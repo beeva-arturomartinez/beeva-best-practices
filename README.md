@@ -1,26 +1,43 @@
 #Best Practices in Beeva
 
-## Best Practices
+Here is saved the list of best practices documents, guidelines and codestyles recommendations for help to you in your daily work. If you want to contribute, please read before the guidelines.
 
+### IT & Security
+* [Security and application hardening](it_security/security_hardening/README.md)
 
-Here is the list of best practices documets, guidelines and codestyles recommendations you can find in this repo
+### DevOps & Continuous integration
+* [Docker](devops/docker/README.md)
+* [Continuous Integration](devops/continuous_integration/README.md)
+* [Configuration Management (puppet)](devops/configuration_management/README.md)
 
- 1. [Amazon Web Services](aws/README.md)
- 2. [Code Optimization](code_optimization/README.md)
- 3. [Configuration Management (puppet)](configuration_management/README.md)
- 4. [Continuous Integration](continuous_integration/README.md)
- 5. [Docker](docker/README.md)
- 6. [Frontend (nodejs)](front/README.md)
- 7. [Google App Engine](gae/README.md)
- 8. [REST Services](rest/README.md)
- 9. [Security and application hardening](security_hardening/README.md)
- 10. [Code Quality with Sonar](sonar/README.md)
- 11. [Testing](testing/README.md)
+### Cloud Computing
+* [Amazon Web Services](cloud/aws/README.md)
+* [Google App Engine](cloud/gae/README.md)
+
+### Big Data
+* [Spark](big_data/spark/README.md)
+
+### Frontend & UX
+* [general frontend techniques](frontend/general/README.md)
+* [angularjs](frontend/angular/README.md)
+* [nodejs](frontend/nodejs/README.md)
+* [CSS & styling](frontend/styling/README.md)
+
+### Backend & API Standards
+* [python](backend/python/README.md)
+* [REST Services](backend/rest/README.md)
+
+### QA & Testing
+* [Code Optimization](qa_testing/code_optimization/README.md)
+* [Code Quality with Sonar](qa_testing/sonar/README.md)
+* [Testing](qa_testing/testing/README.md)
 
 ## Contrib Guidelines
 
-[Here is](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) the markdown cheatsheet you can use to create your documents.
+* To contrib use [pull requests](https://help.github.com/articles/using-pull-requests/) ...
+* [Here is](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) the markdown cheatsheet you can use to create your documents.
+* Write in english please :)
+* Add attributions and references if necessary.
+* Please add the images to your *static* subfolder.
 
-Please add the images to your *static* subfolder.
-
-use pull requests...
+[BEEVA](http://www.beeva.com) | 2015
