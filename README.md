@@ -1,6 +1,6 @@
 #Best Practices in Beeva
 
-Here is saved the list of best practices documents, guidelines and codestyles recommendations for help to you in your daily work. If you want to contribute, please read before the guidelines.
+Here is saved the list of best practices documents, guidelines and codestyles recommendations for help to you in your daily work. If you want to contribute, please read before the [guidelines](#contrib-guidelines).
 
 ### IT & Security
 * [Security and application hardening](it_security/security_hardening/README.md)
