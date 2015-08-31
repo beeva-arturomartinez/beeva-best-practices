@@ -1,3 +1,5 @@
+![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+
 #Best Practices in BEEVA
 
 Here is saved the list of best practices documents, guidelines and codestyles recommendations for help to you in your daily work. If you want to contribute, please read before the [guidelines](#contrib-guidelines).
