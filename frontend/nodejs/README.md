@@ -1,35 +1,51 @@
-# Technology & type (Best Practices, Codestyle, ..)
+# Technology & type (Best Practices, Style Guide, ..) i.e. Node.js Style Guide
+At this point we're going to talk about...
 
-Introduction tests....
+![alt text](https://github.com/beeva/beeva-best-practices/blob/master/frontend/nodejs/static/nodejs.png "nodeJS")
 
-## Introduction (Title 1)
+## Index
+
+* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
+* [The Two Towers](#the-two-towers)
+* [The Return of the King](#the-return-of-the-king)
+* [References](#references)
+
+### The Fellowship of the Ring 
+Some code examples: 
+````javascript
+    var http = require('http');
+    http.createServer(function (req, res) {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.end('Hello World\n');
+    }).listen(1337, '127.0.0.1');
+    console.log('Server running at http://127.0.0.1:1337/');
+````
+
+### The Two Towers
+
+> Blockquotes are very handy in email to emulate reply text.
+> This line is part of the same quote.
+
+A Remarkable idea
 
 
-## Sections
+### The Return of the King
 
+A nice table
 
-Code Example
-
-
-### External Links (Table)
-
-| Link          | Description   | Type  |
+| Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | Cheatsheet |
-| col 2 is      | centered      |   blog |
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
 | zebra stripes | are neat      |    $1 |
 
-Cheatsheet
 
+### References
 
+* [Link](http://www.url.to) Description
+* [nodejs.org](http://www.nodejs.org) API & Docs
+* [Overapi Cheatsheet](http://overapi.com/nodejs/) A node.js full cheatsheet
 
-
-
-
-
-
-
-
-
+___
 
 [BEEVA](http://www.beeva.com) | 2015
