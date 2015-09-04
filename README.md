@@ -30,7 +30,7 @@ Here is saved the list of best practices documents, guidelines and codestyles re
 * [nodejs](frontend/nodejs/README.md)
 * [CSS & styling](frontend/styling/README.md)
 
-### Internet of Things
+### Internet of Things (IoT)
 
 ### IT Security & Hardening
 * [Security and application hardening](it_security/security_hardening/README.md)
