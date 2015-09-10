@@ -973,39 +973,36 @@ Las promesas nos permiten así mismo controlar cuando varios procesos asíncrono
 var miPromesa1, miPromesa2;   
 
 miPromesa1 = function () {   
-  var d = Q.defer(); //inicializamos la promesa   
+  var d = Q.defer(); //inicializamos la promesa   
   //Aquí realizarías la petición asíncrona   
   funcionAsincrona({   
-       onSuccess : function (datos) {   
-              d.resolve(datos); //indicamos que se ha resuelto satisfactoriamente   
-// y mandamos los datos resultantes   
-       } ,   
-       onFailure : function (datosError) {   
-             d.reject(datosError); //indicamos que se ha resuelto con error   
-                 //y enviamos lo que se reciba, que podría   
-    // ser el mensaje de error   
-       }   
-});   
-
+    onSuccess : function (datos) {   
+      d.resolve(datos); //indicamos que se ha resuelto satisfactoriamente   
+      // y mandamos los datos resultantes   
+    },   
+    onFailure : function (datosError) {   
+      d.reject(datosError); //indicamos que se ha resuelto con error   
+      //y enviamos lo que se reciba, que podría   
+      // ser el mensaje de error   
+    }   
+  });   
   return d.promise; //devolvemos la promesa   
-}   
+};   
 
 miPromesa2 = function () {   
   var d = Q.defer(); //inicializamos la promesa   
-
   //Aquí realizarías la petición asíncrona   
   funcionAsincrona({   
-       onSuccess : function (datos) {   
-              d.resolve(datos); //indicamos que se ha resuelto satisfactoriamente   
-// y mandamos los datos resultantes   
-       } ,   
-       onFailure : function (datosError) {   
-             d.reject(datosError); //indicamos que se ha resuelto con error   
-                 //y enviamos lo que se reciba, que podría   
-    // ser el mensaje de error   
-       }   
-});   
-
+    onSuccess : function (datos) {   
+      d.resolve(datos); //indicamos que se ha resuelto satisfactoriamente   
+      // y mandamos los datos resultantes   
+    },   
+    onFailure : function (datosError) {   
+      d.reject(datosError); //indicamos que se ha resuelto con error   
+      //y enviamos lo que se reciba, que podría   
+      // ser el mensaje de error   
+    }   
+  });   
   return d.promise; //devolvemos la promesa   
 }   
 ```
