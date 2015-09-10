@@ -5,50 +5,50 @@ Guía de proyectos y buenas prácticas
 
 Índice   
 
-[1\. Introducción](#introduccion)   
-[2\. Carga inicial](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.w8jtjti4l3gc)   
-[2.1\. Regla 1: Realizar pocas peticiones HTTP](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.dgyksl1vnpea)   
-[2.2\. Regla 2: Usar CDNs (Content Delivery Network)](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.7zwwkdixavbe)   
-[2.3\. Regla 3: Añadir cabeceras de expiración](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.l33bquqrhr7w)   
-[2.4\. Regla 4: Utilizar compresión Gzip](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.okxh4ovlnafq)   
-[2.5\. Regla 5: Incluir hojas de estilos al principio del documento HTML](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.naukkv2tqoao)   
-[2.6\. Regla 6: Incluir ficheros Javascript al final del documento](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.kmef9y8f3jmi)   
-[2.7\. Regla 7: Evitar expresiones CSS](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.tgl8udrak3ou)   
-[2.8\. Regla 8: Cargar Javascript y CSS mediante archivos externos](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.v55rm4ikiizj)   
-[2.9\. Regla 9: Reducir los DNS Lookups](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.m02093s1di6w)   
-[2.10\. Regla 10: Comprimir Javascript](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.z0ywxk4antc3)   
-[2.11\. Regla 11: Evitar redirecciones](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.1ngbi4b3u8sk)   
-[2.12\. Regla 12: Evitar duplicación en ficheros Javascript importados](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.4tevv9d9jm9y)   
-[2.13\. Regla 13: Correcta configuración de los ETags](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.bht4ns6du5s9)   
-[2.14\. Regla 14: Cachear ciertas peticiones AJAX](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.z8juoy13eqgw)   
-[3\. Manejo del DOM](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.l5jukginmy1v)   
-[3.1\. Exceso de reflows](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.1wwu16qyxzbo)   
-[3.2\. Acceso al DOM](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.h1664891v62r)   
-[4\. Creación de hojas de estilos](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.rur1xur14y0s)   
-[4.1\. Utilización de preprocesaores css](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.jvgiu1bu4qcb)   
-[4.2\. Organizar los css](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.5pa1ycy3v3ia)   
-[4.3\. Tipos de clases css](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.oxfnhtnfy7nw)   
-[4.3.1\. Estructura](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.r2m771oon641)   
-[4.3.2\. Estado visual](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.kn33bn2gllql)   
-[4.3.3\. Entidad funcional](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.52n1iym9iquy)   
-[4.3.4\. Estado funcional](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.rm105o6c6qnq)   
-[4.4\. Otras consideraciones](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.r2651igvwahr)   
-[5\. Desarrollo con Javascript](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.f4igzdks7e1t)   
-[5.1\. Escribiendo código Javascript](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.davrdxho11lf)   
-[5.1.1\. Utilización de los operadores comparativos === y !==](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.nf3k8kx5su02)   
-[5.1.2\. Variables](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.7xdr51hwionj)   
-[5.1.3\. Uso estricto](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.rxgi1lvqta83)   
-[5.3.4\. Eval is evil](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.7sso2viaaf1w)   
-[5.3.5\. Problemas en accesos a this](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.cava2zn4zlfd)   
-[5.4\. Programación orientada a eventos](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.2jkxpvi24hwb)   
-[5.5\. Programación funcional](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.iv0ulrk0llkl)   
-[5.6\. Manejo de la asincronía](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.n0myn65wotx3)   
-[5.7\. Conclusión](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.5bi08rr6a7r7)   
-[6\. Elección del framework](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.dvwalz9oorgq)   
-[6.1\. Portales Web](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.vovoppbuhib0)   
-[6.2\. Aplicaciones RIA](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.vokxnk7kjhil)  
+[1\. Introducción](#1-introducción)   
+[2\. Carga inicial](#2-carga-inicial)   
+[2.1\. Regla 1: Realizar pocas peticiones HTTP]   
+[2.2\. Regla 2: Usar CDNs (Content Delivery Network)]   
+[2.3\. Regla 3: Añadir cabeceras de expiración]
+[2.4\. Regla 4: Utilizar compresión Gzip]   
+[2.5\. Regla 5: Incluir hojas de estilos al principio del documento HTML]   
+[2.6\. Regla 6: Incluir ficheros Javascript al final del documento]
+[2.7\. Regla 7: Evitar expresiones CSS]   
+[2.8\. Regla 8: Cargar Javascript y CSS mediante archivos externos]
+[2.9\. Regla 9: Reducir los DNS Lookups]
+[2.10\. Regla 10: Comprimir Javascript]
+[2.11\. Regla 11: Evitar redirecciones]
+[2.12\. Regla 12: Evitar duplicación en ficheros Javascript importados]
+[2.13\. Regla 13: Correcta configuración de los ETags]
+[2.14\. Regla 14: Cachear ciertas peticiones AJAX]   
+[3\. Manejo del DOM](#3-manejo-del-dom)   
+[3.1\. Exceso de reflows]
+[3.2\. Acceso al DOM]
+[4\. Creación de hojas de estilos](#4-creación-de-hojas-de-estilos)   
+[4.1\. Utilización de preprocesaores css]   
+[4.2\. Organizar los css]
+[4.3\. Tipos de clases css]
+[4.3.1\. Estructura]
+[4.3.2\. Estado visual]
+[4.3.3\. Entidad funcional]
+[4.3.4\. Estado funcional]
+[4.4\. Otras consideraciones]
+[5\. Desarrollo con Javascript](#5-desarrollo-con-javascript)   
+[5.1\. Escribiendo código Javascript]
+[5.1.1\. Utilización de los operadores comparativos === y !==]   
+[5.1.2\. Variables]
+[5.1.3\. Uso estricto]
+[5.3.4\. Eval is evil]
+[5.3.5\. Problemas en accesos a this]   
+[5.4\. Programación orientada a eventos]   
+[5.5\. Programación funcional]
+[5.6\. Manejo de la asincronía]
+[5.7\. Conclusión]
+[6\. Elección del framework](#6-elección-del-framework)   
+[6.1\. Portales Web]
+[6.2\. Aplicaciones RIA]
 
-## 1\. Introducción
+# 1\. Introducción
 
 Para lograr un rendimiento óptimo en la ejecución de nuestras aplicaciones web, así como disponer de un código bien estructurado y modularizado, es conveniente seguir una serie de pautas, de las cuales se va a hablar en este apartado.   
 
@@ -60,7 +60,7 @@ En cuanto a la modularización/estructuración del código, se dispone de varios
 *   Desarrollo con Javascript
 *   Elección del framework adecuado
 
-# 3\. Carga inicial
+# 2\. Carga inicial
 
 La carga inicial de una aplicación web es un punto crítico, dependiendo del grueso de nuestra aplicación. En este punto es donde vamos a descargar del servidor tanto el fichero HTML como sus respectivas hojas de estilos, las imágenes incluidas en estas y los ficheros javascript. Además, se procede al renderizado en el navegador del árbol del DOM mientras va leyendo el fichero HTML. Como vemos, son varios procesos que, dependiendo de la conexión de red, de la cantidad de archivos dependientes que tenga que descargar, su tamaño y muchos otros factores, puede ser un trabajo bastante costoso en tiempo.   
 
@@ -68,7 +68,7 @@ Para conseguir una óptima carga inicial, vamos a ver 14 puntos en concreto bás
 
 La intención de este apartado es citar dichas reglas básicas y ofrecer una ligera explicación de cada una de ellas, para que sirva a modo de referencia rápida. Para su entendimiento con mayor profundidad, es recomendable la lectura del citado libro, donde se reflejan distintos estudios de rendimiento y explicaciones más detalladas.   
 
-## 3.1\. Regla 1: Realizar pocas peticiones HTTP
+## 2.1\. Regla 1: Realizar pocas peticiones HTTP
 
 Es obvio que, a menos cantidad de peticiones HTTP, menor será el tiempo de carga de los ficheros de nuestra aplicación, ya que se disminuyen los tiempos de latencia de red. Los ficheros a descargar son tanto nuestro HTML principal, como los archivos css, javascript y las imágenes de las que depende. Estas son las formas en las que podemos reducir el número de peticiones HTTP con respecto a estos ficheros:   
 
@@ -78,61 +78,61 @@ Es obvio que, a menos cantidad de peticiones HTTP, menor será el tiempo de carg
 
 Los dos primeros puntos (tanto la combinación de fuentes Javascript como css) es convenientes realizarlos para despliegues en producción, pero no tanto en entornos o fase de desarrollo, ya que complicaría la depuración   
 
-## 3.2\. Regla 2: Usar CDNs (Content Delivery Network)
+## 2.2\. Regla 2: Usar CDNs (Content Delivery Network)
 
 Como su nombre indica, son redes de distribución de contenidos de sitios webs (documentos, imágenes, css, etc) que existen para mejorar estos tiempos de carga. Son interesantes de utilizar, en la medida de lo posible. COmo proveedores de estos servicios destacan Level 3, Akamai y Amazon CloudFront   
 
-## 3.3\. Regla 3: Añadir cabeceras de expiración
+## 2.3\. Regla 3: Añadir cabeceras de expiración
 
 Es muy importante la correcta gestión de estas cabeceras HTTP, para que el sistema de caché del navegador funcione correctamente. Estas cabeceras son gestionadas en nuestros servidores de aplicaciones. Por ejemplo, en los servidores Apache HTTP, disponemos del módulo mod_expires para este fin.   
 
-## 3.4\. Regla 4: Utilizar compresión Gzip
+## 2.4\. Regla 4: Utilizar compresión Gzip
 
 Habilitar la compresión Gzip en nuestro servidor para archivos estáticos, reduce drásticamente el tamaño que se envía hacia el navegador a través de la red, concretamente en torno al 70% para ficheros css o javascript por ejemplo. Debe estar habilitado.   
 
-## 3.5\. Regla 5: Incluir hojas de estilos al principio del documento HTML
+## 2.5\. Regla 5: Incluir hojas de estilos al principio del documento HTML
 
 Si bien es cierto, que normalmente las hojas de estilos se incluyen en el HEAD del documento HTML, es importante entender que si son incluidos en otros apartados del documento, técnicamente posible, provocaría un problema rendimiento en el renderizado del árbol del DOM, esto es, en pintar la página web. Esto es debido a que muchos navegadores bloquean el renderizado hasta conocer las propiedades de estilos de los nodos que componen el DOM, para evitar repintados o reflows (de los que se hablará posteriormente en la sección de manejo del DOM), por lo que bloquea el renderizado progresivo, que debería ser el comportamiento normal. Es importante, por tanto, que estén dentro de nuestro tag HEAD, al principio del DOM.   
 
-## 3.6\. Regla 6: Incluir ficheros Javascript al final del documento
+## 2.6\. Regla 6: Incluir ficheros Javascript al final del documento
 
 Al contrario que en el punto anterior, es conveniente incluir los ficheros Javascript al final del documento HTML. El problema, es que la descarga de ficheros Javascript es bloqueante, por lo que se detiene el renderizado progresivo de la aplicación web, incrementando el tiempo que transcurre desde que realizamos la petición del HTML, hasta que vemos el proceso de pintado, provocando un efecto más duradero de “pantalla en blanco” cuando los ficheros Javascript son solicitados al principio del documento. Por lo tanto, es conveniente situarlos al final del documento y esperar a la ejecución de cualquier javascript a que la carga del documento haya finalizado. Comúnmente, se ha utilizado el evento onload del tag BODY para controlar cuando la descarga del HTML se ha completado y ejecutar una función de inicialización. Esta solución, se queda un poco corta, ya que el evento se dispara cuando se ha terminado de construir y pintado hasta la etiqueta de cierre del HTML, pero no controla la descarga de imágenes que puede haber en la página. Para poder controlar la carga total, incluidas imágenes, varias librerías ofrecen métodos para este control. Por ejemplo, jQuery ofrece el método $.ready(handler), o su alias $(handler), que recibe como parámetro la función de inicialización.   
 
-## 3.7\. Regla 7: Evitar expresiones CSS
+## 2.7\. Regla 7: Evitar expresiones CSS
 
 Las expresiones CSS fueron introducidas en Internet Explorer 5 y de ahí en adelante la han implementado versiones posteriores de Internet Explorer. El resto de navegadores, las ignoran. Es conveniente no utilizarlas, ya que provocan problemas de rendimiento   
 
-## 3.8\. Regla 8: Cargar Javascript y CSS mediante archivos externos
+## 2.8\. Regla 8: Cargar Javascript y CSS mediante archivos externos
 
 Debe evitarse la incrustación de css mediante la etiqueta STYLE o de código Javascript en el documento HTML. Deben ser incluidos siempre en ficheros externos.   
 
-## 3.9\. Regla 9: Reducir los DNS Lookups
+## 2.9\. Regla 9: Reducir los DNS Lookups
 
 Si disponemos de ficheros fuentes que apuntan a diferentes hosts, conlleva a un aumento de tiempo en la resolución de DNSs, por lo que se puede incrementar el tiempo de carga. Sin embargo, navegadores como Firefox o Internet Explorer, sólo permiten por defecto la descarga de dos ficheros simultáneamente desde un mismo host. Aunque este comportamiento por defecto puede sobrescribirlo el usuario en las preferencias de su navegador (en el caso del Firefox) o en el registro de Windows (en el caso de IE), no podemos depender de ello, por lo que hay que buscar un equilibrio entre la reducción de resoluciones de DNS y las descargas en paralelo   
 
-## 3.10\. Regla 10: Comprimir Javascript
+## 2.10\. Regla 10: Comprimir Javascript
 
 Esta regla también puede aplicarse a los ficheros css. Consiste en eliminar espacios, tabulaciones, comentarios, saltos de línea, etc., de nuestros archivos (combinados mejor como vimos en la primera regla) resultando un archivo con un tamaño menor y, por lo tanto, se descargará de forma más rápida. Existe también la opción de la ofuscaciń (sólo en el caso de los ficheros Javascript), que consiste en pasar unos algoritmos que reescribe el código, haciéndolo ilegible con nombres de variables y métodos reducidos. Este paso es un tanto delicado, ya que, al contrario de la compresión o compactación, cambia el código basándose en un algoritmo y, como todo algoritmo, puede tener bugs y fallar. No suele pasar, pero hay que tenerlo en cuenta. Para estos procesos, se dispone de distintas herramientas como, por ejemplo, YUI Compressor, Uglify, Sencha SDK Tools para desarrollos con ExtJS o r.js para desarrollos en los que la gestión de dependencias sea manejada con require.js.   
 
-## 3.11\. Regla 11: Evitar redirecciones
+## 2.11\. Regla 11: Evitar redirecciones
 
 Las redirecciones son peticiones que vienen con un estado HTTP entre 300 y 307 (salvo el 304 que no es realmente una redirección y veremos más adelante en la regla 13) con una url alternativa. Esto provoca, al menos, dos peticiones desde el navegador. La primera petición y su respuesta con el estado 30* junto con la nueva url y una segunda apuntando a esta url. Por tanto, conlleva una pérdida de tiempo.   
 
-## 3.12\. Regla 12: Evitar duplicación en ficheros Javascript importados
+## 2.12\. Regla 12: Evitar duplicación en ficheros Javascript importados
 
 Parece una regla absurda, pero es básicamente un toque de atención, ya que muchos sitios web, muchos de ellos importantes, se les pasa por alto la inclusión de un mismo Javascript repetidas veces. En concreto, en el momento de la edición del libro, Steve Souders detectó que dos de los 10 sitios más visitados de EEUU contenían scripts duplicados. En concreto CNN y youtube. Y provoca problemas de rendimiento importantes. Hay que tener cuidado con los scripts que se incluyen, y ya no hablar de distintas versiones de un mismo fichero js (como incluir distintas versiones de jquery). ¡Cuidado con esto!   
 
-## 3.13\. Regla 13: Correcta configuración de los ETags
+## 2.13\. Regla 13: Correcta configuración de los ETags
 
 Los ETags, son un sistema de control de los servidores de aplicaciones web. Sirven para controlar si la versión de un componente web cacheado por el navegador es la correcta, la más reciente. Estas comprobaciones las realiza el navegador mediante lo que se llaman peticiones GET condicionales. Cuando un servidor recibe una petición de este tipo, el servidor comprueba la fecha de expiración o los ETags. Si la versión cacheada en el navegador es la correcta, el servidor responde con un 304 (sin modificar). Por tanto, son peticiones más ligeras.  Los ETgas básicamente son una cadena de texto, que contiene más información que simplemente la fecha. por ejemplo, el servidor Apache HTTp, envía como información del ETag un identificador “inode”, el tamaño del archivo y un timestamp concatenados. El problema viene cuando disponemos de un balanceo de carga y un mismo fichero puede ser servido por distintos servidores. En estos casos, tanto el tamaño como el timestamp van a coincidir, pero no el inode, por lo que el servidor no devolverá un 304, si no que devolverá un 200 con el componente completo, desaprovechando el sistema de caché del navegador. Por tanto, cuando existan balanceadores de carga, deberán configurarse los ETags (eliminando por ejemplo en caso del servidor Apache el inode), o bien configurar los servidores para que no utilicen ETags.   
 
-## 3.14\. Regla 14: Cachear ciertas peticiones AJAX
+## 2.14\. Regla 14: Cachear ciertas peticiones AJAX
 
 Al igual que las páginas HTML, los ficheros Javascript o css o las imágenes, también ciertas llamadas AJAX son susceptibles de ser cacheadas una vez realizadas, dando lugar a una mejora en la experiencia del usuario en sucesivas visitas al sitio web. Por ejemplo, si disponemos en nuestra aplicación de un historial de registros de cualquier tipo y accedemos al detalle via AJAX de uno de esos registros, este no va a ser susceptible de cambiar, por lo que, si accedemos posteriormente a él, si hubiéramos cacheado la petición con anterioridad, la respuesta sería mucho más rápida, simplemente indicándole en el header de expiración una fecha futura.   
 
 El análisis y posterior configuración de las peticiones propensas de ser cacheadas, pueden mejorar notablemente la experiencia del usuario, mejorando los tiempos de respuesta.
 
-# 4\. Manejo del DOM
+# 3\. Manejo del DOM
 
 En esta sección vamos a identificar los principales problemas de rendimiento causados por un manejo y acceso incorrecto del DOM (Document Object Model), para tratar de reducirlos y conseguir aplicaciones web más optimizadas.   
 
@@ -142,7 +142,7 @@ Si bien es cierto que el renderizado en sí mismo no es algo que podamos evitar,
 
 Vamos a tratar de explicar en qué consisten estos problemas y cómo solventarlos.   
 
-## 4.1\. Exceso de reflows
+## 3.1\. Exceso de reflows
 
 Lo primero, es explicar que es un reflow o relayout. Imaginemos que disponemos del siguiente marcado en nuestra aplicación web:   
 
@@ -164,36 +164,45 @@ Para un conocimiento más profundo acerca del funcionamiento de los navegadores 
 
 Algunos frameworks como ExtJS, en lo que no se trabaja directamente contra el DOM, si no que se trabaja con objetos Javascript que posteriormente el framework se encarga de renderizar, disponen de sistemas para evitar estos excesos de reflows. En el caso de ExtJS, se dispone de los métodos Ext.suspendLayout() y Ext.resumeLayout().   
 
-## 4.2\. Acceso al DOM
+## 3.2\. Acceso al DOM
 
 Otro de los puntos críticos en los navegadores, es en el acceso desde Javascript al DOM. Esto es, por ejemplo, recoger un determinado nodo mediante la instrucción document.getElementById(), con la función $() de jquery o cualquier método similar en otras librerías. SIn embargo son operaciones que son necesarias, pero igualmente de necesario es reducirlas. ¿Cómo las podemos reducir? Utilizando variables. Por ejemplo, para el ejemplo anterior, utilizando por ejemplo jquery, podríamos haberlo realizado de dos formas:   
 
+```javascript
 $(“div.toolbar”).hide();   
 //… resto ejecución...   
 $(“div.toolbar”).show();   
+```
 
 En este caso, estamos buscando dos veces el mismo nodo del DOM, lo que termina produciendo problemas de rendimiento si abusamos. Es preferible guardar una referencia al nodo en una variable, por lo que la búsqueda se hace sólo una vez:   
 
+```javascript
 var toolbar = $(“div.toolbar”);   
 toolbar.hide();   
 //… resto ejecución...   
 toolbar.show();   
+```
 
 jQuery en concreto, ofrece también un estilo de programación en cascada, en la que cada operación sobre un nodo del DOM, devuelve una referencia de ese nodo, de forma que sólo tenemos un acceso inicial. Por ejemplo:   
 
+```javascript
 $(“div.mi-clase1”)   
 .width(100) //devuelve la referencia del div anterior   
-.height(200);   
+.height(200);
+```
 
 Otro problema típico de acceso lo encontramos en los bucles. Por ejemplo, si queremos recorrer los hijos de un div, podríamos hacer lo siguiente:   
 
+```javascript
 var div = $(“div.mi-clase”);   
 for (var i=0; i<div.children;i++) {   
-div.children[i].innerHTML = “nodo ” + i;   
-}   
+  div.children[i].innerHTML = “nodo ” + i;   
+} 
+```
 
 Esto también conlleva problemas de rendimiento. Sería preferible guardar una referencia de div.children en otra variable, ya que dentro del bucle, tiene que estar accediendo en cada iteración a la propiedad children del nodo del DOM al que apunta la variable div y, por ser un acceso al DOM es especialmente lento.   
 
+```javascript
 var div, children, len;   
 
 div = $(“div.mi-clase”);   
@@ -202,18 +211,19 @@ len = div.length; //guardamos también el valor de la cantidad de los hijos, par
 //que acceder en cada iteración del bucle   
 
 for (var i=0; i<len;i++) {   
-children[i].innerHTML = “nodo ” + i;   
-}   
+  children[i].innerHTML = “nodo ” + i;   
+} 
+```
 
 De esta forma, el código estaría mucho más optimizado.   
 
 En conclusión, es preferible guardar referencias de nodos en variables y evitar accesos de lectura innecesarios.  
 
-# 5\. Creación de hojas de estilos
+# 4\. Creación de hojas de estilos
 
 Muchas veces, las hojas de estilo css suponen verdaderos quebraderos de cabeza conforme van creciendo más y más si no se atiende a una serie de reglas tanto de organización como de buenas prácticas, teniendo muchas veces que comenzar a sobreescribir reglas css o utilizar de forma indebida muchas veces el modificador !important, originando finalmente hojas de estilos mucho más pesadas de lo necesario y, por tanto, aumentando el tiempo de carga cuando se solicitan al servidor . Trataremos de ofrecer en esta sección una serie de reglas que pueden ser de utilidad   
 
-## 5.1\. Utilización de preprocesaores css
+## 4.1\. Utilización de preprocesaores css
 
 Los preprocesadores son herramientas que aportan lenguajes para la creación de ficheros que, posteriormente, serán traducidos, originando los ficheros css necesarios para insertar en los sitios web.   
 
@@ -221,7 +231,7 @@ Hay distintos preprocesadores en el mercado. Los más conocidos son Sass/Compass
 
 No obstante, es conveniente tener conocimiento de buenas prácticas a la hora de escribir hojas de estilo css, para así poder aprovechar aún más la potencia de estos preprocesadores.   
 
-## 5.2\. Organizar los css
+## 4.2\. Organizar los css
 
 Para poder desarrollar css de una forma más organizada, estos deben estar separados en ficheros, al menos durante la fase de desarrollo, ya que en producción deben combinarse para aligerar el número de peticiones del navegador, como se vio en la [primera regla](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.dgyksl1vnpea) del apartado “ [carga inicial](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.w8jtjti4l3gc)”.   
 
@@ -234,7 +244,7 @@ Los componentes reutilizables son todos aquellos que no son propios en sí de la
 
 Otros componentes, son los funcionales, que digamos son las distintas páginas de un sitio web tradicional basado en un patrón de múltiple páginas, o los distintos módulos funcionales en aplicaciones que sigan un patrón de una única página o SPA (Single Page Application), por ejemplo, en una aplicación de gestión de cursos, podríamos tener un módulo de alumnos, con todo el css que estuviera relacionado con este módulo situado en un fichero alumnos.css.   
 
-## 5.3\. Tipos de clases css
+## 4.3\. Tipos de clases css
 
 Es importante que nuestras reglas de css tengan un carácter semántico, de forma que sean muy intuitivas. Para ello, podemos agrupar las clases css en cuatro tipos:   
 
@@ -243,11 +253,11 @@ Es importante que nuestras reglas de css tengan un carácter semántico, de form
 *   De entidad funcional
 *   De estado funcional
 
-### 5.3.1\. Estructura
+### 4.3.1\. Estructura
 
 Las clases css de estructura son aquellas que hacen referencia a componentes reutilizables en distintos aplicaciones o sitios web. Vuelven a ser nuestros componentes reutilizables. Estos deben tener una única clase css que les hiciera referencia. Por ejemplo, si empleamos dos grids de datos en nuestra web, nunca deberíamos tener una clase grid-primero y otra clase grid-segund, sino que ambas deberían tener  una misma clase css, por ejemplo, data-grid. Pero, ¿qué pasa si queremos que uno de estos grids de datos se visualice de forma distinta del anterior? Ahí es donde entra y debemos aprovechar la potencia de las reglas de estilos. Normalmente, si queremos que un componente de un tipo se visualice de una forma distinta de otro del mismo tipo, suele ser debido a algún requerimiento de tipo funcional, ya sea por tener un estado en concreto o por pertenecer a una entidad determinada. Vamos a ver un ejemplo más concreto en el siguiente punto.  
 
-### 5.3.2\. Estado visual
+### 4.3.2\. Estado visual
 
 El estado de visualización, como su nombre indica, es la forma en la que se va a visualizar un componente de cualquier tipo (de estructura o entidad) en función de un estado determinado. Los estados más comunes son:   
 
@@ -262,6 +272,7 @@ Como se puede apreciar, no aparecen los estados deseleccionado, habilitado, ocul
 
 Volviendo al ejemplo del caso anterior, podemos por ejemplo tener el caso en el que tengamos dos grids y la diferencia pudiera ser el estado de visualización, uno habilitado y otro deshabilitado. Pues, en vez de tener dos clases css, una grid-normal y otra grid-disabled, podríamos utilizar una única clase data-grid y utilizar el estado como modificador:   
 
+```html
 <table class=”data-grid”>   
 <tr>   
 <td><span>columna 1<span></td>   
@@ -274,9 +285,11 @@ Volviendo al ejemplo del caso anterior, podemos por ejemplo tener el caso en el 
 <td>columna 2</td>   
 </tr>   
 </table>   
+```
 
 Y en nuestro css, tendríamos las propiedades genéricas para el data-gird y, en el modificador según el estado, bastaría con sobrescribir lo necesario:   
 
+```css
 table.data-grid {color: #000; width: 100%;}   
 table.data-grid .disabled {color: #CCC;}   
 
@@ -287,13 +300,15 @@ table.data-grid span {font-weight: bold;}
 
 table.data-grid.disabled {color: #CCC;}   
 table.data-grid span {font-weight: normal;}   
+```
 
 Pero también, podríamos querer que no sólo dependiera del estado de visualización, sino que en distintas pantallas, queremos que se visualizara de forma distinta, en función del tipo de pantalla, lo que tiene un carácter  funcional, lo cual vamos a tratar a continuación.   
 
-### 5.3.3\. Entidad funcional
+### 4.3.3\. Entidad funcional
 
 Estas pueden ser tanto para hacer referencia a entidades determinadas (Alumnos, cursos, profesores…), como entidades más globales, como podría ser un módulo de administración. En el siguiente ejemplo vamos a ver cómo podríamos diferenciar los grids de datos de un módulo de administración de los del resto de la aplicación:   
 
+```html
 <!-- Módulo de administración -->   
 <div class=”administration”>   
 <table class=”data-grid”>   
@@ -325,9 +340,11 @@ Estas pueden ser tanto para hacer referencia a entidades determinadas (Alumnos, 
 </tr>   
 </table>   
 </div>   
+```
 
 Pues bastaría con hacer depender jerárquicamente las reglas en función de estas entidades:   
 
+```css
 /* Grid genérico */   
 
 table.data-grid {color: #000; width: 100%;}   
@@ -339,54 +356,68 @@ table.data-grid span {font-weight: normal;}
 /* Módulo administración */   
 
 .administration table.data-grid {color: #fff;background: #000; }   
+```
 
 Simplemente sobrescribimos lo que nos interese, manteniendo el resto de reglas por defecto, tanto para los spans que contiene, como para el estado deshabilitado, pudiendo también ser sobrescritas si interesase.   
 
 Para que estas clases sean útiles, deben estar situadas en el nodo HTML superior, el padre de mayor nivel que englobase al resto, para no tener que ser repetida en el HTML. Deben estar incluídas una única vez. En cambio, en el css, cualquier regla que dependa de esta clase, debe reflejarlo en la regla css. Por ejemplo:   
 
+```html
 <div class=”usuario”>   
 <form class=”form-usuario”>   
 …   
 </form>   
-</div>   
+</div> 
+```
 
 En el css:   
 
+```css
 .usuario {font-size: 14;}   
 .form-usuario {padding: 5px;}   
+```
+
 Esto sería incorrecto. Si queremos indicarle al formulario una clase, no debería de contener nada referente a usuario. En su lugar, debería acceder a través de la jerarquía de clases:   
 
+```html
 <div class=”usuario”>   
 <form>   
 …   
 </form>   
-</div>   
+</div> 
+```
 
 En el css:   
 
+```css
 .usuario {font-size: 14;}   
 .usuario form {padding: 5px;}   
+```
 
 o, si queremos darle una clase especial al formulario, para que esta regla no se aplique a todos los formularios:   
-
+```html
 <div class=”usuario”>   
 <form class=”registro”>   
 …   
 </form>   
-</div>   
+</div> 
+```
 
 En el css:   
 
+```css
 .usuario {font-size: 14;}   
 .usuario form {padding: 5px;}   
 .usuario form.registro {font-size: 11px;}   
+```
 
 De esta forma, todos los formularios dependientes de la clase usuario tendrían un tamaño de fuente de 14px y un padding general de 5px, salvo el formulario de registro, que sobrescribirá el tamaño de fuente.   
 
-### 5.3.4\. Estado funcional
+### 4.3.4\. Estado funcional
 
 Por último, tendríamos las clases css de estado funcional, que hacen referencia a los distintos estados que pudiera tener una entidad determinada. Por ejemplo, imaginemos un workflow de un mensaje, en el que queramos representar la información de la cabecera del mensaje de una forma distinta en función de los estados, como la fecha de envío, de lectura en su caso, un icono para cada estado, emisor y remitente. Aquí podríamos tener un montón de nombres de clases css distintas: en cuanto a iconos: ico-enviado, ico-recibido, ico-leido.. Y lo mismo para los demás campos. Una forma sencilla y semántica, sería añadir ese estado como modificador de la clase css que representa la entidad funcional, vista en el punto anterior, definiendo reglas para el estado normal de cada camp. Por ejemplo, vamos a centrarnos en el campo del icono:   
 
+```html
 <div class=”mensaje recibido”>   
 <span class=”emisor”>Fulanito</span>   
 <span class=”receptor”>Menganito</span>   
@@ -394,9 +425,11 @@ Por último, tendríamos las clases css de estado funcional, que hacen referenci
 <span class=”fecha-recepcion”>-</span>   
 <span class=”ico”>-</span>   
 </div>   
+```
 
 En el css…   
 
+```css
 /*Definimos primero las características generales para los iconos de los mensajes. Un apunte: utilizar sprites para las imágenes para reducir llamadas al servidor*/   
 
 .mensaje span.ico {   
@@ -411,10 +444,11 @@ background-image: url(‘sprite_path’);
 .mensaje.enviado span.ico {background-position: 0 0}   
 .mensaje.recibido span.ico {background-position: 0 20px}   
 .mensaje.leido span.ico {background-position: 0 40px}   
+```
 
 De esta forma, no hay que crear gran cantidad de clases css, creando archivos bastante optimizados, reutilizables y fáciles de mantener.   
 
-## 5.4\. Otras consideraciones
+## 4.4\. Otras consideraciones
 
 Además de las reglas visto anteriormente, hay que evitar en la medida de lo posible utilizar el modificador !important y/o la propiedad style de los nodos del DOM.   
 
