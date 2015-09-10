@@ -52,7 +52,7 @@ Guía de proyectos y buenas prácticas
   * Portales Web
   * Aplicaciones RIA
 
-[7\. Referencias](#7.referencias)
+[7\. Referencias](#7-referencias)
 
 # 1\. Introducción
 
