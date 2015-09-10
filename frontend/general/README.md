@@ -21,9 +21,11 @@ Guía de proyectos y buenas prácticas
   * Regla 12: Evitar duplicación en ficheros Javascript importados
   * Regla 13: Correcta configuración de los ETags
   * Regla 14: Cachear ciertas peticiones AJAX
+
 [3\. Manejo del DOM](#3-manejo-del-dom)   
-  * Exceso de reflows]
-  * Acceso al DOM]
+  * Exceso de reflows
+  * Acceso al DOM
+
 [4\. Creación de hojas de estilos](#4-creación-de-hojas-de-estilos)   
   * Utilización de preprocesaores css  
   * Organizar los css
@@ -33,6 +35,7 @@ Guía de proyectos y buenas prácticas
     * Entidad funcional
     * Estado funcional
   * Otras consideraciones
+
 [5\. Desarrollo con Javascript](#5-desarrollo-con-javascript)   
   * Escribiendo código Javascript
     * Utilización de los operadores comparativos === y !==   
@@ -44,6 +47,7 @@ Guía de proyectos y buenas prácticas
   * Programación funcional
   * Manejo de la asincronía
   * Conclusión
+
 [6\. Elección del framework](#6-elección-del-framework)   
   * Portales Web
   * Aplicaciones RIA
@@ -325,7 +329,7 @@ Estas pueden ser tanto para hacer referencia a entidades determinadas (Alumnos, 
 </table>   
 </div>   
 
-<!-- Otro módulo →   
+<!-- Otro módulo -->   
 <div class=”administration”>   
 <table class=”data-grid”>   
 <tr>   
@@ -395,6 +399,7 @@ En el css:
 ```
 
 o, si queremos darle una clase especial al formulario, para que esta regla no se aplique a todos los formularios:   
+
 ```html
 <div class=”usuario”>   
 <form class=”registro”>   
@@ -458,6 +463,8 @@ Y, para el modificador !important, también hay veces en el que se hace impresci
 Otra medida que puede resultar muy útil, para no tener que incluir hojas de estilos específicas para cada navegador, es añadir mediante Javascript una clase css al nodo BODY del DOM, que haga referencia al navegador. Por ejemplo:   
 
 Para IE7   
+
+```html
 <html>   
 <head>   
 ...   
@@ -474,20 +481,24 @@ Para chrome
 <body class=”chrome”>   
 </body>   
 </html>   
+```
 
 De esta forma, podemos tener clases genéricas que sean cross-browser y sobrescribir únicamente lo necesario en función del navegador   
 
+```css
 /*Genérico*/   
 .data-grid {padding: 4px;}   
 
 /*Para IE7*/   
-.ie.v7 .data-grid {padding: 2px;}  
+.ie.v7 .data-grid {padding: 2px;}
+```
 
-# 6\. Desarrollo con Javascript
+
+# 5\. Desarrollo con Javascript
 
 Como vimos en la introducción de esta guía, para un desarrollo bien organizado y estructurado en las aplicaciones web que se construyen hoy en día, es altamente recomendable la utilización de algunos de los frameworks de desarrollo web que proporcionan distintos patrones de diseño, tipo MVC, MVP o MVVM, como son ExtJS, BackboneJS y/o AngularJS. Cada uno de estos tienen sus propias buenas prácticas, por lo que este apartado va a estar más centrado en definir unas buenas prácticas en lo que se refiere a Javascript de una forma más agnóstica, independientemente del framework que se utilice, indicando algunos consejos básicos. No obstante, para un entendimiento más en profundidad del lenguaje, es muy recomendable la lectura del libro “Javascript: the good parts”, escrito por Douglas Crockford ( [www.crockford.com](http://www.crockford.com)), actual arquitecto de Javascript de PayPal, creador de herramientas como JSLint y también conocido por ser quien popularizó el formato de datos JSON. Este libro podría ser bien considerado como la biblia de Javascript.   
 
-## 6.1\. Escribiendo código Javascript
+## 5.1\. Escribiendo código Javascript
 
 Lo imprescindible para facilitar la codificación en este lenguaje, es disponer de un buen IDE. Existen varios plugins para eclipse, de entre los cuales para mi gusto destaca SPKet, pero realmente, no hay ninguno que sea lo suficientemente potente. Hay que irse a otros editores, que ya nos darán muchas más facilidades básicas para un desarrollo cómodo, como navegación entre métodos, clases, completado de código, etc. En concreto, los más utilizados hoy en día son los siguientes:   
 
@@ -506,7 +517,7 @@ La utilización de GruntJS es también bastante recomendada en el desarrollo, ya
 
 Algunos de las buenas prácticas en sintaxis de las que nos advierten estos validadores, y que son importantes comprender, son las siguientes:   
 
-### 6.1.1\. Utilización de los operadores comparativos === y !==
+### 5.1.1\. Utilización de los operadores comparativos === y !==
 
 Todos sabemos que Javascript es un lenguaje débilmente tipado. Estos son los tipos de datos primitivos en Javascript (los que obtenemos al hacer un typeof variable):   
 
@@ -520,146 +531,170 @@ Todos sabemos que Javascript es un lenguaje débilmente tipado. Estos son los ti
 
 Cuando utilizamos los comparadores == y !=, al realizar la comparación se ignoran estos tipos. Sólo se tiene en cuenta el valor. Por ejemplo   
 
+```javascript
 1 == 1 //true   
-“1” == 1 //true   
+“1” == 1 //true
+```
 
 Sin embargo, si utilizamos los compradores estrictos === y !==, también el tipo es comparado. En este caso   
 
+```javascript
 1 === 1 //true   
-“1” === 1 //false   
+“1” === 1 //false
+```
 
 Esto puede evitarnos muchos problemas. Aún siendo un lenguaje débilmente tipado, es nuestra responsabilidad evitar problemas cuando realizamos comparaciones, por lo que es importante utilizar siempre los operadores de comparación estrictos === y !==.   
 
-### 6.1.2\. Variables
+### 5.1.2\. Variables
 
 En Javascript, el ámbito de las variables es global o de función. No existe el ámbito de bloque. Esto quiere decir lo siguiente:   
 
+```javascript
 var miFuncion = function () {   
-if (true) {   
-var value = 1;   
+  if (true) {   
+    var value = 1;   
+  }   
+  alert(value);   
 }   
-alert(value);   
-}   
+```
 
 Si ejecutamos esta función, el alert mostrará siempre 1, aún estando definida y declarada la variable dentro de un bloque. Esto es debido a que el intérprete de Javascript “sube” las declaraciones de las variables a lo alto de la función. El método anterior realmente quedaría así:   
 
+```javascript
 var miFuncion = function () {   
-var value;   
-if (true) {   
-value = 1;   
+  var value;   
+  if (true) {   
+    value = 1;   
+  }   
+  alert(value);   
 }   
-alert(value);   
-}   
+```
 
 También es significativo el siguiente caso:   
 
+```javascript
 var miFuncion = function () {   
-alert(a.prop);  //se puede observar que al ejecutarse lanza la excepción:   
-//Reference error: a is not define   
-}   
+  alert(a.prop);  //se puede observar que al ejecutarse lanza la excepción:   
+  //Reference error: a is not define   
+}
+```
 
 En cambio, el error que nos lanzaría el siguiente método es distinto:   
 
+```javascript
 var miFuncion = function () {   
-alert(a.prop);  //se puede observar que al ejecutarse lanza la excepción:   
-//a is not defined   
-var a;   
+  alert(a.prop);  //se puede observar que al ejecutarse lanza la excepción:   
+  //a is not defined   
+  var a;   
 }   
+```
 
 En el primer caso, la excepción lanzada nos indica que a no ha sido declarada. Sin embargo, en el segundo caso nos indica que no ha sido definida, pero sí declarada, ya que el intérprete sube las definiciones de las variables a lo alto de la función:   
 
+```javascript
 var miFuncion = function () {   
-var a;   
-alert(a.prop);  //se puede observar que al ejecutarse lanza la excepción:   
-//a is not defined   
+  var a;   
+  alert(a.prop);  //se puede observar que al ejecutarse lanza la excepción:   
+  //a is not defined   
 }   
+```
 
 Es importante tener esto en cuenta. Por ello, en Javascript las variables se suelen declarar todas lo más arriba de la función, normalmente combinańdolas en un mismo estamento var, para evitar problemas.   
 
+```javascript
 var miFuncion = function (param) {   
-var a, b, c, d, d; //declaramos todas las variables que vayamos a utilizar   
+  var a, b, c, d, d; //declaramos todas las variables que vayamos a utilizar   
 
-if(param) {   
-a = 1;   
-b = 2;   
-c = 3;   
-} else {   
-a = 11;   
-b = 12;   
-c = 13;   
-d = 14;   
-
+  if(param) {   
+    a = 1;   
+    b = 2;   
+    c = 3;   
+  } else {   
+    a = 11;   
+    b = 12;   
+    c = 13;   
+    d = 14;   
+  }   
 }   
-}   
+```
 
 Es importante también, tener en cuenta que en Javascript las funciones son también variables (por eso existe el tipo function). Por eso es también aconsejable declarar los métodos no anónimos como variables y declararlas al inicio de una función:   
 
+```javascript
 var miFuncion = function (param) {   
-var miFuncion2;   
-
-miFuncion2 = function () {   
-alert(“Se ha ejecutado miFuncion2”);   
+  var miFuncion2;   
+  
+  miFuncion2 = function () {   
+    alert(“Se ha ejecutado miFuncion2”);   
+  }   
+  
+  if(param) {   
+    miFuncion2();   
+  }   
 }   
-
-if(param) {   
-miFuncion2();   
-}   
-}   
+```
 
 Y, ¿qué pasa con las variables de ámbito global? Estas variables pueden ser muy problemáticas, por una particularidad del lenguaje. Si asignamos un valor primitivo a una variable dentro de una función sin haberla declarado, esta pasa automáticamente a ser global:   
 
+```javascript
 var miFuncion = function () {   
-a = 3;   
+  a = 3;   
 }   
 
-alert(a) // indica un alert con valor 3   
+alert(a) // indica un alert con valor 3
+```
 
 Evidentemente, esto es problemático. Por eso, se debe tratar también de declarar todas las variables en lo más alto de la función. Muchos editores avisan cuando estamos definiendo variables globales, aunque hay otro método, que es provocar (al menos en navegadores modernos) que se produzca un error al ejecutarse el código. Esto lo conseguimos con la sentencia “use strict” la cuál cuando no es soportada por el navegador, la ignora, ya que se trata de un string y, cuando sí es soportada, obliga al navegador a ejecutar javascript de forma estricta, limitando problemas de este tipo (y además se ejecuta más rápido el javascript). Si ejecutamos:   
 
+```javascript
 (function () {   
-“use strict”;   
-a = 4;   
-})(); //se autoejecuta la función   
+  “use strict”;   
+  a = 4;   
+})(); //se autoejecuta la función
+```
 
 Nos lanzaría un error.   
 
 Si bien es cierto que hay que tratar de evitar las variables globales, no siempre es posible. Por ejemplo, jQuery pone a disposición la variable global $, ExtJS la variable global Ext… pero lo importante es que mantienen todo el acceso a sus métodos, objetos, etc. bajo un único namespace. Una buena práctica en nuestras aplicaciones, si necesitamos variables globales para temas de configuración o de cualquier tipo, es que estén bajo un mismo dominio o namespace. Por ejemplo, en vez de tener las siguientes 4 variables globales (incluida una función):   
 
+```javascript
 var serverPath = “server”;   
 var contextPath = “/miContexto”;   
 var usuario = “usuario”;   
 var funcionInicio = function () {...}   
 
-Podemos tener un único namespace para toda la aplicación utilizando un objeto Javascript:   
+//Podemos tener un único namespace para toda la aplicación utilizando un objeto Javascript:   
 
 var MyApp = {};   
 
 MyApp.usuario = “usuario”;   
 MyApp.contextPath = “/miContexto”;   
 MyApp.serverPath = “server”;   
-MyApp.functionInicio = function () {...}   
+MyApp.functionInicio = function () {...}
+```
 
-### 6.1.3\. Uso estricto
+### 5.1.3\. Uso estricto
 
 En el anterior punto, hemos visto que la utilización de la sentencia “use strict” nos ayuda a evitar ciertos problemas. Debe ser de obligado uso, siempre que se pueda, ya que algunos frameworks y, en concreto ExtJs o Sencha Touch, lanzan errores de ejecución, y que no están escritos en modo estricto. Debemos utilizarlo siempre y cuando se pueda.   
 
-### 6.3.4\. Eval is evil
+### 5.3.4\. Eval is evil
 
 El método eval() nos permite ejecutar código Javascript que le pasemos por parámetro como un string. Debe evitarse la utilización de este método y buscar vías alternativas cuando queramos ejecutar una lógica determinada. El método eval llama internamente al intérprete de Javascript cada vez que se llama, lo que provoca problemas de rendimiento. También puede acarrear problemas de inyección de código. Debe evitarse. Un caso típico donde se utiliza, es cuando queremos acceder a la propiedad de un objeto en una determinada función, recibiendo como parámetro el nombre de la propiedad. Por ejemplo:   
 
+```javascript
 var alumnos, getProperty;   
 
 //alumnos se un objeto que contiene datos de cada alumnos, agrupados por su identificador   
 
 alumnos =  {   
-AL1 : {   
-nombre : “Juan”,   
-apellidos : “Martínez Campos”   
-},   
-AL2 : {   
-nombre : “Manuel”,   
-apellidos : “López Sánchez”   
-},   
+  AL1 : {   
+    nombre : “Juan”,   
+    apellidos : “Martínez Campos”   
+  },   
+  AL2 : {   
+    nombre : “Manuel”,   
+    apellidos : “López Sánchez”   
+  },   
 };   
 
 /**   
@@ -668,38 +703,42 @@ apellidos : “López Sánchez”
  * @param {String} propertyName   
  */   
 getProperty = function (idAlumno, propertyName) {   
-//ejecutamos un alert que aparezca el valor de alumnos.alumno.propiedad   
-alert(eval(“alumnos.” + idAlumno + “.” + propertyName));   
+  //ejecutamos un alert que aparezca el valor de alumnos.alumno.propiedad   
+  alert(eval(“alumnos.” + idAlumno + “.” + propertyName));   
 }   
 
 //ejecutamos   
 getProperty(“AL1”, “nombre”); //ejecutará alumnos.AL1.nombre   
+```
+
 
 Pero, ¿y si quisiéramos (y debemos) comprobar que el identificador del alumno es válido y está presente en el objeto? Tendríamos que reescribir el método getProperty de la siguiente forma:   
 
+```javascript
 getProperty = function (idAlumno, propertyName) {   
-var alumno;   
-alumno = eval(“alumnos.” + idAlumno);   
-if(alumno) {   
-alert(eval(alumno + “.” + propertyName));   
-} else {   
-alert(“No se encontró el alumno.”);   
+  var alumno;   
+  alumno = eval(“alumnos.” + idAlumno);   
+  if(alumno) {   
+    alert(eval(alumno + “.” + propertyName));   
+  } else {   
+    alert(“No se encontró el alumno.”);   
+  }   
 }   
-
-}   
+```
 
 Esto implica que el intérprete se ejecute dos veces, provocando problemas de rendimiento. Además, es poco legible. La alternativa correcta sería la utilización de acceso a propiedades de objetos alternativa: utilizando los corchetes [“string”]. El método quedaría de la siguiente forma:   
 
+```javascript
 getProperty = function (idAlumno, propertyName) {   
-var alumno;   
-alumno = alumnos[idAlumno]; //alumos[“AL1”] es equivalente a alumnos.AL1   
-if(alumno) {   
-alert(alumno[propertyName]);   
-} else {   
-alert(“No se encontró el alumno.”);   
+  var alumno;   
+  alumno = alumnos[idAlumno]; //alumos[“AL1”] es equivalente a alumnos.AL1   
+  if(alumno) {   
+    alert(alumno[propertyName]);   
+  } else {   
+    alert(“No se encontró el alumno.”);   
+  }   
 }   
-
-}   
+```
 
 Mucho más legible y optimizado.   
 
@@ -707,114 +746,126 @@ Como en este ejemplo, siempre hay una alternativa a utilizar eval. Debe utilizar
 
 El método setTimeout o setInterval, también pueden utilizar eval internamente, si reciben como parámetro un string. Deben recibir métodos:   
 
+```javascript
 var miFunction () {   
-alert(“Mi función”);   
+  alert(“Mi función”);   
 }   
 
 setTimeout(“miFuncion()”, 1000) //mal   
 setTimeout(miFuncion, 1000) //bien. Nótese que no se indican los paréntesis, pues si se   
 // indicasen, la función sería ejecutada en el momento   
 // y no esperaría el segundo indicado en la función   
-// setTimeout  
+// setTimeout
+```
 
-### 6.3.5\. Problemas en accesos a this
+### 5.3.5\. Problemas en accesos a this
 
 En Javascript, igual que en otros lenguajes, this es la forma de acceder al ámbito de una clase (en Javascript objetos, ya que no existe el concepto de clase en Javascript). Sin embargo, en determinadas ocasiones podemos tener problemas a la hora de utilizar this para acceder a un determinado objeto. Estos problemas son debidos a un problema de definición del lenguaje en determinadas y al ámbito donde se ejecutan distintas funciones.   
 
 En cuanto al primer caso, existe un problema de definición del lenguaje, que provoca que cuando, dentro de un método de un objeto creamos otro método y tratamos de acceder al this dentro de esto, this hace referencia al objeto window, en vez de al objeto en cuestión. Veámoslo con un ejemplo:   
 
+```javascript
 var obj = {   
-checkThis : function () {   
-alert(this.access);   
-},   
-access : “Acceso correcto”   
-}   
+  checkThis : function () {   
+    alert(this.access);   
+  },   
+  access : “Acceso correcto”   
+};  
 
 obj.checkThis();   
+```
 
 En este caso, observamos que aparece una alerta con el texto “Acceso correcto”, como era de esperar. Sin embargo, si ejecutamos el siguiente código:   
 
+```javascript
 var obj = {   
-checkThis : function () {   
-var showAccess = function () {   
-alert(this.access); //this en este caso es el objeto window   
-}   
-showAccess();   
-},   
-access : “Acceso correcto”   
-}   
+  checkThis : function () {   
+    var showAccess = function () {   
+      alert(this.access); //this en este caso es el objeto window   
+    }   
+    showAccess();   
+  },   
+  access : “Acceso correcto”   
+};  
 
 obj.checkThis();   
+```
 
 Sin embargo, ahora obtenemos una alerta que indica undefined, ya que this hace referencia al objeto window. Existe un workaround para solventar este problema, que es arropar this en otra variable. Esta variable, normalmente suele ser declarada como that, self o me:   
 
+```javascript
 var obj = {   
-checkThis : function () {   
-var that = this; //en este caso la declaramos como that   
-var showAccess = function () {   
-alert(that.access);   
-}   
-showAccess();   
-},   
-access : “Acceso correcto”   
-}   
+  checkThis : function () {   
+    var that = this; //en este caso la declaramos como that   
+    var showAccess = function () {   
+      alert(that.access);   
+    }   
+    showAccess();   
+  },   
+  access : “Acceso correcto”   
+};   
 
 obj.checkThis();   
+```
 
 De esta forma evitamos el  problema.   
 
 También podemos encontrarnos con el problema de que la función se ejecute dentro de otro ámbito. Por ejemplo, en jQuery podríamos tratar de hacer lo siguiente en el manejador de un evento:   
 
+```javascript
 $(function () { //cuando el documento esté cargado   
-var handlers = {};   
-//supongamos que queremos definir un manejador para todos los eventos click   
-//de los botones de la aplicación   
-
-handlers.attribute = “miAtributo”   
-handlers.initHandler = function () {   
-$(“button”).click(function (evt) {   
-alert(this.attribute);   
-})   
-};   
+  var handlers = {};   
+  //supongamos que queremos definir un manejador para todos los eventos click   
+  //de los botones de la aplicación   
+  handlers.attribute = “miAtributo”   
+  handlers.initHandler = function () {   
+    $(“button”).click(function (evt) {   
+      alert(this.attribute);   
+    })   
+  };   
 });   
+```
 
 Esta ejecución lanzará una excepción, ya que intentará buscar la propiedad attribute dentro del scope del objeto jQuery que encapsula al nodo DOM del botón. Este problema, no es exactamente igual al anterior. Para entender lo que está pasando, hay que entender el comportamiento del patrón observer que está implementado. Básicamente, en un patrón observer, se dota a un determinado objeto de una colección, donde se van apilando distintos objetos de los que quieren observarse determinados comportamientos. Cuando accedemos al método click del objeto jQuery, estamos añadiendo la función pasada por parámetro a esa colección y, cada vez que se lance el evento, va a ser ejecutada dentro del ámbito del objeto en el que se ha implementado el patrón, es decir, en el objeto jQuery.   
 
 Para resolverlo, algunas librerías permiten pasar un parámetro adicional, que sería el scope donde se desea ejecutar la función. Otras, proporcionan métodos auxiliares para enlazar la ejecución del método al de un objeto en concreto. Por ejemplo, underscoreJS, proporciona el método bind():   
 
+```javascript
 $(function () { //cuando el documento esté cargado   
-var handlers = {};   
-//supongamos que queremos definir un manejador para todos los eventos click   
-//de los botones de la aplicación   
-
-handlers.attribute = “miAtributo”   
-handlers.initHandler = function () {   
-$(“button”).click(_.bind(function (evt) {   
-alert(this.attribute);   
-}, this)); //con .bind() enlazamos la ejecución de la función a this,   
-//que es el objeto handler   
-};   
-});   
+  var handlers = {};   
+  //supongamos que queremos definir un manejador para todos los eventos click   
+  //de los botones de la aplicación   
+  handlers.attribute = “miAtributo”   
+  handlers.initHandler = function () {   
+    $(“button”).click(_.bind(function (evt) {   
+      alert(this.attribute);   
+    }, this)); //con .bind() enlazamos la ejecución de la función a this,   
+    //que es el objeto handler   
+  };   
+});
+```
 
 Sin embargo, una solución más sencilla, es utilizar el mismo workaround del problema anterior:   
 
+```javascript
 $(function () { //cuando el documento esté cargado   
-var handlers = {};   
-//supongamos que queremos definir un manejador para todos los eventos click   
-//de los botones de la aplicación   
-
-handlers.attribute = “miAtributo”   
-handlers.initHandler = function () {   
-var that = this;   
-$(“button”).click(function (evt) {   
-alert(that.attribute); //¡solucionado!   
-})   
-};   
+  var handlers = {};   
+  //supongamos que queremos definir un manejador para todos los eventos click   
+  //de los botones de la aplicación   
+  
+  handlers.attribute = “miAtributo”   
+  handlers.initHandler = function () {   
+    var that = this;   
+    $(“button”).click(function (evt) {   
+      alert(that.attribute); //¡solucionado!   
+    });   
+  };   
 });   
+```
 
 En principio, cualquier solución es válida, pero por consistencia, es preferible utilizar la misma solución para ambos problemas.  
 
-## 6.4\. Programación orientada a eventos
+## 5.4\. Programación orientada a eventos
 
 En nuestro caso, la mayoría del código Javascript que codificamos sirve para atender a las necesidades de un usuario que va a ser uso de una aplicación, interactuando con los distintos componentes que contenga la aplicación. Por tanto, los flujos que se vayan a producir en la aplicación no son secuenciales, sino que contienen un carácter aleatorio. Esto que parece una obviedad, debe reflejarse en nuestro código. Muchas veces, tratamos de desarrollar un código completamente secuencial a la hora de crear por ejemplo nuestros propios módulos o widgets, de forma que cuando queremos tratar un mismo módulo pero de formas distintas, muchas veces nos vemos obligados a duplicar código o hacer secuencias de código infernales y difíciles de leer y, por tanto, de mantener.   
 
@@ -841,7 +892,7 @@ B.C.método();
 
 Es cuando A o B quieran hacer algo en función de lo que pase en C. En vez de tener referencias en C de A o B, lo que hace es lanzar o exponer un evento, para que A y/o B hagan algo en este caso, de forma que el código de C es exactamente igual existan A, B, D o los objetos que se necesiten.  
 
-## 6.5\. Programación funcional
+## 5.5\. Programación funcional
 
 Aún no siendo Javascript o lenguaje de programación puramente funcional, debido a ciertas características del lenguaje sí que pueden utilizarse ciertas características de lenguajes funcionales para facilitarnos la vida. Y esto es precisamente gracias a la capacidad del lenguaje de tanto recibir funciones como parámetro de otras funciones y que estas sean capaces de retornar otras funciones (que son conocidas como closures), así como que las funciones sean tipos primitivos. Debido a esta capacidad, muchos frameworks y librerías han implementado las funciones básicas de programación funcional para manejo de Arrays. Estas son:   
 
@@ -854,56 +905,63 @@ Aún no siendo Javascript o lenguaje de programación puramente funcional, debid
 
 En las distintas librerías o frameworks, pueden llamarse de distintas formas. Suelen estar como funciones auxiliares de Arrays o colecciones y nos ayudan a escribir un código mucho más legible y que escribamos mucho menos código, siendo muy importante en el desarrollo front, ya que es muy común trabajar con colecciones (sobre todo de nodos del DOM). Un ejemplo utilizando map:   
 
+```javascript
 var collection, treatment;   
 collection = [1,2,3,4];   
 treatment = function (element) {   
-return element * 2;   
+  return element * 2;   
 }   
 map(collection, treatment); //devolvería [2,4,6,8]   
+```
 
 Para más ejemplos, se puede visitar esta url con dispositivas bastante ilustrativas: [http://www.slideshare.net/leo.soto/javascript-funcional](http://www.slideshare.net/leo.soto/javascript-funcional)  
 
-## 6.6\. Manejo de la asincronía
+## 5.6\. Manejo de la asincronía
 
 En Javascript tenemos que trabajar a menudo con la asincronía, por ejemplo cuando trabajamos con llamadas AJAX. Muchas veces, puede resultar engorroso, debido a que en ocasiones debemos anidar las funciones de callback unas tras otras, cuando queremos realizar ciertas funciones cuando un proceso asíncrono se haya completado, es decir, que sean dependientes.   
 
 Para controlar de una forma óptima la asincronía y hacerlo de una forma más legible y sencilla existe el patrón promesa. Consiste en que una determinada función en la que se va a ejecutar código de forma asíncrona devuelva lo que se llama una promesa. Esto es una especie de contrato, en el que se asegura que cuando se vaya a resolver la ejecución asíncrona, se le va a notificar a quien haya ejecutado la función. Aunque muchas librerías soportan promesas, hay una en concreto Q.js que cumple perfectamente la especificación del patrón promesa según la CommonJS ( [http://wiki.commonjs.org/wiki/Promises](http://wiki.commonjs.org/wiki/Promises)). Vamos a ver un ejemplo de cómo se trabaja con promesas, partiendo de la base que utilizamos Q:   
 
- var miPromesa = function () {   
-  var d = Q.defer(); //inicializamos la promesa   
-
+```javascript
+var miPromesa = function () {   
+  var d = Q.defer(); //inicializamos la promesa   
   //Aquí realizarías la petición asíncrona   
   funcionAsincrona({   
-       onSuccess : function (datos) {   
-              d.resolve(datos); //indicamos que se ha resuelto satisfactoriamente   
-// y mandamos los datos resultantes   
-       } ,   
-       onFailure : function (datosError) {   
-             d.reject(datosError); //indicamos que se ha resuelto con error   
-                //y enviamos lo que se reciba, que podría   
-    // ser el mensaje de error   
-       }   
-});   
-
+    onSuccess : function (datos) {   
+      d.resolve(datos); //indicamos que se ha resuelto satisfactoriamente   
+      // y mandamos los datos resultantes   
+    },   
+    onFailure : function (datosError) {   
+      d.reject(datosError); //indicamos que se ha resuelto con error   
+      //y enviamos lo que se reciba, que podría   
+      // ser el mensaje de error   
+    }   
+  });   
   return d.promise; //devolvemos la promesa   
- }   
+}
+```
 
 Ese digamos que es un esquema básico. Las promesas proporcionan una serie de métodos para poder tratar de forma secuencial las respuestas. En concreto los métodos then() para ejecutarse cuando se ha procesado correctamente, fail() cuando falla y done() cuando ha terminado la cadena:   
 
+```javascript
 var treatResponse, onResponseFailed;   
 
 treatResponse = function (datosDelCallback) {   
     //codigo para tratar la respuesta   
-  }   
+};   
+
 onResponseFailed = function (error) {   
 //tratamos el error   
 };   
 
-miPromesa().then(treatResponse).fail(onResponseFailed).done();   
+miPromesa().then(treatResponse).fail(onResponseFailed).done();
+```
 
 Y las promesas pueden devolver otras promesas, es decir, si la función treatResponse devolviese a su vez otra promesa debido a que realizase alguna llamada asíncrona, podríamos concatenarlas de la siguiente forma:   
 
-miPromesa().then(treatResponse).then(otroMetodo).fail(onResponseFailed).done();   
+```javascript
+miPromesa().then(treatResponse).then(otroMetodo).fail(onResponseFailed).done();
+```
 
 EL método fail en este caso, encapsula el fail de ambas promesas.   
 
@@ -911,11 +969,11 @@ Como vemos, el resultado es un código bastante legible.
 
 Las promesas nos permiten así mismo controlar cuando varios procesos asíncronos han terminado para hacer algo en ese momento. Esto normalmente se ha controlado con contadores, pero con las promesas es tan sencillo como utilizar el método all:   
 
+```javascript
 var miPromesa1, miPromesa2;   
 
 miPromesa1 = function () {   
   var d = Q.defer(); //inicializamos la promesa   
-
   //Aquí realizarías la petición asíncrona   
   funcionAsincrona({   
        onSuccess : function (datos) {   
@@ -950,22 +1008,25 @@ miPromesa2 = function () {
 
   return d.promise; //devolvemos la promesa   
 }   
+```
 
 Como vemos, son dos llamadas asíncronas. Si quisiéramos mostrar un alert con el string “completado”, bastaría con utilizar el método all(), que recibe un array de promesas:   
 
+```javascript
 var onAllCompleted = function () {   
-alert(“completado”);   
+  alert(“completado”);   
 }   
 
-Q.all([miPromesa1, miPromesa2]).then(onAllCompleted);   
+Q.all([miPromesa1, miPromesa2]).then(onAllCompleted);
+```
 
-## 6.7\. Conclusión
+## 5.7\. Conclusión
 
 Cuando desarrollemos Javascript hay que atender a las peculiaridades del lenguaje, para tener un código más óptimo y evitar problemas, así como hacer un desarrollo orientado a eventos apoyándonos en características de programación funcional y en patrones como las promesas. De esta forma conseguiremos tener menos problemas en nuestros desarrollos, así como un código mucho más legible, modularizado y fácil de mantener.   
 
 Hay muchos más patrones que  pueden ayudarnos en nuestros desarrollos con Javascript. Un libro altamente recomendable es el “Learning javascript design patterns” escrito por Addy Osmani, al que se peude acceder de forma libre en el sitio [http://addyosmani.com/resources/essentialjsdesignpatterns/book/](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)   
 
-# 7\. Elección del framework
+# 6\. Elección del framework
 
 Hoy en día, existen numerosos frameworks cuyo objetivo es facilitar y aportar una metodología de desarrollo orientada exclusivamente al front. De entre todos los que están disponibles, en BEEVA apostamos por los siguientes:   
 
@@ -979,7 +1040,7 @@ La apuesta por estos tres frameworks se basa en su extendida utilización, lo qu
 
 Hoy en día, podemos distinguir entre 2 tipos de aplicaciones web, según su diseño e interacción. Estas son los Portales Web y las Aplicaciones Web RIA.   
 
-## 7.1\. Portales Web
+## 6.1\. Portales Web
 
 Son las aplicaciones web más clásicas y comunes. Son los típicos portales que aparecen comúnmente por internet: Webs de periódicos digitales, portales bancarios, etc. Hoy en día, suelen y deben tener un diseño Responsive o adaptativo, es decir, deben visualizarse de forma distinta dependiendo del dispositivo de visualización y no suelen tener un carácter general líquido, por lo que generalmente el contenedor se adapta al contenido (podemos observar que cuanto más crece el contenido de la página, aparece un scroll para poder visualizar el contenido en el marco general de la página). Otra característica es que cuando seleccionamos distintas opciones, cambia el contenido completo de la página, siendo una SPA (Single Page Application) o una aplicación web multipágina. Son el tipo de aplicaciones web que dominan en las extranets, ya que suelen ser más ligeras a la  hora de cargar, conteniendo menos cantidad de componentes web ricos y menos cantidad de código Javascript.  Para este tipo de aplicaciones, apostamos por los frameworks BackboneJS (en cuyo ecosistema incluimos requireJS, jQuery y UnderscoreJS como librerías auxiliares ) y AngularJS. Se trata de dos frameworks ligeros, a los que podemos ir añadiendo dependencias según necesidades (librerías de charting, distintos widgets, etc.). Los patrones de diseño que nos aportan son :   
 
@@ -988,6 +1049,6 @@ Son las aplicaciones web más clásicas y comunes. Son los típicos portales que
 
 Lo normal en Backbone, es utilizar un patrón MVC, ya que es el más utilizado y más familiar, por lo que es el patrón más adecuado. En cambio, en AngularJS es muy común encontrarse con implementaciones basadas en MVVM, aunque puede igualmente utilizarse el MVC.   
 
-## 7.2\. Aplicaciones RIA
+## 6.2\. Aplicaciones RIA
 
 Se caracterizan por tener una gran cantidad de componentes “ricos”: árboles, grids de datos, pestañas, ventanas emergentes y otros muchos componentes complejos. En este tipo de aplicaciones no prima tanto que sea Responsive, sino más bien que sean líquidas. En estas aplicaciones es el contenido el que se adapta al contenedor. Son una simulación en web de las típicas aplicaciones de escritorio que se podían hacer con Java Swing, Visual Basic, etc. ¿Que serían aplicaciones de escritorio? por ejemplo un IDE de desarrollo, el FileZilla… Muchos ejemplos. En la actualidad, muchas aplicaciones web se pueden desarrollar utilizando estos formatos de diseño. Un ejemplo de aplicación de escritorio web la podemos ver aquí: [http://dev.sencha.com/extjs/5.0.0/examples/desktop/index.html](http://dev.sencha.com/extjs/5.0.0/examples/desktop/index.html). Existe una diferencia importante con respecto a los portales web, más tradicionales. Sí que es cierto que se trata de aplicaciones web pesadas, por lo que se suelen implementar para correr en intranets para aplicaciones de gestión por ejemplo. Para este tipo de aplicaciones web se recomienda el uso, en la medida de lo posible, del Framework ExtJS, ya que viene equipado con toda clase de widgets reutilizables y fácilmente extensibles y de todo tipo de librerías para no necesitar de otras externas (aunque bien pueden utilizarse dado el caso). En la versión actual, se puede realizar un desarrollo utilizando tanto el patrón MVVM como MVC.
