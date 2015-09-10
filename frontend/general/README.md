@@ -7,46 +7,46 @@ Guía de proyectos y buenas prácticas
 
 [1\. Introducción](#1-introducción)   
 [2\. Carga inicial](#2-carga-inicial)   
-⋅⋅* Regla 1: Realizar pocas peticiones HTTP   
-⋅⋅* Regla 2: Usar CDNs (Content Delivery Network)
-⋅⋅* Regla 3: Añadir cabeceras de expiración
-⋅⋅* Regla 4: Utilizar compresión Gzip
-⋅⋅* Regla 5: Incluir hojas de estilos al principio del documento HTML
-⋅⋅* Regla 6: Incluir ficheros Javascript al final del documento
-⋅⋅* Regla 7: Evitar expresiones CSS
-⋅⋅* Regla 8: Cargar Javascript y CSS mediante archivos externos
-⋅⋅* Regla 9: Reducir los DNS Lookups
-⋅⋅* Regla 10: Comprimir Javascript
-⋅⋅* Regla 11: Evitar redirecciones
-⋅⋅* Regla 12: Evitar duplicación en ficheros Javascript importados
-⋅⋅* Regla 13: Correcta configuración de los ETags
-⋅⋅* Regla 14: Cachear ciertas peticiones AJAX
+  * Regla 1: Realizar pocas peticiones HTTP   
+  * Regla 2: Usar CDNs (Content Delivery Network)
+  * Regla 3: Añadir cabeceras de expiración
+  * Regla 4: Utilizar compresión Gzip
+  * Regla 5: Incluir hojas de estilos al principio del documento HTML
+  * Regla 6: Incluir ficheros Javascript al final del documento
+  * Regla 7: Evitar expresiones CSS
+  * Regla 8: Cargar Javascript y CSS mediante archivos externos
+  * Regla 9: Reducir los DNS Lookups
+  * Regla 10: Comprimir Javascript
+  * Regla 11: Evitar redirecciones
+  * Regla 12: Evitar duplicación en ficheros Javascript importados
+  * Regla 13: Correcta configuración de los ETags
+  * Regla 14: Cachear ciertas peticiones AJAX
 [3\. Manejo del DOM](#3-manejo-del-dom)   
-⋅⋅* Exceso de reflows]
-⋅⋅* Acceso al DOM]
+  * Exceso de reflows]
+  * Acceso al DOM]
 [4\. Creación de hojas de estilos](#4-creación-de-hojas-de-estilos)   
-[4.1\. Utilización de preprocesaores css]   
-[4.2\. Organizar los css]
-[4.3\. Tipos de clases css]
-[4.3.1\. Estructura]
-[4.3.2\. Estado visual]
-[4.3.3\. Entidad funcional]
-[4.3.4\. Estado funcional]
-[4.4\. Otras consideraciones]
+  * Utilización de preprocesaores css  
+  * Organizar los css
+  * Tipos de clases css
+    * Estructura
+    * Estado visual
+    * Entidad funcional
+    * Estado funcional
+  * Otras consideraciones
 [5\. Desarrollo con Javascript](#5-desarrollo-con-javascript)   
-[5.1\. Escribiendo código Javascript]
-[5.1.1\. Utilización de los operadores comparativos === y !==]   
-[5.1.2\. Variables]
-[5.1.3\. Uso estricto]
-[5.3.4\. Eval is evil]
-[5.3.5\. Problemas en accesos a this]   
-[5.4\. Programación orientada a eventos]   
-[5.5\. Programación funcional]
-[5.6\. Manejo de la asincronía]
-[5.7\. Conclusión]
+  * Escribiendo código Javascript
+    * Utilización de los operadores comparativos === y !==   
+    * Variables
+    * Uso estricto
+    * Eval is evil
+    * Problemas en accesos a this   
+  * Programación orientada a eventos   
+  * Programación funcional
+  * Manejo de la asincronía
+  * Conclusión
 [6\. Elección del framework](#6-elección-del-framework)   
-[6.1\. Portales Web]
-[6.2\. Aplicaciones RIA]
+  * Portales Web
+  * Aplicaciones RIA
 
 # 1\. Introducción
 
