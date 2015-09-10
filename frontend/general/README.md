@@ -51,6 +51,7 @@ Guía de proyectos y buenas prácticas
 [6\. Elección del framework](#6-elección-del-framework)   
   * Portales Web
   * Aplicaciones RIA
+[7\. Referencias](#7.referencias)
 
 # 1\. Introducción
 
@@ -1023,6 +1024,10 @@ Cuando desarrollemos Javascript hay que atender a las peculiaridades del lenguaj
 
 Hay muchos más patrones que  pueden ayudarnos en nuestros desarrollos con Javascript. Un libro altamente recomendable es el “Learning javascript design patterns” escrito por Addy Osmani, al que se peude acceder de forma libre en el sitio [http://addyosmani.com/resources/essentialjsdesignpatterns/book/](http://addyosmani.com/resources/essentialjsdesignpatterns/book/)   
 
+Recomendamos también seguir la guía de estilo JS de AirBnB
+
+[Guía de estilo JS de airbnb](https://github.com/airbnb/javascript)
+
 # 6\. Elección del framework
 
 Hoy en día, existen numerosos frameworks cuyo objetivo es facilitar y aportar una metodología de desarrollo orientada exclusivamente al front. De entre todos los que están disponibles, en BEEVA apostamos por los siguientes:   
@@ -1049,3 +1054,6 @@ Lo normal en Backbone, es utilizar un patrón MVC, ya que es el más utilizado y
 ## 6.2\. Aplicaciones RIA
 
 Se caracterizan por tener una gran cantidad de componentes “ricos”: árboles, grids de datos, pestañas, ventanas emergentes y otros muchos componentes complejos. En este tipo de aplicaciones no prima tanto que sea Responsive, sino más bien que sean líquidas. En estas aplicaciones es el contenido el que se adapta al contenedor. Son una simulación en web de las típicas aplicaciones de escritorio que se podían hacer con Java Swing, Visual Basic, etc. ¿Que serían aplicaciones de escritorio? por ejemplo un IDE de desarrollo, el FileZilla… Muchos ejemplos. En la actualidad, muchas aplicaciones web se pueden desarrollar utilizando estos formatos de diseño. Un ejemplo de aplicación de escritorio web la podemos ver aquí: [http://dev.sencha.com/extjs/5.0.0/examples/desktop/index.html](http://dev.sencha.com/extjs/5.0.0/examples/desktop/index.html). Existe una diferencia importante con respecto a los portales web, más tradicionales. Sí que es cierto que se trata de aplicaciones web pesadas, por lo que se suelen implementar para correr en intranets para aplicaciones de gestión por ejemplo. Para este tipo de aplicaciones web se recomienda el uso, en la medida de lo posible, del Framework ExtJS, ya que viene equipado con toda clase de widgets reutilizables y fácilmente extensibles y de todo tipo de librerías para no necesitar de otras externas (aunque bien pueden utilizarse dado el caso). En la versión actual, se puede realizar un desarrollo utilizando tanto el patrón MVVM como MVC.
+
+## 7\. Referencias
+  * [Guía de estilo JS de airbnb](https://github.com/airbnb/javascript)
