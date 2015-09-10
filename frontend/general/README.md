@@ -7,13 +7,13 @@ Guía de proyectos y buenas prácticas
 
 [1\. Introducción](#1-introducción)   
 [2\. Carga inicial](#2-carga-inicial)   
-[2.1\. Regla 1: Realizar pocas peticiones HTTP]   
-[2.2\. Regla 2: Usar CDNs (Content Delivery Network)]   
-[2.3\. Regla 3: Añadir cabeceras de expiración]
-[2.4\. Regla 4: Utilizar compresión Gzip]   
-[2.5\. Regla 5: Incluir hojas de estilos al principio del documento HTML]   
-[2.6\. Regla 6: Incluir ficheros Javascript al final del documento]
-[2.7\. Regla 7: Evitar expresiones CSS]   
+2.1\. Regla 1: Realizar pocas peticiones HTTP   
+2.2\. Regla 2: Usar CDNs (Content Delivery Network)
+2.3\. Regla 3: Añadir cabeceras de expiración
+2.4\. Regla 4: Utilizar compresión Gzip
+2.5\. Regla 5: Incluir hojas de estilos al principio del documento HTML
+2.6\. Regla 6: Incluir ficheros Javascript al final del documento
+2.7\. Regla 7: Evitar expresiones CSS
 [2.8\. Regla 8: Cargar Javascript y CSS mediante archivos externos]
 [2.9\. Regla 9: Reducir los DNS Lookups]
 [2.10\. Regla 10: Comprimir Javascript]
