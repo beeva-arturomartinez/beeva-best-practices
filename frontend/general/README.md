@@ -51,6 +51,7 @@ Guía de proyectos y buenas prácticas
 [6\. Elección del framework](#6-elección-del-framework)   
   * Portales Web
   * Aplicaciones RIA
+
 [7\. Referencias](#7.referencias)
 
 # 1\. Introducción
