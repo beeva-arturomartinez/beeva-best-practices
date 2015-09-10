@@ -7,23 +7,23 @@ Guía de proyectos y buenas prácticas
 
 [1\. Introducción](#1-introducción)   
 [2\. Carga inicial](#2-carga-inicial)   
-2.1\. Regla 1: Realizar pocas peticiones HTTP   
-2.2\. Regla 2: Usar CDNs (Content Delivery Network)
-2.3\. Regla 3: Añadir cabeceras de expiración
-2.4\. Regla 4: Utilizar compresión Gzip
-2.5\. Regla 5: Incluir hojas de estilos al principio del documento HTML
-2.6\. Regla 6: Incluir ficheros Javascript al final del documento
-2.7\. Regla 7: Evitar expresiones CSS
-[2.8\. Regla 8: Cargar Javascript y CSS mediante archivos externos]
-[2.9\. Regla 9: Reducir los DNS Lookups]
-[2.10\. Regla 10: Comprimir Javascript]
-[2.11\. Regla 11: Evitar redirecciones]
-[2.12\. Regla 12: Evitar duplicación en ficheros Javascript importados]
-[2.13\. Regla 13: Correcta configuración de los ETags]
-[2.14\. Regla 14: Cachear ciertas peticiones AJAX]   
+⋅⋅* Regla 1: Realizar pocas peticiones HTTP   
+⋅⋅* Regla 2: Usar CDNs (Content Delivery Network)
+⋅⋅* Regla 3: Añadir cabeceras de expiración
+⋅⋅* Regla 4: Utilizar compresión Gzip
+⋅⋅* Regla 5: Incluir hojas de estilos al principio del documento HTML
+⋅⋅* Regla 6: Incluir ficheros Javascript al final del documento
+⋅⋅* Regla 7: Evitar expresiones CSS
+⋅⋅* Regla 8: Cargar Javascript y CSS mediante archivos externos
+⋅⋅* Regla 9: Reducir los DNS Lookups
+⋅⋅* Regla 10: Comprimir Javascript
+⋅⋅* Regla 11: Evitar redirecciones
+⋅⋅* Regla 12: Evitar duplicación en ficheros Javascript importados
+⋅⋅* Regla 13: Correcta configuración de los ETags
+⋅⋅* Regla 14: Cachear ciertas peticiones AJAX
 [3\. Manejo del DOM](#3-manejo-del-dom)   
-[3.1\. Exceso de reflows]
-[3.2\. Acceso al DOM]
+⋅⋅* Exceso de reflows]
+⋅⋅* Acceso al DOM]
 [4\. Creación de hojas de estilos](#4-creación-de-hojas-de-estilos)   
 [4.1\. Utilización de preprocesaores css]   
 [4.2\. Organizar los css]
