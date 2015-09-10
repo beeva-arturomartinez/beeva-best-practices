@@ -3,18 +3,6 @@
 Desarrollo Front   
 Guía de proyectos y buenas prácticas   
 
-<table></table>
-
-![](https://lh5.googleusercontent.com/jaz9LmW1aEFE46fHpylI0f1HhhJ7V0kLwIMumhREgd3A8M_jxM0bKE28-q7FQ18RzYaCoWLwvEZAgCNcQ8wUc1DY_djpIX2tkrBeXUw-gADLBiM8teVKDOPJk-lUGi2OMem2Sg)  
-
-![](https://lh4.googleusercontent.com/LdoBpuHwoJVwFMM-Q6vjb1TKdcPZNaPCvTIJ1NSbP9CMyFttoazALbYHW0-OEWC5cONpFZOnjg0oVzedoxsB_aKtkl4EXSw1_UdCdv65aYnoz2fuSuwQyGEzYim7rHdGRhLu5g)  
-
-Avenida de Burgos 16 D, 11ª planta   
-[28002] Madrid   
-[+34] 902 20 25 52   
-hablemos@beeva.com   
-www.beeva.com   
-
 Índice   
 
 [1\. Introducción](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.kfbjdn6p31ll)   
@@ -60,120 +48,7 @@ www.beeva.com
 [6.1\. Portales Web](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.vovoppbuhib0)   
 [6.2\. Aplicaciones RIA](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.vokxnk7kjhil)  
 
-# 1\. Hoja de Control
-
-<table>
-
-<tbody>
-
-<tr>
-
-<td>Realizado por</td>
-
-<td>Fecha</td>
-
-<td>Firma</td>
-
-</tr>
-
-<tr>
-
-<td>Manuel Ángel de la Vega</td>
-
-<td>2014-27-01</td>
-
-</tr>
-
-<tr>
-
-<td>Revisado por</td>
-
-<td>Fecha</td>
-
-<td>Firma</td>
-
-</tr>
-
-<tr>
-
-<td>Isaac Andrés Díez Bargueño</td>
-
-</tr>
-
-<tr>
-
-<td>Aprobado por</td>
-
-<td>Fecha</td>
-
-<td>Firma</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-## 1.1 Control de Versiones
-
-<table>
-
-<tbody>
-
-<tr>
-
-<td>Versión</td>
-
-<td>Motivo del cambio</td>
-
-<td>Responsable del cambio</td>
-
-<td>Fecha Cambio</td>
-
-</tr>
-
-<tr>
-
-<td>1.0</td>
-
-<td>Versión inicial</td>
-
-<td>Manuel Ángel de la Vega</td>
-
-<td>2014-27-01</td>
-
-</tr>
-
-<tr>
-
-<td>1.1</td>
-
-<td>Actualización</td>
-
-<td>Manuel Ángel de la Vega</td>
-
-<td>2014-08-08   
- </td>
-
-</tr>
-
-<tr>
-
-<td>1.2</td>
-
-<td>Aplicación de formato Beeva</td>
-
-<td>Jorge Fernández</td>
-
-<td>2014-01-21</td>
-
-</tr>
-
-</tbody>
-
-</table>
-
-# 2\. Introducción
+# 1\. Introducción
 
 Para lograr un rendimiento óptimo en la ejecución de nuestras aplicaciones web, así como disponer de un código bien estructurado y modularizado, es conveniente seguir una serie de pautas, de las cuales se va a hablar en este apartado.   
 
