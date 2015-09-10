@@ -5,7 +5,7 @@ Guía de proyectos y buenas prácticas
 
 Índice   
 
-[1\. Introducción](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.kfbjdn6p31ll)   
+[1\. Introducción](#introduccion)   
 [2\. Carga inicial](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.w8jtjti4l3gc)   
 [2.1\. Regla 1: Realizar pocas peticiones HTTP](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.dgyksl1vnpea)   
 [2.2\. Regla 2: Usar CDNs (Content Delivery Network)](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.7zwwkdixavbe)   
@@ -48,7 +48,7 @@ Guía de proyectos y buenas prácticas
 [6.1\. Portales Web](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.vovoppbuhib0)   
 [6.2\. Aplicaciones RIA](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.vokxnk7kjhil)  
 
-# 1\. Introducción
+## 1\. Introducción
 
 Para lograr un rendimiento óptimo en la ejecución de nuestras aplicaciones web, así como disponer de un código bien estructurado y modularizado, es conveniente seguir una serie de pautas, de las cuales se va a hablar en este apartado.   
 
