@@ -26,7 +26,6 @@
   1. [Casting de Tipos & Coerción](#type-coercion)
   1. [Convenciones de nomenclatura](#naming-conventions)
   1. [Funciones de Acceso](#accessors)
-  1. [Constructores](#constructors)
   1. [Eventos](#events)
   1. [Módulos](#modules)
   1. [jQuery](#jquery)
@@ -1124,7 +1123,7 @@
 
   - Para más información revisa [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) por Angus Croll
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='blocks'>Bloques</a>
@@ -1153,7 +1152,7 @@
     }
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='comments'>Comentarios</a>
@@ -1246,7 +1245,7 @@
     }
   ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='whitespace'>Espacios en blanco</a>
@@ -1341,8 +1340,8 @@
         .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
         .call(tron.led);
     ```
+**[⬆ Índice](#TOC)**
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
 
 ## <a name='commas'>Comas</a>
 
@@ -1408,7 +1407,7 @@
     ];
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='semicolons'>Puntos y Comas</a>
@@ -1435,7 +1434,7 @@
     })();
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='type-coercion'>Casting de Tipos & Coerción</a>
@@ -1534,20 +1533,14 @@
   - Usa camelCase cuando nombres tus objetos, funciones e instancias.
 
     ```javascript
-    // mal
-    var OBJEcttsssss = {};
-    var this_is_my_object = {};
+    // bad
+    const OBJEcttsssss = {};
+    const this_is_my_object = {};
     function c() {}
-    var u = new user({
-      name: 'Bob Parr'
-    });
 
-    // bien
-    var thisIsMyObject = {};
+    // good
+    const thisIsMyObject = {};
     function thisIsMyFunction() {}
-    var user = new User({
-      name: 'Bob Parr'
-    });
     ```
 
   - Usa PascalCase cuando nombres constructores o clases.
@@ -1558,17 +1551,19 @@
       this.name = options.name;
     }
 
-    var bad = new user({
-      name: 'nope'
+    const bad = new user({
+      name: 'nope',
     });
 
     // bien
-    function User(options) {
-      this.name = options.name;
+    class User {
+      constructor(options) {
+        this.name = options.name;
+      }
     }
 
-    var good = new User({
-      name: 'yup'
+    const good = new User({
+      name: 'yup',
     });
     ```
 
@@ -1583,30 +1578,29 @@
     this._firstName = 'Panda';
     ```
 
-  - Cuando guardes una referencia a `this` usa `_this`.
+  - No guardes referencias a this. Usa funciones arrow o la función bind
 
     ```javascript
-    // mal
-    function() {
-      var self = this;
+    // bad
+    function foo() {
+      const self = this;
       return function() {
         console.log(self);
       };
     }
 
-    // mal
-    function() {
-      var that = this;
+    // bad
+    function foo() {
+      const that = this;
       return function() {
         console.log(that);
       };
     }
 
-    // bien
-    function() {
-      var _this = this;
-      return function() {
-        console.log(_this);
+    // good
+    function foo() {
+      return () => {
+        console.log(this);
       };
     }
     ```
@@ -1624,8 +1618,49 @@
       console.log(msg);
     };
     ```
+    
+  - Si tu fichero exporta una única clase, el fichero ha de llamarse exactamente igual que la clase.
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+    ```javascript
+    // file contents
+    class CheckBox {
+      // ...
+    }
+    export default CheckBox;
+
+    // in some other file
+    // bad
+    import CheckBox from './checkBox';
+
+    // bad
+    import CheckBox from './check_box';
+
+    // good
+    import CheckBox from './CheckBox';
+    ```
+
+  - Usa camelCase cuando exportes una función por defecto. El fichero ha de llamarse igual que la función.
+
+    ```javascript
+    function makeStyleGuide() {
+    }
+
+    export default makeStyleGuide;
+    ```
+
+  - Usa PascalCase cuando exportes un singleton / librería u objeto.
+
+    ```javascript
+    const AirbnbStyleGuide = {
+      es6: {
+      }
+    };
+
+    export default AirbnbStyleGuide;
+    ```
+    
+
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='accessors'>Funciones de Acceso</a>
@@ -1664,107 +1699,23 @@
   - Está bien crear funciones get() y set(), pero sé consistente.
 
     ```javascript
-    function Jedi(options) {
-      options || (options = {});
-      var lightsaber = options.lightsaber || 'blue';
-      this.set('lightsaber', lightsaber);
-    }
-
-    Jedi.prototype.set = function(key, val) {
-      this[key] = val;
-    };
-
-    Jedi.prototype.get = function(key) {
-      return this[key];
-    };
-    ```
-
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
-
-
-## <a name='constructors'>Constructores</a>
-
-  - Asigna métodos al objeto prototype, en vez de sobreescribir prototype con un nuevo objeto. La sobreescritura de prototype hace la herencia imposible: ¡reseteando prototype sobreescribirás la base!
-
-    ```javascript
-    function Jedi() {
-      console.log('new jedi');
-    }
-
-    // mal
-    Jedi.prototype = {
-      fight: function fight() {
-        console.log('fighting');
-      },
-
-      block: function block() {
-        console.log('blocking');
+    class Jedi {
+      constructor(options = {}) {
+        const lightsaber = options.lightsaber || 'blue';
+        this.set('lightsaber', lightsaber);
       }
-    };
 
-    // bien
-    Jedi.prototype.fight = function fight() {
-      console.log('fighting');
-    };
+      set(key, val) {
+        this[key] = val;
+      }
 
-    Jedi.prototype.block = function block() {
-      console.log('blocking');
-    };
-    ```
-
-  - Métodos pueden retornar `this` para ayudar con el encadenamiento de métodos (chaining).
-
-    ```javascript
-    // mal
-    Jedi.prototype.jump = function() {
-      this.jumping = true;
-      return true;
-    };
-
-    Jedi.prototype.setHeight = function(height) {
-      this.height = height;
-    };
-
-    var luke = new Jedi();
-    luke.jump(); // => true
-    luke.setHeight(20) // => undefined
-
-    // bien
-    Jedi.prototype.jump = function() {
-      this.jumping = true;
-      return this;
-    };
-
-    Jedi.prototype.setHeight = function(height) {
-      this.height = height;
-      return this;
-    };
-
-    var luke = new Jedi();
-
-    luke.jump()
-      .setHeight(20);
-    ```
-
-
-  - Está bien escribir un método toString() personalizado, solo asegúrate que funcione correctamente y no cause efectos colaterales.
-
-    ```javascript
-    function Jedi(options) {
-      options || (options = {});
-      this.name = options.name || 'no name';
+      get(key) {
+        return this[key];
+      }
     }
-
-    Jedi.prototype.getName = function getName() {
-      return this.name;
-    };
-
-    Jedi.prototype.toString = function toString() {
-      return 'Jedi - ' + this.getName();
-    };
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='events'>Eventos</a>
@@ -1782,7 +1733,7 @@
     });
     ```
 
-    prefiere:
+    mejor...:
 
     ```js
     // bien
@@ -1795,38 +1746,7 @@
     });
     ```
 
-  **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
-
-
-## <a name='modules'>Módulos</a>
-
-  - El módulo debe empezar con un `!`. Esto asegura que si un módulo mal formado olvide incluir al final un punto y coma, no hayan errores en producción cuando los scripts sean concatenados. [Explicación](https://github.com/airbnb/javascript/issues/44#issuecomment-13063933)
-  - El archivo debe ser nombrado con camelCase, residir en un folder con el mismo nombre, y corresponder al nombre de la función a exportar.
-  - Agrega un método noConflict() que reestablezca el módulo exportado a la versión anterior y retorne este módulo (para ser asignado a una variable).
-  - Siempre declara `'use strict';` al inicio de cada módulo.
-
-    ```javascript
-    // fancyInput/fancyInput.js
-
-    !function(global) {
-      'use strict';
-
-      var previousFancyInput = global.FancyInput;
-
-      function FancyInput(options) {
-        this.options = options || {};
-      }
-
-      FancyInput.noConflict = function noConflict() {
-        global.FancyInput = previousFancyInput;
-        return FancyInput;
-      };
-
-      global.FancyInput = FancyInput;
-    }(this);
-    ```
-
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='jquery'>jQuery</a>
@@ -1834,33 +1754,36 @@
   - Nombre las variables de objetos jQuery con un prefijo `$`.
 
     ```javascript
-    // mal
-    var sidebar = $('.sidebar');
+    // bad
+    const sidebar = $('.sidebar');
 
-    // bien
-    var $sidebar = $('.sidebar');
+    // good
+    const $sidebar = $('.sidebar');
+
+    // good
+    const $sidebarBtn = $('.sidebar-btn');
     ```
 
   - Guarde en variables los lookups de jQuery que se necesiten posteriormente.
 
     ```javascript
-    // mal
+    // bad
     function setSidebar() {
       $('.sidebar').hide();
 
-      // ...algo...
+      // ...stuff...
 
       $('.sidebar').css({
         'background-color': 'pink'
       });
     }
 
-    // bien
+    // good
     function setSidebar() {
-      var $sidebar = $('.sidebar');
+      const $sidebar = $('.sidebar');
       $sidebar.hide();
 
-      // ...algo...
+      // ...stuff...
 
       $sidebar.css({
         'background-color': 'pink'
@@ -1888,17 +1811,17 @@
     $sidebar.find('ul');
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='es5'>Compatibilidad con ECMAScript 5</a>
 
   - Revisa la [tabla de compatibilidad](http://kangax.github.com/es5-compat-table/) de ES5 de [Kangax](https://twitter.com/kangax/).
 
-  **[[⬆]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
-## <a name='testing'>Pruebas</a>
+## <a name='testing'>Testing</a>
 
   - **Sip**.
 
@@ -1911,7 +1834,7 @@
     **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
 
 
-## <a name='performance'>Desempeño</a>
+## <a name='performance'>Rendimiento y performance</a>
 
   - [On Layout & Web Performance](http://kellegous.com/j/2013/01/26/layout-performance/)
   - [String vs Array Concat](http://jsperf.com/string-vs-array-concat/2)
@@ -1937,6 +1860,7 @@
   - [Google JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml) (Guía de Estilo de Javascript de Google)
   - [jQuery Core Style Guidelines](http://docs.jquery.com/JQuery_Core_Style_Guidelines) (Lineamientos de Estilo con el núcleo de jQuery)
   - [Principles of Writing Consistent, Idiomatic JavaScript](https://github.com/rwldrn/idiomatic.js/) (Idiomatic Javascript: Principios de Escritura Consistente)
+  - [AirBnB](https://github.com/airbnb/javascript) (la guía en la que nos hemos basado)
 
 **Otros estilos**
 
