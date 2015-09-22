@@ -4,10 +4,16 @@
 ## <a name='TOC'>Tabla de Contenido</a>
 
   1. [Tipos](#types)
+  1. [Referencias](#referencias)
   1. [Objetos](#objects)
-  1. [Arreglos](#arrays)
-  1. [Cadenas de Texto](#strings)
+  1. [Arrays](#arrays)
+  1. [Desestructuración](#desestructuracion)
+  1. [Strings](#strings)
   1. [Funciones](#functions)
+  1. [Arrows](#arrows)
+  1. [Constructores](#constructores)
+  1. [Módulos](#modulos)
+  1. [Iteradores y generadores](#iteradores-y-generadores)
   1. [Propiedades](#properties)
   1. [Variables](#variables)
   1. [Hoisting](#hoisting)
@@ -28,12 +34,6 @@
   1. [Pruebas](#testing)
   1. [Desempeño](#performance)
   1. [Recursos](#resources)
-  1. [En la cancha](#in-the-wild)
-  1. [Traducciones](#translation)
-  1. [La guía de la Guía del Estilo JavaScript](#guide-guide)
-  1. [Colaboradores](#contributors)
-  1. [Charla con nosotros sobre Javascript](#chat-with-us-about-javascript)
-  1. [Licencia](#license)
 
 ## <a name='types'>Tipos</a>
 
@@ -47,28 +47,76 @@
 
     ```javascript
     var foo = 1;
-    var bar = foo;
+    let bar = foo;
 
     bar = 9;
 
     console.log(foo, bar); // => 1, 9
     ```
-  - **Complejo**: Cuando accesas a un tipo complejo, manejas la referencia a su valor.
+  - **Complejo**: Cuando accedes a un tipo complejo, manejas la referencia en memoria.
 
     + `object`
     + `array`
     + `function`
 
     ```javascript
-    var foo = [1, 2];
-    var bar = foo;
+    const foo = [1, 2];
+    const bar = foo;
 
     bar[0] = 9;
 
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+    **[[⬆ Índice]](#TOC)**
+    
+## Referencias
+
+  - [2.1](#2.1) <a name='2.1'></a> Usa `const` para todas las referencias. Evita usar `var`.
+
+  > ¿Por qué? Aseguramos que no se puede reasignar la referencia (mutar), lo que incrementa el número de bugs y dificulta la comprensión del código.
+
+    ```javascript
+    // bad
+    var a = 1;
+    var b = 2;
+
+    // good
+    const a = 1;
+    const b = 2;
+    ```
+
+  - [2.2](#2.2) <a name='2.2'></a> Si las referencias han de mutar, usa `let` en lugar de `var`.
+
+  > ¿Por qué? `let` funcionará sólo en el bloque, mientras que `var` lo hará en toda la función..
+
+    ```javascript
+    // mal
+    var count = 1;
+    if (true) {
+      count += 1;
+    }
+
+    // bien
+    let count = 1;
+    if (true) {
+      count += 1;
+    }
+    ```
+
+  - [2.3](#2.3) <a name='2.3'></a> Tanto `let` como `const` son block-scoped.
+
+    ```javascript
+    // const y let sólo existen en el bloque en el que han sido definidas
+    {
+      let a = 1;
+      const b = 1;
+    }
+    console.log(a); // ReferenceError
+    console.log(b); // ReferenceError
+    ```
+
+**[⬆ Índice](#TOC)**
 
 ## <a name='objects'>Objetos</a>
 
@@ -82,7 +130,7 @@
     var item = {};
     ```
 
-  - No uses [palabras reservadas](http://es5.github.io/#x7.6.1) para nombres de propiedades. No funciona en IE8. [Más información](https://github.com/airbnb/javascript/issues/61)
+  - No uses [palabras reservadas](http://es5.github.io/#x7.6.1) para nombres de propiedades. No funciona en IE8. [Más información](https://github.com/airbnb/javascript/issues/61) Sí funcionará en NodeJS.
 
     ```javascript
     // mal
@@ -116,6 +164,78 @@
       type: 'alien'
     };
     ```
+    
+     <a name="es6-computed-properties"></a>
+  - [3.4](#3.4) <a name='3.4'></a> Cuando un objeto tenga atributos dinámicos, usa métodos para asignar los nombres (ES6).
+
+  > ¿Por qué? Definirás todos las propiedades en un único método.
+
+    ```javascript
+
+    function getKey(k) {
+      return `a key named ${k}`;
+    }
+
+    // mal
+    const obj = {
+      id: 5,
+      name: 'San Francisco',
+    };
+    obj[getKey('enabled')] = true;
+
+    // bien
+    const obj = {
+      id: 5,
+      name: 'San Francisco',
+      [getKey('enabled')]: true,
+    };
+    ```
+
+  <a name="es6-object-shorthand"></a>
+  - [3.5](#3.5) <a name='3.5'></a> Utiliza los métodos cortos (ES6)
+
+    ```javascript
+    // mal
+    const atom = {
+      value: 1,
+
+      addValue: function (value) {
+        return atom.value + value;
+      },
+    };
+
+    // bien
+    const atom = {
+      value: 1,
+
+      addValue(value) {
+        return atom.value + value;
+      },
+    };
+    ```
+
+  <a name="es6-object-concise"></a>
+  - [3.6](#3.6) <a name='3.6'></a> Utiliza los setters de objeto cortos (ES6)
+
+  > Why? It is shorter to write and descriptive.
+
+    ```javascript
+    const lukeSkywalker = 'Luke Skywalker';
+
+    // bad
+    const obj = {
+      lukeSkywalker: lukeSkywalker,
+    };
+
+    // good
+    const obj = {
+      lukeSkywalker,
+    };
+    ```
+
+
+**[⬆ Índice](#TOC)**
+    
     **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
 
 ## <a name='arrays'>Arreglos</a>
