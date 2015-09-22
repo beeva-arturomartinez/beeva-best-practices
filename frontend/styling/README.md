@@ -1,4 +1,4 @@
-# Guía de estilos para Javascript (ES5)
+# Guía de estilos para Javascript (ES5 y ES6)
 
 
 ## <a name='TOC'>Tabla de Contenido</a>
@@ -7,13 +7,13 @@
   1. [Referencias](#referencias)
   1. [Objetos](#objects)
   1. [Arrays](#arrays)
-  1. [Desestructurado](#destructuring)
+  1. [Desestructurado (ES6)](#destructuring)
   1. [Strings](#strings)
   1. [Funciones](#functions)
-  1. [Operador Arrow](#arrows)
-  1. [Constructores](#constructores)
-  1. [Módulos](#modulos)
-  1. [Iteradores y generadores](#iteradores-y-generadores)
+  1. [Operador Arrow (ES6)](#arrows)
+  1. [Constructores (ES6)](#constructores)
+  1. [Módulos (ES6)](#modulos)
+  1. [Iteradores y generadores (ES6)](#iyg)
   1. [Propiedades](#properties)
   1. [Variables](#variables)
   1. [Hoisting](#hoisting)
@@ -621,18 +621,18 @@
     });
     ```
 
-  - [8.3](#8.3) <a name='8.3'></a> In case the expression spans over multiple lines, wrap it in parentheses for better readability.
+  - Si la expresión require de varias líneas, utiliza siempre paréntesis para mejorar la legibilidad.
 
-  > Why? It shows clearly where the function starts and ends.
+  > ¿Por qué? Clarifica el inicio y el final
 
     ```js
-    // bad
+    // mal
     [1, 2, 3].map(number => 'As time went by, the string containing the ' +
       `${number} became much longer. So we needed to break it over multiple ` +
       'lines.'
     );
 
-    // good
+    // bien
     [1, 2, 3].map(number => (
       `As time went by, the string containing the ${number} became much ` +
       'longer. So we needed to break it over multiple lines.'
@@ -640,29 +640,27 @@
     ```
 
 
-  - [8.4](#8.4) <a name='8.4'></a> If your function only takes a single argument, feel free to omit the parentheses.
-
-  > Why? Less visual clutter.
+  - Si tu función tiene sólo un argumento, omite los paréntesis.
 
     ```js
-    // good
+    // bien
     [1, 2, 3].map(x => x * x);
 
-    // good
+    // bien
     [1, 2, 3].reduce((y, x) => x + y);
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ Índice](#TOC)**
 
 
-## Constructors
+## <a name="constructores">Constructores (ES6)</a>
 
-  - [9.1](#9.1) <a name='9.1'></a> Always use `class`. Avoid manipulating `prototype` directly.
+  - Usa siempre `class`. Evita modificar directamente el `prototype`.
 
-  > Why? `class` syntax is more concise and easier to reason about.
+  > ¿Por qué? `class` es más conciso y fácil de entender.
 
     ```javascript
-    // bad
+    // mal
     function Queue(contents = []) {
       this._queue = [...contents];
     }
@@ -673,7 +671,7 @@
     }
 
 
-    // good
+    // bien
     class Queue {
       constructor(contents = []) {
         this._queue = [...contents];
@@ -686,12 +684,10 @@
     }
     ```
 
-  - [9.2](#9.2) <a name='9.2'></a> Use `extends` for inheritance.
-
-  > Why? It is a built-in way to inherit prototype functionality without breaking `instanceof`.
+  - Usa `extends` para herencia
 
     ```javascript
-    // bad
+    // mal
     const inherits = require('inherits');
     function PeekableQueue(contents) {
       Queue.apply(this, contents);
@@ -701,7 +697,7 @@
       return this._queue[0];
     }
 
-    // good
+    // bien
     class PeekableQueue extends Queue {
       peek() {
         return this._queue[0];
@@ -709,10 +705,10 @@
     }
     ```
 
-  - [9.3](#9.3) <a name='9.3'></a> Methods can return `this` to help with method chaining.
+  - Los métodos pueden devolver `this` para ayudar a concatenar funciones.
 
     ```javascript
-    // bad
+    // mal
     Jedi.prototype.jump = function() {
       this.jumping = true;
       return true;
@@ -726,7 +722,7 @@
     luke.jump(); // => true
     luke.setHeight(20); // => undefined
 
-    // good
+    // bien
     class Jedi {
       jump() {
         this.jumping = true;
@@ -746,7 +742,7 @@
     ```
 
 
-  - [9.4](#9.4) <a name='9.4'></a> It's okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
+  - Está bien crear un método personalizado toString. Asegúrate de que no tiene efectos no deseados.
 
     ```javascript
     class Jedi {
@@ -764,68 +760,60 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ Índice](#TOC)**
 
 
-## Modules
+## <a name="modulos">Módulos (ES6)</a>
 
-  - [10.1](#10.1) <a name='10.1'></a> Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
-
-  > Why? Modules are the future, let's start using the future now.
+  - Usa siempre (`import`/`export`) en lugar de otros métodos no estandarizados.
 
     ```javascript
-    // bad
+    // mal
     const AirbnbStyleGuide = require('./AirbnbStyleGuide');
     module.exports = AirbnbStyleGuide.es6;
 
-    // ok
+    // bien
     import AirbnbStyleGuide from './AirbnbStyleGuide';
     export default AirbnbStyleGuide.es6;
 
-    // best
+    // mejor
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
     ```
 
-  - [10.2](#10.2) <a name='10.2'></a> Do not use wildcard imports.
-
-  > Why? This makes sure you have a single default export.
+  - No importes todo utilizando el operador *. Importa sólo lo que necesites.
 
     ```javascript
-    // bad
+    // mal
     import * as AirbnbStyleGuide from './AirbnbStyleGuide';
 
-    // good
+    // bien
     import AirbnbStyleGuide from './AirbnbStyleGuide';
     ```
 
-  - [10.3](#10.3) <a name='10.3'></a>And do not export directly from an import.
-
-  > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+  - No exportes directamente sobre un import.
 
     ```javascript
-    // bad
+    // mal
     // filename es6.js
     export { es6 as default } from './airbnbStyleGuide';
 
-    // good
+    // bien
     // filename es6.js
     import { es6 } from './AirbnbStyleGuide';
     export default es6;
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ Índice](#TOC)**
 
-## Iterators and Generators
+## <a name="iyg">Iteradores y generadores (ES6)</a>
 
-  - [11.1](#11.1) <a name='11.1'></a> Don't use iterators. Prefer JavaScript's higher-order functions like `map()` and `reduce()` instead of loops like `for-of`.
-
-  > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side-effects.
+  - No utilices los iteradores por defecto. Utiliza `map()` y `reduce()` en lugar de blucles `for-of`.
 
     ```javascript
     const numbers = [1, 2, 3, 4, 5];
 
-    // bad
+    // mal
     let sum = 0;
     for (let num of numbers) {
       sum += num;
@@ -833,23 +821,21 @@
 
     sum === 15;
 
-    // good
+    // bien
     let sum = 0;
     numbers.forEach((num) => sum += num);
     sum === 15;
 
-    // best (use the functional force)
+    // mejor
     const sum = numbers.reduce((total, num) => total + num, 0);
     sum === 15;
     ```
 
-  - [11.2](#11.2) <a name='11.2'></a> Don't use generators for now.
+  - De momento, no uses generadores.
 
-  > Why? They don't transpile well to ES5.
+  > ¿Por qué? Actualmente, no transpilan bien en ES5.
 
-**[⬆ back to top](#table-of-contents)**
-
-
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='properties'>Propiedades</a>
@@ -884,22 +870,22 @@
     var isJedi = getProp('jedi');
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='variables'>Variables</a>
 
-  - Siempre usa `var` para declarar variables. No hacerlo resultará en variables globales. Debemos evitar contaminar el espacio global (global namespace). El Capitán Planeta nos advirtió de eso.
+  - Siempre usa `const` para declarar variables. No hacerlo generará variables globales. Debemos evitar contaminar el espacio global (global namespace).
 
     ```javascript
     // mal
     superPower = new SuperPower();
 
     // bien
-    var superPower = new SuperPower();
+    const superPower = new SuperPower();
     ```
 
-  - Usa una declaración `var` por variable. Es más fácil agregar nuevas declaraciones de variables de este modo, y no tendrás que preocuparte por reemplazar `;` por `,` o introducir diffs de sólo puntuación .
+  - Usa una declaración `const` por variable.
 
     ```javascript
     // mal
@@ -914,61 +900,49 @@
         dragonball = 'z';
 
     // bien
-    var items = getItems();
-    var goSportsTeam = true;
-    var dragonball = 'z';
+    const items = getItems();
+    const goSportsTeam = true;
+    const dragonball = 'z';
     ```
 
-  - Declara a las variables sin asignación al final. Esto es útil cuando necesites asignar una variable luego dependiendo de una de las variables asignadas previamente.
+  - Agrupa todas tus `const`s y después agrupa los `let`s.
 
     ```javascript
-    // mal
-    var i, len, dragonball,
+    // bad
+    let i, len, dragonball,
         items = getItems(),
         goSportsTeam = true;
 
-    // mal
-    var i;
-    var items = getItems();
-    var dragonball;
-    var goSportsTeam = true;
-    var len;
+    // bad
+    let i;
+    const items = getItems();
+    let dragonball;
+    const goSportsTeam = true;
+    let len;
 
-    // bien
-    var items = getItems();
-    var goSportsTeam = true;
-    var dragonball;
-    var length;
-    var i;
+    // good
+    const goSportsTeam = true;
+    const items = getItems();
+    let dragonball;
+    let i;
+    let length;
     ```
 
-  - Asigna las variables al inicio de su ámbito. Esto ayuda a evitar inconvenientes con la declaración de variables y temas relacionados a 'hoisting'.
+
+
+ - Asigna las variables donde las necesites, pero en un sitio razonable.
+
+  > ¿Por qué? `let` y `const` son block scoped y no function scoped.
 
     ```javascript
-    // mal
-    function() {
-      test();
-      console.log('doing stuff..');
-
-      //..otras cosas..
-
-      var name = getName();
-
-      if (name === 'test') {
-        return false;
-      }
-
-      return name;
-    }
-
     // bien
     function() {
-      var name = getName();
-
       test();
       console.log('doing stuff..');
 
-      //..otras cosas..
+      //..other stuff..
+
+      const name = getName();
 
       if (name === 'test') {
         return false;
@@ -977,11 +951,11 @@
       return name;
     }
 
-    // mal - llamada a funcion innecesaria
-    function() {
-      var name = getName();
+    // mall - unnecessary function call
+    function(hasName) {
+      const name = getName();
 
-      if (!arguments.length) {
+      if (!hasName) {
         return false;
       }
 
@@ -991,24 +965,24 @@
     }
 
     // bien
-    function() {
-      if (!arguments.length) {
+    function(hasName) {
+      if (!hasName) {
         return false;
       }
 
-      var name = getName();
+      const name = getName();
       this.setFirstName(name);
 
       return true;
     }
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 ## <a name='hoisting'>Hoisting</a>
 
-  - Las declaraciones de variables son movidas a la parte superior de su ámbito, sin embargo su asignación no.
+  - Las declaraciones de variables son movidas a la parte superior de su ámbito (scope), sin embargo su asignación no. `const` y `let` se declaran utilizando un nuevo concepto [Temporal Dead Zones (TDZ)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let#Temporal_dead_zone_and_errors_with_let). Has de saber que [typeof deja de ser seguro](http://es-discourse.com/t/why-typeof-is-no-longer-safe/15).
 
     ```javascript
     // sabemos que esto no funcionara (asumiendo
@@ -1024,6 +998,14 @@
     function example() {
       console.log(declaredButNotAssigned); // => undefined
       var declaredButNotAssigned = true;
+    }
+    
+
+    // using const and let
+    function example() {
+      console.log(declaredButNotAssigned); // => throws a ReferenceError
+      console.log(typeof declaredButNotAssigned); // => throws a ReferenceError
+      const declaredButNotAssigned = true;
     }
 
     // El interprete hizo hoisting.
@@ -1050,7 +1032,7 @@
     }
     ```
 
-  - Expresiones de función nombradas hacen hoisting de su nombre de variable, pero no del nombre de la función ni del contenido de la función.
+  - Expresiones de función nominales hacen hoisting de su nombre de variable, pero no del nombre de la función ni del contenido de la función.
 
     ```javascript
     function example() {
@@ -1093,7 +1075,7 @@
 
   - Para más información lee [JavaScript Scoping & Hoisting](http://www.adequatelygood.com/2010/2/JavaScript-Scoping-and-Hoisting) por [Ben Cherry](http://www.adequatelygood.com/)
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+**[⬆ Índice](#TOC)**
 
 
 
