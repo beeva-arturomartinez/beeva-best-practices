@@ -27,7 +27,6 @@
   1. [Convenciones de nomenclatura](#naming-conventions)
   1. [Funciones de Acceso](#accessors)
   1. [Eventos](#events)
-  1. [Módulos](#modules)
   1. [jQuery](#jquery)
   1. [Compatibilidad con ES5](#es5)
   1. [Pruebas](#testing)
