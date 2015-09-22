@@ -7,7 +7,7 @@
   1. [Referencias](#referencias)
   1. [Objetos](#objects)
   1. [Arrays](#arrays)
-  1. [Desestructuración](#desestructuracion)
+  1. [Desestructurado](#destructuring)
   1. [Strings](#strings)
   1. [Funciones](#functions)
   1. [Arrows](#arrows)
@@ -68,11 +68,11 @@
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
-    **[[⬆ Índice]](#TOC)**
+**[⬆ Índice](#TOC)**
     
 ## Referencias
 
-  - [2.1](#2.1) <a name='2.1'></a> Usa `const` para todas las referencias. Evita usar `var`.
+  - Usa `const` para todas las referencias. Evita usar `var`.
 
   > ¿Por qué? Aseguramos que no se puede reasignar la referencia (mutar), lo que incrementa el número de bugs y dificulta la comprensión del código.
 
@@ -86,7 +86,7 @@
     const b = 2;
     ```
 
-  - [2.2](#2.2) <a name='2.2'></a> Si las referencias han de mutar, usa `let` en lugar de `var`.
+  - Si las referencias han de mutar, usa `let` en lugar de `var`.
 
   > ¿Por qué? `let` funcionará sólo en el bloque, mientras que `var` lo hará en toda la función..
 
@@ -104,7 +104,7 @@
     }
     ```
 
-  - [2.3](#2.3) <a name='2.3'></a> Tanto `let` como `const` son block-scoped.
+  - Tanto `let` como `const` son block-scoped.
 
     ```javascript
     // const y let sólo existen en el bloque en el que han sido definidas
@@ -165,8 +165,7 @@
     };
     ```
     
-     <a name="es6-computed-properties"></a>
-  - [3.4](#3.4) <a name='3.4'></a> Cuando un objeto tenga atributos dinámicos, usa métodos para asignar los nombres (ES6).
+  - Cuando un objeto tenga atributos dinámicos, usa métodos para asignar los nombres (ES6).
 
   > ¿Por qué? Definirás todos las propiedades en un único método.
 
@@ -191,8 +190,7 @@
     };
     ```
 
-  <a name="es6-object-shorthand"></a>
-  - [3.5](#3.5) <a name='3.5'></a> Utiliza los métodos cortos (ES6)
+  - Utiliza los métodos cortos (ES6)
 
     ```javascript
     // mal
@@ -214,8 +212,7 @@
     };
     ```
 
-  <a name="es6-object-concise"></a>
-  - [3.6](#3.6) <a name='3.6'></a> Utiliza los setters de objeto cortos (ES6)
+  - Utiliza los setters de objeto cortos (ES6)
 
   > Why? It is shorter to write and descriptive.
 
@@ -235,10 +232,8 @@
 
 
 **[⬆ Índice](#TOC)**
-    
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
 
-## <a name='arrays'>Arreglos</a>
+## <a name='arrays'>Arrays</a>
 
   - Usa la sintaxis literal para la creación de arreglos
 
@@ -263,7 +258,7 @@
     someStack.push('abracadabra');
     ```
 
-  - Cuando necesites copiar un arreglo usa Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
+  - Cuando necesites copiar un arreglo usa Array#slice.
 
     ```javascript
     var len = items.length;
@@ -278,8 +273,25 @@
     // bien
     itemsCopy = items.slice();
     ```
+    
+  - Usa spreads `...` para copiar un array (ES6)
+  
+    ```javascript
+    // MAL
+    const len = items.length;
+    const itemsCopy = [];
+    let i;
 
+    for (i = 0; i < len; i++) {
+      itemsCopy[i] = items[i];
+    }
+
+    // bien
+    const itemsCopy = [...items];
+    ```
+    
   - Para convertir un objeto ["array-like" (similar a un arreglo)](https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-7/array-like-objects) a un arreglo, usa Array#slice.
+  
 
     ```javascript
     function trigger() {
@@ -287,92 +299,133 @@
       ...
     }
     ```
+  - Para convertir un objeto ["array-like" (similar a un arreglo)](https://www.inkling.com/read/javascript-definitive-guide-david-flanagan-6th/chapter-7/array-like-objects) a un arreglo, usa Array#from (ES6)
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+    ```javascript
+    const foo = document.querySelectorAll('.foo');
+    const nodes = Array.from(foo);
+    ```
 
+**[⬆ Índice](#TOC)**
 
-## <a name='strings'>Cadenas de Texto</a>
+## <a name="destructuring">Desestructurado (ES6)</a>
+
+  - Usa la desestructuración de objetos cuando se accede a múltiples propiedades de un objeto.
+
+  > ¿Por qué? Evitas crear referencias temporales a estos objetos.
+
+    ```javascript
+    // mal
+    function getFullName(user) {
+      const firstName = user.firstName;
+      const lastName = user.lastName;
+
+      return `${firstName} ${lastName}`;
+    }
+
+    // bien
+    function getFullName(obj) {
+      const { firstName, lastName } = obj;
+      return `${firstName} ${lastName}`;
+    }
+
+    // mejor
+    function getFullName({ firstName, lastName }) {
+      return `${firstName} ${lastName}`;
+    }
+    ```
+
+  - Desesturcturado de Arrays
+
+    ```javascript
+    const arr = [1, 2, 3, 4];
+
+    // mal
+    const first = arr[0];
+    const second = arr[1];
+
+    // bien
+    const [first, second] = arr;
+    ```
+
+  - Usa la desestructuración de objetos para returns múltiples.
+
+  > ¿Por qué? Puedes añadir nuevas propiedades o modificar el orden a lo largo del script.
+
+    ```javascript
+    // mal
+    function processInput(input) {
+      // then a miracle occurs
+      return [left, right, top, bottom];
+    }
+
+    // hay que estar pendiente del orden...
+    const [left, __, top] = processInput(input);
+
+    // bien
+    function processInput(input) {
+      // then a miracle occurs
+      return { left, right, top, bottom };
+    }
+
+    // sólo elegimos los datos que necesitamos
+    const { left, right } = processInput(input);
+    ```
+**[⬆ Índice](#TOC)**
+
+## <a name='strings'>Strings</a>
 
   - Usa comillas simples `''` para las cadenas de texto
 
     ```javascript
     // mal
-    var name = "Bob Parr";
+    const name = "Bob Parr";
 
     // bien
-    var name = 'Bob Parr';
+    const name = 'Bob Parr';
 
-    // mal
-    var fullName = "Bob " + this.lastName;
-
-    // bien
-    var fullName = 'Bob ' + this.lastName;
     ```
 
-  - Las cadenas de texto con una longitud mayor a 80 caracteres deben ser escritas en múltiples líneas usando concatenación.
-  - Nota: Cuando se usa sin criterio, las cadenas de texto largas pueden impactar en el desempeño. [jsPerf](http://jsperf.com/ya-string-concat) & [Discusión](https://github.com/airbnb/javascript/issues/40)
+  - Las cadenas de texto con una longitud mayor a 100 caracteres deben ser escritas en múltiples líneas usando concatenación.
   
     ```javascript
     // mal
-    var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+    const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
     // bien
-    var errorMessage = 'This is a super long error that was thrown because\
+    const errorMessage = 'This is a super long error that was thrown because\
     of Batman. When you stop to think about how Batman had anything to do \
     with this, you would get nowhere fast.';
 
 
     // bien
-    var errorMessage = 'This is a super long error that was thrown because' +
+    const errorMessage = 'This is a super long error that was thrown because' +
       'of Batman. When you stop to think about how Batman had anything to do ' +
       'with this, you would get nowhere fast.';
     ```
 
-  - Cuando se crea programáticamente una cadena de texto, use Array#join en vez de concatenación. Sobretodo por IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).  
-  
+  - Usa templating en lugar de concatenaciones (ES6)
+
+  > ¿Por qué? Hace más legible y conciso el código.
+
     ```javascript
-    var items;
-    var messages;
-    var length;
-    var i;
-
-    messages = [{
-      state: 'success',
-      message: 'This one worked.'
-    },{
-      state: 'success',
-      message: 'This one worked as well.'
-    },{
-      state: 'error',
-      message: 'This one did not work.'
-    }];
-
-    length = messages.length;
+    // mal
+    function sayHi(name) {
+      return 'How are you, ' + name + '?';
+    }
 
     // mal
-    function inbox(messages) {
-      items = '<ul>';
-
-      for (i = 0; i < length; i++) {
-        items += '<li>' + messages[i].message + '</li>';
-      }
-
-      return items + '</ul>';
+    function sayHi(name) {
+      return ['How are you, ', name, '?'].join();
     }
 
     // bien
-    function inbox(messages) {
-      items = [];
-
-      for (i = 0; i < length; i++) {
-        items[i] = messages[i].message;
-      }
-
-      return '<ul><li>' + items.join('</li><li>') + '</li></ul>';
+    function sayHi(name) {
+      return `How are you, ${name}?`;
     }
     ```
+  - NUNCA uses eval() sobre un string. Es la mejor puerta de entrada a las vulnerabilidades en JS
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
 
 
 ## <a name='functions'>Funciones</a>
@@ -381,7 +434,7 @@
 
     ```javascript
     // expresion de funcion anonima
-    var anonymous = function() {
+    const anonymous = function() {
       return true;
     };
 
@@ -397,7 +450,6 @@
     ```
 
   - Nunca declares una función en un bloque que no sea de función (if, while, etc). En vez de ello, asigna la función a una variable. Los navegadores te permitirán hacerlo pero todos ellos lo interpretarán de modo diferente, lo que es lamentable.
-  - **Nota:** ECMA-262 define un bloque como una lista de sentencias. Una declaración de función no es una sentencia. [Lee la nota de ECMA-262 sobre este inconveniente](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
   
     ```javascript
     // mal
