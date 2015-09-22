@@ -10,7 +10,7 @@
   1. [Desestructurado](#destructuring)
   1. [Strings](#strings)
   1. [Funciones](#functions)
-  1. [Arrows](#arrows)
+  1. [Operador Arrow](#arrows)
   1. [Constructores](#constructores)
   1. [Módulos](#modulos)
   1. [Iteradores y generadores](#iteradores-y-generadores)
@@ -426,31 +426,40 @@
     ```
   - NUNCA uses eval() sobre un string. Es la mejor puerta de entrada a las vulnerabilidades en JS
 
+**[⬆ Índice](#TOC)**
 
+## <a name="functions">Funciones</a>
 
-## <a name='functions'>Funciones</a>
+  - Declara funciones en lugar de asignarlas a variables
 
-  - Expresiones de función:
+  > ¿Por qué? Al ser nominales, las declaraciones de funciones aparecen en la pila de llamadas y facilitan su identificación en el "debugging" Además, las declaraciones son "subidas" al principio (hoisting) y estarán disponibles en todo el scope. De esta forma, además, siempre podremos utilizar el operador Arrow (ES6)
 
     ```javascript
-    // expresion de funcion anonima
-    const anonymous = function() {
-      return true;
+    // mal
+    const foo = function () {
     };
 
-    // expresion de funcion nombrada
-    var named = function named() {
-      return true;
-    };
+    // bien
+    function foo() {
+    }
+    ```
 
-    // expresion de funcion inmediatamente invocada (IIFE)
+  - Funciones autoinvocadas
+
+    ```javascript
+    // ES6
+    (() => {
+      console.log('Welcome to the Internet. Please follow me.');
+    })();
+    
+    // ES5
     (function() {
       console.log('Welcome to the Internet. Please follow me.');
     })();
     ```
 
-  - Nunca declares una función en un bloque que no sea de función (if, while, etc). En vez de ello, asigna la función a una variable. Los navegadores te permitirán hacerlo pero todos ellos lo interpretarán de modo diferente, lo que es lamentable.
-  
+  - No declares nunca una función en un bucle, un if, ... 
+
     ```javascript
     // mal
     if (currentUser) {
@@ -460,29 +469,386 @@
     }
 
     // bien
-    var test;
+    let test;
     if (currentUser) {
-      test = function test() {
+      test = () => {
         console.log('Yup.');
       };
     }
     ```
 
-  - Nunca nombres a un parámetro como `arguments`, esto tendrá precedencia sobre el objeto `arguments` que es brindado en cada ámbito de función.
+  - Nunca utilices un parámetro llamado `arguments` ya que Javascript lo declara de forma automática
 
     ```javascript
     // mal
     function nope(name, options, arguments) {
-      // ...algo...
+      // ...stuff...
     }
 
     // bien
     function yup(name, options, args) {
-      // ...algo...
+      // ...stuff...
     }
     ```
 
-    **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
+  - Nunca uses `arguments`, usa `...` en su lugar (ES6)
+
+    ```javascript
+    // mal
+    function concatenateAll() {
+      const args = Array.prototype.slice.call(arguments);
+      return args.join('');
+    }
+
+    // bien
+    function concatenateAll(...args) {
+      return args.join('');
+    }
+    ```
+
+  - Usa parámetros por defecto (ES6)
+
+    ```javascript
+    // FATAL
+    function handleThings(opts) {
+      // No! We shouldn't mutate function arguments.
+      // Double bad: if opts is falsy it'll be set to an object which may
+      // be what you want but it can introduce subtle bugs.
+      opts = opts || {};
+      // ...
+    }
+
+    // mal
+    function handleThings(opts) {
+      if (opts === void 0) {
+        opts = {};
+      }
+      // ...
+    }
+
+    // bien
+    function handleThings(opts = {}) {
+      // ...
+    }
+    ```
+
+  - Evita modificadores en los parámetros por defecto (ES6)
+
+  > ¿Por qué? Confunden....
+
+  ```javascript
+  var b = 1;
+  // mal
+  function count(a = b++) {
+    console.log(a);
+  }
+  count();  // 1
+  count();  // 2
+  count(3); // 3
+  count();  // 3
+  ```
+
+  - Pon siempre los parámetros por defecto al final (ES6)
+
+    ```javascript
+    // mal
+    function handleThings(opts = {}, name) {
+      // ...
+    }
+
+    // bien
+    function handleThings(name, opts = {}) {
+      // ...
+    }
+    ```
+
+- Nunca uses la funcion "Function" para nombrar a una función
+
+  > ¿Por qué? Hace cosas similares al eval...permitiendo vulnerabilidades.
+
+  ```javascript
+  // mal
+  var add = new Function('a', 'b', 'return a + b');
+
+  // igual de mal
+  var subtract = Function('a', 'b', 'return a - b');
+  ```
+
+**[⬆ Índice](#TOC)**
+
+## <a name="arrows">Operador Arrow (ES6)</a>
+
+  - Usa siempre el operador Arrow para pasar por parámetro funciones anónimas.
+
+  > ¿Por qué? Evitamos problemas de contexto `this` y es mucho más legible.
+
+  > ¿Por qué no? Si la función es muy compleja, deberás declararla a parte.
+
+    ```javascript
+    // mal
+    [1, 2, 3].map(function (x) {
+      const y = x + 1;
+      return x * y;
+    });
+
+    // bien
+    [1, 2, 3].map((x) => {
+      const y = x + 1;
+      return x * y;
+    });
+    ```
+
+  - Si el cuerpo de la función es una expresión sencilla, no utilices llaves ni return (aunque puedes hacerlo)
+
+  > ¿Por qué? Más legible y corto.
+
+  > No lo hagas si vas a devolver un objeto.
+
+    ```javascript
+    // bien
+    [1, 2, 3].map(number => `A string containing the ${number}.`);
+
+    // mal
+    [1, 2, 3].map(number => {
+      const nextNumber = number + 1;
+      `A string containing the ${nextNumber}.`;
+    });
+
+    // bien
+    [1, 2, 3].map(number => {
+      const nextNumber = number + 1;
+      return `A string containing the ${nextNumber}.`;
+    });
+    ```
+
+  - [8.3](#8.3) <a name='8.3'></a> In case the expression spans over multiple lines, wrap it in parentheses for better readability.
+
+  > Why? It shows clearly where the function starts and ends.
+
+    ```js
+    // bad
+    [1, 2, 3].map(number => 'As time went by, the string containing the ' +
+      `${number} became much longer. So we needed to break it over multiple ` +
+      'lines.'
+    );
+
+    // good
+    [1, 2, 3].map(number => (
+      `As time went by, the string containing the ${number} became much ` +
+      'longer. So we needed to break it over multiple lines.'
+    ));
+    ```
+
+
+  - [8.4](#8.4) <a name='8.4'></a> If your function only takes a single argument, feel free to omit the parentheses.
+
+  > Why? Less visual clutter.
+
+    ```js
+    // good
+    [1, 2, 3].map(x => x * x);
+
+    // good
+    [1, 2, 3].reduce((y, x) => x + y);
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+## Constructors
+
+  - [9.1](#9.1) <a name='9.1'></a> Always use `class`. Avoid manipulating `prototype` directly.
+
+  > Why? `class` syntax is more concise and easier to reason about.
+
+    ```javascript
+    // bad
+    function Queue(contents = []) {
+      this._queue = [...contents];
+    }
+    Queue.prototype.pop = function() {
+      const value = this._queue[0];
+      this._queue.splice(0, 1);
+      return value;
+    }
+
+
+    // good
+    class Queue {
+      constructor(contents = []) {
+        this._queue = [...contents];
+      }
+      pop() {
+        const value = this._queue[0];
+        this._queue.splice(0, 1);
+        return value;
+      }
+    }
+    ```
+
+  - [9.2](#9.2) <a name='9.2'></a> Use `extends` for inheritance.
+
+  > Why? It is a built-in way to inherit prototype functionality without breaking `instanceof`.
+
+    ```javascript
+    // bad
+    const inherits = require('inherits');
+    function PeekableQueue(contents) {
+      Queue.apply(this, contents);
+    }
+    inherits(PeekableQueue, Queue);
+    PeekableQueue.prototype.peek = function() {
+      return this._queue[0];
+    }
+
+    // good
+    class PeekableQueue extends Queue {
+      peek() {
+        return this._queue[0];
+      }
+    }
+    ```
+
+  - [9.3](#9.3) <a name='9.3'></a> Methods can return `this` to help with method chaining.
+
+    ```javascript
+    // bad
+    Jedi.prototype.jump = function() {
+      this.jumping = true;
+      return true;
+    };
+
+    Jedi.prototype.setHeight = function(height) {
+      this.height = height;
+    };
+
+    const luke = new Jedi();
+    luke.jump(); // => true
+    luke.setHeight(20); // => undefined
+
+    // good
+    class Jedi {
+      jump() {
+        this.jumping = true;
+        return this;
+      }
+
+      setHeight(height) {
+        this.height = height;
+        return this;
+      }
+    }
+
+    const luke = new Jedi();
+
+    luke.jump()
+      .setHeight(20);
+    ```
+
+
+  - [9.4](#9.4) <a name='9.4'></a> It's okay to write a custom toString() method, just make sure it works successfully and causes no side effects.
+
+    ```javascript
+    class Jedi {
+      constructor(options = {}) {
+        this.name = options.name || 'no name';
+      }
+
+      getName() {
+        return this.name;
+      }
+
+      toString() {
+        return `Jedi - ${this.getName()}`;
+      }
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+## Modules
+
+  - [10.1](#10.1) <a name='10.1'></a> Always use modules (`import`/`export`) over a non-standard module system. You can always transpile to your preferred module system.
+
+  > Why? Modules are the future, let's start using the future now.
+
+    ```javascript
+    // bad
+    const AirbnbStyleGuide = require('./AirbnbStyleGuide');
+    module.exports = AirbnbStyleGuide.es6;
+
+    // ok
+    import AirbnbStyleGuide from './AirbnbStyleGuide';
+    export default AirbnbStyleGuide.es6;
+
+    // best
+    import { es6 } from './AirbnbStyleGuide';
+    export default es6;
+    ```
+
+  - [10.2](#10.2) <a name='10.2'></a> Do not use wildcard imports.
+
+  > Why? This makes sure you have a single default export.
+
+    ```javascript
+    // bad
+    import * as AirbnbStyleGuide from './AirbnbStyleGuide';
+
+    // good
+    import AirbnbStyleGuide from './AirbnbStyleGuide';
+    ```
+
+  - [10.3](#10.3) <a name='10.3'></a>And do not export directly from an import.
+
+  > Why? Although the one-liner is concise, having one clear way to import and one clear way to export makes things consistent.
+
+    ```javascript
+    // bad
+    // filename es6.js
+    export { es6 as default } from './airbnbStyleGuide';
+
+    // good
+    // filename es6.js
+    import { es6 } from './AirbnbStyleGuide';
+    export default es6;
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Iterators and Generators
+
+  - [11.1](#11.1) <a name='11.1'></a> Don't use iterators. Prefer JavaScript's higher-order functions like `map()` and `reduce()` instead of loops like `for-of`.
+
+  > Why? This enforces our immutable rule. Dealing with pure functions that return values is easier to reason about than side-effects.
+
+    ```javascript
+    const numbers = [1, 2, 3, 4, 5];
+
+    // bad
+    let sum = 0;
+    for (let num of numbers) {
+      sum += num;
+    }
+
+    sum === 15;
+
+    // good
+    let sum = 0;
+    numbers.forEach((num) => sum += num);
+    sum === 15;
+
+    // best (use the functional force)
+    const sum = numbers.reduce((total, num) => total + num, 0);
+    sum === 15;
+    ```
+
+  - [11.2](#11.2) <a name='11.2'></a> Don't use generators for now.
+
+  > Why? They don't transpile well to ES5.
+
+**[⬆ back to top](#table-of-contents)**
+
 
 
 
