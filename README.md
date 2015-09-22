@@ -11,6 +11,7 @@ Here is saved the list of best practices documents, guidelines and codestyles re
 ### Backend
 * ** [Java] (backend/java/README.md)
 * [Python](backend/python/README.md)
+* [Nodejs](backend/nodejs/README.md)
 * ** [Scala/Akka](backend/akka/README.md)
 * [REST Services](backend/rest/README.md)
 * ** [Microservices] (backend/microservices/README.md)
@@ -27,9 +28,10 @@ Here is saved the list of best practices documents, guidelines and codestyles re
 
 ### Frontend & Data Visualization
 * [General frontend techniques](frontend/general/README.md)
-* [Angularjs](frontend/angular/README.md)
-* [Nodejs](frontend/nodejs/README.md)
 * [CSS & styling](frontend/styling/README.md)
+* [Angularjs](frontend/angular/README.md)
+* [Backbone](frontend/backbone/README.md)
+* [Polymer](frontend/polymer/README.md)
 
 ### IT Security & Hardening
 * [Security and application hardening](it_security/security_hardening/README.md)
