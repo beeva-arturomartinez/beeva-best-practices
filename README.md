@@ -19,8 +19,7 @@ If you think any information is wrong or missing please write us an email or dir
 * ** [Microservices] (backend/microservices/README.md)
 
 ### Big Data
-* ** [Hive] (big_data/hive/README.md)
-* ** [PIG] (big_data/pig/README.md)
+* ** [Hadoop] (big_data/hadoop/README.md) (pig, hive, parquet, AVRO, Oozie, HDFS, EMR)
 * [Spark](big_data/spark/README.md)
 
 ### DevOps
