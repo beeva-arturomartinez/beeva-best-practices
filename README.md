@@ -2,7 +2,9 @@
 
 #Best Practices in BEEVA
 
-Here is saved the list of best practices documents, guidelines and codestyles recommendations for help to you in your daily work. If you want to contribute, please read before the [guidelines](#contrib-guidelines).
+Here is the list of best practices, guidelines, codestyles and recommendations that we follow and recommend in Beeva, please read the contrib [guidelines](#contrib-guidelines) before sending your pull request with your content.
+
+If you think any information is wrong or missing please write us an email or directly create an issue inside this repo.
 
 ### Cloud Computing
 * [Amazon Web Services](cloud/aws/README.md)
@@ -45,8 +47,8 @@ Here is saved the list of best practices documents, guidelines and codestyles re
 ## Contrib Guidelines
 * To contrib use [pull requests](https://help.github.com/articles/using-pull-requests/) ...
 * [Here is](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) the markdown cheatsheet you can use to create your documents.
-* Write in english please :)
-* Add attributions and references if necessary.
-* Please add the images to your *static* subfolder.
+* Write in english please :), don't worry if everything is not perfect as we will continue improving this guidelines overtime as we find and implement new best practices.
+* Add attributions and references if necessary to external sites, it's nice when your work is recognized by others.
+* Please add the images that you required to this repo in the *static* subfolder of each subsection, in this way we ensure no broken links will be ever created, avoid using external images.
 
 [BEEVA](http://www.beeva.com) | 2015
