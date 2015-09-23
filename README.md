@@ -23,9 +23,10 @@ If you think any information is wrong or missing please write us an email or dir
 * [Spark](big_data/spark/README.md)
 
 ### DevOps
-* [Continuous Integration](devops/continuous_integration/README.md)
+* [Continuous Integration](devops/continuous_integration/README.md) (Jenkins & Bamboo)
 * [Configuration Management (puppet)](devops/configuration_management/README.md)
 * [Docker](devops/docker/README.md)
+* [Infrastructure Management](devops/infrastructure/README.md) (Mongo, Elasticsearch, Kafka, Logstash)
 
 ### Frontend & Data Visualization
 * [General frontend techniques](frontend/general/README.md)
