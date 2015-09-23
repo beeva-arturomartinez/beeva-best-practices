@@ -49,6 +49,6 @@ If you think any information is wrong or missing please write us an email or dir
 * [Here is](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) the markdown cheatsheet you can use to create your documents.
 * Write in english please :), don't worry if everything is not perfect as we will continue improving this guidelines overtime as we find and implement new best practices.
 * Add attributions and references if necessary to external sites, it's nice when your work is recognized by others.
-* Please add the images that you required to this repo in the *static* subfolder of each subsection, in this way we ensure no broken links will be ever created, avoid using external images.
+* Please add the images that you required to this repo in the *static* subfolder of each subsection, in this way we ensure no broken links will be ever created, avoid using external image links.
 
 [BEEVA](http://www.beeva.com) | 2015
