@@ -1,7 +1,7 @@
 # Technology & type (Best Practices, Style Guide, ..) i.e. Node.js Style Guide
 At this point we're going to talk about...
 
-![alt text](https://github.com/beeva/beeva-best-practices/blob/master/frontend/nodejs/static/nodejs.png "nodeJS")
+![alt text](static/nodejs.png "nodeJS")
 
 ## Index
 
