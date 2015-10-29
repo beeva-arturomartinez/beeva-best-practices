@@ -27,7 +27,7 @@ If you think any information is wrong or missing please write us an email or dir
 * [Configuration Management (puppet)](devops/configuration_management/README.md)
 * [Docker](devops/docker/README.md)
 * [Infrastructure Management](devops/infrastructure/README.md) (Mongo, Elasticsearch, Kafka, Logstash)
-* [Gitflow](devops/gitflow/README.md) (Gitflow)
+* [Gitflow](devops/gitflow/README.md)
 
 ### Frontend & Data Visualization
 * [General frontend techniques](frontend/general/README.md)
@@ -40,10 +40,10 @@ If you think any information is wrong or missing please write us an email or dir
 * [Security and application hardening](it_security/security_hardening/README.md)
 
 ### Quality Assurance
+* [Code Design](qa_testing/code_design/README.md)
 * [Code Optimization](qa_testing/code_optimization/README.md)
 * [Code Quality with Sonar](qa_testing/sonar/README.md)
 * [Testing](qa_testing/testing/README.md)
-
 
 ## Contrib Guidelines
 * To contrib use [pull requests](https://help.github.com/articles/using-pull-requests/) ...
