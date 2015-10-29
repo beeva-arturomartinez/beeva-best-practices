@@ -1,7 +1,7 @@
 # Technology gitflow
 At this point we're going to talk about...
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+[Replace this logo] ![alt text](https://github.com/beeva-aidaalonso/beeva-best-practices/blob/develop/devops/gitflow/static/gitflow-icon.png "BEEVA")
 
 ## Index
 
