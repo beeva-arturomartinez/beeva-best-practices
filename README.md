@@ -27,6 +27,7 @@ If you think any information is wrong or missing please write us an email or dir
 * [Configuration Management (puppet)](devops/configuration_management/README.md)
 * [Docker](devops/docker/README.md)
 * [Infrastructure Management](devops/infrastructure/README.md) (Mongo, Elasticsearch, Kafka, Logstash)
+* [Gitflow](devops/gitflow/README.md) (Gitflow)
 
 ### Frontend & Data Visualization
 * [General frontend techniques](frontend/general/README.md)
