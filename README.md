@@ -1,4 +1,4 @@
-![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![alt text](/static/horizontal-beeva-logo.png "BEEVA")
 
 #Best Practices in BEEVA
 
