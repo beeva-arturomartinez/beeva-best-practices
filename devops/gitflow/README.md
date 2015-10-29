@@ -1,4 +1,4 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
+# Technology gitflow
 At this point we're going to talk about...
 
 [Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
