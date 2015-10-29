@@ -5,6 +5,8 @@ At this point we're going to talk about...
 
 ## Index
 
+Prueba ruta relativa en imagenes: [Replace this logo] ![alt text](static/gitflow.png "GITFLOW")
+
 * [The Fellowship of the Ring](#the-fellowship-of-the-ring)
 * [The Two Towers](#the-two-towers)
 * [The Return of the King](#the-return-of-the-king)
