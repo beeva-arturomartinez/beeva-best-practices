@@ -7,10 +7,10 @@ Welcome to AngularJS' best practises guide!
 ## Index
 
 * [Preface](#preface)
-* * [A word on Angular's lifecycle](#angular-lifecycle]
-* * [More - TODO](#more)
+  * [Angular's Lifecycle](#angular-lifecycle)
+  * [More - TODO](#more)
 * [Configuration](#configuration)
-* * [TODO](#todo)
+  * [TODO](#todo)
 * [Controllers](#controllers)
 * [Directives](#directives)
 * [Filters](#filters)
