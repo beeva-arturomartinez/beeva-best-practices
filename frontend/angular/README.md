@@ -6,46 +6,20 @@ Welcome to AngularJS' best practises guide!
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
+* [Preface](#preface)
+* * [A word on Angular's lifecycle](#angular-lifecycle]
+* * [More - TODO](#more)
+* [Configuration](#configuration)
+* * [TODO](#todo)
+* [Controllers](#controllers)
+* [Directives](#directives)
+* [Filters](#filters)
+* [Services](#services)
 * [References](#references)
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+### Preface
 
-### The Two Towers
-
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-A Remarkable idea
-
-
-### The Return of the King
-
-A nice table
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-
-### References
-
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+TODO
 
 ___
 
