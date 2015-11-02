@@ -58,6 +58,9 @@ When you request Angular to load a route, you're internally triggering some task
 * `$stateNotFound`: TODO.
 * `$stateChangeSuccess`: TODO.
 
+_NOTE:_ All above-menctioned events are documented [here](https://docs.angularjs.org/api/ngRoute/service/$route).
+
+
 Once this flow finishes, and if everything went up according to plan, your new route will be loaded, and if such route has a configured view, it will kick-in right away.
 
 ### Rendering & data-binding
