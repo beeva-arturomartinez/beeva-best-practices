@@ -1,7 +1,8 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
+# Angular Style Guide
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+Welcome to AngularJS' best practises guide!
+
+![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/695px-AngularJS_logo.svg.png "Angular")
 
 ## Index
 
