@@ -92,12 +92,12 @@ As in any other development language/tool/technique, atomicity gives you great l
  */
 
 // SampleDirective.js
-angular.module('myModule').directive('sampleDirective', [..., function(...) {
+angular.module('myFancyApp').directive('sampleDirective', [..., function(...) {
  ...
 });
 
 // AnotherDirective.js
-angular.module('myModule').directive('anotherDirective', [..., function(...) {
+angular.module('myFancyApp').directive('anotherDirective', [..., function(...) {
  ...
 });
 
@@ -108,7 +108,7 @@ angular.module('myModule').directive('anotherDirective', [..., function(...) {
  */
  
 // Directives.js
-angular.module('myModule').directive('sampleDirective', [..., function(...) {
+angular.module('myFancyApp').directive('sampleDirective', [..., function(...) {
  ...
 }).directive('anotherDirective', [..., function(...) {
  ...
@@ -118,6 +118,8 @@ angular.module('myModule').directive('sampleDirective', [..., function(...) {
 
 ## Angular's modules
 
+### Setting and getting
+
 Angular modules are defined by invoking the `module` function, passing through a name for the module, and the array of dependencies it must be able to inject. Afterwards, modules are got via the same function call, but giving it just the _name_ attribute. You must avoid setting up modules more than once.
 
 ```javascript
@@ -126,19 +128,68 @@ Angular modules are defined by invoking the `module` function, passing through a
  */
 
 //Setting up a module
-angular.module('myModule', ['ngRoute', 'ngAnimate', ...]);
+angular.module('myFancyApp', ['ngRoute', 'ngAnimate', ...]);
 
 /*
  * Once your module is set up, you can just get it anywhere you want
  */
 
 // Getting the module
-angular.module('myModule')
+angular.module('myFancyApp')
+```
+
+### Avoid global variables
+
+Using global variables is always a discouraged technique. `True` they will be available all along your app, but precisely, you could cause collisions among your different files. If you want more information about this topic, please go to Douglas Crockford's article on [why global variables are *evil*](http://yuiblog.com/blog/2006/06/01/global-domination/).
+
+```javascript
+/*
+ * Do this
+ */
+
+// Setting up
+angular.module('myFancyApp', [...]);
+
+// Getting
+angular.module('myFancyApp')
+ .controller(...);
+
+/* 
+ * Instead of this
+ */
+ 
+// Setting up
+var myFancyApp = angular.module('myFancyApp', [...]);
+
+// Getting
+myFancyApp.controller(...);
+
+
 ```
 
 ## Modularise your app
 
-TODO
+In almost every project you will be facing some feature development that doesn't belong to your project's core, or that could be otherwise extracted from central functionalities. 
+
+If you extract these features outside your core, you will ease code understanding, and you could reuse all modularised functionalities into other projects that suit, as they will be component-ready for direct-importing.
+
+> Let's assume your application needs to handle users, and you need to provide several tools for audits.
+
+```javascript
+/*
+ * Do this
+ */
+angular.module('myFancyApp.users', [...]) ... // Users' stuff
+angular.module('myFancyApp.tools', [...]) ... // Audit tools
+angular.module('myFancyApp', ['myFancyApp.users', 'myFancyApp.tools']) ... // General stuff
+
+/*
+ * Instead of this
+ */
+angular.module('myFancyApp', [...])
+ .directive('userStuff', function() {...})
+ .directive('auditTools', function() {...})
+```
 
 # Controllers
 
