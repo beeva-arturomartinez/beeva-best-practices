@@ -84,7 +84,7 @@ _NOTE:_ As word of advice, read *carefully* the section about bindings and expre
 
 ## Atomic development
 
-As in any other development language/tool/technique, atomicity gives you great leverage on reading/understanding/refactoring your code. If you avoid having thousands lines files with many dependencies within them, using your code will eventually be a nightmare.
+As in any other development language/tool/technique, atomicity gives you great leverage on reading/understanding/refactoring your code. If you don't avoid having thousands lines files with many dependencies within them, using your code will eventually be a nightmare.
 
 ```javascript
 /*
@@ -107,8 +107,8 @@ angular.module('myModule').directive('anotherDirective', [..., function(...) {
  * Instead of this
  */
  
- // Directives.js
- angular.module('myModule').directive('sampleDirective', [..., function(...) {
+// Directives.js
+angular.module('myModule').directive('sampleDirective', [..., function(...) {
  ...
 }).directive('anotherDirective', [..., function(...) {
  ...
@@ -118,7 +118,23 @@ angular.module('myModule').directive('anotherDirective', [..., function(...) {
 
 ## Angular's modules
 
-TODO
+Angular modules are defined by invoking the `module` function, passing through a name for the module, and the array of dependencies it must be able to inject. Afterwards, modules are got via the same function call, but giving it just the _name_ attribute. You must avoid setting up modules more than once.
+
+```javascript
+/*
+ * Do this only once!
+ */
+
+//Setting up a module
+angular.module('myModule', ['ngRoute', 'ngAnimate', ...]);
+
+/*
+ * Once your module is set up, you can just get it anywhere you want
+ */
+
+// Getting the module
+angular.module('myModule')
+```
 
 ## Modularise your app
 
