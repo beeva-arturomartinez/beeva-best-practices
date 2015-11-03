@@ -233,11 +233,19 @@ This will also help you while using nested controllers, as you won't need to fol
 
 ### Angular's `$scope` hierarchy
 
-TODO
+As Angular documentation states:
 
-### `$rootScope` abuse
+> Scope is an object that refers to the application model. It is an execution context for expressions. Scopes are arranged in hierarchical structure which mimic the DOM structure of the application. Scopes can watch expressions and propagate events.
 
-TODO
+Due to this `$scope` inheritance, all parameters defined in upper scopes will be propagated to lower ones. This could be a source of performance leaks, and you should fairly know how Angular's scopes need to work (See the guide about [`$scopes`](https://docs.angularjs.org/guide/scope) and the [`$rootScope` documentation](https://docs.angularjs.org/api/ng/type/$rootScope.Scope).
+
+### Don't abuse `$rootScope`
+
+`$rootScope` is the highest-level `$scope` of your app. There's only one, accessible and mutable by all child controllers. Hence, every attribute and method defined within `$rootScope` will be propagated downwards to every single controller. Be wise about what you put inside it.
+
+- [x] Common, view-accessible methods
+- [ ] ~~Configuration attributes~~
+- [ ] ~~Other things?~~
 
 # Directives
 
