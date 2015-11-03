@@ -49,7 +49,16 @@ During app startup, Angular first calls to its declared `config` procedures. On 
 
 #### Run
 
-`run` processes are launched as soon as your app is configured. TODO.
+The `run` process is another configuration phase. But this time around your app will be fully prepared and actually running. This could be a good place to load your transversal resources, configure app's language, ...
+
+#### Config vs Run
+
+Whilst the `run` process is engaged once the app is configured (and all stuff will be loaded and ready), during the `config` phase the application is still loading, and hence Angular hasn't inject your dependencies in order for you to use them. Therefore, during the `config` phase you will have available this:
+
+| Dependency type | Availability                                                     |
+| --------------- | ---------------------------------------------------------------- |
+| constants       | Constants are available throughout all cycles of Angular's life. |
+| providers       | Angular providers are `singletons` (just as any other services) that are not yet initialised during `config`. However, providers provides you (LOL) with a direct access to the declared function before init. |
 
 ### Routing
 
