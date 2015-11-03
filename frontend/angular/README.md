@@ -84,7 +84,37 @@ _NOTE:_ As word of advice, read *carefully* the section about bindings and expre
 
 ## Atomic development
 
-TODO
+As in any other development language/tool/technique, atomicity gives you great leverage on reading/understanding/refactoring your code. If you avoid having thousands lines files with many dependencies within them, using your code will eventually be a nightmare.
+
+```javascript
+/*
+ * Do this
+ */
+
+// SampleDirective.js
+angular.module('myModule').directive('sampleDirective', [..., function(...) {
+ ...
+});
+
+// AnotherDirective.js
+angular.module('myModule').directive('anotherDirective', [..., function(...) {
+ ...
+});
+
+// --------
+
+/*
+ * Instead of this
+ */
+ 
+ // Directives.js
+ angular.module('myModule').directive('sampleDirective', [..., function(...) {
+ ...
+}).directive('anotherDirective', [..., function(...) {
+ ...
+});
+
+```
 
 ## Angular's modules
 
@@ -112,7 +142,7 @@ TODO
 
 # Directives
 
-## Use `$restrict`
+## Use `restrict`
 
 TODO
 
