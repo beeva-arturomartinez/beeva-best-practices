@@ -64,22 +64,21 @@ Whilst the `run` process is engaged once the app is configured (and all stuff wi
 
 When you request Angular to load a route, you're internally triggering some tasks to verify and load your route, and several events will be fired.
 
-* `$routeChangeStart`: TODO.
-* `$stateChangeError`: TODO.
-* `$stateNotFound`: TODO.
-* `$stateChangeSuccess`: TODO.
+* `$routeChangeStart`: This event is fired once a new route is requested. If you listen to this event you could intercept all route changes, and make some controlling within (verify authorization for the requested path, log information...).
+* `$stateChangeSuccess`: Once your new route is loaded and if everything went smooth, you'll get this event triggered.
+* `$routeChangeError`: If anything went south this event will be dispatched. 
 
 _NOTE:_ All above-menctioned events are documented [here](https://docs.angularjs.org/api/ngRoute/service/$route).
 
-
-Once this flow finishes, and if everything went up according to plan, your new route will be loaded, and if such route has a configured view, it will kick-in right away.
+Once this flow finishes, and if everything went ok, your new route will be loaded. Usually `routing` processes are followed up by `rendering` processes.
 
 ### Rendering & data-binding
 
-* `$viewContentLoaded`: TODO.
-* ...
+Rendering is the phase in which Angular takes your views and templates and `$compile`s them. During this lap, all your directives will be engaged, your bindings linked and synced, and your application freed to the user to interact with it. This is all achieved via the `$digest` cycle.
 
-TODO Rendering & data-binding (`$digest`, `$apply`, ...)
+This rendering flow is in most cases completely automatic. Thanks to Angular's `dirty checking`, once something changes within your binded model, Angular will internally launch a `$digest` cycle, in which all targeted values will be checked and updated, and your view should immediately reflect your model updates. There are some cases though in which Angular does not now something has changed, and you need to notify its core to perform a new `$digest`. This is achieved via the `$apply` method.
+
+_NOTE:_ As word of advice, read *carefully* the section about bindings and expressions. Is not usually a good practise to override Angular's native cycle through manual `$apply` calls, and most of the times this could be overcome with a slightly different approach.
 
 # Configuration
 
