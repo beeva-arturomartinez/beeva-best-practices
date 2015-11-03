@@ -96,7 +96,7 @@ angular.module('myFancyApp')
  }]);
  
 /*
- * Instead of this
+ * InsteadOf this
  */
 angular.module('myFancyApp')
  .controller('myFancyCtrl', function($scope, $filter, otherDependency) {
@@ -128,7 +128,7 @@ angular.module('myFancyApp').directive('anotherDirective', [..., function(...) {
 // --------
 
 /*
- * Instead of this
+ * InsteadOf this
  */
  
 // Directives.js
@@ -179,7 +179,7 @@ angular.module('myFancyApp')
  .controller(...);
 
 /* 
- * Instead of this
+ * InsteadOf this
  */
  
 // Setting up
@@ -208,7 +208,7 @@ angular.module('myFancyApp.tools', [...]) ... // Audit tools
 angular.module('myFancyApp', ['myFancyApp.users', 'myFancyApp.tools']) ... // General stuff
 
 /*
- * Instead of this
+ * InsteadOf this
  */
 angular.module('myFancyApp', [...])
  .directive('userStuff', function() {...})
@@ -229,7 +229,7 @@ This is cool. However, for non-complex types you could be facing reference probl
  {{ fancy.variable }}
 </div>
 
-<!-- Instead of this -->
+<!-- InsteadOf this -->
 <div ng-controller="myFancyCtrl">
  {{ variable }}
 </div>
@@ -245,7 +245,7 @@ This will also help you while using nested controllers, as you won't need to fol
  </div>
 </div>
 
-<!-- Instead of this -->
+<!-- InsteadOf this -->
 <div ng-controller="myFancyCtrl">
  <div ng-controller="myChildCtrl">
   {{ $parent.variable + variable }}
@@ -332,7 +332,7 @@ angular.module('myFancyApp')
  })
  
 /*
- * Instead of this
+ * InsteadOf this
  */
 angular.module('myFancyApp')
  .directive('myDirective', function() {
@@ -362,7 +362,7 @@ angular.module('myFancyApp')
   };
  })
 
-// Directive 2 (less priority -> executed last)
+// Directive 2 (less priority -> compiled last)
 angular.module('myFancyApp')
  .directive('myDirective2', function() {
   return {
@@ -373,7 +373,7 @@ angular.module('myFancyApp')
 
 ```
 
-## Use explicitely-declared-variables isolated scopes
+## Use _object hash_ isolated scopes
 
 Directives are directly nested down on DOM's structure, and hence on the `$scope` hierarchy. Thus, a directive will inherit by default all `$scope` attributes available on the context the directive's at. 
 
@@ -398,7 +398,7 @@ angular.module('myFancyApp')
  })
  
  /*
-  * Instead of this (full isolated scope)
+  * InsteadOf this (full isolated scope)
   */
  angular.module('myFancyApp')
  .directive('myDirective', function() {
@@ -416,6 +416,40 @@ angular.module('myFancyApp')
   return {
    ...
    scope: false
+  };
+ })
+```
+
+## Don't declare a directive's controller (normally)
+
+You can include controller functionality under the `link` or `compile` methods. This is on most cases enough to cover your needs.
+
+Angular directives could also define a controller to be directly engaged to the directive's template, in which you could also include features. This is not the best practise. At least not normally.
+
+If your directive features intention are to be shared, an explicit controller might be your solution. On any other cases, `link` methods will do just fine.
+
+```javascript
+/*
+ * Do this
+ */
+angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   link: function postLink(scope, element, attrs) {
+    // your code
+   }
+  };
+ })
+ 
+ /*
+ * InsteadOf this
+ */
+angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   controller: function() {
+    // your code
+   }
   };
  })
 ```
