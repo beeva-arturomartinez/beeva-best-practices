@@ -7,28 +7,30 @@ Welcome to AngularJS' best practises guide!
 ## Index
 
 * [Preface](#preface)
-  * [Angular's Lifecycle](#angular-lifecycle)
-  * [More - TODO](#more)
+  * [Guide's Scope](#guides-scope)
+  * [Angular's Lifecycle](#angulars-lifecycle)
 * [Configuration](#configuration)
-  * [TODO](#todo)
 * [Controllers](#controllers)
-  * [Use of `$scope`](#using-scopes)
-  * [`controllerAs`](#controller-as)
-  * [Nesting controllers](#nesting-controllers)
 * [Directives](#directives)
-  * [Restrict](#directive-restrict)
-  * [Priorities](#directive-priorities)
 * [Filters](#filters)
 * [Services](#services)
+* [Other stuff](#other-stuff)
+  * [`$watch` expressions](#watch-expressions)
+  * [Event management](#event-management)
 * [Testing] (#testing)
-  * [Unit testing](#karma-jasmine)
-    * [Angular mocks](#angular-mocks)
-  * [E2E testing](#protractor)
-* [References](#references)
+  * [Unit testing](#unit-testing)
+  * [E2E testing](#e2e-testing)
+* [References](#further-reading)
 
 # Preface
 
 Thank you for reading this guide, on how to get the best possible outcomes out of your astonishing Angular app. This guide contains procedures and advices, collected from our experience on the tool over time. Every single item should have not only the *what*, but also the *why* using such specific method shall give you better results.
+
+## Guide's Scope
+
+This guide covers development techniques tightly related to Angular JS. Even if them rules could be abstracted into many other tools, you shall see the specific guide for such tool for further best practises.
+
+The content of this guide lays on top of Frontend's best practises, whose contents should be taken into account too when developing an Angular application.
 
 ## Angular's Lifecycle
 
@@ -70,10 +72,53 @@ Once this flow finishes, and if everything went up according to plan, your new r
 
 TODO Rendering & data-binding (`$digest`, `$apply`, ...)
 
-### Others?
+# Configuration
 
+TODO
 
+# Controllers
 
+TODO
+
+# Directives
+
+TODO
+
+#Filters
+
+TODO
+
+#Services
+
+TODO
+
+#Other stuff
+
+## `$watch` expressions
+
+TODO
+
+## Event management
+
+TODO
+
+# Testing
+
+## Angular mocks
+
+TODO
+
+## Unit testing
+
+TODO
+
+## E2E Testing
+
+TODO
+
+## Further reading
+
+TODO
 
 ___
 
