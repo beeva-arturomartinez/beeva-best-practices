@@ -112,7 +112,7 @@ TODO
 
 # Directives
 
-## Use `$restrict``
+## Use `$restrict`
 
 TODO
 
