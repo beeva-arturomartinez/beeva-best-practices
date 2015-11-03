@@ -9,7 +9,7 @@ Welcome to AngularJS' best practises guide!
 * [Preface](#preface)
   * [Guide's Scope](#guides-scope)
   * [Angular's Lifecycle](#angulars-lifecycle)
-* [Configuration](#configuration)
+* [General](#general)
 * [Controllers](#controllers)
 * [Directives](#directives)
 * [Filters](#filters)
@@ -80,9 +80,9 @@ This rendering flow is in most cases completely automatic. Thanks to Angular's `
 
 _NOTE:_ As word of advice, read *carefully* the section about bindings and expressions. Is not usually a good practise to override Angular's native cycle through manual `$apply` calls, and most of the times this could be overcome with a slightly different approach.
 
-# Configuration
+# General
 
-TODO
+TODO: 1 dep per file, app modularisation, ...
 
 # Controllers
 
