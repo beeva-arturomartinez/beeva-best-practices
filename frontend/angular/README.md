@@ -82,13 +82,45 @@ _NOTE:_ As word of advice, read *carefully* the section about bindings and expre
 
 # General
 
-TODO: 1 dep per file, app modularisation, ...
+## Atomic development
+
+TODO
+
+## Angular's modules
+
+TODO
+
+## Modularise your app
+
+TODO
 
 # Controllers
+
+## `controllerAs`
+
+TODO
+
+## Nesting controllers
+
+### Angular's `$scope` hierarchy
+
+TODO
+
+### `$rootScope` abuse
 
 TODO
 
 # Directives
+
+## Use `$restrict``
+
+TODO
+
+## Directive priority
+
+TODO
+
+## `replace` your content
 
 TODO
 
