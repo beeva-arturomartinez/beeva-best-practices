@@ -1,7 +1,5 @@
 # Angular Style Guide
 
-Welcome to AngularJS' best practises guide!
-
 ![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/695px-AngularJS_logo.svg.png "Angular")
 
 ## Index
@@ -82,6 +80,30 @@ _NOTE:_ As word of advice, read *carefully* the section about bindings and expre
 
 # General
 
+## Write obfuscation-ready code
+
+When you inject some dependencies into yours, Angular recognises what you're intending to do by the name of your dependency. Once obfuscation process is through, your variable names would be messed up, and hence Angular would not have a clue about what to inject where.
+
+Angular's solution is to explicitely define dependencies into an array, before declaring your dependency function. In fact, your dependency function will be the last item of such array, and it will receive as arguments all other earlier items.
+
+```javascript
+/*
+ * Do this
+ */
+angular.module('myFancyApp')
+ .controller('myFancyCtrl', ['$scope', '$filter', 'otherDependency', function($scope, $filter, otherDependency) {
+  ...
+ }]);
+ 
+/*
+ * Instead of this
+ */
+angular.module('myFancyApp')
+ .controller('myFancyCtrl', function($scope, $filter, otherDependency) {
+  ...
+ });
+```
+
 ## Atomic development
 
 As in any other development language/tool/technique, atomicity gives you great leverage on reading/understanding/refactoring your code. If you don't avoid having thousands lines files with many dependencies within them, using your code will eventually be a nightmare.
@@ -94,12 +116,12 @@ As in any other development language/tool/technique, atomicity gives you great l
 // SampleDirective.js
 angular.module('myFancyApp').directive('sampleDirective', [..., function(...) {
  ...
-});
+}]);
 
 // AnotherDirective.js
 angular.module('myFancyApp').directive('anotherDirective', [..., function(...) {
  ...
-});
+}]);
 
 // --------
 
@@ -110,9 +132,9 @@ angular.module('myFancyApp').directive('anotherDirective', [..., function(...) {
 // Directives.js
 angular.module('myFancyApp').directive('sampleDirective', [..., function(...) {
  ...
-}).directive('anotherDirective', [..., function(...) {
+}]).directive('anotherDirective', [..., function(...) {
  ...
-});
+}]);
 
 ```
 
