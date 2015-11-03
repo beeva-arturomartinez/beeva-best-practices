@@ -188,14 +188,46 @@ angular.module('myFancyApp', ['myFancyApp.users', 'myFancyApp.tools']) ... // Ge
  */
 angular.module('myFancyApp', [...])
  .directive('userStuff', function() {...})
- .directive('auditTools', function() {...})
+ .provider('auditTools', function() {...})
 ```
 
 # Controllers
 
 ## `controllerAs`
 
-TODO
+When you declaring a controller within a view, you will immediately be provided with its scope, for direct use under your views (in other words, the `$scope` of such controller will be the namespace of the view, just as if all view would be nested within a `with($scope)` clause).
+
+This is cool. However, for non-complex types you could be facing reference problems when your model updates, specially if you are using a variable from an inner `$scope`. Your solution's name is `controllerAs`.
+
+```html
+<!-- Do this -->
+<div ng-controller="myFancyCtrl as fancy">
+ {{ fancy.variable }}
+</div>
+
+<!-- Instead of this -->
+<div ng-controller="myFancyCtrl">
+ {{ variable }}
+</div>
+```
+
+This will also help you while using nested controllers, as you won't need to follow-up hierarchy to arrive at your target variable:
+
+```html
+<!-- Do this -->
+<div ng-controller="myFancyCtrl as fancy">
+ <div ng-controller="myChildCtrl as child">
+  {{ fancy.variable + child.variable }}
+ </div>
+</div>
+
+<!-- Instead of this -->
+<div ng-controller="myFancyCtrl">
+ <div ng-controller="myChildCtrl">
+  {{ $parent.variable + variable }}
+ </div>
+</div>
+```
 
 ## Nesting controllers
 
