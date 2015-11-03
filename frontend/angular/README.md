@@ -104,6 +104,8 @@ angular.module('myFancyApp')
  });
 ```
 
+_NOTE:_ On some examples below we have ommited this syntax. Our only purpose is to keep this guide short.
+
 ## Atomic development
 
 As in any other development language/tool/technique, atomicity gives you great leverage on reading/understanding/refactoring your code. If you don't avoid having thousands lines files with many dependencies within them, using your code will eventually be a nightmare.
@@ -259,7 +261,7 @@ As Angular documentation states:
 
 > Scope is an object that refers to the application model. It is an execution context for expressions. Scopes are arranged in hierarchical structure which mimic the DOM structure of the application. Scopes can watch expressions and propagate events.
 
-Due to this `$scope` inheritance, all parameters defined in upper scopes will be propagated to lower ones. This could be a source of performance leaks, and you should fairly know how Angular's scopes need to work (See the guide about [`$scopes`](https://docs.angularjs.org/guide/scope) and the [`$rootScope` documentation](https://docs.angularjs.org/api/ng/type/$rootScope.Scope).
+Due to this `$scope` inheritance, all parameters defined in upper scopes will be propagated to lower ones. This could be a source of performance leaks, and you should fairly know how Angular's scopes need to work (See the guide about [`$scopes`](https://docs.angularjs.org/guide/scope) and the [`$rootScope`](https://docs.angularjs.org/api/ng/type/$rootScope.Scope) documentation.
 
 ### Don't abuse `$rootScope`
 
@@ -291,17 +293,132 @@ angular.module('myFancyApp')
   return {
    restrict: 'E', // or 'A' or 'EA'
    ...
-  }
+  };
  });
 ```
 
-## Directive priority
+### Replace your content if using `E`
 
-TODO
+When you use element-restricted directives (i.e. `E`), your DOM will render a `<my-directive>` tag in it. While this is cool for development purposes (as it keeps the html simple and more readable) it does not comply with HTML standards, and thus some browsers (e.g. our truly loving friend IE) won't execute your application properly. The solution? Replacing directive's content.
 
-## `replace` your content
+```javascript
+angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   ...
+   replace: true
+  };
+ })
+```
+**WARNING:** When using `replace`, the template of your directive **must** lay into one sole root element. Otherwise you will get an exception thrown.
 
-TODO
+__NOTE:__ Seems that Angular has deprecated the `replace` attribute, and won't be available on 2.0 release. Shame on you, older IEs!
+
+
+## Use `templateUrl` insteadOf `template`
+
+Angular directives let you declare their templates either by an inline html structure (i.e. `template`) or via a view's URL (i.e. `templateUrl`). The latter the better, as therefore you will keep each language within its proper file.
+
+```javascript
+/*
+ * Do this
+ */
+angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   ...
+   templateUrl: '/path/to/your/view.html'
+  };
+ })
+ 
+/*
+ * Instead of this
+ */
+angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   ...
+   template: '<div class="my-content"></div>'
+  };
+ })
+```
+
+## Leverage directive priority
+
+When your application grows big you could end up having several different directives on the very same DOM element, each of which with a duty given. In some cases you may need one particular directive to be compiled after another. For that purpose Angular gives us a directive priority configuration (see more on [`$compile`](https://docs.angularjs.org/api/ng/service/$compile) documentation).
+
+```html
+<div my-directive1 my-directive2></div>
+```
+
+```javascript
+
+// Directive 1 (more priority -> compiled first)
+angular.module('myFancyApp')
+ .directive('myDirective1', function() {
+  return {
+   ...
+   priority: 1
+  };
+ })
+
+// Directive 2 (less priority -> executed last)
+angular.module('myFancyApp')
+ .directive('myDirective2', function() {
+  return {
+   ...
+   priority: 0
+  };
+ })
+
+```
+
+## Use explicitely-declared-variables isolated scopes
+
+Directives are directly nested down on DOM's structure, and hence on the `$scope` hierarchy. Thus, a directive will inherit by default all `$scope` attributes available on the context the directive's at. 
+
+Directive isolation lets you define which attributes the directive could use, and even tell angular how.
+
+```javascript
+/*
+ * Do this
+ */
+angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   ...
+   scope: {
+    inheritValue: '=', // Value obtained from upper scopes
+    plainValue: '@', // Value given directly via String
+    functionValue: '&', // Function call value
+    renamedValue: '=otherValue', // Value set up as 'other-value' within the HTML, renamed to 'renamedValue'
+    optionalValue: '=?' // If followed-up by a question mark, your parameter will be optional
+   }
+  };
+ })
+ 
+ /*
+  * Instead of this (full isolated scope)
+  */
+ angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   ...
+   scope: true
+  };
+ })
+ 
+ /*
+  * Or this (no isolated scope)
+  */
+ angular.module('myFancyApp')
+ .directive('myDirective', function() {
+  return {
+   ...
+   scope: false
+  };
+ })
+```
 
 #Filters
 
