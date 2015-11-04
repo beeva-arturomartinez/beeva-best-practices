@@ -1,46 +1,62 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
+# REST Best Practices
 At this point we're going to talk about...
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+[Replace this logo] ![BEEVA](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
+* [Introduction](#rest-introduction)
+* [URL construction](#url-construction)
+* [Operations over resources](#operations-over-resources)
+* [Status codes](#status-codes)
+* [Payload formatting](#payload-formatting)
+* [Filters](#filters)
+* [Pagination](#pagination)
+* [HATEOAS](#hateoas)
+* [API Versioning](#api-versioning)
+* [API throughput restrictions](api-throughput-restrictions)
+* [OAuth](#oauth)
+* [Errors](#errors)
 * [References](#references)
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+### Introduction
+---
 
-### The Two Towers
+### URL Construction
+---
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+### Operations over resources
+---
 
-A Remarkable idea
+### Status codes
+---
 
+### Payload formatting
+---
 
-### The Return of the King
+### Filters
+---
 
-A nice table
+### Pagination
+---
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+### HATEOAS
+---
 
+### API Versioning
+---
+
+### API throughput restrictions
+---
+
+### OAuth
+---
+
+### Errors
+---
 
 ### References
+---
 
 * [Link](http://www.url.to) Description
 * [oficialsite.org](http://www.oficialwebsite.org) API & Docs
