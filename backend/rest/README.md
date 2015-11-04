@@ -55,6 +55,9 @@ At this point we're going to talk about...
 ### Errors
 ---
 
+### Status and Health endpoints
+---
+
 ### References
 ---
 
