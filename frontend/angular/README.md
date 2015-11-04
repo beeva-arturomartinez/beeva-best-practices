@@ -456,7 +456,36 @@ angular.module('myFancyApp')
 
 #Filters
 
-TODO
+## Use `predefined filters`. They are localized
+
+Angular provides you many filters that can help you to show formatted values to the users. It's better to use these filters than process data in the controllers.
+
+If you use date or currency filters, Angular translate automatically the values to the language you are using in your application.
+
+E.g. the markup `{{ 12 | currency }}` formats the number 12 as a currency using the currency filter. The resulting value is $12.00 if you are using US language. If you are using Spanish language, result will be 12€ for the same sentence.
+
+
+## Use `custom filters` instead of controller processing
+
+Sometimes you need to show certain values from the database, but you need to parse these values before showing them to the users. You must use filters for this purpose.
+
+You can make filters to parse boolean, custom currencies or long texts values, for example:  
+
+```javascript
+/*
+ * Do this for show Yes or No instead of true or false
+ */
+angular.module('myFancyApp')
+  .filter('yesNo',['$translate', function ($translate) {
+    return function (input) {     
+      var st = input ? 'YES' : 'NOT';
+      st = $translate('COMMON.'+st);
+            
+      return st;        
+    };
+  }]);
+ });
+```
 
 #Services
 
