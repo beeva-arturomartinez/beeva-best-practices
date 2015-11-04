@@ -493,9 +493,13 @@ TODO
 
 #Other stuff
 
-## `$watch` expressions
+## Don't overuse `$watch` expressions
 
-TODO
+Watch expressions engage your `$scope` and view together, syncing changes bi-directionally, via `dirty checking`. Hence, once you start using a `$watcher`, all changes on the view model will be reflected autommatically in the view, and vice-versa. Watchers could be defined within a view (via the double-curly syntax - i.e. `{{ watcher }}`), or directly declared over your `$scope` (i.e. `$scope.$watch('scopeParam', ...)`). 
+
+As using a watcher means listening to every change performed, overloading your app with an excessive amount of watchers could trigger a dramatic perfomance leak. 
+
+As stated by Ben Nadel on his article [_Counting the number of watchers in Angular_](http://www.bennadel.com/blog/2698-counting-the-number-of-watchers-in-angularjs.htm), you **must keep your `watcher` count under 2,000.
 
 ## Event management
 
