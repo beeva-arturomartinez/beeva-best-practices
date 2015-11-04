@@ -17,6 +17,7 @@ At this point we're going to talk about...
 * [API throughput restrictions](api-throughput-restrictions)
 * [OAuth](#oauth)
 * [Errors](#errors)
+* [Status and Health endpoints](#status-and-health-endpoints)
 * [References](#references)
 
 ### Introduction
