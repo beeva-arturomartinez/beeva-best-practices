@@ -279,7 +279,7 @@ Directive's `restrict` parameter lets you define in which form your directive wo
 
 * `E`: Your directive would be a DOM element (i.e. `<my-directive></my-directive>`).
 * `A`: You will assign the directive to an element via an html attribute (i.e. `<any my-directive></any>`).
-* `C`: You can use a css class to identify your directive (i.e. `<any class="my-directive"></div>`).
+* `C`: You can use a css class to identify your directive (i.e. `<any class="my-directive"></any>`).
 * `M`: Declare your directive with a html comment (i.e. `<!-- my-directive --><!-- /my-directive -->`).
 
 Using the last two is not recommended, as first could be messed-up via dynamic class assignment, and the last could (and should) be removed by your code minifier.
