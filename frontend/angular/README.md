@@ -219,7 +219,7 @@ angular.module('myFancyApp', [...])
 
 ## `controllerAs`
 
-When you declaring a controller within a view, you will immediately be provided with its scope, for direct use under your views (in other words, the `$scope` of such controller will be the namespace of the view, just as if all view would be nested within a `with($scope)` clause).
+When you declaring a controller within a view, you will immediately be provided with its scope, for direct use under your views (in other words, the `$scope` of such controller will be the namespace of the view, just as if all view were nested within a `with($scope)` clause).
 
 This is cool. However, for non-complex types you could be facing reference problems when your model updates, specially if you are using a variable from an inner `$scope`. Your solution's name is `controllerAs`.
 
