@@ -509,7 +509,7 @@ As we talked before in our [Config vs. Run](#config-vs-run) chapter, during conf
 
 > If you have a complex `locale` management, you shall want to execute something on `config` phase (e.g. loading your languages hashes, determining default language, etcetera. Then during execution you'd also want to consume some of the behaviors defined there. A provider is just what you need.
 
-### Don't **ever** mutate `constants`
+### Don't ever mutate `constants`
 
 Angular constants are mutable. Weird? Yeah, but true. It's therefore your sole responsibility to keep standard procedures and **never** ever modify a constant after it's defined. `Values` would serve you well for this mutable variables.
 
@@ -551,7 +551,7 @@ ngtemplates: {
 
 ## Inject your JSONs in production via `constants`
 
-When you deploy your app into productive environments timing is of the essence. Normal minification procedures cover the obfuscation, concatenation and minification of your resources into <one-lined> one file. Your JSON resources that represent static files on your filesystem shall be minified too, and even converted into an Angular-ready format (avoiding the XHR calls to retrieve them on startup). For that purpose both `Grunt` and `Gulp` offer you tools (`angular-constants` or `ng-constants`) to convert such JSON files into Angular constants that could be directly injected into your app as another dependency. Nice and neat, you're avoiding `N` service calls with this approach.
+When you deploy your app into productive environments timing is of the essence. Normal minification procedures cover the obfuscation, concatenation, minification and compression of all your resources into <one-lined> one file. Your JSON resources that represent static files on your filesystem shall be minified too, and even converted into an Angular-ready format (avoiding the XHR calls to retrieve them on startup). For that purpose both `Grunt` and `Gulp` offer you tools (`angular-constants` or `ng-constants`) to convert such JSON files into Angular constants that could be directly injected into your app as another dependency. Nice and neat, you're avoiding `N` service calls with this approach.
 
 ```javascript
 // Gruntfile.js -EXAMPLE CONFIGURATION-
