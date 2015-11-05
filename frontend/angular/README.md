@@ -17,8 +17,6 @@
   * [`$templateCache`](#use-templatecache-to-compile-your-views)
   * [JSON resources for pro](#inject-your-jsons-in-production-via-constants)
 * [Testing] (#testing)
-  * [Unit testing](#unit-testing)
-  * [E2E testing](#e2e-testing)
 * [Miscellaneous](#miscellaneous)
 
 # Preface
@@ -598,7 +596,7 @@ _NOTE:_ This chapter covers exclusively Angular ways of testing. There's a broad
 
 When defining unit testing, you often need to inject dependencies that won't be available on testing phases. Angular mocks let you inject such services, and train them to return sample values of your choice. Take a look at Angular's [unit testing](https://docs.angularjs.org/guide/unit-testing) documentation for fully detailed information.
 
-** Angular mocks example**
+**Angular mocks example**
 ```javascript
 // Initialize the controller and a mock scope
 beforeEach(inject(function ($controller, $rootScope) {
