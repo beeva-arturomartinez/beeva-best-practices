@@ -14,7 +14,7 @@
 * [Services](#services)
 * [Other stuff](#other-stuff)
   * [`$watch` expressions](#watch-expressions)
-  * [Event management](#event-management)
+  * [Use `$templateCache`](#use-$templateCache-to-compile-your-views)
 * [Testing] (#testing)
   * [Unit testing](#unit-testing)
   * [E2E testing](#e2e-testing)
@@ -508,7 +508,7 @@ As we talked before in our [Config vs. Run](#config-vs-run) chapter, during conf
 
 **Example:**
 
-> If you have to manage a complex `locale` management, you shall want to execute something on `config` phase (e.g. loading your languages hashes, determining default language, etcetera. Then during execution you'd also want to consume some of the behaviors defined there. A provider is just what you need.
+> If you have a complex `locale` management, you shall want to execute something on `config` phase (e.g. loading your languages hashes, determining default language, etcetera. Then during execution you'd also want to consume some of the behaviors defined there. A provider is just what you need.
 
 ### Don't **ever** mutate `constants`
 
@@ -524,9 +524,19 @@ As using a watcher means listening to every change performed, overloading your a
 
 As stated by Ben Nadel on his article [_Counting the number of watchers in Angular_](http://www.bennadel.com/blog/2698-counting-the-number-of-watchers-in-angularjs.htm), you **must keep your `watcher` count under 2,000**.
 
-## Event management
+## Use `$templateCache` to compile your views
 
-TODO
+When you define a view, it is a plain HTML file stored apart from scripts and other resources. Thus, when Angular tries to load some view, it has to perform an XHR request to get your view loaded. ¿The problem? The timing. While your view is loading asynchronously your application will be already rendered, and hence you can feel a lack of integrity or a time-consuming loading for a single purpose.
+
+To overcome this, Angular provides us with the `$templateCache`. When you request a view load, Angular first tries to resolve it's path within the cached templates. If (and only if) none is found there, an XHR request is triggered.
+
+**WARNING:** Having templates cached is cool, but developing already cached templates (inline HTML) is an awkward procedure. Leverage `Grunt` or `Gulp` tasks (i.e. `angular-templates` or `ng-templates`) to compile your views at build time.
+
+## Inject your JSONs in production via `constants`
+
+When you deploy your app into productive environments timing is of the essence. Normal minification procedures cover the obfuscation, concatenation and minification of your resources into <one-lined> one file. Your JSON resources that represent static files on your filesystem shall be minified too, and even converted into an Angular-ready format (avoiding the XHR calls to retrieve them on startup). For that purpose both `Grunt` and `Gulp` offer you tools (`angular-constants` or `ng-constants`) to convert such JSON files into Angular constants that could be directly injected into your app as another dependency. Nice and neat, you're avoiding `N` service calls with this approach.
+
+**WARNING:** When injecting your i18n resources this way, you might find your texts messed-up. To overcome this, be sure the `config.js` file generated with such resources is loaded into the app with its proper encoding and mime-type.
 
 # Testing
 
