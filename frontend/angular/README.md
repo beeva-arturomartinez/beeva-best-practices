@@ -217,7 +217,7 @@ angular.module('myFancyApp', [...])
 
 # Controllers
 
-## `controllerAs`
+## Use `controllerAs`
 
 When you declaring a controller within a view, you will immediately be provided with its scope, for direct use under your views (in other words, the `$scope` of such controller will be the namespace of the view, just as if all view were nested within a `with($scope)` clause).
 
@@ -255,7 +255,7 @@ This will also help you while using nested controllers, as you won't need to fol
 
 ## Nesting controllers
 
-### Angular's `$scope` hierarchy
+### Know Angular's `$scope` hierarchy
 
 As Angular documentation states:
 
@@ -313,7 +313,7 @@ angular.module('myFancyApp')
 ```
 **WARNING:** When using `replace`, the template of your directive **must** lay into one sole root element. Otherwise you will get an exception thrown.
 
-__NOTE:__ Seems that Angular has deprecated the `replace` attribute, and won't be available on 2.0 release. Shame on you, older IEs!
+__NOTE:__ It seems that Angular has deprecated the `replace` attribute, and won't be available on 2.0 release. Shame on you, older IEs!
 
 
 ## Use `templateUrl` insteadOf `template`
@@ -490,7 +490,29 @@ angular.module('myFancyApp')
 
 #Services
 
-TODO
+## Know all service types
+
+Angular provides several kinds of services, having them some differences among each others. Angular's documentation on [providers and recipes](https://docs.angularjs.org/guide/providers) there's an explanation about the peculiarities of each type.
+
+### Use `factories` for data management
+
+Factories are yet another recipe for defining a service in angular. Due to its name (and given that `factories` are often use to manage data) seems just reasonable to use this kind of service for such purpose. 
+
+#### Use `$resource` to connect to web services
+
+Angular gives you a great system for managing web service connections (i.e. `angular-resource`). Via a `$resource` you can natively consume any RESTFUL service, and define all methods required for your custom operations. See the [`$resource`](https://docs.angularjs.org/api/ngResource/service/$resource) documentation for further info.
+
+### Use `providers` for configuration matters
+
+As we talked before in our [Config vs. Run](#config-vs-run) chapter, during configuration phases not all dependency types would be available. Thus, if you need to execute some behavior on a service during your config phase, it **must** be a `provider`.
+
+**Example:**
+
+> If you have to manage a complex `locale` management, you shall want to execute something on `config` phase (e.g. loading your languages hashes, determining default language, etcetera. Then during execution you'd also want to consume some of the behaviors defined there. A provider is just what you need.
+
+### Don't **ever** mutate `constants`
+
+Angular constants are mutable. Weird? Yeah, but true. It's therefore your sole responsibility to keep standard procedures and **never** ever modify a constant after it's defined. `Values` would serve you well for this mutable variables.
 
 #Other stuff
 
