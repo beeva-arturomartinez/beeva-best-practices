@@ -532,9 +532,60 @@ To overcome this, Angular provides us with the `$templateCache`. When you reques
 
 **WARNING:** Having templates cached is cool, but developing already cached templates (inline HTML) is an awkward procedure. Leverage `Grunt` or `Gulp` tasks (i.e. `angular-templates` or `ng-templates`) to compile your views at build time.
 
+```javascript
+// Gruntfile.js -EXAMPLE CONFIGURATION-
+
+...
+ngtemplates: {
+  main: {
+    cwd: '<%= yeoman.app %>',
+    src:  [ 'views/{,*/}*.html', 'templates/**/*.html' ],
+    dest: '<%= yeoman.dist %>/views.js',
+    options: {
+      prefix: '/', // Include a preffix to every view loaded
+      module: 'myFancyApp'
+    }
+  }
+},
+...
+```
+
 ## Inject your JSONs in production via `constants`
 
 When you deploy your app into productive environments timing is of the essence. Normal minification procedures cover the obfuscation, concatenation and minification of your resources into <one-lined> one file. Your JSON resources that represent static files on your filesystem shall be minified too, and even converted into an Angular-ready format (avoiding the XHR calls to retrieve them on startup). For that purpose both `Grunt` and `Gulp` offer you tools (`angular-constants` or `ng-constants`) to convert such JSON files into Angular constants that could be directly injected into your app as another dependency. Nice and neat, you're avoiding `N` service calls with this approach.
+
+```javascript
+// Gruntfile.js -EXAMPLE CONFIGURATION-
+
+...
+ngconstant: {
+options: {
+  space: '  ',
+  name: 'myFancyApp.config', // Name of the module
+  wrap: '"use strict";\n\n {%= __ngModule %}',
+  dest: '<%= yeoman.dist %>/config.js',
+
+  // Global constants
+  constants: {
+    config: { // -> Constant name
+      profiles:  grunt.file.readJSON('app/resources/availableProfiles.json'),
+      global:             grunt.file.readJSON('app/resources/globalConf.json'),
+      infoData:           grunt.file.readJSON('app/resources/infoData.json'),
+      langList:           grunt.file.readJSON('app/resources/langList.json'),
+      roleList:           grunt.file.readJSON('app/resources/roleList.json'),
+      routes:             grunt.file.readJSON('app/resources/routes.json')
+    },
+
+    i18n: { // -> Constant name
+      en:     grunt.file.readJSON('app/i18n/en.json'),
+      en_US:  grunt.file.readJSON('app/i18n/en_US.json'),
+      es:     grunt.file.readJSON('app/i18n/es.json'),
+      es_ES:  grunt.file.readJSON('app/i18n/es_ES.json'),
+    }
+  }
+},
+...
+```
 
 **WARNING:** When injecting your i18n resources this way, you might find your texts messed-up. To overcome this, be sure the `config.js` file generated with such resources is loaded into the app with its proper encoding and mime-type.
 
