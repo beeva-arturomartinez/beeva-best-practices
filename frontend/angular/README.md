@@ -297,7 +297,7 @@ angular.module('myFancyApp')
  });
 ```
 
-### Replace your content if using `E`
+### Replace your content if using '`E`'
 
 When you use element-restricted directives (i.e. `E`), your DOM will render a `<my-directive>` tag in it. While this is cool for development purposes (as it keeps the html simple and more readable) it does not comply with HTML standards, and thus some browsers (e.g. our truly loving friend IE) won't execute your application properly. The solution? Replacing directive's content.
 
@@ -306,6 +306,7 @@ angular.module('myFancyApp')
  .directive('myDirective', function() {
   return {
    ...
+   restrict: 'E',
    replace: true
   };
  })
