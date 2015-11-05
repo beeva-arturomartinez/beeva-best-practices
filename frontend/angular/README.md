@@ -590,7 +590,7 @@ options: {
 
 # Testing
 
-_NOTE:_ This chapter covers exclusively Angular ways of testing. There's a broad greater set of best practises on the particular Testing doc (TODO Link).
+_NOTE:_ This chapter covers exclusively Angular ways of testing. There's a broad greater set of best practises on the particular [Testing & QA](../../qa_testing) section of the guide.
 
 ## Use Angular mocks
 
