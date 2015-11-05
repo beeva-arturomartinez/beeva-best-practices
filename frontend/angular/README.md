@@ -13,7 +13,7 @@
 * [Filters](#filters)
 * [Services](#services)
 * [Other stuff](#other-stuff)
-  * [`$watch` expressions](#watch-expressions)
+  * [`$watch` expressions](#dont-overuse-watch-expressions)
   * [`$templateCache`](#use-templatecache-to-compile-your-views)
   * [JSON resources for pro](#inject-your-jsons-in-production-via-constants)
 * [Testing] (#testing)
