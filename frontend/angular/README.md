@@ -672,9 +672,13 @@ Once you evolve with Angular you'll be capable of great-helping others, that cou
 
 We cannot say nothing about the public community, as open source contributions are completely optional and altruist, but you shall spend some time around our internal front-end community, to give and get as much as you can :).
 
-### Read
+### Further Readings
 
-TODO
+* [Angular Site](https://angularjs.org) API, SDK, News & Documentation
+* [ng-newsletter](http://www.ng-newsletter.com) Newsletter about the angular community
+* [ng-book](https://www.ng-book.com) Book about Angular 1.4
+* [Angular John Papa's Styleguide](https://github.com/johnpapa/angular-styleguide)
+* [CodeSchool free MOOC] (https://www.codeschool.com/courses/shaping-up-with-angular-js)
 
 ___
 
