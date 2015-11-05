@@ -15,7 +15,7 @@
 * [Other stuff](#other-stuff)
   * [`$watch` expressions](#watch-expressions)
   * [`$templateCache`](#use-templatecache-to-compile-your-views)
-  * [resources & `constants`](#inject-your-jsons-in-production-via-constants)
+  * [JSON resources for pro](#inject-your-jsons-in-production-via-constants)
 * [Testing] (#testing)
   * [Unit testing](#unit-testing)
   * [E2E testing](#e2e-testing)
