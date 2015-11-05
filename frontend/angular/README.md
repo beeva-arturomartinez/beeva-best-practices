@@ -19,7 +19,7 @@
 * [Testing] (#testing)
   * [Unit testing](#unit-testing)
   * [E2E testing](#e2e-testing)
-* [References](#further-reading)
+* [Miscellaneous](#miscellaneous)
 
 # Preface
 
@@ -592,19 +592,89 @@ options: {
 
 # Testing
 
-## Angular mocks
+_NOTE:_ This chapter covers exclusively Angular ways of testing. There's a broad greater set of best practises on the particular Testing doc (TODO Link).
 
-TODO
+## Use Angular mocks
 
-## Unit testing
+When defining unit testing, you often need to inject dependencies that won't be available on testing phases. Angular mocks let you inject such services, and train them to return sample values of your choice. Take a look at Angular's [unit testing](https://docs.angularjs.org/guide/unit-testing) documentation for fully detailed information.
 
-TODO
+** Angular mocks example**
+```javascript
+// Initialize the controller and a mock scope
+beforeEach(inject(function ($controller, $rootScope) {
+  scope = $rootScope.$new();
+  ManagementServiceManagementCtrl = $controller('ManagementServiceManagementCtrl', {
+    $scope: scope
+    // place here mocked dependencies
+  });
+}));
+```
 
-## E2E Testing
+## Use Karma and Jasmine
 
-TODO
+Karma and Jasmine let you write atomic behavioral test specs that fullify the unit testing of your app. They're awesome tools.
 
-## Further reading
+**Sample test file**
+```javascript
+'use strict';
+
+describe('Controller: ManagementServiceManagementCtrl', function () {
+
+ // load the controller's module
+ beforeEach(module('myFancyApp'));
+
+ var ManagementServiceManagementCtrl,
+   scope;
+
+ // Initialize the controller and a mock scope
+ beforeEach(inject(function ($controller, $rootScope) {
+   scope = $rootScope.$new();
+   ManagementServiceManagementCtrl = $controller('ManagementServiceManagementCtrl', {
+     $scope: scope
+     // place here mocked dependencies
+   });
+ }));
+
+ it('should attach a list of awesomeThings to the scope', function () {
+   expect(ManagementServiceManagementCtrl.awesomeThings.length).toBe(3);
+ });
+});
+```
+
+## Use Istanbul for coverage
+
+Moving around sprints of your project you stepped back at some point, leaving unused some code. Code coverage lets you graphically see what code is being run or not, once executed your unit tests. Is fully graphical and gives you great insights about your code execution.
+
+You can use keywords to ignore several content, that wouldn't apply for general code coverage reports.
+
+See Istanbul documentation [here](https://github.com/gotwarlost/istanbul)
+
+## Use Protractor for E2E tests
+
+E2E tests allow you to simulate user's behavior executing certain tasks. Plus is cool to see your app moving back and forth magically.
+
+Protractor leverages web drivers (just as Selenium or other tools do) to launch your favorite web browser and execute the tasks you've automated first. With this tool you can assure compliance of all covered behaviors, which is a really handy information before deploying into production environments, at the very least.
+
+## Miscellaneous
+
+### Be patient
+
+Angular is a great tool, but its learning curve could be tricky. It's full of complex stuff and it's so complete, that along with your experience gaining you'll feel stuck somewhere. Don't panic, and try to keep going. Eventually you'll overcome its rollercoaster learning curve:
+
+![alt text](http://www.bennadel.com/resources/uploads/2013/feelings_about_angularjs_over_time.png "Experience on Angular over time")
+_Image provided by Ben Nadel on it's article [My experience with AngularJS](http://www.bennadel.com/blog/2439-my-experience-with-angularjs---the-super-heroic-javascript-mvw-framework.htm)_
+
+### Trust the community
+
+Angular is awesome, right. But most of its awesomeness is that finding someone that had already dealt with some challenge your facing is an almost-sure thing. Plus, its [documentation](https://docs.angularjs.org/guide/concepts) is neat. 
+
+### Provide to the community
+
+Once you evolve with Angular you'll be capable of great-helping others, that could be struggling with some problem you've already solved.
+
+We cannot say nothing about the public community, as open source contributions are completely optional and altruist, but you shall spend some time around our internal front-end community, to give and get as much as you can :).
+
+### Read
 
 TODO
 
