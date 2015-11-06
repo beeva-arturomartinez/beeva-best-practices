@@ -1,46 +1,34 @@
 # Technology gitflow
 At this point we're going to talk about...
 
-[Replace this logo] ![alt text](https://github.com/beeva-aidaalonso/beeva-best-practices/blob/develop/devops/gitflow/static/gitflow-icon.png "BEEVA")
+[Replace this logo] ![alt text](static/gitflow-icon.png "BEEVA")
 
 ## Index
 
-Prueba ruta relativa en imagenes: [Replace this logo] ![alt text](static/gitflow.png "GITFLOW")
-
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
+* [Prologue](#prologue)
+* [Prologue Getting Started](#getting-started)
+	* [gitignore](#gitignore)
+	* [Use the shell](#use-the-shell)
+* [Git Flow](#git-flow)
+* [Advices](#advices)
+	* [Versioning](#versioning)
+	* [Redmine's id-track](#id-track)
+	* [Use hooks](#use-hooks)
+	* [Use tools](#use-tools)
 * [References](#references)
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
 
-### The Two Towers
+## Prologue
+This guide try to help to working teams to use git and git flows correctly.
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-A Remarkable idea
-
-
-### The Return of the King
-
-A nice table
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
+## Getting Started
+### gitignore
+### Use the shell
+## Git Flow
+## Advices
+### Versioning
+### Redmine's id-track
+### Hooks
 
 ### References
 
