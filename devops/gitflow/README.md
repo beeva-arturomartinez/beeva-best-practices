@@ -1,8 +1,6 @@
 # Technology gitflow
 At this point we're going to talk about...
 
-[Replace this logo] ![alt text](static/gitflow-icon.png "BEEVA")
-
 ## Index
 
 * [Prologue](#prologue)
@@ -10,6 +8,8 @@ At this point we're going to talk about...
 	* [gitignore](#gitignore)
 	* [Use the shell](#use-the-shell)
 * [Git Flow](#git-flow)
+	* [Main branches](#main-branches)
+	* [Support branches](#support-branches)
 * [Advices](#advices)
 	* [Versioning](#versioning)
 	* [Redmine's id-track](#id-track)
@@ -25,6 +25,9 @@ This guide try to help to working teams to use git and git flows correctly.
 ### gitignore
 ### Use the shell
 ## Git Flow
+ ![alt text](static/gitflow.png "GIT FLOW GRAPH")
+### Main branches
+### Support branches
 ## Advices
 ### Versioning
 ### Redmine's id-track
