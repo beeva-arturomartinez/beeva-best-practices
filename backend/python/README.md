@@ -5,6 +5,37 @@
 ### 1. Introducción
 ### 2. Python Zen (Pep 20)
 ### 3. Guia de estilo (Pep 8)
+#### 3.1. Indentation
+Use 4 spaces per indentation level.
+
+#### 3.2. Tabs or Spaces?
+
+Spaces are the preferred indentation method.
+Tabs should be used solely to remain consistent with code that is already indented with tabs.
+
+#### 3.3. Maximum Line Length
+Limit all lines to a maximum of 79 characters.
+
+with open('/path/to/some/file/you/want/to/read') as file_1, \
+     open('/path/to/some/file/being/written', 'w') as file_2:
+    file_2.write(file_1.read())
+
+Make sure to indent the continued line appropriately. The preferred place to break around a binary operator is after the operator, not before it. Some examples:
+
+class Rectangle(Blob):
+
+    def __init__(self, width, height,
+                 color='black', emphasis=None, highlight=0):
+        if (width == 0 and height == 0 and
+                color == 'red' and emphasis == 'strong' or
+                highlight > 100):
+            raise ValueError("sorry, you lose")
+        if width == 0 and height == 0 and (color == 'red' or
+                                           emphasis is None):
+            raise ValueError("I don't think so -- values are %s, %s" %
+                             (width, height))
+        Blob.__init__(self, width, height,
+                      color, emphasis, highlight)
 ### 4. Python 2 vs Python 3
 ### 5. Librería estándar
 ### 6. Importar librerías
