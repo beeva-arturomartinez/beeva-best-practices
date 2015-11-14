@@ -16,12 +16,15 @@ Tabs should be used solely to remain consistent with code that is already indent
 #### 3.3. Maximum Line Length
 Limit all lines to a maximum of 79 characters.
 
+```python
 with open('/path/to/some/file/you/want/to/read') as file_1, \
      open('/path/to/some/file/being/written', 'w') as file_2:
     file_2.write(file_1.read())
+```
 
 Make sure to indent the continued line appropriately. The preferred place to break around a binary operator is after the operator, not before it. Some examples:
 
+```python
 class Rectangle(Blob):
 
     def __init__(self, width, height,
@@ -36,6 +39,7 @@ class Rectangle(Blob):
                              (width, height))
         Blob.__init__(self, width, height,
                       color, emphasis, highlight)
+```
 ### 4. Python 2 vs Python 3
 ### 5. Librería estándar
 ### 6. Importar librerías
