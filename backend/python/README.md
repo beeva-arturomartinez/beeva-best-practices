@@ -75,7 +75,170 @@ related third party imports
 local application/library specific imports
 You should put a blank line between each group of imports.
 
+#### 3.7. String Quotes
+In Python, single-quoted strings and double-quoted strings are the same. This PEP does not make a recommendation for this. Pick a rule and stick to it. When a string contains single or double quote characters, however, use the other one to avoid backslashes in the string. It improves readability.
 
+For triple-quoted strings, always use double quote characters to be consistent with the docstring convention in PEP 257 .
+
+#### 3.8. Whitespace in Expressions and Statements
+Pet Peeves
+Avoid extraneous whitespace in the following situations:
+
+Immediately inside parentheses, brackets or braces.
+
+Yes:
+```python
+spam(ham[1], {eggs: 2})
+```
+No:  
+```python
+spam( ham[ 1 ], { eggs: 2 } )
+```
+Immediately before a comma, semicolon, or colon:
+
+Yes: 
+```python
+if x == 4: print x, y; x, y = y, x
+```
+No:  
+```python
+if x == 4 : print x , y ; x , y = y , x
+```
+However, in a slice the colon acts like a binary operator, and should have equal amounts on either side (treating it as the operator with the lowest priority). In an extended slice, both colons must have the same amount of spacing applied. Exception: when a slice parameter is omitted, the space is omitted.
+
+Yes:
+```python
+ham[1:9], ham[1:9:3], ham[:9:3], ham[1::3], ham[1:9:]
+ham[lower:upper], ham[lower:upper:], ham[lower::step]
+ham[lower+offset : upper+offset]
+ham[: upper_fn(x) : step_fn(x)], ham[:: step_fn(x)]
+ham[lower + offset : upper + offset]
+```
+No:
+```python
+ham[lower + offset:upper + offset]
+ham[1: 9], ham[1 :9], ham[1:9 :3]
+ham[lower : : upper]
+ham[ : upper]
+```
+Immediately before the open parenthesis that starts the argument list of a function call:
+
+Yes: 
+```python
+spam(1)
+```
+No: 
+```python
+spam (1)
+```
+Immediately before the open parenthesis that starts an indexing or slicing:
+
+Yes: 
+```python
+dct['key'] = lst[index]
+```
+No: 
+```python
+dct ['key'] = lst [index]
+```
+More than one space around an assignment (or other) operator to align it with another.
+
+Yes:
+```python
+x = 1
+y = 2
+long_variable = 3
+```
+No:
+```python
+x             = 1
+y             = 2
+long_variable = 3
+```
+
+#### 3.9. Other Recommendations
+Always surround these binary operators with a single space on either side: assignment ( = ), augmented assignment ( += , -= etc.), comparisons ( == , < , > , != , <> , <= , >= , in , not in , is , is not ), Booleans ( and , or , not ).
+
+If operators with different priorities are used, consider adding whitespace around the operators with the lowest priority(ies). Use your own judgment; however, never use more than one space, and always have the same amount of whitespace on both sides of a binary operator.
+
+Yes:
+```python
+i = i + 1
+submitted += 1
+x = x*2 - 1
+hypot2 = x*x + y*y
+c = (a+b) * (a-b)
+```
+No:
+```python
+i=i+1
+submitted +=1
+x = x * 2 - 1
+hypot2 = x * x + y * y
+c = (a + b) * (a - b)
+```
+Don't use spaces around the = sign when used to indicate a keyword argument or a default parameter value.
+
+Yes:
+```python
+def complex(real, imag=0.0):
+    return magic(r=real, i=imag)
+ ```
+No:
+```python
+def complex(real, imag = 0.0):
+    return magic(r = real, i = imag)
+```
+Do use spaces around the = sign of an annotated function definition. Additionally, use a single space after the : , as well as a single space on either side of the -> sign representing an annotated return value.
+
+Yes:
+```python
+def munge(input: AnyStr):
+def munge(sep: AnyStr = None):
+def munge() -> AnyStr:
+def munge(input: AnyStr, sep: AnyStr = None, limit=1000):
+```
+No:
+```python
+def munge(input: AnyStr=None):
+def munge(input:AnyStr):
+def munge(input: AnyStr)->PosInt:
+```
+Compound statements (multiple statements on the same line) are generally discouraged.
+
+Yes:
+```python
+if foo == 'blah':
+    do_blah_thing()
+do_one()
+do_two()
+do_three()
+Rather not:
+
+if foo == 'blah': do_blah_thing()
+do_one(); do_two(); do_three()
+```
+While sometimes it's okay to put an if/for/while with a small body on the same line, never do this for multi-clause statements. Also avoid folding such long lines!
+
+Rather not:
+```python
+if foo == 'blah': do_blah_thing()
+for x in lst: total += x
+while t < 10: t = delay()
+```
+Definitely not:
+```python
+if foo == 'blah': do_blah_thing()
+else: do_non_blah_thing()
+
+try: something()
+finally: cleanup()
+
+do_one(); do_two(); do_three(long, argument,
+                             list, like, this)
+
+if foo == 'blah': one(); two(); three()
+```
 
 ### 4. Python 2 vs Python 3
 ### 5. Librería estándar
