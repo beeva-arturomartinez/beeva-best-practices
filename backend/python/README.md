@@ -10,40 +10,40 @@
 ### 6. Importar librerías
 ### 7. Logging
 ### 8. Comentarios y documentación
-#### 8.1. De una sola línea #### 
-#### 8.2. En bloque ####  
-#### 8.3. Comentarios ####  
+#### 8.1. De una sola línea
+#### 8.2. En bloque
+#### 8.3. Comentarios  
 ### 9 Tratamiento de Strings
 ### 10. Operadores
-#### 10.1. Asignación ####   
-#### 10.2. Operadores aritméticos ####   
-#### 10.3. Operadores lógicos ####  
-#### 10.4. Condicionales ####  
-#### 10.5. Bucles ####   
+#### 10.1. Asignación   
+#### 10.2. Operadores aritméticos   
+#### 10.3. Operadores lógicos  
+#### 10.4. Condicionales  
+#### 10.5. Bucles 
 ### 11. Funciones
-#### 11.1. Uso de las funciones ####  
-#### 11.2. Lambda ####  
-#### 11.3. Decoradores ####    
+#### 11.1. Uso de las funciones  
+#### 11.2. Lambda
+#### 11.3. Decoradores    
 ### 12. Paradigmas de programación
-#### 12.1. Tipo de variables ####   
-#### 12.2. Herencia ####   
-#### 12.3. Sobrecarga de funciones ####   
-#### 12.4. Getters y setters ####   
-#### 12.5. Patrones de diseño #### 
-#### OOP, estructura, funcional, ...####  
+#### 12.1. Tipo de variables   
+#### 12.2. Herencia
+#### 12.3. Sobrecarga de funciones   
+#### 12.4. Getters y setters  
+#### 12.5. Patrones de diseño 
+#### OOP, estructura, funcional, ...  
 ### 13. Excepciones
 ### 14. E/S
 ### 15. Ficheros de configuración
 ### 16. Testing
-#### 16.1. Tests ####  
-#### 16.2. Librerías útiles #### 
-#### 16.3. Mocks #### 
+#### 16.1. Tests
+#### 16.2. Librerías útiles 
+#### 16.3. Mocks
 ### 17. Estructura típica de proyecto
 ### 18. Empaquetado y distribución de aplicaciones
 ### 19. Entornos de desarrollo (IDEs)
 ### 20. Gestión de librerías y entornos virtuales
-#### 20.1. pip ####   
-#### 20.2. virtualenv #### 
+#### 20.1. pip   
+#### 20.2. virtualenv 
 ### 21. Integración continua --> solo si da tiempo
 ### 23. Bibliografía  
 
