@@ -45,6 +45,9 @@ At this point we're going to talk about...
 ---
 
 ### API Versioning
+
+Make the API Version mandatory and do not release an unversioned API. There are two versioning topics on wich we will talk. The first one is the what versioning specification should we use to release our api. And the second one is how and when should we engage it with our API releasing.
+
 ---
 
 ### API throughput restrictions
