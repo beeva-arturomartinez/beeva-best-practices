@@ -39,13 +39,13 @@ At this point we're going to talk about...
 ---
 
 ### Pagination
-The right way to include pagination details today is using the Link header introduced by [RFC 5988](http://tools.ietf.org/html/rfc5988#page-6) 
+The right way to include pagination details today is using the ***Link header*** introduced by [RFC 5988](http://tools.ietf.org/html/rfc5988#page-6) 
 
 An API that uses the Link header can return a set of ready-made links so the API consumer doesn't have to construct links themselves. 
 
 ---
 ```html
-Link: <https://blog.mwaysolutions.com/sample/api/v1/cars?offset=15&limit=5>; rel="next",
+Link: <https://www.beeva.com/sample/api/v1/cars?offset=15&limit=5>; rel="next",
 <https://www.beeva.com/sample/api/v1/cars?offset=50&limit=3>; rel="last",
 <https://www.beeva.com/sample/api/v1/cars?offset=0&limit=5>; rel="first",
 <https://www.beeva.com/sample/api/v1/cars?offset=5&limit=5>; rel="prev"
