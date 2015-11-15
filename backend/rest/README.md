@@ -39,7 +39,7 @@ At this point we're going to talk about...
 ---
 
 ### Pagination
-The right way to include pagination details today is using the Link header introduced by [RFC 5988](http://tools.ietf.org/html/rfc5988#page-6) 
+The right way to include pagination details today is using the ***Link header*** introduced by [RFC 5988](http://tools.ietf.org/html/rfc5988#page-6) 
 
 An API that uses the Link header can return a set of ready-made links so the API consumer doesn't have to construct links themselves. 
 
