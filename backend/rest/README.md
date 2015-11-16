@@ -69,9 +69,11 @@ A good endpoint could be **/status**.
 
 The convention for this endpoint is to return a 200 status code response with a very simple response. For example:
 
+```json
 {
     "status":"UP"
 }
+```
 
 Any other response status should be interpreted as an outline API.
 
