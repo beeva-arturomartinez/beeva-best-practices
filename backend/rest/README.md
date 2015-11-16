@@ -20,46 +20,46 @@ At this point we're going to talk about...
 * [Status and Health endpoints](#status-and-health-endpoints)
 * [References](#references)
 
-### Introduction
+## Introduction
 ---
 
-### URL Construction
+## URL Construction
 ---
 
-### Operations over resources
+## Operations over resources
 ---
 
-### Status codes
+## Status codes
 ---
 
-### Payload formatting
+## Payload formatting
 ---
 
-### Filters
+## Filters
 ---
 
-### Pagination
+## Pagination
 ---
 
-### HATEOAS
+## HATEOAS
 ---
 
-### API Versioning
+## API Versioning
 ---
 
-### API throughput restrictions
+## API throughput restrictions
 ---
 
-### OAuth
+## OAuth
 ---
 
-### Errors
+## Errors
 ---
 
-### Status and Health endpoints
+## Status and Health endpoints
 ---
 
-### References
+## References
 ---
 
 * [Link](http://www.url.to) Description
