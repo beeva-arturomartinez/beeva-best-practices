@@ -20,40 +20,40 @@ At this point we're going to talk about...
 * [Status and Health endpoints](#status-and-health-endpoints)
 * [References](#references)
 
-### Introduction
+## Introduction
 ---
 
-### URL Construction
+## URL Construction
 ---
 
-### Operations over resources
+## Operations over resources
 ---
 
-### Status codes
+## Status codes
 ---
 
-### Payload formatting
+## Payload formatting
 ---
 
-### Filters
+## Filters
 ---
 
-### Pagination
+## Pagination
 ---
 
-### HATEOAS
+## HATEOAS
 ---
 
-### API Versioning
+## API Versioning
 ---
 
-### API throughput restrictions
+## API throughput restrictions
 ---
 
-### OAuth
+## OAuth
 ---
 
-### Errors
+## Errors
 ---
 
 ## Status and Health endpoints
@@ -73,7 +73,7 @@ The convention for this endpoint is to return a 200 status code response with a 
     "status":"UP"
 }
 
-Any other response status should be interpreted as a outline API.
+Any other response status should be interpreted as an outline API.
 
 ### Health endpoint
 
