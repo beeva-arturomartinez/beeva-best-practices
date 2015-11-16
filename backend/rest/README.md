@@ -79,7 +79,9 @@ The image below describes the authentication flow (usually referred as OAuth han
 We can observe 3 separated blocks in this negotiation:
 
 1. **Authorization request to access protected resources from a resource owner**, there are several granting types to use, see references for further details
+
 > We recommend to delegate this authorization process to an authorization server, but it could be handled directly by the resource owner
+
 2. **Access token request**, using the authorization grant obtained in the previous step the client obtains a valid OAuth access token
 3. **Retrieval of protected resources**, using OAuth access token obtained in previous step
 
