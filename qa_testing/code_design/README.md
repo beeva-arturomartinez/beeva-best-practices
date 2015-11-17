@@ -5,25 +5,25 @@ At this point we're going to talk about...
 
 ## Index
 
-* [Introduction](#code-design-introduction)
-* [Part 1: Code design rules](#code-design-rules)
-* [Part 2: Code design patterns](#code-design-patterns)
-* [Part 3: Agile metodologies implications](#code-design-agile)
+* [Introduction](#introduction)
+* [Code design rules](#code-design-rules)
+* [Code design patterns](#code-design-patterns)
+* [Agile metodologies implications](#agile-metodologies-implications)
 * [References](#references)
 
-### Introduction
+## Introduction
 ---
 
-### Part 1: Code design rules
+## Code design rules
 ---
 
-### Part 2: Code design patterns
+## Code design patterns
 ---
 
-### Part 3: Agile metodologies implications
+## Agile metodologies implications
 ---
 
-### References
+## References
 
 * [Link](http://www.url.to) Description
 * [oficialsite.org](http://www.oficialwebsite.org) API & Docs
