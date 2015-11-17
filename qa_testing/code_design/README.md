@@ -11,16 +11,16 @@ At this point we're going to talk about...
 * [Part 3: Agile metodologies implications](#code-design-agile)
 * [References](#references)
 
-## Introduction
+### Introduction
 ---
 
-## Part 1: Code design rules
+### Part 1: Code design rules
 ---
 
-## Part 2: Code design patterns
+### Part 2: Code design patterns
 ---
 
-## Part 3: Agile metodologies implications
+### Part 3: Agile metodologies implications
 ---
 
 ### References
