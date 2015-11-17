@@ -5,8 +5,8 @@ At this point we're going to talk about...
 
 ## Index
 
-* [Introduction](#introduction)
-* [Part 1: Code design rules](#Part_1:_Code_design_rules)
+* [Introduction](#code-design-introduction)
+* [Part 1: Code design rules](#code-design-rules)
 * [Part 2: Code design patterns](#code-design-patterns)
 * [Part 3: Agile metodologies implications](#code-design-agile)
 * [References](#references)
