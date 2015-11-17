@@ -1,44 +1,27 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
+# Code Design Best Practices
 At this point we're going to talk about...
 
 [Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
+* [Introduction](#code-design-introduction)
+* [Part 1: Code design rules](#code-design-rules)
+* [Part 2: Code design patterns](#code-design-patterns)
+* [Part 3: Agile metodologies implications](#code-design-agile)
 * [References](#references)
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+## Introduction
+---
 
-### The Two Towers
+## Part 1: Code design rules
+---
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+## Part 2: Code design patterns
+---
 
-A Remarkable idea
-
-
-### The Return of the King
-
-A nice table
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
+## Part 3: Agile metodologies implications
+---
 
 ### References
 
