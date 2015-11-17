@@ -105,6 +105,13 @@ Client credentials should never travel as plain text without using SSL on reques
 
 However, even with the use of TLS/SSL credentials could be sent to the wrong server using OAuth 2.0 - either by misconfiguration or because the server has been compromised. If this is critical for us, maybe the credentials should not travel as plain text, but signed. This sacrifices complexity over protocol requests for a higher security.
 
+### Examples
+
+Below is a list of sample implementations of OAuth 2.0:
+
+* [Google APIs](https://developers.google.com/identity/protocols/OAuth2)
+* [Twitter APIs](https://dev.twitter.com/oauth/overview/introduction)
+
 ## Errors
 ---
 
