@@ -67,6 +67,48 @@ On the other hand, in order to indicate the page that we want to visualized and 
 Anyway whatever pagination-based you choose, there must always be a parameter that indicates  the number of individual objects that are returned in each page (usaully is *limit*) and another one that indicates current page (like *page* , *page_number*, *offset*...)
 
 
+Sometimes, at Beeva projects, we use a link node in the responses instead of use de link header  to paginate. See the example below:
+
+---
+```javascript
+{
+  "result": {
+    "code": 206,
+    "info": "Partial Content"
+  },
+  "paging": {
+    "page_size": 3,
+    "links": {
+      "first": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=0&limit=5"
+      },
+      "prev": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=5&limit=5"
+      },
+      "next": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=15&limit=5"
+      },
+      "last": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=50&limit=3"
+      }
+    }
+  },
+  "data":  [
+      {
+        "date": "201401",
+        "avg": 46.38
+      },
+      {
+        "date": "201402",
+        "avg": 45.66
+      },
+      {
+        "date": "201403",
+        "avg": 48.6
+      }
+    ]
+}
+```
 ---
 
 ### HATEOAS
