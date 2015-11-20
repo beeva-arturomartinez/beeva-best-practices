@@ -38,7 +38,79 @@ At this point we're going to talk about...
 ## Filters
 ---
 
+
 ## Pagination
+
+The right way to include pagination details today is using the ***Link header*** introduced by [RFC 5988](http://tools.ietf.org/html/rfc5988#page-6) 
+
+An API that uses the Link header can return a set of ready-made links so the API consumer doesn't have to construct links themselves. 
+
+---
+```html
+Link: <https://www.beeva.com/sample/api/v1/cars?offset=15&limit=5>; rel="next",
+<https://www.beeva.com/sample/api/v1/cars?offset=50&limit=3>; rel="last",
+<https://www.beeva.com/sample/api/v1/cars?offset=0&limit=5>; rel="first",
+<https://www.beeva.com/sample/api/v1/cars?offset=5&limit=5>; rel="prev"
+```
+---
+
+|Name      |  Description |
+| ------------- | -------------|
+|next      | The link relation for the immediate next page of results.  |
+|last      | The link relation for the last page of results.  |
+|first      | The link relation for the first page of results.  |
+|prev      | The link relation for the immediate previous page of results.  |
+
+
+But this isn't a complete solution as many APIs do like to return the additional pagination information, like a count of the total number of available results. An API that requires sending a count can use a custom HTTP header like ***X-Total-Count.***
+
+On the other hand, in order to indicate the page that we want to visualized and amount of data per page, we should use some parameters in the rest calling. There are some kind of pagination-based [(you cand find some of them here)](https://developers.facebook.com/docs/graph-api/using-graph-api/v2.5#paging), and these parameters had been define by pagination-type based. 
+
+Anyway whatever pagination-based you choose, there must always be a parameter that indicates  the number of individual objects that are returned in each page (usaully is *limit*) and another one that indicates current page (like *page* , *page_number*, *offset*...)
+
+
+Sometimes, at Beeva projects, we use a link node in the responses instead of use de link header  to paginate. See the example below:
+
+---
+```javascript
+{
+  "result": {
+    "code": 206,
+    "info": "Partial Content"
+  },
+  "paging": {
+    "page_size": 3,
+    "links": {
+      "first": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=0&limit=5"
+      },
+      "prev": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=5&limit=5"
+      },
+      "next": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=15&limit=5"
+      },
+      "last": {
+        "href": "https://www.beeva.com/sample/api/v1/cars?offset=50&limit=3"
+      }
+    }
+  },
+  "data":  [
+      {
+        "date": "201401",
+        "avg": 46.38
+      },
+      {
+        "date": "201402",
+        "avg": 45.66
+      },
+      {
+        "date": "201403",
+        "avg": 48.6
+      }
+    ]
+}
+```
 ---
 
 ## HATEOAS
