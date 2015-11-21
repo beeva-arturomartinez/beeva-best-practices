@@ -31,16 +31,19 @@ Investments made in IT infrastructure and information assets of organizations ar
 
 How is it possible to guarantee access to information within a company and justify the investment. Currently we have frames work for it, one of the mostly known is ITIL.
 
-
 ## Information Technology Infrastructure Library (ITIL)
 
 ITIL is a framework that brings together concepts and best practices for managing IT services. ITIL is a comprehensive set of procedures for businesses, to achieve quality and efficiency of IT services. Integrating technology with the company. With this it is getting innovation, speed of reaction, answers to problems, and ability to work, in other words to optimize the work.
 
 We can divide the principles of ITIL is the following:
 - Processes.
+
 - IT Services.
+
 - Service management.
+
 - Lifecycle Services.
+
 - Learning and Certification.
 
 
@@ -56,3 +59,42 @@ ITIL is based on processes, which can be divided into the following questions:
 - How do we get there? (Changes in the process)
 
 - How do we know that? (Metric)
+
+ITIL postulates that the support service, the administration and the operation is performed through five processes:
+
+- Incident Management
+
+- Handling problems
+
+- Management settings
+
+- Management changes
+
+- Management of delivery
+
+
+### Incident Management Process
+
+Its primary goal is to restore service as quickly as possible to prevent the client is affected, this is done in order that the effects of the operation are minimized.
+
+
+### Problem Management Process
+
+The objective of this process is to prevent and minimize the incidents, and this leads to a reduction in the level of incidence. On the other hand it helps us to provide fast and effective solutions to ensure structured resources.
+
+In this process what is sought is that you can have full control of the problem, this is achieved by giving tracking and monitoring the problem.
+
+
+### Configuration management process
+
+Its aim is to provide real and current information than you have configured and installed on each client system.
+
+
+### Change Control Process
+
+The aim of this process is to reduce both technical, economic and time when performing changes risks.
+
+
+### Process management deliveries
+
+Its aim is to plan and successfully control the installation of software and hardware under three environments: development environment, controlled test environment and real environment.
