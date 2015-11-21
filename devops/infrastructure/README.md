@@ -2,28 +2,13 @@ Infrastructure
 ==============
 
 
-Skip to content
-This repository
-
-    Pull requests
-    Issues
-    Gist
-
-    @beeva-alvarolinares
-
-26
-0
-
-    15
-
-beeva-germanmoya/beeva-best-practices private forked from beeva/beeva-best-practices
-
 beeva-best-practices/devops/infrastructure/beeva-alvarolinares
 2f2fb5d a minute ago
 @beeva-alvarolinares beeva-alvarolinares Version 1.0
 1 contributor
 54 lines (30 sloc) 3.41 KB
-## H2 What is IT Service Management (ITSM)?
+
+## What is IT Service Management (ITSM)?
 
 According to ITIL, ITSM is defined as "The implementation and management of quality IT services that meet the needs of the business. The IT service management is performed by IT service providers through appropriate mix of people, processes and information technology. "
 
