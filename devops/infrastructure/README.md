@@ -19,7 +19,7 @@ Among the most important objectives of IT management services include:
 - Reduce the risks associated with IT services.
 
 
-Aligning business objectives
+## Aligning business objectives
 
 Companies currently making significant investments in IT resources to support business processes. Currently the most important value for companies are the use you give your information, this determines that all processes relating to the production and use of Information Technology services should be optimally managed and controlled to ensure the quality of it.
 
@@ -31,7 +31,9 @@ Investments made in IT infrastructure and information assets of organizations ar
 
 How is it possible to guarantee access to information within a company and justify the investment. Currently we have frames work for it, one of the mostly known is ITIL.
 
-Information Technology Infrastructure Library (ITIL)
+
+## Information Technology Infrastructure Library (ITIL)
+
 ITIL is a framework that brings together concepts and best practices for managing IT services. ITIL is a comprehensive set of procedures for businesses, to achieve quality and efficiency of IT services. Integrating technology with the company. With this it is getting innovation, speed of reaction, answers to problems, and ability to work, in other words to optimize the work.
 
 We can divide the principles of ITIL is the following:
@@ -42,7 +44,7 @@ We can divide the principles of ITIL is the following:
 - Learning and Certification.
 
 
-Processes
+## Processes
 
 According to ITIL, "A process is a structured set of activities designed to achieve a specific goal. A process takes one or more defined inputs and turns them into defined outputs. "
 ITIL is based on processes, which can be divided into the following questions:
@@ -54,9 +56,3 @@ ITIL is based on processes, which can be divided into the following questions:
 - How do we get there? (Changes in the process)
 
 - How do we know that? (Metric)
-
-    Status API Training Shop Blog About Pricing 
-
-    © 2015 GitHub, Inc. Terms Privacy Security Contact Help 
-
-
