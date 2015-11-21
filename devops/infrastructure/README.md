@@ -73,28 +73,28 @@ ITIL postulates that the support service, the administration and the operation i
 - Management of delivery
 
 
-### Incident Management Process
+#### Incident Management Process
 
 Its primary goal is to restore service as quickly as possible to prevent the client is affected, this is done in order that the effects of the operation are minimized.
 
 
-### Problem Management Process
+#### Problem Management Process
 
 The objective of this process is to prevent and minimize the incidents, and this leads to a reduction in the level of incidence. On the other hand it helps us to provide fast and effective solutions to ensure structured resources.
 
 In this process what is sought is that you can have full control of the problem, this is achieved by giving tracking and monitoring the problem.
 
 
-### Configuration management process
+#### Configuration management process
 
 Its aim is to provide real and current information than you have configured and installed on each client system.
 
 
-### Change Control Process
+#### Change Control Process
 
 The aim of this process is to reduce both technical, economic and time when performing changes risks.
 
 
-### Process management deliveries
+#### Process management deliveries
 
 Its aim is to plan and successfully control the installation of software and hardware under three environments: development environment, controlled test environment and real environment.
