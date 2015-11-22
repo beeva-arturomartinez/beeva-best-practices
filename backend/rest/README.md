@@ -57,15 +57,15 @@ POST and PUT are similar, POST will be used when we don't know the locality of t
 It deletes the specified resource. Despite the server could return other response if the item already was deleted (the resource does not exist), this operation is idempotent, because the system status will be the same.
 
 
+### Extra operations
+
 These are the basic operations, they allow to implement CRUD operations, but there are some extra operations. It can be used in some special requirements.
 
 **HEAD** operation is similar to GET, with the difference that with HEAD operation the data retrieved only includes the header. Normally it is used if the size of content of the resources is large.
 
 All the operations doesn't have to be implemented, with **OPTIONS** operation the client can discover the list of methods implemented for a resource.
 
-The HTTP methods PATCH can be used to update partial resources. For instance, when you only need to update one field of the resource, PUTting a complete resource representation might be cumbersome and utilizes more bandwidth
-
-While PUT operation must take a full resource representation as the request entity (if only few attributes are provided, the others should be removed), PATCH operation allow partial changes to a resource. It is not idempotent.
+The HTTP methods **PATCH** can be used to update partial resources. While PUT operation must take a full resource representation as the request entity (if only few attributes are provided, the others should be removed), PATCH operation allow partial changes to a resource. It is not idempotent.
 
 ## Status codes
 ---
