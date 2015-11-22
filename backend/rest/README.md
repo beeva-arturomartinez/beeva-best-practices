@@ -29,6 +29,44 @@ At this point we're going to talk about...
 ## Operations over resources
 ---
 
+The operations over resources are limited, the variety is on the resources. The operations over REST are specified as the standard HTTP methods, it constraints the construction of operations trough these methods.
+
+There are operations that are **idempotent**, it means that it can be called many times without different outcomes. It would not matter if the method is called only once, or ten times over, the system state will be the same.
+
+Moreover, there are **safe operations**, which should never change the resource. These operations could be cached without any consequence to the resource.
+
+### Basic operations
+In a REST implementation there are four basic operations which can be published for a resource.
+
+#### GET
+
+This operation retrieves all the information of a resource, or all resources in a collection (if the resource is a collection). It's a safe operation and it should have not other effect.
+
+#### POST
+
+It introduces an item in the collection represented by the resource. It is used to create a *new* item in the collection, the URI of the final resource will be defined by the server. 
+
+#### PUT
+
+PUT operation requests that the entity is stored in the resource indicated. It means that the resource doesn't exist, it creates it. However, if the resource exists, it is overwritten by the given entity. Because of this behavoir, it is idempotent. 
+
+POST and PUT are similar, POST will be used when we don't know the locality of the resource, and PUT where we know it. For this reason, POST is usually implemented as create operation while PUT can be used as update.
+
+#### DELETE
+
+It deletes the specified resource. Despite the server could return other response if the item already was deleted (the resource does not exist), this operation is idempotent, because the system status will be the same.
+
+
+These are the basic operations, they allow to implement CRUD operations, but there are some extra operations. It can be used in some special requirements.
+
+**HEAD** operation is similar to GET, with the difference that with HEAD operation the data retrieved only includes the header. Normally it is used if the size of content of the resources is large.
+
+All the operations doesn't have to be implemented, with **OPTIONS** operation the client can discover the list of methods implemented for a resource.
+
+The HTTP methods PATCH can be used to update partial resources. For instance, when you only need to update one field of the resource, PUTting a complete resource representation might be cumbersome and utilizes more bandwidth
+
+While PUT operation must take a full resource representation as the request entity (if only few attributes are provided, the others should be removed), PATCH operation allow partial changes to a resource. It is not idempotent.
+
 ## Status codes
 ---
 
