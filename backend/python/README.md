@@ -276,6 +276,59 @@ Optional plotz says to frobnicate the bizbaz first.
 """
 For one liner docstrings, please keep the closing """ on the same line.
 
+### 3.11 Version Bookkeeping
+If you have to have Subversion, CVS, or RCS crud in your source file, do it as follows.
+
+__version__ = "$Revision$"
+# $Source$
+These lines should be included after the module's docstring, before any other code, separated by a blank line above and below.
+
+### 3.12 Naming Conventions
+The currently recommended naming standards
+
+#### 3.12.1 Overriding Principle
+Names that are visible to the user as public parts of the API should follow conventions that reflect usage rather than implementation.
+
+#### 3.12.2 Descriptive: Naming Styles
+There are a lot of different naming styles. It helps to be able to recognize what naming style is being used, independently from what they are used for.
+
+The following naming styles are commonly distinguished:
+
+ - b (single lowercase letter)
+ - B (single uppercase letter)
+ - lowercase
+ - lower_case_with_underscores
+
+ - UPPERCASE
+
+ - UPPER_CASE_WITH_UNDERSCORES
+
+ - CapitalizedWords (or CapWords, or CamelCase -- so named because of the bumpy look of its letters [3] ). This is also sometimes known as StudlyCaps.
+
+Note: When using abbreviations in CapWords, capitalize all the letters of the abbreviation. Thus HTTPServerError is better than HttpServerError.
+
+  - mixedCase (differs from CapitalizedWords by initial lowercase character!)
+
+  - Capitalized_Words_With_Underscores (ugly!)
+
+There's also the style of using a short unique prefix to group related names together. This is not used much in Python, but it is mentioned for completeness. For example, the os.stat() function returns a tuple whose items traditionally have names like st_mode , st_size , st_mtime and so on. (This is done to emphasize the correspondence with the fields of the POSIX system call struct, which helps programmers familiar with that.)
+
+The X11 library uses a leading X for all its public functions. In Python, this style is generally deemed unnecessary because attribute and method names are prefixed with an object, and function names are prefixed with a module name.
+
+In addition, the following special forms using leading or trailing underscores are recognized (these can generally be combined with any case convention):
+
+_single_leading_underscore : weak "internal use" indicator. E.g. from M import * does not import objects whose name starts with an underscore.
+
+single_trailing_underscore_ : used by convention to avoid conflicts with Python keyword, e.g.
+
+Tkinter.Toplevel(master, class_='ClassName')
+__double_leading_underscore : when naming a class attribute, invokes name mangling (inside class FooBar, __boo becomes _FooBar__boo ; see below).
+
+__double_leading_and_trailing_underscore__ : "magic" objects or attributes that live in user-controlled namespaces. E.g. __init__ , __import__ or __file__ . Never invent such names; only use them as documented.
+
+
+
+
 ### 4. Python 2 vs Python 3
 ### 5. Librería estándar
 ### 6. Importar librerías
