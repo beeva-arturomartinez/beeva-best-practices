@@ -240,6 +240,29 @@ do_one(); do_two(); do_three(long, argument,
 if foo == 'blah': one(); two(); three()
 ```
 
+#### 3.7. Comments
+
+Write your comments in English.
+
+#### 3.7.1 Block Comments
+Block comments generally apply to some (or all) code that follows them, and are indented to the same level as that code. Each line of a block comment starts with a # and a single space (unless it is indented text inside the comment).
+
+Paragraphs inside a block comment are separated by a line containing a single # .
+
+#### 3.7.2 Inline Comments
+Use inline comments sparingly.
+
+An inline comment is a comment on the same line as a statement. Inline comments should be separated by at least two spaces from the statement. They should start with a # and a single space.
+
+Inline comments are unnecessary and in fact distracting if they state the obvious. Don't do this:
+```python
+x = x + 1                 # Increment x
+```
+But sometimes, this is useful:
+```python
+x = x + 1                 # Compensate for border
+```
+
 ### 4. Python 2 vs Python 3
 ### 5. Librería estándar
 ### 6. Importar librerías
