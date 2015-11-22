@@ -240,16 +240,16 @@ do_one(); do_two(); do_three(long, argument,
 if foo == 'blah': one(); two(); three()
 ```
 
-#### 3.7. Comments
+#### 3.10 Comments
 
 Write your comments in English.
 
-#### 3.7.1 Block Comments
+#### 3.10.1 Block Comments
 Block comments generally apply to some (or all) code that follows them, and are indented to the same level as that code. Each line of a block comment starts with a # and a single space (unless it is indented text inside the comment).
 
 Paragraphs inside a block comment are separated by a line containing a single # .
 
-#### 3.7.2 Inline Comments
+#### 3.10.2 Inline Comments
 Use inline comments sparingly.
 
 An inline comment is a comment on the same line as a statement. Inline comments should be separated by at least two spaces from the statement. They should start with a # and a single space.
@@ -262,6 +262,19 @@ But sometimes, this is useful:
 ```python
 x = x + 1                 # Compensate for border
 ```
+
+#### 3.10.3 Documentation Strings
+Conventions for writing good documentation strings (a.k.a. "docstrings") are immortalized in PEP 257 .
+
+Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. This comment should appear after the def line.
+
+PEP 257 describes good docstring conventions. Note that most importantly, the """ that ends a multiline docstring should be on a line by itself, e.g.:
+
+"""Return a foobang
+
+Optional plotz says to frobnicate the bizbaz first.
+"""
+For one liner docstrings, please keep the closing """ on the same line.
 
 ### 4. Python 2 vs Python 3
 ### 5. Librería estándar
