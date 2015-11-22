@@ -1,6 +1,6 @@
-# Guía de buenas prácticas en Python
+# Python best practices
 
-## Índice
+## Index
 
 ### 1. Introducción
 ### 2. Python Zen (Pep 20)
@@ -9,7 +9,7 @@
 
 
 
-### 3. Guia de estilo (Pep 8)
+### 3. Style guide (Pep 8)
 #### 3.1. Indentation
 Use 4 spaces per indentation level.
 
