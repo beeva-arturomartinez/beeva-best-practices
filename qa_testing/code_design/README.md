@@ -1,7 +1,6 @@
 # Code Design Best Practices
 At this point we're going to talk about the code design best practices.
 
- ![alt text](static/codequality_wtf.png "QA's wtf measure")
 
 ## Index
 
@@ -20,9 +19,13 @@ At this point we're going to talk about the code design best practices.
 * [References](#references)
 
 ## Introduction
+
 This guide's objective is help to developers to write a good code for improve the code readability and help to anybody to understand the code.
 
+ ![alt text](static/codequality_wtf.png "QA's wtf measure")
+
 ## Code Design Rules
+
 ### Format
 
 * Tab correctly your code for improve the readability.
@@ -116,9 +119,6 @@ Other tools that helps you depending on the programming language:
 * **Python**: [Pylint](http://www.pylint.org/) 
 * **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle) 
 
-
-## Code design rules
----
 
 ## Code design patterns
 ---
