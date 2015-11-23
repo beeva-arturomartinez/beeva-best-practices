@@ -1,7 +1,6 @@
 # Code Design Best Practices
-At this point we're going to talk about...
+At this point we're going to talk about the code design best practices.
 
-[Replace this logo] ![alt text](static/horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
@@ -20,9 +19,13 @@ At this point we're going to talk about...
 * [References](#references)
 
 ## Introduction
+
 This guide's objective is help to developers to write a good code for improve the code readability and help to anybody to understand the code.
 
+ ![alt text](static/codequality_wtf.png "QA's wtf measure")
+
 ## Code Design Rules
+
 ### Format
 
 * Tab correctly your code for improve the readability.
@@ -105,7 +108,7 @@ The documentation tools make it possible to generate documentation directly from
 * **Ruby**: [Rubydoc](http://ruby-doc.org/) 
 
 
-#### Format and naming
+#### Naming and format
 There are a lot of tools to help to improve the code's quality and design. These tools allows to review the application code to find naming errors, variables not used, or to force to the developer to comment his methods and classes.
 
 One of the most used tool for this goal is [Sonar](http://www.sonarqube.org/). Normally Sonar is installed in the server, configured for Continuous Integration with other tools (like Jenkins) and ensure that the code must be correct before the deployment.
@@ -116,9 +119,6 @@ Other tools that helps you depending on the programming language:
 * **Python**: [Pylint](http://www.pylint.org/) 
 * **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle) 
 
-
-## Code design rules
----
 
 ## Code design patterns
 ---
