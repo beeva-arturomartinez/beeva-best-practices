@@ -12,16 +12,17 @@ At this point we're going to talk about...
 	* [Error processing](#error-processing)
 	* [Concurrency](#concurrency)
 	* [Tools](#tools)
-		* [Code Documentation](#tools-code-documentation)
-		* [Naming and format](#tools-naming-format)
+		* [Documentation](#documentation)
+		* [Naming and format](#naming-and-format)
 * [Code design rules](#code-design-rules)
 * [Code design patterns](#code-design-patterns)
 * [Agile metodologies implications](#agile-metodologies-implications)
 * [References](#references)
 
 ## Introduction
+This guide's objective is help to developers to write a good code for improve the code readability and help to anybody to understand the code.
 
-## [Code Design Rules](code-design-rules)
+## Code Design Rules
 ### Format
 
 * Tab correctly your code for improve the readability.
