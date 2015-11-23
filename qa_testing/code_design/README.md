@@ -1,7 +1,7 @@
 # Code Design Best Practices
-At this point we're going to talk about...
+At this point we're going to talk about the code design best practices.
 
-[Replace this logo] ![alt text](static/horizontal-beeva-logo.png "BEEVA")
+ ![alt text](static/codequality_wtf "QA's wtf measure")
 
 ## Index
 
