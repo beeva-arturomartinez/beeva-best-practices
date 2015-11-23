@@ -1,7 +1,7 @@
 # Code Design Best Practices
 At this point we're going to talk about the code design best practices.
 
- ![alt text](static/codequality_wtf "QA's wtf measure")
+ ![alt text](static/codequality_wtf.png "QA's wtf measure")
 
 ## Index
 
