@@ -105,7 +105,7 @@ The documentation tools make it possible to generate documentation directly from
 * **Ruby**: [Rubydoc](http://ruby-doc.org/) 
 
 
-#### Format and naming
+#### Naming and format
 There are a lot of tools to help to improve the code's quality and design. These tools allows to review the application code to find naming errors, variables not used, or to force to the developer to comment his methods and classes.
 
 One of the most used tool for this goal is [Sonar](http://www.sonarqube.org/). Normally Sonar is installed in the server, configured for Continuous Integration with other tools (like Jenkins) and ensure that the code must be correct before the deployment.
