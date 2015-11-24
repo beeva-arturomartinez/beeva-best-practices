@@ -17,9 +17,12 @@
 
 ### Introduction
 
-Esto es una edicion
+This is not an introduction to Scala; we assume the reader is familiar with the language. Some resources for learning Scala are:
 
-[URL Base](http://twitter.github.io/effectivescala/):http://twitter.github.io/effectivescala/
+[URL Base](http://www.scala-lang.org/docu/files/ScalaByExample.pdf) http://www.scala-lang.org/docu/files/ScalaByExample.pdf
+[URL Base](https://www.artima.com/pins1ed/index.html#TOC) https://www.artima.com/pins1ed/index.html#TOC
+
+This is a living document that will change to reflect our current “best practices,” but its core ideas are unlikely to change: Always favor readability; write generic code but not at the expensive of clarity; take advantage of simple language features that afford great power but avoid the esoteric ones (especially in the type system). Above all, be always aware of the trade offs you make. A sophisticated language requires a complex implementation, and complexity begets complexity: of reasoning, of semantics, of interaction between features, and of the understanding of your collaborators. Thus complexity is the tax of sophistication — you must always ensure that its utility exceeds its cost.
 
 Some code examples:
 ````javascript
