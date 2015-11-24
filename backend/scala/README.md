@@ -19,8 +19,8 @@
 
 This is not an introduction to Scala; we assume the reader is familiar with the language. Some resources for learning Scala are:
 
-[Link](http://www.scala-lang.org/docu/files/ScalaByExample.pdf) http://www.scala-lang.org/docu/files/ScalaByExample.pdf
-[Link](https://www.artima.com/pins1ed/index.html#TOC) https://www.artima.com/pins1ed/index.html#TOC
+[ScalaByExample](http://www.scala-lang.org/docu/files/ScalaByExample.pdf) 
+[A Scalable Language](https://www.artima.com/pins1ed/index.html#TOC)
 
 This is a living document that will change to reflect our current “best practices,” but its core ideas are unlikely to change: Always favor readability; write generic code but not at the expensive of clarity; take advantage of simple language features that afford great power but avoid the esoteric ones (especially in the type system). Above all, be always aware of the trade offs you make. A sophisticated language requires a complex implementation, and complexity begets complexity: of reasoning, of semantics, of interaction between features, and of the understanding of your collaborators. Thus complexity is the tax of sophistication — you must always ensure that its utility exceeds its cost.
 
@@ -55,7 +55,7 @@ Style cannot be inherently good or bad and almost everybody differs in personal 
 
 This is of particular importance to Scala, as its grammar has a high degree of overlap.
 
-We adhere to the [Link] {http://docs.scala-lang.org/style/} Scala style guide plus the following rules
+We adhere to the [Scala style] {http://docs.scala-lang.org/style/}  guide plus the following rules
 
 Whitespace, Naming, Imports, Braces, Pattern matching, Comments
 
