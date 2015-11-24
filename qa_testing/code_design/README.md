@@ -120,8 +120,155 @@ Other tools that helps you depending on the programming language:
 * **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle) 
 
 
-## Code design patterns
+## Code Design Patterns
 ---
+#### Introduction
+The design patterns are solutions to common problems in the software development. They are defined by experienced programmers that seen a common ways to solve the similar problems.
+
+A pattern is designed according to a template
+
+In this point we are going to list the most common design patterns, and when we could use them.
+#### Gang of four patterns
+In 1994, four authors Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides published a book titled Design Patterns - Elements of Reusable Object-Oriented Software which initiated the concept of Design Pattern in Software development.
+
+These authors are collectively known as Gang of Four (GOF). According to these authors design patterns are primarily based on the following principles of object orientated design:
+
+- Program to an interface not an implementation
+- Favor object composition over inheritance
+
+If you want more information you can visit the wikipedia page [Gang Of Four](https://en.wikipedia.org/wiki/Design_Patterns)
+
+At this point we can define the following three categories of patterns
+
+##### Creational Patterns
+These design patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new opreator. This gives program more flexibility in deciding which objects need to be created for a given use case.
+
+
+- **Abstract factory pattern**
+- **Builder pattern**
+- **Factory method pattern**
+- **Prototype pattern**
+- **Singleton pattern**
+
+
+##### Structural Patterns
+These design patterns concern class and object composition. Concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionalities.
+
+ - **Adapter pattern**
+ - **Bridge pattern**
+ - **Composite pattern**
+ - **Decorator pattern**
+ - **Facade pattern**
+ - **Flyweight pattern**
+ - **Proxy pattern**
+
+##### Behavioral Patterns
+These design patterns are specifically concerned with communication between objects.
+
+ - **Chain of responsibility pattern**
+ - **Command pattern**
+ - **Interpreter pattern**
+ - **Iterator pattern**
+ - **Mediator pattern**
+ - **Memento pattern**
+ - **Observer pattern**
+ - **State pattern**
+ - **Strategy pattern**
+ - **Template method pattern**
+ - **Visitor pattern**
+
+#### Integration Patterns
+Introduction TO-DO
+
+##### Integration Styles
+TO-DO
+##### Messaging Systems
+TO-DO
+##### Messaging Channels
+TO-DO
+##### Message Construction
+TO-DO
+##### Message Routing
+TO-DO
+##### Message Transformation
+TO-DO
+##### Messaging Endpoints
+TO-DO
+##### System Management
+TO-DO
+
+#### Anti-Patterns
+Introduccion TO-DO
+##### Software design
+ - Abstraction inversion: Not exposing implemented functionality required by callers of a function/method/constructor, so that the calling code awkwardly re-implements the same functionality in terms of those calls
+ - Ambiguous viewpoint: Presenting a model (usually Object-oriented analysis and design (OOAD)) without specifying its viewpoint
+ - Big ball of mud: A system with no recognizable structure
+ - Database-as-IPC: Using a database as the message queue for routine interprocess communication where a much more lightweight mechanism would be suitable
+ - Gold plating: Continuing to work on a task or project well past the point at which extra effort is adding value
+ - Inner-platform effect: A system so customizable as to become a poor replica of the software development platform
+ - Input kludge: Failing to specify and implement the handling of possibly invalid input
+ - Interface bloat: Making an interface so powerful that it is extremely difficult to implement
+ - Magic pushbutton: A form with no dynamic validation, or input assistance such as dropdowns
+ - Race hazard: Failing to see the consequences of events that can sometimes interfere with each other
+ - Stovepipe system: A barely maintainable assemblage of ill-related components
+
+##### Object-oriented programming
+
+ - Anemic Domain Model: The use of the domain model without any business logic. The domain model's objects cannot guarantee their correctness at any moment, because their validation and mutation logic is placed somewhere outside (most likely in multiple places). Martin Fowler considers this to be an anti-pattern, but some disagree that it is always an anti-pattern.
+ - BaseBean: Inheriting functionality from a utility class rather than delegating to it
+ - Call super: Requiring subclasses to call a superclass's overridden method
+ - Circle-ellipse problem: Subtyping variable-types on the basis of value-subtypes
+ - Circular dependency: Introducing unnecessary direct or indirect mutual dependencies between objects or software modules
+ - Constant interface: Using interfaces to define constants
+ - God object: Concentrating too many functions in a single part of the design (class)
+ - Object cesspool: Reusing objects whose state does not conform to the (possibly implicit) contract for re-use
+ - Object orgy: Failing to properly encapsulate objects permitting unrestricted access to their internals
+ - Poltergeists: Objects whose sole purpose is to pass information to another object
+ - Sequential coupling: A class that requires its methods to be called in a particular order
+ - Yo-yo problem: A structure (e.g., of inheritance) that is hard to understand due to excessive fragmentation
+
+##### Programming
+
+ - Accidental complexity: Programming tasks which could be eliminated with better tools (as opposed to essential complexity inherent in the problem being solved)
+ - Action at a distance: Unexpected interaction between widely separated parts of a system
+ - Blind faith: Lack of checking of (a) the correctness of a bug fix or (b) the result of a subroutine
+ - Boat anchor: Retaining a part of a system that no longer has any use
+ - Busy waiting: Consuming CPU while waiting for something to happen, usually by repeated checking instead of messaging
+ - Caching failure: Forgetting to clear a cache that holds a negative result (error) after the error condition has been corrected
+ - Cargo cult programming: Using patterns and methods without understanding why
+ - Coding by exception: Adding new code to handle each special case as it is recognized
+ - Design pattern: The use of patterns has itself been called an anti-pattern, a sign that a system is not employing enough abstraction
+ - Error hiding: Catching an error message before it can be shown to the user and either showing nothing or showing a meaningless message. Also can refer to erasing the Stack trace during exception handling, which can hamper debugging.
+ - Hard code: Embedding assumptions about the environment of a system in its implementation
+ - Lasagna code: Programs whose structure consists of too many layers
+ - Lava flow: Retaining undesirable (redundant or low-quality) code because removing it is too expensive or has unpredictable consequences
+ - Loop-switch sequence: Encoding a set of sequential steps using a switch within a loop statement
+ - Magic numbers: Including unexplained numbers in algorithms
+ - Magic strings: Implementing presumably unlikely input scenarios, such as comparisons with very specific strings, to mask functionality.
+ - Repeating yourself: Writing code which contains repetitive patterns and substrings over again; avoid with once and only once (abstraction principle)
+ - Shotgun surgery: Developer adds features to an application codebase which span a multiplicity of implementors or implementations in a single change
+ - Soft code: Storing business logic in configuration files rather than source code[8]
+ - Spaghetti code: Programs whose structure is barely comprehensible, especially because of misuse of code structures
+
+##### Methodological
+
+ - Copy and paste programming: Copying (and modifying) existing code rather than creating generic solutions
+ - Golden hammer: Assuming that a favorite solution is universally applicable (See: Silver bullet)
+ - Improbability factor: Assuming that it is improbable that a known error will occur
+ - Not Invented Here (NIH) syndrome: The tendency towards reinventing the wheel (failing to adopt an existing, adequate solution)
+ - Invented here: The tendency towards dismissing any innovation or less than trivial solution originating from inside the organization, usually because of lack of confidence in the staff
+ - Premature optimization: Coding early-on for perceived efficiency, sacrificing good design, maintainability, and sometimes even real-world efficiency
+ - Programming by permutation (or "programming by accident", or "programming by coincidence"): Trying to approach a solution by successively modifying the code to see if it works
+ - Reinventing the square wheel: Failing to adopt an existing solution and instead adopting a custom solution which performs much worse than the existing one
+ - Silver bullet: Assuming that a favorite technical solution can solve a larger process or problem
+ - Tester Driven Development: Software projects in which new requirements are specified in bug reports
+
+##### Configuration management
+
+ - Dependency hell: Problems with versions of required products
+ - DLL hell: Inadequate management of dynamic-link libraries (DLLs), specifically on Microsoft Windows
+ - Extension conflict: Problems with different extensions to pre-Mac OS X versions of the Mac OS attempting to patch the same parts of the operating system
+ - JAR hell: Overutilization of multiple JAR files, usually causing versioning and location problems because of misunderstanding of the Java class loading model
 
 ## Agile metodologies implications
 ---
