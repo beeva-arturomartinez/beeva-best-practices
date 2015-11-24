@@ -62,7 +62,7 @@ We adhere to the [Scala style] (http://docs.scala-lang.org/style/)  guide plus t
 Indent by two spaces. Try to avoid lines greater than 100 columns in length. Use one blank line between method, class, and object definitions
 
 #### Naming
-Use short names for small scopes
+* Use short names for small scopes *
 is, js and ks are all but expected in loops.
     
 Use longer names for larger scopes: external APIs should have longer and explanatory names that confer meaning. Future.collect not Future.all
