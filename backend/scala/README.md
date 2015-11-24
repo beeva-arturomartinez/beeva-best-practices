@@ -221,6 +221,25 @@ trait HashSet[+T] {
   def add[U >: T](item: U)
 }
 ```
+and the following type hierarchy:
+```
+trait Mammal
+trait Dog extends Mammal
+trait Cat extends Mammal
+```
+
+If I now have a hash set of dogs
+```
+val dogs: HashSet[Dog]
+```
+
+treat it as a set of Mammals and add a cat.
+
+```
+val mammals: HashSet[Mammal] = dogs
+mammals.add(new Cat{})
+```
+
 
 ####Type aliases
 
