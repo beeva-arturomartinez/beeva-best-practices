@@ -215,12 +215,23 @@ It’s definitely OK to use implicits in the following situations:
 - Use to enhance type safety by providing constraint evidence
 - To provide type evidence (typeclassing)
 - For Manifests
+ 
+**[⬆ Index](#index)**
 
 ### Collections
-Hierarchy, Use, Style, Performance, Java Collections
+####Hierarchy
+####Use
+####Style
+####Performance
+####Java Collections
+
+**[⬆ Index](#index)**
 
 ### Concurrency
-Futures, Collections
+####Futures
+####Collections
+
+**[⬆ Index](#index)**
 
 ### Control structures
 Recursion, Returns, for loops and comprehensions, require and assert
