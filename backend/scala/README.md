@@ -62,33 +62,40 @@ We adhere to the [Scala style] (http://docs.scala-lang.org/style/)  guide plus t
 Indent by two spaces. Try to avoid lines greater than 100 columns in length. Use one blank line between method, class, and object definitions
 
 #### Naming
-    Use short names for small scopes: is, js and ks are all but expected in loops.
+Use short names for small scopes
+is, js and ks are all but expected in loops.
     
-    Use longer names for larger scopes: external APIs should have longer and explanatory names that confer meaning. Future.collect not Future.all
+Use longer names for larger scopes: external APIs should have longer and explanatory names that confer meaning. Future.collect not Future.all
     
-    Use common abbreviations but eschew esoteric ones: Everyone knows ok, err or defn whereas sfri is not so common.
+Use common abbreviations but eschew esoteric ones
+Everyone knows ok, err or defn whereas sfri is not so common.
     
-    Don't rebind names for different uses: Use vals
+Don't rebind names for different uses
+Use vals
     
-    Avoid using s to overload reserved names: typ instead of `type`
+Avoid using s to overload reserved names
+typ instead of `type`
     
-    Use active names for operations with side effects: user.activate() not user.setActive()
+Use active names for operations with side effects
+user.activate() not user.setActive()
     
-    Use descriptive names for methods that return values: src.isDefined not src.defined
+Use descriptive names for methods that return values
+src.isDefined not src.defined
     
-    Do not prefix getters with get: As per the previous rule, it is redundant: site.count not site.getCount
+Do not prefix getters with get
+As per the previous rule, it is redundant: site.count not site.getCount
 
-    Do not repeat names that are already encapsulated in package or object name:
+Do not repeat names that are already encapsulated in package or object name:
     
-    Prefer:
-    object User {
-      def get(id: Int): Option[User]
-    }
-    to
-    object User {
-      def getUser(id: Int): Option[User]
-    }
-    They are redundant in use: User.getUser provides no more information than User.get.
+Prefer:
+object User {
+  def get(id: Int): Option[User]
+}
+to
+object User {
+  def getUser(id: Int): Option[User]
+}
+They are redundant in use: User.getUser provides no more information than User.get.
 
 #### Imports
 #### Braces
