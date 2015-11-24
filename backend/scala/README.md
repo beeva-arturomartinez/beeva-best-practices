@@ -47,9 +47,16 @@ A nice table
 | col 2 is      | centered      |   $12 |
 | zebra stripes | are neat      |    $1 |
 
-**[⬆ Índice](#index)**
+**[⬆ Index](#index)**
 
 ### Formatting
+
+Style cannot be inherently good or bad and almost everybody differs in personal preference. However the consistent application of the same formatting rules will almost always enhance readability. A reader already familiar with a particular style does not have to grasp yet another set of local conventions, or decipher yet another corner of the language grammar.
+
+This is of particular importance to Scala, as its grammar has a high degree of overlap.
+
+We adhere to the [URL Base] {http://docs.scala-lang.org/style/} Scala style guide plus the following rules
+
 Whitespace, Naming, Imports, Braces, Pattern matching, Comments
 
 ### Types and Generics
