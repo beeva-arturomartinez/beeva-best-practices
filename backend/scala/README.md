@@ -1,4 +1,4 @@
-# Scala Programing Best Practices
+# Scala Programming Best Practices
 
 ![Scala Logo](static/scala-logo.png "Scala")
 
