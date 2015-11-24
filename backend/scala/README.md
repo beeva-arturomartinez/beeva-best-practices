@@ -141,7 +141,50 @@ def square(x: Int) = {
 even though it may be tempting to distinguish the method body syntactically. The first alternative has less clutter and is easier to read. Avoid syntactical ceremony unless it clarifies.
 
 #### Pattern matching
+
+Use pattern matching directly in function definitions whenever applicable; instead of
+
+```
+list map { item =>
+  item match {
+    case Some(x) => x
+    case None => default
+  }
+}
+```
+
+collapse the match
+
+```
+list map {
+  case Some(x) => x
+  case None => default
+}
+```
+
+it's clear that the list items are being mapped over — the extra indirection does not elucidate.
+
 #### Comments
+
+Use ScalaDoc to provide API documentation. Use the following style:
+
+```
+/**
+ * ServiceBuilder builds services 
+ * ...
+ */
+ ```
+ 
+but not the standard ScalaDoc style:
+
+```
+/** ServiceBuilder builds services
+ * ...
+ */
+```
+
+Do not resort to ASCII art or other visual embellishments. Document APIs but do not add unnecessary comments. If you find yourself adding comments to explain the behavior of your code, ask first if it can be restructured so that it becomes obvious what it does. Prefer “obviously it works” to “it works, obviously” (with apologies to Hoare).
+
 #### ScalaDoc
 
 **[⬆ Index](#index)**
