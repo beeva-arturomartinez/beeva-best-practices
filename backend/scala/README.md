@@ -240,6 +240,7 @@ val mammals: HashSet[Mammal] = dogs
 mammals.add(new Cat{})
 ```
 
+This is no longer a HashSet of dogs
 
 ####Type aliases
 
