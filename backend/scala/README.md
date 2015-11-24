@@ -90,6 +90,37 @@ _They are redundant in use_
     User.getUser provides no more information than User.get.
 
 #### Imports
+
+_Sort import lines alphabetically_
+
+    This makes it easy to examine visually, and is simple to automate.
+    
+_Use braces when importing several names from a package_
+
+    import com.twitter.concurrent.{Broker, Offer}
+    
+_Use wildcards when more than six names are imported_
+
+    e.g.: import com.twitter.concurrent._ 
+    Don't apply this blindly: some packages export too many names_
+
+_When using collections, qualify names by importing scala.collection.immutable and/or scala.collection.mutable_
+
+    Mutable and immutable collections have dual names.
+    Qualifiying the names makes is obvious to the reader which variant is being used (e.g. "immutable.Map")
+    
+_Do not use relative imports from other packages_
+
+    Avoid
+    import com.twitter
+    import concurrent
+    in favor of the unambiguous
+    import com.twitter.concurrent
+    
+_Put imports at the top of the file_
+
+    The reader can refer to all imports in one place.
+
 #### Braces
 #### Pattern matching
 #### Comments
