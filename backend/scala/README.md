@@ -202,6 +202,26 @@ While Scala allows these to be omitted, such annotations provide good documentat
 
 ####Variance
 
+Variance arises when generics are combined with subtyping. Variance defines how subtyping of the contained type relates to subtyping of the container type. Because Scala has declaration site variance annotations, authors of common libraries — especially collections — must be prolific annotators. Such annotations are important for the usability of shared code, but misapplication can be dangerous.
+
+Invariants are an advanced but necessary aspect of Scala’s typesystem, and should be used widely (and correctly) as it aids the application of subtyping.
+
+Immutable collections should be covariant. Methods that receive the contained type should “downgrade” the collection appropriately:
+
+```
+trait Collection[+T] {
+  def add[U >: T](other: U): Collection[U]
+}
+```
+
+Mutable collections should be invariant. Covariance is typically invalid with mutable collections. Consider
+
+```
+trait HashSet[+T] {
+  def add[U >: T](item: U)
+}
+```
+
 ####Type aliases
 
 Use type aliases when they provide convenient naming or clarify purpose, but do not alias types that are self-explanatory.
