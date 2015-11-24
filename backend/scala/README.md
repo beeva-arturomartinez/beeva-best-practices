@@ -1,6 +1,6 @@
 # Scala Programing Best Practices
 
-![Scala Logo](https://github.com/beeva/beeva-best-practices/blob/master/backend/scala/static/scala-logo.png "Scala")
+![Scala Logo](static/scala-logo.png "Scala")
 
 ## Index
 
