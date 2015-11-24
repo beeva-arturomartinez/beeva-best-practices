@@ -72,16 +72,22 @@ _Do not prefix getters with get_
     As per the previous rule, it is redundant: site.count not site.getCount
 
 _Do not repeat names that are already encapsulated in package or object name_
+
+    Prefer:
     
-Prefer:
-object User {
+```object User {
   def get(id: Int): Option[User]
-}
-to
-object User {
+}```
+
+    to:
+    
+```object User {
   def getUser(id: Int): Option[User]
-}
-They are redundant in use: User.getUser provides no more information than User.get.
+}```
+
+_They are redundant in use_
+
+    User.getUser provides no more information than User.get.
 
 #### Imports
 #### Braces
