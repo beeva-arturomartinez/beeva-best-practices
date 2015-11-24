@@ -16,6 +16,9 @@
 * [References](#references)
 
 ### Introduction
+
+[URL Base](http://twitter.github.io/effectivescala/):http://twitter.github.io/effectivescala/
+
 Some code examples:
 ````javascript
     var http = require('http');
