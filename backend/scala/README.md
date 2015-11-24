@@ -193,7 +193,28 @@ Use Scaladoc when something deserves explanation. In general we must try use use
 **[⬆ Index](#index)**
 
 ### Types and Generics
-Return type annotations, Variance, Type aliases, Implicits
+
+The primary objective of a type system is to detect programming errors. Use of the type system should reflect this goal, but we must remain mindful of the reader: judicious use of types can serve to enhance clarity, being unduly clever only obfuscates.
+
+####Return type annotations
+
+While Scala allows these to be omitted, such annotations provide good documentation: this is especially important for public methods. Where a method is not exposed and its return type obvious, omit them.
+
+####Variance
+
+####Type aliases
+
+Use type aliases when they provide convenient naming or clarify purpose, but do not alias types that are self-explanatory.
+
+####Implicits
+
+It’s definitely OK to use implicits in the following situations:
+
+- Extending or adding a Scala-style collection
+- Adapting or extending an object (“pimp my library” pattern)
+- Use to enhance type safety by providing constraint evidence
+- To provide type evidence (typeclassing)
+- For Manifests
 
 ### Collections
 Hierarchy, Use, Style, Performance, Java Collections
