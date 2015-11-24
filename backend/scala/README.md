@@ -187,6 +187,8 @@ Do not resort to ASCII art or other visual embellishments. Document APIs but do 
 
 #### ScalaDoc
 
+Use Scaladoc when something deserves explanation. In general we must try use the defined types and the choose expressive names. The code is "self-defining".
+
 **[⬆ Index](#index)**
 
 ### Types and Generics
