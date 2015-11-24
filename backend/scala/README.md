@@ -259,8 +259,27 @@ It’s definitely OK to use implicits in the following situations:
 **[⬆ Index](#index)**
 
 ### Collections
-####Hierarchy
+Scala has a very generic, rich, powerful, and composable collections library; collections are high level and expose a large set of operations.
+Always use the simplest collection that meets your needs.
+
 ####Use
+Prefer using immutable collections. They are applicable in most circumstances, and make programs easier to reason about since they are referentially transparent and are thus also threadsafe by default.
+
+Use the mutable namespace explicitly. Don’t import scala.collection.mutable._ and refer to Set, instead
+```
+import scala.collection.mutable
+val set = mutable.Set()
+```
+makes it clear that the mutable variant is being used.
+
+Use the default constructor for the collection type. Whenever you need an ordered sequence (and not necessarily linked list semantics), use the Seq() constructor, and so on:
+
+```
+val seq = Seq(1, 2, 3)
+val set = Set(1, 2, 3)
+val map = Map(1 -> "one", 2 -> "two", 3 -> "three")
+```
+
 ####Style
 ####Performance
 ####Java Collections
