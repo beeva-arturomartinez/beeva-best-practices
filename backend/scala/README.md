@@ -17,6 +17,8 @@
 
 ### Introduction
 
+Esto es una edicion
+
 [URL Base](http://twitter.github.io/effectivescala/):http://twitter.github.io/effectivescala/
 
 Some code examples:
