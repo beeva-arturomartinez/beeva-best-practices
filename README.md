@@ -38,6 +38,7 @@ If you think any information is wrong or missing please write us an email or dir
 
 ### IT Security & Hardening
 * [Security and application hardening](it_security/security_hardening/README.md)
+* [Server security](it_security/server_security/README.md)
 
 ### Quality Assurance
 * [Code Design](qa_testing/code_design/README.md)
