@@ -58,7 +58,10 @@ This is of particular importance to Scala, as its grammar has a high degree of o
 
 We adhere to the [Scala style] (http://docs.scala-lang.org/style/)  guide plus the following rules
 
-Whitespace, Naming, Imports, Braces, Pattern matching, Comments
+# Whitespace
+Indent by two spaces. Try to avoid lines greater than 100 columns in length. Use one blank line between method, class, and object definitions
+
+Naming, Imports, Braces, Pattern matching, Comments
 
 ### Types and Generics
 Return type annotations, Variance, Type aliases, Implicits
