@@ -25,29 +25,6 @@ This is not an introduction to Scala; we assume the reader is familiar with the 
 
 This is a living document that will change to reflect our current “best practices,” but its core ideas are unlikely to change: Always favor readability; write generic code but not at the expensive of clarity; take advantage of simple language features that afford great power but avoid the esoteric ones (especially in the type system). Above all, be always aware of the trade offs you make. A sophisticated language requires a complex implementation, and complexity begets complexity: of reasoning, of semantics, of interaction between features, and of the understanding of your collaborators. Thus complexity is the tax of sophistication — you must always ensure that its utility exceeds its cost.
 
-Some code examples:
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
-
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-A Remarkable idea
-
-A nice table
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
 **[⬆ Index](#index)**
 
 ### Formatting
@@ -63,29 +40,38 @@ Indent by two spaces. Try to avoid lines greater than 100 columns in length. Use
 
 #### Naming
 _Use short names for small scopes_
-is, js and ks are all but expected in loops.
-    
-Use longer names for larger scopes: external APIs should have longer and explanatory names that confer meaning. Future.collect not Future.all
-    
-Use common abbreviations but eschew esoteric ones
-Everyone knows ok, err or defn whereas sfri is not so common.
-    
-Don't rebind names for different uses
-Use vals
-    
-Avoid using s to overload reserved names
-typ instead of `type`
-    
-Use active names for operations with side effects
-user.activate() not user.setActive()
-    
-Use descriptive names for methods that return values
-src.isDefined not src.defined
-    
-Do not prefix getters with get
-As per the previous rule, it is redundant: site.count not site.getCount
 
-Do not repeat names that are already encapsulated in package or object name:
+    is, js and ks are all but expected in loops.
+    
+_Use longer names for larger scopes_
+
+    external APIs should have longer and explanatory names that confer meaning. Future.collect not Future.all
+    
+_Use common abbreviations but eschew esoteric ones_
+
+    Everyone knows ok, err or defn whereas sfri is not so common.
+    
+_Don't rebind names for different uses_
+
+    Use vals
+    
+_Avoid using s to overload reserved names_
+
+    typ instead of `type`
+    
+_Use active names for operations with side effects_
+
+    user.activate() not user.setActive()
+    
+_Use descriptive names for methods that return values_
+
+    src.isDefined not src.defined
+    
+_Do not prefix getters with get_
+
+    As per the previous rule, it is redundant: site.count not site.getCount
+
+_Do not repeat names that are already encapsulated in package or object name_
     
 Prefer:
 object User {
@@ -102,6 +88,8 @@ They are redundant in use: User.getUser provides no more information than User.g
 #### Pattern matching
 #### Comments
 #### ScalaDoc
+
+**[⬆ Index](#index)**
 
 ### Types and Generics
 Return type annotations, Variance, Type aliases, Implicits
