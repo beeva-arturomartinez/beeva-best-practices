@@ -1,43 +1,84 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
+# Code Optimization Best Practices Guide
+At this point we're going to talk about the best practices for optimize the code, independant the programming language.
 
 [Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
+* [Introduction](#introduction)
+* [Concepts](#concepts)
+	* [O Notation](#o-notation)
+	* [Unnecesary code](#unnecesary-code)
+* [Simple Data Structures](#simple-data-structures)
+	* [Route](#route)
+	* [Searching](#searching)
+	* [Ordering](#ordering)
+	* [Constants propagation](#constants-propagation)
+* [Recursivity](#recursivity)
+* [Complex Data Structures](#complex-data-structures)
+	* [Hash tables](#hash-tables)
+	* [Trees](#trees)
+	* [Graphs](#graphs)
+* [Profiling](#profiling)
+	* [Profilers types depending on the response](#profilers-types-depending-on-the-response)
+	* [Granularity](#granularity)
+	* [Statistic's profilers](#statistics-profilers)
+* [Instrumentation](#instrumentation)
+* [Bucle optimization](#bucle-optimization)
+* [Efficient exceptions management](#efficient-exceptions-management)
+* [Tools](#tools)
+	* [Loggers](#loggers)
+	* [Death code detection](#death-code-detection)
 * [References](#references)
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+## Introduction
 
-### The Two Towers
+## Concepts
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+### O Notation
 
-A Remarkable idea
+### Unnecesary code
 
+## Simple Data Structures
 
-### The Return of the King
+### Route
 
-A nice table
+### Searching
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+### Ordering
+
+### Constants propagation
+
+## Recursivity
+
+## Complex Data Structures
+
+### Hash tables
+
+### Trees
+
+### Graphs
+
+## Profiling
+
+### Profilers types depending on the response
+
+### Granularity
+
+### Statistic's profilers
+
+## Instrumentation
+
+## Bucle optimization
+
+## Efficient exceptions management
+
+## Tools
+
+###Loggers
+
+### Death code detection
+
 
 
 ### References
