@@ -122,6 +122,24 @@ _Put imports at the top of the file_
     The reader can refer to all imports in one place.
 
 #### Braces
+
+Braces are used to create compound expressions (they serve other uses in the “module language”), where the value of the compound expression is the last expression in the list. Avoid using braces for simple expressions;
+
+write
+
+```
+def square(x: Int) = x*x
+```
+but not
+
+```
+def square(x: Int) = {
+  x * x
+}
+```
+
+even though it may be tempting to distinguish the method body syntactically. The first alternative has less clutter and is easier to read. Avoid syntactical ceremony unless it clarifies.
+
 #### Pattern matching
 #### Comments
 #### ScalaDoc
