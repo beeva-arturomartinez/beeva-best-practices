@@ -148,10 +148,11 @@ These design patterns provide a way to create objects while hiding the creation 
  - Definition: abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
    In Abstract Factory pattern an interface is responsible for creating a factory of related objects without explicitly specifying their classes. Each generated factory can give the objects as per the Factory pattern.
- 
+
  - Design:
+
  ![alt text](static/abstract-factory-uml.jpg "UML Diagram")
- 
+
  - Applicability:
    - A system should be independent of how they are created, make up and represent their products.
    - A system must be configured with a family of products from several.
@@ -159,11 +160,13 @@ These design patterns provide a way to create objects while hiding the creation 
 
  You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Abstract_factory_pattern)
 - **Builder pattern**
+
   - Definition: builder pattern builds a complex object using simple objects and using a step by step approach. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
    A Builder class builds the final object step by step. This builder is independent of other objects.
 
   - Design:
+
   ![alt text](static/640px-Builder_UML_class_diagram.svg.png "UML Diagram")
 
   - Applicability:
@@ -173,11 +176,15 @@ These design patterns provide a way to create objects while hiding the creation 
 
   You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Builder_pattern)
 - **Factory method pattern**
+
   - Definition: this type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
    In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
+
  - Design:
+
   ![alt text](static/320px-Factory_Method_UML_class_diagram.svg.png "UML Diagram")
+
  - Applicability:
    - When you want to create an extensible framework.
    - When you want to be a subclass instead of a superclass, that decides what kind of object must be created.
@@ -185,17 +192,24 @@ These design patterns provide a way to create objects while hiding the creation 
 
   You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Factory_method_pattern)
 - **Prototype pattern**
+
   - Definition: it facilitates dynamic creation to define classes whose objects can create copies of themselves.
+
   - Design:
-  ![alt text](static/prototype-uml.jpg "UML Diagram")
+
+ ![alt text](static/prototype-uml.jpg "UML Diagram")
   - Applicability:
     - The same as the definition.
 
  You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Prototype_pattern)
 - **Singleton pattern**
+
   - Definition: it allows a single instance of a class in the system, at a time that allows all classes have access to that **unique** instance.
+
   - Design:
+
   ![alt text](static/250px-Singleton_UML_class_diagram.svg.png "UML Diagram")
+
   - Applicability:
     - To store configurations.
     - To cache objects in memory.
