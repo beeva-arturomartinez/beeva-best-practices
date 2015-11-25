@@ -315,6 +315,12 @@ Do not throw your own exceptions in methods that return Futures. Futures represe
 
 ####Collections
 
+In most practical situations they are a nonissue: Always start with the simplest, most boring, and most standard collection that serves the purpose. Don’t reach for a concurrent collection before you know that a synchronized one won’t do.
+
+If an immutable collection will do, use it.
+
+Mutable concurrent collections have complicated semantics, and make use of subtler aspects of the Java memory model, so make sure you understand the implications — especially with respect to publishing updates — before you use them.
+
 **[⬆ Index](#index)**
 
 ### Control structures
