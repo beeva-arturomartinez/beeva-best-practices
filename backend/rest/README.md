@@ -36,6 +36,25 @@ At this point we're going to talk about...
 ---
 
 ## Filters
+
+There are several ways to filter the resources of a REST Api. However is a good practice to design an API with the next four features
+
+### Filtering
+
+### Sorting
+
+### Field Selection
+
+Sometimes API consumers don't need all attributes of a resource. Is a good practice give the cosumer the ability to choose returned fields. This will improve API's performance an reduce the network bandwidth.
+
+---
+```html
+GET /cars?fields=manufacturer,model,id,color
+```
+---
+
+### Searching
+
 ---
 
 
