@@ -281,12 +281,38 @@ val map = Map(1 -> "one", 2 -> "two", 3 -> "three")
 ```
 
 ####Style
+
+Functional programming encourages pipelining transformations of an immutable collection to shape it to its desired result. This often leads to very succinct solutions, but can also be confusing to the reader — it is often difficult to discern the author’s intent, or keep track of all the intermediate results that are only implied.
+
+Developer must think that code will be read by other people. Using {} and intermediate state values you will get readable code
+
 ####Performance
+
+Before focusing on low level details, make sure you are using a collection appropriate for your use. Make sure your datastructure doesn’t have unexpected asymptotic complexity.
+
+It is often appropriate to use lower level collections in situations that require better performance or space efficiency. Use arrays instead of lists for large sequences (the immutable Vector collections provides a referentially transparent interface to arrays); and use buffers instead of direct sequence construction when performance matters.
 
 **[⬆ Index](#index)**
 
 ### Concurrency
+
+Modern services are highly concurrent, _Threads_ provide a means of expressing concurrency but they are dificult to manage. Also you have to consider issues such as cancellations and timeouts and your code usually lost modularity and it becomes difficult to maintain
+
 ####Futures
+
+Use Futures to manage concurrency. Scala has lightweight closure literal syntax, so Futures introduce little syntactic overhead, and they become second nature to most programmers.
+
+Futures allow the programmer to express concurrent computation in a declarative style, are composable, and have principled handling of failure.
+
+Prefer transforming futures over creating your own. Future transformations ensure that failures are propagated, that cancellations are signalled, and free the programmer from thinking about the implications of the Java memory model.
+
+We use flatMap to sequence operations and prepend the result onto the list as we proceed. This is a common functional programming idiom translated to Futures. This is correct, requires less boilerplate, is less error prone, and also reads better.
+
+Use the Future combinators. Future.select, Future.join, and Future.collect codify common patterns when operating over multiple futures that should be combined.
+
+
+Do not throw your own exceptions in methods that return Futures. Futures represent both successful and failed computations. Therefore, it’s important that errors involved in that computation are properly encapsulated in the returned Future.
+
 ####Collections
 
 **[⬆ Index](#index)**
