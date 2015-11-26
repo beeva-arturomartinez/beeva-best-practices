@@ -98,3 +98,71 @@ The aim of this process is to reduce both technical, economic and time when perf
 #### Process management deliveries
 
 Its aim is to plan and successfully control the installation of software and hardware under three environments: development environment, controlled test environment and real environment.
+
+
+## Backup and recovery
+
+### Do a backup and recovery guide
+
+One of the most important things what you should do when you are administrating a system could be have a backup and restore policy.
+This policy should have a list of things to do for a system backup and what to do to recover.
+
+Also, this policy would have how many time cost the backup process and how many time you need to recover the information. You should consider that the backup size
+increase over time.
+
+These are several things that you should consider:
+1. What kind of hardware is making a backup (network topology and hardware, drives, tapes,...)
+2. The backup time should be less than backup window
+3. The restore time should be ok for your bussiness.
+4. Retention time. How many time you should be your old backups safe.
+5. You need recover to one snapshot point or a specific point in time (point in time recovery)
+6. That perform backup:
+	1. System
+	2. Database
+	3. Aplication
+	4. ...
+
+### How to do the backup
+
+Depending on what you want perform backup you can select several ways, some of them only are useful to one type and other all valid to all. You can made backup from several sources, you should think which is better for your system or application.
+Sometimes you need only do backup from your database and you won't have system backup because you can recover the system quickly.
+
+These are some ways to do backup:
+	- Backup on array storage: You perform a snapshot and the storage save the information between snapshot.
+	- Backup between array storage: A storage make a snapshot and send data to another storage.
+	- System backup: You can made a full system backup or exclude some folders
+	- Backup from database: You can use specific database tools to do a backup
+	- Backup from application: Some application can save data and files from one specific export tool.
+
+Other think to keep in mind is backup window, If the backup time is more than backup window you must do reduce backup size, change backup time, optimize backup or increment hardware to backup. And if you restore time isn't ok also.
+If you don't have a specific network to backup your system performance could be reduce when the backup is doing.
+
+You should consider how is your system, the more complex is the more complex the backup.
+
+### Backup size
+
+One of the most important things you have to consider is the backup size. It could limit the information you can save or the retention time.
+You have a limit storage where you make a backup and you must adapt your backup to it. You must keep the information for a bussiness retention time and you must keep it safe during it.
+
+Reduce backup size if is posible, you try to reduce files to backup (remove iso, software zip, etc from backup), data read only that you safe previusly.
+If you can get some file more quickly than recover from backup don't backup it. For example, you can reload a database from data files more quickly than recover from backup.
+
+Also, you can perform incremental backup some days. It reduce the backup time but increase restore time. For example on weekend you can perform full and incremental backups on bussines days.
+
+### Backup location
+
+You can save backups to:
+	- local or network disk. It's posible put in on tape later
+	- Directly to tape.
+
+Depend of backup location the time could be increase. Backup to disk normaly is more quickly than to tape.
+
+Finally, you must safe the backup on different location when you do it, you send the tape to another place or send backup data to another place by network.
+
+### Test recover process
+
+A backup isn't useful if you don't test how to recover it. When you have a backup policy you have to test it. To test it you should recover several files from backup and do and full recover from your system on a test enviroment. This test could be useful to have recover time and to deploy a disaster recover guide.
+
+Recover files and system from diferent times, if you have a retention of 30 days you should try to perform a recovery from files of 30 days ago.
+
+Finally you should test recover process on the future. Maybe things were ok in the past, but they won't be ok on the future.
