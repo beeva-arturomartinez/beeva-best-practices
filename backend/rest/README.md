@@ -41,19 +41,42 @@ There are several ways to filter the resources of a REST Api. However is a good 
 
 ### Filtering
 
-### Sorting
-
-### Field Selection
-
-Sometimes API consumers don't need all attributes of a resource. Is a good practice give the cosumer the ability to choose returned fields. This will improve API's performance an reduce the network bandwidth.
+Avoid use one unique parameter for filtering all fields, is a much better approach to use one parameter for each field to filter. Use multiple values separted by comma if you need to filter a resource by multiple field values.
 
 ---
 ```html
-GET /cars?fields=manufacturer,model,id,color
+GET /campaigns?status=computed&provider=CVIP,BBVA
+```
+---
+
+### Sorting
+
+Generic parameter "sort" can be used to describe sorting rules. Allow sort by multiple fields with the use of a list of fields separated by comma. Use - sign before fields to sort in descent order and no sign to sort in ascending order.
+
+---
+```html
+GET /campaigns?sort=last_update,-status
+```
+---
+
+### Field Selection
+
+Sometimes API consumers don't need all attributes of a resource. Is a good practice give the consumer the ability to choose returned fields. This will improve API's performance and reduce the network bandwidth.
+
+---
+```html
+GET /campaigns?fields=id,status,name
 ```
 ---
 
 ### Searching
+
+Define search as a sub-resorce for your collection. Use generic query parameter like "q" to perform a full text search over your resources and return the search result in the same format as a normal list result. In order to make more complex searches allow the use of full text search operators like + - or "/ .
+
+---
+```html
+GET /campaigns/search?q=PAYPAL-BBVA
+```
 
 ---
 
