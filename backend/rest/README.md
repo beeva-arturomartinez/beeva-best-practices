@@ -33,7 +33,22 @@ At this point we're going to talk about...
 ---
 
 ## Payload formatting
----
+
+The payload is the actual data provided in a REST message, the payload does not include the overhead data. That means it is not the headers and the envelope.
+
+Both the *requests* and the *responses* can have a payload. 
+
+For example, in operations such as GET and DELETE, it does not make sense, because there should not be content in the payload. On the other hand, operations like PUT or POST usually contains a payload with data.
+Most of the responses may contain a payload, for responses with data content and for providing extra information about the success (or not) of the operation.
+
+There are many formats as payload, the most used are JSON and XML though. The structure for a payload depends on the information that is represented on it. It will not be the same for an item creation, error content response, successful message, etc.
+
+*Respecting status codes* - It's a bad practice to send a response with status 200, and return in the payload the detail that the response was not successful, with a particular messages result format for our API. The status code for a response must be used to define how was it, don't use the payload to specify the nature of the response. The payload should be used in that case to specify the detail of the operation result.
+
+Sometimes, our API can be prepared to return the responses in xml or json format, and the client should specify what is the format required. There are two ways to define the format of the response expected:
+* Accept header: Indicating in the _Accept_ http header what are the contents types accepted. The request put _application/xml_ or _application/json_ to ask for a xml or json response format.
+* Extension: other way to specify the response format is indicating the extension on the resource. For example, GET _/api/resource.xml?param=value_ or _/api/resource.json?param=value_.
+
 
 ## Filters
 ---
