@@ -208,7 +208,7 @@ These design patterns provide a way to create objects while hiding the creation 
 
 	- Design:
 
-  		![alt text](static/250px-Singleton_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/250px-Singleton_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- To store configurations.
@@ -220,6 +220,20 @@ These design patterns provide a way to create objects while hiding the creation 
 These design patterns concern class and object composition. Concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionalities.
 
  - **Adapter pattern**
+
+	- Adapter pattern works as a bridge between two incompatible interfaces. This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
+
+	This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces..
+
+	- Design:
+
+		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+
+	- Applicability:
+		- TO-DO
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Bridge pattern**
  - **Composite pattern**
  - **Decorator pattern**
