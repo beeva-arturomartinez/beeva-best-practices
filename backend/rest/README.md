@@ -103,6 +103,7 @@ PATCH /clients/123
 ---
 
 ## Payload formatting
+---
 
 The payload is the actual data provided in a REST message, the payload does not include the overhead data. That means it is not either the headers or the envelope.
 
