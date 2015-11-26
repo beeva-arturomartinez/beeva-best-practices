@@ -41,21 +41,44 @@ In a REST implementation there are four basic operations which can be published 
 #### GET
 
 This operation retrieves all the information of a resource, or all resources in a collection (if the resource is a collection). It's a safe operation and it should have not other effect.
+---
+```
+GET /client/123
+
+```
+---
 
 #### POST
 
 It introduces an item in the collection represented by the resource. It is used to create a *new* item in the collection, the URI of the final resource will be defined by the server. 
+---
+```
+POST /products
+{ "name": "car", "color": "black" }
+```
+---
 
 #### PUT
 
 PUT operation requests that the entity is stored in the resource indicated. It means that the resource doesn't exist, it creates it. However, if the resource exists, it is overwritten by the given entity. Because of this behavoir, it is idempotent. 
 
 POST and PUT are similar, POST will be used when we don't know the locality of the resource, and PUT where we know it. For this reason, POST is usually implemented as create operation while PUT can be used as update.
+---
+```
+PUT /products/123
+{ "name": "car", "color": "black" }
+```
+---
 
 #### DELETE
 
 It deletes the specified resource. Despite the server could return other response if the item already was deleted (the resource does not exist), this operation is idempotent, because the system status will be the same.
+---
+```
+DELETE /client/123
 
+```
+---
 
 ### Extra operations
 
@@ -65,7 +88,18 @@ These are the basic operations, they allow to implement CRUD operations, but the
 
 All the operations doesn't have to be implemented, with **OPTIONS** operation the client can discover the list of methods implemented for a resource.
 
-The HTTP methods **PATCH** can be used to update partial resources. While PUT operation must take a full resource representation as the request entity (if only few attributes are provided, the others should be removed), PATCH operation allow partial changes to a resource. It is not idempotent.
+The HTTP methods **PATCH** can be used to update partial resources. While PUT operation must take a full resource representation as the request entity (if only few attributes are provided, the others should be removed), PATCH operation allow partial changes to a resource. It is not idempotent. This operation should not be used as a partial data which only will be updated, it should define the 'suboperation' that are going to do over the resource.
+
+---
+```
+PATCH /client/123
+[
+    { "op": "replace", "path": "/name", "value": "Patricia" }
+]
+```
+---
+
+
 
 ## Status codes
 ---
