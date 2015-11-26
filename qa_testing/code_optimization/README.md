@@ -76,6 +76,9 @@ At this point we're going to talk about the best practices for optimize the code
 ## Tools
 
 ###Loggers
+All programming languages have systems to print information, but in the most of cases isn't efficient use it for print information, because these operations are synchronous and slow. Each programming language have its own libraries to process log messages and allow to save it at disk and/or screen and configure a determined format. Is very recommended use these libraries for improve the performance and manage the log levels unifying the log styles.
+
+For improve the performance of your application is recommended that in production environments only show logs with level INFO, WARN and ERROR. For this goal its important that when you develop your application and you want to log something think about if is usefull information and if is better use debug or info level. Try to avoid print large objects or huge amount information if isn't really necesary, this type of information may be usefull when you are trying your code in local mode or development environments, but in production environments normally penalize the performance and complicate the understanding or reading of the logs.
 
 ### Death code detection
 
