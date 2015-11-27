@@ -20,7 +20,7 @@ At this point we're going to talk about the code design best practices.
 
 ## Introduction
 
-This guide's objective is help to developers to write a good code for improve the code readability and help to anybody to understand the code.
+Sometimes 
 
  ![alt text](static/codequality_wtf.png "QA's wtf measure")
 
@@ -33,14 +33,15 @@ This guide's objective is help to developers to write a good code for improve th
 * Don't use lines too larges.
 * Don't use a lot of params in a method or functions. If there are a lot of params you should consider to use one class or object.
 * Use with caution the copy & paste. When you copy a portion of code, think about if you can extract it to an method or class to reuse it.
-* Write portable code.
 * Read and follow the guide for your programming language.
 * Split Your Code into Short, Focused Units. If a method have a lot of lines, probably is better to divide in more methods to improve the readability and reusability of the code.
 * Delete the variables not used anywhere, not only for performance reasons, also for readibility reasons.
-* Use UTF-8 encoding in all files (configure the ide or text editor).
-* Replace tabs with spaces (Configure the ide or text editor).
 * Use Framework APIs and Third-Party Libraries
 * Be consistent: Do similar things in similar ways. If you're developing a routine whose functionality resembles that of an existing routine, use a similar name, the same parameter order, and a comparable structure for the code body.
+* Write portable code. Unless you have some compelling reason, avoid using functionality that's available only on a specific platform or framework. 
+* Use efficient data structures and algorithms. Simple code is more mantainable , you can combine mantainability with efficiency using the data structures and algorithms provided by your programming framework.
+* Use UTF-8 encoding in all files (configure the ide or text editor).
+* Replace tabs with spaces (Configure the ide or text editor).
 
 
 ### Naming
