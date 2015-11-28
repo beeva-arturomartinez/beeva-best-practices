@@ -145,15 +145,17 @@ These design patterns provide a way to create objects while hiding the creation 
 
 
 - **Abstract factory pattern**
-	- Definition: abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
+	- ***Definition***
+
+		Abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
 		In Abstract Factory pattern an interface is responsible for creating a factory of related objects without explicitly specifying their classes. Each generated factory can give the objects as per the Factory pattern.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/640px-Abstract_Factory_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- A system should be independent of how they are created, make up and represent their products.
 		- A system must be configured with a family of products from several.
 		- A family of related product objects is designed to be used jointly and is necessary to enforce this restriction.
@@ -161,11 +163,13 @@ These design patterns provide a way to create objects while hiding the creation 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Abstract_factory_pattern)
 - **Builder pattern**
 
-	- Definition: builder pattern builds a complex object using simple objects and using a step by step approach. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
+	- ***Definition*** 
+
+		Builder pattern builds a complex object using simple objects and using a step by step approach. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
 		A Builder class builds the final object step by step. This builder is independent of other objects.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/640px-Builder_UML_class_diagram.svg.png "UML Diagram")
 
@@ -176,15 +180,15 @@ These design patterns provide a way to create objects while hiding the creation 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Builder_pattern)
 - **Factory method pattern**
 
-	- Definition: this type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
+	- ***Definition***
 
 		In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/640px-Factory_Method_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- When you want to create an extensible framework.
 		- When you want to be a subclass instead of a superclass, that decides what kind of object must be created.
 		- When you know when to create an object, but does not know the object type.
@@ -192,25 +196,29 @@ These design patterns provide a way to create objects while hiding the creation 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Factory_method_pattern)
 - **Prototype pattern**
 
-	- Definition: it facilitates dynamic creation to define classes whose objects can create copies of themselves.
+	- ***Definition***
 
-	- Design:
+		It facilitates dynamic creation to define classes whose objects can create copies of themselves.
+
+	- ***Design***
 
 		![alt text](static/prototype-uml.jpg "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- The same as the definition.
 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Prototype_pattern)
 - **Singleton pattern**
 
-	- Definition: it allows a single instance of a class in the system, at a time that allows all classes have access to that **unique** instance.
+	- ***Definition***
 
-	- Design:
+		It allows a single instance of a class in the system, at a time that allows all classes have access to that **unique** instance.
+
+	- ***Design***
 
 		![alt text](static/250px-Singleton_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- To store configurations.
 		- To cache objects in memory.
 
@@ -221,15 +229,17 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Adapter pattern**
 
-	- Definition: adapter pattern works as a bridge between two incompatible interfaces. This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
+	- ***Definition***
+
+		Adapter pattern works as a bridge between two incompatible interfaces. This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
 
 		This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/640px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- When you want to use an object in an environment that expects a different interface offered by the object.
 		- When you need a translation between the interfaces of several objects.
 		- When an object must be used like an intermediary for a group of classes, and only is possible to know in execution time what class will be used.
@@ -238,15 +248,17 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Bridge pattern**
 
-	- Definition: bridge pattern is used when we need to decouple an abstraction from its implementation so that the two can vary independently. This type of design pattern comes under structural pattern as this pattern decouples implementation class and abstract class by providing a bridge structure between them.
+	- ***Definition***
+
+		Bridge pattern is used when we need to decouple an abstraction from its implementation so that the two can vary independently. This type of design pattern comes under structural pattern as this pattern decouples implementation class and abstract class by providing a bridge structure between them.
 
 		This pattern involves an interface which acts as a bridge which makes the functionality of concrete classes independent from interface implementer classes. Both types of classes can be altered structurally without affecting each other.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/Bridge_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- When you want flexibility between abstraction and implementation of component, avoiding a static relationship between the two.
 		- When the changes in the implementation should not be visible to the clients.
 		- When you identify multiple abstractions and implementations of components.
@@ -256,15 +268,17 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Composite pattern**
 
-	- Definition: composite pattern is used where we need to treat a group of objects in similar way as a single object. Composite pattern composes objects in term of a tree structure to represent part as well as whole hierarchy. This type of design pattern comes under structural pattern as this pattern creates a tree structure of group of objects.
+	- ***Definition***
+
+		Composite pattern is used where we need to treat a group of objects in similar way as a single object. Composite pattern composes objects in term of a tree structure to represent part as well as whole hierarchy. This type of design pattern comes under structural pattern as this pattern creates a tree structure of group of objects.
 
 		This pattern creates a class that contains group of its own objects. This class provides ways to modify its group of same objects.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/640px-Composite_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- When there is a component modeled as a branch-leaf structure (or part-whole, or contained-container).
 		- When the structure can have any level of complexity and be dynamic.
 		- When you want to deal uniformly the structure of the component, using common operations in all the hierarchy.
@@ -273,15 +287,17 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Decorator pattern**
 
-	- Definition: decorator pattern allows a user to add new functionality to an existing object without altering its structure. This type of design pattern comes under structural pattern as this pattern acts as a wrapper to existing class.
+	- ***Definition***
+
+		Decorator pattern allows a user to add new functionality to an existing object without altering its structure. This type of design pattern comes under structural pattern as this pattern acts as a wrapper to existing class.
 
 		This pattern creates a decorator class which wraps the original class and provides additional functionality keeping class methods signature intact.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/606px-Decorator_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- When you want to make dynamic changes that be transparents to the users, without the restrictions that implies the creation of subclasses.
 		- When they may introduce or remove components capabilities at runtime.
 		- when there are features which vary independently, to be applied dynamically and can be arbitrarily combined on a component.
@@ -290,15 +306,17 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Facade pattern**
 
-	- Definition: facade pattern hides the complexities of the system and provides an interface to the client using which the client can access the system. This type of design pattern comes under structural pattern as this pattern adds an interface to existing system to hide its complexities.
+	- ***Definition***
+
+		Facade pattern hides the complexities of the system and provides an interface to the client using which the client can access the system. This type of design pattern comes under structural pattern as this pattern adds an interface to existing system to hide its complexities.
 
 		This pattern involves a single class which provides simplified methods required by client and delegates calls to methods of existing system classes.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/640px-Facade_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- To simplify the use of the complex systems providing an interface easier without delete the advanced options.
 		- To reduce the coupling between the clients and the subsystems.
 		- To introduce layers in the subsystems, providing facades to the subsystems groups.
@@ -307,15 +325,19 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Flyweight pattern**
 
-	- Definition: flyweight pattern is primarily used to reduce the number of objects created and to decrease memory footprint and increase performance. This type of design pattern comes under structural pattern as this pattern provides ways to decrease object count thus improving the object structure of application.
+	- ***Definition***
+
+		Flyweight pattern is primarily used to reduce the number of objects created and to decrease memory footprint and increase performance. This type of design pattern comes under structural pattern as this pattern provides ways to decrease object count thus improving the object structure of application.
 
 		Flyweight pattern tries to reuse already existing similar kind objects by storing them and creates new object when no matching object is found.
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/Flyweight_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability: only when this conditions are true:
+	- ***Applicability*** 
+
+		Only when this conditions are true:
 		- The application uses a lot of identical objects or almost identical.
 		- For all the almost identical objects, the different parts may be separated from the similar parts, allowing the sharing of the common parts.
 		- The object groups almost identical may be replaced with a shared object when the differents parts of the state have been removed.
@@ -325,13 +347,13 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Proxy pattern**
 
-	- Definition:
+	- ***Definition***
 
-	- Design:
+	- ***Design***
 
 		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- TO-DO
 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
