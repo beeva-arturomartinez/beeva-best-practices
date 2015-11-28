@@ -173,7 +173,7 @@ These design patterns provide a way to create objects while hiding the creation 
 
 		![alt text](static/640px-Builder_UML_class_diagram.svg.png "UML Diagram")
 
-	- Applicability:
+	- ***Applicability***
 		- If a class has an internal complex structure.
 		- If a class has dependant attributes each other.
 		- If a class uses other system objects that are difficult or inconvenient to obtain during its creation.
