@@ -151,7 +151,7 @@ These design patterns provide a way to create objects while hiding the creation 
 
 	- Design:
 
-		![alt text](static/abstract-factory-uml.jpg "UML Diagram")
+		![alt text](static/640px-Abstract_Factory_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- A system should be independent of how they are created, make up and represent their products.
@@ -273,29 +273,37 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Decorator pattern**
 
-	- Definition:
+	- Definition: decorator pattern allows a user to add new functionality to an existing object without altering its structure. This type of design pattern comes under structural pattern as this pattern acts as a wrapper to existing class.
+
+	This pattern creates a decorator class which wraps the original class and provides additional functionality keeping class methods signature intact.
 
 	- Design:
 
-		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/303px-Decorator_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
-		- TO-DO
+		- When you want to make dynamic changes that be transparents to the users, without the restrictions that implies the creation of subclasses.
+		- When they may introduce or remove components capabilities at runtime.
+		- when there are features which vary independently, to be applied dynamically and can be arbitrarily combined on a component.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Decorator_pattern)
 
  - **Facade pattern**
 
-	- Definition:
+	- Definition: facade pattern hides the complexities of the system and provides an interface to the client using which the client can access the system. This type of design pattern comes under structural pattern as this pattern adds an interface to existing system to hide its complexities.
+
+	This pattern involves a single class which provides simplified methods required by client and delegates calls to methods of existing system classes.
 
 	- Design:
 
-		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/320px-Facade_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
-		- TO-DO
+		- To simplify the use of the complex systems providing an interface easier without delete the advanced options.
+		- To reduce the coupling between the clients and the subsystems.
+		- To introduce layers in the subsystems, providing facades to the subsystems groups.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Facade_pattern)
 
  - **Flyweight pattern**
 
