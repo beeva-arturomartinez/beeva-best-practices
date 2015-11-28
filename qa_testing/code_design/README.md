@@ -349,12 +349,18 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- ***Definition***
 
+		In proxy pattern, we create object having original object to interface its functionality to outer world.
+
 	- ***Design***
 
 		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
 
 	- ***Applicability***
-		- TO-DO
+
+		Use this pattern when you need a reference more elaborate to an object rather than a simple reference. There are many different approaches:
+		- Remote proxy: when you need a local representative for an remote object, or when reside in a different namespace.
+		- Virtual proxy: when it is acting as a representative and delegate the creation of expensive objects.
+		- Protector proxy: to establish the access rights to the real object.
 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
 
