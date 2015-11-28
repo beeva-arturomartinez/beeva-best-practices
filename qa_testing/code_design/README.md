@@ -147,7 +147,7 @@ These design patterns provide a way to create objects while hiding the creation 
 - **Abstract factory pattern**
 	- Definition: abstract Factory patterns work around a super-factory which creates other factories. This factory is also called as factory of factories. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
-	In Abstract Factory pattern an interface is responsible for creating a factory of related objects without explicitly specifying their classes. Each generated factory can give the objects as per the Factory pattern.
+		In Abstract Factory pattern an interface is responsible for creating a factory of related objects without explicitly specifying their classes. Each generated factory can give the objects as per the Factory pattern.
 
 	- Design:
 
@@ -163,7 +163,7 @@ These design patterns provide a way to create objects while hiding the creation 
 
 	- Definition: builder pattern builds a complex object using simple objects and using a step by step approach. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
-	A Builder class builds the final object step by step. This builder is independent of other objects.
+		A Builder class builds the final object step by step. This builder is independent of other objects.
 
 	- Design:
 
@@ -178,7 +178,7 @@ These design patterns provide a way to create objects while hiding the creation 
 
 	- Definition: this type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
-	In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
+		In Factory pattern, we create object without exposing the creation logic to the client and refer to newly created object using a common interface.
 
 	- Design:
 
@@ -223,7 +223,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Definition: adapter pattern works as a bridge between two incompatible interfaces. This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
 
-	This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces.
+		This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces.
 
 	- Design:
 
@@ -240,7 +240,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Definition: bridge pattern is used when we need to decouple an abstraction from its implementation so that the two can vary independently. This type of design pattern comes under structural pattern as this pattern decouples implementation class and abstract class by providing a bridge structure between them.
 
-	This pattern involves an interface which acts as a bridge which makes the functionality of concrete classes independent from interface implementer classes. Both types of classes can be altered structurally without affecting each other.
+		This pattern involves an interface which acts as a bridge which makes the functionality of concrete classes independent from interface implementer classes. Both types of classes can be altered structurally without affecting each other.
 
 	- Design:
 
@@ -258,7 +258,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Definition: composite pattern is used where we need to treat a group of objects in similar way as a single object. Composite pattern composes objects in term of a tree structure to represent part as well as whole hierarchy. This type of design pattern comes under structural pattern as this pattern creates a tree structure of group of objects.
 
-	This pattern creates a class that contains group of its own objects. This class provides ways to modify its group of same objects.
+		This pattern creates a class that contains group of its own objects. This class provides ways to modify its group of same objects.
 
 	- Design:
 
@@ -275,7 +275,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Definition: decorator pattern allows a user to add new functionality to an existing object without altering its structure. This type of design pattern comes under structural pattern as this pattern acts as a wrapper to existing class.
 
-	This pattern creates a decorator class which wraps the original class and provides additional functionality keeping class methods signature intact.
+		This pattern creates a decorator class which wraps the original class and provides additional functionality keeping class methods signature intact.
 
 	- Design:
 
@@ -292,7 +292,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Definition: facade pattern hides the complexities of the system and provides an interface to the client using which the client can access the system. This type of design pattern comes under structural pattern as this pattern adds an interface to existing system to hide its complexities.
 
-	This pattern involves a single class which provides simplified methods required by client and delegates calls to methods of existing system classes.
+		This pattern involves a single class which provides simplified methods required by client and delegates calls to methods of existing system classes.
 
 	- Design:
 
@@ -309,11 +309,11 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Definition: flyweight pattern is primarily used to reduce the number of objects created and to decrease memory footprint and increase performance. This type of design pattern comes under structural pattern as this pattern provides ways to decrease object count thus improving the object structure of application.
 
-	Flyweight pattern tries to reuse already existing similar kind objects by storing them and creates new object when no matching object is found.
+		Flyweight pattern tries to reuse already existing similar kind objects by storing them and creates new object when no matching object is found.
 
 	- Design:
 
-		![alt text](static/Flyweight_UML_class_diagram.svg.png")
+		![alt text](static/Flyweight_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability: only when this conditions are true:
 		- The application uses a lot of identical objects or almost identical.
