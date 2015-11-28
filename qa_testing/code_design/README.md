@@ -30,7 +30,7 @@ At this point we're going to talk about the code design best practices.
     	* [System Management](#system-management)
     * [Anti-Patterns](#anti-patterns)
     	* [Software Design](#software-design)
-    	* [Object Oriented programing](#Object Oriented programing)
+    	* [Object Oriented programing](#object-oriented-programing)
     	* [Programming](#programming)
     	* [Methodological](#methodological)
     	* [Configuracion Management](#configuration-management)
