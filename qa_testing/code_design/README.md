@@ -238,16 +238,21 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Bridge pattern**
 
-	- Definition:
+	- Definition: bridge pattern is used when we need to decouple an abstraction from its implementation so that the two can vary independently. This type of design pattern comes under structural pattern as this pattern decouples implementation class and abstract class by providing a bridge structure between them.
+
+	This pattern involves an interface which acts as a bridge which makes the functionality of concrete classes independent from interface implementer classes. Both types of classes can be altered structurally without affecting each other.
 
 	- Design:
 
-		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/Bridge_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
-		- TO-DO
+		- When you want flexibility between abstraction and implementation of component, avoiding a static relationship between the two.
+		- When the changes in the implementation should not be visible to the clients.
+		- When you identify multiple abstractions and implementations of components.
+		- When it is appropriate create subclasses, but you want to handle independently the two aspects of the system.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Bridge_pattern)
 
  - **Composite pattern**
 
