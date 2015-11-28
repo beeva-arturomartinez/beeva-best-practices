@@ -221,9 +221,24 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Adapter pattern**
 
-	- Adapter pattern works as a bridge between two incompatible interfaces. This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
+	- Definition: adapter pattern works as a bridge between two incompatible interfaces. This type of design pattern comes under structural pattern as this pattern combines the capability of two independent interfaces.
 
-	This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces..
+	This pattern involves a single class which is responsible to join functionalities of independent or incompatible interfaces.
+
+	- Design:
+
+		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+
+	- Applicability:
+		- When you want to use an object in an environment that expects a different interface offered by the object.
+		- When you need a translation between the interfaces of several objects.
+		- When an object must be used like an intermediary for a group of classes, and only is possible to know in execution time what class will be used.
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
+ - **Bridge pattern**
+
+	- Definition:
 
 	- Design:
 
@@ -234,12 +249,70 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
 
- - **Bridge pattern**
  - **Composite pattern**
+
+	- Definition:
+
+	- Design:
+
+		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+
+	- Applicability:
+		- TO-DO
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Decorator pattern**
+
+	- Definition:
+
+	- Design:
+
+		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+
+	- Applicability:
+		- TO-DO
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Facade pattern**
+
+	- Definition:
+
+	- Design:
+
+		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+
+	- Applicability:
+		- TO-DO
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Flyweight pattern**
+
+	- Definition:
+
+	- Design:
+
+		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+
+	- Applicability:
+		- TO-DO
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Proxy pattern**
+
+	- Definition:
+
+	- Design:
+
+		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+
+	- Applicability:
+		- TO-DO
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
 
 ##### Behavioral Patterns
 These design patterns are specifically concerned with communication between objects.
