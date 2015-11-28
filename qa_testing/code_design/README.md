@@ -256,16 +256,20 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Composite pattern**
 
-	- Definition:
+	- Definition: composite pattern is used where we need to treat a group of objects in similar way as a single object. Composite pattern composes objects in term of a tree structure to represent part as well as whole hierarchy. This type of design pattern comes under structural pattern as this pattern creates a tree structure of group of objects.
+
+	This pattern creates a class that contains group of its own objects. This class provides ways to modify its group of same objects.
 
 	- Design:
 
-		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/320px-Composite_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
-		- TO-DO
+		- When there is a component modeled as a branch-leaf structure (or part-whole, or contained-container).
+		- When the structure can have any level of complexity and be dynamic.
+		- When you want to deal uniformly the structure of the component, using common operations in all the hierarchy.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Composite_pattern)
 
  - **Decorator pattern**
 
