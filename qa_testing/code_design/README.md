@@ -182,7 +182,7 @@ These design patterns provide a way to create objects while hiding the creation 
 
 	- Design:
 
-		![alt text](static/320px-Factory_Method_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/640px-Factory_Method_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- When you want to create an extensible framework.
@@ -227,7 +227,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Design:
 
-		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/640px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- When you want to use an object in an environment that expects a different interface offered by the object.
@@ -262,7 +262,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Design:
 
-		![alt text](static/320px-Composite_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/640px-Composite_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- When there is a component modeled as a branch-leaf structure (or part-whole, or contained-container).
@@ -279,7 +279,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Design:
 
-		![alt text](static/303px-Decorator_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/606px-Decorator_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- When you want to make dynamic changes that be transparents to the users, without the restrictions that implies the creation of subclasses.
@@ -296,7 +296,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Design:
 
-		![alt text](static/320px-Facade_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/640px-Facade_UML_class_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- To simplify the use of the complex systems providing an interface easier without delete the advanced options.
@@ -329,7 +329,7 @@ These design patterns concern class and object composition. Concept of inheritan
 
 	- Design:
 
-		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
 
 	- Applicability:
 		- TO-DO
