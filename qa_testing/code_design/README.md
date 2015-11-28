@@ -307,16 +307,21 @@ These design patterns concern class and object composition. Concept of inheritan
 
  - **Flyweight pattern**
 
-	- Definition:
+	- Definition: flyweight pattern is primarily used to reduce the number of objects created and to decrease memory footprint and increase performance. This type of design pattern comes under structural pattern as this pattern provides ways to decrease object count thus improving the object structure of application.
+
+	Flyweight pattern tries to reuse already existing similar kind objects by storing them and creates new object when no matching object is found.
 
 	- Design:
 
-		![alt text](static/320px-Adapter_using_inheritance_UML_class_diagram.svg.png "UML Diagram")
+		![alt text](static/Flyweight_UML_class_diagram.svg.png")
 
-	- Applicability:
-		- TO-DO
+	- Applicability: only when this conditions are true:
+		- The application uses a lot of identical objects or almost identical.
+		- For all the almost identical objects, the different parts may be separated from the similar parts, allowing the sharing of the common parts.
+		- The object groups almost identical may be replaced with a shared object when the differents parts of the state have been removed.
+		- The application needs to differentiate between the almost identical objects in their original state.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Flyweight_pattern)
 
  - **Proxy pattern**
 
