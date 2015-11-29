@@ -563,16 +563,20 @@ These design patterns are specifically concerned with communication between obje
 
 	- ***Definition***
 
+		In Template pattern, an abstract class exposes defined way(s)/template(s) to execute its methods. Its subclasses can override the method implementation as per need but the invocation is to be in the same way as defined by an abstract class.
 
 	- ***Design***
 
-		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+		![alt text](static/template_method_pattern.gif "UML Diagram")
 
 	- ***Applicability***
 
-		- 
+		Use this pattern to:
+		- To give an skeleton for a method, allowing that the subclasses redefine specific parts of the method.
+		- To centralize parts of a method that are defined in all the subtypes classes, but always have a little different on each subclass.
+		- To control the operations that is neccesary redefine in the subclass.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Template_method_pattern)
 
  - **Visitor pattern**
 
