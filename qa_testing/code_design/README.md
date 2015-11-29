@@ -477,48 +477,59 @@ These design patterns are specifically concerned with communication between obje
 
 	- ***Applicability***
 
-		- 
+		Use this pattern when:
+		- There are complex rules to the object communication in a system.
+		- You want simple and handling objects.
+		- You want this object classes are redistributable and independent business model of the system.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Mediator_pattern)
 
  - **Memento pattern**
 
 	- ***Definition***
 
+		Memento pattern is used to restore state of an object to a previous state.
 
 	- ***Design***
 
-		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+		![alt text](static/memento_pattern.gif "UML Diagram")
 
 	- ***Applicability***
 
-		- 
+		Use this pattern when all conditions below are accomplished:
+		- It must to take a snapshot of the object state.
+		- This snapshot is used to restore the original state of the object.
+		- A direct interface that reads the internal state of the object, violates the encapsulation principle, because reveals the internal functionality.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Memento_pattern)
 
  - **Observer pattern**
 
 	- ***Definition***
 
+		Observer pattern is used when there is one-to-many relationship between objects such as if one object is modified, its depenedent objects are to be notified automatically.
 
 	- ***Design***
 
-		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+		![alt text](static/observer_pattern.gif "UML Diagram")
 
 	- ***Applicability***
 
-		- 
+		Use this pattern generally when a system have:
+		- At least one emitter message.
+		- One or more message receptors that could vary inside an application or between applications.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Observer_pattern)
 
  - **State pattern**
 
 	- ***Definition***
 
+		In State pattern, we create objects which represent various states and a context object whose behavior varies as its state object changes.
 
 	- ***Design***
 
-		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+		![alt text](static/state_pattern.gif "UML Diagram")
 
 	- ***Applicability***
 
