@@ -22,6 +22,7 @@ At this point we're going to talk about...
 This guide try to help to working teams to use git and git flows correctly.
 
 ## Getting Started
+### Setting up
 ### gitignore
 ### Use the shell
 ## Git Flow
