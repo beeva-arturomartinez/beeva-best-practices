@@ -582,16 +582,20 @@ These design patterns are specifically concerned with communication between obje
 
 	- ***Definition***
 
+		In Visitor pattern, we use a visitor class which changes the executing algorithm of an element class. By this way, execution algorithm of element can vary as and when visitor varies. As per the pattern, element object has to accept the visitor object so that visitor object handles the operation on the element object.
 
 	- ***Design***
 
-		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+		![alt text](static/visitor_pattern.gif "UML Diagram")
 
 	- ***Applicability***
 
-		- 
+		Use this pattern when converge all the following conditions:
+		- A System contains a group of related classes.
+		- Has to do some non trivial operations over some/all the related classes.
+		- The operations must executed in a different way for the distinct classes.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Visitor_pattern)
 
 #### Integration Patterns
 Introduction TO-DO
