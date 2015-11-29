@@ -20,7 +20,7 @@ At this point we're going to talk about the code design best practices.
 
 ## Introduction
 
-Write a good code with a good design and format is very important for many reasons. A correct code design help to improve the maintanability, and correct readability for anybody who have to work with the code. If all team's members write the code in the same way, and comment their methods, will be easier for a new member or non familiarized with the code understand it and can work with it expend less time.
+Write a good code with a good design and format is very important for many reasons. A correct code design help to improve the maintanability, and correct readability for anybody who have to work with the code. If all team's members write the code in the same way, and comment their methods, will be easier for a new member or non familiarized with the code understand it and can work with it expending less time.
 
  ![alt text](static/codequality_wtf.png "QA's wtf measure")
 
