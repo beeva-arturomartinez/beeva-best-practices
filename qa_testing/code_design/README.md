@@ -16,6 +16,10 @@ At this point we're going to talk about the code design best practices.
 * [Code design rules](#code-design-rules)
 * [Code design patterns](#code-design-patterns)
 * [Agile metodologies implications](#agile-metodologies-implications)
+    * [TDD](#tdd)
+    * [The importance of testing](#the-importance-of-testing)
+    * [How to make a correct application design](how-to-make-a-correct-application-design)
+    * [BDD](#bdd)
 * [References](#references)
 
 ## Introduction
@@ -124,7 +128,9 @@ Other tools that helps you depending on the programming language:
 ---
 
 ## Agile metodologies implications
----
+Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+### TDD
+Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 
 ## [References](references)
 
