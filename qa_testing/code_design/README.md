@@ -182,7 +182,7 @@ These design patterns provide a way to create objects while hiding the creation 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Abstract_factory_pattern)
 - **Builder pattern**
 
-	- ***Definition*** 
+	- ***Definition***
 
 		Builder pattern builds a complex object using simple objects and using a step by step approach. This type of design pattern comes under creational pattern as this pattern provides one of the best ways to create an object.
 
@@ -381,22 +381,195 @@ These design patterns concern class and object composition. Concept of inheritan
 		- Virtual proxy: when it is acting as a representative and delegate the creation of expensive objects.
 		- Protector proxy: to establish the access rights to the real object.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Proxy_pattern)
 
 ##### Behavioral Patterns
 These design patterns are specifically concerned with communication between objects.
 
  - **Chain of responsibility pattern**
+
+	- ***Definition***
+
+		As the name suggests, the chain of responsibility pattern creates a chain of receiver objects for a request. This pattern decouples sender and receiver of a request based on type of request. This pattern comes under behavioral patterns.
+
+		In this pattern, normally each receiver contains reference to another receiver. If one object cannot handle the request then it passes the same to the next receiver and so on.
+
+	- ***Design***
+
+		![alt text](static/Chain_of_responsibility_UML_diagram.png "UML Diagram")
+
+	- ***Applicability***
+
+		Use this pattern when:
+		- Exists a group of system objects that may respond potentially to the same types of messages.
+		- The messages must be handled by one of the several system objects.
+		- The messages follow the model "handle or forward", ergo, some events may be handled at the same level where are received or produced, while the others must be forwarded to a other object.
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Chain-of-responsibility_pattern)
+
  - **Command pattern**
+
+	- ***Definition***
+
+        A request is wrapped under an object as command and passed to invoker object. Invoker object looks for the appropriate object which can handle this command and passes the command to the corresponding object which executes the command.
+
+	- ***Design***
+
+		![alt text](static/Command_Design_Pattern_Class_Diagram.png "UML Diagram")
+
+	- ***Applicability***
+
+		Use this pattern when:
+		- To provide support for undo commands, identification process and/or transformations.
+		- To put in queue and execute commands in different moments.
+		- To decouple the source of a request object that satisfies
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Command_pattern)
+
  - **Interpreter pattern**
+
+	- ***Definition***
+
+		Interpreter pattern provides a way to evaluate language grammar or expression. This type of pattern comes under behavioral pattern. This pattern involves implementing an expression interface which tells to interpret a particular context. This pattern is used in SQL parsing, symbol processing engine etc.
+
+	- ***Design***
+
+		![alt text](static/Interpreter_UML_class_diagram.jpg "UML Diagram")
+
+	- ***Applicability***
+
+		Use this pattern when:
+		- You need to interpret a simple language.
+		- The resolution of a problem may be expressed in that language.
+		- The efficiency do not be a fundamental aspect.
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Interpreter_pattern)
+
  - **Iterator pattern**
+
+	- ***Definition***
+
+		This pattern is used to get a way to access the elements of a collection object in sequential manner without any need to know its underlying representation.
+
+        Also, many languages implements this pattern as the normal way to walk into collections.
+
+	- ***Design***
+
+		![alt text](static/640px-Iterator_UML_class_diagram.svg.png "UML Diagram")
+
+	- ***Applicability***
+
+		Use this pattern when:
+		- To provide a uniform way and independent for the implementation, with the goal of walk the collection elements.
+		- To allow the travel of multiple collections, allowing to the different clients to access simultaneously to the same collection.
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Iterator_pattern)
+
  - **Mediator pattern**
+
+	- ***Definition***
+
+		Mediator pattern is used to reduce communication complexity between multiple objects or classes. This pattern provides a mediator class which normally handles all the communications between different classes and supports easy maintenance of the code by loose coupling.
+
+	- ***Design***
+
+		![alt text](static/mediator_pattern.gif "UML Diagram")
+
+	- ***Applicability***
+
+		- 
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Memento pattern**
+
+	- ***Definition***
+
+
+	- ***Design***
+
+		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+
+	- ***Applicability***
+
+		- 
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Observer pattern**
+
+	- ***Definition***
+
+
+	- ***Design***
+
+		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+
+	- ***Applicability***
+
+		- 
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **State pattern**
+
+	- ***Definition***
+
+
+	- ***Design***
+
+		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+
+	- ***Applicability***
+
+		- 
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Strategy pattern**
+
+	- ***Definition***
+
+
+	- ***Design***
+
+		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+
+	- ***Applicability***
+
+		- 
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Template method pattern**
+
+	- ***Definition***
+
+
+	- ***Design***
+
+		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+
+	- ***Applicability***
+
+		- 
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+
  - **Visitor pattern**
+
+	- ***Definition***
+
+
+	- ***Design***
+
+		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+
+	- ***Applicability***
+
+		- 
+
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
 
 #### Integration Patterns
 Introduction TO-DO
