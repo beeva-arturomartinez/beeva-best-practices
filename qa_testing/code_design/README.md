@@ -533,24 +533,31 @@ These design patterns are specifically concerned with communication between obje
 
 	- ***Applicability***
 
-		- 
+		Use this pattern when:
+		- The behaviour of the object depends on their state and the state changes frequently.
+		- The methods have long conditional sentences that depends on the state of the object.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/State_pattern)
 
  - **Strategy pattern**
 
 	- ***Definition***
 
+		In Strategy pattern, we create objects which represent various strategies and a context object whose behavior varies as per its strategy object. The strategy object changes the executing algorithm of the context object.
 
 	- ***Design***
 
-		![alt text](static/400px-Proxy_pattern_diagram.svg.png "UML Diagram")
+		![alt text](static/strategy_pattern.gif "UML Diagram")
 
 	- ***Applicability***
 
-		- 
+		Use this pattern when:
+		- You have many different ways of execute an action.
+		- You don't know what approximation use until the execution moment.
+		- You want to introduce easily new ways of achieve an action.
+		- You want the code to be easily to maintain when you have to add behaviours.
 
-	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Adapter_pattern)
+	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Strategy_pattern)
 
  - **Template method pattern**
 
