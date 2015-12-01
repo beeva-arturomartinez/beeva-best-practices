@@ -312,9 +312,18 @@ identify three partitions initially valid and an invalid equivalence as
 shown below:
 
  
-| Invalid partition  | Valid (3%)       | Valid (5%)     |  Valid(7%)    |
-| :----------------- | :--------------- | :------------- | :------------ |
-| -0.01              | -0.00   100.00   | 100.01  999.99   | 100.00   |
+| Attribute | Target    | Type   | Description |
+| :-------- | :-------- | :----- | :---------- |
+| `trim`    | `<th>`    | `NULL` | trim long column names. |
+
+
+-----------
+
+
+
+| Invalid partition  | Valid (3%)       | Valid (5%)       |  Valid(7%)    |
+| :----------------- |:----------------:|:----------------:| -------------:|
+| -0.01              | -0.00   100.00   | 100.01  999.99   | 100.00        |
 
 
 
