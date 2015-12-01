@@ -73,7 +73,7 @@ on experience. Then the techniques of each of these classifications as
 shown in the figure are described below:
 
  
-![Dynamics](https://github.com/beeva-josemiguelmoralesTecnic1.pngTecnic1.png/beeva-best-practices/blob/master/qa_testing/testing/static/tecnic1.png "Dynamics")
+![Dynamics](https://github.com/beeva-josemiguelmoralesTecnic1.pngTecnic1.png/beeva-best-practices/blob/master/qa_testing/testing/static/Tecnic1.png "Dynamics")
  
 
 
@@ -124,8 +124,8 @@ for testing these non-functional aspects are less procedural and less
 formalized than other categories.
 
  
-
-#### Partitioning equivalence {.P73}
+==================
+#### Partitioning equivalence
 
 Partitioning equivalence is a black box technique based on the
 specification. It can be applied at any level of evidence and is often

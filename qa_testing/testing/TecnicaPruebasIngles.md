@@ -73,7 +73,7 @@ on experience. Then the techniques of each of these classifications as
 shown in the figure are described below:
 
  
-![Dynamics](https://github.com/beeva-josemiguelmoralesTecnic1.pngTecnic1.png/beeva-best-practices/blob/master/qa_testing/testing/static/tecnic1.png "Dynamics")
+![Dynamics](https://github.com/beeva-josemiguelmoralesTecnic1.pngTecnic1.png/beeva-best-practices/blob/master/qa_testing/testing/static/Tecnic1.png "Dynamics")
  
 
 
@@ -210,13 +210,13 @@ likely to appear in a real situation.
   --------------------------------------------------------------------------------------------------------------------------------
   Examples of equivalence classes
 
-  -   •Valid entry: integers in the range 100-999. 
+  * Valid entry: integers in the range 100-999. 
 
       -   ◦Valid partitions: 100-999 included.  
 
       -   ◦Invalid partitions less than 100, more than 999 real numbers (decimal) and characters not numeric. 
 
-  -   •Valid entry: names with up to 20 alphanumeric characters. 
+  * Valid entry: names with up to 20 alphanumeric characters. 
 
       -   ◦Valid partitions: strings up to 20 alphanumeric characters. 
 
@@ -688,14 +688,14 @@ There are three ways of structuring executable code:
 
  
 
--   •Sequence: Consists of executing the instructions one to one as they
+* Sequence: Consists of executing the instructions one to one as they
     appear in the code.  
 
--   •Selection: In this case the computer has to decide if a condition
+* Selection: In this case the computer has to decide if a condition
     is true or false. If true, that route is taken, it would take a
     different route.  
 
--   •Iteration is to run a piece of code more than once. 
+* Iteration is to run a piece of code more than once. 
 
  
 
@@ -742,9 +742,9 @@ are decisive factors for their success.
 
 Two types of techniques based on experience are as follows:
 
--   •Guessing errors  
+* Guessing errors  
 
--   •Exploratory testing 
+* Exploratory testing 
 
  
 
