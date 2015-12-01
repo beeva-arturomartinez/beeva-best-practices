@@ -15,6 +15,7 @@ At this point we're going to talk about best practices to work with git.
 	* [Redmine's id-track](#id-track)
 	* [Use hooks](#use-hooks)
 	* [Use tools](#use-tools)
+	* [README.md](#readme-md)
 * [References](#references)
 
 
@@ -67,6 +68,14 @@ There are a lot of IDEs that have its own git plugins, but very often this plugi
 ### Versioning
 ### Redmine's id-track
 ### Hooks
+### README.md
+Write a text file called README.md in the main directory of project. This file must have the main information about the code, how use and configure it and how can execute it. This file must contains:
+
+* Information about the application configuration, must cover configuration files, dependencies, libraries or tools that are needed for use or install it.
+* Information about how install and execute the application.
+* Information to test the application and test the qa quality.
+* If is a application or library that you can invoke, like an web application or an service web, is important include the information about you can call it.
+* For applications which will run on Docker container, is important include here the information necessary to build the Docker image and how run the container.
 
 ### References
 
