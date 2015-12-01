@@ -254,7 +254,38 @@ invalid borders (in invalid partitions).
 As an example, consider a printer that has an option input the number of
 copies to be made, of 1 to 99.
 
+
+
+| Tables        | Are           | Cool  |
+| ------------- |:-------------:| -----:|
+| col 3 is      | right-aligned | $1600 |
+| col 2 is      | centered      |   $12 |
+| zebra stripes | are neat      |    $1 |
+
  
+----------------------------------
+
+
+| Not Valid     | Valid         | Not Valid     |
+| ------------- |:-------------:| -------------:|
+| col 3 is      | right-aligned | $1600         |
+| col 2 is      | centered      |   $12         |
+| zebra stripes | are neat      |    $1         |
+
+
+------------------------------------
+
+
+
+| Not Valid     | Valid         | Not Valid     |
+| ------------- |:-------------:| -------------:|
+| 0             | 99            | 100           |
+
+
+-----------------------------------------
+
+
+
 | Not valid | Valid         | Not valid  |
 | --------- |:-------------:| ----------:|
 | 0         | 99            | 100        |
