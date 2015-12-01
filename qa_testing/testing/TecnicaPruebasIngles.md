@@ -212,15 +212,13 @@ likely to appear in a real situation.
 
   * Valid entry: integers in the range 100-999. 
 
-      -   ◦Valid partitions: 100-999 included.  
-
-      -   ◦Invalid partitions less than 100, more than 999 real numbers (decimal) and characters not numeric. 
+      -   Valid partitions: 100-999 included.  
+      -   Invalid partitions less than 100, more than 999 real numbers (decimal) and characters not numeric. 
 
   * Valid entry: names with up to 20 alphanumeric characters. 
 
-      -   ◦Valid partitions: strings up to 20 alphanumeric characters. 
-
-      -   ◦Partition invalid: strings longer than 20 alphanumeric characters, strings that contain non-alphanumeric characters. 
+      -   Valid partitions: strings up to 20 alphanumeric characters. 
+      -   Partition invalid: strings longer than 20 alphanumeric characters, strings that contain non-alphanumeric characters. 
 
   --------------------------------------------------------------------------------------------------------------------------------
 
@@ -238,8 +236,8 @@ between € 1001-2000 generate 1%; more than € 2000 value generates 1.5%
 of output.
 
  
-
-#### Analysis of limit value {.P73}
+============================================
+#### Analysis of limit value
 
 One of the things we know about the kinds of mistakes programmers is
 that errors tend to cluster around the city. For example, if a program
@@ -257,10 +255,9 @@ As an example, consider a printer that has an option input the number of
 copies to be made, of 1 to 99.
 
  
-
-  ----------- ------- -----------
-  Not valid   Valid   Not valid
-  0           99      100
+| Not valid | Valid         | Not valid  |
+| --------- |:-------------:| ----------:|
+| 0         | 99            | 100        |
   ----------- ------- -----------
 
  
@@ -312,6 +309,11 @@ identify three partitions initially valid and an invalid equivalence as
 shown below:
 
  
+| Not valid | Valid         | Not valid  |
+| --------- |:-------------:| ----------:|
+| 0         | 99            | 100        |
+  ----------- ------- -----------
+
 
   ------------------- ---------------------------- ----------------------------- -----------
   Invalid partition   Valid (3%)                   Valid (5%)                    Valid(7%)

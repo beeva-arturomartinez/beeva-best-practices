@@ -210,17 +210,15 @@ likely to appear in a real situation.
   --------------------------------------------------------------------------------------------------------------------------------
   Examples of equivalence classes
 
-  -   •Valid entry: integers in the range 100-999. 
+  * Valid entry: integers in the range 100-999. 
 
-      -   ◦Valid partitions: 100-999 included.  
+      -   Valid partitions: 100-999 included.  
+      -   Invalid partitions less than 100, more than 999 real numbers (decimal) and characters not numeric. 
 
-      -   ◦Invalid partitions less than 100, more than 999 real numbers (decimal) and characters not numeric. 
+  * Valid entry: names with up to 20 alphanumeric characters. 
 
-  -   •Valid entry: names with up to 20 alphanumeric characters. 
-
-      -   ◦Valid partitions: strings up to 20 alphanumeric characters. 
-
-      -   ◦Partition invalid: strings longer than 20 alphanumeric characters, strings that contain non-alphanumeric characters. 
+      -   Valid partitions: strings up to 20 alphanumeric characters. 
+      -   Partition invalid: strings longer than 20 alphanumeric characters, strings that contain non-alphanumeric characters. 
 
   --------------------------------------------------------------------------------------------------------------------------------
 
@@ -238,8 +236,8 @@ between € 1001-2000 generate 1%; more than € 2000 value generates 1.5%
 of output.
 
  
-
-#### Analysis of limit value {.P73}
+============================================
+#### Analysis of limit value
 
 One of the things we know about the kinds of mistakes programmers is
 that errors tend to cluster around the city. For example, if a program
@@ -257,10 +255,9 @@ As an example, consider a printer that has an option input the number of
 copies to be made, of 1 to 99.
 
  
-
-  ----------- ------- -----------
-  Not valid   Valid   Not valid
-  0           99      100
+| Not valid | Valid         | Not valid  |
+| --------- |:-------------:| ----------:|
+| 0         | 99            | 100        |
   ----------- ------- -----------
 
  
@@ -688,14 +685,14 @@ There are three ways of structuring executable code:
 
  
 
--   •Sequence: Consists of executing the instructions one to one as they
+* Sequence: Consists of executing the instructions one to one as they
     appear in the code.  
 
--   •Selection: In this case the computer has to decide if a condition
+* Selection: In this case the computer has to decide if a condition
     is true or false. If true, that route is taken, it would take a
     different route.  
 
--   •Iteration is to run a piece of code more than once. 
+* Iteration is to run a piece of code more than once. 
 
  
 
@@ -742,9 +739,9 @@ are decisive factors for their success.
 
 Two types of techniques based on experience are as follows:
 
--   •Guessing errors  
+* Guessing errors  
 
--   •Exploratory testing 
+* Exploratory testing 
 
  
 
