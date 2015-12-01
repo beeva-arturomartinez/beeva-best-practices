@@ -379,8 +379,8 @@ is somewhere.\
 We recommend choosing values on partitions other than border values.
 
  
-
-#### Decision tables {.P73}
+=============================
+#### Decision tables
 
 The technical equivalence partitioning and boundary value analysis are
 often applied to specific situations or tickets. However, if different
