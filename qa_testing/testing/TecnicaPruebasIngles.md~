@@ -1,11 +1,8 @@
-# Testing techniquies 
+Índice de contenido
 
-Índex
+[Testing Techniques](#__RefHeading__695_1161086623)
 
-
-[Testing Techniques](# Testing Techniques)
-
-[Dynamic](#Dynamic)
+[Dynamic](#__RefHeading__697_1161086623)
 
 [Based on the specification (black box)](#__RefHeading__699_1161086623)
 
@@ -31,9 +28,8 @@
 
  
 
+Testing Techniques {.P70}
 ==================
-### Testing Techniques
-
 
 There are different software testing techniques, with their weaknesses
 and their strengths. Each is good to find a specific type of defects.
@@ -64,9 +60,9 @@ analysis.
  
 
  
-==================
-###Dynamic 
 
+Dynamic {.Heading_20_2}
+-------
 
 Dynamic techniques are classified based specification, also called black
 box techniques or structure based white box techniques and finally based
