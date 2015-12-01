@@ -256,40 +256,12 @@ copies to be made, of 1 to 99.
 
 
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
- 
-----------------------------------
-
-
-| Not Valid     | Valid         | Not Valid     |
-| ------------- |:-------------:| -------------:|
-| col 3 is      | right-aligned | $1600         |
-| col 2 is      | centered      |   $12         |
-| zebra stripes | are neat      |    $1         |
-
-
-------------------------------------
-
 
 
 | Not Valid     | Valid         | Not Valid     |
 | ------------- |:-------------:| -------------:|
 | 0             | 99            | 100           |
 
-
------------------------------------------
-
-
-
-| Not valid | Valid         | Not valid  |
-| --------- |:-------------:| ----------:|
-| 0         | 99            | 100        |
-  ----------- ------- -----------
 
  
 
@@ -340,18 +312,12 @@ identify three partitions initially valid and an invalid equivalence as
 shown below:
 
  
-| Not valid | Valid         | Not valid  |
-| --------- |:-------------:| ----------:|
-| 0         | 99            | 100        |
-  ----------- ------- -----------
+| Invalid partition  | Valid (3%)       | Valid (5%)     |  Valid(7%)    |
+| ------------------ |:-------------:|:-------------:| -------------:|
+| -0.01              | -0.00   100.00   | 100.01  999.99   | 100.00   |
 
 
-  ------------------- ---------------------------- ----------------------------- -----------
-  Invalid partition   Valid (3%)                   Valid (5%)                    Valid(7%)
-  -0.01               -0.00               100.00   100.01               999.99   100.00
-  ------------------- ---------------------------- ----------------------------- -----------
 
- 
 
 The border values in this case would be -0.01 (an invalid boundary
 value), 0.00, 0.01, 99.99, 100.00, 100.01, 999.98, 999.99, 1000.00.\
@@ -364,9 +330,9 @@ is a table like this:
 
  
 
-  ----------------- ------------------ -------------------- -------------------- ----------------------
-  Test Conditions   Valid partitions   Partitions invalid   Limit values valid   Limit values invalid
-                                                                                 
+
+  | Test Conditions   | Valid partitions   | Partitions invalid   | Limit values valid   | Limit values invalid   |
+  |  -----------------|:------------------:|:--------------------:|:--------------------:| -------------:|                                                                               
                                                                                  
 
   Account Balance   0.00 – 100.00\     \<0.00\              0.00\                -0.01\
@@ -413,8 +379,8 @@ is somewhere.\
 We recommend choosing values on partitions other than border values.
 
  
-
-#### Decision tables {.P73}
+=============================
+#### Decision tables
 
 The technical equivalence partitioning and boundary value analysis are
 often applied to specific situations or tickets. However, if different
