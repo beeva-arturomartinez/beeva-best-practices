@@ -400,7 +400,15 @@ outputs. This is shown schematically in the following table:
 | Business Rule 1 requires that all the conditions are true to generate action 1. 2 business rule is in action 2 if condition1 is false and condition2 is true, but does not depend on condition3. Rule 3 requires that business conditions 1 and 2 are true and three false.    |
 
 
-
++---------------+----------------------+-----------------------+-----------------------+
+|               | Rule of Business 1   | Rule of Business 2    | Rule of Business 3    | 
++===============+======================+=======================+=======================+
+| Bananas       | $1.34         | - built-in wrapper | - built-in wrapper |
+|               |               | - bright color     | - bright color     |
++---------------+---------------+--------------------+--------------------+
+| Oranges       | $2.10         | - cures scurvy     | - cures scurvy     |
+|               |               | - tasty            | - tasty            |
++---------------+---------------+--------------------+--------------------+
 
  
 
@@ -583,10 +591,6 @@ higher priority than the 4th from the point of view of safety.
 The system requirements can be specified as a set of use cases. This
 will be made easier involvement of users in the process of defining
 them.
-
- 
-
- 
 
  
 ==================
