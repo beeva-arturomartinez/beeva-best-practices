@@ -4,16 +4,17 @@ At this point we're going to talk about tdd
 
 ## Index
 
-* [TDD "The Great Unknown"](#the-fellowship-of-the-ring)
+* [TDD "The Great Unknown"](#TDD "The Great Unknown")
 * [What is TDD?](#the-two-towers)
 * [Advantages and disadvantages](#the-return-of-the-king)
 * [Cycle of TDD](#the-return-of-the-king)
 * [Speed is the key](#the-return-of-the-king)
 * [Executable documentation](#the-return-of-the-king)
 * [Design Principles](#the-return-of-the-king)
+* [Recommendations](#the-return-of-the-king)
 * [References](#references)
 
-### The Fellowship of the Ring 
+### TDD "The Great Unknown" 
 Some code examples: 
 ````javascript
     var http = require('http');
