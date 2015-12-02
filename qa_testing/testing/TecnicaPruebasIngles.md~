@@ -542,7 +542,7 @@ defined in terms of use cases, as seen in the following table:
 
  
 |                          |  Steps     |  Description        | 
-| :----------------------- |:----------:| -----------------:|
+|:------------------------ |:----------:| -----------------:|
 | Main success scenario    | 1       | A: Insert Card       |
 | A: Actor                 | 2       | S:Validate card and ask for the PIN       |
 | S:System                 | 3       | A: Insert Pin        |

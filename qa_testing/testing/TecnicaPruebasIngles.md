@@ -534,19 +534,17 @@ defined in terms of use cases, as seen in the following table:
 
 
 
-|                          |  Steps     |  Description              | 
-|:------------------------ |:----------:| -------------------------:|
-| Main success scenario    | 1          | A: Insert Card            |
-
-
+|                          |  Steps     |  Description                                        | 
+|:------------------------ |:----------:| ---------------------------------------------------:|
+| Main success scenario    | 1          | A: Insert Card                                      |
+| A: Actor                 | 2          | S:Validate card and ask for the PIN                 |
+| S:System                 | 3          | A: Insert Pin                                       |
+|                          | 4          | S: Validate Pin                                     |
 
  
-|                          |  Steps     |  Description        | 
-|:------------------------ |:----------:| -----------------:|
-| Main success scenario    | 1       | A: Insert Card       |
-| A: Actor                 | 2       | S:Validate card and ask for the PIN       |
-| S:System                 | 3       | A: Insert Pin        |
-|                          | 4       | S: Validate Pin      |
+
+
+
 |                          | 5       | S: Allow access to account       |
 | Extensions               | 2a      | Invalid Card. S: It displays a message and rejects the card    |
 |                          | 4a      | Invalid Pin. S: displays a message and asks again the PIN (twice)    |
