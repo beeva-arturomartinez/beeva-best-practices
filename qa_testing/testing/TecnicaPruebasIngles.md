@@ -536,9 +536,9 @@ defined in terms of use cases, as seen in the following table:
 
 |                          |  Steps     |  Description                                        | 
 |:------------------------ |:----------:| ---------------------------------------------------:|
-| Main success scenario    | 1          | A: Insert Card                                      |
-| A: Actor                 | 2          | S:Validate card and ask for the PIN                 |
-| S:System                 | 3          | A: Insert Pin                                       |
+| Main success scenario    A: Actor       S:System   | 1          | A: Insert Card                                      |
+|                          | 2          | S:Validate card and ask for the PIN                 |
+|                 | 3          | A: Insert Pin                                       |
 |                          | 4          | S: Validate Pin                                     |
 
  
