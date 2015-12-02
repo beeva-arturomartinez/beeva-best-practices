@@ -58,7 +58,7 @@ tests are revisions. In the review process, its phases, roles, etc. and
 also the characteristics of other known technique called static
 analysis.
  
-==================
+------------------
 ##Dynamic 
 ==================
 
@@ -72,7 +72,7 @@ shown in the figure are described below:
  
 
 
-==================
+-----------------
 ##Based on the specification (black box)
 ==================
 
