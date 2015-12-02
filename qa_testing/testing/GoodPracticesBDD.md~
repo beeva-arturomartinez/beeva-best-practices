@@ -1,6 +1,6 @@
 # Testing techniquies TDD, BDD and Acceptance Test
 
-###Índex
+Índex
 
 * [Introduction](#Introduction)
 
@@ -13,18 +13,20 @@
 * [Conclusions](#Conclusions)
 
 
-----------------
-##Introduction
-----------------
+
+### Introduction
+
 
 Let's do a review of the techniques most widespread agile development
 today we can find:
+
  
 
 * TDD (Test Driven Develop) 
 
 * BDD (Behaviour Driven Development) 
 
+ 
 
 These two techniques have a common goal which is to improve the quality
 SW produced. Also it tries to go a step beyond the unit testing and
@@ -33,9 +35,9 @@ integrate acceptance test in our test cycle less expensive way possible
 review.
 
 
---------
-##TDD 
---------
+================
+### TDD 
+
 
 Test-driven Development or TDD is a programming technique that focuses
 sen that you write tests before scheduling functionality, following the
@@ -74,12 +76,17 @@ Disadvantages that gives us:
     which ask if the functionality is really needed by the user or the
     user wanted. 
 
+ 
+
 To understand some of these disadvantages born BDD and other techniques
 are used as are Acceptance Test.
 
--------
-##BDD 
--------
+ 
+
+ 
+=====
+### BDD 
+
 
 Guided BDD behavior or development is a process that extends TDD ideas
 and combines them with other SW design ideas and business analysis to
@@ -88,11 +95,16 @@ improving the development SW.\
 BDD is based on TDD formalizing best practices of TDD, which are
 clarifying and emphasizing it.
 
+ 
+
 In DB not only tested units or classes, test scenarios and behavior when
 classes meet those scenarios, which can be composed of various kinds.
 
  
 ![BDD + TDD](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/static/BDD1.jpg "BBD + TDD")
+ 
+
+
  
 
 BDD habits, adding that TDD provides are:
@@ -102,9 +114,12 @@ BDD habits, adding that TDD provides are:
 * If we generate the correct language tests, they can serve to make
     the Acceptance Test. 
 
+ 
 
 When carrying wing practices DB is strongly recommended to use DSL that
 offers a common language on which to do the test.
+
+ 
 
 The DLS's most used when defining scenarios in BDD usually consist of
 Steps or Steps, are usually divided into:
@@ -117,6 +132,9 @@ Steps or Steps, are usually divided into:
 * Then: In this step we will look at changes in the system and see if
     they are desired. 
 
+     
+
+ 
 
 DSL instead use natural language to specify when it can help us to
 maintain the same level of abstraction in defining the scenarios. A good
@@ -127,10 +145,16 @@ All this serves to test the internal behavior of the application, once
 the functionality is made, we want to know if what the user really
 looking for it there is evidence of acceptance.
 
------------------
-##Acceptance Test
------------------
+ 
 
+ 
+
+ 
+===============
+### Acceptance Test
+
+
+ 
 
 The acceptance test are those recipients to determine whether certain
 functionality requirements have been met, as end users need not worry
@@ -146,6 +170,8 @@ DSL's DB and practices give us an extra point of abstraction in
 specifying the stories, plus documentation of the progress and
 achievements of each Sprint.
 
+ 
+
 The acceptance test raises a number of technical problems:
 
 * Wing problems in automating this test. 
@@ -153,8 +179,12 @@ The acceptance test raises a number of technical problems:
 * En el caso de no usar un lenguaje muy concreto pueden encontrarse
     problemas a la hora de compartir test. 
 
+ 
+
 In the case of not using a very specific language problems can be found
 in sharing test.
+
+ 
 
 The acceptance test automation generally have a number of associated
 problems:
@@ -164,13 +194,15 @@ problems:
 * Do not tolerate changes in both the specification and
     implementation 
 
-* Difficulties when develop the scenario tests. 
+* Dificultades a la hora de reconstruir los escenarios de prueba. 
 
+ 
 
 So it is very useful to use tools such as TestLink or TestRails,
 allowing us to document and organize all have our test application,
 ordering them so as Srpint version of our application.
 
+ 
 
 Here the use of DSL is almost essential, since freedom of natural
 language specification makes it very difficult later have to make the
@@ -178,9 +210,10 @@ user because by using highly technical language or select a level of
 abstraction wrong in declaring the proves.
 
  
--------------
-##Conclusions 
--------------
+
+ 
+===========
+### Conclusions 
 
 
 As we can see BDD gets the best practices of RUP and tries to guide
@@ -188,4 +221,4 @@ development when choosing which parts of the application prove that
 joined the acceptance test can help to prioritize the development of the
 stories that really add value to the user .
 
-
+ 
