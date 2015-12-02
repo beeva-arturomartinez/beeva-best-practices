@@ -532,9 +532,17 @@ the use case has been successfully implemented system.
 The PIN example we use for testing state transition could also be
 defined in terms of use cases, as seen in the following table:
 
+
+
+|                          |  Steps     |  Description              | 
+|:------------------------ |:----------:| -------------------------:|
+| Main success scenario    | 1          | A: Insert Card            |
+
+
+
  
-|                          |  Steps     |  Description      | 
-| :----------------------- |:-------:|:--------------------:|
+|                          |  Steps     |  Description        | 
+| :----------------------- |:----------:| -----------------:|
 | Main success scenario    | 1       | A: Insert Card       |
 | A: Actor                 | 2       | S:Validate card and ask for the PIN       |
 | S:System                 | 3       | A: Insert Pin        |
@@ -553,7 +561,6 @@ The system requirements can be specified as a set of use cases. This
 will be made easier involvement of users in the process of defining
 them.
 
- 
 ==================
 ## Based on the structure (white box)
 ==================
