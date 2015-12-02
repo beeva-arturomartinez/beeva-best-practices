@@ -59,7 +59,7 @@ also the characteristics of other known technique called static
 analysis.
 
 ------------------
-##Dynamic 
+##Dynamic
 ------------------
 
 Dynamic techniques are classified based specification, also called black
@@ -70,8 +70,6 @@ shown in the figure are described below:
  
 ![Dynamics](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/static/Tecnic1.png "Dynamics")
  
-
-
 -----------------
 ##Based on the specification (black box)
 ------------------
@@ -390,7 +388,7 @@ outputs. This is shown schematically in the following table:
 
 ####*STRUCTURE OF A BOARD DECISION*
 |                                             |  Rule of Business 1    |  Rule of Business 2   |  Rule of Business 3    |
-| :-------------------------------------------|:----------------------:|:---------------------:| ----------------------:|
+| :-------------------------------------------|:----------------------:|:---------------------:|:----------------------:|
 | Condition 1                                 |     V                  |    F                  |  V                     |
 | Condition 2                                 |     V                  |    V                  |  V                     |
 | Condition 3                                 |     V                  |    \-                 |  F                     |
@@ -407,7 +405,7 @@ not applied but is restricted to those that correspond to business
 rules. A This is called limited decision table to distinguish it from
 the tables with all entries identified combinations of inputs.
 
- 
+
 ------------------
 ##State transition
 ------------------
@@ -580,7 +578,7 @@ There are three ways of structuring executable code:
 * Iteration is to run a piece of code more than once. 
 
 -------------
-##Tests sentence 
+##Tests sentence
 -------------
 
 The purpose of testing sentence is try different judgments throughout
@@ -594,7 +592,7 @@ appropriate measure to prove the effectiveness.
 
 
 -------------
-##Testing decision 
+##Testing decision
 -------------
 
 The objective of these tests is to ensure that decisions are properly
@@ -608,7 +606,7 @@ As evidence of judgments, decision tests have a measure of coverage
 asociad ae tries nc onsegu go 100% of the cov ra decision.
 
 -------------
-##Based on experience 
+##Based on experience
 -------------
 
 Techniques based on experiences are those which are used when there is
