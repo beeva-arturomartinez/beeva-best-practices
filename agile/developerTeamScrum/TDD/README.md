@@ -8,7 +8,7 @@ At this point we're going to talk about tdd
 * [What is TDD?](#what-is-tdd)
 * [Advantages and disadvantages](#advantages-and-disadvantages)
 * [Cycle of TDD](#cycle-of-tdd)
-* [Speed is the key](#the-return-of-the-king)
+* [Speed is the key](#speed-is-the-key)
 * [Executable documentation](#the-return-of-the-king)
 * [Design Principles](#the-return-of-the-king)
 * [Recommendations](#the-return-of-the-king)
