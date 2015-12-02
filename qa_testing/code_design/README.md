@@ -196,7 +196,57 @@ When you stop and think about it, particularly in respect to Figure 2, TDD is a 
 If you want more information you can read the book **Disciplined Agile Delivery** by Scott W. Ambler and Mark Lines.
 
 ### TDD
-Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
+
+Test-driven development (TDD), also called test-driven design, is a method of software development in which unit testing is repeatedly done on source code. The concept is to "get something working now and perfect it later." After each test, refactoring is done and then the same or a similar test is performed again. The process is iterated as many times as necessary until each unit is functioning according to the desired specifications. Test-driven development is part of a larger software design paradigm known as Extreme Programming (XP).
+
+#### The importance of testing
+
+Any IT solution that is implemented without the proper amount of testing performed throughout the project is a definite recipe for disaster. Testing is an ongoing process. It happens in development, it happens in the actual testing phase, it happens just prior to deployment and it happens post-deployment.
+
+Without a well-thought testing effort, the project will undoubtedly fail overall and will impact the entire operational performance of the solution. With a poorly tested solution, the support and maintenance cost will escalate exponentially, and the reliability of the solution will be poor. Therefore, project managers need to realize that the testing effort is a necessity, not merely as an ad hoc task that is the last hurdle before deployment.
+
+Clients do not want a costly and stressful problem with software that doesn't work, isn't ready on time, does not meet specifications, impacts customers adversely.
+
+Releasing any software with so many bugs into it may affects the user experience which makes bad impact on quality impression of your company brand. They will remember about the delivered bad quality product, so there will be Importance of testing which makes vital.
+
+The aim of software testing is to ensure good quality software. Good quality software means it has less defects or issues, it works well, and does what it needs to do.
+
+When you do software testing as part of a development project, you are aiming to pick up and find all of the issues in the system before it is release to the end users as part of the project deployment.
+
+The best results for a project occur when testing is planned and related activities commenced at the start of a project.
+
+In summary, the importance of software testing can be attributed to three areas – less maintenance, increased user morale, and matching to requirements. It results in high quality software which should be something all of us are aiming for.
+
+
+#### How to make a correct application design
+We propose TDD Mantra: **"red, green, refactor, repeat"**:
+
+![alt text](static/redGreenRefactor.png "Mantra of TDD")
+
+* **Adding a test**
+
+        In the TDD process, each new feature begins with a developer writing a test. This test must inevitably fail because it is written before the feature has been implemented. If it does not fail, then either the proposed new feature already exists or the test is defective.
+
+* **Running all tests to see if the new one fails**
+
+        This validates that the test harness is working correctly and that the new test does not mistakenly pass without requiring any new code. The new test should fail for the expected reason.
+
+* **Writing code**
+
+        The next step is to write some code that will cause the test to pass. The new code written at this stage may not be perfect, however this is acceptable because steps made later will improve and hone it. It is important that the code written is only designed to pass the test.
+
+* **Running successful automated tests**
+
+        If all test cases now pass, the developer can be confident that the code meets all the tested requirements. This is a good point from which to begin the final step of the cycle - refactoring.
+
+* **Refactoring the code**
+
+        Now the code can be cleaned up (refactored) as necessary. By re-running the test cases, the developer can be confident that refactoring is not damaging any existing functionality. The concept of removing duplication is an important aspect of any software design.
+
+* **Repeat**
+
+        Starting with another new test, the cycle is then repeated to push forward the functionality. 
+
 
 ## [References](references)
 
