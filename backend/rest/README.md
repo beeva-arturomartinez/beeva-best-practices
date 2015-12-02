@@ -410,7 +410,8 @@ This endpoint **should not be published to third party applications** because th
 ---
 
 * [OAuth RFC 6749] (https://tools.ietf.org/html/rfc6749) OAuth RFC 6749 defined by IETF
+* <a id="rest_wikipedia">[1]</a> [REST Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer)
 
-___
+---
 
 [BEEVA](http://www.beeva.com) | 2015
