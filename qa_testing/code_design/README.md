@@ -135,9 +135,11 @@ Other tools that helps you depending on the programming language:
 
 ## [References](references)
 
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+* [Wikipedia Design patterns](https://en.wikipedia.org/wiki/Software_design_pattern) Design Patterns Wiki
+* [Enterprise Integration Patterns](http://www.enterpriseintegrationpatterns.com/)Enterprise Integration Patterns
+* [Wikipedia Object Oriented Design](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29) Object Oriented Design Wiki
+* [TDD](https://en.wikipedia.org/wiki/Test-driven_development) Test Driven Development Wiki
+* [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) Behavior Driven Development
 
 ___
 
