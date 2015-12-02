@@ -29,7 +29,7 @@
 
 [Exploratory testing](#exploratory-testing)
 
- 
+
 ------------------
 ##Testing Techniques
 ------------------
@@ -57,7 +57,7 @@ examine the source code before run. A technique used to perform static
 tests are revisions. In the review process, its phases, roles, etc. and
 also the characteristics of other known technique called static
 analysis.
- 
+
 ------------------
 ##Dynamic 
 ------------------
@@ -119,7 +119,7 @@ performance, usability, portability, maintainability, etc. Techniques
 for testing these non-functional aspects are less procedural and less
 formalized than other categories.
 
- 
+
 ------------------
 ##Partitioning equivalence
 ------------------
@@ -231,7 +231,7 @@ input value between 0- € 1000 output would generate 0.5%; a value
 between € 1001-2000 generate 1%; more than € 2000 value generates 1.5%
 of output.
 
- 
+
 ----------------------------------
 ##Analysis of limit value
 ----------------------------------
@@ -351,7 +351,7 @@ boundary value analysis are closely linked and that any partition border
 is somewhere.  
 We recommend choosing values on partitions other than border values.
 
- 
+
 ------------------
 ##Decision tables
 ------------------
