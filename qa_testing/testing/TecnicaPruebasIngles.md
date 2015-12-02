@@ -7,9 +7,9 @@
 
 [Dynamic](#dynamic)
 
-[Based on the specification (black box)](#)
+[Based on the specification (black box)](#based-on-the-specification-black-box)
 
-[Partitioning equivalence](#__RefHeading__701_1161086623)
+[Partitioning equivalence](#partitioning-equivalence)
 
 [Analysis of limit value](#__RefHeading__703_1161086623)
 
@@ -78,7 +78,7 @@ shown in the figure are described below:
 
 
 ==================
-## Based on the specification (black box)
+##Based on the specification (black box)
 ==================
 
 Dynamic testing techniques are testing techniques based on the
@@ -126,7 +126,7 @@ formalized than other categories.
 
  
 ==================
-### Partitioning equivalence
+##Partitioning equivalence
 ==================
 
 Partitioning equivalence is a black box technique based on the
@@ -536,19 +536,14 @@ defined in terms of use cases, as seen in the following table:
 
 |                          |  Steps     |  Description                                        | 
 |:------------------------ |:----------:| ---------------------------------------------------:|
-| Main success scenario <br>   A: Actor   \r    S:System   | 1          | A: Insert Card                                      |
+| Main success scenario <br>  A: Actor  <br>   S:System   | 1          | A: Insert Card                                      |
 |                          | 2          | S:Validate card and ask for the PIN                 |
 |                 | 3          | A: Insert Pin                                       |
 |                          | 4          | S: Validate Pin                                     |
 |                          | 5       | S: Allow access to account       |
-| Extensions               | 2a      | Invalid Card. S: It displays a message and rejects the card    | 
-|                          | 4a      | Invalid Pin. S: displays a message and asks again the PIN (twice)    |
-|                          | 4b      | Invalid PIN 3 times. S:is swallowed card and leaves       |
-
-
-
-
-
+| Extensions               | 2a      | Invalid Card.<br> S: It displays a message and rejects the card    | 
+|                          | 4a      | Invalid Pin.<br> S: displays a message and asks again the PIN (twice)    |
+|                          | 4b      | Invalid PIN 3 times.<br> S:is swallowed card and leaves       |
 
 
 For testing use case scenario would have a successful test and a test
