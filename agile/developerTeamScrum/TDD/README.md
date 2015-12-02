@@ -7,7 +7,7 @@ At this point we're going to talk about tdd
 * [TDD "The Great Unknown"](#tdd-the-great-unknown)
 * [What is TDD?](#what-is-tdd)
 * [Advantages and disadvantages](#advantages-and-disadvantages)
-* [Cycle of TDD](#the-return-of-the-king)
+* [Cycle of TDD](#cycle-of-tdd)
 * [Speed is the key](#the-return-of-the-king)
 * [Executable documentation](#the-return-of-the-king)
 * [Design Principles](#the-return-of-the-king)
