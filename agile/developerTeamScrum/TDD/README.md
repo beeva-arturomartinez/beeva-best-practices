@@ -4,7 +4,7 @@ At this point we're going to talk about tdd
 
 ## Index
 
-* [TDD "The Great Unknown"](#tdd-"the-great-unknown")
+* [TDD "The Great Unknown"](#tdd-the-great-unknown)
 * [What is TDD?](#the-two-towers)
 * [Advantages and disadvantages](#the-return-of-the-king)
 * [Cycle of TDD](#the-return-of-the-king)
