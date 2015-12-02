@@ -11,7 +11,7 @@ At this point we're going to talk about tdd
 * [Speed is the key](#speed-is-the-key)
 * [Executable documentation](#executable-documentation)
 * [Design Principles](#design-principles)
-* [Recommendations](#the-return-of-the-king)
+* [Recommendations](#recommendations)
 * [References](#references)
 
 ### TDD "The Great Unknown" 
