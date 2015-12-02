@@ -1,6 +1,5 @@
 ![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/Que-es-TDD.png "TDD")
 # TDD (Test-driven development)
-At this point we're going to talk about tdd
 
 ## Index
 
@@ -15,10 +14,10 @@ At this point we're going to talk about tdd
 * [References](#references)
 
 ### TDD "The Great Unknown" 
-xxxx
+The TDD concept is generally misunderstood by people. Perhaps the acronym TDD "Test-driven development " are not the most convenient. The "T" of TDD cheats a bit for TDD is not a testing methodology else a development methodology and design software.
 
 ### What is TDD?
-xxxx
+As the wikipedia definition
 
 ### Advantages and disadvantages
 xxxx
