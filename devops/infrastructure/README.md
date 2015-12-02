@@ -166,3 +166,41 @@ A backup isn't useful if you don't test how to recover it. When you have a backu
 Recover files and system from diferent times, if you have a retention of 30 days you should try to perform a recovery from files of 30 days ago.
 
 Finally you should test recover process on the future. Maybe things were ok in the past, but they won't be ok on the future.
+
+Capacity Planning
+=================
+
+Capacity planning is the process of determining the ability of a company to meet the growth in demand for its products.
+
+There are thousands of models, planning to run a professional capacity since it can run each of shape, because in IT projects there is no single methodology or standard for this reason the term is not well known. Although for the implementation of a planning capacity it is important to have not only the hardware and software components, but also with human talent in the area.
+
+ The duration and size depend on the target that you want to reach.
+
+Thanks to capacity planning can distinguish between risk management and risk perception. In doing will allow us to know what are the real risks of the IT platform which we are responsible, as the risk impact on the business of our company.
+
+The main moments which should execute a capacity planning are:
+
+- During the development of the project.
+- Once the platform is in production.
+- Each time the company will make a decision on business.
+
+The primary responsibility for capacity planning should be the area of ​​systems of the organization, since it is responsible for maintaining production systems and should know perfectly what the status and potential for growth.
+
+The three basic steps necessary to execute a capacity planning are:
+
+#### Defining service levels
+
+Defines the minimum level above which the quality of service is acceptable. The definition of service levels must be realistic with the business needs of the company. Establish too demanding service levels can cause a miscalculation on the other service levels "relaxed" become an issue of platform performance against unexpected needs of small growths platform.
+To set service levels must be clear what will work units, based on which service levels will be defined, generally tend to be those operations critical to the development of business, this allows me to identify problems in the IT platform associate problems to a part of the development of business and thus to manage the risk that this problem can come up.
+
+#### Capacity analysis:
+
+ Is to retrieve a set of data, depending on the quality of data collected and experience of the team that analyzed, this will be more or less accurate. Therefore there are two maxims when you analyze the capacity of the platform:
+Having a procedure to collect data, which guarantees the same quality and have a team with enough experience to interpret the data collected correctly.
+
+#### Action planning: 
+
+is the last phase where being planned according to the results. Depending on the project phase in which we find ourselves, action planning can cause you to have to replant the architecture of the new platform, which is due to invest in the production platform, among others.
+It should generate a customized documentation for the various areas involved in the project, failure to do so will not be able to transmit tightly and efficiently gaps, problems or changes in the platform.
+In short, this is the time where you must perform a risk management, if we do not pass on the possible risks, have failed in our task of capacity planning and thus be endangering the business of our company.
+
