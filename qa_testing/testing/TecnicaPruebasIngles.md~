@@ -7,9 +7,9 @@
 
 [Dynamic](#dynamic)
 
-[Based on the specification (black box)](#)
+[Based on the specification (black box)](#based-on-the-specification-black-box)
 
-[Partitioning equivalence](#__RefHeading__701_1161086623)
+[Partitioning equivalence](#partitioning-equivalence)
 
 [Analysis of limit value](#__RefHeading__703_1161086623)
 
@@ -31,9 +31,9 @@
 
  
 
-==================
-## Testing Techniques
-
+====================
+##Testing Techniques
+====================
 
 There are different software testing techniques, with their weaknesses
 and their strengths. Each is good to find a specific type of defects.
@@ -78,7 +78,7 @@ shown in the figure are described below:
 
 
 ==================
-## Based on the specification (black box)
+##Based on the specification (black box)
 ==================
 
 Dynamic testing techniques are testing techniques based on the
@@ -126,7 +126,7 @@ formalized than other categories.
 
  
 ==================
-### Partitioning equivalence
+##Partitioning equivalence
 ==================
 
 Partitioning equivalence is a black box technique based on the
@@ -239,8 +239,8 @@ of output.
 
  
 ============================================
-#### Analysis of limit value
-==================
+##Analysis of limit value
+============================================
 
 One of the things we know about the kinds of mistakes programmers is
 that errors tend to cluster around the city. For example, if a program
@@ -252,21 +252,13 @@ analysis is based on test values of the partition border. By making
 this technique also we have valid limits (on valid partitions) and
 invalid borders (in invalid partitions).
 
- 
-
 As an example, consider a printer that has an option input the number of
 copies to be made, of 1 to 99.
-
-
-
-
 
 | Not Valid     | Valid         | Not Valid     |
 | ------------- |:-------------:| -------------:|
 | 0             | 99            | 100           |
 
-
- 
 
 We partition of integers from 1 to 99, the minimum value 1 and a maximum
 of 99. These two values are called frontier values. They are actually
@@ -401,7 +393,6 @@ the entry conditions combine to produce actions. Thus, each column
 represents a possible test case, because it identifies both inputs and
 outputs. This is shown schematically in the following table:
 
- 
 
 ####*STRUCTURE OF A BOARD DECISION*
 |                                             |  Rule of Business 1    |  Rule of Business 2   |  Rule of Business 3    |
@@ -411,9 +402,7 @@ outputs. This is shown schematically in the following table:
 | Condition 3                                 |     V                  |    \-                 |                        |
 | Acction 1                                   |     S                  |    N                  |                        |
 | Acction 2                                   |     N                  |    S                  |                        |
-| Business Rule 1 requires that all the conditions are true to generate action 1.  |    |       |                    |
-| 2 business rule is in action 2 if condition1 is false and condition2 is true, but does not depend on condition3.  |    |    |    |
-| Rule 3 requires that business conditions 1 and 2 are true and three false.    |   |           |                    |
+| Business Rule 1 requires that all the conditions are true to generate action 1. <br /> 2 business rule is in action 2 if condition1 is false and condition2 is true, but does not depend on condition3.  <br /> Rule 3 requires that business conditions 1 and 2 are true and three false.    |   |           |                    |
 
 
 In fact, the number of conditions and actions can be very long, but
@@ -426,7 +415,7 @@ the tables with all entries identified combinations of inputs.
 
  
 ==================
-### State transition
+## State transition
 ==================
 
 The prior art testing decision tables, is particularly useful when
@@ -436,8 +425,6 @@ which outputs are triggered by changes in the conditions of entry, or
 changes "status"; in other words, the behavior depends on the current
 state and past state, and is the transition that triggers the system
 behavior.
-
- 
 
 The state transition tests are used when one of the aspects of the
 system can be described in what is called a "finite state machine". This
@@ -490,7 +477,7 @@ PIN").
 *Drawing 1: Example of state transition*
  
 ==================
-###  Testing Use Cases
+##Testing Use Cases
 ==================
 
 Use cases are a way of specifying functionality as business scenarios or
@@ -555,7 +542,7 @@ will be made easier involvement of users in the process of defining
 them.
 
 ==================
-## Based on the structure (white box)
+##Based on the structure (white box)
 ==================
 
 It provides the most sophisticated techniques, incrementally, complete
@@ -602,7 +589,7 @@ There are three ways of structuring executable code:
 
  
 =============
-## Tests sentence 
+##Tests sentence 
 =============
 
 The purpose of testing sentence is try different judgments throughout
@@ -616,7 +603,7 @@ appropriate measure to prove the effectiveness.
 
  
 =============
-## Testing decision 
+##Testing decision 
 =============
 
 
@@ -632,7 +619,7 @@ asociad ae tries nc onsegu go 100% of the cov ra decision.
 
  
 =============
-## Based on experience 
+##Based on experience 
 =============
 
 Techniques based on experiences are those which are used when there is
@@ -655,7 +642,7 @@ Two types of techniques based on experience are as follows:
 
  
 =============
-## Exploratory testing
+##Exploratory testing
 =============
 
 
