@@ -30,9 +30,9 @@
 [Exploratory testing](#exploratory-testing)
 
  
-====================
+------------------==
 ##Testing Techniques
-====================
+------------------==
 
 There are different software testing techniques, with their weaknesses
 and their strengths. Each is good to find a specific type of defects.
@@ -60,7 +60,7 @@ analysis.
  
 ------------------
 ##Dynamic 
-==================
+------------------
 
 Dynamic techniques are classified based specification, also called black
 box techniques or structure based white box techniques and finally based
@@ -74,7 +74,7 @@ shown in the figure are described below:
 
 -----------------
 ##Based on the specification (black box)
-==================
+------------------
 
 Dynamic testing techniques are testing techniques based on the
 specification. They are also known as testing techniques "black box" or
@@ -120,9 +120,9 @@ for testing these non-functional aspects are less procedural and less
 formalized than other categories.
 
  
-==================
+------------------
 ##Partitioning equivalence
-==================
+------------------
 
 Partitioning equivalence is a black box technique based on the
 specification. It can be applied at any level of evidence and is often
@@ -232,9 +232,9 @@ between € 1001-2000 generate 1%; more than € 2000 value generates 1.5%
 of output.
 
  
-============================================
+------------------------------------========
 ##Analysis of limit value
-============================================
+------------------------------------========
 
 One of the things we know about the kinds of mistakes programmers is
 that errors tend to cluster around the city. For example, if a program
@@ -352,9 +352,9 @@ is somewhere.
 We recommend choosing values on partitions other than border values.
 
  
-==================
+------------------
 ##Decision tables
-==================
+------------------
 
 The technical equivalence partitioning and boundary value analysis are
 often applied to specific situations or tickets. However, if different
@@ -408,9 +408,9 @@ rules. A This is called limited decision table to distinguish it from
 the tables with all entries identified combinations of inputs.
 
  
-==================
+------------------
 ##State transition
-==================
+------------------
 
 The prior art testing decision tables, is particularly useful when
 combinations of input conditions produce several actions. Now it is
@@ -470,9 +470,9 @@ PIN").
 
 *Drawing 1: Example of state transition*
  
-==================
+------------------
 ##Testing Use Cases
-==================
+------------------
 
 Use cases are a way of specifying functionality as business scenarios or
 process flows.
@@ -535,9 +535,9 @@ The system requirements can be specified as a set of use cases. This
 will be made easier involvement of users in the process of defining
 them.
 
-==================
+------------------
 ##Based on the structure (white box)
-==================
+------------------
 
 It provides the most sophisticated techniques, incrementally, complete
 code coverage. In some applications this is essential. In a system where
