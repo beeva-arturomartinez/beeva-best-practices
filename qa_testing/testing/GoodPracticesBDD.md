@@ -2,15 +2,15 @@
 
 ###Índex
 
-* [Introduction](#Introduction)
+* [Introduction](#introduction)
 
-* [TDD](#TDD)
+* [TDD](#tdd)
 
-* [BDD](#BDD)
+* [BDD](#bdd)
 
-* [Acceptance Test](#Acceptance Test)
+* [Acceptance Test](#acceptance-test)
 
-* [Conclusions](#Conclusions)
+* [Conclusions](#conclusions)
 
 
 ----------------
@@ -177,11 +177,10 @@ language specification makes it very difficult later have to make the
 user because by using highly technical language or select a level of
 abstraction wrong in declaring the proves.
 
- 
+
 -------------
 ##Conclusions 
 -------------
-
 
 As we can see BDD gets the best practices of RUP and tries to guide
 development when choosing which parts of the application prove that
