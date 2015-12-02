@@ -2,8 +2,6 @@
 # TDD (Test-driven development)
 At this point we're going to talk about tdd
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
-
 ## Index
 
 * [TDD "The Great Unknown"](#the-fellowship-of-the-ring)
