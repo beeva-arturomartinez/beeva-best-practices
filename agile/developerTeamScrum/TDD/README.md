@@ -1,3 +1,4 @@
+![alt text](/static/Que-es-TDD.png "TDD")
 # TDD (Test-driven development)
 At this point we're going to talk about tdd
 
