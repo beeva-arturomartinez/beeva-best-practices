@@ -193,6 +193,8 @@ When you stop and think about it, particularly in respect to Figure 2, TDD is a 
 ![alt text](static/AMDD.gif "The Agile SDLC")
 
 
+If you want more information you can read the book **Disciplined Agile Delivery** by Scott W. Ambler and Mark Lines.
+
 ### TDD
 Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum
 
