@@ -579,7 +579,6 @@ There are three ways of structuring executable code:
 
 * Iteration is to run a piece of code more than once. 
 
- 
 -------------
 ##Tests sentence 
 -------------
@@ -593,7 +592,7 @@ which are represented by rectangles.
 Generally, coverage of judgments is too weak to be considered an
 appropriate measure to prove the effectiveness.
 
- 
+
 -------------
 ##Testing decision 
 -------------
@@ -608,10 +607,9 @@ you ensure that all possible outcomes of the decision have been tested.
 As evidence of judgments, decision tests have a measure of coverage
 asociad ae tries nc onsegu go 100% of the cov ra decision.
 
- 
--------------==
+-------------
 ##Based on experience 
--------------==
+-------------
 
 Techniques based on experiences are those which are used when there is
 no adequate specification from which to create test cases based
@@ -631,7 +629,7 @@ Two types of techniques based on experience are as follows:
 
 * Exploratory testing 
 
- 
+
 -------------
 ##Exploratory testing
 -------------

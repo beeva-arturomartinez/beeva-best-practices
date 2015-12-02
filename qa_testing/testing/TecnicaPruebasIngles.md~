@@ -30,9 +30,9 @@
 [Exploratory testing](#exploratory-testing)
 
  
-------------------==
+------------------
 ##Testing Techniques
-------------------==
+------------------
 
 There are different software testing techniques, with their weaknesses
 and their strengths. Each is good to find a specific type of defects.
@@ -232,9 +232,9 @@ between € 1001-2000 generate 1%; more than € 2000 value generates 1.5%
 of output.
 
  
-------------------------------------========
+----------------------------------
 ##Analysis of limit value
-------------------------------------========
+----------------------------------
 
 One of the things we know about the kinds of mistakes programmers is
 that errors tend to cluster around the city. For example, if a program
@@ -513,8 +513,6 @@ the use case has been successfully implemented system.
 The PIN example we use for testing state transition could also be
 defined in terms of use cases, as seen in the following table:
 
-
-
 |                          |  Steps     |  Description                                        | 
 |:------------------------ |:----------:| ---------------------------------------------------:|
 | Main success scenario <br>  A: Actor  <br>   S:System   | 1          | A: Insert Card                                      |
@@ -582,9 +580,9 @@ There are three ways of structuring executable code:
 * Iteration is to run a piece of code more than once. 
 
  
-=============
+-------------
 ##Tests sentence 
-=============
+-------------
 
 The purpose of testing sentence is try different judgments throughout
 the code. If each and every code executable statements are tested, there
@@ -596,10 +594,9 @@ Generally, coverage of judgments is too weak to be considered an
 appropriate measure to prove the effectiveness.
 
  
-=============
+-------------
 ##Testing decision 
-=============
-
+-------------
 
 The objective of these tests is to ensure that decisions are properly
 program made. The decisions are part of the selection and iteration
@@ -612,9 +609,9 @@ As evidence of judgments, decision tests have a measure of coverage
 asociad ae tries nc onsegu go 100% of the cov ra decision.
 
  
-=============
+-------------==
 ##Based on experience 
-=============
+-------------==
 
 Techniques based on experiences are those which are used when there is
 no adequate specification from which to create test cases based
@@ -635,10 +632,9 @@ Two types of techniques based on experience are as follows:
 * Exploratory testing 
 
  
-=============
+-------------
 ##Exploratory testing
-=============
-
+-------------
 
 Exploratory testing is a technique that combines the experience of the
 testers with a structured approach to testing specifications are missing
