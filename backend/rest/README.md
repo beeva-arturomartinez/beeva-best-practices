@@ -5,7 +5,7 @@ At this point we're going to talk about...
 
 ## Index
 
-* [Introduction](#rest-introduction)
+* [Introduction](#introduction)
 * [URL construction](#url-construction)
 * [Operations over resources](#operations-over-resources)
 * [Status codes](#status-codes)
@@ -22,6 +22,30 @@ At this point we're going to talk about...
 
 ## Introduction
 ---
+In this guide we are going to describe the best practices we consider most relevant at design time for a good REST API.
+
+According with the wikipedia definition:
+* *Representational State Transfer (REST)* ***is the software architectural style*** *of the World Wide Web. REST gives a coordinated set of constraints to the design of components in a distributed hypermedia system that can lead to a higher-performing and more maintainable architecture.* [[1](#rest_wikipedia)]
+
+In the above definition, we can see that REST is a architectural style not an implementation. An implementation of this architecture is ***RESTFul***. This is a common mistake that some people have. 
+
+The use of REST is often preferred over the more heavyweight SOAP (Simple Object Access Protocol) style because REST does not leverage as much bandwidth, which makes it a better fit for use over the Internet. 
+
+REST, which typically runs over HTTP (Hypertext Transfer Protocol), has several architectural constraints:
+
+1. Decouples consumers from producers
+
+2. Stateless existence
+
+3. Able to leverage a cache
+
+4. Leverages a layered system
+
+5. Leverages a uniform interface
+
+The REST style emphasizes that interactions between clients and services is enhanced by having a limited number of operations (verbs). Flexibility is provided by assigning resources (nouns) their own unique Universal Resource Identifiers (URIs). Because each verb has a specific meaning (GET, POST, PUT and DELETE), REST avoids ambiguity.
+
+The use of hypermedia both for application information as to the state transitions of the application: the representation of this state in a REST system are typically HTML, XML or JSON. As a result, it is possible to browse a resource REST to many others simply following links without requiring the use of registries or another additional infrastructure.
 
 ## URL Construction
 ---
