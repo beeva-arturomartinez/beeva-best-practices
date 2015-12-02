@@ -14,7 +14,7 @@ At this point we're going to talk about...
 * [Pagination](#pagination)
 * [HATEOAS](#hateoas)
 * [API Versioning](#api-versioning)
-* [API throughput restrictions](api-throughput-restrictions)
+* [API throughput restrictions](#api-throughput-restrictions)
 * [OAuth](#oauth)
 * [Errors](#errors)
 * [Status and Health endpoints](#status-and-health-endpoints)
