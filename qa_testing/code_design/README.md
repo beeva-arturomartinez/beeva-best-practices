@@ -100,7 +100,9 @@ Is very important to have one unique strategy for processing the errors of your 
 
 ### Concurrency
 
-[Concurrency Wiki Link](https://en.wikipedia.org/wiki/Concurrency_pattern) 
+TODO
+
+[Concurrency Wiki Link](https://en.wikipedia.org/wiki/Concurrency_pattern)
 
 ### Tools
 There are a lot of tools that help you to improve your code design for all programming languages. It's very recommended to use them for help to mantain the same format in all project and prevent errors.
@@ -133,13 +135,14 @@ Other tools that helps you depending on the programming language:
 ## Agile metodologies implications
 ---
 
-## [References](references)
+## References
 
-* [Wikipedia Design patterns](https://en.wikipedia.org/wiki/Software_design_pattern) Design Patterns Wiki
-* [Enterprise Integration Patterns](http://www.enterpriseintegrationpatterns.com/)Enterprise Integration Patterns
-* [Wikipedia Object Oriented Design](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29) Object Oriented Design Wiki
-* [TDD](https://en.wikipedia.org/wiki/Test-driven_development) Test Driven Development Wiki
-* [BDD](https://en.wikipedia.org/wiki/Behavior-driven_development) Behavior Driven Development
+* [Design Patterns Wiki](https://en.wikipedia.org/wiki/Software_design_pattern)
+* [Enterprise Integration Patterns](http://www.enterpriseintegrationpatterns.com/)
+* [Object Oriented Design Wiki](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29)
+* [Test Driven Development (TDD) Wiki](https://en.wikipedia.org/wiki/Test-driven_development)
+* [Behavior Driven Development (BDD) Wiki](https://en.wikipedia.org/wiki/Behavior-driven_development)
+* [Clean Code (Book)](http://www.amazon.es/Clean-code-Handbook-Software-Craftsmanship/dp/0132350882)
 
 ___
 
