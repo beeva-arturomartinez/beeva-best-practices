@@ -17,7 +17,7 @@
 The TDD concept is generally misunderstood by people. Perhaps the acronym TDD "Test-driven development " are not the most convenient. The "T" of TDD cheats a bit for TDD is not a testing methodology else a development methodology and design software.
 
 ### What is TDD?
-xxxx
+As the wikipedia definition
 
 ### Advantages and disadvantages
 xxxx
