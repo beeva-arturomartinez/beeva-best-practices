@@ -4,9 +4,8 @@
 
 ## Index
 
-* [Best Practices BDD](#the-fellowship-of-the-ring)
-* [Good Practices BDD](#the-two-towers)
-* [Technic Test](#the-return-of-the-king)
+* [Good Practices BDD](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/GoodPracticesBDD.md)
+* [Technic Test](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/TechnicTest.md)
 
 ___
 
