@@ -533,55 +533,20 @@ The PIN example we use for testing state transition could also be
 defined in terms of use cases, as seen in the following table:
 
  
+|                          | Steps   | Description          | 
+| :----------------------- |:-------:|:--------------------:|
+| Main success scenario    | 1       | A: Insert Card       |
+| A: Actor                 | 2       | S:Validate card and ask for the PIN       |
+| S:System                 | 3       | A: Insert Pin        |
+|                          | 4       | S: Validate Pin      |
+|                          | 5       | S: Allow access to account       |
+| Extensions               | 2a      | Invalid Card
+S: It displays a message and rejects the card    |
+|                          | 4a      | Invalid Pin
+S: displays a message and asks again the PIN (twice)    |
+|                          | 4b      | Invalid PIN 3 times
+S:is swallowed card and leaves       |
 
-Step
-
-Description
-
-Main success scenario
-
-A: Actor\
-S:System
-
-1
-
-A: Insert Card
-
-2
-
-S:Validate card and ask for the PIN
-
-3
-
-A: Insert Pin
-
-4
-
-S: Validate Pin
-
-5
-
-S: Allow access to account
-
-Extensions
-
-2a
-
-Invalid Card\
-S: It displays a message and rejects the card
-
-4a
-
-Invalid Pin\
-S: displays a message and asks again the PIN (twice
-
-4b
-
-Invalid PIN 3 times
-
-S:is swallowed card and leaves
-
- 
 
 For testing use case scenario would have a successful test and a test
 for each extension. In this example, we will give to the extension 4b a
@@ -639,8 +604,9 @@ There are three ways of structuring executable code:
 * Iteration is to run a piece of code more than once. 
 
  
-
-#### Tests sentence {.P73}
+=============
+## Tests sentence 
+=============
 
 The purpose of testing sentence is try different judgments throughout
 the code. If each and every code executable statements are tested, there
@@ -652,8 +618,10 @@ Generally, coverage of judgments is too weak to be considered an
 appropriate measure to prove the effectiveness.
 
  
+=============
+## Testing decision 
+=============
 
-#### Testing decision {.P73}
 
 The objective of these tests is to ensure that decisions are properly
 program made. The decisions are part of the selection and iteration
@@ -666,8 +634,9 @@ As evidence of judgments, decision tests have a measure of coverage
 asociad ae tries nc onsegu go 100% of the cov ra decision.
 
  
-
-#### Based on experience {.P73}
+=============
+## Based on experience 
+=============
 
 Techniques based on experiences are those which are used when there is
 no adequate specification from which to create test cases based
@@ -688,8 +657,10 @@ Two types of techniques based on experience are as follows:
 * Exploratory testing 
 
  
+=============
+## Exploratory testing
+=============
 
-#### Exploratory testing {.Heading_20_4}
 
 Exploratory testing is a technique that combines the experience of the
 testers with a structured approach to testing specifications are missing
