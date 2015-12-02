@@ -406,9 +406,12 @@ outputs. This is shown schematically in the following table:
 Rule 3 requires that business conditions 1 and 2 are true and three false.    |
 
 
+
+
 +---------------+----------------------+-----------------------+-----------------------+
 |               | Rule of Business 1   | Rule of Business 2    | Rule of Business 3    | 
 +===============+======================+=======================+=======================+
+
 | Bananas       | $1.34         | - built-in wrapper | - built-in wrapper |
 |               |               | - bright color     | - bright color     |
 +---------------+---------------+--------------------+--------------------+
