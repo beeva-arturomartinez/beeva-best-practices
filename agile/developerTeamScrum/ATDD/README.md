@@ -1,5 +1,5 @@
-![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/Que-es-TDD.png "TDD")
-# TDD (Test-driven development)
+![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/ATDD/static/atdd-cycle.png "ATDD")
+# ATDD (Acceptance Test-driven development)
 At this point we're going to talk about tdd
 
 ## Index
