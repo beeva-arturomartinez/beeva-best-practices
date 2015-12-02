@@ -225,27 +225,27 @@ We propose TDD Mantra: **"red, green, refactor, repeat"**:
 
 * **Adding a test**
 
-        In the TDD process, each new feature begins with a developer writing a test. This test must inevitably fail because it is written before the feature has been implemented. If it does not fail, then either the proposed new feature already exists or the test is defective.
+    In the TDD process, each new feature begins with a developer writing a test. This test must inevitably fail because it is written before the feature has been implemented. If it does not fail, then either the proposed new feature already exists or the test is defective.
 
 * **Running all tests to see if the new one fails**
-
-        This validates that the test harness is working correctly and that the new test does not mistakenly pass without requiring any new code. The new test should fail for the expected reason.
+    
+    This validates that the test harness is working correctly and that the new test does not mistakenly pass without requiring any new code. The new test should fail for the expected reason.
 
 * **Writing code**
 
-        The next step is to write some code that will cause the test to pass. The new code written at this stage may not be perfect, however this is acceptable because steps made later will improve and hone it. It is important that the code written is only designed to pass the test.
+    The next step is to write some code that will cause the test to pass. The new code written at this stage may not be perfect, however this is acceptable because steps made later will improve and hone it. It is important that the code written is only designed to pass the test.
 
 * **Running successful automated tests**
 
-        If all test cases now pass, the developer can be confident that the code meets all the tested requirements. This is a good point from which to begin the final step of the cycle - refactoring.
+    If all test cases now pass, the developer can be confident that the code meets all the tested requirements. This is a good point from which to begin the final step of the cycle - refactoring.
 
 * **Refactoring the code**
 
-        Now the code can be cleaned up (refactored) as necessary. By re-running the test cases, the developer can be confident that refactoring is not damaging any existing functionality. The concept of removing duplication is an important aspect of any software design.
+    Now the code can be cleaned up (refactored) as necessary. By re-running the test cases, the developer can be confident that refactoring is not damaging any existing functionality. The concept of removing duplication is an important aspect of any software design.
 
 * **Repeat**
-
-        Starting with another new test, the cycle is then repeated to push forward the functionality. 
+    
+    Starting with another new test, the cycle is then repeated to push forward the functionality. 
 
 
 ## [References](references)
