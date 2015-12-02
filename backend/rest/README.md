@@ -249,6 +249,21 @@ Sometimes, at Beeva projects, we use a link node in the responses instead of use
 
 ## API throughput restrictions
 ---
+For performance reasons and to ensure a homogeneous response times APIs, it is good practice to limit the consumption of APIs. This limitation can be performed based on many factors:
+
+* **Limit requests in a time slot for an authenticated user.**. Such limitations are usually carried out in public APIs to control abusive access to the APIs. There are several approaches such as restricting the number of day / month requests for authenticated users.
+* **Limit requests for public / private consumption API depending on the authenticated user profile**. Usually public APIs have limited consumption, always with the concept of ensuring homogeneous consumption of all users allowing resizes infrastructure in stages. Now another factor to consider, the payment appears APIs. If someone pays for higher demand requests, we can not make this service affects the service consumer of APIs, so normally corresponding changes will be made in infrastructure to ensure the number of requests the client demands, and there is a unique routing requests asigned to the user profile.
+
+To manage the rate of requests are often used the following headers in responses of each request:
+
+* **X-Rate-Limit-Limit**: The number of allowed requests in the current period
+* **X-Rate-Limit-Remaining**: The number of remaining requests in the current period
+* **X-Rate-Limit-Reset**: The number of seconds left in the current period. It is necessary to clarify at this point that should not be confused with a timestamp, you should be the seconds remaining to avoid problems with time zones.
+
+As we can see in the following [link](http://stackoverflow.com/questions/16022624/examples-of-http-api-rate-limiting-http-response-headers), There are multiple APIs that use these headers (and sometimes more), to inform the user of the limits.
+
+For ending this section, when the request limit is reached, the response will return this code status: ***HTTP - 429 Too Many Requests*** as indicated in the [RFC 6585](http://tools.ietf.org/html/rfc6585#section-4)
+
 
 ## OAuth
 ---
