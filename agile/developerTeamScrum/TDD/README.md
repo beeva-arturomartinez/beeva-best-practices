@@ -5,7 +5,7 @@ At this point we're going to talk about tdd
 ## Index
 
 * [TDD "The Great Unknown"](#tdd-the-great-unknown)
-* [What is TDD?](#the-two-towers)
+* [What is TDD?](#what-is-tdd)
 * [Advantages and disadvantages](#the-return-of-the-king)
 * [Cycle of TDD](#the-return-of-the-king)
 * [Speed is the key](#the-return-of-the-king)
