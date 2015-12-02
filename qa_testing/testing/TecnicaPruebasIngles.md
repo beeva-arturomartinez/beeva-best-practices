@@ -325,8 +325,18 @@ is a table like this:
 
 | Test Conditions    | Valid partitions   | Partitions invalid   | Limit values valid   | Limit values invalid   |
 | :----------------- |:------------------:|:--------------------:|:--------------------:| ----------------------:|
-| Account Balance    |   0.00 – 100.00\100.01-999.99\1000.00- Max   |  \<0.00\ \>Max\ Not integer | 0.00\ \ 0.01\ 99.99\ 100.00\ 100.01\ 999.98\ 999.99\ 1000.00  |-0.01\ Max+0.01 |
-| Interest rates     | 3%\ 5%\ 7%         | Any other value\ Not integer | Not applicable   | Not applicable   |
+| Account Balance    |  0.00 – 100.00     | \<0.00               |  0.00                | -0.01                  |
+|                    |  100.01-999.99     | \>Max                |  0.01                | Max+0.01               |
+|                    |  1000.00- Max      | Not integer          |  99.99               |                        |
+|                    |                    |                      |  100.00              |                        |
+|                    |                    |                      |  100.01              |                        |
+|                    |                    |                      |  999.98              |                        |
+|                    |                    |                      |  999.99              |                        |
+|                    |                    |                      |  1000.00             |                        |
+| Interest rates     |  3%                |   Any other value    |  Not applicable      | Not applicable         |
+|                    |  5%                |   Not integer        |                      |                        |
+|                    |  7%                |                      |                      |                        |
+
 
 Looking at the data in the table we can see that is not specified for a
 maximum interest rate of 7%. It would be interesting to know what is the
@@ -405,21 +415,6 @@ outputs. This is shown schematically in the following table:
 | 2 business rule is in action 2 if condition1 is false and condition2 is true, but does not depend on condition3.  |    |    |    |
 | Rule 3 requires that business conditions 1 and 2 are true and three false.    |   |           |                    |
 
-
-
-
-+---------------+----------------------+-----------------------+-----------------------+
-|               | Rule of Business 1   | Rule of Business 2    | Rule of Business 3    | 
-+===============+======================+=======================+=======================+
-
-| Bananas       | $1.34         | - built-in wrapper | - built-in wrapper |
-|               |               | - bright color     | - bright color     |
-+---------------+---------------+--------------------+--------------------+
-| Oranges       | $2.10         | - cures scurvy     | - cures scurvy     |
-|               |               | - tasty            | - tasty            |
-+---------------+---------------+--------------------+--------------------+
-
- 
 
 In fact, the number of conditions and actions can be very long, but
 usually the number of combinations that produce a specific action is
