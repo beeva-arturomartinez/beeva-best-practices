@@ -32,7 +32,7 @@
  
 
 ==================
-### Testing Techniques
+## Testing Techniques
 
 
 There are different software testing techniques, with their weaknesses
@@ -64,8 +64,8 @@ analysis.
  
  
 ==================
-###Dynamic 
-
+##Dynamic 
+==================
 
 Dynamic techniques are classified based specification, also called black
 box techniques or structure based white box techniques and finally based
@@ -78,7 +78,8 @@ shown in the figure are described below:
 
 
 ==================
-### Based on the specification (black box)
+## Based on the specification (black box)
+==================
 
 Dynamic testing techniques are testing techniques based on the
 specification. They are also known as testing techniques "black box" or
@@ -125,11 +126,12 @@ formalized than other categories.
 
  
 ==================
-#### Partitioning equivalence
+### Partitioning equivalence
+==================
 
 Partitioning equivalence is a black box technique based on the
 specification. It can be applied at any level of evidence and is often
-good as first technique to apply.\
+good as first technique to apply.  
 The idea behind this technique is to divide a set of test conditions in
 groups or sets that can be considered equal (eg the system should handle
 equivalently), hence "equivalence partitioning". Equivalence partitions
@@ -154,7 +156,7 @@ outputs.
 
  
 
-Partitions Input
+### Partitions Input
 
 Grouping partitions possible entries of the program. For example, a
 program that accepts integer values can accept as valid any entry that
@@ -224,7 +226,7 @@ likely to appear in a real situation.
 
  
 
-Partitions outputs
+### Partitions outputs
 
 Likewise the input of a program may be partitioned, it can be output.
 Suppose a program of bank accounts that generate the following outputs:\
@@ -238,6 +240,7 @@ of output.
  
 ============================================
 #### Analysis of limit value
+==================
 
 One of the things we know about the kinds of mistakes programmers is
 that errors tend to cluster around the city. For example, if a program
@@ -315,7 +318,7 @@ shown below:
 
 
 The border values in this case would be -0.01 (an invalid boundary
-value), 0.00, 0.01, 99.99, 100.00, 100.01, 999.98, 999.99, 1000.00.\
+value), 0.00, 0.01, 99.99, 100.00, 100.01, 999.98, 999.99, 1000.00.  
 A good way to represent the partitions and the valid and invalid borders
 is a table like this:
 
@@ -346,15 +349,16 @@ try to focus the program to fail.
 
 We could also try to find the border open for the lower limit, what is
 the minimum negative balance? This example is omitted, but in some cases
-also be of interest.\
+also be of interest.  
 As already it mentioned before technical equivalence partitioning and
 boundary value analysis are closely linked and that any partition border
-is somewhere.\
+is somewhere.  
 We recommend choosing values on partitions other than border values.
 
  
-=============================
-#### Decision tables
+==================
+### Decision tables
+==================
 
 The technical equivalence partitioning and boundary value analysis are
 often applied to specific situations or tickets. However, if different
@@ -390,61 +394,19 @@ outputs. This is shown schematically in the following table:
  
 
 *STRUCTURE OF A BOARD DECISION*
+|            |  Rule of Business 1    |  Rule of Business 2   |  Rule of Business 3    |
+| :----------|:----------------:|:----------------:| -------------:|
+|Condition 1  Condition 2\ Condition 3\ Acction 1\ Acction 2   | V\ V\ V\ S\ N\   | F\ V\ -\ N\ S\ |       |
+| Business Rule 1 requires that all the conditions are true to generate action 1. 2 business rule is in action 2 if condition1 is false and condition2 is true, but does not depend on condition3. Rule 3 requires that business conditions 1 and 2 are true and three false.    |
 
- 
 
-Rule of Business 1
 
-Rule of Business 2
-
-Rule of Business 3
-
-Condition 1\
-Condition 2\
-Condition 3
-
-Acction 1\
-Acction 2
-
-V\
-V
-
-V
-
-S
-
-N
-
-F
-
-V
-
--
-
-N
-
-S
-
-V
-
-V
-
-F
-
-S
-
-S
-
-Business Rule 1 requires that all the conditions are true to generate
-action 1. 2 business rule is in action 2 if condition1 is false and
-condition2 is true, but does not depend on condition3. Rule 3 requires
-that business conditions 1 and 2 are true and three false.
 
  
 
 In fact, the number of conditions and actions can be very long, but
 usually the number of combinations that produce a specific action is
-relatively small.\
+relatively small.  
 Therefore all possible combinations of conditions in decision tables are
 not applied but is restricted to those that correspond to business
 rules. A This is called limited decision table to distinguish it from
@@ -475,7 +437,7 @@ system. A finite state system is usually represented by a state diagram.
 
 It notes that in a given state, an event can cause one action, but the
 same event from a different state, can cause a different action or a
-different final state.\
+different final state.  
 If we have a representation of a state transition diagram we can analyze
 the behavior in terms of what happens when a transition occurs.
 
@@ -486,7 +448,7 @@ the system for some reason, as a field in a database that is updated.
 
 In some cases an event generates an output, in others the event changes
 the internal state of the system without generating an output, and
-others can cause an output and a change of state.\
+others can cause an output and a change of state.  
 What happens with every change can always deduce the state transition
 diagram.
 
@@ -679,7 +641,7 @@ the code. If each and every code executable statements are tested, there
 will be full coverage decision. It is important to remember that these
 tests only focus on executable statements when measuring coverage.It is
 very useful to use graphical data flow to identify such sentences -
-which are represented by rectangles.\
+which are represented by rectangles.  
 Generally, coverage of judgments is too weak to be considered an
 appropriate measure to prove the effectiveness.
 
