@@ -1,6 +1,6 @@
 # Testing techniquies 
 
-Índex
+##Índex
 
 
 [Testing Techniques](#testing-techniques)
@@ -11,26 +11,25 @@
 
 [Partitioning equivalence](#partitioning-equivalence)
 
-[Analysis of limit value](#__RefHeading__703_1161086623)
+[Analysis of limit value](#analysis-of-limit-value)
 
-[Decision tables](#__RefHeading__705_1161086623)
+[Decision tables](#decision-tables)
 
-[State transition](#__RefHeading__707_1161086623)
+[State transition](#state-transition)
 
-[Testing Use Cases](#__RefHeading__709_1161086623)
+[Testing Use Cases](#testing-use-cases)
 
-[Based on the structure (white box)](#__RefHeading__711_1161086623)
+[Based on the structure (white box)](#based-on-the-structure-white-box)
 
-[Tests sentence](#__RefHeading__713_1161086623)
+[Tests sentence](#tests-sentence)
 
-[Testing decision](#__RefHeading__715_1161086623)
+[Testing decision](#testing-decision)
 
-[Based on experience](#__RefHeading__717_1161086623)
+[Based on experience](#based-on-experience)
 
-[Exploratory testing](#__RefHeading__719_1161086623)
+[Exploratory testing](#exploratory-testing)
 
  
-
 ====================
 ##Testing Techniques
 ====================
@@ -43,13 +42,11 @@ find unit tests logical flaws in the code and not in the system design.
 Generally speaking, the techniques can be organized into two categories
 which are: static and dynamic techniques techniques.
 
- 
 
 Dynamic testing techniques run the software. For it introduced a series
 of input values, and examine the output compared with the expected
 results. However, static testing techniques do not execute code but
 analyze it (manually or by tools).
-
  
 
 As a result, the dynamic tests only apply on the product code to detect
@@ -60,8 +57,6 @@ examine the source code before run. A technique used to perform static
 tests are revisions. In the review process, its phases, roles, etc. and
 also the characteristics of other known technique called static
 analysis.
-
- 
  
 ==================
 ##Dynamic 
@@ -73,7 +68,7 @@ on experience. Then the techniques of each of these classifications as
 shown in the figure are described below:
 
  
-![Dynamics](https://github.com/beeva-josemiguelmoralesTecnic1.pngTecnic1.png/beeva-best-practices/blob/master/qa_testing/testing/static/Tecnic1.png "Dynamics")
+![Dynamics](https://github.com/beeva-josemiguelmoralesTecnic1.pngTecnic1.png/beeva-best-practices/blob/master/qa_testing/testing/static/tecnic1.png "Dynamics")
  
 
 

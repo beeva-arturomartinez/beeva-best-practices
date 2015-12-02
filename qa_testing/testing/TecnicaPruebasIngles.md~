@@ -1,6 +1,6 @@
 # Testing techniquies 
 
-Índex
+##Índex
 
 
 [Testing Techniques](#testing-techniques)
@@ -11,26 +11,25 @@
 
 [Partitioning equivalence](#partitioning-equivalence)
 
-[Analysis of limit value](#__RefHeading__703_1161086623)
+[Analysis of limit value](#analysis-of-limit-value)
 
-[Decision tables](#__RefHeading__705_1161086623)
+[Decision tables](#decision-tables)
 
-[State transition](#__RefHeading__707_1161086623)
+[State transition](#state-transition)
 
-[Testing Use Cases](#__RefHeading__709_1161086623)
+[Testing Use Cases](#testing-use-cases)
 
-[Based on the structure (white box)](#__RefHeading__711_1161086623)
+[Based on the structure (white box)](#based-on-the-structure-white-box)
 
-[Tests sentence](#__RefHeading__713_1161086623)
+[Tests sentence](#tests-sentence)
 
-[Testing decision](#__RefHeading__715_1161086623)
+[Testing decision](#testing-decision)
 
-[Based on experience](#__RefHeading__717_1161086623)
+[Based on experience](#based-on-experience)
 
-[Exploratory testing](#__RefHeading__719_1161086623)
+[Exploratory testing](#exploratory-testing)
 
  
-
 ====================
 ##Testing Techniques
 ====================
@@ -43,13 +42,11 @@ find unit tests logical flaws in the code and not in the system design.
 Generally speaking, the techniques can be organized into two categories
 which are: static and dynamic techniques techniques.
 
- 
 
 Dynamic testing techniques run the software. For it introduced a series
 of input values, and examine the output compared with the expected
 results. However, static testing techniques do not execute code but
 analyze it (manually or by tools).
-
  
 
 As a result, the dynamic tests only apply on the product code to detect
@@ -154,7 +151,6 @@ typical user input selection.
 There are several types of partitions among which partitions inputs and
 outputs.
 
- 
 
 ### Partitions Input
 
@@ -359,7 +355,7 @@ We recommend choosing values on partitions other than border values.
 
  
 ==================
-### Decision tables
+##Decision tables
 ==================
 
 The technical equivalence partitioning and boundary value analysis are
@@ -415,7 +411,7 @@ the tables with all entries identified combinations of inputs.
 
  
 ==================
-## State transition
+##State transition
 ==================
 
 The prior art testing decision tables, is particularly useful when
