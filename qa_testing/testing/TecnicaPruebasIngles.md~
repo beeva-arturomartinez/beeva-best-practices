@@ -209,20 +209,20 @@ likely to appear in a real situation.
 
  
 
-  --------------------------------------------------------------------------------------------------------------------------------
+   -------------------------------------------------------------------------------------------------------------------------------
   Examples of equivalence classes
 
   * Valid entry: integers in the range 100-999. 
 
-      -   Valid partitions: 100-999 included.  
-      -   Invalid partitions less than 100, more than 999 real numbers (decimal) and characters not numeric. 
+          Valid partitions: 100-999 included.  
+          Invalid partitions less than 100, more than 999 real numbers (decimal) and characters not numeric. 
 
   * Valid entry: names with up to 20 alphanumeric characters. 
 
-      -   Valid partitions: strings up to 20 alphanumeric characters. 
-      -   Partition invalid: strings longer than 20 alphanumeric characters, strings that contain non-alphanumeric characters. 
+          Valid partitions: strings up to 20 alphanumeric characters. 
+          Partition invalid: strings longer than 20 alphanumeric characters, strings that contain non-alphanumeric characters. 
 
-  --------------------------------------------------------------------------------------------------------------------------------
+   -------------------------------------------------------------------------------------------------------------------------------
 
  
 
@@ -396,14 +396,14 @@ outputs. This is shown schematically in the following table:
 ####*STRUCTURE OF A BOARD DECISION*
 |                                             |  Rule of Business 1    |  Rule of Business 2   |  Rule of Business 3    |
 | :-------------------------------------------|:----------------------:|:---------------------:| ----------------------:|
-| - Condition 1                               | - V                    | - F                   |                        |
-| - Condition 2                               | - V                    | - V                   |                        |
-| - Condition 3                               | - V                    | - \-                  |                        |
-| - Acction 1                                 | - S                    | - N                   |                        |
-| - Acction 2                                 | - N                    | - S                   |                        |
-| Business Rule 1 requires that all the conditions are true to generate action 1.  
-2 business rule is in action 2 if condition1 is false and condition2 is true, but does not depend on condition3.  
-Rule 3 requires that business conditions 1 and 2 are true and three false.    |
+| Condition 1                                 |     V                    |    F                   |                    |
+| Condition 2                                 |     V                    |    V                   |                    |
+| Condition 3                                 |     V                    |    \-                  |                    |
+| Acction 1                                   |     S                    |    N                   |                    |
+| Acction 2                                   |     N                    |    S                   |                    |
+| -  Business Rule 1 requires that all the conditions are true to generate action 1.  |    |       |                    |
+| -  2 business rule is in action 2 if condition1 is false and condition2 is true, but does not depend on condition3.  |    |    |    |
+| -  Rule 3 requires that business conditions 1 and 2 are true and three false.    |   |           |                    |
 
 
 
