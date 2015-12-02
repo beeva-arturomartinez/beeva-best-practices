@@ -1,54 +1,50 @@
+![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/Que-es-TDD.png "TDD")
 # TDD (Test-driven development)
 At this point we're going to talk about tdd
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
-
 ## Index
 
-* [TDD "The Great Unknown"](#the-fellowship-of-the-ring)
-* [What is TDD?](#the-two-towers)
-* [Advantages and disadvantages](#the-return-of-the-king)
-* [Cycle of TDD](#the-return-of-the-king)
-* [Speed is the key](#the-return-of-the-king)
-* [Executable documentation](#the-return-of-the-king)
-* [Design Principles](#the-return-of-the-king)
+* [TDD "The Great Unknown"](#tdd-the-great-unknown)
+* [What is TDD?](#what-is-tdd)
+* [Advantages and disadvantages](#advantages-and-disadvantages)
+* [Cycle of TDD](#cycle-of-tdd)
+* [Speed is the key](#speed-is-the-key)
+* [Executable documentation](#executable-documentation)
+* [Design Principles](#design-principles)
+* [Recommendations](#recommendations)
 * [References](#references)
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+### TDD "The Great Unknown" 
+xxxx
 
-### The Two Towers
+### What is TDD?
+xxxx
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+### Advantages and disadvantages
+xxxx
 
-A Remarkable idea
+### Cycle of TDD 
+xxxx
 
+### Speed is the key 
+xxxx
 
-### The Return of the King
+### Executable documentation 
+xxxx
 
-A nice table
+### Design Principles 
+xxxx
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+### Recommendations 
+xxxx
+
 
 
 ### References
 
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+* [Link](https://www.beeva.com/beeva-view/metodologiasagiles/desarrollo-dirigido-por-test-el-gran-desconocido/) Beeva TDD
+* [Course](https://github.com/beeva-danielpetrovic/beeva-curso-tdd) Beeva course TDD
+* [Katas](https://github.com/beeva-danielpetrovic/beeva-taller-tdd/tree/master) Beeva katas TDD
 
 ___
 
