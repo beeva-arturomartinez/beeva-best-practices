@@ -15,33 +15,29 @@ At this point we're going to talk about tdd
 * [References](#references)
 
 ### TDD "The Great Unknown" 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+xxxx
 
-### The Two Towers
+### What is TDD?
+xxxx
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+### Advantages and disadvantages
+xxxx
 
-A Remarkable idea
+### Cycle of TDD 
+xxxx
 
+### Speed is the key 
+xxxx
 
-### The Return of the King
+### Executable documentation 
+xxxx
 
-A nice table
+### Design Principles 
+xxxx
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+### Recommendations 
+xxxx
+
 
 
 ### References
