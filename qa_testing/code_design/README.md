@@ -93,21 +93,21 @@ Is very important to have one unique strategy for processing the errors of your 
 * Define the error detail objetive. It's not the same one error for an developer or sysops person than an error to show to the client. An error for a client should help it about what can do to solve or who have to contact.
 * Define a common object error for all project. All methods or function must use it for return the error.
 * Define a error code list for the errors.
-* If is an error which can be shown to the client, use this code list with a internationalitable file for the descriptions.
+* If is an error which can be shown to the client, use this code list with a internationalizable file for the descriptions.
 * Log correctly the error with all information available about this cause and when it occurred.
 * Use a common format for all error logs.
 
 
 ### Concurrency
 
-Write concurrent programs is hard, is easier write code within a single thread, or multithreading thats looks like but fails when the system is placed under extress.
+Write concurrent programs is hard, is easier write code within a single thread, or multithreading thats looks fine but fails when the system is placed under extress.
 
 Concurrency is a decoupling strategy that help us to know the behaviour of our concurrent system and know what gets done from when it gets done. A single thread code is easier to understand and testing. Split what from when can improve the throughput and structure of an application.
 
 There are other reasons to adopt the concurrency, some systems have response time and throughput requirements that need develop concurrent solutions, for example, for proccess a lot of data in the shortest time possible.
 
 #### Myths and misconceptions
-* Concurrency always improves performance. TODO
+* Concurrency always improves performance. Not always the concurrency is the best option, sometimes is unnecessary.
 * Design does not change when writing concurrent programs TODO
 * Concurrency incurs some overhead, both in performance as well as writing additional code. TODO
 * Correct concurrency is complex, even for simple problems.
