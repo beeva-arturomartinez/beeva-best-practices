@@ -43,13 +43,14 @@ The main advantages and disadvantages are:
 ### Cycle of TDD 
 The iterative cycle methodology is divided in three easy steps:
 > RED - GREEN - REFACTOR
+
 ![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/red-green-refactor.png "Reed-Green-Refactor")
 
 ### Speed is the key 
 xxxx
 
 ### Executable documentation 
-xxxx
+
 
 ### Design Principles 
 xxxx
