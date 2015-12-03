@@ -25,7 +25,8 @@ TDD ! = Unit testing , unit test as much as possible try to be decoupled by defi
 People also believed that applying TDD the need for other types of tests is eliminated. This is completely false as there are types of test as system test "End to End" performing QA that do not comply with the principles that must meet a test in TDD. TDD therefore does not eliminate the QA work even if indirectly reduced because the number of bugs that can appear in higher-level test without having appeared in unit testing or integration of lower level is very low probability occur.
 
 ### What is TDD?
-The definition of wikipedia express > Self
+The definition of wikipedia express:
+> "Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: first the developer writes an (initially failing) automated test case that defines a desired improvement or new function, then produces the minimum amount of code to pass that test, and finally refactors the new code to acceptable standards"
 
 ### Advantages and disadvantages
 xxxx
