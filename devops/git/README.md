@@ -12,10 +12,10 @@ At this point we're going to talk about best practices to work with git.
 	* [Support branches](#support-branches)
 * [Advices](#advices)
 	* [Versioning](#versioning)
-	* [Redmine's id-track](#id-track)
+ 	* [README.md](#readme-md)
+	* [Redmine's id-track](#redmines-id-track)
 	* [Use hooks](#use-hooks)
 	* [Use tools](#use-tools)
-	* [README.md](#readme-md)
 * [References](#references)
 
 
@@ -23,6 +23,7 @@ At this point we're going to talk about best practices to work with git.
 This guide try to help to working teams to use git and git flows correctly. Is very recommended that all team's members working with git in the same way, for this goal this guide will contain some usefull advices and tips for the correct use of git and help to unify the way of work with it.
 
 ## Getting Started
+
 ### gitignore
 When you work with git there are some files that's you shouldn't upload to the repository like configuration files, ide files, files with passwords or connection params, etc. For this goal, exists the .gitignore file, and you need create it and include here the list of files or folders to exclude of the version control.
 
@@ -53,21 +54,29 @@ Next, there are some folders and files thats usually have to be added at .gitign
 * NodeJS:
 	* node_modules/
 * Python:
-	* Files with pyc extension: *.pyc
+	* Files with pyc extension: .pyc
 * The jetbrains ides like Pycharm or WebStorm, have a settings folder  with the name:
-	* .idea/
+	* idea/
 
 ### Use the shell
+
 There are a lot of IDEs that have its own git plugins, but very often this plugins doesn't works fine in determinated features. The most reliable way to syncronize with git is install git and use the shell to work with git.
 
 ## Git Flow
  ![alt text](static/gitflow.png "GIT FLOW GRAPH")
+
 ### Main branches
+
 ### Support branches
+
 ## Advices
+
 ### Versioning
+
 ### Redmine's id-track
+
 ### Hooks
+
 ### README.md
 Write a text file called README.md in the main directory of project. This file must have the main information about the code, how use and configure it and how can execute it. This file must contains:
 
@@ -79,9 +88,9 @@ Write a text file called README.md in the main directory of project. This file m
 
 ### References
 
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+* [GitHub Help](https://help.github.com/)
+* [Git Cheatsheet](http://www.git-tower.com/blog/git-cheat-sheet/)
+* [Git Flow Cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
 
 ___
 
