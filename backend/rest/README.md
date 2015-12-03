@@ -124,6 +124,161 @@ PATCH /clients/123
 
 
 ## Status codes
+
+When you are developing a REST API, a common doubt is what status code use in response.  
+
+### Introduction
+
+One of the most important point, while you are designing an API Rest, is correctly choose how we will inform our customers of the status of their requests. Since one of the main features of the REST services is that they are built on HTTP protocol, the best way to inform the user will be to use HTTP status codes.
+
+It is a good practice to add to the response of REST services a new field "result" which contains HTTP status code number and a more descriptive message related to contexts of the request.
+
+### New Resources
+
+When you are creating new resources, you have to report to client that these resources has been created.
+
+Method: POST (We can also use PUT method intead of POST, but POST it's most recomended for creating resources).
+
+---
+
+|Result 			|Code 	|Response Body 			|
+| ----------------------- | ---------- | ------------------------------------- |
+|Sucessful created	|201		|Empty					|
+|Bad Request		|400		|codeError and description	|
+|Invalid credentials	|401		|codeError and description	|
+
+---
+
+### Update Resources
+
+When you are updating existing resources, you have to report to client that these resources has been updated.
+
+Method: PUT (We can also use POST method intead of PUT, but PUT it's most recomended for updating resources).
+
+---
+
+|Result 			|Code 	|Response Body	 					|
+| ----------------------- | ----------- | ------------------------------------------------------- |
+|Sucessful updated	|200		|Empty or fields of updated resource		|
+|Bad Request		|400		|codeError and description recommended	|
+|Invalid credentials	|401		|codeError and description recommended	|
+|Resource not found|404	|Empty								|
+
+---
+
+### Query a Resource
+
+When you are querying an unique and existing resource, you have to report to client the content of this resource.
+
+Method: GET.
+
+---
+
+|Result 				|Code 	|Response Body 						|
+| ------------------------------ | ---------- | ------------------------------------------------------- |
+|Resource founded		|200		|Resource with partially or fully data		|
+|Resource don't exists	|204		|Empty								|
+|Bad Request			|400		|codeError and description recommended	|
+|Invalid credentials		|401		|codeError and description recommended	|
+|Resource not found	|404		|Empty								|
+
+---
+
+### Query Resource List by pattern or all resources
+
+When you are querying a list of resources by certain pattern, you have to report to client at least a list with some info about these resources.
+
+It's also recommended to return info about pagination like total number of resources in list, number of pages, current page, etc....
+
+Method: GET.
+
+---
+
+|Result 				|Code 	|Response Body 						|
+| ------------------------------ | ---------- | ------------------------------------------------------- |
+|Resources founded	|200		|Resource list with partial or full data		|
+|Resources not founded	|204		|Empty								|
+|Resources paginated	|206		|Resource list with pagination info		|
+|Bad Request			|400		|codeError and description recommended	|
+|Invalid credentials		|401		|codeError and description recommended	|
+
+---
+
+### General Purpose
+
+There are other status codes than have to be taken into account:
+
+---
+
+|Action										|Code 	| Example							|
+| -------------------------------------------------------------------- | ---------- | -------------------------------------------------------- |
+|Request to non-existent or without sense method	| 405	| PUT over all resource collection			|
+|Request to existent resource with invalid headers	| 412	| One header is no correct or field missed	|
+
+---
+
+### Annexed 1: 2XX Success
+
+These status codes are informative and tell the user that his request has been processed correctly.
+
+---
+
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+|200 | OK | Request completed successfully. Used mainly in response to GET methods|
+| 201| Created | New resource has been created. Used in response to POST methods |
+|202 | Accepted | Request has been accepted but has not been completed yet. It is a response code which is commonly used for asynchronous processing |
+|204 | No Content | Request has been completed successfully but the method does not return any information. For example, when a resource exists but it does not have information or in response to a DELETE request |
+|206 | Partial Content | Partial response indicates that there are more elements available to return. It is good practice to use the Content-Range header to indicate at what position we are in and how many elements is able to return the service |
+
+---
+
+### Annexed 2: 3XX Redirection
+
+These response codes indicate to the user to do any additional actions to complete his request
+
+---
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+| 301 | Moved Permanently | The requested resource has been assigned a new permanent URI and any future references to this resource should use one of the returned URIs. |
+| 304 | Not Modified | In HEAD and GET requests indicates that the requested resource has not changed since the last request received. Mostly used in caching systems |
+
+---
+
+### Annexed 3: 4XX Client Error
+
+These response codes are used to tell the client that there are some type of error in his request and he have to fix it before send another request
+
+---
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+| 400 | Bad Request | The request could not be understood by the server due to malformed syntax. For example, request parameters in bad format in the case of a GET method or a field of a json that does not validate properly in the case of PUT/POSTS methods |
+| 401 | Unauthorized | The request requires user authentication |
+| 403 | Forbidden | The requested action cannot be carried out on the specified resource. For example, a DELETE operation on a resource that cannot be deleted | 
+| 404 |  Not Found | You cannot perform any operation on the requested resource because server has not found anything matching the Request-URI |
+| 405 | Method Now Allowed | Unable to perform the specified action on the requested resource |
+| 409 | Conflict | The request cannot be completed because there is a problem with the current state of the resource |
+| 410 | Gone | The resource in this endpoint is no longer available. Useful for deprecate older versions of an API |
+|429 | Too Many Request | Request has been denied because exceeded of rate limits |
+
+---
+
+### Annexed 4: 5XX Server Error
+
+They are used to inform the user of errors in valid requests
+
+---
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+| 500 | Internal Server Error | Generic code indicating an unexpected error |
+| 503 | Service Unavailable | The server is currently unable to handle the request due to a temporary overloading or maintenance of the server|
+
+
+
+
+
+
+
 ---
 
 ## Payload formatting
