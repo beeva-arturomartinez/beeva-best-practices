@@ -18,6 +18,9 @@ The TDD concept is generally misunderstood by people. Perhaps the acronym TDD "T
 In practice TDD tends to confuse concepts are interrelated but do not start from the same root:
 > Self -testing -code ! = TDD ! = Unit testing
 
+Self -testing -code ! = TDD , TDD has not primary mission the test coverage. This coverage is a benefit that is obtained by applying the methodology. This means that you can have high test coverage making after developing the product. It isnt´t condition applying TDD or to have high test coverage.
+TDD ! = Unit testing , unit test as much as possible try to be decoupled by definition. In exchange for not applying the compulsory decoupling TDD code is required although it is convenient. Moreover, in many parts of it will be convenient to be a "small" coupled for some tests. Moreover establish any automated test framework is a consequence of applying the methodology.
+
 ### What is TDD?
 As the wikipedia definition
 
