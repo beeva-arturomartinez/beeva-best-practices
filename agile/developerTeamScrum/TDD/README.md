@@ -31,11 +31,11 @@ The definition of wikipedia express:
 ### Advantages and disadvantages
 The main advantages and disadvantages are:
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| Advantages        | disadvantages |
+| ------------- |:-------------:|
+| col 3 is      | right-aligned |
+| col 2 is      | centered      |
+| zebra stripes | are neat      |
 
 ### Cycle of TDD 
 xxxx
