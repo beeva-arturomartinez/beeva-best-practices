@@ -614,6 +614,86 @@ Below is a list of sample implementations of OAuth 2.0:
 ## Errors
 ---
 
+A major element of web services is planning for when things go wrong, and propagating error messages back to client applications. However, REST-based web services do not have a well-defined convention for returning error messages. 
+
+Nonetheless, here are the most important criteria for manage REST API response errors:
+
+1. Error Messages must be readable for humans: Part of the major appeal of REST based web services is that you can open any browser, type in the right URL, and see an immediate response -- no special tools needed. However, HTTP error codes do not always provide enough information and we need to share with client a short description of the error committed. 
+
+2. Application Specific Errors: The response body in errors must have the imprint of the application. 
+
+3. Error Codes must be readable for other applications: As a third criteria, error codes should be easily readable by other applications.
+
+So the best option for response error are:
+
+1. Use HTTP Status Codes for problems specifically related to HTTP, and not specifically related to your web service.
+
+2. When an error occurs, always return an error code and description document detailing this. 
+
+3. Error document must contain both an error code, and a human readable error message.
+
+#### 400: Bad Request
+
+User error. This can mean that a required field or parameter has not been provided, the value supplied is invalid, or the combination of provided fields is invalid.
+
+This error can be thrown when trying to add a duplicate parent to a Drive item. It can also be thrown when trying to add a parent that would create a cycle in the directory graph.
+
+```json
+{
+ 	"error": {
+		"errors": [
+		{
+			"domain": "global",
+			"reason": "badRequest",
+			"message": "Bad Request"
+		}],
+		"code": 400,
+		"message": "Bad Request"
+	}
+}
+```
+or
+
+```json
+{
+	"generalError": {
+		"codeError": "0003",
+		"description": "El atributo 'managedMerchantId' es obligatorio."
+	}
+}
+```
+
+#### 401: Invalid Credentials
+
+Invalid authorization header. The access token you're using is either expired or invalid.
+
+```json
+{
+	"error": {
+		"errors": [
+		{
+			"domain": "global",
+			"reason": "authError",
+			"message": "Invalid Credentials",
+			"locationType": "header",
+			"location": "Authorization",
+		}],
+		"code": 401,
+		"message": "Invalid Credentials"
+	}
+}
+```
+or
+
+```json
+{
+	"generalError": {
+		"codeError": "0200",
+		"description": "No está autorizado a acceder al recurso."
+	}
+}
+```
+
 ## Status and Health endpoints
 ---
 
