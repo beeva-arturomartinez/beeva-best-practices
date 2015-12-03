@@ -31,11 +31,14 @@ The definition of wikipedia express:
 ### Advantages and disadvantages
 The main advantages and disadvantages are:
 
-| Advantages        | disadvantages |
-| ------------- |:-------------:|
-| col 3 is      | right-aligned |
-| col 2 is      | centered      |
-| zebra stripes | are neat      |
+| Advantages                                 | disadvantages |
+| :-------------:                            |:-------------:|
+| The tests act as low documentation         | right-aligned |
+| Debugging less time                        | centered      |
+| Higher quality software                    | are neat      |
+| Higher quality software                    | are neat      |
+| Higher quality software                    | are neat      |
+| Higher quality software                    | are neat      |
 
 ### Cycle of TDD 
 xxxx
