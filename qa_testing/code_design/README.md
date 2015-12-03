@@ -663,6 +663,7 @@ You can find more detailed information in the [http://www.enterpriseintegrationp
         ![alt text](static/EncapsulatedSynchronousIntegration.gif)
 
     - Solution
+
 		Develop each application as a large-scale object or component with encapsulated data. Provide an interface to allow other applications to interact with the running application.
 
  - **Messaging**
@@ -685,6 +686,7 @@ You can find more detailed information in the [http://www.enterpriseintegrationp
         ![alt text](static/MessageChannelSolution.gif)
 
     - Solution
+
 		Connect the applications using a Message Channel, where one application writes information to the channel and the other one reads that information from the channel.
 
  - **Message**
@@ -1285,6 +1287,7 @@ You can find more detailed information in the [http://www.enterpriseintegrationp
 
  - **Wire Tap**
 	- Problem
+
 		How do you inspect messages that travel on a point-to-point channel?
 
         ![alt text](static/WireTap.gif)
