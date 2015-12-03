@@ -15,6 +15,8 @@
 
 ### TDD "The Great Unknown" 
 The TDD concept is generally misunderstood by people. Perhaps the acronym TDD "Test-driven development " are not the most convenient. The "T" of TDD cheats a bit for TDD is not a testing methodology else a development methodology and design software.
+In practice TDD tends to confuse concepts are interrelated but do not start from the same root:
+<"Self -testing -code ! = TDD ! = Unit testing"
 
 ### What is TDD?
 As the wikipedia definition
