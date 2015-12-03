@@ -32,7 +32,7 @@ The definition of wikipedia express:
 The main advantages and disadvantages are:
 
 | Advantages                                 | disadvantages |
-| :-------------:                            |:-------------:|
+| :-------------                             |:-------------|
 | The tests act as low documentation         | Always focus on micro design |
 | Debugging less time                        | The developer makes testing : it goes against good testing practices |
 | Higher quality software                    | More development time delay so the feedback to the user |
