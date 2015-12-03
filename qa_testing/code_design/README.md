@@ -20,6 +20,7 @@ At this point we're going to talk about the code design best practices.
 		* [Creational Patterns](#creational-patterns)
 		* [Structural Patterns](#structural-patterns)
 		* [Behavioral Patterns](#behavioral-patterns)
+    * [Model View Controller Pattern](#model-view-controller-pattern)
     * [Integration Patterns](#integration-patterns)
     	* [Integration Styles](#integration-styles)
     	* [Messaging Systems](#messaging-systems)
@@ -135,8 +136,8 @@ One of the most used tool for this goal is [Sonar](http://www.sonarqube.org/). N
 Other tools that helps you depending on the programming language:
 
 * **Java**: [Checkstyle](http://checkstyle.sourceforge.net/) and [PMD](https://pmd.github.io/) with maven plugin, allow to configure some configuration rules and test that your code is fine when you build your java application, preserving for deployment server errors. You should configure the same rules than sonar. Other usefull tool is [FindBugs](http://findbugs.sourceforge.net/) .
-* **Python**: [Pylint](http://www.pylint.org/) 
-* **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle) 
+* **Python**: [Pylint](http://www.pylint.org/)
+* **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle)
 
 
 ## Code Design Patterns
@@ -596,6 +597,33 @@ These design patterns are specifically concerned with communication between obje
 		- The operations must executed in a different way for the distinct classes.
 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Visitor_pattern)
+
+##### Model View Controller Pattern
+
+This pattern separates a component or a subsystem in three logical parts (model, view and controller), doing easier to change each part. For this pattern we are not going to describe with an UML diagram, is more representative and intuitive the graph below:
+
+![alt text](static/MVC_pattern.gif)
+
+At this point we are going to describe the three components:
+
+- **Model**
+
+	Model represents the application state. It can also have logic to update controller if its data changes.
+
+- **View**
+
+	View represents the visualization of the data that model contains.
+- **Controller**
+
+	Controller acts on both model and view. It controls the data flow into model object and updates the view whenever data changes. It keeps view and model separate.
+
+Although originally developed for desktop computing, there are many implementations of this pattern in the web.
+
+Early web MVC frameworks took a thin client approach that placed almost the entire model, view and controller logic on the server. In this approach, the client sends either hyperlink requests or form input to the controller and then receives a complete and updated web page (or other document) from the view; the model exists entirely on the server.
+
+As client technologies have matured, the new frameworks allow to the MVC components to execute partly on the client.
+
+You can find more information on this [link](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller)
 
 #### Integration Patterns
 
