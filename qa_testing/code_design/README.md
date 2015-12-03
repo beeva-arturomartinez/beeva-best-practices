@@ -141,7 +141,6 @@ Other tools that helps you depending on the programming language:
 
 
 ## Code Design Patterns
----
 #### Introduction of code design patterns
 The design patterns are solutions to common problems in the software development. They are defined by experienced programmers that seen a common ways to solve the similar problems.
 
@@ -598,7 +597,7 @@ These design patterns are specifically concerned with communication between obje
 
 	You can find more detailed explanation in this [link](https://en.wikipedia.org/wiki/Visitor_pattern)
 
-##### Model View Controller Pattern
+#### Model View Controller Pattern
 
 This pattern separates a component or a subsystem in three logical parts (model, view and controller), doing easier to change each part. For this pattern we are not going to describe with an UML diagram, is more representative and intuitive the graph below:
 
