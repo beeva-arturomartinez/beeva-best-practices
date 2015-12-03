@@ -1,16 +1,29 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. Node.js Style Guide
-At this point we're going to talk about...
+# Node.js Style Guide & Best Pratices
+At this point we're going to talk about nodeJS, we're useing nodeJS to develop lightweight and efficient network apps using an event-driven, non-blocking I/O on the top of Chrome's V8 JavaScript engine.
 
 ![alt text](static/nodejs.png "nodeJS")
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
-* [References](#references)
+## [Frameworks](#nodejs-frameworks)
+* [Introduction, best practices, antipatterns](#nodejs-frameworks-best-practices)
+* [ExpressJS](#nodejs-frameworks-express)
+* [Hapi](#nodejs-frameworks-hapi)
+* [Restify](#nodejs-frameworks-restify)
+
+## [DevOps](#nodejs-devops)
+* [Scaffolding](#nodejs-devops-scaffolding)
+* [Security](#nodejs-devops-security)
+* [Log](#nodejs-devops-log)
+* [Clustering](#nodejs-devops-clustering)
+* [Cloud](#nodejs-devops-cloud)
+
+## [Testing](#nodejs-testing)
+* [TDD with Mocha](#nodejs-testing-mocha)
+* [BDD with Cucumber](#nodejs-testing-cucumber)
 
 ### The Fellowship of the Ring 
+
 Some code examples: 
 ````javascript
     var http = require('http');
@@ -42,7 +55,6 @@ A nice table
 
 ### References
 
-* [Link](http://www.url.to) Description
 * [nodejs.org](http://www.nodejs.org) API & Docs
 * [Overapi Cheatsheet](http://overapi.com/nodejs/) A node.js full cheatsheet
 
