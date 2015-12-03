@@ -31,13 +31,99 @@ At this point we're going to talk about...
 
 ## Status codes
 
+When you are developing a REST API, a common doubt is what status code use in response.  
+
 ### Introduction
 
 One of the most important point, while you are designing an API Rest, is correctly choose how we will inform our customers of the status of their requests. Since one of the main features of the REST services is that they are built on HTTP protocol, the best way to inform the user will be to use HTTP status codes.
 
 It is a good practice to add to the response of REST services a new field "result" which contains HTTP status code number and a more descriptive message related to contexts of the request.
 
-### 2XX Success
+### New Resources
+
+When you are creating new resources, you have to report to client that these resources has been created.
+
+Method: POST (We can also use PUT method intead of POST, but POST it's most recomended for creating resources).
+
+---
+
+|Result 			|Code 	|Response Body 			|
+| ----------------------- | ---------- | ------------------------------------- |
+|Sucessful created	|201		|Empty					|
+|Bad Request		|400		|codeError and description	|
+|Invalid credentials	|401		|codeError and description	|
+
+---
+
+### Update Resources
+
+When you are updating existing resources, you have to report to client that these resources has been updated.
+
+Method: PUT (We can also use POST method intead of PUT, but PUT it's most recomended for updating resources).
+
+---
+
+|Result 			|Code 	|Response Body	 					|
+| ----------------------- | ----------- | ------------------------------------------------------- |
+|Sucessful updated	|200		|Empty or fields of updated resource		|
+|Bad Request		|400		|codeError and description recommended	|
+|Invalid credentials	|401		|codeError and description recommended	|
+|Resource not found|404	|Empty								|
+
+---
+
+### Query a Resource
+
+When you are querying an unique and existing resource, you have to report to client the content of this resource.
+
+Method: GET.
+
+---
+
+|Result 				|Code 	|Response Body 						|
+| ------------------------------ | ---------- | ------------------------------------------------------- |
+|Resource founded		|200		|Resource with partially or fully data		|
+|Resource don't exists	|204		|Empty								|
+|Bad Request			|400		|codeError and description recommended	|
+|Invalid credentials		|401		|codeError and description recommended	|
+|Resource not found	|404		|Empty								|
+
+---
+
+### Query Resource List by pattern or all resources
+
+When you are querying a list of resources by certain pattern, you have to report to client at least a list with some info about these resources.
+
+It's also recommended to return info about pagination like total number of resources in list, number of pages, current page, etc....
+
+Method: GET.
+
+---
+
+|Result 				|Code 	|Response Body 						|
+| ------------------------------ | ---------- | ------------------------------------------------------- |
+|Resources founded	|200		|Resource list with partial or full data		|
+|Resources not founded	|204		|Empty								|
+|Resources paginated	|206		|Resource list with pagination info		|
+|Bad Request			|400		|codeError and description recommended	|
+|Invalid credentials		|401		|codeError and description recommended	|
+
+---
+
+### General Purpose
+
+There are other status codes than have to be taken into account:
+
+---
+
+|Action										|Code 	| Example							|
+| -------------------------------------------------------------------- | ---------- | -------------------------------------------------------- |
+|Request to non-existent or without sense method	| 405	| PUT over all resource collection			|
+|Request to existent resource with invalid headers	| 412	| One header is no correct or field missed	|
+
+---
+
+### Annexed 1: 2XX Success
 
 These status codes are informative and tell the user that his request has been processed correctly.
 
@@ -53,7 +139,7 @@ These status codes are informative and tell the user that his request has been p
 
 ---
 
-### 3XX Redirection
+### Annexed 2: 3XX Redirection
 
 These response codes indicate to the user to do any additional actions to complete his request
 
@@ -65,7 +151,7 @@ These response codes indicate to the user to do any additional actions to comple
 
 ---
 
-### 4XX Client Error
+### Annexed 3: 4XX Client Error
 
 These response codes are used to tell the client that there are some type of error in his request and he have to fix it before send another request
 
@@ -83,7 +169,7 @@ These response codes are used to tell the client that there are some type of err
 
 ---
 
-5XX Server Error
+### Annexed 4: 5XX Server Error
 
 They are used to inform the user of errors in valid requests
 
