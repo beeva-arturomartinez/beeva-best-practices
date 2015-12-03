@@ -635,24 +635,29 @@ You can find more detailed information in the [http://www.enterpriseintegrationp
 ##### Integration Styles
  - **File Transfer**
 	- Problem
+
 		How can I integrate multiple applications so that they work together and can exchange information?
 
 		![alt text](static/FileTransferIntegration.gif)
 
     - Solution
+
 		Have each application produce files containing information that other applications need to consume. Integrators take the responsibility of transforming files into different formats. Produce the files at regular intervals according to the nature of the business.
 
  - **Shared Database**
 	- Problem
+
 		How can I integrate multiple applications so that they work together and can exchange information?
 
         ![alt text](static/SharedDatabaseIntegration.gif)
 
     - Solution
+
 		Integrate applications by having them store their data in a single Shared Database.
 
  - **Remote Procedure**
 	- Problem
+
 		How can I integrate multiple applications so that they work together and can exchange information?
 
         ![alt text](static/EncapsulatedSynchronousIntegration.gif)
@@ -662,16 +667,19 @@ You can find more detailed information in the [http://www.enterpriseintegrationp
 
  - **Messaging**
 	- Problem
+
 		How can I integrate multiple applications so that they work together and can exchange information?
 
         ![alt text](static/Messaging.gif)
 
     - Solution
+
 		Use Messaging to transfer packets of data frequently, immediately, reliably, and asynchronously, using customizable formats.
 
 ##### Messaging Systems
  - **Message Channel**
 	- Problem
+
 		How does one application communicate with another using messaging?
 
         ![alt text](static/MessageChannelSolution.gif)
@@ -681,490 +689,598 @@ You can find more detailed information in the [http://www.enterpriseintegrationp
 
  - **Message**
 	- Problem
+
 		How can two applications connected by a message channel exchange a piece of information?
 
         ![alt text](static/MessageSolution.gif)
 
     - Solution
+
 		Package the information into a Message, a data record that the messaging system can transmit through a message channel.
 
  - **Pipes and Filters**
 	- Problem
+
 		How can we perform complex processing on a message while maintaining independence and flexibility?
 
         ![alt text](static/PipesAndFilters.gif)
 
     - Solution
+
 		Use the Pipes and Filters architectural style to divide a larger processing task into a sequence of smaller, independent processing steps (Filters) that are connected by channels (Pipes).
 
  - **Message Router**
 	- Problem
+
 		How can you decouple individual processing steps so that messages can be passed to different filters depending on a set of conditions?
 
         ![alt text](static/MessageRouter.gif)
 
     - Solution
+
 		Insert a special filter, a Message Router, which consumes a Message from one Message Channel and republishes it to a different Message Channel channel depending on a set of conditions.
 
  - **Message Translator**
 	- Problem
+
 		How can systems using different data formats communicate with each other using messaging?
 
         ![alt text](static/MessageTranslator.gif)
 
     - Solution
+
 		Use a special filter, a Message Translator, between other filters or applications to translate one data format into another.
 
  - **Message Endpoint**
 	- Problem
+
 		How does an application connect to a messaging channel to send and receive messages?
 
         ![alt text](static/MessageEndpointSolution.gif)
 
     - Solution
+
 		Connect an application to a messaging channel using a Message Endpoint, a client of the messaging system that the application can then use to send or receive messages.
 
 ##### Messaging Channels
  - **Point-to-Point Channel**
 	- Problem
+
 		How can the caller be sure that exactly one receiver will receive the document or perform the call?
 
         ![alt text](static/PointToPointSolution.gif)
 
     - Solution
+
 		Send the message on a Point-to-Point Channel, which ensures that only one receiver will receive a particular message.
 
  - **Publish-Subscribe Channel**
 	- Problem
+
 		How can the sender broadcast an event to all interested receivers?
 
         ![alt text](static/PublishSubscribeSolution.gif)
 
     - Solution
+
 		Send the event on a Publish-Subscribe Channel, which delivers a copy of a particular event to each receiver.
 
  - **Datatype Channel**
 	- Problem
+
 		How can the application send a data item such that the receiver will know how to process it?
 
         ![alt text](static/DatatypeSolution.gif)
 
     - Solution
+
 		Use a separate Datatype Channel for each data type, so that all data on a particular channel is of the same type.
 
  - **Invalid Message Channel**
 	- Problem
+
 		How can a messaging receiver gracefully handle receiving a message that makes no sense?
 
         ![alt text](static/InvalidMessageSolution.gif)
 
     - Solution
+
 		The receiver should move the improper message to an Invalid Message Channel, a special channel for messages that could not be processed by their receivers.
 
  - **Dead Letter Channel**
 	- Problem
+
 		What will the messaging system do with a message it cannot deliver?
 
         ![alt text](static/DeadLetterChannelSolution.gif)
 
     - Solution
+
 		When a messaging system determines that it cannot or should not deliver a message, it may elect to move the message to a Dead Letter Channel.
 
  - **Guaranteed Delivery**
 	- Problem
+
 		How can the sender make sure that a message will be delivered, even if the messaging system fails?
 
         ![alt text](static/GuaranteedMessagingSolution.gif)
 
     - Solution
+
 		Use Guaranteed Delivery to make messages persistent so that they are not lost even if the messaging system crashes.
 
  - **Channel Adapter**
 	- Problem
+
 		How can you connect an application to the messaging system so that it can send and receive messages?
 
         ![alt text](static/ChannelAdapterSolution.gif)
 
     - Solution
+
 		Use a Channel Adapter that can access the application's API or data and publish messages on a channel based on this data, and that likewise can receive messages and invoke functionality inside the application.
 
  - **Messaging Bridge**
 	- Problem
+
 		How can multiple messaging systems be connected so that messages available on one are also available on the others?
 
         ![alt text](static/MessagingBridge.gif)
 
     - Solution
+
 		Use a Messaging Bridge, a connection between messaging systems, to replicate messages between systems.
 
  - **Message Bus**
 	- Problem
+
 		What is an architecture that enables separate applications to work together, but in a decoupled fashion such that applications can be easily added or removed without affecting the others?
 
         ![alt text](static/MessageBusSolution.gif)
 
     - Solution
+
 		Structure the connecting middleware between these applications as a Message Bus that enables them to work together using messaging.
 
 ##### Message Construction
  - **Command Message**
 	- Problem
+
 		How can messaging be used to invoke a procedure in another application?
 
         ![alt text](static/CommandMessageSolution.gif)
 
     - Solution
+
 		Use a Command Message to reliably invoke a procedure in another application.
 
  - **Document Message**
 	- Problem
+
 		How can messaging be used to transfer data between applications?
 
         ![alt text](static/DocumentMessageSolution.gif)
 
     - Solution
+
 		Use a Document Message to reliably transfer a data structure between applications.
 
  - **Event Message**
 	- Problem
+
 		How can messaging be used to transmit events from one application to another?
 
         ![alt text](static/EventMessageSolution.gif)
 
     - Solution
+
 		Use an Event Message for reliable, asynchronous event notification between applications.
 
  - **Request-Reply**
 	- Problem
+
 		When an application sends a message, how can it get a response from the receiver?
 
         ![alt text](static/RequestReply.gif)
 
     - Solution
+
 		Send a pair of Request-Reply messages, each on its own channel.
 
  - **Return Address**
 	- Problem
+
 		How does a replier know where to send the reply?
 
         ![alt text](static/ReturnAddressSolution.gif)
 
     - Solution
+
 		The request message should contain a Return Address that indicates where to send the reply message.
 
  - **Correlation Identifier**
 	- Problem
+
 		How does a requestor that has received a reply know which request this is the reply for?
 
         ![alt text](static/CorrelationIdentifierSolution.gif)
 
     - Solution
+
 		Each reply message should contain a Correlation Identifier, a unique identifier that indicates which request message this reply is for.
 
  - **Message Sequence**
 	- Problem
+
 		How can messaging transmit an arbitrarily large amount of data?
 
         ![alt text](static/MessageSequenceSize.gif)
 
     - Solution
+
 		Whenever a large set of data may need to be broken into message-size chunks, send the data as a Message Sequence and mark each message with sequence identification fields.
 
  - **Message Expiration**
 	- Problem
+
 		How can a sender indicate when a message should be considered stale and thus shouldn’t be processed?
 
         ![alt text](static/MessageExpirationSolution.gif)
 
     - Solution
+
 		Set the Message Expiration to specify a time limit how long the message is viable.
 
  - **Format Indicator**
 	- Problem
+
 		How can a message’s data format be designed to allow for possible future changes?
 
     - Solution
+
 		Design a data format that includes a Format Indicator, so that the message specifies what format it is using.
 
 ##### Message Routing
  - **Content-Based Router**
 	- Problem
+
 		How do we handle a situation where the implementation of a single logical function (e.g., inventory check) is spread across multiple physical systems? 
 
         ![alt text](static/ContentBasedRouter.gif)
 
     - Solution
+
 		Use a Content-Based Router to route each message to the correct recipient based on message content.
 
  - **Message Filter**
 	- Problem
+
 		How can a component avoid receiving uninteresting messages?
 
         ![alt text](static/MessageFilter.gif)
 
     - Solution
+
 		Use a special kind of Message Router, a Message Filter, to eliminate undesired messages from a channel based on a set of criteria.
 
  - **Dynamic Router**
 	- Problem
+
 		How can you avoid the dependency of the router on all possible destinations while maintaining its efficiency?
 
         ![alt text](static/DynamicRouter.gif)
 
     - Solution
+
 		Use a Dynamic Router, a Router that can self-configure based on special configuration messages from participating destinations.
 
  - **Recipient List**
 	- Problem
+
 		How do we route a message to a list of dynamically specified recipients?
 
         ![alt text](static/RecipientList.gif)
 
     - Solution
+
 		Define a channel for each recipient. Then use a Recipient List to inspect an incoming message, determine the list of desired recipients, and forward the message to all channels associated with the recipients in the list.
 
  - **Splitter**
 	- Problem
+
 		How can we process a message if it contains multiple elements, each of which may have to be processed in a different way?
 
         ![alt text](static/Sequencer.gif)
 
     - Solution
+
 		Use a Splitter to break out the composite message into a series of individual messages, each containing data related to one item.
 
  - **Aggregator**
 	- Problem
+
 		How do we combine the results of individual, but related messages so that they can be processed as a whole?
 
         ![alt text](static/Aggregator.gif)
 
     - Solution
+
 		Use a stateful filter, an Aggregator, to collect and store individual messages until a complete set of related messages has been received. Then, the Aggregator publishes a single message distilled from the individual messages.
 
  - **Resequencer**
 	- Problem
+
 		How can we get a stream of related but out-of-sequence messages back into the correct order?
 
         ![alt text](static/Resequencer.gif)
 
     - Solution
+
 		Use a stateful filter, a Resequencer, to collect and re-order messages so that they can be published to the output channel in a specified order.
 
  - **Composed Message Processor**
 	- Problem
+
 		How can you maintain the overall message flow when processing a message consisting of multiple elements, each of which may require different processing?
 
         ![alt text](static/DistributionAggregate.gif)
 
     - Solution
+
 		Use Composed Message Processor to process a composite message. The Composed Message Processor splits the message up, routes the sub-messages to the appropriate destinations and re-aggregates the responses back into a single message.
 
  - **Scatter-Gather**
 	- Problem
+
 		How do you maintain the overall message flow when a message needs to be sent to multiple recipients, each of which may send a reply?
 
         ![alt text](static/BroadcastAggregate.gif)
 
     - Solution
+
 		Use a Scatter-Gather that broadcasts a message to multiple recipients and re-aggregates the responses back into a single message.
 
  - **Routing Slip**
 	- Problem
+
 		How do we route a message consecutively through a series of processing steps when the sequence of steps is not known at design-time and may vary for each message?
 
         ![alt text](static/RoutingTableSimple.gif)
 
     - Solution
+
 		Attach a Routing Slip to each message, specifying the sequence of processing steps. Wrap each component with a special message router that reads the Routing Slip and routes the message to the next component in the list.
 
  - **Process Manager**
 	- Problem
+
 		How do we route a message through multiple processing steps when the required steps may not be known at design-time and may not be sequential?
 
         ![alt text](static/ProcessManager.gif)
 
     - Solution
+
 		Use a central processing unit, a Process Manager, to maintain the state of the sequence and determine the next processing step based on intermediate results.
 
  - **Message Broker**
 	- Problem
+
 		How can you decouple the destination of a message from the sender and maintain central control over the flow of messages?
 
         ![alt text](static/MessageBroker.gif)
 
     - Solution
+
 		Use a central Message Broker that can receive messages from multiple destinations, determine the correct destination and route the message to the correct channel. Implement the internals of the Message Broker using the design patterns presented in this chapter.
 
 ##### Message Transformation
  - **Envelope Wrapper**
 	- Problem
+
 		How can existing systems participate in a messaging exchange that places specific requirements on the message format, such as message header fields or encryption?
 
         ![alt text](static/Wrapper.gif)
 
     - Solution
+
 		Use a Envelope Wrapper to wrap application data inside an envelope that is compliant with the messaging infrastructure. Unwrap the message when it arrives at the destination.
 
  - **Content Enricher**
 	- Problem
+
 		How do we communicate with another system if the message originator does not have all the required data items available?
 
         ![alt text](static/DataEnricher.gif)
 
     - Solution
+
 		Use a specialized transformer, a Content Enricher, to access an external data source in order to augment a message with missing information.
 
  - **Content Filter**
 	- Problem
+
 		How do you simplify dealing with a large message, when you are interested only in a few data items?
 
         ![alt text](static/ContentFilter.gif)
 
     - Solution
+
 		Use a Content Filter to remove unimportant data items from a message leaving only important items.
 
  - **Claim Check**
 	- Problem
+
 		How can we reduce the data volume of message sent across the system without sacrificing information content?
 
         ![alt text](static/StoreInLibrary.gif)
 
     - Solution
+
 		Store message data in a persistent store and pass a Claim Check to subsequent components. These components can use the Claim Check to retrieve the stored information.
 
  - **Normalizer**
 	- Problem
+
 		How do you process messages that are semantically equivalent, but arrive in a different format?
 
         ![alt text](static/NormalizerDetail.gif)
 
     - Solution
+
 		Use a Normalizer to route each message type through a custom Message Translator so that the resulting messages match a common format.
 
  - **Canonical Data Model**
 	- Problem
+
 		How can you minimize dependencies when integrating applications that use different data formats?
 
         ![alt text](static/CanonicalDataModel.gif)
 
     - Solution
+
 		Therefore, design a Canonical Data Model that is independent from any specific application. Require each application to produce and consume messages in this common format.
 
 ##### Messaging Endpoints
  - **Messaging Gateway**
 	- Problem
+
 		How do you encapsulate access to the messaging system from the rest of the application?
 
         ![alt text](static/MessagingGatewaySolution.gif)
 
     - Solution
+
 		Use a Messaging Gateway, a class than wraps messaging-specific method calls and exposes domain-specific methods to the application.
 
  - **Messaging Mapper**
 	- Problem
+
 		How do you move data between domain objects and the messaging infrastructure while keeping the two independent of each other?
 
         ![alt text](static/MessagingMapperClassDiagram.gif)
 
     - Solution
+
 		Create a separate Messaging Mapper that contains the mapping logic between the messaging infrastructure and the domain objects. Neither the objects nor the infrastructure have knowledge of the Messaging Mapper's existence.
 
  - **Transactional Client**
 	- Problem
+
 		How can a client control its transactions with the messaging system?
 
         ![alt text](static/TransactionalClientSolution.gif)
 
     - Solution
+
 		Use a Transactional Client—make the client’s session with the messaging system transactional so that the client can specify transaction boundaries.
 
  - **Polling Consumer**
 	- Problem
+
 		How can an application consume a message when the application is ready?
 
         ![alt text](static/PollingConsumerSolution.gif)
 
     - Solution
+
 		The aplication should use a Polling Consumer, one that explicitly makes a call when it wants to receive a message.
 
  - **Event-Driven Consumer**
 	- Problem
+
 		How can an application automatically consume messages as they become available?
 
         ![alt text](static/EventDrivenConsumerSolution.gif)
 
     - Solution
+
 		The application should use an Event-Driven Consumer, one that is automatically handed messages as they’re delivered on the channel.
 
  - **Competing Consumers**
 	- Problem
+
 		How can a messaging client process multiple messages concurrently?
 
         ![alt text](static/CompetingConsumers.gif)
 
     - Solution
+
 		Create multiple Competing Consumers on a single channel so that the consumers can process multiple messages concurrently.
 
  - **Message Dispatcher**
 	- Problem
+
 		How can multiple consumers on a single channel coordinate their message processing?
 
         ![alt text](static/MessageDispatcher.gif)
 
     - Solution
+
 		Create a Message Dispatcher on a channel that will consume messages from a channel and distribute them to performers.
 
  - **Selective Consumer**
 	- Problem
+
 		How can a message consumer select which messages it wishes to receive?
 
         ![alt text](static/MessageSelectorSolution.gif)
 
     - Solution
+
 		Make the consumer a Selective Consumer, one that filteres the messages delivered by its channel so that it only receives the ones that match its criteria.
 
  - **Durable Subscriber**
 	- Problem
+
 		How can a subscriber avoid missing messages while it’s not listening for them?
 
         ![alt text](static/DurableSubscriptionSolution.gif)
 
     - Solution
+
 		Use a Durable Subscriber to make the messaging system save messages published while the subscriber is disconnected.
 
  - **Idempotent Receiver**
 	- Problem
+
 		How can a message receiver deal with duplicate messages?
 
     - Solution
+
 		Design a receiver to be an Idempotent Receiver--one that can safely receive the same message multiple times.
 
  - **Service Activator**
 	- Problem
+
 		How can an application design a service to be invoked both via various messaging technologies and via non-messaging techniques?
 
         ![alt text](static/MessagingAdapterSolution.gif)
 
     - Solution
+
 		Design a Service Activator that connects the messages on the channel to the service being accessed.
 
 ##### System Management
  - **Control Bus**
 	- Problem
+
 		How can we effectively administer a messaging system that is distributed across multiple platforms and a wide geographic area?
 
         ![alt text](static/ControlBus.gif)
 
     - Solution
+
 		Use a Control Bus to manage an enterprise integration system. The Control Bus uses the same messaging mechanism used by the application data, but uses separate channels to transmit data that is relevant to the management of components involved in the message flow.
 
  - **Detour**
 	- Problem
+
 		How can you route a message through intermediate steps to perform validation, testing or debugging functions?
 
         ![alt text](static/Detour.gif)
 
     - Solution
+
 		Construct a Detour with a context-based router controlled via the Control Bus. In one state the router routes incoming messages through additional steps while in the other it routes messages directly to the destination channel.
 
  - **Wire Tap**
@@ -1174,51 +1290,62 @@ You can find more detailed information in the [http://www.enterpriseintegrationp
         ![alt text](static/WireTap.gif)
 
     - Solution
+
 		Insert a simple Recipient List into the channel that publishes each incoming message to the main channel and a secondary channel.
 
  - **Message History**
 	- Problem
+
 		How can we effectively analyze and debug the flow of messages in a loosely coupled system?
 
         ![alt text](static/MessageHistory.gif)
 
     - Solution
+
 		Therefore, attach a Message History to the message. The Message History is a list of all applications that the message passed through since its origination.
 
  - **Message Store**
 	- Problem
+
 		How can we report against message information without disturbing the loosely coupled and transient nature of a messaging system?
 
         ![alt text](static/MessageStore.gif)
 
     - Solution
+
 		Use a Message Store to capture information about each message in a central location.
 
  - **Smart Proxy**
 	- Problem
+
 		How can you track messages on a service that publishes reply messages to the Return Address specified by the requestor?
 
         ![alt text](static/SmartProxy.gif)
 
     - Solution
+
 		Use a Smart Proxy to store the Return Address supplied by the original requestor and replace it with the address of the Smart Proxy. When the service sends the reply message route it to the original Return Address.
 
  - **Test Message**
 	- Problem
+
 		What happens, though, if a component is actively processing messages, but garbles outgoing messages due to an internal fault?
 
         ![alt text](static/TestMessage.gif)
 
     - Solution
+
 		Therefore, use Test Message to assure the health of message processing components.
 
  - **Channel Purger**
 	- Problem
+
 		How can you keep 'left-over' messages on a channel from disturbing tests or running systems?
 
         ![alt text](static/ChannelPurger.gif)
 
     - Solution
+
 		Use a Channel Purger to remove unwanted messages from a channel.
 
 #### Anti-Patterns
