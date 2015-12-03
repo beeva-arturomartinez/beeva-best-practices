@@ -5,6 +5,7 @@ At this point we're going to talk about best practices to work with git.
 
 * [Prologue](#prologue)
 * [Getting Started](#getting-started)
+	* [Setting up git](setting-up-git)
 	* [gitignore](#gitignore)
 	* [Use the shell](#use-the-shell)
 * [Git Flow](#git-flow)
@@ -23,6 +24,9 @@ At this point we're going to talk about best practices to work with git.
 This guide try to help to working teams to use git and git flows correctly. Is very recommended that all team's members working with git in the same way, for this goal this guide will contain some usefull advices and tips for the correct use of git and help to unify the way of work with it.
 
 ## Getting Started
+
+### Setting up git
+ The first thing to do is setting up git.
 
 ### gitignore
 When you work with git there are some files that's you shouldn't upload to the repository like configuration files, ide files, files with passwords or connection params, etc. For this goal, exists the .gitignore file, and you need create it and include here the list of files or folders to exclude of the version control.
