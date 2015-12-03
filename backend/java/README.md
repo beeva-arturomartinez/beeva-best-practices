@@ -47,12 +47,11 @@ This is how we work with Java at BEEVA.
 ---
 
 ## Hints about code optimization
+### General recommendations
+### Java Enterprise Edition recommendations
 ---
 
 ## References
-
-### General recommendations
-### Java Enterprise Edition recommendations
 ---
 
 * [Sample reference] (http://www.beeva.es) Sample reference description
