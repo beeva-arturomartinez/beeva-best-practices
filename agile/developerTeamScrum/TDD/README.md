@@ -41,7 +41,9 @@ The main advantages and disadvantages are:
 | Solid test coverage                        | |
 
 ### Cycle of TDD 
-xxxx
+The iterative cycle methodology is divided in three easy steps:
+> RED - GREEN - REFACTOR
+
 
 ### Speed is the key 
 xxxx
