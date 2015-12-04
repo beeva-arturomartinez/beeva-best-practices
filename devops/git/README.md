@@ -120,6 +120,14 @@ developments, for example, related with Amazon Web Services should use a pre-com
 To learn deeply about git hooks, please [see documentation](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 
 ### Use tools
+There are a lot of tools and sites to help you to work better with git. List below show you some tools and web sites interesting for work with git:
+
+* [Gitflow tool](https://github.com/nvie/gitflow). A tool that help you to implemet gitflow workflow.
+* [Gitignore.io](https://www.gitignore.io/). A website that generate *.gitignore* file for operating systems, IDEs or programming languages.
+* [Tips and scrpts](http://git-scm.com/book/es/v1/Fundamentos-de-Git-Consejos-y-trucos). A very interesting collection with scripts to do your git experience easier.
+* [.bashrc](static/git_bashrc). Code to add inside ~/.bashrc file and help you to know in wich branch you are.
+
+
 
 
 
