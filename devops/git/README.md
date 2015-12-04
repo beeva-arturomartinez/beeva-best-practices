@@ -126,7 +126,7 @@ There are a lot of tools and sites to help you to work better with git. List bel
 * [Gitflow tool](https://github.com/nvie/gitflow). A tool that help you to implemet gitflow workflow.
 * [Gitignore.io](https://www.gitignore.io/). A website that generate *.gitignore* file for operating systems, IDEs or programming languages.
 * [Tips and scrpts](http://git-scm.com/book/es/v1/Fundamentos-de-Git-Consejos-y-trucos). A very interesting collection with scripts to do your git experience easier.
-* [.bashrc](static/git_bashrc). Code to add inside ~/.bashrc file and help you to know in which branch you are.
+* [.bashrc](static/git_bashrc). Code to add inside *~/.bashrc* file and help you to know in which branch you are.
 
 ### Use ssh key
 Sometimes when we are using as a remote repository as a github, we must write our password in each commit. It's a good practice configure a ssh key to do this task easier and avoid writing password with each git sentence. See example for [GitHub](https://help.github.com/articles/generating-ssh-keys/)
