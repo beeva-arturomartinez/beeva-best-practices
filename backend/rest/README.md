@@ -27,9 +27,9 @@ In this guide we are going to describe the best practices we consider most relev
 According with the wikipedia definition:
 * *Representational State Transfer (REST)* ***is the software architectural style*** *of the World Wide Web. REST gives a coordinated set of constraints to the design of components in a distributed hypermedia system that can lead to a higher-performing and more maintainable architecture.* [[1](#rest_wikipedia)]
 
-In the above definition, we can see that REST is a architectural style not an implementation. An implementation of this architecture is ***RESTFul***. This is a common mistake that some people have. 
+In the above definition, we can see that REST is a architectural style not an implementation. An implementation of this architecture is ***RESTFul***. This is a common mistake that some people have.
 
-The use of REST is often preferred over the more heavyweight SOAP (Simple Object Access Protocol) style because REST does not leverage as much bandwidth, which makes it a better fit for use over the Internet. 
+The use of REST is often preferred over the more heavyweight SOAP (Simple Object Access Protocol) style because REST does not leverage as much bandwidth, which makes it a better fit for use over the Internet.
 
 REST, which typically runs over HTTP (Hypertext Transfer Protocol), has several architectural constraints:
 
@@ -74,7 +74,7 @@ GET /clients/123
 
 #### POST
 
-It introduces an item in the collection represented by the resource. It is used to create a *new* item in the collection, the URI of the final resource will be defined by the server. 
+It introduces an item in the collection represented by the resource. It is used to create a *new* item in the collection, the URI of the final resource will be defined by the server.
 
 ```
 POST /products
@@ -84,7 +84,7 @@ POST /products
 
 #### PUT
 
-PUT operation requests that the entity is stored in the resource indicated. It means that the resource doesn't exist, it creates it. However, if the resource exists, it is overwritten by the given entity. Because of this behavoir, it is idempotent. 
+PUT operation requests that the entity is stored in the resource indicated. It means that the resource doesn't exist, it creates it. However, if the resource exists, it is overwritten by the given entity. Because of this behavoir, it is idempotent.
 
 POST and PUT are similar, POST will be used when we don't know the locality of the resource, and PUT where we know it. For this reason, POST is usually implemented as create operation while PUT can be used as update.
 
@@ -254,7 +254,7 @@ These response codes are used to tell the client that there are some type of err
 | ------------- | -------------| ------------|
 | 400 | Bad Request | The request could not be understood by the server due to malformed syntax. For example, request parameters in bad format in the case of a GET method or a field of a json that does not validate properly in the case of PUT/POSTS methods |
 | 401 | Unauthorized | The request requires user authentication |
-| 403 | Forbidden | The requested action cannot be carried out on the specified resource. For example, a DELETE operation on a resource that cannot be deleted | 
+| 403 | Forbidden | The requested action cannot be carried out on the specified resource. For example, a DELETE operation on a resource that cannot be deleted |
 | 404 |  Not Found | You cannot perform any operation on the requested resource because server has not found anything matching the Request-URI |
 | 405 | Method Now Allowed | Unable to perform the specified action on the requested resource |
 | 409 | Conflict | The request cannot be completed because there is a problem with the current state of the resource |
@@ -286,7 +286,7 @@ They are used to inform the user of errors in valid requests
 
 The payload is the actual data provided in a REST message, the payload does not include the overhead data. That means it is not either the headers or the envelope.
 
-Both the *requests* and the *responses* can have a payload. 
+Both the *requests* and the *responses* can have a payload.
 
 For example, in operations such as GET and DELETE, it does not make sense, because there should not be content in the payload. On the other hand, operations like PUT or POST usually contains a payload with data.
 Most of the responses may contain a payload, for responses with data content and for providing extra information about the success (or not) of the operation.
@@ -428,7 +428,7 @@ Sometimes, at Beeva projects, we use a link node in the responses instead of use
 Make the API Version mandatory and do not release an unversioned API. There are two versioning topics on wich we will talk. The first one is the what versioning specification should we use to release our api. And the second one is how and when should we engage it with our API releasing.
 
 
-####Semantic Versioning
+#### Semantic Versioning
 As a especification of our APIs we use [Semantic Versioning](http://semver.org/). This is an spefication authored by Tom Preston-Werner based on three digits *MAJOR.MINOR.PATCH*
 
 Theses are the main rules about this speficiation
@@ -445,9 +445,6 @@ Theses are the main rules about this speficiation
 
 * Major version X (X.y.z | X > 0) MUST be incremented if any backwards incompatible changes are introduced to the public API. It MAY include minor and patch level changes. Patch and minor version MUST be reset to 0 when major version is incremented.
 
-
->>>>>>> versionado
----
 
 ## API throughput restrictions
 ---
