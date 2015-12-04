@@ -5,7 +5,7 @@ At this point we're going to talk about...
 
 ## Index
 
-* [Introduction](#rest-introduction)
+* [Introduction](#introduction)
 * [URL construction](#url-construction)
 * [Operations over resources](#operations-over-resources)
 * [Status codes](#status-codes)
@@ -14,7 +14,7 @@ At this point we're going to talk about...
 * [Pagination](#pagination)
 * [HATEOAS](#hateoas)
 * [API Versioning](#api-versioning)
-* [API throughput restrictions](api-throughput-restrictions)
+* [API throughput restrictions](#api-throughput-restrictions)
 * [OAuth](#oauth)
 * [Errors](#errors)
 * [Status and Health endpoints](#status-and-health-endpoints)
@@ -22,6 +22,30 @@ At this point we're going to talk about...
 
 ## Introduction
 ---
+In this guide we are going to describe the best practices we consider most relevant at design time for a good REST API.
+
+According with the wikipedia definition:
+* *Representational State Transfer (REST)* ***is the software architectural style*** *of the World Wide Web. REST gives a coordinated set of constraints to the design of components in a distributed hypermedia system that can lead to a higher-performing and more maintainable architecture.* [[1](#rest_wikipedia)]
+
+In the above definition, we can see that REST is a architectural style not an implementation. An implementation of this architecture is ***RESTFul***. This is a common mistake that some people have. 
+
+The use of REST is often preferred over the more heavyweight SOAP (Simple Object Access Protocol) style because REST does not leverage as much bandwidth, which makes it a better fit for use over the Internet. 
+
+REST, which typically runs over HTTP (Hypertext Transfer Protocol), has several architectural constraints:
+
+1. Decouples consumers from producers
+
+2. Stateless existence
+
+3. Able to leverage a cache
+
+4. Leverages a layered system
+
+5. Leverages a uniform interface
+
+The REST style emphasizes that interactions between clients and services is enhanced by having a limited number of operations (verbs). Flexibility is provided by assigning resources (nouns) their own unique Universal Resource Identifiers (URIs). Because each verb has a specific meaning (GET, POST, PUT and DELETE), REST avoids ambiguity.
+
+The use of hypermedia both for application information as to the state transitions of the application: the representation of this state in a REST system are typically HTML, XML or JSON. As a result, it is possible to browse a resource REST to many others simply following links without requiring the use of registries or another additional infrastructure.
 
 ## URL Construction
 ---
@@ -29,13 +53,296 @@ At this point we're going to talk about...
 ## Operations over resources
 ---
 
+The operations over resources are limited, the variety is on the resources. The operations over REST are specified as the standard HTTP methods, it constraints the construction of operations trough these methods.
+
+There are operations that are **idempotent**, it means that it can be called many times without different outcomes. It would not matter if the method is called only once, or ten times over, the system state will be the same.
+
+Moreover, there are **safe operations**, which should never change the resource. These operations could be cached without any consequence to the resource.
+
+### Basic operations
+In a REST implementation there are four basic operations which can be published for a resource.
+
+#### GET
+
+This operation retrieves all the information of a resource, or all resources in a collection (if the resource is a collection). It's a safe operation and it should have not other effect.
+
+```
+GET /clients/123
+
+```
+
+
+#### POST
+
+It introduces an item in the collection represented by the resource. It is used to create a *new* item in the collection, the URI of the final resource will be defined by the server. 
+
+```
+POST /products
+{ "name": "car", "color": "black" }
+```
+
+
+#### PUT
+
+PUT operation requests that the entity is stored in the resource indicated. It means that the resource doesn't exist, it creates it. However, if the resource exists, it is overwritten by the given entity. Because of this behavoir, it is idempotent. 
+
+POST and PUT are similar, POST will be used when we don't know the locality of the resource, and PUT where we know it. For this reason, POST is usually implemented as create operation while PUT can be used as update.
+
+```
+PUT /products/123
+{ "name": "car", "color": "black" }
+```
+
+
+#### DELETE
+
+It deletes the specified resource. Despite the server could return other response if the item already was deleted (the resource does not exist), this operation is idempotent, because the system status will be the same.
+
+```
+DELETE /client/123
+
+```
+
+
+### Extra operations
+
+These are the basic operations, they allow to implement CRUD operations, but there are some extra operations. It can be used in some special requirements.
+
+**HEAD** operation is similar to GET, with the difference that with HEAD operation the data retrieved only includes the header. Normally it is used if the size of content of the resources is large.
+
+All the operations doesn't have to be implemented, with **OPTIONS** operation the client can discover the list of methods implemented for a resource.
+
+The HTTP methods **PATCH** can be used to update partial resources. While PUT operation must take a full resource representation as the request entity (if only few attributes are provided, the others should be removed), PATCH operation allow partial changes to a resource. It is not idempotent. This operation should not be used as a partial data which only will be updated, it should define the 'suboperation' that are going to do over the resource.
+
+```
+PATCH /clients/123
+[
+    { "op": "replace", "path": "/name", "value": "Patricia" }
+]
+```
+
+
+
 ## Status codes
+
+When you are developing a REST API, a common doubt is what status code use in response.  
+
+### Introduction
+
+One of the most important point, while you are designing an API Rest, is correctly choose how we will inform our customers of the status of their requests. Since one of the main features of the REST services is that they are built on HTTP protocol, the best way to inform the user will be to use HTTP status codes.
+
+It is a good practice to add to the response of REST services a new field "result" which contains HTTP status code number and a more descriptive message related to contexts of the request.
+
+### New Resources
+
+When you are creating new resources, you have to report to client that these resources has been created.
+
+Method: POST (We can also use PUT method intead of POST, but POST it's most recomended for creating resources).
+
+---
+
+|Result 			|Code 	|Response Body 			|
+| ----------------------- | ---------- | ------------------------------------- |
+|Sucessful created	|201		|Empty					|
+|Bad Request		|400		|codeError and description	|
+|Invalid credentials	|401		|codeError and description	|
+
+---
+
+### Update Resources
+
+When you are updating existing resources, you have to report to client that these resources has been updated.
+
+Method: PUT (We can also use POST method intead of PUT, but PUT it's most recomended for updating resources).
+
+---
+
+|Result 			|Code 	|Response Body	 					|
+| ----------------------- | ----------- | ------------------------------------------------------- |
+|Sucessful updated	|200		|Empty or fields of updated resource		|
+|Bad Request		|400		|codeError and description recommended	|
+|Invalid credentials	|401		|codeError and description recommended	|
+|Resource not found|404	|Empty								|
+
+---
+
+### Query a Resource
+
+When you are querying an unique and existing resource, you have to report to client the content of this resource.
+
+Method: GET.
+
+---
+
+|Result 				|Code 	|Response Body 						|
+| ------------------------------ | ---------- | ------------------------------------------------------- |
+|Resource founded		|200		|Resource with partially or fully data		|
+|Resource don't exists	|204		|Empty								|
+|Bad Request			|400		|codeError and description recommended	|
+|Invalid credentials		|401		|codeError and description recommended	|
+|Resource not found	|404		|Empty								|
+
+---
+
+### Query Resource List by pattern or all resources
+
+When you are querying a list of resources by certain pattern, you have to report to client at least a list with some info about these resources.
+
+It's also recommended to return info about pagination like total number of resources in list, number of pages, current page, etc....
+
+Method: GET.
+
+---
+
+|Result 				|Code 	|Response Body 						|
+| ------------------------------ | ---------- | ------------------------------------------------------- |
+|Resources founded	|200		|Resource list with partial or full data		|
+|Resources not founded	|204		|Empty								|
+|Resources paginated	|206		|Resource list with pagination info		|
+|Bad Request			|400		|codeError and description recommended	|
+|Invalid credentials		|401		|codeError and description recommended	|
+
+---
+
+### General Purpose
+
+There are other status codes than have to be taken into account:
+
+---
+
+|Action										|Code 	| Example							|
+| -------------------------------------------------------------------- | ---------- | -------------------------------------------------------- |
+|Request to non-existent or without sense method	| 405	| PUT over all resource collection			|
+|Request to existent resource with invalid headers	| 412	| One header is no correct or field missed	|
+
+---
+
+### Annexed 1: 2XX Success
+
+These status codes are informative and tell the user that his request has been processed correctly.
+
+---
+
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+|200 | OK | Request completed successfully. Used mainly in response to GET methods|
+| 201| Created | New resource has been created. Used in response to POST methods |
+|202 | Accepted | Request has been accepted but has not been completed yet. It is a response code which is commonly used for asynchronous processing |
+|204 | No Content | Request has been completed successfully but the method does not return any information. For example, when a resource exists but it does not have information or in response to a DELETE request |
+|206 | Partial Content | Partial response indicates that there are more elements available to return. It is good practice to use the Content-Range header to indicate at what position we are in and how many elements is able to return the service |
+
+---
+
+### Annexed 2: 3XX Redirection
+
+These response codes indicate to the user to do any additional actions to complete his request
+
+---
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+| 301 | Moved Permanently | The requested resource has been assigned a new permanent URI and any future references to this resource should use one of the returned URIs. |
+| 304 | Not Modified | In HEAD and GET requests indicates that the requested resource has not changed since the last request received. Mostly used in caching systems |
+
+---
+
+### Annexed 3: 4XX Client Error
+
+These response codes are used to tell the client that there are some type of error in his request and he have to fix it before send another request
+
+---
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+| 400 | Bad Request | The request could not be understood by the server due to malformed syntax. For example, request parameters in bad format in the case of a GET method or a field of a json that does not validate properly in the case of PUT/POSTS methods |
+| 401 | Unauthorized | The request requires user authentication |
+| 403 | Forbidden | The requested action cannot be carried out on the specified resource. For example, a DELETE operation on a resource that cannot be deleted | 
+| 404 |  Not Found | You cannot perform any operation on the requested resource because server has not found anything matching the Request-URI |
+| 405 | Method Now Allowed | Unable to perform the specified action on the requested resource |
+| 409 | Conflict | The request cannot be completed because there is a problem with the current state of the resource |
+| 410 | Gone | The resource in this endpoint is no longer available. Useful for deprecate older versions of an API |
+|429 | Too Many Request | Request has been denied because exceeded of rate limits |
+
+---
+
+### Annexed 4: 5XX Server Error
+
+They are used to inform the user of errors in valid requests
+
+---
+|Code      | Message |  Description |
+| ------------- | -------------| ------------|
+| 500 | Internal Server Error | Generic code indicating an unexpected error |
+| 503 | Service Unavailable | The server is currently unable to handle the request due to a temporary overloading or maintenance of the server|
+
+
+
+
+
+
+
 ---
 
 ## Payload formatting
 ---
 
+The payload is the actual data provided in a REST message, the payload does not include the overhead data. That means it is not either the headers or the envelope.
+
+Both the *requests* and the *responses* can have a payload. 
+
+For example, in operations such as GET and DELETE, it does not make sense, because there should not be content in the payload. On the other hand, operations like PUT or POST usually contains a payload with data.
+Most of the responses may contain a payload, for responses with data content and for providing extra information about the success (or not) of the operation.
+
+There are many formats as payload, the most used are **JSON** and **XML** though. The structure for a payload depends on the information that is represented on it. It will not be the same for an item creation, error content response, successful message, etc.
+
+**Respecting status codes** - It's a bad practice to send a response with status 200, and return in the payload the detail that the response was not successful, with a particular messages result format for our API. The status code for a response must be used to define how was it, don't use the payload to specify the nature of the response. The payload should be used in that case to specify the detail of the operation result.
+
+Sometimes, our API can be prepared to return the responses in xml or json format, the client should specify the format required. There are two ways to define the format of the response expected:
+* Accept header: Indicating in the _Accept_ http header what are the contents types accepted. The request put _application/xml_ or _application/json_ to ask for a xml or json response format.
+* Extension: other way to specify the response format is indicating the extension on the resource. For example, GET _/api/resource.xml?param=value_ or _/api/resource.json?param=value_.
+
+
 ## Filters
+
+There are several ways to filter the resources of a REST Api. However is a good practice to design an API with the next four features
+
+### Filtering
+
+Avoid use one unique parameter for filtering all fields, is a much better approach to use one parameter for each field to filter. Use multiple values separted by comma if you need to filter a resource by multiple field values.
+
+---
+```html
+GET /campaigns?status=computed&provider=CVIP,BBVA
+```
+---
+
+### Sorting
+
+Generic parameter "sort" can be used to describe sorting rules. Allow sort by multiple fields with the use of a list of fields separated by comma. Use - sign before fields to sort in descent order and no sign to sort in ascending order.
+
+---
+```html
+GET /campaigns?sort=last_update,-status
+```
+---
+
+### Field Selection
+
+Sometimes API consumers don't need all attributes of a resource. Is a good practice give the consumer the ability to choose returned fields. This will improve API's performance and reduce the network bandwidth.
+
+---
+```html
+GET /campaigns?fields=id,status,name
+```
+---
+
+### Searching
+
+Define search as a sub-resorce for your collection. Use generic query parameter like "q" to perform a full text search over your resources and return the search result in the same format as a normal list result. In order to make more complex searches allow the use of full text search operators like + - or "/ .
+
+---
+```html
+GET /campaigns/search?q=PAYPAL-BBVA
+```
+
 ---
 
 
@@ -144,6 +451,21 @@ Theses are the main rules about this speficiation
 
 ## API throughput restrictions
 ---
+For performance reasons and to ensure a homogeneous response times APIs, it is good practice to limit the consumption of APIs. This limitation can be performed based on many factors:
+
+* **Limit requests in a time slot for an authenticated user.**. Such limitations are usually carried out in public APIs to control abusive access to the APIs. There are several approaches such as restricting the number of day / month requests for authenticated users.
+* **Limit requests for public / private consumption API depending on the authenticated user profile**. Usually public APIs have limited consumption, always with the concept of ensuring homogeneous consumption of all users allowing resizes infrastructure in stages. Now another factor to consider, the payment appears APIs. If someone pays for higher demand requests, we can not make this service affects the service consumer of APIs, so normally corresponding changes will be made in infrastructure to ensure the number of requests the client demands, and there is a unique routing requests asigned to the user profile.
+
+To manage the rate of requests are often used the following headers in responses of each request:
+
+* **X-Rate-Limit-Limit**: The number of allowed requests in the current period
+* **X-Rate-Limit-Remaining**: The number of remaining requests in the current period
+* **X-Rate-Limit-Reset**: The number of seconds left in the current period. It is necessary to clarify at this point that should not be confused with a timestamp, you should be the seconds remaining to avoid problems with time zones.
+
+As we can see in the following [link](http://stackoverflow.com/questions/16022624/examples-of-http-api-rate-limiting-http-response-headers), There are multiple APIs that use these headers (and sometimes more), to inform the user of the limits.
+
+For ending this section, when the request limit is reached, the response will return this code status: ***HTTP - 429 Too Many Requests*** as indicated in the [RFC 6585](http://tools.ietf.org/html/rfc6585#section-4)
+
 
 ## OAuth
 ---
@@ -266,7 +588,8 @@ This endpoint **should not be published to third party applications** because th
 ---
 
 * [OAuth RFC 6749] (https://tools.ietf.org/html/rfc6749) OAuth RFC 6749 defined by IETF
+* <a id="rest_wikipedia">[1]</a> [REST Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer)
 
-___
+---
 
 [BEEVA](http://www.beeva.com) | 2015
