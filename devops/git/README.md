@@ -69,6 +69,12 @@ There are a lot of IDEs that have its own git plugins, but very often this plugi
 ### README.md
 Write a text file called README.md in the main directory of project. This file must have the main information about the code, how use and configure it and how can execute it. This file must contains:
 
+* Information about the application configuration, must cover configuration files, dependencies, libraries or tools that are needed for use or install it.
+* Information about how install and execute the application.
+* Information to test the application and test the qa quality.
+* If is a application or library that you can invoke, like an web application or an service web, is important include the information about you can call it.
+* For applications which will run on Docker container, is important include here the information necessary to build the Docker image and how run the container.
+
 ## Git Flow
  ![alt text](static/gitflow.png "GIT FLOW GRAPH")
 
@@ -105,18 +111,21 @@ In order to improve the traceability of our developments and integrate it with p
 
 For example, if there is a task into Redmine with id *17025* and we start commit message (commit -m "#17025 change label value") each message that starts with *"#17025..."* can will be shown into Redmine task description
 
-### Hooks
+### Use hooks
+
+Hooks are a good tool to customize version control behavior. Using hooks we can intercept each step of git cycle, client-side and server-side, and launch custom scripts when certain important actions occur.
+
+developments, for example, related with Amazon Web Services should use a pre-commit  hook to search for Amazon AWS API keys and to avoid push to the remote repository these credentials, [see the example](https://gist.github.com/DmZ/3a99d829f17af383712b)
+
+To learn deeply about git hooks, please [see documentation](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
+
+### Use tools
 
 
-
-* Information about the application configuration, must cover configuration files, dependencies, libraries or tools that are needed for use or install it.
-* Information about how install and execute the application.
-* Information to test the application and test the qa quality.
-* If is a application or library that you can invoke, like an web application or an service web, is important include the information about you can call it.
-* For applications which will run on Docker container, is important include here the information necessary to build the Docker image and how run the container.
 
 ### References
 
+* [Git official documentation](https://git-scm.com/doc)
 * [GitHub Help](https://help.github.com/)
 * [Git Cheatsheet](http://www.git-tower.com/blog/git-cheat-sheet/)
 * [Git Flow Cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
