@@ -8,12 +8,12 @@ At this point we're going to talk about best practices to work with git.
 	* [Setting up git](setting-up-git)
 	* [gitignore](#gitignore)
 	* [Use the shell](#use-the-shell)
+	* [README.md](#readme-md)
 * [Git Flow](#git-flow)
 	* [Main branches](#main-branches)
 	* [Support branches](#support-branches)
-* [Advices](#advices)
+* [Tips](#tips)
 	* [Versioning](#versioning)
- 	* [README.md](#readme-md)
 	* [Redmine's id-track](#redmines-id-track)
 	* [Use hooks](#use-hooks)
 	* [Use tools](#use-tools)
@@ -66,6 +66,9 @@ Next, there are some folders and files thats usually have to be added at .gitign
 
 There are a lot of IDEs that have its own git plugins, but very often this plugins doesn't works fine in determinated features. The most reliable way to syncronize with git is install git and use the shell to work with git.
 
+### README.md
+Write a text file called README.md in the main directory of project. This file must have the main information about the code, how use and configure it and how can execute it. This file must contains:
+
 ## Git Flow
  ![alt text](static/gitflow.png "GIT FLOW GRAPH")
 
@@ -73,16 +76,34 @@ There are a lot of IDEs that have its own git plugins, but very often this plugi
 
 ### Support branches
 
-## Advices
+## Tips
 
 ### Versioning
+
+It's very important to version your tags with a concrete versioning system to made easy trazability of all your code. We suggest using of a lightweight version sepecification called [Semantic Versioning](http://semver.org/) thinking to API versiosing, but totally applicable to git tags
+
+#### Semantic Versioning
+ This is an spefication authored by Tom Preston-Werner based on three digits *MAJOR.MINOR.PATCH*
+
+Theses are the main rules about this speficiation
+
+* A normal version number MUST take the form X.Y.Z where X, Y, and Z are non-negative integers, and MUST NOT contain leading zeroes. X is the major version, Y is the minor version, and Z is the patch version. Each element MUST increase numerically. For instance: 1.9.0 -> 1.10.0 -> 1.11.0.
+
+* Major version zero (0.y.z) is for initial development. Anything may change at any time. The code of this tag should not be considered stable.
+
+* Version 1.0.0 defines the first tag with stable code. The way in which the version number is incremented after this release is dependent on how your code change.
+
+* Patch version Z (x.y.Z | x > 0) MUST be incremented if only backwards compatible bug fixes are introduced. A bug fix is defined as an internal change that fixes incorrect behavior.
+
+* Minor version Y (x.Y.z | x > 0) MUST be incremented if new, backwards compatible functionality is introduced to the code. It MUST be incremented if any functionality is marked as deprecated. It MAY be incremented if substantial new functionality or improvements are introduced within the private code. It MAY include patch level changes. Patch version MUST be reset to 0 when minor version is incremented.
+
+* Major version X (X.y.z | X > 0) MUST be incremented if any backwards incompatible changes are introduced to the code. It MAY include minor and patch level changes. Patch and minor version MUST be reset to 0 when major version is incremented.
 
 ### Redmine's id-track
 
 ### Hooks
 
-### README.md
-Write a text file called README.md in the main directory of project. This file must have the main information about the code, how use and configure it and how can execute it. This file must contains:
+
 
 * Information about the application configuration, must cover configuration files, dependencies, libraries or tools that are needed for use or install it.
 * Information about how install and execute the application.
