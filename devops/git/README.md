@@ -80,12 +80,12 @@ Write a text file called README.md in the main directory of project. This file m
 
 ### Versioning
 
-It's very important to version your tags with a concrete versioning system to made easy trazability of all your code. We suggest using of a lightweight version sepecification called [Semantic Versioning](http://semver.org/) thinking to API versiosing, but totally applicable to git tags
+It's very important to version your tags with a concrete versioning system to made easy  traceability of all your code. We suggest using of a lightweight version specification called [Semantic Versioning](http://semver.org/) thinking to API versiosing, but totally applicable to git tags
 
 #### Semantic Versioning
- This is an spefication authored by Tom Preston-Werner based on three digits *MAJOR.MINOR.PATCH*
+ This is an specification authored by Tom Preston-Werner based on three digits *MAJOR.MINOR.PATCH*
 
-Theses are the main rules about this speficiation
+Theses are the main rules about this specification
 
 * A normal version number MUST take the form X.Y.Z where X, Y, and Z are non-negative integers, and MUST NOT contain leading zeroes. X is the major version, Y is the minor version, and Z is the patch version. Each element MUST increase numerically. For instance: 1.9.0 -> 1.10.0 -> 1.11.0.
 
@@ -100,6 +100,10 @@ Theses are the main rules about this speficiation
 * Major version X (X.y.z | X > 0) MUST be incremented if any backwards incompatible changes are introduced to the code. It MAY include minor and patch level changes. Patch and minor version MUST be reset to 0 when major version is incremented.
 
 ### Redmine's id-track
+
+In order to improve the traceability of our developments and integrate it with project management tools as Jira or Redmine (inside Beeva) you can start each commit messages with *#id_task*. In this way is possible link task description into Redmine to know what commits is associated with this task.
+
+For example, if there is a task into Redmine with id *17025* and we start commit message (commit -m "#17025 change label value") each message that starts with *"#17025..."* can will be shown into Redmine task description
 
 ### Hooks
 
