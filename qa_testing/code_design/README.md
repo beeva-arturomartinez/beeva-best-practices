@@ -1729,7 +1729,8 @@ We propose TDD Mantra: **"red, green, refactor, repeat"**:
 * [Behavior Driven Development (BDD) Wiki](https://en.wikipedia.org/wiki/Behavior-driven_development)
 * [Clean Code (Book)](https://books.google.es/books/about/Clean_Code.html?id=dwSfGQAACAAJ&redir_esc=y)
 * [Concurrency Wiki](https://en.wikipedia.org/wiki/Concurrency_pattern)
-
+* [keepcoding](http://keepcoding.io/es/sin-categoria/curso-test-driven-development-tdd-para-ios/)
+* [agilemodeling](http://www.ambysoft.com/)
 ___
 
 [BEEVA](http://www.beeva.com) | 2015
