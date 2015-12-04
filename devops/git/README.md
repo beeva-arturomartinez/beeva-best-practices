@@ -91,9 +91,9 @@ Write a text file called README.md in the main directory of project. This file m
 * For applications which will run on Docker container, is important include here the information necessary to build the Docker image and how run the container.
 
 ### References
-
-* [GitHub Help](https://help.github.com/)
+* [Git SCM Documentation](https://git-scm.com/doc)
 * [Git Cheatsheet](http://www.git-tower.com/blog/git-cheat-sheet/)
+* [GitHub Help](https://help.github.com/)
 * [Git Flow Cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
 
 ___
