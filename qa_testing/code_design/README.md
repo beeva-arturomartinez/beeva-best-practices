@@ -20,7 +20,7 @@ At this point we're going to talk about the code design best practices.
 
 ## Introduction
 
-This guide's objective is help to developers to write a good code for improve the code readability and help to anybody to understand the code.
+Write a good code with a good design and format is very important for many reasons. A correct code design help to improve the maintanability, and correct readability for anybody who have to work with the code. If all team's members write the code in the same way, and comment their methods, will be easier for a new member or non familiarized with the code understand it and can work with it expending less time.
 
  ![alt text](static/codequality_wtf.png "QA's wtf measure")
 
@@ -31,11 +31,16 @@ This guide's objective is help to developers to write a good code for improve th
 * Tab correctly your code for improve the readability.
 * Comment your code for tip to understand complex code or bucles.
 * Don't use lines too larges.
-* Don't use a lot of params in a method or functions. If there are a lot of params the design is bad and you should consider to use one class or object.
-* Use with caution the copy & paste. When you copy a portion of code, think about is usefull use a method for it.
-* If a method have a lot of lines, probably is better to divide in more methods to improve the readability and reusability of the code.
+* Don't use a lot of params in a method or functions. If there are a lot of params you should consider to use one class or object.
+* Use with caution the copy & paste. When you copy a portion of code, think about if you can extract it to an method or class to reuse it.
+* Read and follow the guide for your programming language.
+* Split Your Code into Short, Focused Units. If a method have a lot of lines, probably is better to divide in more methods to improve the readability and reusability of the code.
 * Delete the variables not used anywhere, not only for performance reasons, also for readibility reasons.
-* Use UTF-8.
+* Use Framework APIs and Third-Party Libraries
+* Be consistent: Do similar things in similar ways. If you're developing a routine whose functionality resembles that of an existing routine, use a similar name, the same parameter order, and a comparable structure for the code body.
+* Write portable code. Unless you have some compelling reason, avoid using functionality that's available only on a specific platform or framework.
+* Use efficient data structures and algorithms. Simple code is more mantainable , you can combine mantainability with efficiency using the data structures and algorithms provided by your programming framework.
+* Use UTF-8 encoding in all files (configure the ide or text editor).
 * Replace tabs with spaces (Configure the ide or text editor).
 
 
@@ -88,12 +93,52 @@ Is very important to have one unique strategy for processing the errors of your 
 * Define the error detail objetive. It's not the same one error for an developer or sysops person than an error to show to the client. An error for a client should help it about what can do to solve or who have to contact.
 * Define a common object error for all project. All methods or function must use it for return the error.
 * Define a error code list for the errors.
-* If is an error which can be shown to the client, use this code list with a internationalitable file for the descriptions.
+* If is an error which can be shown to the client, use this code list with a internationalizable file for the descriptions.
 * Log correctly the error with all information available about this cause and when it occurred.
 * Use a common format for all error logs.
 
 
 ### Concurrency
+
+Write concurrent programs is hard, is easier write code within a single thread, or multithreading thats looks fine but fails when the system is placed under extress.
+
+Concurrency is a decoupling strategy that help us to know the behaviour of our concurrent system and know what gets done from when it gets done. A single thread code is easier to understand and testing. Split what from when can improve the throughput and structure of an application.
+
+There are other reasons to adopt the concurrency, some systems have response time and throughput requirements that need develop concurrent solutions, for example, for proccess a lot of data in the shortest time possible.
+
+#### Myths and misconceptions
+* Concurrency always improves performance. Not always the concurrency is the best option, sometimes is unnecessary.
+* Design does not change when writing concurrent programs TODO
+* Concurrency incurs some overhead, both in performance as well as writing additional code. TODO
+* Correct concurrency is complex, even for simple problems.
+* Concurrency bugs aren’t usually repeatable, so they are often ignored as one-offs instead of the true defects they are.
+* Concurrency often requires a fundamental change in design strategy
+
+#### Concurrency Defense Principles
+
+* Single Responsability Principle TODO
+* Limit the Scope of data TODO
+* Use copies of data TODO
+* Threads should be as independant as possible TODO
+* Execution Models TODO
+	* Producers-Consumers
+	* Reader-Writers
+	* Dinning Philosofers
+
+#### Testing Threaded Code
+* Treat Spurious Failures as Candidate Threading Issues
+* Get Your Nonthreaded Code Working First
+* Make Your Threaded Code Pluggable
+* Make Your Threaded Code Tunable
+* Run with More Threads Than Processors
+* Run on Different Platforms
+* Instrument Your Code to Try and Force Failures
+* Hand-coded
+* Automatizated
+
+
+
+[Concurrency Wiki Link](https://en.wikipedia.org/wiki/Concurrency_pattern)
 
 ### Tools
 There are a lot of tools that help you to improve your code design for all programming languages. It's very recommended to use them for help to mantain the same format in all project and prevent errors.
@@ -101,11 +146,11 @@ There are a lot of tools that help you to improve your code design for all progr
 #### Documentation
 The documentation tools make it possible to generate documentation directly from your source code. Each programming language have its own tools, some of them are:
 
-* **Java**: [Javadoc](http://www.oracle.com/technetwork/articles/java/index-jsp-135444.html) 
-* **Python**: [PyDoc](https://wiki.python.org/moin/PyDoc) 
-* **Javascript**: [jsdoc toolkit](https://code.google.com/p/jsdoc-toolkit/) 
-* **php**: [phpDocumentor](http://www.phpdoc.org/) 
-* **Ruby**: [Rubydoc](http://ruby-doc.org/) 
+* **Java**: [Javadoc](http://www.oracle.com/technetwork/articles/java/index-jsp-135444.html)
+* **Python**: [PyDoc](https://wiki.python.org/moin/PyDoc)
+* **Javascript**: [jsdoc toolkit](https://code.google.com/p/jsdoc-toolkit/)
+* **php**: [phpDocumentor](http://www.phpdoc.org/)
+* **Ruby**: [Rubydoc](http://ruby-doc.org/)
 
 
 #### Naming and format
@@ -116,8 +161,8 @@ One of the most used tool for this goal is [Sonar](http://www.sonarqube.org/). N
 Other tools that helps you depending on the programming language:
 
 * **Java**: [Checkstyle](http://checkstyle.sourceforge.net/) and [PMD](https://pmd.github.io/) with maven plugin, allow to configure some configuration rules and test that your code is fine when you build your java application, preserving for deployment server errors. You should configure the same rules than sonar. Other usefull tool is [FindBugs](http://findbugs.sourceforge.net/) .
-* **Python**: [Pylint](http://www.pylint.org/) 
-* **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle) 
+* **Python**: [Pylint](http://www.pylint.org/)
+* **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle)
 
 
 ## Code design patterns
@@ -126,11 +171,14 @@ Other tools that helps you depending on the programming language:
 ## Agile metodologies implications
 ---
 
-## [References](references)
+## References
 
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+* [Design Patterns Wiki](https://en.wikipedia.org/wiki/Software_design_pattern)
+* [Enterprise Integration Patterns](http://www.enterpriseintegrationpatterns.com/)
+* [Object Oriented Design Wiki](https://en.wikipedia.org/wiki/SOLID_%28object-oriented_design%29)
+* [Test Driven Development (TDD) Wiki](https://en.wikipedia.org/wiki/Test-driven_development)
+* [Behavior Driven Development (BDD) Wiki](https://en.wikipedia.org/wiki/Behavior-driven_development)
+* [Clean Code (Book)](https://books.google.es/books/about/Clean_Code.html?id=dwSfGQAACAAJ&redir_esc=y)
 
 ___
 
