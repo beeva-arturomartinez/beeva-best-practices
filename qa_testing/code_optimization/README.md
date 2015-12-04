@@ -24,8 +24,8 @@ At this point we're going to talk about the best practices for optimize the code
 	* [Granularity](#granularity)
 	* [Statistic's profilers](#statistics-profilers)
 * [Instrumentation](#instrumentation)
-* [Bucle optimization](#bucle-optimization)
-* [Efficient exceptions management](#efficient-exceptions-management)
+* [Loop Optimization](#loop-optimization)
+* [Efficient Exceptions Management](#efficient-exceptions-management)
 * [Tools](#tools)
 	* [Loggers](#loggers)
 	* [Death code detection](#death-code-detection)
@@ -69,9 +69,16 @@ At this point we're going to talk about the best practices for optimize the code
 
 ## Instrumentation
 
-## Bucle optimization
+## Loop Optimization
+* Try to avoid ending conditions of loops with unnecessary calculations, because its will be calculated in each loop iteration.
+* By the same reason, is interesting initialize the common variables out of the loop.
 
-## Efficient exceptions management
+## Efficient Exceptions Management
+The exception management may be performance expensive, is better write proactive code which verifies some conditions that eventually may produces exceptions.
+
+There are some examples for this:
+	* If you need divide by a variable, is more efficient test if the divider is 0 than management an exception.
+	* Also is better test a correct format for a variable than make a cast and catch the error.
 
 ## Tools
 
