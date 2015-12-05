@@ -5,7 +5,7 @@ At this point we're going to talk about best practices to work with git.
 
 * [Prologue](#prologue)
 * [Getting Started](#getting-started)
-	* [Setting up git](setting-up-git)
+	* [Setting up git](#setting-up-git)
 	* [gitignore](#gitignore)
 	* [Use the shell](#use-the-shell)
 	* [README.md](#readme-md)
