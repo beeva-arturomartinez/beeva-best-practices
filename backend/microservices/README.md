@@ -140,14 +140,14 @@ Additionally, we recommend to avoid Single Points Of Failure (SPOF) providing se
     application-local.yml
     application-pre.yml
     application-pro.yml
-    project1-functionality1/functionality-1/microservice1.yml
-    project1-functionality1/functionality-1/microservice1-local.yml
-    project1-functionality1/functionality-1/microservice1-pre.yml
-    project1-functionality1/functionality-1/microservice1-pro.yml
-    project2-functionalityA/functionality-2/microservice2.yml
-    project2-functionalityA/functionality-2/microservice2-local.yml
-    project2-functionalityA/functionality-2/microservice2-pre.yml
-    project2-functionalityA/functionality-2/microservice2-pro.yml
+    project1-arbitraryname/functionality-1/microservice1.yml
+    project1-arbitraryname/functionality-1/microservice1-local.yml
+    project1-arbitraryname/functionality-1/microservice1-pre.yml
+    project1-arbitraryname/functionality-1/microservice1-pro.yml
+    project2-anotherarbitraryname/functionality-2/microservice2.yml
+    project2-anotherarbitraryname/functionality-2/microservice2-local.yml
+    project2-anotherarbitraryname/functionality-2/microservice2-pre.yml
+    project2-anotherarbitraryname/functionality-2/microservice2-pro.yml
 ```
 
 > When a microservice with name _microservice1_ starts with profile 'local', it will request to the config server all needed configuration files. According to the configuration above, config server will server the following files:
