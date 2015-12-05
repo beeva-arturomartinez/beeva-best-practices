@@ -8,28 +8,6 @@ This is how we work with Microservices at BEEVA.
 
 1. [Introduction to microservices](#1-introduction-to-microservices)
 
-A microservice is an independent process with a series of characteristics:
-- Loosely coupled
-- Small
-- With a single purpose
-- Deployed independently
-- Deployed in an automated way
-
-Applications built with a microservice-oriented architecture have a set of advantages:
-
-- Logic isolated in functional blocks
-- Easier maintenance
-- Selective deploys without outages
-- Easier integration with cloud platforms (for example, fine grained scalation)
-
-This document address some of the challenges that arise when using an architecture based on microservices:
-
-- Microservice discovery : how many microservices exist and where are they?
-- Central configuration
-- Error resiliency and failover
-
-All these challenges are addressed using a good infrastructure, able to orchestrate all existing microservices in our application.
-
 2. [Microservice architectures](#2-microservice-architectures)
 
     2.1. [Overview for a microservice architecture](#21-overview-for-a-microservice-architecture)
@@ -58,6 +36,28 @@ All these challenges are addressed using a good infrastructure, able to orchestr
 
 ## 1. Introduction to microservices
 ---
+
+A microservice is an independent process with a series of characteristics:
+- Loosely coupled
+- Small
+- With a single purpose
+- Deployed independently
+- Deployed in an automated way
+
+Applications built with a microservice-oriented architecture have a set of advantages:
+
+- Logic isolated in functional blocks
+- Easier maintenance
+- Selective deploys without outages
+- Easier integration with cloud platforms (for example, fine grained scalation)
+
+This document address some of the challenges that arise when using an architecture based on microservices:
+
+- Microservice discovery : how many microservices exist and where are they?
+- Central configuration
+- Error resiliency and failover
+
+All these challenges are addressed using a good infrastructure, able to orchestrate all existing microservices in our application.
 
 ## 2. Microservice architectures
 ---
