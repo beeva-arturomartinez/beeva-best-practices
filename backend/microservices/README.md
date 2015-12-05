@@ -73,6 +73,27 @@ All these challenges are addressed using a good infrastructure, able to orchestr
 
 ### 3.1 Introduction
 
+Rather than starting from the scratch, we have some reference architectures already working. One of them is the Netflix architecture, that was released as Open Source as part of the Netflix OSS stack.
+
+This architecture has been proven to be a very successful architecture and for this reason Spring decided to wrap its components in a Spring project, called Spring Cloud.
+
+Together with Spring Boot, Spring Cloud offers a really easy way to deploy the infrastructure's core needed for orchestrate a microservice-based application, including:
+
+ - A centralized configuration server
+ - A service discovery component (Eureka)
+ - A router (Zuul)
+ - A load balancer module (Ribbon)
+
+Complemented with some additional components that enhance the features offered:
+
+ - A failover mechanism based on the circuit breaker pattern (Hystrix)
+ - A communication bus to send messages to all microservices (Spring Cloud bus)
+ - A bridge module to allow polyglot microservices, implemented in programming languages different than Java (Sidecar)
+
+The picture below illustrates a general overview of this architecture:
+
+![Spring Cloud Overview](static/spring_cloud_overview.png)
+
 ### 3.2 Config Server
 
 ### 3.3 Eureka
