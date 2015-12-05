@@ -96,6 +96,67 @@ The picture below illustrates a general overview of this architecture:
 
 ### 3.2 Config Server
 
+One of the most important orchestration modules is the Config Server. Its main purpose is to centralize the configuration for all microservices using the architecture.
+
+We recommend to use git as source for the properties and to have an optimal file organization, we provide some hints:
+
+- Use an isolated repository for spring cloud components (zuul, eureka)
+- Use folders to categorize property files instead of a flat folder for every file
+- Use profiles to swap easily between environment configurations.
+- Do not duplicate properties, group the common ones and store them in files at the root level
+- If you need to use several GIT repositories, associate them to microservice name patterns
+
+Additionally, we recommend to avoid Single Points Of Failure (SPOF) providing several configuration servers behind a load balancer (see section 5 for details).
+
+#### A sample configuration
+
+ A sample configuration file (bootstrap.yml) for a Spring Cloud Config Server is shown below:
+
+ ``` java
+ spring:
+   application:
+       name: configsrv
+   cloud:
+       config:
+         server:
+           git:
+             uri: git@mydomain:mygroup/mydefaultrepository.git
+             repos:
+               myrepository1:
+                 pattern: project1-*
+                 uri: git@mydomain:mygroup/myrepository1.git
+                 searchPaths: functionality-*
+               myrepository2:
+                 pattern: project2-*
+                 uri: git@mydomain:mygroup/myrepository2.git
+                 searchPaths: functionality-*
+           defaultLabel: master
+ ```
+
+ and the associated file structure for one of the repositories, according to the previous configuration is listed below:
+
+``` java
+    application.yml
+    application-local.yml
+    application-pre.yml
+    application-pro.yml
+    project1-functionality1/functionality-1/microservice1.yml
+    project1-functionality1/functionality-1/microservice1-local.yml
+    project1-functionality1/functionality-1/microservice1-pre.yml
+    project1-functionality1/functionality-1/microservice1-pro.yml
+    project2-functionalityA/functionality-2/microservice2.yml
+    project2-functionalityA/functionality-2/microservice2-local.yml
+    project2-functionalityA/functionality-2/microservice2-pre.yml
+    project2-functionalityA/functionality-2/microservice2-pro.yml
+```
+
+> When a microservice with name _microservice1_ starts with profile 'local', it will request to the config server all needed configuration files. According to the configuration above, config server will server the following files:
+    - application.yml
+    - application-local.yml
+    - microservice1.yml
+    - microservice1-local.yml
+
+
 ### 3.3 Eureka
 
 ### 3.4 Zuul
