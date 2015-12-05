@@ -20,6 +20,13 @@ This is how we work with Java at BEEVA.
 * [References](#references)
 
 ## Introduction
+
+This document set some principles and recommendations for developing JAVA applications. 
+
+The most important thing that we, as developers, must have in our minds is that our code is written for other persons, and not for compilers. For this reason, we really care about readability, cleanliness and good structure of our code. It is also very important to backup our code with a good automated battery test, raising the level of confidence when complex refactors or simply improvements in code are needed.
+
+This is not an static document, but a living one. We will be adding new hints and sections as we go through the path to have an exceptional code.
+
 ---
 
 ## Choosing proper names inside our code
