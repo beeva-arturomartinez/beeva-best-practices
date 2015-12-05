@@ -151,6 +151,7 @@ Additionally, we recommend to avoid Single Points Of Failure (SPOF) providing se
 ```
 
 > When a microservice with name _microservice1_ starts with profile 'local', it will request to the config server all needed configuration files. According to the configuration above, config server will server the following files:
+
     - application.yml
     - application-local.yml
     - microservice1.yml
