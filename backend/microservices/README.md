@@ -1,50 +1,77 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
+# Microservices Best Practices
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+This is how we work with Microservices at BEEVA.
+
+![BEEVA](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
-* [References](#references)
+1. [Introduction to microservices](#introduction-to-microservices)
+2. [Microservice architectures](#microservice-architectures)
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+    2.1. [Overview for a microservice architecture](#overview-for-a-microservice-architecture)
 
-### The Two Towers
+    2.2. [Components for a microservice architecture](#components-for-a-microservice-architecture)
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+    2.3. [Communication between microservices](#communication-between-microservices)
+3. [Microservices with Spring Cloud](#microservices-with-spring-cloud)
 
-A Remarkable idea
+    3.1. [Introduction](#introduction)
 
+    3.2. [Config Server](#config-server)
 
-### The Return of the King
+    3.3. [Eureka](#eureka)
 
-A nice table
+    3.4. [Zuul](#zuul)
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+    3.5. [Ribbon](#ribbon)
 
+    3.6. [Bus](#bus)
 
-### References
+    3.7. [Sidecar](#sidecar)
+4. [Using docker to deploy microservices](#using-docker-to-deploy-microservices)
+5. [A reference architecture for microservices in AWS](#a-reference-architecture-for-microservices-in-aws)
+6. [References](#references)
 
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+## 1. Introduction to microservices
+---
+
+## 2. Microservice architectures
+---
+
+### 2.1 Overview for a microservice architecture
+
+### 2.2 Components for a microservice architecture
+
+### 2.3 Communication between microservices
+
+## 3. Microservices with Spring Cloud
+---
+
+### 3.1 Introduction
+
+### 3.2 Config Server
+
+### 3.3 Eureka
+
+### 3.4 Zuul
+
+### 3.5 Ribbon
+
+### 3.6 Bus
+
+### 3.7 Sidecar
+
+## 4. Using docker to deploy microservices
+---
+
+## 5. A reference architecture for microservices in AWS
+---
+
+## 6. References
+---
+
+* [Sample reference] (http://www.beeva.es) Sample reference description
 
 ___
 
