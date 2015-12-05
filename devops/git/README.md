@@ -7,7 +7,14 @@ At this point we're going to talk about best practices to work with git.
 * [Getting Started](#getting-started)
 	* [Setting up git](#setting-up-git)
 	* [gitignore](#gitignore)
+	* [Commit Messages](#commit-messages)
+	* [Commit Often](#commit-often)
+	* [Push only finished and tested code](#push-only-finished-and-tested-code)
+	* [Divide repositories](#divide-repositories)
+	* [History](#history)
 	* [Use the shell](#use-the-shell)
+	* [Moving files](#moving-files)
+	* [Large files](#large-files)
 	* [README.md](#readme-md)
 * [Git Flow](#git-flow)
 	* [Main branches](#main-branches)
@@ -28,6 +35,12 @@ This guide try to help to working teams to use git and git flows correctly. Is v
 
 ### Setting up git
  The first thing to do is setting up git.
+
+```
+git config --global user.name Nombre
+git config --global user.email correo@dominio.com
+git config --global core.filemode false
+```
 
 ### gitignore
 When you work with git there are some files that's you shouldn't upload to the repository like configuration files, ide files, files with passwords or connection params, etc. For this goal, exists the .gitignore file, and you need create it and include here the list of files or folders to exclude of the version control.
@@ -63,9 +76,38 @@ Next, there are some folders and files thats usually have to be added at .gitign
 * The jetbrains ides like Pycharm or WebStorm, have a settings folder  with the name:
 	* idea/
 
+### Commit messages
+Write descriptive commit messages that explain the changes maked at the commit and his reason. For this goal, is recommended so configure the git repository to force to use messages in commits.
+
+### Commit often
+Do commit early and often, have periodic checkpoints help you to have control and solve problems when your code fails, will be easier understand what is different and where the problem may be.
+
+### Push only finished and tested code
+Its very important that all code that you push into the remote repository works properly and be tested. All people that synchronize within the repository should be able to execute it without problems.
+
+For ensure this is very recommended using continuous delivery tools for testing code, you can find more information at this [guide](../../qa_testing/sonar/README.md).
+
+### Divide repositories
+Often is a good idea create different repositories depending of his functionallity, project or team who work with it. For example, may be interesting have a different repositories for the backend application than the frontend application, and may be interesting have one for the devops configuration files like puppet.
+
+### History
+Don't change the history published, for mantain a true traceability of the changes and preserving for problems.
+
+For this goal you should use the option *--no-ff* with merge commands to maintain all commit history in the merged branch. The differences from a merge with --no-ff option and other without it is shown in the next picture:
+
+![alt text](static/merge-without-ff.png "difference-merges")
+
+You should configure your repository against history changes. If you initialize a bare git repository with *--shared* it will automatically get the *git-config "receive.denyNonFastForwards"* set to true.
+
 ### Use the shell
 
 There are a lot of IDEs that have its own git plugins, but very often this plugins doesn't works fine in determinated features. The most reliable way to syncronize with git is install git and use the shell to work with git.
+
+### Moving Files
+If you need move some file or directory to another path, use the git mv command. For preserving correctly traceability of the changes, you should commit separate the moving of file before make changes of the file, because when you move a file the git internally delete and create new file and you can't see the differences between latest version.
+
+### Large Files
+Don't commit binary files or very large files if you can avoid it. Git is not intended for it.
 
 ### README.md
 Write a text file called README.md in the main directory of project. This file must have the main information about the code, how use and configure it and how can execute it. This file must contains:
@@ -138,6 +180,7 @@ Sometimes when we are using as a remote repository as a github, we must write ou
 * [GitHub Help](https://help.github.com/)
 * [Git Cheatsheet](http://www.git-tower.com/blog/git-cheat-sheet/)
 * [Git Flow Cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
+* [Successful branching model](http://nvie.com/posts/a-successful-git-branching-model/)
 
 ___
 
