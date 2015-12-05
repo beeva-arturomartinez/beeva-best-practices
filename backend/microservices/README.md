@@ -28,6 +28,8 @@ This document address some of the challenges that arise when using an architectu
 - Central configuration
 - Error resiliency and failover
 
+All these challenges are addressed using a good infrastructure, able to orchestrate all existing microservices in our application.
+
 2. [Microservice architectures](#2-microservice-architectures)
 
     2.1. [Overview for a microservice architecture](#21-overview-for-a-microservice-architecture)
