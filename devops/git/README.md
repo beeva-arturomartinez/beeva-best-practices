@@ -154,12 +154,30 @@ Git flow establishes the following restictions on this branch:
 
 #### Develop branch
 
-    * The develop branch must be created from master.
+The develop branch is a long running branch and must be created from master.
+
+    * Never delete this branch.
     * Never do commits over this branch directly: only merge commits are allowed.
     * All features must be merged in develop
-    * When develop code reaches a stable point and is ready to be released, all changes will be merged back into master, creating a new release. 
+    * When develop reaches a stable point, will be merged back into master, throug a release branch. 
+    * Once a release process is finished, the release branch must be merged back into develop.
+    * Once a hotfix process is finished, the hotfix branch must be merged back into develop.
 
-### Support branches
+#### Support branches
+
+The support branches are **short running branches**. 
+Those branches are created to follow one of the three processes defined on Git Flow.
+Every support branch has defined from what branch must be created and on what branch/es must be merged.
+
+##### Feature branch
+This is the developer working branch.
+
+    * The feature branch always is created from develop branch.
+    * We can create several feature branches.
+    * It's recommended to create only a feature for each developer and feature to develop, and to create shorter features as posible.
+    * The feature branch always must be merged back into develop.
+    * Don't merge any other branch into feature branch. (i.e.: develop branch)
+    * The feature branch must be deleted once merged.
 
 ### Flow
 
