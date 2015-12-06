@@ -131,16 +131,33 @@ It is highly recommended that **all team members follow the same procedural rule
 Git Flow establishes the following restrictions:
 
     * There are only one central repository: **origin**. Every developer pull and pushes to origin.
-    * There are only two long running branches: **develop** and **master**.
+    * There are only two main branches: **develop** and **master**.
     * There are three support branch types: **feature**, **release** and **hotfix**.
+    * Always merge with --no-ff option.
 
 ### Branches
 
+Git Flow defines two branch types, main branches and support branches.
+
 ### Main branches
+
+The Main branches are **develop** and **master**. 
 
 #### Master branch
 
+The master branch is the default git branch. This is a special branch. 
+Git flow establishes the following restictions on this branch:
+
+    * Never delete this branch.
+    * Never do commits over this branch directly: only merge commits are allowed.
+    * Only do merges from release and hotfix branches.
+
 #### Develop branch
+
+    * The develop branch must be created from master.
+    * Never do commits over this branch directly: only merge commits are allowed.
+    * All features must be merged in develop
+    * When develop code reaches a stable point and is ready to be released, all changes will be merged back into master, creating a new release. 
 
 ### Support branches
 
