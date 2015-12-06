@@ -172,6 +172,151 @@ Additionally, we recommend to avoid Single Points Of Failure (SPOF) providing se
 
 ### 3.7 Sidecar
 
+So far, we have only considered microservices implemented in JAVA programming language. What could I do if we want to build a microservice in a different programming language? the answer is : use the Sidecar module of Spring Cloud, based on Netflix Prana.
+
+![Spring Cloud Sidecar Overview](static/spring_cloud_sidecar.png)
+
+A bridge application, hosted in the same machine that the microservice is responsible of communicating the microservice with the Spring Cloud architecture.
+
+We have to enable an endpoint inside our microservice to allow Eureka to monitor and register the microservice into the architecture. For communications in the other direction, the microservice can retrieve information from Spring Cloud via the bridge application.
+
+> http://[bridge_domain]:[bridge_port]/hosts/[serviceId]
+
+But config server will not be accessible this way unless we register it in Zuul (which is not the default behaviour).
+
+#### Example : Bridge Application
+
+Suppose we configure a bridge application in port 10001.
+
+Application.java
+
+---
+
+```java
+
+    package com.demo;
+
+    import org.springframework.boot.SpringApplication;
+    import org.springframework.boot.autoconfigure.SpringBootApplication;
+    import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+    import org.springframework.cloud.netflix.sidecar.EnableSidecar;
+
+    @SpringBootApplication
+    @EnableEurekaClient
+    @EnableSidecar
+    public class Application
+    {
+        public static void main( String[] args )
+        {
+            SpringApplication.run(Application.class, args);
+        }
+
+    }
+
+```
+
+application.yml
+
+---
+
+```YAML
+
+    server:
+      port: 10001 # Port used by bridge application
+
+    spring:
+      application:
+        name: microservice-sidecar-bridge # Name that will be registered in eureka for the bridge application
+
+    sidecar:
+      port: 3000 # Microservice's port
+      health-uri: http://localhost:${sidecar.port}/health # Microservice's heartbeat url
+```
+
+#### Example : Microservice in node.js
+
+app.js
+
+---
+
+```javascript
+
+    var express = require('express');
+    var bodyParser = require('body-parser');
+    var app = express();
+    app.use(bodyParser.json());
+    app.use(bodyParser.urlencoded({ extended: false }));
+
+    var session = require('express-session');
+
+    // Populates req.session
+    app.use(session({
+        resave: false,
+        saveUninitialized: false,
+        secret: 'atomic mouse'
+    }));
+
+    var path = require('path');
+    var favicon = require('serve-favicon');
+    var cookieParser = require('cookie-parser');
+
+    var swig = require('swig');
+    var util = require('util');
+    var restify = require('restify');
+
+    // App engine
+    app.engine('html', swig.renderFile);
+
+    // view engine setup
+    app.set('views', path.join(__dirname, 'views'));
+    app.set('view engine', 'html');
+
+    app.use(cookieParser());
+    app.use(express.static(path.join(__dirname, 'public')));
+
+    var port = 3000;
+
+    // Start server
+    app.listen(port);
+
+    // Exports the configuration
+    module.exports = {
+        app: app,
+    };
+
+    //Add routes to detect the enabled endpoints
+    require('./routes/index');
+```
+
+/routes/index.js
+
+---
+
+```javascript
+
+    var appJs = require('../app.js');
+
+    /* GET home page. */
+    appJs.app.route('/').get(function(req, res) {
+      res.send("This is the home page of node.js application");
+    });
+
+    appJs.app.route('/health').get(function(req,res){
+        res.set("Content-Type","application/json");
+        res.status(200).send({
+            "status":"UP"
+        });
+    });
+```
+
+Assuming that Zuul is started at port 8989 and with name _zuul_, an invocation to the node.js microservice would be possible :
+
+> http://localhost:8989/microservice-sidecar-bridge
+
+and from the node.js microservice, retrieval of information about zuul would be possible through:
+
+> http://localhost:10001/hosts/zuul
+
 ## 4. Using docker to deploy microservices
 ---
 
@@ -181,7 +326,8 @@ Additionally, we recommend to avoid Single Points Of Failure (SPOF) providing se
 ## 6. References
 ---
 
-* [Sample reference] (http://www.beeva.es) Sample reference description
+* [Spring Cloud Project Website](http://projects.spring.io/spring-cloud/)
+* [Spring Boot](http://projects.spring.io/spring-boot/)
 
 ___
 
