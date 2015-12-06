@@ -130,10 +130,10 @@ It is highly recommended that **all team members follow the same procedural rule
 
 Git Flow establishes the following restrictions:
 
-    * There are only one central repository: **origin**. Every developer pull and pushes to origin.
-    * There are only two main branches: **develop** and **master**.
-    * There are three support branch types: **feature**, **release** and **hotfix**.
-    * Always merge with --no-ff option.
+* There are only one central repository: **origin**. Every developer pull and pushes to origin.
+* There are only two main branches: **develop** and **master**.
+* There are three support branch types: **feature**, **release** and **hotfix**.
+* Always merge with --no-ff option.
 
 ### Branches
 
@@ -148,20 +148,20 @@ The Main branches are **develop** and **master**.
 The master branch is the default git branch. This is a special branch. 
 Git flow establishes the following restictions on this branch:
 
-    * Never delete this branch.
-    * Never do commits over this branch directly: only merge commits are allowed.
-    * Only do merges from release and hotfix branches.
+* Never delete this branch.
+* Never do commits over this branch directly: only merge commits are allowed.
+* Only do merges from release and hotfix branches.
 
 #### Develop branch
 
 The develop branch is a long running branch and must be created from master.
 
-    * Never delete this branch.
-    * Never do commits over this branch directly: only merge commits are allowed.
-    * All features must be merged in develop
-    * When develop reaches a stable point, will be merged back into master, throug a release branch. 
-    * Once a release process is finished, the release branch must be merged back into develop.
-    * Once a hotfix process is finished, the hotfix branch must be merged back into develop.
+* Never delete this branch.
+* Never do commits over this branch directly: only merge commits are allowed.
+* All features must be merged in develop
+* When develop reaches a stable point, will be merged back into master, throug a release branch. 
+* Once a release process is finished, the release branch must be merged back into develop.
+* Once a hotfix process is finished, the hotfix branch must be merged back into develop.
 
 #### Support branches
 
@@ -172,16 +172,22 @@ Every support branch has defined from what branch must be created and on what br
 ##### Feature branch
 This is the developer working branch.
 
-    * The feature branch always is created from develop branch.
-    * We can create several feature branches.
-    * It's recommended to create only a feature for each developer and feature to develop, and to create shorter features as posible.
-    * The feature branch always must be merged back into develop.
-    * Don't merge any other branch into feature branch. (i.e.: develop branch)
-    * The feature branch must be deleted once merged.
+* The feature branch always is created from develop branch.
+* We can create several feature branches.
+* It's recommended to create only a feature for each developer and feature to develop, and to create shorter features as posible.
+* The feature branch always must be merged back into develop.
+* Don't merge any other branch into feature branch. (i.e.: develop branch)
+* The feature branch must be deleted once finished: merged back into develop.
 
 ### Flow
 
-#### Features
+Git Flow defines three sub work flows:
+
+#### Feature Flow
+
+Each task of development must be created in a feature branch following the Feature flow.
+
+
 #### Releases
 #### Hotfixes
 
