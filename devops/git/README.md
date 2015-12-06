@@ -120,7 +120,7 @@ Write a text file called README.md in the main directory of project. This file m
 
 ## Git Flow
 
-It is highly recommended that *all team members follow the same procedural rules* when using git. The workflow described below is an accepted procedure worldwide for small work teams.
+It is highly recommended that **all team members follow the same procedural rules** when using git. The workflow described below is an accepted procedure worldwide for small work teams.
 
 ![git flow graph][]
 
@@ -130,12 +130,17 @@ It is highly recommended that *all team members follow the same procedural rules
 
 Git Flow establishes the following restrictions:
 
-    * There are only two long running branches: develop and master
-    * There are three support branch types: feature, release and hotfix
+    * There are only one central repository: **origin**. Every developer pull and pushes to origin.
+    * There are only two long running branches: **develop** and **master**.
+    * There are three support branch types: **feature**, **release** and **hotfix**.
 
 ### Branches
 
 ### Main branches
+
+#### Master branch
+
+#### Develop branch
 
 ### Support branches
 
