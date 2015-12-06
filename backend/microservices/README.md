@@ -55,7 +55,7 @@ Applications built with a microservice-oriented architecture have a set of advan
 - Selective deploys without outages
 - Easier integration with cloud platforms (for example, fine grained scalation)
 
-This document address some of the challenges that arise when using an architecture based on microservices:
+This document addresses some of the challenges that arise when using an architecture based on microservices:
 
 - Microservice discovery : how many microservices exist and where are they?
 - Central configuration
