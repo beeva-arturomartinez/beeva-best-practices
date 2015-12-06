@@ -1,4 +1,4 @@
-<link href="http://kevinburke.bitbucket.org/markdowncss/markdown.css" rel="stylesheet"></link>
+<link href="static/markdown.css" rel="stylesheet"></link>
 
 # Git Best Practices Guide
 At this point we're going to talk about best practices to work with git.
