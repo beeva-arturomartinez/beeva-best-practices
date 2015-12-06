@@ -194,13 +194,13 @@ Each task of development must be created in a feature branch following the Featu
 Steps in the feature flow:
 ``` sh
 
-# Feature Start
+# gitflow feature Start
 git checkout -b feature/lorem-ipsum develop
 
 # Editing
 edit, git add .., git commit ..
 
-# Feature Finish
+# gitflow feature Finish
 git checkout develop
 git merge --no-ff feature/lorem-ipsum
 git branch -d feature/lorem-ipsum
@@ -214,20 +214,20 @@ git push origin develop
 
 When the source code in the develop branch reaches a stable point and is ready to be released, all of the changes should be merged back into master somehow and then tagged with a release number.
 
-
 ![git flow release graph][]
 
-[git flow release graph]: static/release.png "git flow release graph"
+[git flow release graph]: static/release.jpg "git flow release graph"
 
 Steps in the release flow:
 ``` sh
 
-# Release Start
+# gitflow release start
 git checkout -b release/0.1.0 develop
 
+# Editing
 edit, git add .., git commit ..
 
-# Release finish
+# gitflow release finish
 git checkout master
 git merge --no-ff release/0.1.0
 git tag -a v0.1.0
@@ -236,13 +236,36 @@ git merge --no-ff release/0.1.0
 git branch -d release/0.1.0
 
 git push origin 0.1.0
-git pull origin develop
 git push origin develop
-git pull origin master
 git push origin master
 ```
 
 #### Hotfixes
+
+![git flow hotfix graph][]
+
+[git flow hotfix graph]: static/hotfix.jpg "git flow hotfix graph"
+
+Steps in the release flow:
+``` sh
+
+# gitflow hotfix start
+git checkout -b hotfix/0.1.1 master
+
+# Editing
+edit, git add .., git commit ..
+
+# gitflow hotfix finish
+git checkout master
+git merge --no-ff hotfix/0.1.1
+git tag -a 0.1.1
+git checkout develop
+git merge --no-ff hotfix/0.1.1
+git branch -d hotfix/0.1.1
+
+git push origin develop
+git push origin master
+```
 
 ## Tips
 
