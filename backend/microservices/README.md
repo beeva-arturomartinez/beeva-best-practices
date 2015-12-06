@@ -116,7 +116,7 @@ Additionally, we recommend to avoid Single Points Of Failure (SPOF) providing se
 
  A sample configuration file (bootstrap.yml) for a Spring Cloud Config Server is shown below:
 
- ``` java
+ ``` YAML
  spring:
    application:
        name: configsrv
