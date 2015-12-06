@@ -122,13 +122,10 @@ Write a text file called README.md in the main directory of project. This file m
 
 It is highly recommended that *all team members follow the same procedural rules* when using git. The workflow described below is an accepted procedure worldwide for small work teams.
 
+| &nbsp; | &nbsp;              | &nbsp; |
+|:-------|:-------------------:|-------:|
+| &nbsp; | ![git flow graph][] | &nbsp; |
 
-
-
-| This is the flow of work of Git Flow: |
-|:-------------------:|
-| ![git flow graph][] |
- 
 
 [git flow graph]: static/gitflow.png "git flow graph" style="max-width: 60%; !important;"
 
