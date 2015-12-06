@@ -124,29 +124,92 @@ It is highly recommended that **all team members follow the same procedural rule
 
 ![git flow graph][]
 
-[git flow graph]: static/gitflow.png "git flow graph" style="max-width: 60%; !important;"
+[git flow graph]: static/gitflow.png "git flow graph"
 
 ### Git Flow Rules
 
 Git Flow establishes the following restrictions:
 
-    * There are only one central repository: **origin**. Every developer pull and pushes to origin.
-    * There are only two long running branches: **develop** and **master**.
-    * There are three support branch types: **feature**, **release** and **hotfix**.
+* There are only one central repository: **origin**. Every developer pull and pushes to origin.
+* There are only two main branches: **develop** and **master**.
+* There are three support branch types: **feature**, **release** and **hotfix**.
+* Always merge with --no-ff option.
 
 ### Branches
 
+Git Flow defines two branch types, main branches and support branches.
+
 ### Main branches
+
+The Main branches are **develop** and **master**. 
 
 #### Master branch
 
+The master branch is the default git branch. This is a special branch. 
+Git flow establishes the following restictions on this branch:
+
+* Never delete this branch.
+* Never do commits over this branch directly: only merge commits are allowed.
+* Only do merges from release and hotfix branches.
+
 #### Develop branch
 
-### Support branches
+The develop branch is a long running branch and must be created from master.
+
+* Never delete this branch.
+* Never do commits over this branch directly: only merge commits are allowed.
+* All features must be merged in develop
+* When develop reaches a stable point, will be merged back into master, throug a release branch. 
+* Once a release process is finished, the release branch must be merged back into develop.
+* Once a hotfix process is finished, the hotfix branch must be merged back into develop.
+
+#### Support branches
+
+The support branches are **short running branches**. 
+Those branches are created to follow one of the three processes defined on Git Flow.
+Every support branch has defined from what branch must be created and on what branch/es must be merged.
+
+##### Feature branch
+This is the developer working branch.
+
+* The feature branch always is created from develop branch.
+* We can create several feature branches.
+* It's recommended to create only a feature for each developer and feature to develop, and to create shorter features as posible.
+* The feature branch always must be merged back into develop.
+* Don't merge any other branch into feature branch. (i.e.: develop branch)
+* The feature branch must be deleted once finished: merged back into develop.
 
 ### Flow
 
-#### Features
+Git Flow defines three sub work flows:
+
+#### Feature Flow
+
+Each task of development must be created in a feature branch following the Feature flow.
+
+![git flow feature graph][]
+
+[git flow feature graph]: static/feature-gitflow.jpg "git flow feature graph"
+
+Steps in the feature flow:
+``` sh
+
+# Feature Start
+git checkout -b feature/lorem-ipsum develop
+
+# Editing
+git add .., git commit ..
+
+# Feature Finish
+git checkout develop
+git merge --no-ff feature/lorem-ipsum
+git branch -d feature/lorem-ipsum
+
+# Publish code
+git pull origin develop
+git push origin develop
+```
+
 #### Releases
 #### Hotfixes
 
