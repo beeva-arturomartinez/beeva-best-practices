@@ -188,10 +188,7 @@ But config server will not be accessible this way unless we register it in Zuul 
 
 Suppose we configure a bridge application in port 10001.
 
-Application.java
-
----
-
+**Application.java**
 ```java
 
     package com.demo;
@@ -215,10 +212,7 @@ Application.java
 
 ```
 
-application.yml
-
----
-
+**application.yml**
 ```YAML
 
     server:
@@ -235,10 +229,7 @@ application.yml
 
 #### Example : Microservice in node.js
 
-app.js
-
----
-
+**app.js**
 ```javascript
 
     var express = require('express');
@@ -288,10 +279,7 @@ app.js
     require('./routes/index');
 ```
 
-/routes/index.js
-
----
-
+**/routes/index.js**
 ```javascript
 
     var appJs = require('../app.js');
