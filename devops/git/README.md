@@ -124,7 +124,7 @@ It is highly recommended that **all team members follow the same procedural rule
 
 ![git flow graph][]
 
-[git flow graph]: static/gitflow.png "git flow graph"
+[git flow graph]: static/gitflow.jpg "git flow graph"
 
 ### Git Flow Rules
 
@@ -241,6 +241,9 @@ git push origin master
 ```
 
 #### Hotfixes
+
+They arise from the necessity to act immediately upon an undesired state of a live production version. 
+When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.
 
 ![git flow hotfix graph][]
 
