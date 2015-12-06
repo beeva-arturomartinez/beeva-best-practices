@@ -184,7 +184,7 @@ A high level example of a cluster configuration, can be seen below:
 
 Eureka server exposes the information of all of the microservices registered throughout the REST API and the Web UI.
 
-This eureka client is included in Spring Cloud as an annotation: @EnableEurekaServer
+Eureka server is included in Spring Cloud as an annotation: @EnableEurekaServer
 
 #### Eureka Client
 
