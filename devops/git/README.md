@@ -191,6 +191,25 @@ Each task of development must be created in a feature branch following the Featu
 
 [git flow feature graph]: static/feature-gitflow.jpg "git flow feature graph"
 
+Steps in the feature flow:
+``` sh
+
+# Feature Start
+git checkout -b feature/lorem-ipsum develop
+
+# Editing
+git add .., git commit ..
+
+# Feature Finish
+git checkout develop
+git merge --no-ff feature/lorem-ipsum
+git branch -d feature/lorem-ipsum
+
+# Publish code
+git pull origin develop
+git push origin develop
+```
+
 #### Releases
 #### Hotfixes
 
