@@ -1,3 +1,5 @@
+<link href="static/markdown.css" rel="stylesheet"></link>
+
 # Git Best Practices Guide
 At this point we're going to talk about best practices to work with git.
 
@@ -119,11 +121,24 @@ Write a text file called README.md in the main directory of project. This file m
 * For applications which will run on Docker container, is important include here the information necessary to build the Docker image and how run the container.
 
 ## Git Flow
- ![alt text](static/gitflow.png "GIT FLOW GRAPH")
+
+This is the flow of work of Git Flow:
+
+ ![alt text](static/gitflow.png "GIT FLOW GRAPH") =575x762
+
+### Git Flow Rules
+
+### Branches
 
 ### Main branches
 
 ### Support branches
+
+### Flow
+
+#### Features
+#### Releases
+#### Hotfixes
 
 ## Tips
 
