@@ -1,5 +1,3 @@
-<link href="static/markdown.css" rel="stylesheet"></link>
-
 # Git Best Practices Guide
 At this point we're going to talk about best practices to work with git.
 
@@ -123,8 +121,10 @@ Write a text file called README.md in the main directory of project. This file m
 ## Git Flow
 
 This is the flow of work of Git Flow:
+ 
+ ![git flow graph][]
 
- ![alt text](static/gitflow.png "GIT FLOW GRAPH") =575x762
+[git flow graph]: static/gitflow.png "git flow graph" style="width: 60%; margin: auto;"
 
 ### Git Flow Rules
 
