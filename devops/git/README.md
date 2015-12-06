@@ -124,7 +124,7 @@ It is highly recommended that **all team members follow the same procedural rule
 
 ![git flow graph][]
 
-[git flow graph]: static/gitflow.png "git flow graph" style="max-width: 60%; !important;"
+[git flow graph]: static/gitflow.png "git flow graph"
 
 ### Git Flow Rules
 
@@ -187,6 +187,9 @@ Git Flow defines three sub work flows:
 
 Each task of development must be created in a feature branch following the Feature flow.
 
+![git flow feature graph][]
+
+[git flow feature graph]: static/feature-gitflow.jpg "git flow feature graph"
 
 #### Releases
 #### Hotfixes
