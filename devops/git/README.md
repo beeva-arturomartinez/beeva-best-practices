@@ -120,6 +120,8 @@ Write a text file called README.md in the main directory of project. This file m
 
 ## Git Flow
 
+It is highly recommended that all team members follow the same procedural rules when using git. The workflow described below is an accepted procedure worldwide for small work teams.
+
 This is the flow of work of Git Flow:
  
  ![git flow graph][]
@@ -127,6 +129,11 @@ This is the flow of work of Git Flow:
 [git flow graph]: static/gitflow.png "git flow graph" style="width: 60%; margin: auto;"
 
 ### Git Flow Rules
+
+Git Flow establishes the following restrictions:
+
+    * There are only two long running branches: develop and master
+    * There are three support branch types: feature, release and hotfix
 
 ### Branches
 
