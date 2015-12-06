@@ -198,7 +198,7 @@ Steps in the feature flow:
 git checkout -b feature/lorem-ipsum develop
 
 # Editing
-git add .., git commit ..
+edit, git add .., git commit ..
 
 # Feature Finish
 git checkout develop
@@ -211,6 +211,37 @@ git push origin develop
 ```
 
 #### Releases
+
+When the source code in the develop branch reaches a stable point and is ready to be released, all of the changes should be merged back into master somehow and then tagged with a release number.
+
+
+![git flow release graph][]
+
+[git flow release graph]: static/release.png "git flow release graph"
+
+Steps in the release flow:
+``` sh
+
+# Release Start
+git checkout -b release/0.1.0 develop
+
+edit, git add .., git commit ..
+
+# Release finish
+git checkout master
+git merge --no-ff release/0.1.0
+git tag -a v0.1.0
+git checkout develop
+git merge --no-ff release/0.1.0
+git branch -d release/0.1.0
+
+git push origin 0.1.0
+git pull origin develop
+git push origin develop
+git pull origin master
+git push origin master
+```
+
 #### Hotfixes
 
 ## Tips
