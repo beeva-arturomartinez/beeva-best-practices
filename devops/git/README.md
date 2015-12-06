@@ -95,7 +95,7 @@ Don't change the history published, for mantain a true traceability of the chang
 
 For this goal you should use the option *--no-ff* with merge commands to maintain all commit history in the merged branch. The differences from a merge with --no-ff option and other without it is shown in the next picture:
 
-![alt text](static/merge-without-ff.png "difference-merges")
+![alt text](static/merge-without-ff.jpg "difference-merges")
 
 You should configure your repository against history changes. If you initialize a bare git repository with *--shared* it will automatically get the *git-config "receive.denyNonFastForwards"* set to true.
 
@@ -124,7 +124,7 @@ It is highly recommended that **all team members follow the same procedural rule
 
 ![git flow graph][]
 
-[git flow graph]: static/gitflow.png "git flow graph"
+[git flow graph]: static/gitflow.jpg "git flow graph"
 
 ### Git Flow Rules
 
@@ -241,6 +241,9 @@ git push origin master
 ```
 
 #### Hotfixes
+
+They arise from the necessity to act immediately upon an undesired state of a live production version. 
+When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.
 
 ![git flow hotfix graph][]
 
