@@ -42,6 +42,52 @@ Some code examples:
 A Remarkable idea
 
 
+### BDD with Cucumber
+
+#### Structure for BDD
+
+> my-application/
+>	test/
+>		acceptance-test/
+>			features/
+>				step_definitions/
+>					stepdefinition-file1 # methods, helpers and 
+>					stepdefinition-file2 # variables for describing 
+>					stepdefinition-fileN # step definitions
+>				support/
+>					hooks.js # hooks functions for clean environment
+>					world.js # file with all properties and funcions to be used in step definitions
+>				feature-file1.feature # feature files with scenarios 
+>				feature-file2.feature # and steps for all user histories
+>				feature-fileN.feature # defined in you application
+>			npm-debug.log # npm  
+>			my-application.log # application acceptance-test logging file
+>		mocks/
+>			mocks-file1.js # methods and funcions 
+>			mocks-file2.js # for mocking during unit 
+>			mocks-fileN.js # tests in your application
+>		unit-test/
+>			unit-test-file1.js # unit-test files for testing 
+>			unit-test-file2.js # functions and methods of 
+>			unit-test-fileN.js # your application
+>
+
+
+#### World function
+
+World is a constructor function with utility properties, destined to be used in step definitions:
+
+#### Dependencies
+
+#### Features
+
+#### Support Files
+
+#### Step Definitions
+
+#### Hooks
+
+
 ### The Return of the King
 
 A nice table
