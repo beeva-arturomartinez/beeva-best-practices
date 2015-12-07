@@ -354,7 +354,7 @@ For more information click [here][linkrecursivity] .
 
 A Hash table is simply an array that is addressed via a hash function.
 
-Hash tables are a simple and effective method to implement dictionaries. Average time to search for an element is *O(1)*, while worst-case time is *O(n)*.
+Hash tables are a simple and effective method to implement dictionaries. Average time to search for an element is **O(1)**, while worst-case time is **O(n)**.
 
 A Hash table needs the following:
 
@@ -365,7 +365,7 @@ A Hash table needs the following:
 It is recommended to use Hash tables when you need faster searches in your data with this conditions:
 
  - The hash table occupation is not elevated.
- - we use function that generates uniformly distributed keys.
+ - We use a function that generates uniformly distributed keys.
 
 This operations may be slower in Hash tables:
 
@@ -374,13 +374,13 @@ This operations may be slower in Hash tables:
 
 ### Trees
 
-Trees are highly recursive data structures that you can use to store *hierarchical data and model decision processes*.
+Trees are highly recursive data structures that you can use to store **hierarchical data and model decision processes**.
 
 A tree is a structure compounded with nodes, each node have the data and the relations with others nodes:
 
- - Root (actual node).
- - Children (relationship with their lower nodes).
- - Leaf is a node without children.
+ - **Root** (or actual node if we are walking on the tree).
+ - **Children** (relationship with their lower nodes).
+ - **Leaf** is a node without children.
 
 All the trees have a principal **root node**, that is the upper node in the tree.
 
@@ -391,7 +391,7 @@ The common cases of use are:
  - Binary indexes in databases.
  - Decision trees.
 
-There are different types of trees based on their design. We are not going to describe how to implement this data structure, we will only talk about the performance properties.
+There are different types of trees based on their use. We are not going to describe how to implement this data structure, we will only talk about the performance properties.
 
 #### Binary trees
 
@@ -399,9 +399,9 @@ In this design we only have two children per node.
 
 Binary trees are useful in many algorithms, partly because lots of problems can be modeled using binary choices and partly because binary trees are relatively easy to understand.
 
- - Searching operations on a *perfect tree* (a full tree where all the leaves are at the same level). that contains N nodes from the root to a leaf node, you must know that the algorithm needs only *O(log(N))* steps.
- - For randomly inserted data, search time is *O(lgn)*.
- - Worst-case behavior occurs when ordered data is inserted. In this case the search time is *O(n)*.
+ - Searching operations on a **perfect tree** (a full tree where all the leaves are at the same level). that contains N nodes from the root to a leaf node, you must know that the algorithm needs only **O(log(N))** steps.
+ - For randomly inserted data, search time is **O(lgn)**.
+ - Worst-case behavior occurs when ordered data is inserted. In this case the search time is **O(n)**.
 
 #### Balanced trees (AVL)
 
@@ -409,9 +409,9 @@ An AVL tree is a sorted binary tree in which the heights of two subtrees at any 
 
 Like other sorted trees, balanced trees let a program store and find values quickly. By keeping themselves balanced, ensure that they don’t grow too tall and thin, which would ruin their performance.
 
-The better property of this types of trees is in their design, they are optimized for searches, trying to get the *perfect tree* approaching and their benefits.
+The better property of this types of trees is in their design, they are optimized for searches, trying to get the **perfect tree** approaching and their benefits.
 
-Adding and removing values in a balanced tree takes longer than it does in an ordinary (nonbalanced) sorted tree. Those operations still take only *O(log N)* time, however, so the theoretical run time is the same even if the actual time is slightly longer. Spending that extra time lets the algorithm guarantee that those operations don’t grow to linear time.
+Adding and removing values in a balanced tree takes longer than it does in an ordinary (nonbalanced) sorted tree. Those operations still take only **O(log N)** time, however, so the theoretical run time is the same even if the actual time is slightly longer. Spending that extra time lets the algorithm guarantee that those operations don’t grow to linear time.
 
 #### Decision trees
 
@@ -428,6 +428,95 @@ Thinking about the problem as a general decision tree may be a mistake, because 
 Still, decision trees are a powerful technique that you should at least consider if you don’t know of a better approach to a problem.
 
 ### Graphs
+
+#### Undirected Graphs
+
+A graph is a set of **vertices** and a collection of **edges** that each connect a pair of **vertices**.
+
+If vertices A and vertices B are directly connected by a edges, they are adjacent and are called neighbors.
+
+Unlike the case with a tree, a graph has no root node, although there may be particular vertices of interest, depending on the graph. Essentially, a tree is a special type of graph.
+
+A **path** in a graph is a sequence of vertices connected by edges:
+
+ - A **simple path** is one with no repeated vertices.
+ - A **cycle** is a path with at least one edge whose first and last vertices are the same.
+ - A **simple cycle** is a cycle with no repeated edges or vertices (except the requisite repetition of the first and last vertices).
+ - The length of a path or a cycle is its number of edges.
+
+There are algorithms commonly used in graphs for search vertices based on our interests:
+
+ - **Depth-first search**
+
+	First we choose any vertex and expand the adjacent vertices. Next the process repeats for each adjacent until all the nodes in this path are visited, and then select another path until all vertices are visited.
+
+	The execution time is **O(|V|+|E|)** where V are the number of vertices and E the number of edges.
+
+ - **Breadth-first search**
+
+	First we choose any vertex and then visit all the adjacent vertices. Next the process repeats for each adjacent until all the vertices are visited.
+
+	The execution time is **O(|V|+|E|)** where V are the number of vertices and E the number of edges.
+
+#### Directed Graphs
+
+A directed graph (or digraph) is a set of vertices and a collection of directed edges. Each directed edge connects an ordered pair of vertices.
+
+This can be represented in many ways. For the following directed graph:
+
+![alt text](static/directed_graph.png "Directed Graph")
+
+ - **Adjacent Matrix**
+
+	![alt text](static/directed_graph_matrix.png "Adjacent Matrix")
+
+    Each element in the matrix have the weight of the edge, the file represent the origin vertex, and the column the destination vertex.
+
+	- Advantages
+
+		 - The access time to an element of the adjacency matrix is independent of the number of vertices and edges: **O(1)**.
+		 - It supports adding and deleting arcs.
+		 - Besides representing simple graphs, can represent some multiple graphs (which they are as much a loop at its vertices).
+
+	- Disavantages
+
+		- It is a system that applies only to graphs in which the number of vertices is not changed (in a parent can not add or delete rows and columns).
+		- It can produce a great waste of memory in sparse directed graph, that is, those graphs that possess a large number of vertices and a small number of arcs, as the adjacency matrix n^2^ always occupy memory elements, regardless of the number Arch. Also, examine the entire array will take time **O(n^2^)**, which invalidates algorithms **O(n)** for handling directed graphs with **O(n)** arches.
+
+ - **Adjacent Lists** **
+
+	![alt text](static/directed_graph_adjacent_list.png "Adjacent Lists")
+
+	In this representation, each vertex of the graph will have an associated adjacency list, which contains all those vertices that are adjacent to it.
+
+	- Advantages
+
+		- The representation of a directed graph with adjacency lists requires a space proportional to the sum of the number of vertices plus the number of arcs: **O(n + a)**, which makes it use enough when the graph is sparse.
+		- It supports adding and deleting arcs.
+		- You can add and delete vertices of the graph if a variant is used: the list of lists adjacency. In this case, the vertices are in a list instead of an array, which makes possible to insert new vertices.
+		- Can represent any multiple graph.
+
+	- Disavantages
+
+		- Takes **O(n)** to determine if there is an arc from vertex i to vertex j, as it can be **O(n)** vertices in the adjacency list associated with the vertex i.
+		- Because pointers and tags the vertices on the arches, this representation may come to occupy more memory than the adjacency matrix for dense graphs.
+
+ - **Two vectors**
+
+	![alt text](static/directed_graph_two_vectors.png "Two vectors")
+
+	This system of representation is very suitable for static graphs. Two vectors are used, U1 and U2. If the graph is of order n (has n vertices), the vector U1 will be n + 1 elements, which shall be to U2 vector positions. The vector U2 have as many elements (labels of adjacent vertices and weight corresponding) arc as arcs have the graph. Vertices adjacent to vertex i will find one after another in the vector U2 from the position U1 [i] and to U1 [i + 1] -1 position.
+
+	- Advantages
+
+		- Especially suitable for static and sparse graphs by saving memory provided in this case (greater than the adjacency list).
+		- Can represent any multiple graph.
+
+	- Disavantages
+
+		- Takes **O(n)** to determine if there is an arc from vertex i to vertex j.
+		- Can occupy more memory than the adjacency matrix for dense graphs.
+		- Only applicable for static graphs: You can not add or vertices or arcs.
 
 ## Profiling
 
