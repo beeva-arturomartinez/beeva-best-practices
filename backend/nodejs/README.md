@@ -97,6 +97,8 @@ World is a constructor function with utility properties, destined to be used in 
 
 9. Test description function where you can prepare the request to server endpoints.
 
+This is one valid example for this structure: 
+
 ```javascript
 var	request = require('request'),//1
 	zombie = require('zombie'),
@@ -203,7 +205,40 @@ exports.World = World;
 
 #### Features
 
+The acceptance-test features with user histories must be packed and stored in files with .feature extension. This Features are written using Gherkin language:
+
+``` gherkin
+# features/feature-file1.feature
+
+Feature: Example feature
+	As a user of cucumber.js
+	I want to have documentation on cucumber
+	So that I can concentrate on building awesome applications
+
+	Scenario: Reading documentation
+		Given I am on the Cucumber.js GitHub repository
+		When I go to the README file
+		Then I should see "Usage" as the page title
+```
+
+
+It's a best practice to store these files under /features in acceptance-test subfolder.
+
+It isn't the purpose of this article how to describe correct features in Gherkin, but there are a set of recommendations:
+
+1. Use Background and Scenario Outline if it's posible.
+2. Don't write large feature files. You can pack these features in more files. For example, if you have 24 scenarios for testing two different application param values, yo can choose:
+	⋅⋅1 createnotification.feature (24 Scenarios). ** NOT GOOD **
+	⋅⋅2 createnotification_app1.feature (the first 12 Scenarios) and createnotification_app2.feature (the remaining 12 Scenarios). ** BETTER **
+	⋅⋅3 createnotification_app1_ok.feature (the first 2 Scenarios for app1), createnotification_app1_errors.feature (the remaining 10 Scenarios for app1), createnotification_app2_ok.feature (the first 2 Scenarios for app2) and createnotification_app2_errors.feature (the remaining 10 Scenarios for app2). ** BEST **
+
+You can check the official cucumber github repository for a beggining guide[Feature-Introduction](https://github.com/cucumber/cucumber/wiki/Feature-Introduction)
+
+You can also check more examples how to describe Features using Gherkin in this [link](http://docs.behat.org/en/v2.5/guides/1.gherkin.html)
+
 #### Support Files
+
+Support files let you setup the environment in which steps will be run, and define step definitions.
 
 #### Step Definitions
 
