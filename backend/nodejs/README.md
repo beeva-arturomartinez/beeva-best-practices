@@ -47,37 +47,159 @@ A Remarkable idea
 #### Structure for BDD
 
 ```
-+-- my-application/
-|	+--	test/
-|		+--		acceptance-test/
-|		+--			features/
-|		+--				step_definitions/
-|		+--					stepdefinition-file1 # methods, helpers and 
-|		+--					stepdefinition-file2 # variables for describing 
-|		+--					stepdefinition-fileN # step definitions
-|		+--				support/
-|		+--					hooks.js # hooks functions for clean environment
-|		+--					world.js # file with all properties and funcions to be used in step definitions
-|		+--				feature-file1.feature # feature files with scenarios 
-|		+--				feature-file2.feature # and steps for all user histories
-|		+--				feature-fileN.feature # defined in you application
-|		+--			npm-debug.log # npm  
-|		+--			my-application.log # application acceptance-test logging file
-|		+--		mocks/
-|		+--			mocks-file1.js # methods and funcions 
-|		+--			mocks-file2.js # for mocking during unit 
-|		+--			mocks-fileN.js # tests in your application
-|		+--		unit-test/
-|		+--			unit-test-file1.js # unit-test files for testing 
-|		+--			unit-test-file2.js # functions and methods of 
-|		+--			unit-test-fileN.js # your application
+my-application/
+	test/
+		acceptance-test/
+			features/
+				step_definitions/
+					stepdefinition-file1 # methods, helpers and 
+					stepdefinition-file2 # variables for describing 
+					stepdefinition-fileN # step definitions
+				support/
+					hooks.js # hooks functions for clean environment
+					world.js # file with all properties and funcions to be used in step definitions
+				feature-file1.feature # feature files with scenarios 
+				feature-file2.feature # and steps for all user histories
+				feature-fileN.feature # defined in you application
+			npm-debug.log # npm  
+			my-application.log # application acceptance-test logging file
+		mocks/
+			mocks-file1.js # methods and funcions 
+			mocks-file2.js # for mocking during unit 
+			mocks-fileN.js # tests in your application
+		unit-test/
+			unit-test-file1.js # unit-test files for testing 
+			unit-test-file2.js # functions and methods of 
+			unit-test-fileN.js # your application
 ```
 
 #### Dependencies
 
 #### World function
 
-World is a constructor function with utility properties, destined to be used in step definitions. In this file, you to declare every 
+World is a constructor function with utility properties, destined to be used in step definitions. World function file should have this desired structure: 
+
+1. Require section for imports.
+
+2. World function declaration.
+
+3. Functions for setting, getting and cleaning data of every scenario.
+
+4. Validation functions for checking JSON objects in responses.
+
+5. Server properties and constants for making requests.
+
+6. Functions for start and stop a mock server for acceptance-tests.
+
+7. Requests functions to call server endpoints you wish to call.
+
+8. Client-side response methods for check if you receive the expected responses.
+
+9. Test description function where you can prepare the request to server endpoints.
+
+```javascript
+var	request = require('request'),//1
+	zombie = require('zombie'),
+	expect = require('chai').expect,
+	async = require('async'),
+	server = require('server'),
+	extend = require('extend');
+
+var	World = function World(callback) {//2
+	var sharedData = {};
+
+	this.setData = function (field, data) {//3
+		sharedData[field] = data;
+	};
+
+	this.getData = function (field) {//3
+		return sharedData[field];
+	};
+
+	this.clearData = function (field) {//3
+		if (field) {
+			delete sharedData[field];
+		} else {
+			shardData = {};
+		}
+	};
+
+	this.validations = {
+		validationOne: function (data) {//4
+			expect(data).to.be.ok;
+		}
+	};
+
+	var SERVER_URL = this.SERVER_URL = "http://localhost:3000/my-application";//5
+	var VERSION = this.VERSION = "v1";//5
+
+	var applicationUrls = this.urls = {//5
+		endpoint: SERVER_URL + VERSION + '/{applicationId}'
+	};
+
+	var config = this.config = {//5
+		//API properties		
+		name: 'my-application',
+		port: 3000,
+		version: "0.0.1",
+		apiversion: "v1",
+		//Store properties
+		store: {
+			type: "mongodb",
+			url: "mongodb://localhost:27017/my-application_test",
+			collection: "notifications",
+			options: {}
+		},
+		//Logging properties
+		log: {
+			fileName: './my-application.log',
+			console: false
+		}
+	};
+
+	this.startServer = function () {//6
+		return server.start(config);
+	};
+
+	this.stopServer = function () {//6
+		server.stop();
+	};
+
+	logger.init(config.log);
+
+	this.requestFunction = function (param1, param2, ..., paramN, callback) {//7
+		request.post({
+			url: url,
+			json: json,
+			headers: {
+			}
+		}, callback);
+	};
+
+	callback();
+};
+
+World.responseMustBe = function (expectedStatus, callback) {//8
+	var statusCode = this.getData('response').statusCode;
+	expect(statusCode).to.be.equal(Number(expectedStatus));
+	callback();
+};
+
+World.followingRequest = function (items, callback) {//9
+	async.eachSeries(items, function (item, callback) {
+		this.requestFunction(item.param1, item.param2, ..., item.paramN, function (error, response, body) {
+			expect(error).to.be.null;
+			expect(response.statusCode).to.equal(201);
+			callback();
+		}.bind(this));
+	}.bind(this), function (error) {
+		expect(error).to.not.exist;
+		callback();
+	}.bind(this));
+};
+
+exports.World = World;
+```
 
 #### Features
 
