@@ -121,9 +121,9 @@ It isn't the purpose of this article how to describe correct features in Gherkin
 
 1. Use Background and Scenario Outline if it's posible.
 2. Don't write large feature files. You can pack these features in more files. For example, if you have 24 scenarios for testing two different application param values, yo can choose:
-	* createnotification.feature (24 Scenarios). ** NOT GOOD **
-	* createnotification_app1.feature (the first 12 Scenarios) and createnotification_app2.feature (the remaining 12 Scenarios). ** BETTER **
-	* createnotification_app1_ok.feature (the first 2 Scenarios for app1), createnotification_app1_errors.feature (the remaining 10 Scenarios for app1), createnotification_app2_ok.feature (the first 2 Scenarios for app2) and createnotification_app2_errors.feature (the remaining 10 Scenarios for app2). ** BEST **
+	* createnotification.feature (24 Scenarios). **NOT GOOD**
+	* createnotification_app1.feature (the first 12 Scenarios) and createnotification_app2.feature (the remaining 12 Scenarios). **BETTER**
+	* createnotification_app1_ok.feature (the first 2 Scenarios for app1), createnotification_app1_errors.feature (the remaining 10 Scenarios for app1), createnotification_app2_ok.feature (the first 2 Scenarios for app2) and createnotification_app2_errors.feature (the remaining 10 Scenarios for app2). **BEST**
 
 You can check the official cucumber github repository for a beggining guide [Feature-Introduction](https://github.com/cucumber/cucumber/wiki/Feature-Introduction)
 
@@ -256,7 +256,7 @@ You can also check more examples how to describe Step definitions in this [link]
 
 Support files let you setup the environment in which steps will be run, and define step definitions. The most important support file is the World function, but you may need more functions for testing. 
 
-The secondary files you need to develop and store are the hooks functions. These two with other acceptance-test functions files must be stroed in suppor subfolder. 
+The secondary files you need to develop and store are the hooks functions. These two with other acceptance-test functions files must be stored in support subfolder. 
 
 #### World function
 
@@ -401,14 +401,14 @@ There are four different Hook function types:
 
 Best practices for using Hooks, are:
 
-** Pack all of them in a single file. 
-** Store this file with World function file. 
-** Use a little set of hooks.
+* Pack all of them in a single file. 
+* Store this file with World function file. 
+* Use a little set of hooks.
 
 The following example are hooks for clean data repository (in mongoDB) before every scenario, and start/stop server in every Scenario:
 
 ```javascript
-var 	expect = require('chai').expect,
+var expect = require('chai').expect,
 	MongoClient = require('mongodb').MongoClient;
 
 var hooks = function () {
