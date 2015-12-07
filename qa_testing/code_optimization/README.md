@@ -350,10 +350,62 @@ For more information click [here][linkrecursivity] .
 [linkrecursivity]: https://en.wikipedia.org/wiki/Recursion_(computer_science)
 
 ## Complex Data Structures
-
 ### Hash tables
 
+A Hash table is simply an array that is addressed via a hash function.
+
+Hash tables are a simple and effective method to implement dictionaries. Average time to search for an element is *O(1)*, while worst-case time is *O(n)*.
+
+A Hash table needs the following:
+
+ - A data structure to hold the data.
+ - A hashing function to map keys to locations in the data structure.
+ - A collision-resolution policy that specifies what should be done when keys collide.
+
+It is recommended to use Hash tables when you need faster searches in your data with this conditions:
+
+ - The hash table occupation is not elevated.
+ - we use function that generates uniformly distributed keys.
+
+This operations may be slower in Hash tables:
+
+ - Browse all elements of the Hash.
+ - Rescaling the Hash size.
+
 ### Trees
+
+Trees are highly recursive data structures that you can use to store hierarchical data and model decision processes.
+
+A tree is a structure compounded with nodes, each node have the data and the relations with others nodes:
+
+ - Root (actual node).
+ - Children (relationship with their lower nodes).
+ - Leaf is a node without children.
+
+All the trees have a principal **root node**, that is the upper node in the tree.
+
+There are different types of trees based on their design. We are not going to describe how to implement this data structure, we will only talk about the performance properties.
+
+#### Binary trees
+
+In this design we only have two children per node.
+
+Binary trees are useful in many algorithms, partly because lots of problems can be modeled using binary choices and partly because binary trees are relatively easy to understand.
+
+ - Searching operations on a *perfect tree* (a full tree where all the leaves are at the same level). that contains N nodes from the root to a leaf node, you must know that the algorithm needs only *O(log(N))* steps.
+ - For randomly inserted data, search time is *O(lgn)*.
+ - Worst-case behavior occurs when ordered data is inserted. In this case the search time is *O(n)*.
+
+#### Balanced trees (AVL)
+
+An AVL tree is a sorted binary tree in which the heights of two subtrees at any given node differ by at most 1. When a node is added or removed, the tree is rebalanced if necessary to ensure that the subtrees again have heights differing by at most 1.
+
+Like other sorted trees, balanced trees let a program store and find values quickly. By keeping themselves balanced, ensure that they don’t grow too tall and thin, which would ruin their performance.
+
+The better property of this types of trees is in their design, they are optimized for searches, trying to get the *perfect tree* approaching and their benefits.
+
+Adding and removing values in a balanced tree takes longer than it does in an ordinary (nonbalanced) sorted tree. Those operations still take only *O(log N)* time, however, so the theoretical run time is the same even if the actual time is slightly longer. Spending that extra time lets the algorithm guarantee that those operations don’t grow to linear time.
+
 
 ### Graphs
 
