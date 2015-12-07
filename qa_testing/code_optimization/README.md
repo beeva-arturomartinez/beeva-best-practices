@@ -374,7 +374,7 @@ This operations may be slower in Hash tables:
 
 ### Trees
 
-Trees are highly recursive data structures that you can use to store hierarchical data and model decision processes.
+Trees are highly recursive data structures that you can use to store *hierarchical data and model decision processes*.
 
 A tree is a structure compounded with nodes, each node have the data and the relations with others nodes:
 
@@ -383,6 +383,13 @@ A tree is a structure compounded with nodes, each node have the data and the rel
  - Leaf is a node without children.
 
 All the trees have a principal **root node**, that is the upper node in the tree.
+
+The common cases of use are:
+
+ - File systems.
+ - Ordering lists.
+ - Binary indexes in databases.
+ - Decision trees.
 
 There are different types of trees based on their design. We are not going to describe how to implement this data structure, we will only talk about the performance properties.
 
@@ -406,6 +413,19 @@ The better property of this types of trees is in their design, they are optimize
 
 Adding and removing values in a balanced tree takes longer than it does in an ordinary (nonbalanced) sorted tree. Those operations still take only *O(log N)* time, however, so the theoretical run time is the same even if the actual time is slightly longer. Spending that extra time lets the algorithm guarantee that those operations don’t grow to linear time.
 
+#### Decision trees
+
+You can use to model situations where you can solve a problem by making a series of decisions.
+
+ 1. Each branch in the tree represents a single choice.
+ 2. A leaf node represents a complete set of decisions that produces a final solution.
+ 3. The goal is to find the best possible set of choices or the best leaf node in the tree.
+
+Decision trees are extremely useful and can model all sorts of situations where you can use a series of steps to produce a solution. Unfortunately, decision trees are often truly enormous.
+
+Thinking about the problem as a general decision tree may be a mistake, because it might make you miss the simplifications that let you solve the problem efficiently.
+
+Still, decision trees are a powerful technique that you should at least consider if you don’t know of a better approach to a problem.
 
 ### Graphs
 
