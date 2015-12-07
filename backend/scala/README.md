@@ -115,10 +115,13 @@ _When using collections, qualify names by importing scala.collection.immutable a
 
 _Do not use relative imports from other packages_
 
-    Avoid
+Avoid
+
     import com.beeva
     import concurrent
-    in favor of the unambiguous
+
+in favor of the unambiguous
+
     import com.beeva.concurrent
 
 _Put imports at the top of the file_
@@ -134,6 +137,7 @@ Write
 ```scala
 def square(x: Int) = x*x
 ```
+
 but not
 
 ```scala
