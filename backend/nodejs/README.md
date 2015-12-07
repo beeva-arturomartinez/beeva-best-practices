@@ -75,6 +75,189 @@ my-application/
 
 #### Dependencies
 
+##### Instalation
+
+Cucumber.js is available as an npm module. Install globally with:
+
+``` shell
+$ npm install -g cucumber
+```
+
+Install as a development dependency of your application with:
+
+``` shell
+$ npm install --save-dev cucumber
+```
+
+##### Develop and run test
+
+For checking response code and fields, maybe you also need:
+
+* chai
+* json-schema
+
+#### Features
+
+The acceptance-test features with user histories must be packed and stored in files with .feature extension. Must be stored in features folder. This Features are written using Gherkin language:
+
+``` gherkin
+# features/feature-file1.feature
+
+Feature: Example feature
+	As a user of cucumber.js
+	I want to have documentation on cucumber
+	So that I can concentrate on building awesome applications
+
+	Scenario: Reading documentation
+		Given I am on the Cucumber.js GitHub repository
+		When I go to the README file
+		Then I should see "Usage" as the page title
+```
+
+
+It's a best practice to store these files under /features in acceptance-test subfolder.
+
+It isn't the purpose of this article how to describe correct features in Gherkin, but there are a set of recommendations:
+
+1. Use Background and Scenario Outline if it's posible.
+2. Don't write large feature files. You can pack these features in more files. For example, if you have 24 scenarios for testing two different application param values, yo can choose:
+	* createnotification.feature (24 Scenarios). ** NOT GOOD **
+	* createnotification_app1.feature (the first 12 Scenarios) and createnotification_app2.feature (the remaining 12 Scenarios). ** BETTER **
+	* createnotification_app1_ok.feature (the first 2 Scenarios for app1), createnotification_app1_errors.feature (the remaining 10 Scenarios for app1), createnotification_app2_ok.feature (the first 2 Scenarios for app2) and createnotification_app2_errors.feature (the remaining 10 Scenarios for app2). ** BEST **
+
+You can check the official cucumber github repository for a beggining guide [Feature-Introduction](https://github.com/cucumber/cucumber/wiki/Feature-Introduction)
+
+You can also check more examples how to describe Features using Gherkin in this [link](http://docs.behat.org/en/v2.5/guides/1.gherkin.html)
+
+
+#### Step Definitions
+
+Step definitions are defined in javascript files under my.application/features/step_definitions folder. This step definitions are 
+
+Best practices:
+1. Don't write redundant or near Step definitions. Example:
+``` gherkin
+	Given(/^the following data for creating a notification:$/, function (table, callback) {
+		//step code
+	});
+
+	Given(/^the following data for creating a notification:$/, function (table, callback) {
+		//step code
+	});
+``` 
+or
+
+``` gherkin
+	Given(/^the following data for creating a notification:$/, function (table, callback) {
+		//step code
+	});
+
+	Given(/^the following data for create a new notification:$/, function (table, callback) {
+		//step code
+	});
+```
+
+You can use the same step definition for all of them. 
+
+2. Don't write ambiguos or near Step definitions:
+``` gherkin
+	Given(/^the following signature "([^"]*)"$/, function (signature, callback) {
+		//step code
+	});
+
+	Given(/^the following "([^"]*)" signature$/, function (signature, callback) {
+		//step code
+	});
+``` 
+Those are the same definition for an unique step.
+
+3. Group step definitions by functionality, and use only one for common step definitions. Example:
+
+```
+my-application/
+	test/
+		acceptance-test/
+			features/
+				step_definitions/
+					createApp_stepdefinitions.js
+					getApp_stepdefinition.js
+					common_stepdefinitions.js
+				createApp_ok.feature
+				createApp_error.feature 
+				getApp_ok.feature
+				getApp_error.feature 
+
+```
+
+4. Gruop Given, When and Then step definitions in the same file section. Example:
+
+``` gherkin
+	Given(/^step 1 definition$/, function (callback) {
+		//step code
+	});
+
+	Given(/^step 2 definition$/, function (callback) {
+		//step code
+	});
+
+	When(/^step 3 definition$/, function (callback) {
+		//step code
+	});
+
+	When(/^step 4 definition$/, function (callback) {
+		//step code
+	});
+	
+	Then(/^step 5 definition$/, function (callback) {
+		//step code
+	});
+
+	Then(/^step 6 definition$/, function (callback) {
+		//step code
+	});
+
+``` 
+
+Here is a simple example:
+
+``` javascript
+var expect = require('chai').expect;
+
+module.exports = function () {
+	this.World = World = require("../support/world.js").World;
+	var 	Given = this.Given,
+		When = this.When,
+		Then = this.Then;
+
+	Given(/^the following data for creating a notification:$/, function (table, callback) {
+		this.setData("notificationData", table.hashes()[0]);
+		callback();
+	});
+
+	When(/^I try to create a notification$/, function (callback) {
+		World.tryToCreateNotification.call(this, callback);
+	});
+
+	Then(/^the response must be "([^"]*)"$/, World.responseMustBe);
+
+	Then(/^I receive all required info for creating notification$/, function (callback) {
+		World.checkCreateNotificationResponseData.call(this, callback);
+	});
+
+	Then(/^the notification was created and stored$/, function (callback) {
+		World.checkNotificationExists.call(this, callback);
+	});
+};
+```
+You can also check more examples how to describe Step definitions in this [link]
+(https://github.com/cucumber/cucumber/wiki/Step-Definitions)
+
+#### Support Files
+
+Support files let you setup the environment in which steps will be run, and define step definitions. The most important support file is the World function, but you may need more functions for testing. 
+
+The secondary files you need to develop and store are the hooks functions. These two with other acceptance-test functions files must be stroed in suppor subfolder. 
+
 #### World function
 
 World is a constructor function with utility properties, destined to be used in step definitions. World function file should have this desired structure: 
@@ -203,47 +386,60 @@ World.followingRequest = function (items, callback) {//9
 exports.World = World;
 ```
 
-#### Features
-
-The acceptance-test features with user histories must be packed and stored in files with .feature extension. This Features are written using Gherkin language:
-
-``` gherkin
-# features/feature-file1.feature
-
-Feature: Example feature
-	As a user of cucumber.js
-	I want to have documentation on cucumber
-	So that I can concentrate on building awesome applications
-
-	Scenario: Reading documentation
-		Given I am on the Cucumber.js GitHub repository
-		When I go to the README file
-		Then I should see "Usage" as the page title
-```
-
-
-It's a best practice to store these files under /features in acceptance-test subfolder.
-
-It isn't the purpose of this article how to describe correct features in Gherkin, but there are a set of recommendations:
-
-1. Use Background and Scenario Outline if it's posible.
-2. Don't write large feature files. You can pack these features in more files. For example, if you have 24 scenarios for testing two different application param values, yo can choose:
-	* createnotification.feature (24 Scenarios). ** NOT GOOD **
-	* createnotification_app1.feature (the first 12 Scenarios) and createnotification_app2.feature (the remaining 12 Scenarios). ** BETTER **
-	* createnotification_app1_ok.feature (the first 2 Scenarios for app1), createnotification_app1_errors.feature (the remaining 10 Scenarios for app1), createnotification_app2_ok.feature (the first 2 Scenarios for app2) and createnotification_app2_errors.feature (the remaining 10 Scenarios for app2). ** BEST **
-
-You can check the official cucumber github repository for a beggining guide[Feature-Introduction](https://github.com/cucumber/cucumber/wiki/Feature-Introduction)
-
-You can also check more examples how to describe Features using Gherkin in this [link](http://docs.behat.org/en/v2.5/guides/1.gherkin.html)
-
-#### Support Files
-
-Support files let you setup the environment in which steps will be run, and define step definitions.
-
-#### Step Definitions
-
 #### Hooks
 
+Hooks are functions that can be used to prepare and clean the environment before and after each scenario is executed. Hooks can use callbacks, return promises, or be synchronous. The first argument to hooks is always the current scenario.
+
+There are four different Hook function types:
+1. Scenario hooks: will be run before/after the first/last step of each scenario. They will run in the same order of which they are registered.
+
+2. Step hooks: will be run before/after every step of each scenario. Dos not work with scenarios which have backgrounds.
+
+3. Tagged hooks: will be run before/after certain scenarios. You have to use tags for select subset of scenarios to run with this kind of hooks.
+
+4. Global hooks: will be run once before any scenario is run.
+
+Best practices for using Hooks, are:
+
+** Pack all of them in a single file. 
+** Store this file with World function file. 
+** Use a little set of hooks.
+
+The following example are hooks for clean data repository (in mongoDB) before every scenario, and start/stop server in every Scenario:
+
+```javascript
+var 	expect = require('chai').expect,
+	MongoClient = require('mongodb').MongoClient;
+
+var hooks = function () {
+	var Before = this.Before,
+		After = this.After,
+		Around = this.Around;
+
+	Before(function (done) {
+		var that = this;
+		this.startServer().then(function () {
+			MongoClient.connect(that.config.store.url, function (error, db) {
+				db.collection(that.config.store.collection).remove(function (error) {
+					db.close();
+					done();
+				});
+			});
+		}).fail(function (error) {
+			expect(error).to.be.null;
+			done();
+		});
+	});
+
+	After(function (done) {
+		var that = this;
+		this.stopServer();
+		done();
+	});
+};
+
+module.exports = hooks;
+```
 
 ### The Return of the King
 
