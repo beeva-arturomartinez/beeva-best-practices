@@ -16,12 +16,6 @@ This is how we work with Microservices at BEEVA.
 
     2.3. [Communication between microservices](#23-communication-between-microservices)
 
-	2.3.1. [Coordination and dumb pipes](#231-coordination-and-dumb-pipes)
-
-   	2.3.2. [Synchronous communication](#232-synchronous-communication)
-
-	2.3.3. [Aynchronous communication](#233-asynchronous-communication)
-
 3. [Microservices with Spring Cloud](#3-microservices-with-spring-cloud)
 
     3.1. [Introduction](#31-introduction)
