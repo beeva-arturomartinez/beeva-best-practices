@@ -20,10 +20,9 @@ At this point we're going to talk about the best practices for optimize the code
 	* [Trees](#trees)
 	* [Graphs](#graphs)
 * [Profiling](#profiling)
-	* [Profilers types depending on the response](#profilers-types-depending-on-the-response)
+	* [Profilers types depending on output](#profilers-types-depending-on-output)
 	* [Granularity](#granularity)
-	* [Statistic's profilers](#statistics-profilers)
-* [Instrumentation](#instrumentation)
+	* [Instrumentation](#instrumentation)
 * [Bucle optimization](#bucle-optimization)
 * [Efficient exceptions management](#efficient-exceptions-management)
 * [Tools](#tools)
@@ -350,22 +349,244 @@ For more information click [here][linkrecursivity] .
 [linkrecursivity]: https://en.wikipedia.org/wiki/Recursion_(computer_science)
 
 ## Complex Data Structures
-
 ### Hash tables
+
+A Hash table is simply an array that is addressed via a hash function.
+
+Hash tables are a simple and effective method to implement dictionaries. Average time to search for an element is **O(1)**, while worst-case time is **O(n)**.
+
+A Hash table needs the following:
+
+ - A data structure to hold the data.
+ - A hashing function to map keys to locations in the data structure.
+ - A collision-resolution policy that specifies what should be done when keys collide.
+
+It is recommended to use Hash tables when you need faster searches in your data with this conditions:
+
+ - The hash table occupation is not elevated.
+ - We use a function that generates uniformly distributed keys.
+
+This operations may be slower in Hash tables:
+
+ - Browse all elements of the Hash.
+ - Rescaling the Hash size.
+
+You can find more information [here][linkhashtable]
+
+[linkhashtable]:https://en.wikipedia.org/wiki/Hash_table
 
 ### Trees
 
+Trees are highly recursive data structures that you can use to store **hierarchical data and model decision processes**.
+
+A tree is a structure compounded with nodes, each node have the data and the relations with others nodes:
+
+ - **Root** (or actual node if we are walking on the tree).
+ - **Children** (relationship with their lower nodes).
+ - **Leaf** is a node without children.
+
+All the trees have a principal **root node**, that is the upper node in the tree.
+
+The common cases of use are:
+
+ - File systems.
+ - Ordering lists.
+ - Binary indexes in databases.
+ - Decision trees.
+
+There are different types of trees based on their use. We are not going to describe how to implement this data structure, we will only talk about the performance properties.
+
+You can find more information [here][linktrees]
+[linktrees]: https://en.wikipedia.org/wiki/Tree_(data_structure)
+
+#### Binary trees
+
+In this design we only have two children per node.
+
+Binary trees are useful in many algorithms, partly because lots of problems can be modeled using binary choices and partly because binary trees are relatively easy to understand.
+
+ - Searching operations on a **perfect tree** (a full tree where all the leaves are at the same level). that contains N nodes from the root to a leaf node, you must know that the algorithm needs only **O(log(N))** steps.
+ - For randomly inserted data, search time is **O(lgn)**.
+ - Worst-case behavior occurs when ordered data is inserted. In this case the search time is **O(n)**.
+
+You can find more information [here][linkbinarytrees]
+[linkbinarytrees]: https://en.wikipedia.org/wiki/Binary_tree
+
+#### Balanced trees (AVL)
+
+An AVL tree is a sorted binary tree in which the heights of two subtrees at any given node differ by at most 1. When a node is added or removed, the tree is rebalanced if necessary to ensure that the subtrees again have heights differing by at most 1.
+
+Like other sorted trees, balanced trees let a program store and find values quickly. By keeping themselves balanced, ensure that they don’t grow too tall and thin, which would ruin their performance.
+
+The better property of this types of trees is in their design, they are optimized for searches, trying to get the **perfect tree** approaching and their benefits.
+
+Adding and removing values in a balanced tree takes longer than it does in an ordinary (nonbalanced) sorted tree. Those operations still take only **O(log N)** time, however, so the theoretical run time is the same even if the actual time is slightly longer. Spending that extra time lets the algorithm guarantee that those operations don’t grow to linear time.
+
+You can find more information [here][linkavltrees]
+[linkavltrees]: https://en.wikipedia.org/wiki/AVL_tree
+
+#### Decision trees
+
+You can use to model situations where you can solve a problem by making a series of decisions.
+
+ 1. Each branch in the tree represents a single choice.
+ 2. A leaf node represents a complete set of decisions that produces a final solution.
+ 3. The goal is to find the best possible set of choices or the best leaf node in the tree.
+
+Decision trees are extremely useful and can model all sorts of situations where you can use a series of steps to produce a solution. Unfortunately, decision trees are often truly enormous.
+
+Thinking about the problem as a general decision tree may be a mistake, because it might make you miss the simplifications that let you solve the problem efficiently.
+
+Still, decision trees are a powerful technique that you should at least consider if you don’t know of a better approach to a problem.
+
+You can find more information [here][linkdecisiontrees]
+[linkdecisiontrees]: https://en.wikipedia.org/wiki/Decision_tree
+
 ### Graphs
+
+#### Undirected Graphs
+
+A graph is a set of **vertices** and a collection of **edges** that each connect a pair of **vertices**.
+
+If vertices A and vertices B are directly connected by a edges, they are adjacent and are called neighbors.
+
+Unlike the case with a tree, a graph has no root node, although there may be particular vertices of interest, depending on the graph. Essentially, a tree is a special type of graph.
+
+A **path** in a graph is a sequence of vertices connected by edges:
+
+ - A **simple path** is one with no repeated vertices.
+ - A **cycle** is a path with at least one edge whose first and last vertices are the same.
+ - A **simple cycle** is a cycle with no repeated edges or vertices (except the requisite repetition of the first and last vertices).
+ - The length of a path or a cycle is its number of edges.
+
+There are algorithms commonly used in graphs for search vertices based on our interests:
+
+ - **Depth-first search**
+
+	First we choose any vertex and expand the adjacent vertices. Next the process repeats for each adjacent until all the nodes in this path are visited, and then select another path until all vertices are visited.
+
+	The execution time is **O(|V|+|E|)** where V are the number of vertices and E the number of edges.
+
+ - **Breadth-first search**
+
+	First we choose any vertex and then visit all the adjacent vertices. Next the process repeats for each adjacent until all the vertices are visited.
+
+	The execution time is **O(|V|+|E|)** where V are the number of vertices and E the number of edges.
+
+#### Directed Graphs
+
+A directed graph (or digraph) is a set of vertices and a collection of directed edges. Each directed edge connects an ordered pair of vertices.
+
+This can be represented in many ways. For the following directed graph:
+
+![alt text](static/directed_graph.png "Directed Graph")
+
+ - **Adjacent Matrix**
+
+	![alt text](static/directed_graph_matrix.png "Adjacent Matrix")
+
+    Each element in the matrix have the weight of the edge, the file represent the origin vertex, and the column the destination vertex.
+
+	- Advantages
+
+		 - The access time to an element of the adjacency matrix is independent of the number of vertices and edges: **O(1)**.
+		 - It supports adding and deleting arcs.
+		 - Besides representing simple graphs, can represent some multiple graphs (which they are as much a loop at its vertices).
+
+	- Disavantages
+
+		- It is a system that applies only to graphs in which the number of vertices is not changed (in a parent can not add or delete rows and columns).
+		- It can produce a great waste of memory in sparse directed graph, that is, those graphs that possess a large number of vertices and a small number of arcs, as the adjacency matrix n^2^ always occupy memory elements, regardless of the number Arch. Also, examine the entire array will take time **O(n^2^)**, which invalidates algorithms **O(n)** for handling directed graphs with **O(n)** arches.
+
+ - **Adjacent Lists** **
+
+	![alt text](static/directed_graph_adjacent_list.png "Adjacent Lists")
+
+	In this representation, each vertex of the graph will have an associated adjacency list, which contains all those vertices that are adjacent to it.
+
+	- Advantages
+
+		- The representation of a directed graph with adjacency lists requires a space proportional to the sum of the number of vertices plus the number of arcs: **O(n + a)**, which makes it use enough when the graph is sparse.
+		- It supports adding and deleting arcs.
+		- You can add and delete vertices of the graph if a variant is used: the list of lists adjacency. In this case, the vertices are in a list instead of an array, which makes possible to insert new vertices.
+		- Can represent any multiple graph.
+
+	- Disavantages
+
+		- Takes **O(n)** to determine if there is an arc from vertex i to vertex j, as it can be **O(n)** vertices in the adjacency list associated with the vertex i.
+		- Because pointers and tags the vertices on the arches, this representation may come to occupy more memory than the adjacency matrix for dense graphs.
+
+ - **Two vectors**
+
+	![alt text](static/directed_graph_two_vectors.png "Two vectors")
+
+	This system of representation is very suitable for static graphs. Two vectors are used, U1 and U2. If the graph is of order n (has n vertices), the vector U1 will be n + 1 elements, which shall be to U2 vector positions. The vector U2 have as many elements (labels of adjacent vertices and weight corresponding) arc as arcs have the graph. Vertices adjacent to vertex i will find one after another in the vector U2 from the position U1 [i] and to U1 [i + 1] -1 position.
+
+	- Advantages
+
+		- Especially suitable for static and sparse graphs by saving memory provided in this case (greater than the adjacency list).
+		- Can represent any multiple graph.
+
+	- Disavantages
+
+		- Takes **O(n)** to determine if there is an arc from vertex i to vertex j.
+		- Can occupy more memory than the adjacency matrix for dense graphs.
+		- Only applicable for static graphs: You can not add or vertices or arcs.
+
+
+You can find more information about graphs [here][linkundirectedgraph]
+[linkundirectedgraph]: https://en.wikipedia.org/wiki/Graph_(abstract_data_type)
 
 ## Profiling
 
-### Profilers types depending on the response
+Profiling is a set of techniques/tools that may help with software optimization. This is a technology based on tracking all the program parts, that may help us to find bottlenecks in our code.
+
+All the information about this point is in [wikipedia](linkprofiling)
+[linkprofiling]: https://en.wikipedia.org/wiki/Profiling_(computer_programming)
+
+### Profilers types depending on output
+
+- **Flat profiler**
+
+	Compute the average call times, from the calls, and do not break down the call times based on the callee or the context.
+
+- **Call-graph profiler**
+
+	Show the call times, and frequencies of the functions, and also the call-chains involved based on the callee. In some tools full context is not preserved.
+
+- **Input-sensitive profiler**
+
+	Add a further dimension to flat or call-graph profilers by relating performance measures to features of the input workloads, such as input size or input values. They generate charts that characterize how an application's performance scales as a function of its input.
 
 ### Granularity
 
-### Statistic's profilers
+Profilers, which are also programs themselves, analyze target programs by collecting information on their execution. Based on their data granularity, on how profilers collect information, they are classified into event based or statistical profilers. Since profilers interrupt program execution to collect information, they have a finite resolution in the time measurements, which should be taken with a grain of salt.
 
-## Instrumentation
+- **Event-based profilers**
+
+	The programming languages listed here have event-based profilers:
+
+	- Java: the JVMTI (JVM Tools Interface) API, formerly JVMPI (JVM Profiling Interface), provides hooks to profilers, for trapping events like calls, class-load, unload, thread enter leave.
+
+	- .NET: Can attach a profiling agent as a COM server to the CLR using Profiling API. Like Java, the runtime then provides various callbacks into the agent, for trapping events like method JIT / enter / leave, object creation, etc. Particularly powerful in that the profiling agent can rewrite the target application's bytecode in arbitrary ways.
+
+	- Python: Python profiling includes the profile module, hotshot (which is call-graph based), and using the 'sys.setprofile' function to trap events like c_{call,return,exception}, python_{call,return,exception}.
+
+	- Ruby: Ruby also uses a similar interface to Python for profiling. Flat-profiler in profile.rb, module, and ruby-prof a C-extension are present.
+
+- **Statistical profilers**
+
+	Some profilers operate by sampling. A sampling profiler probes the target program's program counter at regular intervals using operating system interrupts. Sampling profiles are typically less numerically accurate and specific, but allow the target program to run at near full speed.
+
+	The resulting data are not exact, but a statistical approximation. "The actual amount of error is usually more than one sampling period. In fact, if a value is n times the sampling period, the expected error in it is the square-root of n sampling periods."
+
+	In practice, sampling profilers can often provide a more accurate picture of the target program's execution than other approaches, as they are not as intrusive to the target program, and thus don't have as many side effects (such as on memory caches or instruction decoding pipelines). Also since they don't affect the execution speed as much, they can detect issues that would otherwise be hidden. They are also relatively immune to over-evaluating the cost of small, frequently called routines or 'tight' loops. They can show the relative amount of time spent in user mode versus interruptible kernel mode such as system call processing.
+
+	Still, kernel code to handle the interrupts entails a minor loss of CPU cycles, diverted cache usage, and is unable to distinguish the various tasks occurring in uninterruptible kernel code (microsecond-range activity).
+
+### Instrumentation
+
+This technique effectively adds instructions to the target program to collect the required information. Note that instrumenting a program can cause performance changes, and may in some cases lead to inaccurate results and/or heisenbugs. The effect will depend on what information is being collected, and on the level of detail required. For example, adding code to count every procedure/routine call will probably have less effect than counting how many times each statement is obeyed. A few computers have special hardware to collecting information; in this case the impact on the program is minimal.
 
 ## Bucle optimization
 
