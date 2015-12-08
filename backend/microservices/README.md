@@ -283,7 +283,7 @@ A high level example of a cluster configuration, can be seen below:
 
 ![Eureka Cluster Overview](static/eureka_cluster_overview.png)
 
-Eureka server exposes the information of all of the microservices registered throughout the REST API and the Web UI.
+Eureka server exposes the information of all of the microservices registered throughout the REST API (`/eureka/apps`) and the Web UI.
 
 Eureka server is included in Spring Cloud as an annotation: @EnableEurekaServer
 
