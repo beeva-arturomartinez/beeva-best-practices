@@ -16,6 +16,12 @@ This is how we work with Microservices at BEEVA.
 
     2.3. [Communication between microservices](#23-communication-between-microservices)
 
+	2.3.1. [Coordination and dumb pipes](#231-coordination-and-dumb-pipes)
+
+   	2.3.2. [Synchronous communication](#232-synchronous-communication)
+
+	2.3.3. [Aynchronous communication](#233-asynchronous-communication)
+
 3. [Microservices with Spring Cloud](#3-microservices-with-spring-cloud)
 
     3.1. [Introduction](#31-introduction)
@@ -66,11 +72,112 @@ All these challenges are addressed using a good infrastructure, able to orchestr
 ## 2. Microservice architectures
 ---
 
+"*As small as possible but as big as necessary*"
+
 ### 2.1 Overview for a microservice architecture
+
+**Definition**: A software architecture design pattern in which complex applications are composed of small, independent processes communicating with each other using language-agnostic APIs.
+
+#### 2.1.1. Monolithic vs Microservice architecture
+
+|   | Monolithic  | Microservice  |
+|---|---|---|
+| Architecture  | Built as a single logical executable (typically the server-side part of a three tier client-server-database architecture)  | Built as a suite of small services, each running separately and communicating with lightweight mechanisms  |
+| Modularity  | Based on language features  | Based on business capabilities  |
+| Agility  | Changes to the system involve building and deploying a new version of the entire application  | Changes can be applied to each service independently  |
+| Scaling  | Entire application scaled horizontally behind a load-balancer  | Each service scaled independently when needed  |
+| Implementation  | Typically written in one language  | Each service implemented in the language that best fits the need  |
+| Maintainability  | Large code base intimidating to new developpers  | Smaller code base easier to manage  |
+| Transaction  | ACID  | BASE  |
+
+#### 2.1.2. SOA vs MSA
+
+Service-Oriented Architecture (SOA) sprung up during the first few years of this century, and microservice architecture (MSA) bears a number of similarities. Both types are a way of structuring many related applications to work together, rather than trying to solve all problems in one application. Traditional SOA, however, is a broader framework and can mean a wide variety of things.  Some microservices advocates reject the SOA tag altogether, while others consider microservices to be simply an ideal, refined form of SOA.
+ 
+The typical SOA model usually depends on ESBs while microservices use faster messaging mechanisms. SOA also focuses on imperative programming, whereas microservices architecture focuses on a responsive-actor programming style. Moreover, SOA models tend to have an outsized relational database, while microservices frequently use NoSQL or micro-SQL databases. But the real difference has to do with the architecture methods used to arrive at an integrated set of services in the first place. 
+ 
+Since everything changes in the digital world, agile development techniques that can keep up with the demands of software evolution are invaluable. Most of the practices used in microservices architecture come from developers who have created software applications for large enterprise organizations, and who know that today’s end users expect dynamic yet consistent experiences across a wide range of devices. Scalable, adaptable, modular, and quickly accessible cloud-based applications are in high demand. And this has led many developers to change their approach.
+
+#### 2.1.3. Perks of the microservices approach
+
+##### 2.1.3.1. Complexity
+
+* Scalability and Reliability:
+
+Constrain the size limit of individual cases and allow to have in mind all the behaviors.
+
+Technical debt is kept under control, and the code is thus able to evolve. Go through service calls to communicate with other areas formalizes exchanges.
+
+Interface contracts are then more strict, and it is easier to consider all cases, including cases of errors.
+
+* Horizontal Scalability:
+
+With applications of limited size, it is easier to increase the scalability by refactoring the code or by rewriting it completely based on new requirements.
+
+##### 2.1.3.2. Innovation
+
+* Technological innovation:
+
+Code bases and teams are independent and can therefore make technical choices according to their own needs.
+
+* Business innovation:
+
+If all the information system is structured in services, it is easy to experiment by starting a new project based on others’ data and easier to remove features because it is the whole project that will be deleted.
+
+#### 2.1.4. Requirements and limitations
+
+If microservices architecture has many advantages, it has many requirements and a certain number of limitations.
+
+The microservices being a variation of the classic SOA architecture, we will find the same characteristics, but with an additional level of criticality.
+
+* The system becomes distributed
+
+Conventional architectures make it possible to ensure to have independent states between different applications: everyone is the master of his business field.
+When switching to microservices, the system becomes widely distributed. This introduces new particularly difficult issues.
+
+The most complicated case is about transactions: each time a transaction is shared between two applications, we must manage transactions in two phases or manage cancellations. In a system based on services, there is no tool that allows to take it into account in an automated way. We must do it manually at each location of the code.
+
+And even when you can bypass transaction: there are always references to cross-application data, and therefore a management system of asynchronous events or cache to be implemented to ensure data consistency.
+
+Then there is the case of external services unavailability. Because using services of another application means to depend on it. The design for failure approach allows to limit risks but require to have a rigorous engineering.
+
+It is also important to master all the service quality (SLA) for different applications in order not to be surprised.
+
+Eventually the system becomes more difficult to test: integration tests increase, and require to prepare the data and be well equipped to test cases of technical and business errors.
+
+* Value-added services:
+
+Although the REST approach suggests to handle simple features, there is always a proportion of calls with “value-added” that involve multiple business areas.
+
+Regarding microservices, it means dial calls between several applications.
+
+This has the effect of multiplying cases of errors to manage (problem of distributed systems) and adding network latencies.
+
+In the most critical cases, it becomes necessary to add specific services in different applications or add data caches, causing consistency issues.
+
+* DevOps and provisioning:
+
+Multiply applications means multiply the number of deployments and server instances.
+
+To avoid error and excessive additional costs, we need a very efficient workflow in terms of tools and processes with as much automated deployments as possible. This is even more true for tests and POCs where we want temporary environments as sandbox.
+
+#### 2.1.5. How do I go there?
 
 ### 2.2 Components for a microservice architecture
 
+#### 2.2.1. How microservice architecture works
+
+#### 2.2.2. Tools and technologies used to build microservice stack
+
 ### 2.3 Communication between microservices
+
+Services communicate using either synchronous protocols such as HTTP/REST or asynchronous protocols such as AMQP.
+
+#### 2.3.1. Coordination and Dumb Pipes
+
+#### 2.3.2. Synchronous communication
+
+#### 2.3.3. Aynchronous communication
 
 ## 3. Microservices with Spring Cloud
 ---
