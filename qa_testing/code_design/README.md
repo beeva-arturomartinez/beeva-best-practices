@@ -216,6 +216,8 @@ If you want more information you can visit the wikipedia page [Gang Of Four](htt
 
 At this point we can define the following three categories of patterns:
 
+NOTE: all the images used in this chapter are in wikipedia.
+
 ##### Creational Patterns
 These design patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new opreator. This gives program more flexibility in deciding which objects need to be created for a given use case.
 
@@ -687,7 +689,7 @@ Enterprise integration is too complex to be solved with a simple 'cookbook' appr
 
 We are going to list the integration patterns, only for searching purposes. It is a good practice to recognize all the integration patterns and know when to use them.
 
-You can find more detailed information in the [http://www.enterpriseintegrationpatterns.com](http://www.enterpriseintegrationpatterns.com) site, or in this [book](http://www.amazon.com/o/asin/0321200683/ref=nosim/enterpriseint-20)
+All the images in this chapter and more detailed information are in the  [http://www.enterpriseintegrationpatterns.com](http://www.enterpriseintegrationpatterns.com) site, or in this [book](http://www.amazon.com/o/asin/0321200683/ref=nosim/enterpriseint-20)
 
 ##### Integration Styles
  - **File Transfer**
