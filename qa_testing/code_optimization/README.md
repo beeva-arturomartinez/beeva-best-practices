@@ -20,10 +20,9 @@ At this point we're going to talk about the best practices for optimize the code
 	* [Trees](#trees)
 	* [Graphs](#graphs)
 * [Profiling](#profiling)
-	* [Profilers types depending on the response](#profilers-types-depending-on-the-response)
+	* [Profilers types depending on output](#profilers-types-depending-on-output)
 	* [Granularity](#granularity)
-	* [Statistic's profilers](#statistics-profilers)
-* [Instrumentation](#instrumentation)
+	* [Instrumentation](#instrumentation)
 * [Bucle optimization](#bucle-optimization)
 * [Efficient exceptions management](#efficient-exceptions-management)
 * [Tools](#tools)
@@ -372,6 +371,10 @@ This operations may be slower in Hash tables:
  - Browse all elements of the Hash.
  - Rescaling the Hash size.
 
+You can find more information [here][linkhashtable]
+
+[linkhashtable]:https://en.wikipedia.org/wiki/Hash_table
+
 ### Trees
 
 Trees are highly recursive data structures that you can use to store **hierarchical data and model decision processes**.
@@ -393,6 +396,9 @@ The common cases of use are:
 
 There are different types of trees based on their use. We are not going to describe how to implement this data structure, we will only talk about the performance properties.
 
+You can find more information [here][linktrees]
+[linktrees]: https://en.wikipedia.org/wiki/Tree_(data_structure)
+
 #### Binary trees
 
 In this design we only have two children per node.
@@ -403,6 +409,9 @@ Binary trees are useful in many algorithms, partly because lots of problems can 
  - For randomly inserted data, search time is **O(lgn)**.
  - Worst-case behavior occurs when ordered data is inserted. In this case the search time is **O(n)**.
 
+You can find more information [here][linkbinarytrees]
+[linkbinarytrees]: https://en.wikipedia.org/wiki/Binary_tree
+
 #### Balanced trees (AVL)
 
 An AVL tree is a sorted binary tree in which the heights of two subtrees at any given node differ by at most 1. When a node is added or removed, the tree is rebalanced if necessary to ensure that the subtrees again have heights differing by at most 1.
@@ -412,6 +421,9 @@ Like other sorted trees, balanced trees let a program store and find values quic
 The better property of this types of trees is in their design, they are optimized for searches, trying to get the **perfect tree** approaching and their benefits.
 
 Adding and removing values in a balanced tree takes longer than it does in an ordinary (nonbalanced) sorted tree. Those operations still take only **O(log N)** time, however, so the theoretical run time is the same even if the actual time is slightly longer. Spending that extra time lets the algorithm guarantee that those operations don’t grow to linear time.
+
+You can find more information [here][linkavltrees]
+[linkavltrees]: https://en.wikipedia.org/wiki/AVL_tree
 
 #### Decision trees
 
@@ -426,6 +438,9 @@ Decision trees are extremely useful and can model all sorts of situations where 
 Thinking about the problem as a general decision tree may be a mistake, because it might make you miss the simplifications that let you solve the problem efficiently.
 
 Still, decision trees are a powerful technique that you should at least consider if you don’t know of a better approach to a problem.
+
+You can find more information [here][linkdecisiontrees]
+[linkdecisiontrees]: https://en.wikipedia.org/wiki/Decision_tree
 
 ### Graphs
 
@@ -518,15 +533,60 @@ This can be represented in many ways. For the following directed graph:
 		- Can occupy more memory than the adjacency matrix for dense graphs.
 		- Only applicable for static graphs: You can not add or vertices or arcs.
 
+
+You can find more information about graphs [here][linkundirectedgraph]
+[linkundirectedgraph]: https://en.wikipedia.org/wiki/Graph_(abstract_data_type)
+
 ## Profiling
 
-### Profilers types depending on the response
+Profiling is a set of techniques/tools that may help with software optimization. This is a technology based on tracking all the program parts, that may help us to find bottlenecks in our code.
+
+All the information about this point is in [wikipedia](linkprofiling)
+[linkprofiling]: https://en.wikipedia.org/wiki/Profiling_(computer_programming)
+
+### Profilers types depending on output
+
+- **Flat profiler**
+
+	Compute the average call times, from the calls, and do not break down the call times based on the callee or the context.
+
+- **Call-graph profiler**
+
+	Show the call times, and frequencies of the functions, and also the call-chains involved based on the callee. In some tools full context is not preserved.
+
+- **Input-sensitive profiler**
+
+	Add a further dimension to flat or call-graph profilers by relating performance measures to features of the input workloads, such as input size or input values. They generate charts that characterize how an application's performance scales as a function of its input.
 
 ### Granularity
 
-### Statistic's profilers
+Profilers, which are also programs themselves, analyze target programs by collecting information on their execution. Based on their data granularity, on how profilers collect information, they are classified into event based or statistical profilers. Since profilers interrupt program execution to collect information, they have a finite resolution in the time measurements, which should be taken with a grain of salt.
 
-## Instrumentation
+- **Event-based profilers**
+
+	The programming languages listed here have event-based profilers:
+
+	- Java: the JVMTI (JVM Tools Interface) API, formerly JVMPI (JVM Profiling Interface), provides hooks to profilers, for trapping events like calls, class-load, unload, thread enter leave.
+
+	- .NET: Can attach a profiling agent as a COM server to the CLR using Profiling API. Like Java, the runtime then provides various callbacks into the agent, for trapping events like method JIT / enter / leave, object creation, etc. Particularly powerful in that the profiling agent can rewrite the target application's bytecode in arbitrary ways.
+
+	- Python: Python profiling includes the profile module, hotshot (which is call-graph based), and using the 'sys.setprofile' function to trap events like c_{call,return,exception}, python_{call,return,exception}.
+
+	- Ruby: Ruby also uses a similar interface to Python for profiling. Flat-profiler in profile.rb, module, and ruby-prof a C-extension are present.
+
+- **Statistical profilers**
+
+	Some profilers operate by sampling. A sampling profiler probes the target program's program counter at regular intervals using operating system interrupts. Sampling profiles are typically less numerically accurate and specific, but allow the target program to run at near full speed.
+
+	The resulting data are not exact, but a statistical approximation. "The actual amount of error is usually more than one sampling period. In fact, if a value is n times the sampling period, the expected error in it is the square-root of n sampling periods."
+
+	In practice, sampling profilers can often provide a more accurate picture of the target program's execution than other approaches, as they are not as intrusive to the target program, and thus don't have as many side effects (such as on memory caches or instruction decoding pipelines). Also since they don't affect the execution speed as much, they can detect issues that would otherwise be hidden. They are also relatively immune to over-evaluating the cost of small, frequently called routines or 'tight' loops. They can show the relative amount of time spent in user mode versus interruptible kernel mode such as system call processing.
+
+	Still, kernel code to handle the interrupts entails a minor loss of CPU cycles, diverted cache usage, and is unable to distinguish the various tasks occurring in uninterruptible kernel code (microsecond-range activity).
+
+### Instrumentation
+
+This technique effectively adds instructions to the target program to collect the required information. Note that instrumenting a program can cause performance changes, and may in some cases lead to inaccurate results and/or heisenbugs. The effect will depend on what information is being collected, and on the level of detail required. For example, adding code to count every procedure/routine call will probably have less effect than counting how many times each statement is obeyed. A few computers have special hardware to collecting information; in this case the impact on the program is minimal.
 
 ## Bucle optimization
 
