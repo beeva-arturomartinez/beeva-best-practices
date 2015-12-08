@@ -267,7 +267,7 @@ Additionally, we recommend to avoid Single Points Of Failure (SPOF) providing se
 
 Eureka is the module responsible for both service registering and service discovering.
 
-It is divided in two diferent modules:
+It is divided into two diferent modules:
 - Eureka Server
 - Eureka Client
 
@@ -275,7 +275,7 @@ It is divided in two diferent modules:
 
 It is a REST service that is used for service discovery, load balancing and failover of middle-tier servers. For a complete reference of all Eureka REST operations, see the next link: https://github.com/Netflix/eureka/wiki/Eureka-REST-operations
 
-Eureka Server can be deployed in a Single Instance configuration or in a Cluster Configuration.
+Eureka Server can be deployed in a Single Instance configuration or (recommended) in a Cluster Configuration.
 
 When Eureka is deployed as a Cluster, all the nodes in the cluster needs to communicate with each other to synchronize their metadata, so when a new microservice registers with one of the Eureka Server nodes, all of the metadata information will be replicated along the cluster. Each Eureka Server node shares the same information for each microservice. To do that, each Eureka Node stores a Registry with the information of each registered microservice. Thereby, each microservice is responsible for providing a heartbeat to let Eureka knows that it is up and running. When some microservice fails in providing this heartbeat signal, it is removed from the registry.
 
@@ -297,6 +297,43 @@ As mentioned above it has to also provide a heartbeat every 30 seconds to let th
 This eureka client is included in Spring Cloud as an annotation: @EnableEurekaClient
 
 #### Communication between Eureka Clients And Eureka Servers
+
+The key point to understand the behaviour of Eureka is to know how clients and server communicate with each others.
+At this point we have seen a few different actors that are involved in this game:
+- Eureka Server
+- Eureka Clients
+- Ribbon Clients
+
+All of them use different cache mechanisms, so it is interesting to know the different steps that are carried out when a microservice is registered in Eureka Server, and how long it takes this microservice to be avaible to recieve requests.
+
+Both @EnableEurekaServer and @EnableEurekaClient provide an implementation of Eureka Client, along with an implementation of Ribbon Load Balancer. So, even when we are not directly using some of these clients, they are there for us.
+
+##### Step 1: Microservice registration in Eureka Server
+
+When the Microservice starts up it sends the first heartbeat to Eureka Server. At this point, the server still doesn't know anything about the microservice so it sends back a response with the **404** status code. The microservice is forced to be registered so it sends a **new request** containing all the necessary information like host, port, etc...
+
+Now, the microservice is registered in Eureka Server, but it is not available yet to receive incoming requests. The microservice is not ready until it sends the heartbeat again to the server. This sending happens, by default, **30 seconds** after registration, so the microservice will not appear in the Eureka registry and it will not be reachable before this time.
+
+This default time can be configured in the microservice eureka client through the property: **`eureka.instance.leaseRenewalIntervalInSeconds`**
+
+##### Step 2: Server Response and Cached Items
+
+It is important to note that Eureka Server mantains a cache containing all the responses sent back to clients, which is refreshed by default every **30 seconds**. So, it can happen that even when the microservice is registered in Eureka Server, it will not appear in the results of the invokation to `/eureka/apps` endpoint right away.
+
+This behaviour can be configured through the property: **`eureka.server.response-cache-update-interval-ms`**
+
+##### Step 3: Client Cache
+
+Each one of the Eureka Client mantains a local cache to avoid to send too many requests to the Server, to fetch the Eureka Registry. By default, this cache is refreshed every **30 seconds**. Again, this can be configured through the property: **`eureka.client.registryFetchIntervalSeconds`**
+
+For example, Zuul (talk about it below) can benefit from this property to early detect new microservice instances.
+
+##### Step 4: Ribbon LoadBalancer Cache
+
+As mentioned above each Spring Cloud microservice has an implementacion of Ribbon LoadBalancer. This ribbon implementation retrieves its information from the local Eureka Client, but it also mantains a local cache to avoid to overload the discovery client in Eureka. As imagined, this property is set by default to **30 seconds**. We can custom this value through the property: **`ribbon.serverListRefreshInterval`**
+
+It is important that these two last properties be in sync so that the different caches be refreshed in the correct order.
+
 
 ### 3.4 Zuul
 
