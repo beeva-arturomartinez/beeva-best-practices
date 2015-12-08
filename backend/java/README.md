@@ -44,7 +44,47 @@ This is not an static document, but a living one. We will be adding new hints an
 ---
 
 ## Encapsulation
----
+
+It allows the data abstraction inside an object. For example, if an object needs to be modified its internal data structure, it won't change (if it's possible) the external use of this object. Moreover, an object doesn't have to publish all its fields, it doesn't expose them through methods or public fields.
+
+There are some advices to use correctly the encapsulation. It's not as simple as make all the fields accesible through getter and setter methods. In fact, this kind of implementation is more common for beans which don't have any extra funcionality, such as DTOs (Data Transfer Object).
+
+In the next example, we can see a bean with a simple constructor and all its fields exposed through getters.
+
+```
+public class User {
+	private String name;
+	private String email;
+	private Date dateOfBirth;
+
+	public User(String name, String email, Date dateOfBirth){
+		this.name = name;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public String getName(){
+		return name;
+	}
+}
+```
+
+### Law of Demeter
+
+It's a guideline to develop software with loose coupling. It specifies that a module should not
+know about the internal workings of the objects it uses. Like encapsulation determines, the internal structure and functioning shouldn't be exposed, it means that an object knows about the objects it uses and their interface, it shouldn't know about the internal objects (or methods) of these objects.
+
+There is a clear scenario of what LoD allows: An object A can call a method of an object instance B, but object A should not access through object B to another object C, to call C methods B's interface should be modified in order to directly serve to object A's the calls to C, propagating it to any relevant subcomponents. 
+
+Objects expose behavior and hide data.
 
 ## Exception handling
 
