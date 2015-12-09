@@ -9,6 +9,7 @@ At this point we're going to talk about atdd
 * [Objectives ATDD](#recommendations)
 * [Criteria acceptance vs Acceptance test](#recommendations)
 * [Writing acceptance tests](#recommendations)
+* [Properties acceptance tests](#recommendations)
 * [Workflow ATDD](#cycle-of-tdd)
 * [Conclusions](#conclusions)
 * [References](#references)
@@ -51,6 +52,9 @@ People often make mistakes when defining the criteria and acceptance test. Often
 ### Writing acceptance tests
 The acceptance test must be automated to be meaningful in an agile environment. The tests must be specific and not allow ambiguity and avoid generic scenarios. An example of incorrect test could be "add cards to the system ", this is very generic. Instead "Add Card 4777308023346398" , making specific test.
 Moreover avoid the implementation details acceptance test. An example of incorrect test could be "By introducing the card and click the Add button, a new record is created in DB" aspects are entering records databases, Web events etc. Instead "The user saves card 4777308023346398 in the payment screen" has a vocabulary of business and is not in technical parts of the system.
+
+### Properties acceptance tests
+The 
 
 ### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
