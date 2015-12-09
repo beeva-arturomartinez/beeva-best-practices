@@ -8,7 +8,7 @@ At this point we're going to talk about atdd
 * [Based Features](#based-features)
 * [Objectives ATDD](#objectives-atdd)
 * [Criteria acceptance vs Acceptance test](#criteria-acceptance-vs-acceptance-test)
-* [Writing acceptance tests](#recommendations)
+* [Writing acceptance tests](#writing-acceptance-tests)
 * [Properties acceptance tests](#recommendations)
 * [Good and Bad Practices](#recommendations)
 * [Workflow ATDD](#cycle-of-tdd)
