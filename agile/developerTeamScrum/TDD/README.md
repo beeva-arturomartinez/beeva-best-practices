@@ -68,8 +68,22 @@ Speed is the key to success of TDD. We must make the cycle in minutes, even seco
 ### Executable documentation 
 One consequence and benefit of applying the TDD methodology is the generation of an executable documentation. The tests act as documentation for developers. Practically we do not need to put comments in the code. The nomenclature should explain the functionality test. It is easier to understand the code does a test that implementation of the code itself. The documentation does not conflict with other documents of higher or wider level. Code documentation is completely further. The documentation is kept current without any extra work because it belongs flow methodology.
 
-### Design Principles 
-xxxx
+### Design Principles
+* YAGNI (“You ain’t gonna need it”):
+
+> It is aimed at eliminating unnecessary code and focus on functionality. Less code means less maintenance and less chance of bugs.
+
+* DRY (“Don’t repeat yourself”):
+
+> We reuse previously written code. The benefit is less code to maintain and use code that we know works.
+
+* KISS (“Keep it simple, stupid”):
+
+> Keep the code as simple as possible while performing their function.
+
+* OCCAM'S RAZOR (“Philosophical principle”):
+
+> Being equal, the simplest explanation is usually the most likely. That is, when you have two solutions to the same problem, the simplest is often the best.
 
 ### Recommendations 
 xxxx
