@@ -420,10 +420,95 @@ Sometimes, at Beeva projects, we use a link node in the responses instead of use
 ```
 ---
 
-## HATEOAS
+### HATEOAS
+---
+
+**Definition from Wikipedia:** "*HATEOAS, an abbreviation for Hypermedia as the Engine of Application State, is a constraint of the REST application architecture that distinguishes it from most other network application architectures. The principle is that a client interacts with a network application entirely through hypermedia provided dynamically by application servers. A REST client needs no prior knowledge about how to interact with any particular application or server beyond a generic understanding of hypermedia. By contrast, in some service-oriented architectures (SOA), clients and servers interact through a fixed interface shared through documentation or an interface description language (IDL). The HATEOAS constraint decouples client and server in a way that allows the server functionality to evolve independently.*"
+
+![hateoas](/home/thomasperson/Descargas/hateoas.png  "HATEOAS")
+
+Let’s take as an example an Amazon customer who wishes to read the details of his last order. To do this, he has to follow two steps:
+
+* List all his orders
+* Select his last order
+
+On the Amazon website, he does not need to be a web expert to read his last order: he just has to login into his account, then click on the “my orders” link and finally select the most recent one.
+
+Now let’s imagine the customer wishes to use an API to do the same thing!
+
+He must begin by reading Amazon documentation to find the URL that returns the list of orders. When he finds it, he must make an actual HTTP call to this URL. He’ll see the reference of his order in the list, but he’ll need to make a second call to another URL to get its details. He will have to figure out how to construct the proper URL from Amazon‘s documentation.
+
+There is one main difference between these two scenarii: In the first one, the customer just needed to know the first URL “http://www.amazon.com” then follow the links on the web page. Whereas in the second one, he needed to read the documentation so as to elaborate the URL.
+
+The drawbacks of the second process are:
+
+* The developers do not like documentation.
+* In real life, the documentation is usually not up to date. The developer may miss one or several available services just because they are not properly documented.
+* The API is less accessible.
+
+Now let’s assume we develop a component to automatically create these contextual URLs. What happens when Amazon modifies its URLs?
+
+In practical, HATEOAS is like a urban legend. Everybody talks about it but nobody ever witnessed an actual implementation. [Paypal](https://developer.paypal.com/docs/integration/direct/paypal-rest-payment-hateoas-links/) proposes one:
+
+```javascript
+[{
+	"href": "https://api.sandbox.paypal.com/v1/payments/payment/PAY-6RV70583SB702805EKEYSZ6Y",
+	"rel": "self",
+	"method": "GET"
+}, {
+	"href": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&amp;token=EC-60U79048BN7719609",
+	"rel": "approval_url",
+	"method": "REDIRECT"
+}, {
+	"href": "https://api.sandbox.paypal.com/v1/payments/payment/PAY-6RV70583SB702805EKEYSZ6Y/execute",
+	"rel": "execute",
+	"method": "POST"
+}]
+```
+In our Amazon case, a call to /customers/007 would then return the details of the customer, along with pointers towards linked resources :
+
+```
+GET /customers/007
+200 Ok
+{
+	"id": "007",
+	"firstname": "James",
+	...,
+	"links": [{
+			"rel": "self",
+			"href": "https://api.domain.com/v1/customers/007",
+			"method": "GET"
+		}, {
+			"rel": "addresses",
+			"href": "https://api.domain.com/v1/addresses/42",
+			"method": "GET"
+		}, {
+			"rel": "orders",
+			"href": "https://api.domain.com/v1/orders/1234",
+			"method": "GET"
+		},
+		...
+	]
+}
+```
+For implementing HATEOAS, we therefore recomment using the following method, also applied in the pagination section, compliant with [RFC 5988](http://tools.ietf.org/html/rfc5988#page-6) and usable by clients that don’t support several Header “Link”:
+
+```
+GET /customers/007
+200 Ok
+{ 
+  	"id":"007", 
+	"firstname":"James",
+	...
+}
+Link : https://api.domain.com/v1/customers/007; rel="self"; method:"GET",
+https://api.domain.com/v1/addresses/42; rel="addresses"; method:"GET",
+https://api.domain.com/v1/orders/1234; rel="orders"; method:"GET"
+```
 ---
 
 ### API Versioning
+---
 
 Make the API Version mandatory and do not release an unversioned API. There are two versioning topics on wich we will talk. The first one is the what versioning specification should we use to release our api. And the second one is how and when should we engage it with our API releasing.
 
