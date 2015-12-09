@@ -88,9 +88,7 @@ The iterative cycle ATDD:
 
 ### References
 
-* [Link](https://www.beeva.com/beeva-view/metodologiasagiles/desarrollo-dirigido-por-test-el-gran-desconocido/) Beeva TDD
-* [Course](https://github.com/beeva-danielpetrovic/beeva-curso-tdd) Beeva course TDD
-* [Katas](https://github.com/beeva-danielpetrovic/beeva-taller-tdd/tree/master) Beeva katas TDD
+* [Link](https://www.beeva.com/beeva-view/metodologiasagiles/atdd-la-clave-del-exito-en-equipos-agiles/) Beeva ATDD
 
 ___
 
