@@ -456,7 +456,7 @@ In practical, HATEOAS is like a urban legend. Everybody talks about it but nobod
 	"rel": "self",
 	"method": "GET"
 }, {
-	"href": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&amp;token=EC-60U79048BN7719609",
+	"href": "https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&amp;token=EC-60U79048BN77196",
 	"rel": "approval_url",
 	"method": "REDIRECT"
 }, {
