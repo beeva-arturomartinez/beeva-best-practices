@@ -469,6 +469,11 @@ The following examples use Spring to code tests.
 ## Hints about code optimization
 ### General recommendations
 ### Java Enterprise Edition recommendations
+| Efficient | Inefficient|
+|:---|:---|
+|Multi
+line
+cell|Multi line cell|
 ---
 
 ## References
