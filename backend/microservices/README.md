@@ -334,6 +334,7 @@ As mentioned above each Spring Cloud microservice has an implementacion of Ribbo
 
 It is important that these two last properties be in sync so that the different caches be refreshed in the correct order.
 
+> To know more about this interaction between clients and server, there is an open discussion in both [Spring Cloud's Github](https://github.com/spring-cloud/spring-cloud-netflix/issues/373) and [Stackoverflow](http://stackoverflow.com/questions/33921557/understanding-spring-cloud-eureka-server-self-preservation-and-renew-threshold)
 
 ### 3.4 Zuul
 
