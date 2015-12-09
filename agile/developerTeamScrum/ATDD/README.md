@@ -84,17 +84,7 @@ As bad practices we can enumerate:
 ### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
 
-![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/red-green-refactor.png "Reed-Green-Refactor")
-
-* We write a test
-* We run all tests
-* Check that the last written test fails **(RED)**
-* Write code implementation
-* We run all tests
-* Check that all tests pass **(GREEN)**
-* Refactored the code **(Refactoring)**
-* We run all tests
-* We check that all tests pass
+![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/Flujo_atdd_tdd_v3.png "WorkFlow ATDD")
 
 ### References
 
