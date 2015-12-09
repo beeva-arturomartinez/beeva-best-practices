@@ -10,8 +10,8 @@ At this point we're going to talk about atdd
 * [Criteria acceptance vs Acceptance test](#recommendations)
 * [Writing acceptance tests](#recommendations)
 * [Properties acceptance tests](#recommendations)
+* [Good and Bad Practices](#recommendations)
 * [Workflow ATDD](#cycle-of-tdd)
-* [Conclusions](#conclusions)
 * [References](#references)
 
 ### What is TDD?
@@ -62,6 +62,9 @@ The acceptance test must meet the following properties:
 > * **RELEVANT**: Having a connection with the story.
 > * **TIME BOUND**: When will the outcome be observed.
 
+### Good and Bad Practices
+To apply the TDD methodology is necessary to change the mindset of how teams have worked in traditional development 
+
 ### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
 
@@ -76,25 +79,6 @@ The iterative cycle methodology is divided in three easy steps: *RED - GREEN - R
 * Refactored the code **(Refactoring)**
 * We run all tests
 * We check that all tests pass
-
-### Recommendations 
-There are problems in applying the methodology tdd.
-
-* TDD with an unknown technology:
-
-> It is common when we started with new tools that problems occur when following the TDD methodology. As a first approximation is convenient "spikes " or concept testing tools. *Before driving the car it is important to know where the steering wheel, brake etc*.
-
-* TDD middle of a project:
-
-> One of the questions that arise when we start implementing TDD is: *Can you apply TDD project started?*For the new that has to implement course. The problem comes to what is already developed. In this case you could abusing lot of mocks. There are many legacy without coverage test and difficult to use parts. So they can live the parties will be necessary in many mocks even penalize fragility test. *Best parachute jump without it!*
-
-### Conclusions
-To apply the TDD methodology is necessary to change the mindset of how teams have worked in traditional development methodologies. This usually has a significant learning curve to start. TDD program "now" is not programmed thinking " it just in case. "Cast the first stone that the developer has not set then things have not been used. In the end this is just in case it not using!
-
-The developments do not work with the super architect who owns the application. **So the super enterprise architect does not mount the foundation product for developers to add functionality?** The answer is a resounding no. The super architect remains a reference and asked for advice and help, but the technical team will be responsible for emerging architecture. That is all developers act as architects, designers and developers. TDD promotes the concept of "collective code" leaving aside the stereotype that certain portions of code only the certain technical touch.
-
-Note that this method works to be met mainly two things ; first the whole team and the second TDD make the team and the client has a constant flow of communication following an iterative and incremental manner any agile methodology like Scrum. Without this low success we have applied the methodology.
-
 
 ### References
 
