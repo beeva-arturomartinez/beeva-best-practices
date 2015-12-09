@@ -10,7 +10,7 @@ At this point we're going to talk about atdd
 * [Criteria acceptance vs Acceptance test](#criteria-acceptance-vs-acceptance-test)
 * [Writing acceptance tests](#writing-acceptance-tests)
 * [Properties acceptance tests](#properties-acceptance-tests)
-* [Good and Bad Practices](#recommendations)
+* [Good and Bad Practices](#good-and-bad-practices)
 * [Workflow ATDD](#cycle-of-tdd)
 * [References](#references)
 
