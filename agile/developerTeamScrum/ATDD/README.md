@@ -6,8 +6,9 @@ At this point we're going to talk about atdd
 
 * [What is ATDD?](#what-is-atdd)
 * [Based Features](#based-features)
-* [Cycle of TDD](#cycle-of-tdd)
-* [Recommendations](#recommendations)
+* [Objectives ATDD](#recommendations)
+* [Criteria acceptance vs Acceptance test](#recommendations)
+* [Workflow ATDD](#cycle-of-tdd)
 * [Conclusions](#conclusions)
 * [References](#references)
 
@@ -18,7 +19,7 @@ The definition of wikipedia express:
 Its acronym define it as test driven development of acceptance. ATDD is a requirements specification methodology that more testing methodology. ATDD is the beginning of the iterative development cycle level, because the basis of an acceptance test we deepen implementation through successive TDD unit testing to shape the code that finally meets the defined acceptance criteria.
 
 ### Based Features
-TDD methodology provides a basis features:
+ATDD methodology provides a basis features:
 
 |Written by clients (ATDD)|
 | :-------------|
@@ -27,7 +28,22 @@ TDD methodology provides a basis features:
 | Business Vocabulary| 
 | Without implementation detail|
 
-### Cycle of TDD 
+### Objectives ATDD
+ATDD focuses on the implementation of a completely different way to traditional methods. One of the main objectives is to provide customer ATDD rapid feedback of the progress of development by acceptance tests. The business analyst's job becomes to replace pages and pages of requirements written in natural language, for example executable consensus emerged among the various team members, including of course the client. I speak not replace all the documentation, but the requirements, which I consider a subset of the documentation. For this, a specification of less ambiguous and more specific requirements is performed by using examples of Users stories. Written great novels are left behind in defining requirements years ago. The examples do not replace the talks, it is achieved between foster these customer, testers and developers.
+The methodology helps both the client understand what you want and developers understand what the customer wants specifying the behavior of each user story and avoiding the free interpretation of casuistry not covered by the specification.
+
+### Criteria acceptance vs Acceptance test
+People often make mistakes when defining the criteria and acceptance test. Often we confuse who defines the criteria and acceptance test.
+
+* What is the difference between acceptance criteria and test?
+
+> Criteria are the set of conditions to be met by a story to be given for good.
+> The acceptance criteria consist of:
+> * Actor
+> * Verb (describes a behavior on the system actor)
+> * Observable result
+
+### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
 
 ![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/red-green-refactor.png "Reed-Green-Refactor")
