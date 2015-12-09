@@ -7,7 +7,7 @@
 * [What is TDD?](#what-is-tdd)
 * [Advantages and disadvantages](#advantages-and-disadvantages)
 * [Based Features](#based-features)
-* [Tdd test properties](#based-features)
+* [Tdd test properties](#tdd-test-properties)
 * [Cycle of TDD](#cycle-of-tdd)
 * [Speed is the key](#speed-is-the-key)
 * [Executable documentation](#executable-documentation)
@@ -59,11 +59,11 @@ TDD methodology provides a basis features:
 ### Tdd test properties
 All unit test that applies tdd must to be:
 
-> * FAST: Large number of test should be very fast.
-> * INDEPENDENT: You can not depend on another to produce a satisfactory result.
-> * REPEATABLE: Innocuous. You should not alter the system. It will run just 20 times.
-> * SMALL: Atomic. Proving the minimum amount of functionality possible.
-> * TRANSPARENT: Clear the purpose of the test, even without comment.
+> * **FAST**: Large number of test should be very fast.
+> * **INDEPENDENT**: You can not depend on another to produce a satisfactory result.
+> * **REPEATABLE**: Innocuous. You should not alter the system. It will run just 20 times.
+> * **SMALL**: Atomic. Proving the minimum amount of functionality possible.
+> * **TRANSPARENT**: Clear the purpose of the test, even without comment.
 
 ### Cycle of TDD 
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
