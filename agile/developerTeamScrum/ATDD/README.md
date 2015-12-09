@@ -54,7 +54,13 @@ The acceptance test must be automated to be meaningful in an agile environment. 
 Moreover avoid the implementation details acceptance test. An example of incorrect test could be "By introducing the card and click the Add button, a new record is created in DB" aspects are entering records databases, Web events etc. Instead "The user saves card 4777308023346398 in the payment screen" has a vocabulary of business and is not in technical parts of the system.
 
 ### Properties acceptance tests
-The 
+The acceptance test must meet the following properties:
+
+> * **SPECIFIC**: Explicitly defined and definite.
+> * **MEASURABLE**: Possible to observe and quantify.
+> * **ARCHIEVABLE**: Capable of existing or taking place.
+> * **RELEVANT**: Having a connection with the story.
+> * **TIME BOUND**: When will the outcome be observed.
 
 ### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
