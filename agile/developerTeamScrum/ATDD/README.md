@@ -63,7 +63,23 @@ The acceptance test must meet the following properties:
 > * **TIME BOUND**: When will the outcome be observed.
 
 ### Good and Bad Practices
-To apply the TDD methodology is necessary to change the mindset of how teams have worked in traditional development 
+As best practices we can enumerate:
+
+> * Allow the customer to add new test without breaking the build.
+> * Keep acceptance test along with the code in version control system.
+> * Independence : a test can not depend on others
+> * Leave the system in the same state it was before his execution
+> * Use tools continuous integration
+> * Avoid dependencies with external systems
+> * Write the test as close to real environment as possible.
+> * Avoid too large or multipurpose test
+
+As bad practices we can enumerate:
+
+> * Developers write test of acceptance for themselves.
+> * Acceptance test as write unit tests.
+> * Developers write test of acceptance for themselves.
+> * Write acceptance tests which are dependent on implementation details or data structures.
 
 ### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
