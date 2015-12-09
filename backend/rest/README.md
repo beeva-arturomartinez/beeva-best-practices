@@ -425,7 +425,7 @@ Sometimes, at Beeva projects, we use a link node in the responses instead of use
 
 **Definition from Wikipedia:** "*HATEOAS, an abbreviation for Hypermedia as the Engine of Application State, is a constraint of the REST application architecture that distinguishes it from most other network application architectures. The principle is that a client interacts with a network application entirely through hypermedia provided dynamically by application servers. A REST client needs no prior knowledge about how to interact with any particular application or server beyond a generic understanding of hypermedia. By contrast, in some service-oriented architectures (SOA), clients and servers interact through a fixed interface shared through documentation or an interface description language (IDL). The HATEOAS constraint decouples client and server in a way that allows the server functionality to evolve independently.*"
 
-![hateoas](/home/thomasperson/Documentos/Beeva/REST/beeva-best-practices/backend/rest/static/hateoas.png  "HATEOAS")
+![hateoas](https://github.com/beeva/beeva-best-practices/blob/master/static/hateoas.png  "HATEOAS")
 
 Let’s take as an example an Amazon customer who wishes to read the details of his last order. To do this, he has to follow two steps:
 
