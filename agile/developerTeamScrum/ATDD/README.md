@@ -45,7 +45,7 @@ People often make mistakes when defining the criteria and acceptance test. Often
 
 * Who should write the test for acceptance?
 
-> The acceptance test must write the Product Owner , but unlike what many people think do not have to do alone , this methodology is based ultimately on communication and collaboration among all stakeholders of the system. We all know that the tests require a technical component that in some cases the customer can get to have it but in other cases , so the customer can ask for help from developers or QA technical aspects . The same happens in reverse when developers need help understanding the test as business rules are often confusing.
+> The acceptance test must write the Product Owner, but unlike what many people think do not have to do alone, this methodology is based ultimately on communication and collaboration among all stakeholders of the system. We all know that the tests require a technical component that in some cases the customer can get to have it but in other cases, so the customer can ask for help from developers or QA technical aspects. The same happens in reverse when developers need help understanding the test as business rules are often confusing.
 
 ### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
