@@ -8,6 +8,7 @@ At this point we're going to talk about atdd
 * [Based Features](#based-features)
 * [Objectives ATDD](#recommendations)
 * [Criteria acceptance vs Acceptance test](#recommendations)
+* [Writing acceptance tests](#recommendations)
 * [Workflow ATDD](#cycle-of-tdd)
 * [Conclusions](#conclusions)
 * [References](#references)
@@ -46,6 +47,10 @@ People often make mistakes when defining the criteria and acceptance test. Often
 * Who should write the test for acceptance?
 
 > The acceptance test must write the Product Owner, but unlike what many people think do not have to do alone, this methodology is based ultimately on communication and collaboration among all stakeholders of the system. We all know that the tests require a technical component that in some cases the customer can get to have it but in other cases, so the customer can ask for help from developers or QA technical aspects. The same happens in reverse when developers need help understanding the test as business rules are often confusing.
+
+### Writing acceptance tests
+The acceptance test must be automated to be meaningful in an agile environment. The tests must be specific and not allow ambiguity and avoid generic scenarios. An example of incorrect test could be "add cards to the system ", this is very generic. Instead "Add Card 4777308023346398" , making specific test.
+Moreover avoid the implementation details acceptance test. An example of incorrect test could be "By introducing the card and click the Add button, a new record is created in DB" aspects are entering records databases, Web events etc. Instead "The user saves card 4777308023346398 in the payment screen" has a vocabulary of business and is not in technical parts of the system.
 
 ### Workflow ATDD
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
