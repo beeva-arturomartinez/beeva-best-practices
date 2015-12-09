@@ -1,17 +1,47 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
+# Spark Best Practices
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![alt text](static/spark-logo.png "SPARK")
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
-* [References](#references)
+* [Writing applications](#writing-applications)
+* [Launching applications](#launching-applications)
+* [Spark SQL](#spark-sql)
+* [Spark Streaming](#spark-streaming)
+* [Tuning and debugging](#tuning-and-debuging)
 
-### The Fellowship of the Ring 
-Some code examples: 
+### Writing applications
+
+* SparkContext
+* Transformations and actions
+* Broadcast variables and accumulators
+
+### Launching applications
+
+* Driver/executors
+* Spark-submit options
+* Cluster types
+
+### Spark SQL
+
+* DataFrames
+* Hive ...
+
+### Spark Streaming
+
+* DStreams
+* Checkpointing
+* MaxRate and backpressure options
+
+### Tuning and debugging
+
+* Tuning spark configuration
+* Debugging spark applications
+
+
+### Markdown examples
+
+Some code examples:
 ````javascript
     var http = require('http');
     http.createServer(function (req, res) {
