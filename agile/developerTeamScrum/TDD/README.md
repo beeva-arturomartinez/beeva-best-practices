@@ -6,6 +6,7 @@
 * [TDD "The Great Unknown"](#tdd-the-great-unknown)
 * [What is TDD?](#what-is-tdd)
 * [Advantages and disadvantages](#advantages-and-disadvantages)
+* [Based Features](#based-features)
 * [Cycle of TDD](#cycle-of-tdd)
 * [Speed is the key](#speed-is-the-key)
 * [Executable documentation](#executable-documentation)
@@ -43,6 +44,16 @@ The main advantages and disadvantages are:
 | Lower maintenance costs                    | Learning curve for new teams |
 | Avoid overdesigned : a test requires us to write the minimum functionality | |
 | Solid test coverage                        | |
+
+### Based Features
+TDD methodology provides a basis features:
+
+| Written by developers (TDD)|
+| :-------------|
+| How does the system|
+| Test code|
+| Vocabulary solution| 
+| With implementation detail|
 
 ### Cycle of TDD 
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
