@@ -6,7 +6,7 @@ At this point we're going to talk about atdd
 
 * [What is ATDD?](#what-is-atdd)
 * [Based Features](#based-features)
-* [Objectives ATDD](#recommendations)
+* [Objectives ATDD](#objectives-atdd)
 * [Criteria acceptance vs Acceptance test](#recommendations)
 * [Writing acceptance tests](#recommendations)
 * [Properties acceptance tests](#recommendations)
