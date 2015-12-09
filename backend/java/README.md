@@ -282,6 +282,22 @@ As well as recording exceptions, logging should also record your program’s act
 ---
 
 ## Log traces
+Java logging is not an exact science since is left to the programmer and its experience several decisions, for instance the log level to use, the format of the messages or the information to display, all this is very important since it is proven that Java logging affects to the efficiency of ours applications. Here we offer an outline of how to make good use of the java logs.
+
+#### First choose an appropriate tool for logging
+
+#### Logging levels
+
+#### Use of isDebugEnabled()
+
+#### Use rotation policies
+
+#### Be concise and descriptive
+
+#### Be careful logging
+
+#### Log exceptions properly
+
 ---
 
 ## Code testing
