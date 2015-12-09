@@ -32,6 +32,58 @@ This is not an static document, but a living one. We will be adding new hints an
 ---
 
 ## Choosing proper names inside our code
+
+
+When we choose a name for variables, functions, arguments, classes, etc, it is important to apply a set of rules that will help us to make our code more consistent, and easier to read and understand. What follows are some of these basic rules for creating correct names:
+
+- The name of a variable, function or class must answer a number of basic questions: it should indicate why it exists, what it does, and how it is used. We have to choose names that reveal intentions,  since can make it much easier to understand and change code. For example, if we have the following variable to indicate a number of days since the last modification:
+
+	*int d;*
+
+	we can not know what it refers with the name *d*. To put a name to a variable, we should choose a name that specifies what is being measured and the unit of that measurement:
+
+	*int daysSinceModification;*
+
+- We have to use full descriptors that describe the variable, the field or the class properly. For example, an appropriate name for a field that defines the name of a user, it would be *firstName* or *userName*. Short names (for example *x1* or *f1*), although are easier to type, not provide any information of what they represent and consequently result in a difficult code to understand, maintain and improve.
+
+- Avoid disinformation, i.e. we should avoid words whose meanings vary from our intended meaning. For example, we do not have to put *customerList* as a variable name, if it is not a list, because for a developer the word list has a very particular meaning.
+
+- Avoid names that are too similar, or that differ only in uppercase or lowercase. For example, names *persistentObject* and *persistentObjects*, or names *anSqlDatabase* and *anSQLDatabase*, should not be used together as they give rise to confusion.
+
+- We need to distinguish names such a way that the reader appreciates the differences. Not just with add number-series or noise words, because if the names have to be different, they must also have a different meaning. The names of numerical series do not provide information, and noise words are another distinction without sense. For example, if we have the class *Product*, and we add another class with the name *ProductData*, we will have two classes with different names but with the same meaning (*Data* is a noise word that not provides any meaning).
+
+- Create names that we can pronounce, because if we cannot pronounce them, we are not going to be able to explain them correctly and we will have errors of understanding. For example, the name of the class *DtaRcrd104* cannot be pronounced.
+
+- Use names that can be searched for. Letter names or numeric constants are not easy to locate in the text. The length of a name must correspond to the size of our scope. If a variable or constant is used in several points of our code, we must assign a name that can be looked for.
+
+- Use abbreviations with moderation and intelligence. This means that we must maintain a standard list of short forms (abbreviations), choose them wisely and use them in a consistent manner. For example, if we want to use an abbreviation for the word *number*, we can use *nbr*, *no* or *num*, but recording the register used (no matter what) and using only that one.
+
+- Avoid encodings, because names encoded are unpronounceable and are usually written incorrectly. In Java there is no need to encode types, as is done in other languages with the Hungarian Notation (HN consists in prefixes in lowercase added to the names of the variables, and that indicate its type; the rest of the name indicates, as clearly as possible, the function that performs the variable), so we have to avoid this encoding as it makes it more difficult the readability of the code, may confuse the reader, and makes it more complicated to change the name or the type of a variable or class.
+
+- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, that must be in uppercase, as well as the first letter of any word not initial (naming convention CamelCase).
+
+- Use uppercase in the first letter of standard acronyms. The names will generally have standard abbreviations, such as SQL by Standard Query Language. Names such as *sqlDatabase* for an attribute or *SqlDatabase* for a class are much easier to read than *sQLDatabase* and *SQLDatabase*.
+
+- The names of the classes and objects must be nouns or phrases of nouns. For example, *Customer* or *BankAssistant*. The name of a class should not be a verb.
+
+- Methods must have names of verb. For example, *save* or *retrieveResult*. The methods of access, modification and the predicates must have as name its value and use as a prefix get, set, and is. For example:
+
+	*String name = client.getName( );*
+
+- Choose a word for each abstract concept and maintain it. It is very confusing to use names such as *get* and *retrieve* as equivalent methods from different classes, to be difficult to remember which method corresponds to each class. The names of functions must be independent and consistent in order to choose the correct method without need of additional searches. A coherent lexicon is a great advantage for developers who have to use our code.
+
+- Avoid using the same word for two different purposes. For example, if we have several classes with a method *add* that it does is to create a new value by adding two existing values, and we create a new class with a method that adds a value to a list, in this new method we could name it such as *add*, but in this case there is a difference in semantics, and we should use another name such as *insert*. We have to facilitate the understanding of our code.
+
+- Use terminology applicable to the domain of solutions and/or of the problem. It is advisable to use computer terms, algorithms, patterns names, and other mathematical terms, i.e. choose technical names to define technical stuff. However when there is not a programming term for that is being done, we should use a domain name of the problem. Many developers make the mistake of creating generic terms for concepts when there are already perfectly useable terms in the domain. For example, if our users relate to their customers as consumers, we have to use the term *Customer* for the class, not *Client*.
+
+- Some names have a meaning by themselves, but not the majority, so they must be included in a context, in classes, functions and namespaces with appropriate names. For example, we have the variables *firstname*, *lastname*, *street*, *number*, *city* and *country*, that combined, they obviously form an address, but if the variable *number* is used in isolation on a method, we would not be able to identify that is a part of an address. For this, the best would be to create the class *Address*, so we would know that the variables belong to a broader concept.
+
+- Short names are usually more appropriate than the extensive, provided they are clear. For example, the names *AccountAddress* and *ClientAddress* are perfect for instances of the class *Address*, but do not serve as the class name. *Address* serves better as the class name.
+
+Regarding to the naming conventions of identifiers in Java, several communities have established and proposed their owns. In the following link, you can see the naming conventions established by Sun Microsystems:
+
+[http://www.oracle.com/technetwork/java/codeconventions-135099.html](http://www.oracle.com/technetwork/java/codeconventions-135099.html)
+
 ---
 
 ## Function's design
