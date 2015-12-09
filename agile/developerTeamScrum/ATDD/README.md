@@ -9,7 +9,7 @@ At this point we're going to talk about atdd
 * [Objectives ATDD](#objectives-atdd)
 * [Criteria acceptance vs Acceptance test](#criteria-acceptance-vs-acceptance-test)
 * [Writing acceptance tests](#writing-acceptance-tests)
-* [Properties acceptance tests](#recommendations)
+* [Properties acceptance tests](#properties-acceptance-tests)
 * [Good and Bad Practices](#recommendations)
 * [Workflow ATDD](#cycle-of-tdd)
 * [References](#references)
