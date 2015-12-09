@@ -82,7 +82,7 @@ As bad practices we can enumerate:
 > * Write acceptance tests which are dependent on implementation details or data structures.
 
 ### Workflow ATDD
-The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
+The iterative cycle ATDD:
 
 ![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/ATDD/static/Flujo_atdd_tdd_v3.png "WorkFlow ATDD")
 
