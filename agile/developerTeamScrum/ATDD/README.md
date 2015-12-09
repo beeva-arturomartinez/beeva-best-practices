@@ -4,7 +4,6 @@ At this point we're going to talk about tdd
 
 ## Index
 
-* [TDD "The Great Unknown"](#tdd-the-great-unknown)
 * [What is ATDD?](#what-is-atdd)
 * [Advantages and disadvantages](#advantages-and-disadvantages)
 * [Based Features](#based-features)
@@ -16,20 +15,9 @@ At this point we're going to talk about tdd
 * [Conclusions](#conclusions)
 * [References](#references)
 
-### TDD "The Great Unknown" 
-The TDD concept is generally misunderstood by people. Perhaps the acronym TDD "Test-driven development " are not the most convenient. The "T" of TDD cheats a bit for TDD is not a testing methodology else a development methodology and design software.
-In practice TDD tends to confuse concepts are interrelated but do not start from the same root:
-> Self -testing -code ! = TDD ! = Unit testing
-
-Self -testing -code ! = TDD , TDD has not primary mission the test coverage. This coverage is a benefit that is obtained by applying the methodology. This means that you can have high test coverage making after developing the product. It isnt´t condition applying TDD or to have high test coverage.
-
-TDD ! = Unit testing , unit test as much as possible try to be decoupled by definition. In exchange for not applying the compulsory decoupling TDD code is required although it is convenient. Moreover, in many parts of it will be convenient to be a "small" coupled for some tests. Moreover establish any automated test framework is a consequence of applying the methodology.
-
-People also believed that applying TDD the need for other types of tests is eliminated. This is completely false as there are types of test as system test "End to End" performing QA that do not comply with the principles that must meet a test in TDD. TDD therefore does not eliminate the QA work even if indirectly reduced because the number of bugs that can appear in higher-level test without having appeared in unit testing or integration of lower level is very low probability occur.
-
 ### What is TDD?
 The definition of wikipedia express:
-> "Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: first the developer writes an (initially failing) automated test case that defines a desired improvement or new function, then produces the minimum amount of code to pass that test, and finally refactors the new code to acceptable standards"
+> "Acceptance Test-Driven Development (ATDD) is a development methodology based on communication between the business customers, the developers, and the testers.ATDD encompasses many of the same practices as Specification by Example, Behavior Driven Development (BDD), Example-Driven Development (EDD), and Story Test-Driven Development (SDD). All these processes aid developers and testers in understanding the customer’s needs prior to implementation and allow customers to be able to converse in their own domain language. ATDD is closely related to Test-Driven Development[TDD]. It differs by the emphasis on developer-tester-business customer collaboration. ATDD encompasses acceptance testing, but highlights writing acceptance tests before developers begin coding"
 
 TDD is more than just perform test at first. As a result of applying the methodology produced automated test and also occur following the first TFD "Test - First- development".
 But we must not forget that the main mission of the methodology is to design the software product by examples. These examples are translated in getting test emerging architecture of our product iteratively and incrementally only what the customer asks us .
