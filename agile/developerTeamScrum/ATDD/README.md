@@ -14,7 +14,7 @@ At this point we're going to talk about atdd
 * [Workflow ATDD](#cycle-of-tdd)
 * [References](#references)
 
-### What is TDD?
+### What is ATDD??
 The definition of wikipedia express:
 > "Acceptance Test-Driven Development (ATDD) is a development methodology based on communication between the business customers, the developers, and the testers.ATDD encompasses many of the same practices as Specification by Example, Behavior Driven Development (BDD), Example-Driven Development (EDD), and Story Test-Driven Development (SDD). All these processes aid developers and testers in understanding the customer’s needs prior to implementation and allow customers to be able to converse in their own domain language. ATDD is closely related to Test-Driven Development[TDD]. It differs by the emphasis on developer-tester-business customer collaboration. ATDD encompasses acceptance testing, but highlights writing acceptance tests before developers begin coding"
 
