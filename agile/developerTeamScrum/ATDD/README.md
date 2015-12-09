@@ -11,7 +11,7 @@ At this point we're going to talk about atdd
 * [Writing acceptance tests](#writing-acceptance-tests)
 * [Properties acceptance tests](#properties-acceptance-tests)
 * [Good and Bad Practices](#good-and-bad-practices)
-* [Workflow ATDD](#cycle-of-tdd)
+* [Workflow ATDD](#workflow-atdd)
 * [References](#references)
 
 ### What is ATDD??
