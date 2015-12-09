@@ -282,21 +282,88 @@ As well as recording exceptions, logging should also record your program’s act
 ---
 
 ## Log traces
+
 Java logging is not an exact science since is left to the programmer and its experience several decisions, for instance the log level to use, the format of the messages or the information to display, all this is very important since it is proven that Java logging affects to the efficiency of ours applications. Here we offer an outline of how to make good use of the java logs.
 
-#### First choose an appropriate tool for logging
+### First choose an appropriate tool for logging
 
-#### Logging levels
+We recommend you to use the abstraction layer SLF4J (Simple Logging Facade for Java), this facade give us a list of improvements:
+* Loose coupling: using SLF4J we are not linking our classes to an implementation of logging in particular. Thus in a future if we change that implementation we don't need to modify our classes.
+* The only dependency in application components should be on the SLF4J API, no class should reference any other logging interfaces.
+* SLF4J's parameterized logging: SLF4J has a feature that help us to construct messages in a way much more attractive. Example: 
 
-#### Use of isDebugEnabled()
+		logger.debug("There are " + numberOfBooks + " of " + kind); //Log4J
+		logger.debug("There are {} of {}", numberOfBooks, kind);//SLF4J
+	As we can see, the second form is shorter and easier to read, it is also more efficient because of the way it builds messages SLF4J
 
-#### Use rotation policies
+### Logging levels
+For each message, we have to think carefully which level is the most appropriate. Logging affect the performance of our application because each log is a file IO, that's why is very important to use the right level. Log4J give us 6 levels of priority:
 
-#### Be concise and descriptive
+**FATAL:** for critical messages, usually the application will abort after save the message
 
-#### Be careful logging
+**ERROR:** designates error events that might still allow the application to continue but it has to be investigated quickly.
 
-#### Log exceptions properly
+**WARN:** used for messages of alert that we want to save but the application still will follow running
+
+**INFO:** give us information about the progress and the status of the application very useful for the final user 
+
+**DEBUG:** this level is used to get information of utility for the developer to debug the application. Commonly this level is only used in the development environment of DEV
+
+**TRACE:** used to show an information more detailed than debug, it has the highest priority of all
+
+### Is Log4j isDebugEnabled() necessary?
+This method is only worth of use it if we are not using SLF4J and we can prove that the construct of the specified log is expensive. Example of use:
+
+         if (log.isDebugEnabled()) {
+   	 		log.debug("Something happened");
+		 }
+	
+### Use rotation policies
+Logs can take up a lot of space. Maybe you need to keep years of archival storage, but the space is limited and expensive. So, we have to set up a good rotation strategy and decide whether to destroy or back up your logs but always it has to allow the analysis of recents events.
+
+For example to create daily rolling log files we have to configure log4j, in that case log4j provides the DailyRollingFileAppender class. Here is an example of a log4j’s properties configuration file 
+
+    log4j.appender.Appender2=org.apache.log4j.DailyRollingFileAppender
+    log4j.appender.Appender2.File=app.log
+    log4j.appender.Appender2.DatePattern='.'yyyy-MM-dd
+
+### Be concise and descriptive
+It's important to log in simple English, it should make sense and human readable. The usual is that the loggings statements include data and description in a single line.
+Example: 
+
+    log.debug(“Finalizacion”); //Only description, no data
+    log.debug(status); //Only data, no description
+    log.debug(“Finalizacion {}”, status); //Is better to put data and description together
+
+### Be careful logging
+We have to keep attention that we are logging and avoid typical mistakes.
+* Avoid null pointer exceptions:
+    
+        log.debug(“Correct insertion for the user {} ”, user.getId()); 
+    Are we sure that user is not nullpointer? 
+
+* Avoid logging collections:
+
+        log.debug(“Inserting users {} ”, users);
+    A lot of errors can happen: object users not initialized, thread startvation, ouf of memories... It is better to log only the size of the collections or the id of each iteration.
+
+* Never log sensitive information as password, credit car numbers or account number
+
+### Log exceptions properly
+The usual rule is to not log any exceptions, but there is an exception; if we throw exceptions for some remote service that is capable of serializing exceptions. There are two basic rules to throw an exception:
+* If you re-throw an exception, don't log it. For example:
+
+            try {
+    			/ …..
+    		} catch (IOException ex) {
+    			log.error(“Error: {}”, ex);
+    			throw new MyCustomerException(ex);
+    		}
+    This is wrong, we would be duplicating traces of the same error in the logs. Log, or wrap and throw back, never both,
+
+* In order to log an exception the first argument is always the text message, write something about the nature of the problem, and the second argument is the exception itself.
+
+        log.error("Error reading configuration file", e);
 
 ---
 
