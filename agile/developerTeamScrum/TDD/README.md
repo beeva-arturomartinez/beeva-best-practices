@@ -10,7 +10,7 @@
 * [Speed is the key](#speed-is-the-key)
 * [Executable documentation](#executable-documentation)
 * [Design Principles](#design-principles)
-* [Recommendations](#recommendations)conclusions
+* [Recommendations](#recommendations)
 * [Conclusions](#conclusions)
 * [References](#references)
 
@@ -87,7 +87,15 @@ One consequence and benefit of applying the TDD methodology is the generation of
 > Being equal, the simplest explanation is usually the most likely. That is, when you have two solutions to the same problem, the simplest is often the best.
 
 ### Recommendations 
-xxxx
+There are problems in applying the methodology tdd.
+
+* TDD with an unknown technology:
+
+> It is common when we started with new tools that problems occur when following the TDD methodology. As a first approximation is convenient "spikes " or concept testing tools. *Before driving the car it is important to know where the steering wheel, brake etc*.
+
+* TDD middle of a project:
+
+> Being
 
 ### Conclusions
 To apply the TDD methodology is necessary to change the mindset of how teams have worked in traditional development methodologies. This usually has a significant learning curve to start. TDD program "now" is not programmed thinking " it just in case. "Cast the first stone that the developer has not set then things have not been used. In the end this is just in case it not using!
