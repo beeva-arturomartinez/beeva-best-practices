@@ -1,9 +1,9 @@
 # Hadoop Management and Development Guidelines
 At this point we're going to talk about Hadoop
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
-## Index
+## Links
 
 * [Development](./hadoop-management.md)
 * [Management](./hadoop-development.md)
