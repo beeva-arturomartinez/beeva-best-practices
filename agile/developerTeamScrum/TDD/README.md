@@ -59,10 +59,14 @@ The iterative cycle methodology is divided in three easy steps: *RED - GREEN - R
 * We check that all tests pass
 
 ### Speed is the key 
-xxxx
+Speed is the key to success of TDD. We must make the cycle in minutes, even seconds. You can compare it like a game of ping pong.
+
+* We write and execute all test **(PING)**.
+* We write implementation **(PONG)**.
+* Refactored and confirm that all tests pass **(POINT)**.
 
 ### Executable documentation 
-
+One consequence and benefit of applying the TDD methodology is the generation of an executable documentation. The tests act as documentation for developers. Practically we do not need to put comments in the code. The nomenclature should explain the functionality test. It is easier to understand the code does a test that implementation of the code itself. The documentation does not conflict with other documents of higher or wider level. Code documentation is completely further. The documentation is kept current without any extra work because it belongs flow methodology.
 
 ### Design Principles 
 xxxx
