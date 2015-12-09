@@ -94,7 +94,7 @@ To apply the TDD methodology is necessary to change the mindset of how teams hav
 
 The developments do not work with the super architect who owns the application. **So the super enterprise architect does not mount the foundation product for developers to add functionality?** The answer is a resounding no. The super architect remains a reference and asked for advice and help, but the technical team will be responsible for emerging architecture. That is all developers act as architects, designers and developers. TDD promotes the concept of "collective code" leaving aside the stereotype that certain portions of code only the certain technical touch.
 
-Note that this method works to be met mainly two things ; first the whole team and the second TDD make the team and the client has a constant flow of communication following an iterative and incremental manner any agile methodology like Scrum .Without this low success we have applied the methodology.
+Note that this method works to be met mainly two things ; first the whole team and the second TDD make the team and the client has a constant flow of communication following an iterative and incremental manner any agile methodology like Scrum. Without this low success we have applied the methodology.
 
 
 ### References
