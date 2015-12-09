@@ -10,7 +10,8 @@
 * [Speed is the key](#speed-is-the-key)
 * [Executable documentation](#executable-documentation)
 * [Design Principles](#design-principles)
-* [Recommendations](#recommendations)
+* [Recommendations](#recommendations)conclusions
+* [Conclusions](#conclusions)
 * [References](#references)
 
 ### TDD "The Great Unknown" 
@@ -88,6 +89,12 @@ One consequence and benefit of applying the TDD methodology is the generation of
 ### Recommendations 
 xxxx
 
+### Conclusions
+To apply the TDD methodology is necessary to change the mindset of how teams have worked in traditional development methodologies. This usually has a significant learning curve to start. TDD program "now" is not programmed thinking " it just in case. "Cast the first stone that the developer has not set then things have not been used. In the end this is just in case it not using!
+
+The developments do not work with the super architect who owns the application. **So the super enterprise architect does not mount the foundation product for developers to add functionality?** The answer is a resounding no. The super architect remains a reference and asked for advice and help, but the technical team will be responsible for emerging architecture. That is all developers act as architects, designers and developers. TDD promotes the concept of "collective code" leaving aside the stereotype that certain portions of code only the certain technical touch.
+
+Note that this method works to be met mainly two things ; first the whole team and the second TDD make the team and the client has a constant flow of communication following an iterative and incremental manner any agile methodology like Scrum .Without this low success we have applied the methodology.
 
 
 ### References
