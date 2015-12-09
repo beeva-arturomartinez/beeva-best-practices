@@ -28,6 +28,9 @@ People also believed that applying TDD the need for other types of tests is elim
 The definition of wikipedia express:
 > "Test-driven development (TDD) is a software development process that relies on the repetition of a very short development cycle: first the developer writes an (initially failing) automated test case that defines a desired improvement or new function, then produces the minimum amount of code to pass that test, and finally refactors the new code to acceptable standards"
 
+TDD is more than just perform test at first. As a result of applying the methodology produced automated test and also occur following the first TFD "Test - First- development".
+But we must not forget that the main mission of the methodology is to design the software product by examples. These examples are translated in getting test emerging architecture of our product iteratively and incrementally only what the customer asks us .
+
 ### Advantages and disadvantages
 The main advantages and disadvantages are:
 
@@ -44,6 +47,16 @@ The main advantages and disadvantages are:
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
 
 ![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/red-green-refactor.png "Reed-Green-Refactor")
+
+* We write a test
+* We run all tests
+* Check that the last written test fails **(RED)**
+* Write code implementation
+* We run all tests
+* Check that all tests pass **(GREEN)**
+* Refactored the code **(Refactoring)**
+* We run all tests
+* We check that all tests pass
 
 ### Speed is the key 
 xxxx
