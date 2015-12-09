@@ -95,7 +95,7 @@ There are problems in applying the methodology tdd.
 
 * TDD middle of a project:
 
-> Being
+> One of the questions that arise when we start implementing TDD is: *Can you apply TDD project started?*For the new that has to implement course. The problem comes to what is already developed. In this case you could abusing lot of mocks. There are many legacy without coverage test and difficult to use parts. So they can live the parties will be necessary in many mocks even penalize fragility test. *Best parachute jump without it!*
 
 ### Conclusions
 To apply the TDD methodology is necessary to change the mindset of how teams have worked in traditional development methodologies. This usually has a significant learning curve to start. TDD program "now" is not programmed thinking " it just in case. "Cast the first stone that the developer has not set then things have not been used. In the end this is just in case it not using!
