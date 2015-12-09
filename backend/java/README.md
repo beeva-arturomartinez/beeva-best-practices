@@ -199,6 +199,14 @@ Logging should generally be left to the outermost handler. This may seem counter
 
 In some methods, we may want to **catch and rethrow** exceptions to provide a more informative message or additional diagnostic information.
 
+#### Never use exceptions for flow control
+
+The exceptions are expensive operations and as the name would suggest, exceptional conditions. Using exceptions for control flow is an anti-pattern, and it carries the following handicaps:
+
+* Leads to more difficult to read and understand code.
+* Java has existing control structures designed to solve the problems without the use of exceptions.
+* The modern compilers tend to optimize with the assumption that exceptions are not used for control flow.
+
 #### Add informative messages
 
 While throwing runtime exceptions outward requires the minimal amount of code, we may sometimes want better information as to what action & data failures the program failed on.
