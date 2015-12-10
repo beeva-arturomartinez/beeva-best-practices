@@ -275,7 +275,7 @@ Thus, we must not create lots of css classes, creating quite optimized, reusable
 
 ### 2.5\. Other considerations
 
-Here are some notes that do not fall in the other sections even if it may have been mentioned previously discussed above .
+Here are some notes that do not fall in the other sections even if it may have been mentioned previously discussed above.
 
 #### 2.5.1\. !important and Style
 
