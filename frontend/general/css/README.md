@@ -25,7 +25,25 @@ For correct use of these tools it is necessary to have knowledge of good practic
 
 #### 2.3\. Organize CSS
 
-In the development should generate multiple CSS that will later be unified for production environments . With that we improve the encapsulation of the different needs of the project. To make this separation are certain criteria:
+In the development should generate multiple CSS that will later be unified for production environments. With that we improve the encapsulation of the different needs of the project. 
+
+Using CSS preprocessors is recommended to have an initial file that loads the rest , thus the order in which the classes defined in each of the files are loaded is controlled.
+
+```css
+/*** main.scss content */
+/* general */
+@import colors.scss
+@import fonts.scss
+@import containers.scss
+@import buttons.scss
+...
+
+/* specific */
+@import students.scss
+...
+```
+
+To make this separation are certain criteria:
 
 * Generic reusable components
 * Functional application components
@@ -36,7 +54,7 @@ Other components are functional, that is, focusing on all visual content having 
 
 These two approaches are not mutually exclusive. It is useful to identify elements that are general and create a reuse approach, and certainly appear specifications related to functionality, which will overload these general styles.
 
-#### 2.1.3\. Types of CSS classes
+#### 2.4\. Types of CSS classes
 
 It is important that our rules of CSS have a **semantic** nature , so they are very intuitive. To do this , we can group the CSS classes into four types:
 
