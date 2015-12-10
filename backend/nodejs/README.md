@@ -42,6 +42,55 @@ Some code examples:
 A Remarkable idea
 
 
+### Restify
+
+Restify is a light framework similar to Express and very easy for building REST APIs. This is the easy way to create a REST API application:
+
+``` javascript
+var restify = require('restify');
+var server = restify.createServer();
+
+server.get('/hello/:name', function(req, res, next) {
+	res.send('hello ' + req.params.name);
+});
+
+server.listen(3000, function() {
+	console.log('Listening on port 3000');
+});
+```
+
+#### When use Restify instead of Express
+
+1. Exists to let you build "strict" API services that are maintanable and observable. 
+
+2. Comes with automatic DTrace support for all your handlers, if you're running on a platform that supports DTrace.
+
+3. Is lighter than Express
+
+#### When do not use Restify instead of Express 
+
+1. Express use case is targeted at browser applications and contains a lot of functionality, such as templating and rendering, to support that. 
+
+2. Restify does not support that. Express is more powerful on this.
+
+3. More indicated when you have a large number of queries.
+
+#### Conclusion Restify vs Express
+
+Restify: If I need a framework that gave me absolute control over interactions with HTTP and full observability into the latency and characteristics of my applications. 
+
+Express: If you don't need absolute control over these interactions, or don't care about those aspect(s), and I need to manage a large number of queries.
+
+You can see a perfomance comparison between Hapi, Express and Restify in the following [link](https://raygun.io/blog/2015/03/node-performance-hapi-express-js-restify/)
+
+#### Desired structure for a Restify application
+
+
+
+#### Logging in Restify
+
+
+
 ### BDD with Cucumber
 
 #### Structure for BDD
