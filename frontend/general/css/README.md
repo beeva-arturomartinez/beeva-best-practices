@@ -3,44 +3,38 @@
 ##2.- CSS 
 
 Index
+* Creating style sheets
 * Using CSS preprocessors
+* Organize CSS
 * uso correcto de selectores, reducir su número en las hojas de estilo
 * evitar utilizar clases para dotar de funcionalidades JS (usar data-xxxx) etc.
-
-
-
-#Here begins the old translation guide
-
-
 
 ### 2.1\. Creating style sheets
 
 In this section we discuss some basic rules for both the creation of new style sheets and for organizing them. The goal is to minimize the volume of the generated files and avoid having to overwrite the classes or attributes using the modifier **!important**.   
 
-#### 2.1.1\. Using CSS preprocessors
+#### 2.2\. Using CSS preprocessors
 
-Preprocessors are tools that provide meta for creating CSS files. These are translated into CSS files that will be inserted into the Web .
+Preprocessors are tools that provide meta for creating CSS files. These are translated into CSS files that will be inserted into the Web.
 
-There are different preprocessors in the market among them Sass / Compass, Less and Stylus. They work similarly, allowing you to define variables and functions and other facilities to write our code will be subsequently exported to css. Above all bring our code readability and speed up development.
+There are different preprocessors in the market among them Sass/Compass and Less are the most widespread. These tools allow you to create variables and functions for use in CSS, as well as providing features such as loops. optimizing the generation, readability and reuse of CSS.
 
-However, the recommendation is to use SASS / Compass, to the greatest extent in the community.
+However, the recommendation is to use SASS/Compass, to the greatest extent in the community.
 
 For correct use of these tools it is necessary to have knowledge of good practice in creating CSS, in order to exploit the power of these preprocessors.   
 
-#### 2.1.2\. Organize css
+#### 2.3\. Organize CSS
 
-CSS to develop a more organized way these should be separated in files as production combined to lighten the number of requests the browser, as seen in the [first rule](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.dgyksl1vnpea) in " [load inicial](https://docs.google.com/document/d/1oq6x-s6riZlSa4fxXyGQR-gQbdZdVUlG9ReTzzZepUk/edit#heading=h.w8jtjti4l3gc)”.
-
-This guide of good practices suggest two criteria to organize the development css files:
+In the development should generate multiple CSS that will later be unified for production environments . With that we improve the encapsulation of the different needs of the project. To make this separation are certain criteria:
 
 * Generic reusable components
 * Functional application components
 
 Reusable components are those that are not part of the application itself that we are developing, it can be used in various applications. These are for example the css for data grids, select boxes, trees and other reusable components or widgets. These components may come from third-party libraries or frameworks that overwrite, but if they themselves want to reuse components between applications we have to pay special attention to this separation because it will allow us to preserve independecia to be reused in the current project or another.
 
-Other components are functional, that is, focusing on all visual content having a certain functionality. They can be several pages of a traditional website based on a pattern of multiple pages, the various functional modules or applications that follow a pattern of a single page or SPA (Single Page Application ).
+Other components are functional, that is, focusing on all visual content having a certain functionality. They can be several pages of a traditional website based on a pattern of multiple pages, the various functional modules or applications that follow a pattern of a single page or SPA (Single Page Application ). For example, a course management application, we could have a module students with all the CSS that was related to this module located in a students.css file.
 
-For example, a course management application, we could have a module students with all the CSS that was related to this module located in a students.css file.
+These two approaches are not mutually exclusive. It is useful to identify elements that are general and create a reuse approach, and certainly appear specifications related to functionality, which will overload these general styles.
 
 #### 2.1.3\. Types of CSS classes
 
