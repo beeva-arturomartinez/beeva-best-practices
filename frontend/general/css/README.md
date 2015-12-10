@@ -2,18 +2,25 @@
 
 ##2.- CSS 
 
-Index
+This section describes the best practices applicable to CSS , divided into the following sections are covered:
 * Creating style sheets
 * Using CSS preprocessors
 * Organize CSS
-* uso correcto de selectores, reducir su número en las hojas de estilo
-* evitar utilizar clases para dotar de funcionalidades JS (usar data-xxxx) etc.
+* Selectors and types of CSS classes
+** Structure
+** Visual state
+** Functional entity
+** Functional status
+* Other considerations
+** !important and Style
+** Based on CSS JavaScript functionality
+** Styles sheets Browsers
 
 ### 2.1\. Creating style sheets
 
 In this section we discuss some basic rules for both the creation of new style sheets and for organizing them. The goal is to minimize the volume of the generated files and avoid having to overwrite the classes or attributes using the modifier **!important**.   
 
-#### 2.2\. Using CSS preprocessors
+### 2.2\. Using CSS preprocessors
 
 Preprocessors are tools that provide meta for creating CSS files. These are translated into CSS files that will be inserted into the Web.
 
@@ -23,7 +30,7 @@ However, the recommendation is to use SASS/Compass, to the greatest extent in th
 
 For correct use of these tools it is necessary to have knowledge of good practice in creating CSS, in order to exploit the power of these preprocessors.   
 
-#### 2.3\. Organize CSS
+### 2.3\. Organize CSS
 
 In the development should generate multiple CSS that will later be unified for production environments. With that we improve the encapsulation of the different needs of the project. 
 
@@ -54,20 +61,24 @@ Other components are functional, that is, focusing on all visual content having 
 
 These two approaches are not mutually exclusive. It is useful to identify elements that are general and create a reuse approach, and certainly appear specifications related to functionality, which will overload these general styles.
 
-#### 2.4\. Types of CSS classes
+### 2.4\. Selectors and types of CSS classes
 
-It is important that our rules of CSS have a **semantic** nature , so they are very intuitive. To do this , we can group the CSS classes into four types:
+In the style sheets not only the order in which the classes are defined, also depends on the accuracy of specifying a particular component.
+
+We must guide all styles of a **semantic** way so they are reusable as possible. Very specific selectors may force us to use switches **!important**, which are entirely discouraged.
+
+It is important that our rules of CSS have a **semantic** nature, so they are very intuitive. To do this, we can group the CSS classes into four types:
 
 * Structure
 * Visual state
 * Functional entity
 * Functional status
 
-##### 2.1.3.1\. Structure
+#### 2.4.1\. Structure
 
 The structure css classes are those that reference **reusable components** in different applications or websites. Again become our reusable components. These must have a unique CSS class to make reference to them. For example, if we use two data grids on our website, we should never have a class grid-first and  another class grid-second, but both should have the same css class data- grid. If in any case requires the viewing is different, this is usually for functional reasons discussed below, in this case an overload of classes will be used, ie, applying a whole class to class data-grid to represent differences.
  
-##### 2.1.3.2\. Visual state
+#### 2.4.2\. Visual state
 
 The status display indicates which particular state of a component of any type ( structure or entity ). The most common states are:
 
@@ -117,7 +128,7 @@ table.data-grid.disabled span {font-weight: normal;}
 
 But also , you might want to not only depended on the status of view, but on different screens, we want to be displayed differently depending on the type of display, which has a functional nature, which we will try next.
 
-##### 2.1.3.3\. Functional entity
+#### 2.4.3\. Functional entity
 
 These can be either to refer to certain entities (students, courses, teachers...) and more global entities, as it could be an administration module. In the following example we will see how we could differentiate the grids data management module from the rest of the application:
 
@@ -227,7 +238,7 @@ In the css:
 
 Thus, all forms of user dependent class would have a font size of 14px and a general padding of 5px, except the registration form, which will overwrite the font size.
 
-##### 2.1.3.4\. Functional status
+#### 2.4.4\. Functional status
 
 Finally, would the CSS classes of functional status, which refer to individual states may have a particular entity. For example, for different states can have the elements of a message (header, icon, date, etc) in a messaging system. We could have many different css classes for these elements, for example, in terms of icons: ico-sent, ico-received, ico-read... A simple and semantic form, would add that state as a modifier of the css class that represents functional entity, seen in the previous point, defining the normal rules of each camp. For example, let's focus on the field icon:
 
@@ -262,12 +273,38 @@ background-image: url(‘sprite_path’);
 
 Thus, we must not create lots of css classes, creating quite optimized, reusable and easy to maintain files.
 
-#### 2.1.4\. Other considerations
+### 2.5\. Other considerations
 
-In addition to the rules seen above, must be avoided as far as possible use the switch **!important** and / or **style** property of DOM nodes .
+Here are some notes that do not fall in the other sections even if it may have been mentioned previously discussed above .
+
+#### 2.5.1\. !important and Style
+
+In addition to the rules seen above, must be avoided as far as possible use the switch **!important** and / or **style** property of DOM nodes.
 
 As for the style property, it is often essential to use. For example, it is imperative for many when frameworks provide dynamic attributes such as width, height, etc. to offer a dynamic and / or flexible components. However, what it is to be avoided at this property indicate attributes of constant styles. Anything must be consistent in its corresponding CSS file.
 And, for the switch **!important**, there are times in which it is essential. For example, in those cases in which frameworks accessing the style property and modify a particular attribute, for any reason, we want to be consistent and we have defined in our CSS. As inclusion in the style property overrides the classes defined in the CSS as a general rule, we can only do so using this switch, overriding the value in our style sheet, but should be limited use as far as possible.
+
+#### 2.5.2\. Based on CSS JavaScript functionality
+
+In order to separate a fully the structure and functionality viewing. You need not apply functionality through JavaScript based CSS classes, for which the use of attributes in the structure of HTML like data-XXX is recommended.
+
+```html
+<div class="container">
+  <p>This is the reference to a <span class="link" data-link>link</span></p>
+</div>
+```
+
+Wrong way:
+```javascript
+$('.link').click(function(){alert('Please use a data-XXX atribute instead of a class')});
+```
+
+Right way:
+```javascript
+$('[data-link]').click(function(){alert('this is the right way')});
+```
+
+#### 2.5.3\. Styles sheets Browsers
 
 Another measure that may be useful, to avoid having to include specific styles sheets for each browser, Javascript is added using a CSS class BODY DOM node, referring to the browser. For instance:
 
@@ -301,4 +338,3 @@ Thus, we can have generic classes that are cross-browser and overwrite only what
 /*For IE7*/   
 .ie.v7 .data-grid {padding: 2px;}
 ```
-
