@@ -1,12 +1,105 @@
 # Python best practices
 
+The following contents table provides an index of the contents covered in this guide.
+
 ## Index
 
-### 1. Introducción
-### 2. Python Zen (Pep 20)
+* [1. Introduction](#1-introduction)
+* [2. The Zen of Python (Pep 20)](#2-the-zen-of-python-pep-20)
+* [3. Style guide (Pep 8)](#3-style-guide-pep-8)
+* [4. Python 2 vs Python 3](#4-python-2-vs-python-3)
+* [5. Standard libarary](#5-standard-libarary)
+* [6. Importing libraries](#6-importing-libraries)
+* [7. Logging](#7-logging)
+* [8. Comments and documentation](#8-comments-and-documentation)
+* [9. String treatment](#9-string-treatment)
+* [10. Operators](#10-operators)
+* [11. Functions](#11-functions)
+* [12. Programming paradigms](#12-programming-paradigms)
+* [13. Exceptions](#13-exceptions)
+* [14. Input / Output](#14-input-output)
+* [15. Configuration files](#15-configuration-files)
+* [16. Testing](#16-testing)
+* [17. Project structure](#17-project-structure)
+* [18. Application packaging and distribution](#18-application-packaging-and-distribution)
+* [19. Development Environments (IDEs)](#19-development-environments-ides)
+* [20. Library and virtual environment management](#20-library-and-virtual-environment-management)
+* [21. References](#21-references)
 
 
+### 1. Introduction
 
+Python is a general purpose and high level programming language created by [Guido van Rossum](https://en.wikipedia.org/wiki/Guido_van_Rossum) in 1989. The first public release was made in 1991 (0.9.0) and it reached version 1.0 in 1994. As the time of this writing, Python 2.7.10 and Python 3.5.0 are considered as the stable versions.
+
+The language allows the programmer to choose between different programming paradigms, although some are more supported than others:
+* Procedural.
+* Imperative.
+* Object oriented.
+* Functional.
+
+Python is an __interpreted language__ as well. While files containing code have the .py extension, when executing the file it is partially compiled to a byte code [link goes here] file with the .pyc extension. Hence, the .py file is only compiled for the first time (unless the code is changed) an then the .pyc file is executed upon every invocation. The byte code is then translated to machine instructions by the Python Virtual Machine (PVM) during the execution. Since the byte code needs to be interpreted by the PVM, Python's  performance is in general lower than the one provided by a compiled language.
+
+As an interpreted language, an interactive console is provided as a tool that its part of the language. The console allows to easily ensure that the code that has been just developed performs as expected. As an example, the console supports defining functions and then testing them or loading whole modules just developed and using their inner objects or functions. Therefore the use of the console is highly recommended since it allows testing anything from code snippets to multi module programs.
+
+Python allows employing object oriented design, or procedural programming depending on the needs. And the fact that it is an interpreted language, has led to its use for scripting purposes.
+
+Many libraries and frameworks have been created enriching the Pythons ecosystem and they are available for the developer to be used. These utilities focus on different areas such as scientific computing (SciPy), data analysis (pandas), or web development (Django) to name a few.
+
+Because of all the characteristics previously presented, Python provides great programming flexibility and ease of development at the cost of performance. This facts have boosted the interest on it and its adoption for product development.
+
+In this best practices guide, a set of recommendations is provided in order to take advantage of the all the possibilities the language provides and to avoid common mistakes that can arise in Python developments. Additionally, links to external references are provided as well when required.
+
+
+### 2. The Zen of Python (Pep 20)
+
+Unlike other languages, Python has a philosophy strongly associated to it, named as “The Zen of Python”. For example, the language itself is more restrictive in some aspects such as indenting and code organisation in comparison to other languages. However, by fixing the code style, programs become more uniform since all programmers follow the same rules and code readability is increased. Because of cases like the previous one, where a benefit is obtained, the community tries to reinforce the philosophy. Therefore, it is highly recommended to follow Python's philosophy when developing programs with it.
+
+### 2.1. PEP overview
+
+In Python, the development of the language itself has an specific procedure to follow, which is based on Python Enhancement Proposals or PEPs. These proposals, are published as an article that describes anything related to improving existing features, adding new features or describing ways of working. Each PEP is independently evolved until it is approved by the community in order to be applied from that moment onwards. All PEPs can be found in the following site:
+
+https://www.python.org/dev/peps/
+
+In these type processes and in the community in general, Guido acts as a Benevolent Dictator For Life (BDFL) by making certain type of decisions and ending discussions. That is, he acts as a recognised authority.
+
+The recommended approach is to follow PEPs as possible, that is, when known and when they apply.
+
+### 2.2. The Zen
+
+The Zen of Python, which is the core of the philosophy in [PEP20](https://www.python.org/dev/peps/pep-0020/), whose content is represented below:
+
+The Zen of Python:
+
+    Beautiful is better than ugly.
+    Explicit is better than implicit.
+    Simple is better than complex.
+    Complex is better than complicated.
+    Flat is better than nested.
+    Sparse is better than dense.
+    Readability counts.
+    Special cases aren't special enough to break the rules.
+    Although practicality beats purity.
+    Errors should never pass silently.
+    Unless explicitly silenced.
+    In the face of ambiguity, refuse the temptation to guess.
+    There should be one-- and preferably only one --obvious way to do it.
+    Although that way may not be obvious at first unless you're Dutch.
+    Now is better than never.
+    Although never is often better than *right* now.
+    If the implementation is hard to explain, it's a bad idea.
+    If the implementation is easy to explain, it may be a good idea.
+    Namespaces are one honking great idea -- let's do more of those!
+
+
+#### 2.2.1. The Zen through examples:
+
+http://artifex.org/~hblanks/talks/2011/pep20_by_example.html
+
+ADD examples
+
+#### 2.2.2. Performance optimisations
+
+In general, Python developments seek avoiding optimisation of the code during the first development. This is due to the fact that optimisations might affect code readability or complexity. It is only if performance shows to be a crucial point for operation, when optimisations are recommended.
 
 
 ### 3. Style guide (Pep 8)
@@ -388,6 +481,7 @@ Always decide whether a class's methods and instance variables (collectively: "a
 
 
 ### 4. Python 2 vs Python 3
+<<<<<<< HEAD
 When people talk or write for what version they should use of Python, the typical response is this appointment: “Python 2.x is legacy, Python 3.x is the present and future of the language” [1]. For this reason It shoulds use Python 3 in new projects and it is more important, if the project will be long in time. Because Python 2.x won’t receive new improvements, it only has bug support and it finishes in 2020 [2].
 
 The biggest disadvantage of  Python 3 is the support from libraries, frameworks, packages… Because nowadays have a libraries, which they only support Python 2.x, but this problem is fixing bit by bit. For this reason we only should use Python 2.x , if it needs a library that only support  Python 2.x. If the project will use Python 2.x, we should write the code thinking in the future port. For this reason we can start write code used for example:
@@ -409,41 +503,42 @@ Main changes in Python 3.x respect to Python 2.x [1]:
 * Change List Comprehension.
 * And other changes, for example in improve readability.
 
-### 5. Librería estándar
-### 6. Importar librerías
+### 5. Standard libarary
+### 6. Importing libraries
 ### 7. Logging
-### 8. Comentarios y documentación
+### 8. Comments and documentation
 #### 8.1. De una sola línea
 #### 8.2. En bloque
 #### 8.3. Comentarios  
-### 9 Tratamiento de Strings
-### 10. Operadores
+### 9. String treatment
+### 10. Operators
 #### 10.1. Asignación   
 #### 10.2. Operadores aritméticos   
 #### 10.3. Operadores lógicos  
 #### 10.4. Condicionales  
 #### 10.5. Bucles
-### 11. Funciones
+### 11. Functions
 #### 11.1. Uso de las funciones  
 #### 11.2. Lambda
 #### 11.3. Decoradores    
-### 12. Paradigmas de programación
+### 12. Programming paradigms
 #### 12.1. Tipo de variables   
 #### 12.2. Herencia
 #### 12.3. Sobrecarga de funciones   
 #### 12.4. Getters y setters  
 #### 12.5. Patrones de diseño
 #### OOP, estructura, funcional, ...  
-### 13. Excepciones
-### 14. E/S
-### 15. Ficheros de configuración
+### 13. Exceptions
+### 14. Input / Output
+### 15. Configuration files
 ### 16. Testing
 #### 16.1. Tests
 #### 16.2. Librerías útiles
 #### 16.3. Mocks
-### 17. Estructura típica de proyecto
-### 18. Empaquetado y distribución de aplicaciones
-### 19. Entornos de desarrollo (IDEs)
+### 17. Project structure
+### 18. Application packaging and distribution
+### 19. Development Environments (IDEs)
+
 To develop a Python program, it isn’t necessary to have a IDE. You can develop it in text editor, for example gedit, Sublime Text, Atom… and run it Python console. But if you want a IDE to develop, because you want features how debugger, autocomplete… Nowadays exist a lot of for Python, exists commercial and noncommercial and they have different features. In this document will list only the most popular at this moment (you should know exist other options) and it won’t compare that is the best IDE. You are free to decide, which one to use.
 
 List of IDEs:
@@ -468,12 +563,12 @@ List of IDEs:
 
 You can discovered other IDEs for Python and  their description in the following link:
 
-
-### 20. Gestión de librerías y entornos virtuales
+### 20. Library and virtual environment management
 
 In this chapter explains, how add new libraries or packages to the project. It is possible thanks to pip and when you use PIP, it is necessary explain virtual environments.
 
-#### 20.1. pip   
+#### 20.1. pip
+
 PIP is the package manager for Python. When the project need a extra library, it’s really easy add it. Only need execute the following command, if the package exist in PIP:
 
 `pip install <name package>`
@@ -522,8 +617,8 @@ Of course virtualenv has several options, you can see in the documentation:
 
 <http://virtualenv.readthedocs.org/en/latest/index.html>
 
+### 21. References
 ### 21. Integración continua --> solo si da tiempo
-### 23. Bibliografía  
 
 
 [BEEVA](http://www.beeva.com) | 2015
