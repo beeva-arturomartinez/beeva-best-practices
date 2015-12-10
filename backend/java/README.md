@@ -90,7 +90,134 @@ Regarding to the naming conventions of identifiers in Java, several communities 
 ---
 
 ## Comments and documentation
----
+
+### Introduction
+ 
+There’s always been controversy around code documentation and comments: one side is defending a more verbose approach by writing a lot of comments inside the code and creating large documents where everything is explained in detail whereas the other is claiming that source code should remain as neater as possible and be auto-explanatory, i.e. include as less comments and docs as possible, since they are not needed if the code is clean and structured. Some go even further and state that comments are code smell. 
+
+Well, as in many other aspects, maybe the best choice is to meet halfway so that’s why we will try here to give some tips which we think it may help encounter a reasonable compromise in between. After all they say virtue is in the middle course.
+
+### Documenting your code
+
+Let’s begin by stating the obvious: a public API needs to be well-described. Of course there are plenty of tools in the market to help you with this tedious but necessary task to document your application, but if you’re coding Java, then we think javadocs should be your way to go.
+
+Javadoc generates API documentation automatically from source code with specially formatted documentation comments, more commonly known as doc comments. But furthermore javadoc is powerful because it is way better than a simple "//comment" :
+
+It is recognized by the IDE and used to display a pop-up when you move your cursor on top of one of your - javadoc-ed - function.
+It can be parsed by external tools (like xdoclet)
+
+Here we show an example:
+
+``` java
+/**
+ * Returns an Image object that can then be painted on the screen. 
+ * The url argument must specify an absolute {@link URL}. The name
+ * argument is a specifier that is relative to the url argument. 
+ * <p>
+ * This method always returns immediately, whether or not the 
+ * image exists. When this applet attempts to draw the image on
+ * the screen, the data will be loaded. The graphics primitives 
+ * that draw the image will incrementally paint on the screen. 
+ *
+ * @param  url  an absolute URL giving the base location of the image
+ * @param  name the location of the image, relative to the url argument
+ * @return      the image at the specified URL
+ * @see         Image
+ */
+ public Image getImage(URL url, String name) {
+        try {
+            return getImage(new URL(url, name));
+        } catch (MalformedURLException e) {
+            return null;
+        }
+ }
+
+``` 
+
+Using Javadoc acknowledges that there are two distinct questions a reader can ask about code:
+ - what is this supposed to do? (answered only by the javadoc and method header)
+ - how does it try to do it? (answered only by the implementation)
+
+If javadoc is written correctly, then one can understand exactly what services are offered by a method ("what is this supposed this do?"), without having to look at its implementation ("how does it try to do it?"). Reading an implementation usually takes a lot more effort than reading javadoc.
+
+The implementation can be checked for correctness versus the specification. That is, some bugs can be found just by reading the code, as opposed to executing it.
+
+It is not the idea of this guide to show in depth the javadoc tool, all details about it can be found in Sun’s Javadoc Guide  “How to Write Doc Comments”
+
+### Comments
+
+Javadoc comments and self-documenting code (and in-code comments) have two very different target audiences: 
+
+Javadoc comments are typically for users of the API -also developers, but they don't care about the internal structure of the system, just the classes, methods, inputs, and outputs of the system. The code is contained within a black box. These comments should be used to explain how to do certain tasks, what the expected results of operations are, when exceptions are thrown, and what input values mean. Given a Javadoc-generated set of documentation, I should be able to fully understand how to use your interfaces without ever looking at a line of your code.
+
+On the other hand the code and comments that remain in the code file are for developers. You want to address their concerns here - make it easy to understand what the code does and why the code is the way it is. The use of appropriate variable names, methods, classes, and so on (self-documenting code) coupled with comments achieves this.
+
+As mentioned before it is sometimes said that most comments are just code smell. I guess that what they are really referring to is that comments which do not bring anything interesting to our program should be avoided. Some wrong behaviours would be:
+
+	* Redundancy
+
+```java
+	/**
+	* @param sellRequest
+	* @return
+	* @throws ManagedComponentException
+	*/
+	public SellResponse beginSellItem(SellRequest sellRequest)
+	throws ManagedComponentException
+```
+
+	* State the obvious
+```java
+		i++; // increment i
+```
+	* Commented-out code
+	* Comments right after closing a brace
+	* Misplace (as in source control)
+	* In general any noise to the code
+
+To minimize the probability to fall in one of those bullet cases above, as a simple rule of thumb, it is best to try to keep it simple and write as few comments as possible. At least, think twice before write, see if the code can be written in a way that can elude the comment. And as usual, nothing like a good example to illustrate easier and better what we are trying to explain:
+
+Let’s take a look at a typical example that can be easily found in many references across the web and which uses a Newton formula to calculate displacement.
+
+```java
+float a, b, c; a=9.81; b=5; c= .5*a*(b^2);
+```
+
+I think everybody will agree that this is awful. No possible reader could take a look at this code and form a minimal idea about what the excerpt is pursuing, let alone if no other context is provided. One could be tempted to simply add some comments to fix it and write something like this:
+
+```java
+const float a = 9.81; //gravitational force 
+float b = 5; //time in seconds 
+float c = (1/2)*a*(b^2) //multiply the time and gravity together to get displacement.
+```
+
+Although this is clearly much better than the initial one, it looks like it’s still kind of lame. 
+
+```java
+/* compute displacement with Newton's equation x = vₒt + ½at² */ 
+const float gravitationalForce = 9.81; 
+float timeInSeconds = 5; 
+float displacement = (1 / 2) * gravitationalForce * (timeInSeconds ^ 2)
+```
+
+Again better than before, this code is fine, but it could be rewritten in an equally informative way without any comment, for instance:
+
+```java
+const float accelerationDueToGravity = 9.81;
+float timeInSeconds = 5; 
+float displacement = NewtonianPhysics.  CalculateDisplacement(accelerationDueToGravity);
+```
+I think the code is now cleaner and self-explanatory, but this will of course depend on the reader’s point of view if we compare it with the previous excerpt.
+
+Anyway, many books and authors tend to preach that, and I quote Robert C. Martin here, “when you find yourself in a position where you need to write a comment, think it through and see whether there isn’t some way to turn the tables and express yourself in code”.
+
+And why do they say that, you may wonder. Well, there is a problem with comments, a big one I think: comments -like code- need to be maintained, and if not, they often get old too quickly, so it might -it will- become really annoying to go through them. Or even worse, it will not get done, so the comment will rot and get “old” and end up confusing -in the best case scenario, or even “lying” in a worse one- while the code keeps changing.
+
+We like to align with this position, I mean, why do even bother writing a comment when you can explain it via code!? furthermore, why invest effort in maintain a comment instead of using that time in refactoring your code. 
+
+We are not saying run like hell from comments, no. Sometimes they are even good and/or necessary. Just be careful when you use them, because often there is no point if one takes a small pause and think a bit slower. 
+
+And as it often happens, everything’s connected so, as it’s been explained before in previous sections, giving proper names to our variables and methods is essential to reach the goal and keep the code legible and self-documented. And so it is giving good format and style, as it will be explained in the next section.
 
 ## Code styling and formatting
 ---
