@@ -7,14 +7,14 @@ This section describes the best practices applicable to CSS , divided into the f
 * Using CSS preprocessors
 * Organize CSS
 * Selectors and types of CSS classes
-..* Structure
-..* Visual state
-..* Functional entity
-..* Functional status
+.. Structure
+.. Visual state
+.. Functional entity
+.. Functional status
 * Other considerations
-..* !important and Style
-..* Based on CSS JavaScript functionality
-..* Styles sheets Browsers
+.. !important and Style
+.. Based on CSS JavaScript functionality
+.. Styles sheets Browsers
 
 ### 2.1\. Creating style sheets
 
