@@ -74,14 +74,14 @@ Returning to the example of grids, if you have two grids that have to be differe
 ```html
 <table class=”data-grid”>   
 <tr>   
-<td><span>columna 1<span></td>   
-<td>columna 2</td>   
+<td><span>column 1<span></td>   
+<td>column 2</td>   
 </tr>   
 </table>   
 <table class=”data-grid disabled”>   
 <tr>   
-<td><span>columna 1</span></td>   
-<td>columna 2</td>   
+<td><span>column 1</span></td>   
+<td>column 2</td>   
 </tr>   
 </table>   
 ```
