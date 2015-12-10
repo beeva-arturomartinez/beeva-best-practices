@@ -1,5 +1,9 @@
 # Python best practices
 
+![Python logo](../static/python-logo-generic.svg "Python logo")
+
+<sup>Please note that Python is a trademark of the Python Software Foundation (PSF) and that the logo above is subject to use restrictions as described [here](https://www.python.org/psf/trademarks/).</sup>
+
 The following contents table provides an index of the contents covered in this guide.
 
 ## Index
