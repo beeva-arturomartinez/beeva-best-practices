@@ -91,9 +91,11 @@ And in our CSS , we would have the generic properties for data- gird and , in th
 ```css
 table.data-grid {color: #000; width: 100%;}   
 table.data-grid.disabled {color: #CCC;}   
+```
 
 And the same for the nodes that depend on it, as the span
 
+```
 table.data-grid {color: #000; width: 100%;}   
 table.data-grid span {font-weight: bold;}   
 
