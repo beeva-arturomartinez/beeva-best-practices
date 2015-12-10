@@ -2,7 +2,7 @@
 
 ##4.- JavaScript
 
-### Performance
+### Style Guide
 
 Index  
 
