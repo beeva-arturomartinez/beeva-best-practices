@@ -114,14 +114,14 @@ These can be either to refer to certain entities (students, courses, teachers...
 <div class=”administration”>   
 <table class=”data-grid”>   
 <tr>   
-<td><span>columna 1<span></td>   
-<td>columna 2</td>   
+<td><span>column 1<span></td>   
+<td>column 2</td>   
 </tr>   
 </table>   
 <table class=”data-grid disabled”>   
 <tr>   
-<td><span>columna 1</span></td>   
-<td>columna 2</td>   
+<td><span>column 1</span></td>   
+<td>column 2</td>   
 </tr>   
 </table>   
 </div>   
@@ -130,14 +130,14 @@ These can be either to refer to certain entities (students, courses, teachers...
 <div class=”administration”>   
 <table class=”data-grid”>   
 <tr>   
-<td><span>columna 1<span></td>   
-<td>columna 2</td>   
+<td><span>column 1<span></td>   
+<td>column 2</td>   
 </tr>   
 </table>   
 <table class=”data-grid disabled”>   
 <tr>   
-<td><span>columna 1</span></td>   
-<td>columna 2</td>   
+<td><span>column 1</span></td>   
+<td>column 2</td>   
 </tr>   
 </table>   
 </div>   
