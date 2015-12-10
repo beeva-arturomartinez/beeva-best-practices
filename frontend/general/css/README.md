@@ -32,14 +32,14 @@ Using CSS preprocessors is recommended to have an initial file that loads the re
 ```css
 /*** main.scss content */
 /* general */
-@import colors.scss
-@import fonts.scss
-@import containers.scss
-@import buttons.scss
+@import colors.scss;
+@import fonts.scss;
+@import containers.scss;
+@import buttons.scss;
 ...
 
 /* specific */
-@import students.scss
+@import students.scss;
 ...
 ```
 
