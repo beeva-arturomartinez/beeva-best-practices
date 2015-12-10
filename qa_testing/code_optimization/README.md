@@ -20,9 +20,6 @@ At this point we're going to talk about the best practices for optimize the code
 	* [Trees](#trees)
 	* [Graphs](#graphs)
 * [Profiling](#profiling)
-	* [Profilers types depending on output](#profilers-types-depending-on-output)
-	* [Granularity](#granularity)
-	* [Instrumentation](#instrumentation)
 * [Bucle optimization](#bucle-optimization)
 * [Efficient exceptions management](#efficient-exceptions-management)
 * [Tools](#tools)
@@ -541,52 +538,21 @@ You can find more information about graphs [here][linkundirectedgraph]
 
 Profiling is a set of techniques/tools that may help with software optimization. This is a technology based on tracking all the program parts, that may help us to find bottlenecks in our code.
 
-All the information about this point is in [wikipedia](linkprofiling)
+Normally we may have different approaches:
+
+1. Analize an application/software code executions in stress tests:
+	 - The process must be executed **before** launch an application/software in production.
+	 - The process must be launched until the critical bottlenecks are solved.
+
+2. Active profiling or software of introspection.
+	- This is a kind of software that makes an introspection over the existent production code and system, this means that you can track every software components in real-time.
+	- The analysis of this metrics have a direct impact on the overall execution code (+/-5%).
+	- There are many hardware dedicated to minimize the impact on the execution application.
+
+This kind of software makes easier to find performance issues in our programs, and it helps also to make more accurate decisions about the infrastructures, because we can know how the application system requirements grow in time.
+
+You can find more information in [wikipedia](linkprofiling)
 [linkprofiling]: https://en.wikipedia.org/wiki/Profiling_(computer_programming)
-
-### Profilers types depending on output
-
-- **Flat profiler**
-
-	Compute the average call times, from the calls, and do not break down the call times based on the callee or the context.
-
-- **Call-graph profiler**
-
-	Show the call times, and frequencies of the functions, and also the call-chains involved based on the callee. In some tools full context is not preserved.
-
-- **Input-sensitive profiler**
-
-	Add a further dimension to flat or call-graph profilers by relating performance measures to features of the input workloads, such as input size or input values. They generate charts that characterize how an application's performance scales as a function of its input.
-
-### Granularity
-
-Profilers, which are also programs themselves, analyze target programs by collecting information on their execution. Based on their data granularity, on how profilers collect information, they are classified into event based or statistical profilers. Since profilers interrupt program execution to collect information, they have a finite resolution in the time measurements, which should be taken with a grain of salt.
-
-- **Event-based profilers**
-
-	The programming languages listed here have event-based profilers:
-
-	- Java: the JVMTI (JVM Tools Interface) API, formerly JVMPI (JVM Profiling Interface), provides hooks to profilers, for trapping events like calls, class-load, unload, thread enter leave.
-
-	- .NET: Can attach a profiling agent as a COM server to the CLR using Profiling API. Like Java, the runtime then provides various callbacks into the agent, for trapping events like method JIT / enter / leave, object creation, etc. Particularly powerful in that the profiling agent can rewrite the target application's bytecode in arbitrary ways.
-
-	- Python: Python profiling includes the profile module, hotshot (which is call-graph based), and using the 'sys.setprofile' function to trap events like c_{call,return,exception}, python_{call,return,exception}.
-
-	- Ruby: Ruby also uses a similar interface to Python for profiling. Flat-profiler in profile.rb, module, and ruby-prof a C-extension are present.
-
-- **Statistical profilers**
-
-	Some profilers operate by sampling. A sampling profiler probes the target program's program counter at regular intervals using operating system interrupts. Sampling profiles are typically less numerically accurate and specific, but allow the target program to run at near full speed.
-
-	The resulting data are not exact, but a statistical approximation. "The actual amount of error is usually more than one sampling period. In fact, if a value is n times the sampling period, the expected error in it is the square-root of n sampling periods."
-
-	In practice, sampling profilers can often provide a more accurate picture of the target program's execution than other approaches, as they are not as intrusive to the target program, and thus don't have as many side effects (such as on memory caches or instruction decoding pipelines). Also since they don't affect the execution speed as much, they can detect issues that would otherwise be hidden. They are also relatively immune to over-evaluating the cost of small, frequently called routines or 'tight' loops. They can show the relative amount of time spent in user mode versus interruptible kernel mode such as system call processing.
-
-	Still, kernel code to handle the interrupts entails a minor loss of CPU cycles, diverted cache usage, and is unable to distinguish the various tasks occurring in uninterruptible kernel code (microsecond-range activity).
-
-### Instrumentation
-
-This technique effectively adds instructions to the target program to collect the required information. Note that instrumenting a program can cause performance changes, and may in some cases lead to inaccurate results and/or heisenbugs. The effect will depend on what information is being collected, and on the level of detail required. For example, adding code to count every procedure/routine call will probably have less effect than counting how many times each statement is obeyed. A few computers have special hardware to collecting information; in this case the impact on the program is minimal.
 
 ## Bucle optimization
 
