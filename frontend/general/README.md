@@ -15,5 +15,9 @@ Index
   * [Grunt](javascript/tools/grunt)
   * [Gulp](javascript/tools/gulp)
 * [6\. Old Guide](old.md)
-  
+* [7\. References](#references)
 ## <a name='introduction'>Introduction</a>
+
+## <a name='references'>References</a>
+
+* [AirBnB JS Style Guide](https://github.com/airbnb/javascript)
