@@ -185,3 +185,248 @@ class Polygon {
   }
 }
 ```
+
+Hoisting
+
+An important difference between function declarations and class declarations is that function declarations are hoisted and class declarations are not. You first need to declare your class and then access it, otherwise code like the following will throw a ReferenceError:
+
+```javascript
+var p = new Polygon(); // ReferenceError
+
+class Polygon {}
+```
+
+####Static methods
+
+The static keyword defines a static method for a class. Static methods are called without instantiating their class and are also not callable when the class is instantiated. Static methods are often used to create utility functions for an application.
+
+```javascript
+class Point {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    static distance(a, b) {
+        const dx = a.x - b.x;
+        const dy = a.y - b.y;
+
+        return Math.sqrt(dx*dx + dy*dy);
+    }
+}
+
+const p1 = new Point(5, 5);
+const p2 = new Point(10, 10);
+
+console.log(Point.distance(p1, p2));
+```
+
+####Sub classing with extends
+
+The extends keyword is used in class declarations or class expressions to create a class with a child of another class.
+
+```javascript
+class Animal { 
+  constructor(name) {
+    this.name = name;
+  }
+  
+  speak() {
+    console.log(this.name + ' makes a noise.');
+  }
+}
+
+class Dog extends Animal {
+  speak() {
+    console.log(this.name + ' barks.');
+  }
+}
+```
+
+####Super
+
+The super keyword is used to call functions on an object's parent.
+
+The super.prop and super(expr) expressions are valid in any method definition in both classes and object literals.
+
+```javascript
+class Polygon {
+  constructor(height, width) {
+    this.name = 'Polygon';
+    this.height = height;
+    this.width = width;
+  }
+  sayName() {
+    console.log('Hi, I am a ', this.name + '.');
+  }
+}
+
+class Square extends Polygon {
+  constructor(length) {
+    this.height; // ReferenceError, super needs to be called first!
+    
+    // Here, it calls the parent class' constructor with lengths
+    // provided for the Polygon's width and height
+    super(length, length);
+    
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Leaving this out will cause a reference error.
+    this.name = 'Square';
+  }
+
+  get area() {
+    return this.height * this.width;
+  }
+
+  set area(value) {
+    this.area = value;
+  } 
+}
+```
+
+#####Super.prop can not overwrite non-writable properties
+
+When defining non-writable properties with e.g. Object.defineProperty, super can not overwrite the value of the property.
+
+```javascript
+class X {
+  constructor() {
+    Object.defineProperty(this, "prop", {
+      configurable: true,
+      writable: false, 
+      value: 1
+    });
+  } 
+  f() { 
+    super.prop = 2;
+  }
+}
+
+var x = new X();
+x.f();
+console.log(x.prop); // 1
+```
+
+## <a name='destructuring'>Destructuring</a>
+
+Destructuring Assignment
+
+####Array Matching
+
+Intuitive and flexible destructuring of Arrays into individual variables during assignment.
+
+```javascript
+var list = [ 1, 2, 3 ]
+var [ a, , b ] = list
+console.log(a); // 1
+console.log(b); // 3
+[ b, a ] = [ a, b ]
+console.log(a); // 3
+console.log(b); // 1
+```
+
+
+
+Intuitive and flexible destructuring of Objects into individual variables during assignment.
+
+
+```javascript
+console.log(getNode); // { "a" : 1, "b" : 2 }
+var { a, b } = getNode();
+console.log(a); // 1
+console.log(b); // 2
+```
+
+####Object Matching, Shorthand Notation
+
+Intuitive and flexible destructuring of Arrays and Objects into individual parameters during function calls.
+
+```javascript
+function f ([ name, val ]) {
+    console.log(name, val)
+}
+function g ({ name: n, val: v }) {
+    console.log(n, v)
+}
+function h ({ name, val }) {
+    console.log(name, val)
+}
+f([ "bar", 42 ]) // bar,42
+g({ name: "foo", val:  7 }) //foo,7
+h({ name: "bar", val: 42 }) //bar,42
+```
+
+####Fail-Soft Destructuring
+
+Fail-soft destructuring, optionally with defaults.
+
+```javascript
+var list = [ 7, 42 ]
+var [ a = 1, b = 2, c = 3, d ] = list
+a === 7
+b === 42
+c === 3
+d === undefined
+```
+
+## <a name='generator'>Generator</a>
+
+####Generator Function, Iterator Protocol
+
+Support for generators, a special case of Iterators containing a generator function, where the control flow can be paused and resumed, in order to produce sequence of values (either finite or infinite).
+
+```javascript
+let fibonacci = {
+    *[Symbol.iterator]() {
+        let pre = 0, cur = 1
+        for (;;) {
+            [ pre, cur ] = [ cur, pre + cur ]
+            yield cur
+        }
+    }
+}
+
+for (let n of fibonacci) {
+    if (n > 1000)
+        break
+    console.log(n)
+}
+```
+
+####Generator Function, Direct Use
+
+Support for generator functions, a special variant of functions where the control flow can be paused and resumed, in order to produce sequence of values (either finite or infinite).
+
+```javascript
+function* range (start, end, step) {
+    while (start < end) {
+        yield start
+        start += step
+    }
+}
+
+for (let i of range(0, 10, 2)) {
+    console.log(i) // 0, 2, 4, 6, 8
+}
+```
+
+####Generator Matching
+
+Support for generator functions, i.e., functions where the control flow can be paused and resumed, in order to produce and spread sequence of values (either finite or infinite).
+
+```javascript
+let fibonacci = function* (numbers) {
+    let pre = 0, cur = 1
+    while (numbers-- > 0) {
+        [ pre, cur ] = [ cur, pre + cur ]
+        yield cur
+    }
+}
+
+for (let n of fibonacci(1000))
+    console.log(n)
+
+let numbers = [ ...fibonacci(1000) ]
+
+let [ n1, n2, n3, ...others ] = fibonacci(1000)
+```
