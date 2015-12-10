@@ -496,9 +496,9 @@ This can be represented in many ways. For the following directed graph:
 	- Disavantages
 
 		- It is a system that applies only to graphs in which the number of vertices is not changed (in a parent can not add or delete rows and columns).
-		- It can produce a great waste of memory in sparse directed graph, that is, those graphs that possess a large number of vertices and a small number of arcs, as the adjacency matrix n^2^ always occupy memory elements, regardless of the number Arch. Also, examine the entire array will take time **O(n^2^)**, which invalidates algorithms **O(n)** for handling directed graphs with **O(n)** arches.
+		- It can produce a great waste of memory in sparse directed graph, that is, those graphs that possess a large number of vertices and a small number of arcs, as the adjacency matrix n<sup>2</sup> always occupy memory elements, regardless of the number Arch. Also, examine the entire array will take time **O(n<sup>2</sup>)**, which invalidates algorithms **O(n)** for handling directed graphs with **O(n)** arches.
 
- - **Adjacent Lists** **
+ - **Adjacent Lists**
 
 	![alt text](static/directed_graph_adjacent_list.png "Adjacent Lists")
 
