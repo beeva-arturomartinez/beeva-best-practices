@@ -101,7 +101,7 @@ spam( ham[ 1 ], { eggs: 2 } )
 ```
 Immediately before a comma, semicolon, or colon:
 
-Yes: 
+Yes:
 ```python
 if x == 4: print x, y; x, y = y, x
 ```
@@ -128,21 +128,21 @@ ham[ : upper]
 ```
 Immediately before the open parenthesis that starts the argument list of a function call:
 
-Yes: 
+Yes:
 ```python
 spam(1)
 ```
-No: 
+No:
 ```python
 spam (1)
 ```
 Immediately before the open parenthesis that starts an indexing or slicing:
 
-Yes: 
+Yes:
 ```python
 dct['key'] = lst[index]
 ```
-No: 
+No:
 ```python
 dct ['key'] = lst [index]
 ```
@@ -387,13 +387,28 @@ Constants are usually defined on a module level and written in all capital lette
 Always decide whether a class's methods and instance variables (collectively: "attributes") should be public or non-public. If in doubt, choose non-public; it's easier to make it public later than to make a public attribute non-public.
 
 
-
-
-
-
-
-
 ### 4. Python 2 vs Python 3
+When people talk or write for what version they should use of Python, the typical response is this appointment: “Python 2.x is legacy, Python 3.x is the present and future of the language” [1]. For this reason It shoulds use Python 3 in new projects and it is more important, if the project will be long in time. Because Python 2.x won’t receive new improvements, it only has bug support and it finishes in 2020 [2].
+
+The biggest disadvantage of  Python 3 is the support from libraries, frameworks, packages… Because nowadays have a libraries, which they only support Python 2.x, but this problem is fixing bit by bit. For this reason we only should use Python 2.x , if it needs a library that only support  Python 2.x. If the project will use Python 2.x, we should write the code thinking in the future port. For this reason we can start write code used for example:
+
+* modules `__future__`
+* Create class with inheritance from base class `Object`
+* Using the new syntaxes, for example: `exceptions, prints, …`
+
+To help this work, it’s possible use tools to help write code to make a future port. For example in IDE Pycharm can be configured to check for compatibility. Of course nowadays exists tools to try to port code in Python 2.x to Python 3.x automatically, but it doesn’t always work correctly.
+
+Main changes in Python 3.x respect to Python 2.x [1]:
+
+* The best improvement is in Strings, now in Python 3.x The strings are unicode by default.
+* Upgrade of bytes are formed unicodes.
+* Improvement in packages for concurrence (Threads, locks, …).
+* Change exceptions.
+* Change print function.
+* Change division.
+* Change List Comprehension.
+* And other changes, for example in improve readability.
+
 ### 5. Librería estándar
 ### 6. Importar librerías
 ### 7. Logging
@@ -407,7 +422,7 @@ Always decide whether a class's methods and instance variables (collectively: "a
 #### 10.2. Operadores aritméticos   
 #### 10.3. Operadores lógicos  
 #### 10.4. Condicionales  
-#### 10.5. Bucles 
+#### 10.5. Bucles
 ### 11. Funciones
 #### 11.1. Uso de las funciones  
 #### 11.2. Lambda
@@ -417,21 +432,96 @@ Always decide whether a class's methods and instance variables (collectively: "a
 #### 12.2. Herencia
 #### 12.3. Sobrecarga de funciones   
 #### 12.4. Getters y setters  
-#### 12.5. Patrones de diseño 
+#### 12.5. Patrones de diseño
 #### OOP, estructura, funcional, ...  
 ### 13. Excepciones
 ### 14. E/S
 ### 15. Ficheros de configuración
 ### 16. Testing
 #### 16.1. Tests
-#### 16.2. Librerías útiles 
+#### 16.2. Librerías útiles
 #### 16.3. Mocks
 ### 17. Estructura típica de proyecto
 ### 18. Empaquetado y distribución de aplicaciones
 ### 19. Entornos de desarrollo (IDEs)
+To develop a Python program, it isn’t necessary to have a IDE. You can develop it in text editor, for example gedit, Sublime Text, Atom… and run it Python console. But if you want a IDE to develop, because you want features how debugger, autocomplete… Nowadays exist a lot of for Python, exists commercial and noncommercial and they have different features. In this document will list only the most popular at this moment (you should know exist other options) and it won’t compare that is the best IDE. You are free to decide, which one to use.
+
+List of IDEs:
+* Pycharm [1] is nowadays one of the most used for python developers. It has a free licence, named  free community and other commercial named professional. The free licence, it is very nice and include a lot of features, for example:
+  * Debugger
+  * Intelligent Code Editor, autocomplete, code analice...
+  * Refactor code to PEP 8
+  * And other features.
+* Eric [2], it is other IDE for python, it is really nice, because it is open source and you can use free. A few features for this IDE are the following:
+  * Debugger
+  * Intelligent Code Editor, autocomplete, code analice...
+  * Integrated version control interface
+  * And other features.
+* WingWare [3], this is another nice IDE for develop with Python, It is a commercial IDE and you will need pay to use it. A few features for this IDE are the following (similar to before IDEs):
+  * Debugger
+  * Intelligent Code Editor, autocomplete, code analice...
+  * And other features.
+* Eclipse with Pydev [4], other nice IDE to develop with Python is Eclipse. This IDE is famed in JAVA, but you can use with Python adding the plugin Pydev. It is free and you don’t need pay for use it. A few features for this IDE are the following (similar to before IDEs):
+  * Debugger
+  * Intelligent Code Editor, autocomplete, code analice...
+  * And other features.
+
+You can discovered other IDEs for Python and  their description in the following link:
+
+
 ### 20. Gestión de librerías y entornos virtuales
+
+In this chapter explains, how add new libraries or packages to the project. It is possible thanks to pip and when you use PIP, it is necessary explain virtual environments.
+
 #### 20.1. pip   
-#### 20.2. virtualenv 
+PIP is the package manager for Python. When the project need a extra library, it’s really easy add it. Only need execute the following command, if the package exist in PIP:
+
+`pip install <name package>`
+
+The before command install the latest version of the package. If the project need a specific version, it’s possible indicate it. Use the following command:
+
+`pip install <name package>==<version>`
+
+If the package doesn’t exist in PIP, it’s possible add the url of repository to install it. Use the following command:
+
+`pip install <CVS+URL>`
+
+example:
+
+`pip install git+https://github.com/mirepo.git`
+
+It is possible export all packages, that the project has install to a config file. The convention say, that name of this file is requirements.txt. To do this, execute the following command:
+
+`pip freeze > requirements.txt`
+
+When the project has file requirements.txt, it possible install all packages inside of the file. Use the next command:
+
+`pip install -r requirements.txt `
+
+Pay attention if the project contains a package that was installed with a url of repository. The command pip freeze will not correctly generate the file, because it will put the name of package with the version (not the repository url) and when pip try to install this package, it will not install the desired package. It’s possible to fix this problem manually. It is only necessary to change its line with <CVS+URL> that belongs to package repository (This url is the same used when it was installed with pip).
+
+The documentation can be read in the next link:
+
+<https://pip.readthedocs.org/en/stable/>
+
+#### 20.2. virtualenv
+
+Virtualenv is a tool to generate a virtual environments for Python. It is really useful, because when in the same machine has several projects use python and their use some differents packages. This packages can have conflicts among themself or need use the same package with different versions, without virtualenv have a big problem, because the packages install in Python and all projects use it. But it is possible fix it with this tool and can have unlimited differents virtual environments in the same machine. For this reasons and because it is a bad practice, you never install packages in python without create a virtualenv and use pip with sudo.
+
+To use virtualenv, it is necessary install it. When it is installed, it necessary create a virtual environment, it is doing with this command:
+
+`virtualenv <dir/name_environment>`
+
+Now to use or install packages you need active, it is easy only execute this code:
+
+`source route_environment/bin/activate`
+
+When the environment is not necessary, remove the directory.
+
+Of course virtualenv has several options, you can see in the documentation:
+
+<http://virtualenv.readthedocs.org/en/latest/index.html>
+
 ### 21. Integración continua --> solo si da tiempo
 ### 23. Bibliografía  
 
