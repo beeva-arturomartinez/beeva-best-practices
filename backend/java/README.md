@@ -148,14 +148,13 @@ It is not the idea of this guide to show in depth the javadoc tool, all details 
 
 Javadoc comments and self-documenting code (and in-code comments) have two very different target audiences: 
 
-Javadoc comments are typically for users of the API -also developers, but they don't care about the internal structure of the system, just the classes, methods, inputs, and outputs of the system. The code is contained within a black box. These comments should be used to explain how to do certain tasks, what the expected results of operations are, when exceptions are thrown, and what input values mean. Given a Javadoc-generated set of documentation, I should be able to fully understand how to use your interfaces without ever looking at a line of your code.
+Javadoc comments are typically for users of the API -also developers-, but they don't care about the internal structure of the system, just the classes, methods, inputs, and outputs of the system. The code is contained within a black box. These comments should be used to explain how to do certain tasks, what the expected results of operations are, when exceptions are thrown, and what input values mean. Given a Javadoc-generated set of documentation, I should be able to fully understand how to use your interfaces without ever looking at a line of your code.
 
-On the other hand the code and comments that remain in the code file are for developers. You want to address their concerns here - make it easy to understand what the code does and why the code is the way it is. The use of appropriate variable names, methods, classes, and so on (self-documenting code) coupled with comments achieves this.
+On the other hand the code and comments that remain in the code file are for developers. You want to address their concerns here, make it easy to understand what the code does and why the code is the way it is. The use of appropriate variable names, methods, classes, and so on (self-documenting code) coupled with comments achieves this.
 
 As mentioned before it is sometimes said that most comments are just code smell. I guess that what they are really referring to is that comments which do not bring anything interesting to our program should be avoided. Some wrong behaviours would be:
 
 	* Redundancy
-
 ```java
 	/**
 	* @param sellRequest
@@ -165,7 +164,6 @@ As mentioned before it is sometimes said that most comments are just code smell.
 	public SellResponse beginSellItem(SellRequest sellRequest)
 	throws ManagedComponentException
 ```
-
 	* State the obvious
 ```java
 		i++; // increment i
@@ -211,7 +209,7 @@ I think the code is now cleaner and self-explanatory, but this will of course de
 
 Anyway, many books and authors tend to preach that, and I quote Robert C. Martin here, “when you find yourself in a position where you need to write a comment, think it through and see whether there isn’t some way to turn the tables and express yourself in code”.
 
-And why do they say that, you may wonder. Well, there is a problem with comments, a big one I think: comments -like code- need to be maintained, and if not, they often get old too quickly, so it might -it will- become really annoying to go through them. Or even worse, it will not get done, so the comment will rot and get “old” and end up confusing -in the best case scenario, or even “lying” in a worse one- while the code keeps changing.
+And why do they say that?, you may wonder. Well, there is a problem with comments, a big one I think: comments -like code- need to be maintained, and if not, they often get old too quickly, so it might -it will- become really annoying to go through them. Or even worse, it will not get done, so the comment will rot and get “old” and end up confusing -in the best case scenario, or even “lying” in a worse one- while the code keeps changing.
 
 We like to align with this position, I mean, why do even bother writing a comment when you can explain it via code!? furthermore, why invest effort in maintain a comment instead of using that time in refactoring your code. 
 
