@@ -11,9 +11,9 @@ Index
   * [Performance](javascript/performance)
   * [Style Guide](javascript/style_guide)
 * [5\. Tools](javascript/tools)
-  * [General](javascript/tools)
-  * [Grunt](javascript/tools/grunt)
-  * [Gulp](javascript/tools/gulp)
+  * [General](tools)
+  * [Grunt](tools/grunt)
+  * [Gulp](tools/gulp)
 * [6\. Old Guide](old.md)
 * [7\. References](#references)
 
