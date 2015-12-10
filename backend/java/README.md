@@ -205,7 +205,7 @@ Again better than before, this code is fine, but it could be rewritten in an equ
 ```java
 const float accelerationDueToGravity = 9.81;
 float timeInSeconds = 5; 
-float displacement = NewtonianPhysics.  CalculateDisplacement(accelerationDueToGravity);
+float displacement = NewtonianPhysics.CalculateDisplacement(accelerationDueToGravity);
 ```
 I think the code is now cleaner and self-explanatory, but this will of course depend on the reader’s point of view if we compare it with the previous excerpt.
 
