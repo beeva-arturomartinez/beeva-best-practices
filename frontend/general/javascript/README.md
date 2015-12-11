@@ -12,11 +12,11 @@
 
 ### Testing
 
-    ```javascript
-    function () {
-      return true;
-    }
-    ```
+```javascript
+  function () {
+    return true;
+  }
+```
    - Whichever testing framework you use, you should be writing tests!
    - Strive to write many small pure functions, and minimize where mutations occur.
    - Be cautious about stubs and mocks - they can make your tests more brittle.
