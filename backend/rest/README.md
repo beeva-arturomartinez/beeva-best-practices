@@ -50,6 +50,45 @@ The use of hypermedia both for application information as to the state transitio
 ## URL Construction
 ---
 
+The first important thing in the URL construction is not using verbs, **only nouns**. This is because the verbs are implicit in the method:
+
+Method	| Verb
+---		| ---	
+POST    	| Create
+GET		| Read
+PUT		| Update
+DELETE	| Delete	
+
+With this in mind, you can start thinking which are the best nouns that describe your resources. It is good that the names are as **simple as posible and best describe** the resource.
+
+There are some points to consider when you construct the URL:
+
+- Shorts, to makes them easy to write and remenber.
+- Predictable, to makes the users understand them and  the site structure. 
+- The nouns must be in plural to make more easy to use for the users.
+- Use the same noun with the differents methods of http to do the actions that represent the methods.
+
+###Relations
+
+If there is a relation that can only exist within another resource. You must to put the reference of the resources one next to the other.
+
+```
+/films/57/reviews		// Return all the reviews of the film 57
+/films/57/reviews/5		// Return the review 5 of the film 57
+```
+
+
+###Versioning
+It is advisable to put the version of the API in the URL and don't release without it. Another recommendation is that the version number is preceded by a *v* to avoid disambiguations.
+
+Only put the **MAJOR** version number, never the MINOR or PATCH. For example don't use v1.2 or v2.1.3.
+
+Correct form:
+```
+/api/v1/films			// Return all the films of version 1
+/api/v2/films/57		// Return the film 57 of version 2
+```
+
 ## Operations over resources
 ---
 
