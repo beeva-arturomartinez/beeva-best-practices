@@ -64,7 +64,7 @@ In a REST implementation there are four basic operations which can be published 
 
 #### GET
 
-This operation retrieves all the information of a resource, or all resources in a collection (if the resource is a collection). It's a safe operation and it should have not other effect.
+This operation retrieves all the information of a resource, or all resources in a collection (if the resource is a collection). It's a safe operation and it should not have other effect.
 
 ```
 GET /clients/123
@@ -120,6 +120,8 @@ PATCH /clients/123
     { "op": "replace", "path": "/name", "value": "Patricia" }
 ]
 ```
+
+All these operations, specially the basic operations must be used like they were defined. POST operation must never be used to get a resource, or GET to produce any modification. All implementations in REST should be defined as a combination of resource-request_method, don't use new operations, respect standard HTTP methods.
 
 
 
@@ -282,7 +284,7 @@ They are used to inform the user of errors in valid requests
 ---
 
 ## Payload formatting
----
+
 
 The payload is the actual data provided in a REST message, the payload does not include the overhead data. That means it is not either the headers or the envelope.
 
@@ -298,6 +300,8 @@ There are many formats as payload, the most used are **JSON** and **XML** though
 Sometimes, our API can be prepared to return the responses in xml or json format, the client should specify the format required. There are two ways to define the format of the response expected:
 * Accept header: Indicating in the _Accept_ http header what are the contents types accepted. The request put _application/xml_ or _application/json_ to ask for a xml or json response format.
 * Extension: other way to specify the response format is indicating the extension on the resource. For example, GET _/api/resource.xml?param=value_ or _/api/resource.json?param=value_.
+
+When we are developing a new project, it's important to define a common layout for payloads on requests and responses. It will make easier for us and the clients of our REST api. It facilitates to identify any kind of response, error or success, if the layout doesn't match, it could produce confusion and errors.
 
 
 ## Filters
@@ -371,12 +375,12 @@ Link: <https://www.beeva.com/sample/api/v1/cars?offset=15&limit=5>; rel="next",
 
 But this isn't a complete solution as many APIs do like to return the additional pagination information, like a count of the total number of available results. An API that requires sending a count can use a custom HTTP header like ***X-Total-Count.***
 
-On the other hand, in order to indicate the page that we want to visualized and amount of data per page, we should use some parameters in the rest calling. There are some kind of pagination-based [(you cand find some of them here)](https://developers.facebook.com/docs/graph-api/using-graph-api/v2.5#paging), and these parameters had been define by pagination-type based.
+On the other hand, in order to indicate the page that we want to visualize and amount of data per page, we should use some parameters in the rest calling. There are some kind of pagination-based [(you cand find some of them here)](https://developers.facebook.com/docs/graph-api/using-graph-api/v2.5#paging), and these parameters had been define by pagination-type based.
 
 Anyway whatever pagination-based you choose, there must always be a parameter that indicates  the number of individual objects that are returned in each page (usaully is *limit*) and another one that indicates current page (like *page* , *page_number*, *offset*...)
 
 
-Sometimes, at Beeva projects, we use a link node in the responses instead of use de link header  to paginate. See the example below:
+Sometimes, at Beeva projects, we use a link node in the responses instead of use the link header  to paginate. See the example below:
 
 ---
 ```javascript
