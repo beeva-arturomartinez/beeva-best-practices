@@ -180,7 +180,7 @@ The support branches are **short running branches**.
 Those branches are created to follow one of the three processes defined on Git Flow.
 Every support branch has defined from what branch must be created and on what branch/es must be merged.
 
-##### Feature branch
+#### Feature branch
 This is the developer working branch.
 
 * The feature branch always is created from develop branch.
