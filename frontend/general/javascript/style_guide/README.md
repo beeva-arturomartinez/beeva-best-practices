@@ -146,7 +146,7 @@
     const item = {};
     ```
 
-  - [3.2](#3.2) <a name='3.2'></a> If your code will be executed in browsers in script context, don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61). It’s OK to use them in ES6 modules and server-side code.
+  - [3.2](#3.2) <a name='3.2'></a> If your code will be executed in browsers in script context, don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. It’s OK to use them in ES6 modules and server-side code.
 
     ```javascript
     // bad
@@ -417,7 +417,7 @@
     ```
 
   - [6.2](#6.2) <a name='6.2'></a> Strings longer than 100 characters should be written across multiple lines using string concatenation.
-  - [6.3](#6.3) <a name='6.3'></a> Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
+  - [6.3](#6.3) <a name='6.3'></a> Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat)
 
     ```javascript
     // bad
@@ -831,15 +831,15 @@
 
     ```javascript
     // bad
-    const AirbnbStyleGuide = require('./AirbnbStyleGuide');
-    module.exports = AirbnbStyleGuide.es6;
+    const BeevaStyleGuide = require('./BeevaStyleGuide');
+    module.exports = BeevaStyleGuide.es6;
 
     // ok
-    import AirbnbStyleGuide from './AirbnbStyleGuide';
-    export default AirbnbStyleGuide.es6;
+    import BeevaStyleGuide from './BeevaStyleGuide';
+    export default BeevaStyleGuide.es6;
 
     // best
-    import { es6 } from './AirbnbStyleGuide';
+    import { es6 } from './BeevaStyleGuide';
     export default es6;
     ```
 
@@ -849,10 +849,10 @@
 
     ```javascript
     // bad
-    import * as AirbnbStyleGuide from './AirbnbStyleGuide';
+    import * as BeevaStyleGuide from './BeevaStyleGuide';
 
     // good
-    import AirbnbStyleGuide from './AirbnbStyleGuide';
+    import BeevaStyleGuide from './BeevaStyleGuide';
     ```
 
   - [10.3](#10.3) <a name='10.3'></a>And do not export directly from an import.
@@ -862,11 +862,11 @@
     ```javascript
     // bad
     // filename es6.js
-    export { es6 as default } from './airbnbStyleGuide';
+    export { es6 as default } from './BeevaStyleGuide';
 
     // good
     // filename es6.js
-    import { es6 } from './AirbnbStyleGuide';
+    import { es6 } from './BeevaStyleGuide';
     export default es6;
     ```
 
@@ -1825,7 +1825,7 @@
     const val = inputValue >> 0;
     ```
 
-  - [21.5](#21.5) <a name='21.5'></a> **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](http://es5.github.io/#x4.3.19), but Bitshift operations always return a 32-bit integer ([source](http://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits. [Discussion](https://github.com/airbnb/javascript/issues/109). Largest signed 32-bit Int is 2,147,483,647:
+  - [21.5](#21.5) <a name='21.5'></a> **Note:** Be careful when using bitshift operations. Numbers are represented as [64-bit values](http://es5.github.io/#x4.3.19), but Bitshift operations always return a 32-bit integer ([source](http://es5.github.io/#x11.7)). Bitshift can lead to unexpected behavior for integer values larger than 32 bits.
 
     ```javascript
     2147483647 >> 0 //=> 2147483647
@@ -1978,12 +1978,12 @@
   - [22.8](#22.8) <a name='22.8'></a> Use PascalCase when you export a singleton / function library / bare object.
 
     ```javascript
-    const AirbnbStyleGuide = {
+    const BeevaStyleGuide = {
       es6: {
       }
     };
 
-    export default AirbnbStyleGuide;
+    export default BeevaStyleGuide;
     ```
 
 
