@@ -155,17 +155,95 @@ Multiply applications means multiply the number of deployments and server instan
 
 To avoid error and excessive additional costs, we need a very efficient workflow in terms of tools and processes with as much automated deployments as possible. This is even more true for tests and POCs where we want temporary environments as sandbox.
 
-#### 2.1.5. How do I go there?
+#### 2.1.5. Go / no go
+
+##### 2.1.5.1 Do we need it?
+
+The fundamental SOA approach is to keep control of organisational and business complexity by distributing it.
+
+By separating the projects, the complexity is reduced on some axes in exchange for an extra cost in other places, including having a distributed system.
+
+You can have well organized monolithics, scalable, evolutive…, but it requires strong discipline at all times. Microservices architecture chooses not to take those risks to make sure to keep control.
+
+However, if this is implemented in an unsuitable environment or in a bad way, we will combine disadvantages without enjoying the benefits, and we therefore take much higher risks than in conventional service architecture.
+
+So, do not tell yourself that you need microservices, ask yourself:
+
+  -If you have issues that this approach solves
+  -If you have necessary requirements, or if you are ready to reach them before starting the migration
+
+Only in this case ask yourself this question.
+
+And do not forget that an architecture is a tool that we adapt to our need and not a dogma to follow: if what suits you is a hybrid solution taking some microservices ideas and not others, go for it!
+
+##### 2.1.5.2. How do I go there?
+
+Once decided that a microservices architecture is the right solution, we need to find a way to setting it up.
+
+If there is no magic solution, some approaches seem to emerge.
+
+* **The difficult case: from scratch**
+
+The most attractive situation is to create a new system from scratch, nothing to challenge or to manage, this seems the ideal situation.
+Unfortunately, build microservices from scratch is the most difficult case:
+
+  -It is complicated to determine, so it seems, the limits where we need to cut out the different projects because it is not clear how the system will evolve.
+  -As we have already seen, the evolutions are more costly because you have to make cross-project refactoring.
+
+Unless to be already mature on a subject, it is better to go for a monolith approach to begin with.
+
+* **The favorable case: peel a monolith**
+
+The most favorable case is the monolith that we “peel”. In reviewing its organisation and its structure, we will outsource pieces to the edge of the system following the cutting lines that emerged naturally.
+
+The goal is not to end up with 50 mini-projects but rather:
+
+  -One or several “core” applications of average size, consistent with each other;
+  -Microservices moving around, which are going to move away with time.
+
+This operation is made easier as the initial application is well structured in technical layers, business bricks and that this reorganisation is respected. The best practices of software developments allow to have “microservices-ready” projects. Otherwise, it takes a lot of investigation to extract some parts of the code.
+
+Automated tests are essential to limit risks. In their absence, it is necessary to consider the application as a legacy and use the proper techniques to remove the technical debt.
+
+Before getting into the “cutting” phase, we must examine the data distribution issues: this is the most structural element and can make the operation impossible.
+
+Finally, we must avoid to be dogmatic considering that the operation is necessarily one-sided.
+
+If later, others projects evolution are getting close to each other and more issues arise by separating them than they are solving, we must not hesitate to merge them back. Merge two projects back is not an admission of failure but rather a good sign because it shows that when your business evolves, your information system is able to adapt.
 
 ### 2.2 Components for a microservice architecture
 
 #### 2.2.1. How microservice architecture works
+
+How do your services find each other?
+
+A microservices application is a distributed system, the components have to interact with each other in order to achieve a common goal. What is a better way to overcome the challenges in order for one microservice to find another? You have two solutions: service discovery protocol or a centralized router. Both require high availability and scalability. 
+
+![Components](/static/architecure_components.png  "Components")
+
+* Centralized Router
+
+The centralized router works between the systems, it is actually proxying all the traffic and ensure load balancing. This router is built very transparently and exposed externally.
+
+* Service Discovery Protocol
+
+In order to make a request to an API, your code needs to know the network location (IP address and port) of a service instance. In a traditional application running on physical hardware, the network locations of service instances are relatively static. For example, your code can read the network locations from a configuration file that is occasionally updated.
+
+In a modern, cloud-based microservices application, however, this is a much more difficult problem. 
+
+Service instances have dynamically assigned network locations. Moreover, the set of service instances changes dynamically because of auto-scaling, failures, and upgrades. Service discovery is a mechanism which allows for an automatic detection of services offered and directs one service toward the other. 
+
+There are two main service discovery patterns: client-side discovery and server-side discovery. 
 
 #### 2.2.2. Tools and technologies used to build microservice stack
 
 ### 2.3 Communication between microservices
 
 Services communicate using either synchronous protocols such as HTTP/REST or asynchronous protocols such as AMQP.
+
+But since each part works independently, there is the risk of latency when each piece is brought together. While the whole point of microservices is that they are able to work independently, they need to work together, which can be a repeated challenge. Particularly when many services are making calls to many others, you can have a “dogpile” of information — when one service goes down while the other connecting services don’t have any time-out mechanisms, eventually the entire app will collapse.
+
+You can create a circuit breaker which acts like a discovery service, where one microservice realizes another is “sick” and notifies the main circuit breaker. From that point on, a microservice will be able to check the service discovery to determine if the microservice it is connected to is broken in order to prevent calls being made to or from said microservice. Saleh recommends setting a “time out” for about ten minutes.
 
 #### 2.3.1. Coordination and Dumb Pipes
 
@@ -486,8 +564,13 @@ and from the node.js microservice, retrieval of information about zuul would be 
 ## 6. References
 ---
 
+* [Introduction to Microservices](https://www.nginx.com/blog/introduction-to-microservices/) 
+* [Wikipedia](https://en.wikipedia.org/wiki/Microservices) 
 * [Spring Cloud Project Website](http://projects.spring.io/spring-cloud/)
 * [Spring Boot](http://projects.spring.io/spring-boot/)
+* [How we ended up with microservices](http://philcalcado.com/2015/09/08/how_we_ended_up_with_microservices.html) 
+* [Microservices. The good, the bad and the ugly](http://sanderhoogendoorn.com/blog/index.php/microservices-the-good-the-bad-and-the-ugly/) 
+* [Monolith First](http://martinfowler.com/bliki/MonolithFirst.html) 
 
 ___
 
