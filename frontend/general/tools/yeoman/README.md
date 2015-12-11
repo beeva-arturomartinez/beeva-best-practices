@@ -2,7 +2,7 @@
 
 ##5.- Tools
 
-### <img src="http://gruntjs.com/img/grunt-logo.png" height="80px"/> GRUNT 
+### <img src="https://raw.githubusercontent.com/yeoman/media/master/optimized/yeoman-horizontal.png" height="100px"/>  
 * [Introduction](#introduction)
 
  

@@ -2,7 +2,7 @@
 
 ##5.- Tools
 
-### <img src="http://gruntjs.com/img/grunt-logo.png" height="80px"/> GRUNT 
+### <img src="https://www.npmjs.com/static/images/npm-logo.svg" height="60px"/>  
 * [Introduction](#introduction)
 
  

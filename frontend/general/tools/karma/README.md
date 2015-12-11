@@ -2,7 +2,7 @@
 
 ##5.- Tools
 
-### <img src="http://gruntjs.com/img/grunt-logo.png" height="80px"/> GRUNT 
+### <img src="http://karma-runner.github.io/assets/img/banner.png" height="60px"/>  
 * [Introduction](#introduction)
 
  

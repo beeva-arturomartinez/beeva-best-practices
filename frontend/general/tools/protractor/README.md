@@ -2,7 +2,7 @@
 
 ##5.- Tools
 
-### <img src="http://gruntjs.com/img/grunt-logo.png" height="80px"/> GRUNT 
+### <img src="https://raw.githubusercontent.com/angular/protractor/master/website/img/protractor-logo-300.png" height="70px"/>  
 * [Introduction](#introduction)
 
  
