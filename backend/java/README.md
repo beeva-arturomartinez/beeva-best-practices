@@ -11,7 +11,7 @@ This is how we work with Java at BEEVA.
 * [Choosing proper names inside our code](#choosing-proper-names-inside-our-code)
 * [Function's design](#function's-design)
 * [Comments and documentation](#comments-and-documentation)
-* [Code styling and formatting](#code-styling-and-formatting)
+* [Formatting and code styling](#formatting-and-code-styling)
 * [Encapsulation](#encapsulation)
 * [Exception handling](#exception-handling)
 * [Log traces](#log-traces)
@@ -217,8 +217,246 @@ We are not saying run like hell from comments, no. Sometimes they are even good 
 
 And as it often happens, everything’s connected so, as it’s been explained before in previous sections, giving proper names to our variables and methods is essential to reach the goal and keep the code legible and self-documented. And so it is giving good format and style, as it will be explained in the next section.
 
-## Code styling and formatting
+## Formatting and code styling
 ---
+- Code style and format are very important. Application functionality is changing and code styling is an important aspect of it. A good code style and format will make it much more maintainable and easy to scale.
+
+###Vertical Formatting
+- If you perform correct vertical formatting, the code will be clearer. When we review a code, our eyes search for the first lines after a break line. Bits of code should be structured with correct vertical formatting. The following sections provide guidelines to correct vertical formatting.
+
+####Vertical whitespace [blank lines]
+- Between consecutive members of a class: fields, constructors, methods, nested classes, static initializers, instance initializers.  
+- It is not recommended to perform two consecutive blank lines.    
+
+Example without break line:
+``` java
+package examples.java
+public class Bicycle {
+    public int cadence;
+    public int gear;
+    public int speed;
+    public Bicycle(int startCadence, int startSpeed, int startGear) {
+        gear = startGear;
+        cadence = startCadence;
+        speed = startSpeed;
+    }
+    public void setCadence(int newValue) {
+        cadence = newValue;
+    }
+    public void setGear(int newValue) {
+        gear = newValue;
+    }
+    public void applyBrake(int decrement) {
+        speed -= decrement;
+    }
+    public void speedUp(int increment) {
+        speed += increment;
+    }
+        
+}
+```
+Example with break line:
+```java
+package examples.java
+
+public class Bicycle {
+        
+    public int cadence;
+    public int gear;
+    public int speed;
+        
+    public Bicycle(int startCadence, int startSpeed, int startGear) {
+        gear = startGear;
+        cadence = startCadence;
+        speed = startSpeed;
+    }
+        
+    public void setCadence(int newValue) {
+        cadence = newValue;
+    }
+        
+    public void setGear(int newValue) {
+        gear = newValue;
+    }
+        
+    public void applyBrake(int decrement) {
+        speed -= decrement;
+    }
+        
+    public void speedUp(int increment) {
+        speed += increment;
+    }
+        
+}
+```
+
+####Distance between variables
+- ***Local variables*** should be declared as close to their usage as possible.  This is helpful to code’s readability. It is not practical to keep on scrolling up just to look for the variables. Control variables for loops should be declared within the loop statement.
+```java
+//eclared within the loop
+for (ObjectMember member : mapObjectMember.values()) {
+    nodeGroup.setId(member.getId());
+    nodeGroup.setName(member.getMember());
+    }
+}
+```
+- ***Instance variables*** should be declared at the top of the class.  
+Instance variables example:
+```java
+public class Employee{
+
+   private String name;
+   private double salary;
+  
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+   public double getSalary() {
+      return salary;
+   }
+   public void setSalary(double salary) {
+      this.salary = salary;
+   }
+}
+```
+####Dependent Functions.
+- If one function calls another, they should be vertically close, and the caller should be above the caller.   
+Dependent function example:
+```java
+...
+   public void a() {
+     b();
+   }
+  
+   public void b() {
+     c();
+   }
+   
+   public void c() {}
+...
+```
+####Ordening
+- The following are the three basic points for ordering bits of code:   
+  - ***Direct dependence:*** when a function calls another. (example given above)
+  - ***Affinity:*** Groups of functions perform similar operations.
+  - ***Descending order:*** create a flow down the source code module from high level to low level.
+
+
+###Horizontal Formatting
+- ***Line Length***, A line with more than 120 characters is not recommended, because they are not handled well by many terminals and tools.
+
+- ***Wrapping Lines***, When an expression can't fit in a single line, break it according to these general principles: after a comma, before an operator and prefer higher-level breaks.
+```java
+//example of break after comma
+    methodA(param1, param2, param3, 
+        param4, param5)  
+
+
+//example of breaking an arithmetic higher-level expression
+  var1 = var2 * (var3 
+      + var4) - var5;
+  
+  var1 = var2 * (var3 + var4) 
+      - var5; //This is better than previous one.
+```
+- Line wrapping for "if": Double indentation should be used. 
+```java
+//double indentation
+if (booleanA || booleanB || 
+        booleanC || booleanD || 
+        booleanE) {
+    System.out.println("***");
+}
+```
+- If you do not use braces for a "if", you should do a break line with indentation.
+```java
+if (booleanA) System.out.println("***");  // NO!
+
+if (booleanA) 
+   System.out.println("***");  // YES!
+```
+- ***Declaration alignment***, It is recommended to declare a single variable per line, and it is not recommended to align the variable name.
+Example:
+```java
+//not recommended
+boolean var1;
+int     var2;
+float   var3;
+int     var4, var5;
+
+//this is better 
+boolean var1;
+int var2;
+float var3;
+int var4; 
+int var5;
+```
+
+- ***Blank Space***: Blank space should be used in the following situations:
+  - A keyword followed by a parenthesis should be separated by space.
+  - A blanck space should appear after commas in arguments lists.
+  - Binary operators.
+```java
+// Keyword example
+if (condition) { //YES!!
+  setA(x);
+}
+if(condition) { //NO!!
+  setA(x);
+}
+
+//Arguments example
+method(x, y, z); //YES!!
+method(x,y,z); //NO!!
+
+//binary operators example
+a = (b + c) * (d + f); // YES!!
+a = (b+c)*(d+f); // NO!!
+```
+
+- ***Indentation***, use four spaces for indentation to indicate nesting of control structures. Without indentation, programs would be virtually unreadable by humans.
+
+Indentation example:
+```java
+class Example {
+  int[] myArray = { 1, 2, 3, 4, 5, 6 };
+  int theInt = 1;
+  String someString = "Hello";
+  double aDouble = 3.0;
+
+  void foo(int a, int b, int c, int d, int e, int f) {
+    switch (a) {
+    case 0:
+      Other.doFoo();
+      break;
+    default:
+      Other.doBaz();
+    }
+  }
+
+  void bar(List v) {
+    for (int i = 0; i < 10; i++) {
+      v.add(new Integer(i));
+    }
+  }
+}
+
+enum MyEnum {
+  UNDEFINED(0) {
+    void foo() {
+    }
+  }
+}
+
+@interface MyAnnotation {
+  int count() default 1;
+}
+```
+
+- Nowadays, IDEs such as Eclipse allow us to format code automatically. IDEs establish a lot of parameters like indentation, braces, white spaces, blank lines, control statements, line wrapping, comments etc. When someone start a new project, it is recommended to define these parameters, so all developers will have the same style and format.
 
 ## Encapsulation
 ---
