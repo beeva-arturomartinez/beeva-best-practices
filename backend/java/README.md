@@ -11,7 +11,7 @@ This is how we work with Java at BEEVA.
 * [Choosing proper names inside our code](#choosing-proper-names-inside-our-code)
 * [Function's design](#function's-design)
 * [Comments and documentation](#comments-and-documentation)
-* [Code styling and formatting](#code-styling-and-formatting)
+* [Formatting and code styling](#formatting-and-code-styling)
 * [Encapsulation](#encapsulation)
 * [Exception handling](#exception-handling)
 * [Log traces](#log-traces)
@@ -32,16 +32,431 @@ This is not an static document, but a living one. We will be adding new hints an
 ---
 
 ## Choosing proper names inside our code
+
+
+When we choose a name for variables, functions, arguments, classes, etc, it is important to apply a set of rules that will help us to make our code more consistent, and easier to read and understand. What follows are some of these basic rules for creating correct names:
+
+- The name of a variable, function or class must answer a number of basic questions: it should indicate why it exists, what it does, and how it is used. We have to choose names that reveal intentions,  since can make it much easier to understand and change code. For example, if we have the following variable to indicate a number of days since the last modification:
+
+	*int d;*
+
+	we can not know what it refers with the name *d*. To put a name to a variable, we should choose a name that specifies what is being measured and the unit of that measurement:
+
+	*int daysSinceModification;*
+
+- We have to use full descriptors that describe the variable, the field or the class properly. For example, an appropriate name for a field that defines the name of a user, it would be *firstName* or *userName*. Short names (for example *x1* or *f1*), although are easier to type, not provide any information of what they represent and consequently result in a difficult code to understand, maintain and improve.
+
+- Avoid disinformation, i.e. we should avoid words whose meanings vary from our intended meaning. For example, we do not have to put *customerList* as a variable name, if it is not a list, because for a developer the word list has a very particular meaning.
+
+- Avoid names that are too similar, or that differ only in uppercase or lowercase. For example, names *persistentObject* and *persistentObjects*, or names *anSqlDatabase* and *anSQLDatabase*, should not be used together as they give rise to confusion.
+
+- We need to distinguish names such a way that the reader appreciates the differences. Not just with add number-series or noise words, because if the names have to be different, they must also have a different meaning. The names of numerical series do not provide information, and noise words are another distinction without sense. For example, if we have the class *Product*, and we add another class with the name *ProductData*, we will have two classes with different names but with the same meaning (*Data* is a noise word that not provides any meaning).
+
+- Create names that we can pronounce, because if we cannot pronounce them, we are not going to be able to explain them correctly and we will have errors of understanding. For example, the name of the class *DtaRcrd104* cannot be pronounced.
+
+- Use names that can be searched for. Letter names or numeric constants are not easy to locate in the text. The length of a name must correspond to the size of our scope. If a variable or constant is used in several points of our code, we must assign a name that can be looked for.
+
+- Use abbreviations with moderation and intelligence. This means that we must maintain a standard list of short forms (abbreviations), choose them wisely and use them in a consistent manner. For example, if we want to use an abbreviation for the word *number*, we can use *nbr*, *no* or *num*, but recording the register used (no matter what) and using only that one.
+
+- Avoid encodings, because names encoded are unpronounceable and are usually written incorrectly. In Java there is no need to encode types, as is done in other languages with the Hungarian Notation (HN consists in prefixes in lowercase added to the names of the variables, and that indicate its type; the rest of the name indicates, as clearly as possible, the function that performs the variable), so we have to avoid this encoding as it makes it more difficult the readability of the code, may confuse the reader, and makes it more complicated to change the name or the type of a variable or class.
+
+- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, that must be in uppercase, as well as the first letter of any word not initial (naming convention CamelCase).
+
+- Use uppercase in the first letter of standard acronyms. The names will generally have standard abbreviations, such as SQL by Standard Query Language. Names such as *sqlDatabase* for an attribute or *SqlDatabase* for a class are much easier to read than *sQLDatabase* and *SQLDatabase*.
+
+- The names of the classes and objects must be nouns or phrases of nouns. For example, *Customer* or *BankAssistant*. The name of a class should not be a verb.
+
+- Methods must have names of verb. For example, *save* or *retrieveResult*. The methods of access, modification and the predicates must have as name its value and use as a prefix get, set, and is. For example:
+
+	*String name = client.getName( );*
+
+- Choose a word for each abstract concept and maintain it. It is very confusing to use names such as *get* and *retrieve* as equivalent methods from different classes, to be difficult to remember which method corresponds to each class. The names of functions must be independent and consistent in order to choose the correct method without need of additional searches. A coherent lexicon is a great advantage for developers who have to use our code.
+
+- Avoid using the same word for two different purposes. For example, if we have several classes with a method *add* that it does is to create a new value by adding two existing values, and we create a new class with a method that adds a value to a list, in this new method we could name it such as *add*, but in this case there is a difference in semantics, and we should use another name such as *insert*. We have to facilitate the understanding of our code.
+
+- Use terminology applicable to the domain of solutions and/or of the problem. It is advisable to use computer terms, algorithms, patterns names, and other mathematical terms, i.e. choose technical names to define technical stuff. However when there is not a programming term for that is being done, we should use a domain name of the problem. Many developers make the mistake of creating generic terms for concepts when there are already perfectly useable terms in the domain. For example, if our users relate to their customers as consumers, we have to use the term *Customer* for the class, not *Client*.
+
+- Some names have a meaning by themselves, but not the majority, so they must be included in a context, in classes, functions and namespaces with appropriate names. For example, we have the variables *firstname*, *lastname*, *street*, *number*, *city* and *country*, that combined, they obviously form an address, but if the variable *number* is used in isolation on a method, we would not be able to identify that is a part of an address. For this, the best would be to create the class *Address*, so we would know that the variables belong to a broader concept.
+
+- Short names are usually more appropriate than the extensive, provided they are clear. For example, the names *AccountAddress* and *ClientAddress* are perfect for instances of the class *Address*, but do not serve as the class name. *Address* serves better as the class name.
+
+Regarding to the naming conventions of identifiers in Java, several communities have established and proposed their owns. In the following link, you can see the naming conventions established by Sun Microsystems:
+
+[http://www.oracle.com/technetwork/java/codeconventions-135099.html](http://www.oracle.com/technetwork/java/codeconventions-135099.html)
+
 ---
 
 ## Function's design
 ---
 
 ## Comments and documentation
----
 
-## Code styling and formatting
+### Introduction
+ 
+There’s always been controversy around code documentation and comments: one side is defending a more verbose approach by writing a lot of comments inside the code and creating large documents where everything is explained in detail whereas the other is claiming that source code should remain as neater as possible and be auto-explanatory, i.e. include as less comments and docs as possible, since they are not needed if the code is clean and structured. Some go even further and state that comments are code smell. 
+
+Well, as in many other aspects, maybe the best choice is to meet halfway so that’s why we will try here to give some tips which we think it may help encounter a reasonable compromise in between. After all they say virtue is in the middle course.
+
+### Documenting your code
+
+Let’s begin by stating the obvious: a public API needs to be well-described. Of course there are plenty of tools in the market to help you with this tedious but necessary task to document your application, but if you’re coding Java, then we think javadocs should be your way to go.
+
+Javadoc generates API documentation automatically from source code with specially formatted documentation comments, more commonly known as doc comments. But furthermore javadoc is powerful because it is way better than a simple "//comment" :
+
+It is recognized by the IDE and used to display a pop-up when you move your cursor on top of one of your - javadoc-ed - function.
+It can be parsed by external tools (like xdoclet)
+
+Here we show an example:
+
+``` java
+/**
+ * Returns an Image object that can then be painted on the screen. 
+ * The url argument must specify an absolute {@link URL}. The name
+ * argument is a specifier that is relative to the url argument. 
+ * <p>
+ * This method always returns immediately, whether or not the 
+ * image exists. When this applet attempts to draw the image on
+ * the screen, the data will be loaded. The graphics primitives 
+ * that draw the image will incrementally paint on the screen. 
+ *
+ * @param  url  an absolute URL giving the base location of the image
+ * @param  name the location of the image, relative to the url argument
+ * @return      the image at the specified URL
+ * @see         Image
+ */
+ public Image getImage(URL url, String name) {
+        try {
+            return getImage(new URL(url, name));
+        } catch (MalformedURLException e) {
+            return null;
+        }
+ }
+
+``` 
+
+Using Javadoc acknowledges that there are two distinct questions a reader can ask about code:
+ - what is this supposed to do? (answered only by the javadoc and method header)
+ - how does it try to do it? (answered only by the implementation)
+
+If javadoc is written correctly, then one can understand exactly what services are offered by a method ("what is this supposed this do?"), without having to look at its implementation ("how does it try to do it?"). Reading an implementation usually takes a lot more effort than reading javadoc.
+
+The implementation can be checked for correctness versus the specification. That is, some bugs can be found just by reading the code, as opposed to executing it.
+
+It is not the idea of this guide to show in depth the javadoc tool, all details about it can be found in Sun’s Javadoc Guide  “How to Write Doc Comments”
+
+### Comments
+
+Javadoc comments and self-documenting code (and in-code comments) have two very different target audiences: 
+
+Javadoc comments are typically for users of the API -also developers-, but they don't care about the internal structure of the system, just the classes, methods, inputs, and outputs of the system. The code is contained within a black box. These comments should be used to explain how to do certain tasks, what the expected results of operations are, when exceptions are thrown, and what input values mean. Given a Javadoc-generated set of documentation, I should be able to fully understand how to use your interfaces without ever looking at a line of your code.
+
+On the other hand the code and comments that remain in the code file are for developers. You want to address their concerns here, make it easy to understand what the code does and why the code is the way it is. The use of appropriate variable names, methods, classes, and so on (self-documenting code) coupled with comments achieves this.
+
+As mentioned before it is sometimes said that most comments are just code smell. I guess that what they are really referring to is that comments which do not bring anything interesting to our program should be avoided. Some wrong behaviours would be:
+
+	* Redundancy
+```java
+	/**
+	* @param sellRequest
+	* @return
+	* @throws ManagedComponentException
+	*/
+	public SellResponse beginSellItem(SellRequest sellRequest)
+	throws ManagedComponentException
+```
+	* State the obvious
+```java
+		i++; // increment i
+```
+	* Commented-out code
+	* Comments right after closing a brace
+	* Misplace (as in source control)
+	* In general any noise to the code
+
+To minimize the probability to fall in one of those bullet cases above, as a simple rule of thumb, it is best to try to keep it simple and write as few comments as possible. At least, think twice before write, see if the code can be written in a way that can elude the comment. And as usual, nothing like a good example to illustrate easier and better what we are trying to explain:
+
+Let’s take a look at a typical example that can be easily found in many references across the web and which uses a Newton formula to calculate displacement.
+
+```java
+float a, b, c; a=9.81; b=5; c= .5*a*(b^2);
+```
+
+I think everybody will agree that this is awful. No possible reader could take a look at this code and form a minimal idea about what the excerpt is pursuing, let alone if no other context is provided. One could be tempted to simply add some comments to fix it and write something like this:
+
+```java
+const float a = 9.81; //gravitational force 
+float b = 5; //time in seconds 
+float c = (1/2)*a*(b^2) //multiply the time and gravity together to get displacement.
+```
+
+Although this is clearly much better than the initial one, it looks like it’s still kind of lame. 
+
+```java
+/* compute displacement with Newton's equation x = vₒt + ½at² */ 
+const float gravitationalForce = 9.81; 
+float timeInSeconds = 5; 
+float displacement = (1 / 2) * gravitationalForce * (timeInSeconds ^ 2)
+```
+
+Again better than before, this code is fine, but it could be rewritten in an equally informative way without any comment, for instance:
+
+```java
+const float accelerationDueToGravity = 9.81;
+float timeInSeconds = 5; 
+float displacement = NewtonianPhysics.CalculateDisplacement(accelerationDueToGravity);
+```
+I think the code is now cleaner and self-explanatory, but this will of course depend on the reader’s point of view if we compare it with the previous excerpt.
+
+Anyway, many books and authors tend to preach that, and I quote Robert C. Martin here, “when you find yourself in a position where you need to write a comment, think it through and see whether there isn’t some way to turn the tables and express yourself in code”.
+
+And why do they say that?, you may wonder. Well, there is a problem with comments, a big one I think: comments -like code- need to be maintained, and if not, they often get old too quickly, so it might -it will- become really annoying to go through them. Or even worse, it will not get done, so the comment will rot and get “old” and end up confusing -in the best case scenario, or even “lying” in a worse one- while the code keeps changing.
+
+We like to align with this position, I mean, why do even bother writing a comment when you can explain it via code!? furthermore, why invest effort in maintain a comment instead of using that time in refactoring your code. 
+
+We are not saying run like hell from comments, no. Sometimes they are even good and/or necessary. Just be careful when you use them, because often there is no point if one takes a small pause and think a bit slower. 
+
+And as it often happens, everything’s connected so, as it’s been explained before in previous sections, giving proper names to our variables and methods is essential to reach the goal and keep the code legible and self-documented. And so it is giving good format and style, as it will be explained in the next section.
+
+## Formatting and code styling
 ---
+- Code style and format are very important. Application functionality is changing and code styling is an important aspect of it. A good code style and format will make it much more maintainable and easy to scale.
+
+###Vertical Formatting
+- If you perform correct vertical formatting, the code will be clearer. When we review a code, our eyes search for the first lines after a break line. Bits of code should be structured with correct vertical formatting. The following sections provide guidelines to correct vertical formatting.
+
+####Vertical whitespace [blank lines]
+- Between consecutive members of a class: fields, constructors, methods, nested classes, static initializers, instance initializers.  
+- It is not recommended to perform two consecutive blank lines.    
+
+Example without break line:
+``` java
+package examples.java
+public class Bicycle {
+    public int cadence;
+    public int gear;
+    public int speed;
+    public Bicycle(int startCadence, int startSpeed, int startGear) {
+        gear = startGear;
+        cadence = startCadence;
+        speed = startSpeed;
+    }
+    public void setCadence(int newValue) {
+        cadence = newValue;
+    }
+    public void setGear(int newValue) {
+        gear = newValue;
+    }
+    public void applyBrake(int decrement) {
+        speed -= decrement;
+    }
+    public void speedUp(int increment) {
+        speed += increment;
+    }
+        
+}
+```
+Example with break line:
+```java
+package examples.java
+
+public class Bicycle {
+        
+    public int cadence;
+    public int gear;
+    public int speed;
+        
+    public Bicycle(int startCadence, int startSpeed, int startGear) {
+        gear = startGear;
+        cadence = startCadence;
+        speed = startSpeed;
+    }
+        
+    public void setCadence(int newValue) {
+        cadence = newValue;
+    }
+        
+    public void setGear(int newValue) {
+        gear = newValue;
+    }
+        
+    public void applyBrake(int decrement) {
+        speed -= decrement;
+    }
+        
+    public void speedUp(int increment) {
+        speed += increment;
+    }
+        
+}
+```
+
+####Distance between variables
+- ***Local variables*** should be declared as close to their usage as possible.  This is helpful to code’s readability. It is not practical to keep on scrolling up just to look for the variables. Control variables for loops should be declared within the loop statement.
+```java
+//eclared within the loop
+for (ObjectMember member : mapObjectMember.values()) {
+    nodeGroup.setId(member.getId());
+    nodeGroup.setName(member.getMember());
+    }
+}
+```
+- ***Instance variables*** should be declared at the top of the class.  
+Instance variables example:
+```java
+public class Employee{
+
+   private String name;
+   private double salary;
+  
+   public String getName() {
+      return name;
+   }
+   public void setName(String name) {
+      this.name = name;
+   }
+   public double getSalary() {
+      return salary;
+   }
+   public void setSalary(double salary) {
+      this.salary = salary;
+   }
+}
+```
+####Dependent Functions.
+- If one function calls another, they should be vertically close, and the caller should be above the caller.   
+Dependent function example:
+```java
+...
+   public void a() {
+     b();
+   }
+  
+   public void b() {
+     c();
+   }
+   
+   public void c() {}
+...
+```
+####Ordening
+- The following are the three basic points for ordering bits of code:   
+  - ***Direct dependence:*** when a function calls another. (example given above)
+  - ***Affinity:*** Groups of functions perform similar operations.
+  - ***Descending order:*** create a flow down the source code module from high level to low level.
+
+
+###Horizontal Formatting
+- ***Line Length***, A line with more than 120 characters is not recommended, because they are not handled well by many terminals and tools.
+
+- ***Wrapping Lines***, When an expression can't fit in a single line, break it according to these general principles: after a comma, before an operator and prefer higher-level breaks.
+```java
+//example of break after comma
+    methodA(param1, param2, param3, 
+        param4, param5)  
+
+
+//example of breaking an arithmetic higher-level expression
+  var1 = var2 * (var3 
+      + var4) - var5;
+  
+  var1 = var2 * (var3 + var4) 
+      - var5; //This is better than previous one.
+```
+- Line wrapping for "if": Double indentation should be used. 
+```java
+//double indentation
+if (booleanA || booleanB || 
+        booleanC || booleanD || 
+        booleanE) {
+    System.out.println("***");
+}
+```
+- If you do not use braces for a "if", you should do a break line with indentation.
+```java
+if (booleanA) System.out.println("***");  // NO!
+
+if (booleanA) 
+   System.out.println("***");  // YES!
+```
+- ***Declaration alignment***, It is recommended to declare a single variable per line, and it is not recommended to align the variable name.
+Example:
+```java
+//not recommended
+boolean var1;
+int     var2;
+float   var3;
+int     var4, var5;
+
+//this is better 
+boolean var1;
+int var2;
+float var3;
+int var4; 
+int var5;
+```
+
+- ***Blank Space***: Blank space should be used in the following situations:
+  - A keyword followed by a parenthesis should be separated by space.
+  - A blanck space should appear after commas in arguments lists.
+  - Binary operators.
+```java
+// Keyword example
+if (condition) { //YES!!
+  setA(x);
+}
+if(condition) { //NO!!
+  setA(x);
+}
+
+//Arguments example
+method(x, y, z); //YES!!
+method(x,y,z); //NO!!
+
+//binary operators example
+a = (b + c) * (d + f); // YES!!
+a = (b+c)*(d+f); // NO!!
+```
+
+- ***Indentation***, use four spaces for indentation to indicate nesting of control structures. Without indentation, programs would be virtually unreadable by humans.
+
+Indentation example:
+```java
+class Example {
+  int[] myArray = { 1, 2, 3, 4, 5, 6 };
+  int theInt = 1;
+  String someString = "Hello";
+  double aDouble = 3.0;
+
+  void foo(int a, int b, int c, int d, int e, int f) {
+    switch (a) {
+    case 0:
+      Other.doFoo();
+      break;
+    default:
+      Other.doBaz();
+    }
+  }
+
+  void bar(List v) {
+    for (int i = 0; i < 10; i++) {
+      v.add(new Integer(i));
+    }
+  }
+}
+
+enum MyEnum {
+  UNDEFINED(0) {
+    void foo() {
+    }
+  }
+}
+
+@interface MyAnnotation {
+  int count() default 1;
+}
+```
+
+- Nowadays, IDEs such as Eclipse allow us to format code automatically. IDEs establish a lot of parameters like indentation, braces, white spaces, blank lines, control statements, line wrapping, comments etc. When someone start a new project, it is recommended to define these parameters, so all developers will have the same style and format.
 
 ## Encapsulation
 ---
@@ -230,6 +645,89 @@ As well as recording exceptions, logging should also record your program’s act
 ---
 
 ## Log traces
+
+Java logging is not an exact science since is left to the programmer and its experience several decisions, for instance the log level to use, the format of the messages or the information to display, all this is very important since it is proven that Java logging affects to the efficiency of ours applications. Here we offer an outline of how to make good use of the java logs.
+
+### First choose an appropriate tool for logging
+
+We recommend you to use the abstraction layer SLF4J (Simple Logging Facade for Java), this facade give us a list of improvements:
+* Loose coupling: using SLF4J we are not linking our classes to an implementation of logging in particular. Thus in a future if we change that implementation we don't need to modify our classes.
+* The only dependency in application components should be on the SLF4J API, no class should reference any other logging interfaces.
+* SLF4J's parameterized logging: SLF4J has a feature that help us to construct messages in a way much more attractive. Example: 
+
+		logger.debug("There are " + numberOfBooks + " of " + kind); //Log4J
+		logger.debug("There are {} of {}", numberOfBooks, kind);//SLF4J
+	As we can see, the second form is shorter and easier to read, it is also more efficient because of the way it builds messages SLF4J
+
+### Logging levels
+For each message, we have to think carefully which level is the most appropriate. Logging affect the performance of our application because each log is a file IO, that's why is very important to use the right level. Log4J give us 6 levels of priority:
+
+**FATAL:** for critical messages, usually the application will abort after save the message
+
+**ERROR:** designates error events that might still allow the application to continue but it has to be investigated quickly.
+
+**WARN:** used for messages of alert that we want to save but the application still will follow running
+
+**INFO:** give us information about the progress and the status of the application very useful for the final user 
+
+**DEBUG:** this level is used to get information of utility for the developer to debug the application. Commonly this level is only used in the development environment of DEV
+
+**TRACE:** used to show an information more detailed than debug, it has the highest priority of all
+
+### Is Log4j isDebugEnabled() necessary?
+This method is only worth of use it if we are not using SLF4J and we can prove that the construct of the specified log is expensive. Example of use:
+
+         if (log.isDebugEnabled()) {
+   	 		log.debug("Something happened");
+		 }
+	
+### Use rotation policies
+Logs can take up a lot of space. Maybe you need to keep years of archival storage, but the space is limited and expensive. So, we have to set up a good rotation strategy and decide whether to destroy or back up your logs but always it has to allow the analysis of recents events.
+
+For example to create daily rolling log files we have to configure log4j, in that case log4j provides the DailyRollingFileAppender class. Here is an example of a log4j’s properties configuration file 
+
+    log4j.appender.Appender2=org.apache.log4j.DailyRollingFileAppender
+    log4j.appender.Appender2.File=app.log
+    log4j.appender.Appender2.DatePattern='.'yyyy-MM-dd
+
+### Be concise and descriptive
+It's important to log in simple English, it should make sense and human readable. The usual is that the loggings statements include data and description in a single line.
+Example: 
+
+    log.debug(“Finalizacion”); //Only description, no data
+    log.debug(status); //Only data, no description
+    log.debug(“Finalizacion {}”, status); //Is better to put data and description together
+
+### Be careful logging
+We have to keep attention that we are logging and avoid typical mistakes.
+* Avoid null pointer exceptions:
+    
+        log.debug(“Correct insertion for the user {} ”, user.getId()); 
+    Are we sure that user is not nullpointer? 
+
+* Avoid logging collections:
+
+        log.debug(“Inserting users {} ”, users);
+    A lot of errors can happen: object users not initialized, thread startvation, ouf of memories... It is better to log only the size of the collections or the id of each iteration.
+
+* Never log sensitive information as password, credit car numbers or account number
+
+### Log exceptions properly
+The usual rule is to not log any exceptions, but there is an exception; if we throw exceptions for some remote service that is capable of serializing exceptions. There are two basic rules to throw an exception:
+* If you re-throw an exception, don't log it. For example:
+
+            try {
+    			/ …..
+    		} catch (IOException ex) {
+    			log.error(“Error: {}”, ex);
+    			throw new MyCustomerException(ex);
+    		}
+    This is wrong, we would be duplicating traces of the same error in the logs. Log, or wrap and throw back, never both,
+
+* In order to log an exception the first argument is always the text message, write something about the nature of the problem, and the second argument is the exception itself.
+
+        log.error("Error reading configuration file", e);
+
 ---
 
 ## Code testing
