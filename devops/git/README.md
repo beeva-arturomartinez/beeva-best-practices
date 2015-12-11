@@ -17,10 +17,21 @@ At this point we're going to talk about best practices to work with git.
 	* [Large files](#large-files)
 	* [README.md](#readme-md)
 * [Git Flow](#git-flow)
+	* [Git Flow Rules](#git-flow-rules)
+	* [Branches](#branches)
 	* [Main branches](#main-branches)
+		* [Master branch](#master-branch)
+		* [Develop branch](#develop-branch)
+		* [Support branches](#support-branches)
+		* [Feature branches](#feature-branches)
+	* [Flow](#flow)
+		* [Feature flow](#feature-flow)
+		* [Releases](#releases)
+		* [Hotfixes](#hotfixes)
 	* [Support branches](#support-branches)
 * [Tips](#tips)
 	* [Versioning](#versioning)
+		* [Semantic Versioning](#semantic-versioning)
 	* [Redmine's id-track](#redmines-id-track)
 	* [Use hooks](#use-hooks)
 	* [Use tools](#use-tools)
@@ -141,11 +152,11 @@ Git Flow defines two branch types, main branches and support branches.
 
 ### Main branches
 
-The Main branches are **develop** and **master**. 
+The Main branches are **develop** and **master**.
 
 #### Master branch
 
-The master branch is the default git branch. This is a special branch. 
+The master branch is the default git branch. This is a special branch.
 Git flow establishes the following restictions on this branch:
 
 * Never delete this branch.
@@ -159,13 +170,13 @@ The develop branch is a long running branch and must be created from master.
 * Never delete this branch.
 * Never do commits over this branch directly: only merge commits are allowed.
 * All features must be merged in develop
-* When develop reaches a stable point, will be merged back into master, throug a release branch. 
+* When develop reaches a stable point, will be merged back into master, throug a release branch.
 * Once a release process is finished, the release branch must be merged back into develop.
 * Once a hotfix process is finished, the hotfix branch must be merged back into develop.
 
 #### Support branches
 
-The support branches are **short running branches**. 
+The support branches are **short running branches**.
 Those branches are created to follow one of the three processes defined on Git Flow.
 Every support branch has defined from what branch must be created and on what branch/es must be merged.
 
@@ -242,7 +253,7 @@ git push origin master
 
 #### Hotfixes
 
-They arise from the necessity to act immediately upon an undesired state of a live production version. 
+They arise from the necessity to act immediately upon an undesired state of a live production version.
 When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.
 
 ![git flow hotfix graph][]
@@ -326,6 +337,7 @@ Sometimes when we are using as a remote repository as a github, we must write ou
 * [Git Cheatsheet](http://www.git-tower.com/blog/git-cheat-sheet/)
 * [Git Flow Cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
 * [Successful branching model](http://nvie.com/posts/a-successful-git-branching-model/)
+* [Seth Robertson Best Practices](https://sethrobertson.github.io/GitBestPractices/)
 
 ___
 
