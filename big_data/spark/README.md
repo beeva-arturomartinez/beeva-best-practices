@@ -1,6 +1,6 @@
-# Spark Best Practices
-
 ![alt text](static/spark-logo.png "SPARK")
+
+# Spark Best Practices
 
 ## Index
 
@@ -37,6 +37,10 @@
 
 * Tuning spark configuration
 * Debugging spark applications
+
+### Spark on EMR
+* Launching applications
+* Connecting to cluster instances and spark UI
 
 
 ### Markdown examples
