@@ -1,50 +1,55 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
+# Polymer Style Guide
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![Polymer logo](https://www.polymer-project.org/images/logos/lockup.svg "BEEVA")
+
+Polymer is a library created to develop web components in order to compose apps with. It relies on Web Components standard from W3C. It is supported by Google and, by now, it has released its 1.2.4 version.
+
+Since Polymer is based on Web Components it has to different contexts.
+ 
+* **Component context:** when you develop standalone components to be used by other web components, or component based apps.
+* **App context:** When you use web components to compose your app with, taking care on how they interact.
+
+In this document we're going to introduce some common good practices for developing polymer components, also polymer based apps.
 
 ## Index
 
-* [The Fellowship of the Ring](#the-fellowship-of-the-ring)
-* [The Two Towers](#the-two-towers)
-* [The Return of the King](#the-return-of-the-king)
-* [References](#references)
+* Think in polymer:
 
-### The Fellowship of the Ring 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
+  - Best practices about how to compose using atomic design, without monolithic code
 
-### The Two Towers
+* Correctly used observers: 
+  
+  - Notify readOnly
 
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
+  - {{}} vs [[]]
 
-A Remarkable idea
+  - declarative vs imperative
 
+* [Behaviors and inheritance](behaviors_and_inheritance.md):
+  
+  - Reusing code by mixins
+  
+  - Inheritance emulation
 
-### The Return of the King
+* Life cycle matters:
+  
+  - You have to do some stuff at the correct time
 
-A nice table
+* Styling well:
 
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+* Javascript applied to Polymer:
+
+* [Appendice](appendice.md):
+  - Polymer apps
+  - Mediator pattern
+  - Tools for polymer
+    - Bower
+    - Yeoman
 
 
 ### References
 
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+* [Web Polymer](https://www.polymer-project.org): Polymer project website
 
 ___
 
