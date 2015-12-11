@@ -16,14 +16,15 @@ The Sixth Edition, known as ECMAScript 2015, adds significant new syntax for wri
 * [Destructuring](#destructuring)
 * [Generator](#generator)
 * [Map](#map)
-* [Reflect](#reflect)
 * [Set](#set)
+* [Proxy](#proxy)
+* [Reflect](#reflect)
 * [Iterator](#iterator)
 * [Object literal](#object_literal)
 * [String](#string)
 * [Template strings](#template_strings)
 * [Symbol](#symbol)
-* [Arrow functions](#arroy_functions)
+* [Arrow functions](#arrow_functions)
 * [Block scope](#block_scope)
 * [Rest operator](#rest_operator)
 * [Spread operator](#spread_operator)
@@ -100,7 +101,7 @@ function isPrime(element, index, array) {
 }
 
 console.log([4, 6, 8, 12].find(isPrime)); // undefined, not found
-console.log([4, 5, 8, 12].find(isPrime)); // 5
+console.log([4, 5, 8, 12].find((x) => x>10); // 12
 ```
 
 ###Array.findIndex()
@@ -429,4 +430,310 @@ for (let n of fibonacci(1000))
 let numbers = [ ...fibonacci(1000) ]
 
 let [ n1, n2, n3, ...others ] = fibonacci(1000)
+```
+
+## <a name='map'>Map</a>
+
+The Map object is a simple key/value map. Any value (both objects and primitive values) may be used as either a key or a value.
+
+```javascript
+let m = new Map()
+m.set("hello", 42)
+m.set(s, 34)
+m.get(s) === 34
+m.size === 2
+for (let [ key, val ] of m.entries())
+    console.log(key + " = " + val)
+```
+
+## <a name='set'>Set</a>
+
+The Set object lets you store unique values of any type, whether primitive values or object references.
+
+```javascript
+let s = new Set()
+s.add("hello").add("goodbye").add("hello")
+s.size === 2
+s.has("hello") === true
+for (let key of s.values()) // insertion order
+    console.log(key)
+```
+
+## <a name='proxy'>Proxy</a>
+
+The Proxy object is used to define custom behavior for fundamental operations (e.g. property lookup, assignment, enumeration, function invocation, etc).
+
+```javascript
+let target = {
+    foo: "Welcome, foo"
+}
+let proxy = new Proxy(target, {
+    get (receiver, name) {
+        return name in receiver ? receiver[name] : `Hello, ${name}`
+    }
+})
+console.log(proxy.foo) //"Welcome, foo"
+console.log(proxy.world) //"Hello, world"
+```
+
+## <a name='reflect'>Reflect</a>
+
+Reflect is a built-in object that provides methods for interceptable JavaScript operations. The methods are the same as those of [proxy](#proxy) handlers. Reflect is not a function object, so it's not constructible.
+
+```javascript
+let obj = { a: 1 }
+Object.defineProperty(obj, "b", { value: 2 })
+obj[Symbol("c")] = 3
+console.log(Reflect.ownKeys(obj)) // [ "a", "b", Symbol(c) ]
+```
+
+## <a name='iterator'>Iterator</a>
+
+Support "iterable" protocol to allow objects to customize their iteration behaviour. Additionally, support "iterator" protocol to produce sequence of values (either finite or infinite). Finally, provide convenient of operator to iterate over all values of an iterable object.
+
+```javascript
+let fibonacci = {
+    [Symbol.iterator]() {
+        let pre = 0, cur = 1
+        return {
+           next () {
+               [ pre, cur ] = [ cur, pre + cur ]
+               return { done: false, value: cur }
+           }
+        }
+    }
+}
+
+for (let n of fibonacci) {
+    if (n > 1000)
+        break
+    console.log(n)
+}
+```
+
+## <a name='object_literal'>Object literal</a>
+
+Direct support for safe binary and octal literals.
+
+```javascript
+0b111110111 === 503
+0o767 === 503
+```
+
+## <a name='string'>String</a>
+
+####String.includes()
+
+The includes() method determines whether one string may be found within another string, returning true or false as appropriate.
+
+```javascript
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.includes('To be'));       // true
+console.log(str.includes('question'));    // true
+console.log(str.includes('nonexistent')); // false
+console.log(str.includes('To be', 1));    // false
+console.log(str.includes('TO BE'));       // false
+```
+
+####String.repeat()
+
+The repeat() method constructs and returns a new string which contains the specified number of copies of the string on which it was called, concatenated together.
+
+```javascript
+'abc'.repeat(-1);   // RangeError
+'abc'.repeat(0);    // ''
+'abc'.repeat(1);    // 'abc'
+'abc'.repeat(2);    // 'abcabc'
+'abc'.repeat(3.5);  // 'abcabcabc' (count will be converted to integer)
+'abc'.repeat(1/0);  // RangeError
+
+({ toString: () => 'abc', repeat: String.prototype.repeat }).repeat(2);
+// 'abcabc' (repeat() is a generic method)
+```
+
+####String.startsWith()
+
+The startsWith() method determines whether a string begins with the characters of another string, returning true or false as appropriate.
+
+```javascript
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.startsWith('To be'));         // true
+console.log(str.startsWith('not to be'));     // false
+console.log(str.startsWith('not to be', 10)); // true
+```
+
+####String.endsWith()
+
+The endsWith() method determines whether a string ends with the characters of another string, returning true or false as appropriate.
+
+```javascript
+var str = 'To be, or not to be, that is the question.';
+
+console.log(str.endsWith('question.')); // true
+console.log(str.endsWith('to be'));     // false
+console.log(str.endsWith('to be', 19)); // true
+```
+
+## <a name='template_strings'>Template strings</a>
+
+Template strings are string literals allowing embedded expressions. You can use multi-line strings and string interpolation features with them.
+
+```javascript
+`string text`
+
+`string text line 1
+ string text line 2`
+
+`string text ${expression} string text`
+
+tag `string text ${expression} string text`
+```
+
+Template strings are enclosed by the back-tick (` `) (grave accent) character instead of double or single quotes. Template strings can contain place holders. These are indicated by the Dollar sign and curly braces (${expression}). The expressions in the place holders and the text between them get passed to a function. The default function just concatenates the parts into a single string. If there is an expression preceding the template string (tag here),  the template string is called "tagged template string". In that case, the tag expression (usually a function) gets called with the processed template string, which you can then manipulate before outputting.
+
+####Multi-line strings
+
+Any new line characters inserted in the source are part of the template string. Using normal strings, you would have to use the following syntax in order to get multi-line strings:
+
+```javascript
+console.log("string text line 1\n"+
+"string text line 2");
+// "string text line 1
+// string text line 2"
+
+//With ES6
+
+console.log(`string text line 1
+string text line 2`);
+// "string text line 1
+// string text line 2"
+```
+
+####Expression interpolation
+
+In order to embed expressions within normal strings, you would use the following syntax:
+
+```javascript
+var a = 5;
+var b = 10;
+console.log(`Fifteen is ${a + b} and\nnot ${2 * a + b}.`);
+// "Fifteen is 15 and
+// not 20."
+```
+
+####Tagged template strings
+
+A more advanced form of template strings are tagged template strings. With them you are able to modify the output of template strings using a function. The first argument contains an array of string literals ("Hello " and " world" in this example). The second, and each argument after the first one, are the values of the processed (or sometimes called cooked) substitution expressions ("15" and "50" here). In the end, your function returns your manipulated string. There is nothing special about the name tag in the following example. The function name may be anything you want.
+
+```javascript
+var a = 5;
+var b = 10;
+
+function tag(strings, ...values) {
+  console.log(strings[0]); // "Hello "
+  console.log(strings[1]); // " world "
+  console.log(values[0]);  // 15
+  console.log(values[1]);  // 50
+
+  return "Bazinga!";
+}
+
+tag`Hello ${ a + b } world ${ a * b }`;
+// "Bazinga!"
+```
+
+## <a name='symbol'>Symbol</a>
+
+A symbol is a unique and immutable data type and may be used as an identifier for object properties. The symbol object is an implicit object wrapper for the symbol primitive data type.
+
+
+```javascript
+var sym1 = Symbol();
+var sym2 = Symbol("foo");
+var sym3 = Symbol("foo");
+Symbol("foo") === Symbol("foo"); // false
+```
+
+####Iterator
+
+We can make our own iterables like this:
+
+```javascript
+var myIterable = {}
+myIterable[Symbol.iterator] = function* () {
+    yield 1;
+    yield 2;
+    yield 3;
+};
+[...myIterable] // [1, 2, 3]
+```
+
+####Symbol.for()
+
+The Symbol.for(key) method searches for existing symbols in a runtime-wide symbol registry with the given key and returns it if found. Otherwise a new symbol gets created in the global symbol registry with this key.
+
+```javascript
+Symbol.for("foo"); // create a new global symbol
+Symbol.for("foo"); // retrieve the already created symbol
+
+// Same global symbol, but not locally
+Symbol.for("bar") === Symbol.for("bar"); // true
+Symbol("bar") === Symbol("bar"); // false
+
+// The key is also used as the description
+var sym = Symbol.for("mario");
+sym.toString(); // "Symbol(mario)"
+```
+
+####Symbol.keyFor()
+
+The Symbol.keyFor(sym) method retrieves a shared symbol key from the global symbol registry for the given symbol.
+
+
+```javascript
+var globalSym = Symbol.for("foo"); // create a new global symbol
+Symbol.keyFor(globalSym); // "foo"
+
+var localSym = Symbol();
+Symbol.keyFor(localSym); // undefined
+
+// well-known symbols are not symbols registered 
+// in the global symbol registry
+Symbol.keyFor(Symbol.iterator) // undefined
+```
+
+## <a name='arrow_functions'>Arrow functions</a>
+
+Arrow functions are a more convinient and shorter way to write a function. 
+
+####Expression Bodies
+
+More expressive closure syntax.
+
+```javascript
+odds  = evens.map(v => v + 1)
+pairs = evens.map(v => ({ even: v, odd: v + 1 }))
+nums  = evens.map((v, i) => v + i)
+```
+
+####Statement Bodies
+
+```javascript
+nums.forEach(v => {
+   if (v % 5 === 0)
+       fives.push(v)
+})
+```
+
+####Lexical this
+
+More intuitive handling of current object context.
+
+```javascript
+this.nums.forEach((v) => {
+    if (v % 5 === 0)
+        this.fives.push(v)
+})
 ```
