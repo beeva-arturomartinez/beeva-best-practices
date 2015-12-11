@@ -219,7 +219,7 @@ How do your services find each other?
 
 A microservices application is a distributed system, the components have to interact with each other in order to achieve a common goal. What is a better way to overcome the challenges in order for one microservice to find another? You have two solutions: service discovery protocol or a centralized router. Both require high availability and scalability. 
 
-![Components](/static/architecure_components.png  "Components")
+![Components](static/architecure_components.png  "Components")
 
 * Centralized Router
 
