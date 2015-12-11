@@ -26,7 +26,6 @@ The Sixth Edition, known as ECMAScript 2015, adds significant new syntax for wri
 * [Symbol](#symbol)
 * [Arrow functions](#arrow_functions)
 * [Block scope](#block_scope)
-* [Rest operator](#rest_operator)
 * [Spread operator](#spread_operator)
 * [Default parameters](#default_parameters)
 * [Modules](#modules)
@@ -736,4 +735,56 @@ this.nums.forEach((v) => {
     if (v % 5 === 0)
         this.fives.push(v)
 })
+```
+
+## <a name='block_scope'>Block scope</a>
+
+####Block-Scoped Variables
+
+Block-scoped variables (and constants) without hoisting.
+
+```javascript
+for (let i = 0; i < a.length; i++) {
+    let x = a[i]
+    …
+}
+for (let i = 0; i < b.length; i++) {
+    let y = b[i]
+    …
+}
+
+let callbacks = []
+for (let i = 0; i <= 2; i++) {
+    callbacks[i] = function () { return i * 2 }
+}
+callbacks[0]() === 0
+callbacks[1]() === 2
+callbacks[2]() === 4
+```
+
+####Block-Scoped Functions
+
+```javascript
+{
+    function foo () { return 1 }
+    foo() === 1
+    {
+        function foo () { return 2 }
+        foo() === 2
+    }
+    foo() === 1
+}
+```
+
+## <a name='spread_operator'>Spread operator</a>
+
+Spreading of elements of an iterable collection (like an array or even a string) into both literal elements and individual function parameters.
+
+```javascript
+var params = [ "hello", true, 7 ]
+var other = [ 1, 2, ...params ] // [ 1, 2, "hello", true, 7 ]
+f(1, 2, ...params) === 9
+
+var str = "foo"
+var chars = [ ...str ] // [ "f", "o", "o" ]
 ```
