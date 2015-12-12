@@ -414,6 +414,65 @@ It is important that these two last properties be in sync so that the different 
 
 ### 3.4 Zuul
 
+Zuul is the main entrypoint to the microservice architecture. It is responsible for routing each request to the corresponding microservice. Zuul is built to enable dynamic routing, monitoring, resiliency and security.
+
+![Zuul Overview](static/zuul-zoom-1.png)
+
+As part of the Spring Cloud framework, Zuul has both an **Eureka Client** and a **Ribbon client** built-in implementation. By default, this Ribbon implementation uses a Round Robbin algorithm for routing requests, but this algorithm can be changed and customized based on the needs. For example we can implement a routing algorithm based on the latency of the responses or based on the geographical location of each microservice.
+
+#### Zuul Filter Types
+
+Zuul consists of filters that are responsible for different tasks based on the type of each one of them. These filters are written in Groovy, but Zuul supports any JVM-language.
+
+There are four standard types of filters that are related to the lifecycle of a request (see the diagram below):
+
+- PRE Filter: These type of filters are executed before the request arrives at the destination
+- ROUTING Filter: These type of filters handle routing request to an origin. Here is where **Ribbon Client** acts
+- POST Filter: These type of filters are executed after the request has been routed to the destination. For example, we can modify some aspects of the response as headers, before sending it back to clients
+- ERROR Filter: When there is an error in one of the previous described filters, this type of filter comes into action
+
+There is another type of filter that allows us to create new and **custom** filters that executes explicitly, that is, these filters respond the request by themselves and prevent the request from spreading to the microservices. This behaviour can be useful to define some endpoints for health checking purposes.
+
+![Zuul Filters Overview](static/zuul-zoom-2.png)
+
+> If You want to know more about how Zuul and Filters work, see the official Netflix Github documentation at: [Zuul - How it Works](https://github.com/Netflix/zuul/wiki/How-it-Works)
+
+#### Spring Cloud Zuul Example
+
+Zuul is included in Spring Cloud as an annotation: @EnableZuulProxy
+
+```java
+@SpringBootApplication
+@EnableZuulProxy
+public class ZuulServer {
+
+    public static void main(String args[]){
+
+        new SpringApplicationBuilder((ZuulServer.class)).web(true).run(args);
+
+    }
+}
+```
+
+#### Spring Cloud Zuul Properties Example
+
+```YAML
+spring:
+    application:
+        name: zuul
+
+server:
+    port: 8989
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+      leaseRenewalIntervalInSeconds: 5
+      healthCheckUrlPath: /dockerhealth
+```
+
 ### 3.5 Ribbon
 
 ### 3.6 Bus
