@@ -1,7 +1,7 @@
 # AWS Best Practices
 At this point we're going to talk about...
 
-[Replace this logo] ![BEEVA](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![AWS ](static/aws.png  "AWS Best Practices")
 
 ## Index
 
