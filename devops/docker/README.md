@@ -18,7 +18,7 @@
 #### Docker-Compose
 Docker-compose is a tool that allows to define multiple docker-containers using a configuration file and run them with a single command.
 
-This is an example of a docker-compose configuration file:
+This is an example of a docker-compose.yml configuration file:
 ````yaml
 mongodb:
   image: mongodb
@@ -46,6 +46,15 @@ kafka:
     - /var/run/docker.sock:/var/run/docker.sock
 
 ````
+You can run the containers with the command
+````sh
+docker-compose up
+````
+Docker compose generates an isolated enviroment when launching based on the name of the project directory. You can set a custom project name by using the -p command line option or the COMPOSE_PROJECT_NAME environment variable
+````sh
+docker-compose -p myproject up
+````
+
 
 
 
