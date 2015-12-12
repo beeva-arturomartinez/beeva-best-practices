@@ -12,9 +12,25 @@
 
 ### Writing applications
 
-* SparkContext
-* Transformations and actions
-* Broadcast variables and accumulators
+#### SparkContext
+#### Transformations and actions
+
+Do not return all the elements of a large RDD back to the driver. Avoid using collect and count on large RDDS, use instead take or takeSample to control the number of elements returned. Be careful using actions like  countByKey, countByValue, collectAsMap.
+
+Chose the transformations in order to minimize the number of shuffles.
+
+Avoid using groupByKey. Consider using the following two functions instead:
+* combineByKey can be used when you are combining elements but your return type differs from your input value type.
+* foldByKey merges the values for each key using an associative function and a neutral "zero value".
+* reduceByKey is preferred to perform an associative reduction operation. For example, rdd.groupByKey().mapValues(_.sum) will produce the same results as rdd.reduceByKey(_ + _) but the latter will perform local sums before sending the values to combine after shuffling.
+
+Avoid using reduceByKey when the output value type differs from the input type of elements to reduce. To reduce all elements into a collection of elements consider using aggregateByKey instead.
+
+Avoid using the flatMap + join + groupBy pattern. When two datasets are already grouped by key and you want to join them and keep them grouped, you can just use cogroup.
+
+One exception to the general rule of trying to minimize the shuffles is when you force them to increase parallelism. For example, when you process a few large unsplittable files and after loading them they have not been splitted into enough partitions to take advantage of all the available cores. In this scenario invoking repartiton with a high number of partitions is preferred.
+
+#### Broadcast variables and accumulators
 
 ### Launching applications
 
