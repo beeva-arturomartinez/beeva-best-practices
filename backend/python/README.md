@@ -701,6 +701,29 @@ In general, the use of decorators is recommended in order to improve code readab
 #### 16.2. Librerías útiles
 #### 16.3. Mocks
 ### 17. Project structure
+
+Projects in Python can have different structures depending on the target that they have, or depending on the needs and policies of development teams. In general, Python does not introduce hard requirements in this aspect and the development team has flexibility to decide on the best approach.
+
+#### 17.1. Top level folders
+
+In relation to project folders, the following ones are to be considered into account:
+
+* doc: To keep project documentation, which can be in any type of format.
+* projectname: This one would be the one to keep the project's code. The chosen name is usually the name of the project as opposed to src in other langauges. One thing worth noting is that the subfolders of this project should have the __init__.py file so that Python understands that they contain code.
+
+#### 17.2. Top level files
+
+* README: The readme file that contains the introduction and main description of the project. Usually in markdown format in order to work with github or simiral solutions.
+* LICENSE: It describes the licensing scheme of the project.
+* requirements.txt: It contains the dependencies of the Python application. It is generally used to ensure that the required dependencies are installed before the application's installation. Both manual or automatic installations of the application make use of it.
+* setup.py: Describes the way to install the project. It is used both in manual and automatic installations.
+
+#### 17.3 Example
+
+As a reference example, the following link shows the structure of a Python project for distributing it in PyPI (please see section 18):
+
+https://pypi.python.org/pypi/an_example_pypi_project
+
 ### 18. Application packaging and distribution
 
 In Python, there are several ways for packaging and distributing applications, libraries or frameworks. Depending on the case, one might be more suitable than others. As an overview, the following is a list of the available alternatives:
