@@ -229,6 +229,7 @@ And as it often happens, everything’s connected so, as it’s been explained b
 - It is not recommended to perform two consecutive blank lines.    
 
 Example without break line:
+
 ``` java
 package examples.java
 public class Bicycle {
@@ -255,7 +256,9 @@ public class Bicycle {
         
 }
 ```
+
 Example with break line:
+
 ```java
 package examples.java
 
@@ -292,14 +295,16 @@ public class Bicycle {
 
 ####Distance between variables
 - ***Local variables*** should be declared as close to their usage as possible.  This is helpful to code’s readability. It is not practical to keep on scrolling up just to look for the variables. Control variables for loops should be declared within the loop statement.
+
 ```java
-//eclared within the loop
+//Declared within the loop
 for (ObjectMember member : mapObjectMember.values()) {
     nodeGroup.setId(member.getId());
     nodeGroup.setName(member.getMember());
     }
 }
 ```
+
 - ***Instance variables*** should be declared at the top of the class.  
 Instance variables example:
 ```java
@@ -322,9 +327,11 @@ public class Employee{
    }
 }
 ```
+
 ####Dependent Functions.
 - If one function calls another, they should be vertically close, and the caller should be above the caller.   
 Dependent function example:
+
 ```java
 ...
    public void a() {
@@ -338,7 +345,8 @@ Dependent function example:
    public void c() {}
 ...
 ```
-####Ordening
+
+####Ordering
 - The following are the three basic points for ordering bits of code:   
   - ***Direct dependence:*** when a function calls another. (example given above)
   - ***Affinity:*** Groups of functions perform similar operations.
@@ -347,8 +355,8 @@ Dependent function example:
 
 ###Horizontal Formatting
 - ***Line Length***, A line with more than 120 characters is not recommended, because they are not handled well by many terminals and tools.
-
 - ***Wrapping Lines***, When an expression can't fit in a single line, break it according to these general principles: after a comma, before an operator and prefer higher-level breaks.
+
 ```java
 //example of break after comma
     methodA(param1, param2, param3, 
@@ -362,7 +370,9 @@ Dependent function example:
   var1 = var2 * (var3 + var4) 
       - var5; //This is better than previous one.
 ```
+
 - Line wrapping for "if": Double indentation should be used. 
+
 ```java
 //double indentation
 if (booleanA || booleanB || 
@@ -371,15 +381,19 @@ if (booleanA || booleanB ||
     System.out.println("***");
 }
 ```
+
 - If you do not use braces for a "if", you should do a break line with indentation.
+
 ```java
 if (booleanA) System.out.println("***");  // NO!
 
 if (booleanA) 
    System.out.println("***");  // YES!
 ```
+
 - ***Declaration alignment***, It is recommended to declare a single variable per line, and it is not recommended to align the variable name.
 Example:
+
 ```java
 //not recommended
 boolean var1;
@@ -399,6 +413,7 @@ int var5;
   - A keyword followed by a parenthesis should be separated by space.
   - A blanck space should appear after commas in arguments lists.
   - Binary operators.
+
 ```java
 // Keyword example
 if (condition) { //YES!!
@@ -420,6 +435,7 @@ a = (b+c)*(d+f); // NO!!
 - ***Indentation***, use four spaces for indentation to indicate nesting of control structures. Without indentation, programs would be virtually unreadable by humans.
 
 Indentation example:
+
 ```java
 class Example {
   int[] myArray = { 1, 2, 3, 4, 5, 6 };
@@ -495,7 +511,6 @@ public class User {
 Commonly, all variables for an object should be private, and there should be methods to get or set their values if it's necessary to be exposed. Getters and setters enables to envelope that data, validating it, transforming it, synchronizing it, etc. It prevents other external modifications which potentially make the object unusable.
 
 The next example shows how the setters of the attributes can validate and transform the input, and the attributes are not accesibles by getters, only obtain the *area*.
-
 
 ```java
 import java.math.BigDecimal;
