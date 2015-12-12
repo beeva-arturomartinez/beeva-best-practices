@@ -15,6 +15,7 @@ At this point we're going to talk about...
 * [Services](#services)
 * [EC2](#ec2)
 * [DynamoDB](#dynamodb)
+* [IAM](#iam)
 
 ---
 ## Introduction
