@@ -522,9 +522,170 @@ Main changes in Python 3.x respect to Python 2.x [1]:
 #### 10.4. Condicionales  
 #### 10.5. Bucles
 ### 11. Functions
-#### 11.1. Uso de las funciones  
-#### 11.2. Lambda
-#### 11.3. Decoradores    
+
+Functions in Python can be used as part of a script and as part of modules, in a similar fashion as methods of a class as well. In this section their use and possibilities are covered as well as the recommended practice with functions.
+
+#### 11.1. General use of functions
+
+In this section the general properties of functions are covered.
+
+As a quick introduction, the syntax for defining a function in Python is the following one:
+
+```python
+def <functionname>(arg1, arg2,... argN):
+    <statements>
+    <statements>
+```
+
+An example of a simple function would be:
+
+```python
+def hello():
+    print 'hi there!'
+```
+
+While the call to that very same function it is performed as:
+
+```python
+hello()
+hi there!
+```
+
+Functions may or may not have a return statement. Please take into account that when no return statement is defined a None object is returned underneath in order to avoid errors.
+
+##### 11.1.1. Functions as objects
+
+The first thing to take into account in Python in relation to functions is that they are just another type of object. Hence, it is possible to pass a function's object reference to another function in order to perform operations with it.
+
+The following code shows how to obtain a the hello function's object reference:
+
+```python
+>>> hello
+<function hello at 0x7f2cd3a25668>
+>>> myref = hello
+>>> myref
+<function hello at 0x7f2cd3a25668>
+```
+
+For example it is possible to define the following function, which computes an operation on a list based on a function passed to it:
+
+```python
+>>> list = [1,2,4,5,7,8]
+>>> list
+[1, 2, 4, 5, 7, 8]
+>>> def plusone(myelem):
+...     return myelem + 1
+...
+>>> def bytwo(myelem):
+...     return myelem * 2
+
+>>> def complexfunc(list, func):
+...     newlist = []
+...     for x in list:
+...         newlist.append(func(x))
+...     return newlist
+...
+>>> complexfunc(list, plusone)
+[2, 3, 5, 6, 8, 9]
+>>> complexfunc(list, bytwo)
+[2, 4, 8, 10, 14, 16]
+```
+
+This approach allows developing functions or frameworks that provide a greater level of abstraction and power. However, the added complexity should be backed up by a relevant need.
+
+
+##### 11.1.2. Function polymorfism
+
+In Python, objects of different types can have a the same type of interfaces or protocols implemented, while the operation performed is understood in a different way. For example, the + operation can be applied both to strings and to numbers with a different interpretation, concatenation in the first case and addition in the second:
+
+```python
+>>> 'spam' + 'eggs'
+'spameggs'
+
+>>> 5 + 4
+9
+```
+
+And therefore, a function that does not force its parameters to be of a fixed type, it is a polymorfic function. As it can be seen in the following example, the plus function can operate on different object types:
+
+```python
+>>> def plus(one, two):
+...     return one + two
+...
+>>> plus('spam', 'eggs')
+'spameggs'
+>>> plus(5, 4)
+9
+```
+
+In general, functions developed in Python should take advantage of this property since the become more generic and can be reused in the future without having to worry about the type of objects they receive as parameters. In this way, a function will be able to operate on object types that do not even exist yet. In case one of the objects processed by the function does not support the interfaces or protocols that are required by the function, the function will raise an error to indicate the case.
+
+##### 11.1.3. Scopes
+
+In Python, there are different scopes that a variable name can be under. These are the four possible scopes:
+
+* Python built-in scope.
+* Global scope: File scope or module namespace.
+* Enclosing function scope: Superior functions to the current one, when function nesting is used.
+* Local function scope: The scope of the current function.
+
+Python starts the search from the local scope until the built-in one. This is why some errors do not appear until certain executions of the file, when the function with the error is executed.
+
+As a general rule, it is recommended to minimise global variables in modules, since that makes code difficult to understand and error prone. This is because multiple functions may interact with the same object or variable and it is difficult to follow the evolution of the state of such object.
+
+More importantly, cross file variable modifications should be avoided as well. This is the case when an object within a file is modified by a function within another module or file. Hence, beyond the previous drawback a dependency between files is introduced.
+
+#### 11.2. Lambda functions
+
+The Lambda expression, allows defining and applying an inline function (functions contained in a single line), an they are usually used within another function call. The same line therefore is a function definition and function call.
+
+For example, in the case of the previous complexfunc, instead of passing an existing function, lambda can be used to define one for it:
+
+```python
+# Multiply by 2 instead of passing the by two function reference:
+>>> complexfunc(list, (lambda x: x * 2))
+[2, 4, 8, 10, 14, 16]
+# Identify odd and even numbers:
+>>> complexfunc(list, (lambda x: x % 2 == 0))
+[False, True, True, False, False, True]
+```
+
+As it can be noticed, the function passed to complexfunc is no longer defined one or several lines separated from the call. This allows understanding the call to complexfunc just when read, because no other function's definition needs to be looked for.
+
+As another example, the Spark data processing engine allows developing against its API through Python with pyspark. Spark creates datasets (RDDs) by transforming and or combining other datasets, and requires the developer to pass a function to perform the conversion. Within the same dode line it is possible to define the function and to call it as it can bee seen below:
+
+```python
+newrdd = inputrdd.filter(lambda x: x if (x.get('postalcode') != 'SW1A0AA') else None)
+```
+
+The use of lambda functions is recommended since it allows reducing the amount of functions that is used in the code and it improves code readability. However, the use should be done in cases where such function is simple and it is seldomly used for the same operation. In case the previous requirements are not met, a regular function should be created.
+
+
+#### 11.3. Decorators
+
+In Python, decorators are a way of transforming functions or methods. Before their introduction, these operations where performed after the definition itself, which separated these two parts of the functions characteristics, being the effect more notable in the case of large functions or methods:
+
+```python
+def foo(cls):
+    pass
+foo = synchronized(lock)(foo)
+foo = classmethod(foo)
+```
+
+In order to keep all the declaration related parts together, the @ symbol is used prior to the function declaration in order to perform these same operations:
+
+```python
+@classmethod
+@synchronized(lock)
+def foo(cls):
+    pass
+```
+
+Decorators and their motivations are described in [PEP 318](https://www.python.org/dev/peps/pep-0318/), where all the related information can be found. For Python 3, class decorators are also available as described in [PEP 3129](https://www.python.org/dev/peps/pep-3129/).
+
+In general, the use of decorators is recommended in order to improve code readability.
+
+
 ### 12. Programming paradigms
 #### 12.1. Tipo de variables   
 #### 12.2. Herencia
