@@ -459,7 +459,92 @@ enum MyEnum {
 - Nowadays, IDEs such as Eclipse allow us to format code automatically. IDEs establish a lot of parameters like indentation, braces, white spaces, blank lines, control statements, line wrapping, comments etc. When someone start a new project, it is recommended to define these parameters, so all developers will have the same style and format.
 
 ## Encapsulation
----
+
+It allows the data abstraction inside an object. For example, if an object needs to be modified its internal data structure, it won't change (if it's possible) the external use of this object. Moreover, an object doesn't have to publish all its fields, it doesn't expose them through methods or public fields.
+
+There are some advices to use correctly the encapsulation. It's not as simple as make all the fields accesible through getter and setter methods. In fact, this kind of implementation is more common for beans which don't have any extra funcionality, such as DTOs (Data Transfer Object).
+
+In the next example, we can see a bean with a simple constructor and all its fields exposed through getters.
+
+```java
+public class User {
+	private String name;
+	private String email;
+	private Date dateOfBirth;
+
+	public User(String name, String email, Date dateOfBirth){
+		this.name = name;
+		this.email = email;
+		this.dateOfBirth = dateOfBirth;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public String getName(){
+		return name;
+	}
+}
+```
+
+Commonly, all variables for an object should be private, and there should be methods to get or set their values if it's necessary to be exposed. Getters and setters enables to envelope that data, validating it, transforming it, synchronizing it, etc. It prevents other external modifications which potentially make the object unusable.
+
+The next example shows how the setters of the attributes can validate and transform the input, and the attributes are not accesibles by getters, only obtain the *area*.
+
+
+```java
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class Rectangle {
+	private double height;
+	private double width;
+
+	public void setHeight(double height){
+		if (height <= 0) throw new IllegalArgumentException();
+	    this.height = getRounded(height);
+	}
+
+	public void setWidth(double width){
+		if (width <= 0) throw new IllegalArgumentException();
+	    this.width = getRounded(width);
+	}
+
+	private double getRounded(double value){
+		BigDecimal bd = new BigDecimal(value);
+	    bd = bd.setScale(2, RoundingMode.HALF_UP);
+	    return bd.doubleValue();
+	}
+
+	public double getArea() {
+		return height * width;
+	}
+}
+```
+
+### Law of Demeter
+
+It's a guideline to develop software with loose coupling. It specifies that a module should not
+know about the internal workings of the objects it uses. Like encapsulation determines, the internal structure and functioning shouldn't be exposed, it means that an object knows about the objects it uses and their interface, it shouldn't know about the internal objects (or methods) of these objects.
+
+There is a clear scenario of what LoD allows: An object A can call a method of an object instance B, but object A should not access through object B to another object C, to call C methods, B's interface should be modified in order to directly serve to object A's the calls to C, propagating it to any relevant subcomponents. 
+
+The Law of Demeter says that a method f of a class C should only call methods of:
+* C
+* Objects created by f
+* Objects as arguments on f
+* Objects as variables on C
+
+Usually, this law it's applied strictly, because sometimes, we are using third party libraries which don't allow us to apply the rule completly. LoD should be applied, whenever possible, to follow the encapsulation definition.
+
+
+In summary, the objects **expose behavoir** and **hide data**, the interface of an object should isolate the internal data of that object.
+
 
 ## Exception handling
 
