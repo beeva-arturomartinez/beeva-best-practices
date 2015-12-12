@@ -426,10 +426,10 @@ Zuul consists of filters that are responsible for different tasks based on the t
 
 There are four standard types of filters that are related to the lifecycle of a request (see the diagram below):
 
-- PRE Filter: These type of filters are executed before the request arrives at the destination
-- ROUTING Filter: These type of filters handle routing request to an origin. Here is where **Ribbon Client** acts
-- POST Filter: These type of filters are executed after the request has been routed to the destination. For example, we can modify some aspects of the response as headers, before sending it back to clients
-- ERROR Filter: When there is an error in one of the previous described filters, this type of filter comes into action
+- **PRE Filter**: These type of filters are executed before the request arrives at the destination
+- **ROUTING Filter**: These type of filters handle routing request to an origin. Here is where **Ribbon Client** acts
+- **POST Filter**: These type of filters are executed after the request has been routed to the destination. For example, we can modify some aspects of the response as headers, before sending it back to clients
+- **ERROR Filter**: When there an error arises from one of the previous described filters, this type of filter comes into action
 
 There is another type of filter that allows us to create new and **custom** filters that executes explicitly, that is, these filters respond the request by themselves and prevent the request from spreading to the microservices. This behaviour can be useful to define some endpoints for health checking purposes.
 
@@ -439,17 +439,15 @@ There is another type of filter that allows us to create new and **custom** filt
 
 #### Spring Cloud Zuul Example
 
-Zuul is included in Spring Cloud as an annotation: @EnableZuulProxy
+Zuul is included in Spring Cloud as an annotation: **@EnableZuulProxy**
 
 ```java
 @SpringBootApplication
 @EnableZuulProxy
 public class ZuulServer {
 
-    public static void main(String args[]){
-
+    public static void main(String[] args){
         new SpringApplicationBuilder((ZuulServer.class)).web(true).run(args);
-
     }
 }
 ```
@@ -470,7 +468,7 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
   instance:
       leaseRenewalIntervalInSeconds: 5
-      healthCheckUrlPath: /dockerhealth
+      healthCheckUrlPath: /health
 ```
 
 ### 3.5 Ribbon
