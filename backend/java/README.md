@@ -966,7 +966,7 @@ The following examples use Spring to code tests.
 
 ## Hints about code optimization
 
-One of the essential aspects in today's programming techniques is the optimization of the source code. The quality of the code has direct impact on the resources needed for its implementation (memory, disk, bandwidth) and is fully decisive in the final performance of the application.
+One of the essential aspects in today's programming techniques is the optimization of the source code. The quality of the code has direct impact on the resources needed for its implementation (memory, disk, bandwidth, etc.) and is fully decisive in the final performance of the application.
 
 To get a quality source code, is essential to have a phase of powerful technical design, where complex situations that require a detailed study of the solution (applications requiring synchronization mechanisms especially complex, critical performance needs, etc.) are foreseen.
 
@@ -976,7 +976,7 @@ In order to meet high quality standards, it is interesting to also have Code Rev
 
 #### Basic types
 
-##### Text strings
+##### Working with text strings
 
 When working with strings, usually small mistakes are made. If this small mistakes are used extensively in the code, the overall application performance can be affected. These are some of the most common errors:
 
@@ -986,43 +986,39 @@ Instead of using `string = new String ("chain")` it is better to use `chain = "s
 
 ###### Using strings to compare characters
 
-Instead of using substring for comparing a single character, the *chartAt()* method must be used. This solution is much more efficient: ```exampleString (i).equals (' ')``` instead of ```exampleString.substring(i, i+1).equals("")```.
-
-###### Misuse of StringBuffer
-
-A common mistake is to create a string to obtain the length of a *StringBuffer*: ```stringBuffer.toString().length()```. It is more efficient to use ```stringBuffer.length()```.
+Instead of using substring for comparing a single character, the *chartAt()* method must be used. This solution is much more efficient: ```exampleString(i).equals (' ')``` instead of ```exampleString.substring(i, i+1).equals("")```.
 
 ###### Concatenation of strings using String
 
-The concatenation of *String* objects impacts on performance because of the creation of new temporary objects, that can consume a lot of memory. The String instances are immutable objects. This means that once created the programmer cannot modify its content, making necessary the internal creation of a new *String* with each concatenation. To modify a *String* repeatedly you must use a StringBuffer and then convert it to String.
+The concatenation of *String* objects impacts on performance because this conconcatenation triggers the creation of new temporary objects, that can consume a lot of memory. Since *String* instances are immutable objects, making necessary the internal creation of a new *String* with each concatenation. To modify a *String* repeatedly you must use a StringBuffer and then convert it to String.
 
-Wrong
+> Inmutable objects are the ones that, once created, don't allow to modify its content
 
-```
-for (int i=0; i<10; i++) {
-	exampleString = exampleString + computeSuffix(i);
+```java
+	for (int i=0; i<10; i++) {
+		exampleString = exampleString + computeSuffix(i);
 }
 ```
 
-Right
+A better aproach would be:
 
+```java
+	StringBuffer exampleStringBuffer = new StringBuffer();
+	for (int i=0; i<10; i++) {
+		exampleStringBuffer.append(computeSuffix(i));
+	}
+	exampleString = exampleStirngBuffer.toString ();
 ```
-StringBuffer exampleStringBuffer = new StringBuffer();
-for (int i=0; i<10; i++) {
-	exampleStringBuffer.append(computeSuffix(i));
-}
-exampleString = exampleStirngBuffer.toString ();
-```
 
-###### Using the default size on a *StringBuffer*
+###### Using the StringBuffer class
 
-*StringBuffer* uses an array of char to store the content. To expand its size, creates one new greater array, initializes it with the contents of the previous and discards the old array. This process consumes memory and CPU time.
+A common mistake is to create a string to obtain the length of a *StringBuffer*: ```stringBuffer.toString().length()```. It is more efficient to use ```stringBuffer.length()```.
+
+Because *StringBuffer* uses an array of char to store the content, in order to expand its size, it creates one new greater array, initializes it with the contents of the previous and discards the old array. This process consumes memory and CPU time.
 
 The default size to create a *StringBuffer* with the constructor without parameters is 16 positions. To increase capacity, the new size will be at least twice as much as the previous.
 
-For example, we deal with records that end up being 80 characters and use *StringBuffer* object with the initial capacity by default (16) to which we are adding less than 16 character strings. The *StringBuffer* would end with 142 reserved characters and each 182 characters would have been wasted.
-
-If the exact size is not known, the chosen value should be enough so that in most cases it is not necessary to increase the capacity.
+If the exact size is not known when initializing, the chosen value should be enough so that in most cases it is not necessary to increase the capacity.
 
 Obviously, it is not recommended stablishing excesive size to *StringBuffer* objects, not to keep reserved more memory than necessary. Generally, it is advisable to give enough size to not resize the *StringBuffer* in the majority of cases, but not much more.
 
@@ -1032,35 +1028,27 @@ From Java version 2, the constant and literal *String* are canonical: this means
 
 Taking advantage of this implementation, one efficient way to compare two strings is to use this internal table and compare references instead of the contests of each String.
 
-To access this internal table, Java provides the *intern()* method, that returns the reference in the table. Suppose two String defined as *s* and *t*, it holds that ```s.intern() == t.intern() if and only if s.equals(t) = true```.
+To access this internal table, Java provides the *intern()* method, that returns the reference in the table. Suppose two String defined as *s1* and *s2*, it holds that ```s1.intern() == s2.intern() if and only if s1.equals(s2) = true```.
 
 Instead of comparing like this:
 
-```
-Boolean compareDayOfTheWeek (String s)
-{
-	if (s.equals("Monday")) {
-		...
-	} 
-	else if (s.equals("Tuesday")) {
-		...
+```java
+	Boolean compareDayOfTheWeek (String s)
+	{
+		if (s.equals("Monday")) { ...	} 
+		else if (s.equals("Tuesday")) { ... }
 	}
-}
 ```
 
 It's more efficient to do it like this:
 
-```
-Boolean compareDayOfTheWeek (String s)
-{
-   String s2 = s.intern ();
-   if (s == "Monday") {
-		...
+```java
+	Boolean compareDayOfTheWeek (String s)
+	{
+		String s2 = s.intern ();
+		if (s == "Monday") {	...}
+		else if (s == "Tuesday") {...}
 	}
-	else if (s == "Tuesday") {
-       ...
-   }
-}
 ```
 
 This optimization is recommended only when comparing a restricted set of values of String objects (days of the week, seasons of the year, etc.), since intern has a significant cost associated with: seeks the chain on the inner table, and if the string does not exist, it is recorded on the table.
@@ -1071,21 +1059,19 @@ The use of *StringTokenizer* implies a high consumption of resources, so it is a
 
 ###### Copying strings "manually"
 
-The use of the ```System.arraycopy()``` method is advised for copying of arrays, better than performing a loop. It is efficient and is a proven solution.
+Instead of performing a loop to copying arrays
 
-Not recommended
-
-```
-int len = arr1.length;
-for (int i = 0; i)< len; i++) {
-	arr2 [i] = arr1 [i];
-}
+```java
+	int len = arr1.length;
+	for (int i = 0; i)< len; i++) {
+		arr2 [i] = arr1 [i];
+	}
 ```
 
-Recomended
+The use of the ```System.arraycopy()``` method is advised, because it is efficient and it is a proven solution.
 
-```
-System.arraycopy(arr1, 0, arr2, 0, arr1.length);
+```java
+	System.arraycopy(arr1, 0, arr2, 0, arr1.length);
 ```
 
 ##### Collections
@@ -1107,13 +1093,13 @@ In addition, in order to add the flexibility provided by the polymorphism, make 
 
 There are also classes that provide algorithms for handling of collections:
 
-* *Arrays* provides algorithms for handling operations on arrays
-* *Collections* allows to get fully synchronized data structures from other data structures. Special attention must be put when using them (see the section dedicated to synchronization)
+* *Arrays* provides algorithms for handling operations on arrays.
+* *Collections* allows to get fully synchronized data structures from other data structures. Special attention must be put when using them (see the section dedicated to synchronization).
 
-It is convenient to stablish the size of the collections correctly, making correct use of provided builders, in a way that will save resources at run time. For example:
+It is convenient to **stablish the size of the collections correctly**, making correct use of provided builders, in a way that will save resources at run time. For example:
 
-* for the *Vector* class, the preferred builder is the one which allows establishing the initial capacity and sets a parameter with the desired default increase: ```Vector (int initialCapacity, int capacityIncrement)```.
-* for the *HashMap* class, a similar situation arises. Of all the available constructors, it is recommended to use the one which allows establishing an initial size and load factor (percentage of occupation that triggers a resize of the hash table): ```HashMap (int initialCapacity, float loadFactor)```. The bigger the load factor is, the less memory is occupied by the collection, but more expensive is the search for elements, affecting the *get()* and *put()* methods.
+* For the *Vector* class, the preferred builder is the one which allows establishing the initial capacity and sets a parameter with the desired default increase: ```Vector (int initialCapacity, int capacityIncrement)```.
+* For the *HashMap* class, a similar situation arises. Of all the available constructors, it is recommended to use the one which allows establishing an initial size and load factor (percentage of occupation that triggers a resize of the hash table): ```HashMap (int initialCapacity, float loadFactor)```. The bigger the load factor is, the less memory is occupied by the collection, but more expensive is the search for elements, affecting the *get()* and *put()* methods.
 
 Another often neglected aspect is to keep in-memory collections that already are not going to be used, consuming large amounts of resources unnecessarily. To avoid this situation we recommend using:
 
@@ -1124,10 +1110,10 @@ Another often neglected aspect is to keep in-memory collections that already are
 
 A common practice in managing dates is to use the *SimpleDateFormat* class. The creation of a *SimpleDateFormat* is more expensive both in memory consumption and CPU, than the formatting of a date with the parse method of the same class. If you frequently use SimpleDateFormat it is recommended to have a pool of objects and reusing them.
 
-```
-exampleFormater = PoolSimpleDateFormat.getFormater();
-exampleFormater.applyPattern (pattern);
-exampleFormater.parse ();
+```java
+	exampleFormater = PoolSimpleDateFormat.getFormater();
+	exampleFormater.applyPattern (pattern);
+	exampleFormater.parse ();
 ```
 
 On methods that are used frequently, and this being possible, ```System.currentTimeMillis ()``` must be used, instead of using ```java.util.Date ()``` or ```java.util.GregorianCalendar```, because it is much less expensive. For example, to calculate the elapsed time between two instants, it is much more efficient to perform the calculation in milliseconds (long type) than instantiating two Date objects and comparing them.
@@ -1136,31 +1122,27 @@ On methods that are used frequently, and this being possible, ```System.currentT
 
 Another example, could be controlling when a cache data expires. The expiration time can be calculated by adding the number of milliseconds from the current date plus the validity time in milliseconds.
 
-Not optimized
+Not optimized solution:
 
-```
-GregorianCalendar expiration = new GregorianCalendar();
-expiration.add (GregorianCalendar.SECOND, validityTimeInSeconds);
-cacheObject.setExpiration (expiration);
-
-// Check if it has expired
-if (cacheObject.getExpiration().before(
-new GregorianCalendar())) {
-   // It has expired
-	...
-}
-```
-
-Optimized
-
-```
-cacheObject.setExpiration(
-	System.currentTimeMillis () + validityTimeInMillis);
+```java
+	GregorianCalendar expiration = new GregorianCalendar();
+	expiration.add (GregorianCalendar.SECOND, validityTimeInSeconds);
+	cacheObject.setExpiration (expiration);
 	
+	// Check if it has expired
+	if (cacheObject.getExpiration().before( new GregorianCalendar())) {
+	   // It has expired
+	}
+```
+
+Optimized solution:
+
+```java
+	cacheObject.setExpiration(System.currentTimeMillis () + validityTimeInMillis);
+		
 	// Check if it has expired
 	if (cacheObject.getExpiration () > System.currentTimeMillis ()) {
 	   // It has expired
-	   ...
 	}
 ```
 
@@ -1170,328 +1152,157 @@ cacheObject.setExpiration(
 
 The use of the casting has impact on performance and in the majority of cases there are alternatives with better performance.
 
-If it is necessary to perform multiple casting operations on the same object, it is recommended to create a temporary object and make a unique casting:
+If it is necessary to perform multiple casting operations on the same object, it is recommended to create a temporary object and make a unique casting, instead of performing the casting each time that is needed:
 
-
-Wrong
-
-```
-if (myObj instanceof MyClass) {
-	return ((MyClass) myObj).meth1() + ((MyClass) myObj).meth1();
-}
+```java
+	if (myObj instanceof MyClass) {
+		return ((MyClass) myObj).method1() + ((MyClass) myObj).method1();
+	}
 ```
 
-Right
+A better solution would be:
 
-```
-if (myObj instanceof MyClass) {
-	MyClass temp = (MyClass) myObj;
-	return temp.meth1 () + temp.meth1 ();
-}
+```java
+	if (myObj instanceof MyClass) {
+		MyClass temp = (MyClass) myObj;
+		return temp.method1() + temp.method1();
+	}
 ```
 
 ##### The use of Static
 
 The properties of objects of a class that are common to all instances must be defined at class level (*static*). In particular, the constant data must be defined as a Java constant (*static final*).
 
-Wrong
-
-```
-public class Order {}
-	private String tableName;
-	public String getTableName();
-}
-```
-
-Right
-
-```
-public class Order {}
-	private static String tableName;
-	public static String getTableName();
-}
+```java
+	public class Order {
+		private String tableName;
+		public String getTableName();
+	}
+	...	
+	Order order = new Order ();
+	order.getTableName()
 ```
 
-Methods that are independent of a specific instance of a class, i.e. they are independent of their attributes, must be defined in the class as static. This prevents the creation of objects specifically created to call these methods.
+On this example, the "order" object is created specifically to call the *getTableName()* method. If that method is independent of the attributes of the calling object instance, this other aproach should be used:
 
-Wrong
-
-```
-Order order = new Order ();
-order.getTableName()
-```
-
-Right
-
-```
-Order.getTableName()
+```java
+	public class Order {
+		private static String tableName;
+		public static String getTableName();
+	}
+	...
+	Order.getTableName();
 ```
 
 ##### Serialization
 
-It must be taken into account that the serialization is very expensive. In those attributes that do not need to store when serializing (are not essential to retrieve the object when deserializing) the transient keyword must be used. Thus the references of the object tree is pruned and reduces the cost of serialization/deserialization.
+It must be taken into account that the **serialization is very expensive**. In those attributes that do not need to store when serializing (are not essential to retrieve the object when deserializing) the transient keyword must be used. Thus the references of the object tree is pruned and reduces the cost of serialization/deserialization.
 
 In some cases, it is more efficient to implement methods of serialization/deserialization (overwriting the *writeObject()* and *readObject()* methods).
 
-##### Handling exceptions
+##### Speculative Casting
 
-Exception handling is a costly mechanism. It is more efficient to write proactive code that checks certain conditions that may eventually produce exceptions.
+The Speculative Casting consists in producing exceptions to validate conditions:
 
-Inneficient
-
-```
-try {
-	myDiv = 1/myNum;
-} catch (AritmeticException ax) {
-	...
-}
-```
-
-Efficient
-
-```
-if (myNum! = 0) {
-	myDiv = 1/myNum;
-]
-```
-
-A special case is the use of Speculative Casting, which consists in producing exceptions to validate conditions:
-
-Inefficient
-
-```
-try {
-	((SomeObj) o).someOperation();
-} 
-catch (ClassCastException ccx) {
-	try {	
-		((SomeObj2)o).SomeOperation2();	
-	}	
-	catch(ClassCastException ccx) {	
-		...	
+```java
+	try {
+		((SomeObj) o).someOperation();
+	} 
+	catch (ClassCastException ccx) {
+		try {	
+			((SomeObj2)o).SomeOperation2();	
+		}	
+		catch(ClassCastException ccx) {...}
 	}
-}
 ```
 
-Efficient
+Instead of doing that, it is better to use the *instance of* operator:
 
-```
-if (o instanceof SomeObj) {
-	((SomeObj) o).someOperation();
-}
-else if (o instanceof SomeObj2) {
-	((SomeObj2) o).someOperation2();
-}
+```java
+	if (o instanceof SomeObj1) {
+		((SomeObj1) o).someOperation();
+	}
+	else if (o instanceof SomeObj2) {
+		((SomeObj2) o).someOperation2();
+	}
 ```
 
 This recommendation is limited to these improper uses of the casting. In general, the use of exceptions allows splitting application logic from error handling, for improved readability and maintainability of the code, so it is not recommended to carry out a possible improvement of performance by doing a worse design.
-
-#### Synchronization
-
-Although synchronization (synchronized code blocks and methods) is required to control access to resources common to several threads, it severely impacts performance. It should be tried to reduce its use as much as possible, extracting logic that does not need to run concurrently of synchronized code blocks.
-
-For example, if writing on a log trace must be done synchronously but some previous checks have to be done, this chekis should be done out the synchronized block:
-
-Inefficient
-
-```
-public void synchronized escribirTraza(int nivel, String componente, String mensaje) {
-	boolean trazaHabilitada = isEscribirTraza(nivel, componente);
-	if (trazaHabilitada) {
-		// Escribir la traza
-	}
-}
-```
-
-Efficient
-
-```
-public void escribirTraza(int nivel, String componente, String mensaje) {
-	boolean trazaHabilitada = isEscribirTraza(nivel, componente);
-	if (trazaHabilitada) {
-		// Escribir la traza
-		escribirTrazaSync(nivel, componente, mensaje);
-	}
-}
-
-public synchronized void escribirTrazaSync(int nivel, String componente, String mensaje) {
-	// Escribir la traza
-}
-```
-
-Thus, if having into account the application's configuration, there is no need to write the trace, no kind of synchronization is performed.
-
-There are situations in which a poor synchronization may penalize performance significantly. For example, in an application server many requests can run concurrently. Small synchronizations negatively affect performance. Another classic example is accessing a resource with multiple readings or a single write. In some situations in which access to a resource should be synchronized, multiple readings of the same concurrent or a unique writing may be allowed. This allows to reduce the reading time when there is concurrence.
-
-Below is a possible implementation:
-
-```
-public class LecturasConcurrentesRecurso {
-	// Numero de threads que están leyendo
-	private int lectores = 0;
-	
-	/ /Numero de threads que están escribiendo	private int escritores = 0;
-	
-	// Espera a que sea posible leer	
-	protected synchronized void antesLeer() {
-		while(escritores > 0) {
-			try {
-				wait();
-			} 
-			catch (InterruptedException iE) {
-			}
-		}	
-		lectores++;
-	}
-	
-	// Notifica que un thread termina la lectura
-	protected synchronized void despuesLeer() {
-		lectores--;
-		notifyAll();
-	}
-	
-	// Lectura de un recurso
-	public Object leer() {	
-		Object recurso = null;	
-		antesLeer();
-		
-		try {
-			// Leer recurso	
-		} finally {
-			despuesLeer();
-		}
-		
-		return recurso;
-	}
-	
-	// Espera a que sea posible escribir
-	protected synchronized void antesEscribir() {
-		while(lectores > 0  ||  escritores > 0) 
-		{
-			try {
-				wait();
-			} 
-			catch (InterruptedException iE) {}
-		}
-		escritores++;
-	}
-	
-	// Notifica que un thread termina la escritura
-	protected synchronized void despuesEscribir() {
-		escritores--;
-		notifyAll();
-	}
-	
-	// Escritura de un recurso
-	public void escribir(Object recurso) {
-		antesEscribir();                           
-		try {
-			// Escribir recurso
-		} finally {
-			despuesEscribir();
-		}
-	}
-}
-```
-
-In a multithread environment write access to files must be synchronized: it is a unique resource that is shared by all threads in the application.
-
-###### Using of iterators in a concurrent scenario
-
-While accessing a collection with an iterator, changing its structure e.g. in another thread by  using *put()* or *remove()*, the iterator on the next access will detect this change and launch the ConcurrentModificationException exception. This situation occurs even if the collection is synchronized.
-
-To control this situation the *ConcurrentModificationException* exception can be captured and properly treat the situation, for example, retrying the operation or if the collection that is being used is synchronized, also synchronize the access with the iterator. For example:
-
-```
-synchronized(coleccion) {
-	Iterator i = coleccion.iterator();
-	while(i.hasNext()) {
-		...
-	}
-}
-```
-
-#### Saving Resources
 
 ##### Unnecessary calculations and code
 
 It is imperative to pay special attention to the coding, to avoid unnecessary repetitive calculations.
 
-For example, it is a usual solution to convert data types as needed in the code. It is much better converting only once and reusing that already converted item:
+For example, it is a usual solution to convert data types as needed in the code:
 
-Inneficient
-
-```
-dato=obtenerRenta();
-System.out.println(dato.toString());
-clave=dato.toString()+"\001\"+tipo;
-nombreFichero=dato.toString()+"\"+timestamp+".xml";
+```java
+	calculation = performCalculation();
+	System.out.println(calculation.toString());
+	theKey = calculation.toString() + "_001_" + type;
+	filename = calculation.toString() + "_"+timestamp + ".xml";
 ```
 
-Efficient
+It is much better converting only once and reusing that already converted item:
 
-```
-dato=obtenerRenta();
-datoSt=dato.toString();
-System.out.println(datoSt);
-clave=datoSt+"\001\"+tipo;
-nobreFichero=datoSt+"\"+timestamp+".xml";
+```java
+	calculation = performCalculation();
+	calculationSt = calculation.toString();
+	System.out.println(calculationSt);
+	theKey= calculationSt + "_001_" + type;
+	filename= calculationSt+"_" + timestamp + ".xml";
 ```
 
-Another usual case of unnecessary calculations, is to establish conditions calculated at the end of a loop:
+Another usual case of unnecessary calculations, is to establish **calculated conditions at the end of a loop**:
 
-```
-for (int i = 0; i < myList.size(); i++) {
-	System.out.println(myList.get(i).toString());
-}
+```java
+	for (int i = 0; i < myList.size(); i++) {
+		System.out.println(myList.get(i).toString());
+	}
 ```
 
 The calculation of the termination condition will run on each iteration of the loop, so if the calculation is only performed once, an improvement in the overall performance of the loop is achieved:
 
-```
-int size = myList.size();
-for (int i = 0; i < size; i++) {
-	System.out.println(myList.get(i).toString());
-}
-```
-
-Unnecessary expensive function calls must be avoided. For example, an expensive function is invoked and then depending on a condition its result is used or not.
-
-Inneficient
-
-```
-// si l2 es null se crean t1 y t2, y se invoca a sumar(l1)
-public int sumarListas(Lista l1, Lista l2)
-{
-	TablaFormateada t1=new TablaFormateada(l1);
-	TablaFormateada t2=new TablaFormateada(l2);
-	if (l1==null) return;
-	temp1=sumar(t1);
-	if (l2==null) return;
-	temp2=sumar(t2);
-	return temp1+temp2;
-}
+```java
+	int size = myList.size();
+	for (int i = 0; i < size; i++) {
+		System.out.println(myList.get(i).toString());
+	}
 ```
 
-Efficient
+Unnecessary expensive function calls must be avoided. For example, an expensive function is invoked and then depending on a condition its result is used or not:
 
+```java
+	public int sumLists(List l1, List l2)
+	{
+		FormattedTable t1 = new FormattedTable(l1);
+		FormattedTable t2 = new FormattedTable(l2);
+		if (l1==null) return;
+		temp1 = sum(t1);
+		if (l2 == null) return;
+		temp2 = sum(t2);
+		return temp1 + temp2;
+	}
 ```
-// si l2 es null no hay proceso
-// no se crean los objetos t1 y t2 y no se invoca a sumar(l1)
-public int sumarListas(Lista l1, Lista l2) 
-{
-    if (l1==null || l2== null) return;
-    TablaFormateada t1=new TablaFormateada(l1);
-    TablaFormateada t2=new TablaFormateada(l2);
-    temp1=sumar(t1);
-    temp2=sumar(t2);
-    return temp1+temp2;
-}
+
+Reorganizing the conditions, the creation of the tables and in some cases, the first addition operation can be avoided:
+
+```java
+	public int sumLists(List l1, List l2) 
+	{
+	    if (l1 == null || l2 == null) return;
+	    FormattedTable t1 = new FormattedTable(l1);
+	    FormattedTable t2 = new FormattedTable(l2);
+	    temp1 = sum(t1);
+	    temp2 = sum(t2);
+	    return temp1 + temp2;
+	}
 ```
 
-Special care must be provided at the moment of the creation of objects: it is recommended not to create the objects at the beginning of the method, but instead along the code where will be used for the first time, so implementing conditional logic in some cases will avoid creating these objects.
+###### Creating objects
 
-Avoiding excessive conditional logic in methods. It is common to find methods that repeat conditions throughout the code. In many cases, rearranging the conditions simpler and more efficient methods are achieved. In other cases, it is recommended to separate the logic in various methods: one single method can do too much computing, causing redundant checks and unnecessary complexity.
+Special care must be provided at the moment of the creation of objects: it is recommended **not to create the objects at the beginning of the method**, but instead along the code where will be used for the first time, so implementing conditional logic in some cases will avoid creating these objects.
+
+###### Data type conversion
 
 Often there is inefficiency in invocations to methods, because data type conversion is needed to meet the signature of the original method.
 
@@ -1499,156 +1310,142 @@ For example, lets suppose an A method that receives an String with a sequence of
 
 When components or classes are created, it is recommended to define methods in its API with the parameters of input and output of the proper type, to avoid transformation of types to invoke it, or to transform its result.
 
-There are certain types of data that are constant throughout the execution of an application.  The first time they are accessed they take a value and from now on do not change. For these situations, it is advisable to make use of the Singleton pattern, avoiding that he is set to an attribute more than once. A possible implementation can be as follows:
-
-
-Class scope
-
-```
-private static Tipo dato;
-
-public static Tipo getDato()
-{
-	if (dato== null) {
-		// calculo dato
-	}
-	
-	return dato;
-}
-```
-
-Object scope
-
-```
-private Tipo dato;
-
-public Tipo getDato()
-{
-	if (dato== null) {
-		// calculo dato
-	}
-	
-	return dato;
-}
-```
-
 ##### Unnecessary recursion
 
 Recursion creates simple and elegant code, but it can be inefficient if not used properly.
 
-For example, imagine a hierarchical data structure (a tree) in which each node has a numerical value and the requirement is to get the maximum value from the tree. One solution could be to travel the tree recursively from the root once. Suppose now that another requirement is to calculate, for each node in the tree, the maximum of its descendants. A very inefficient implementation is traveling the whole tree and for each node , invoking the  method defined previously to get the maximum of its hive, since the tree is traversed many times. It is much more efficient to implement another recursive method that gets the maximum value from a node, calculating the maximum of its sub-nodes, so the algorithm only traverses the tree once.
+For example, imagine a hierarchical data structure (a tree) in which each node has a numerical value and the requirement is to get the maximum value from the tree. One solution could be to travel the tree recursively from the root once. Suppose now that another requirement is to calculate, for each node in the tree, the maximum of its descendants. A very inefficient implementation is traveling the whole tree and for each node, invoking the  method defined previously to get the maximum of its hive, since the tree is traversed many times. It is much more efficient to implement another recursive method that gets the maximum value from a node, calculating the maximum of its sub-nodes, so the algorithm only traverses the tree once.
 
 ##### Reusing objects
 
-In many applications, there are objects whose repetitive creation costs a lot of memory and CPU or processing time. In the first case is for example the externalized information (XML, files, etc.) that has to be converted to java objects to be used, and in the second case, connections to information systems.
+In many applications, there are objects whose repetitive creation costs a lot of memory and CPU or processing time. In the first case is for example the externalized information (XML, files, etc.) that has to be converted to Java objects to be used, and in the second case, connections to information systems.
 
-Examples of this type of objects can be:
+Examples of this type of objects are the following:
 
 * Java objects created from XML
-* *SimpleDateFormat*
-* graphical objects such as *Rectangle* and *Graphics*.
+* *SimpleDateFormat* instances
+* graphical objects such as *Rectangle* and *Graphics*
 
-To reduce the impact of the creation of this kind of objects, several alternatives are proposed, according to the characteristics of the objects:
+To reduce the impact of the creation of this kind of objects, several alternatives are proposed, according to the characteristics of the objects.
 
 ###### Objects for which only one instance is needed
 
-Objects are not modified once they have been created and, in multithread applications, they can be used by multiple threads concurrently.
+Some objects are not modified once they have been created and, in multithread applications, they can be used by multiple threads concurrently (e.g. the passing of externalized XML information to Java data structures).
 
-For example, on a service that formats messages prior to be sent to an information system. The service creates messages based on some data and a set of rules that establish the format. Format rules for each type of message are externalized and are converted to objects in order to use them. Objects that represent the set of formatting rules are those who are in this category of objects. For this type of object it is sufficient to have a single instance of the object and is much more efficient.
+There are several techniques that provide a single instance of the object, in order to avoid the expensive process of creating object instances:
 
-The performance improvement is due to to avoid repeatedly perform expensive object creation (e.g. the passing of externalized XML information to Java data structures tends to be expensive, even if that information is stored in memory in a DOM object). Also creating fewer objects, decreasing the size of the memory and therefore the Garbage Collecting time.
+* **Object catching**: instead of creating a new object, the object is requested to the object cache (if the object doesn't exist, a new one is created and added to the cache for forthcoming requests). The cache is accessed using a key that identifies the object. The proposed example shows how to create a cache with objects especialized on stablishing the format for each type of message rules.
+* **Singleton Design Pattern**: this pattern shows how to avoid the  creation of an object that never varies
+* **Canonical Objects**: another aproach is to create a named copy of each object (a prototype) that can be reused, and then accessed by name, rather than creating new objects identical one to another.
 
-There are several techniques that provide a single instance of the object:
+Example of Singleton Pattern:
 
-* **object catching**: instead of creating a new object, the object is requested to the object cache (if the object doesn't exist, a new one is created and added to the cache for forthcoming requests). The cache is accessed using a key that identifies the object. The proposed example shows how to create a cache with objects especialized on stablishing the format for each type of message rules.
-* **singleton design pattern** discussed earlier in this guide
-* **canonical objects**: another aproach is to create a named copy of each object (a prototype) that can be reused, and then accessed by name, rather than creating new objects identical one to another.
-
-Example of canonical object:
-
-```
-public class IntegerHelper {
-	public static final Integer ZERO = new Integer(0);
-	public static final Integer ONE = new Integer(1);
-	public static final Integer TWO = new Integer(2);
-}
-
-public class Tester {
-	public void doIt(Integer i) {
-	if (i == IntegerHelper.ONE) {
-		doSomething();
-	} else if (i == IntegerHelper.TWO) {
-		doSomethingElse();
-	} else {
-		...
+```java
+	private static Type value;
+	
+	public static Type getValue()
+	{
+	    if (value == null) {
+	        // calculate the value
+	    }	
+	    return value;
 	}
-}
 ```
 
-###### Objects that can not be directly reused after the first use
+Example of Canonical Object:
 
-Following the example of sending messages to an information system, it is recommended:
+```java
+	public class IntegerHelper {
+		public static final Integer ZERO = new Integer(0);
+		public static final Integer ONE = new Integer(1);
+		public static final Integer TWO = new Integer(2);
+	}
+	
+	public class Tester {
+		public void doIt(Integer i) {
+			if (i == IntegerHelper.ONE) {
+				doSomething();
+			} else if (i == IntegerHelper.TWO) {
+				doSomethingElse();
+			} else {
+				...
+			}
+		}
+	}
+```
 
-* Having a single object that is cloned whenever a new instance is needed. For cloning the object, the recommendation is to use the implementation provided by Java, with the *Cloneable* interface. Performance improvement is achieved by replacing the conversion of information that has been externalized to objects, which tends to be expensive even if externalized information is stored in memory, by the cloning of an object that is less expensive. The proposed example creates a cache of objects with the information structure for each type of message. To use a data structure it would be recovered from the cache, using the message type, and would be cloned.
-* Having an instance pool. When a client needs one gets it from the pool. To return it to the pool the object should be reestablished to the original state so that it can be reused. Performance improvements is achieved by replacing the conversion of the information that has been externalized to objects, which tends to be expensive even if externalized information is cached in memory, for the restoration of the object to its original state that is less expensive. The proposed example creates a pool for each type of structure of information objects. When a data structure is needed it will be recovered from the appropriate pool, it would be used, its initial state would be reestablished and the object would be returned to the pool.
-
-##### Pools and Caches
+##### Using object Pools and Caches
 
 In order to improve the overall performance of applications, usually mechanisms of pooling and catching are implemented.
 
-Pooling consists of booking n resources already created in previous instances in the application, so that when one resource of that specific kind is needed, ir is already available. In addition, pools have mechanisms of limitation on the number of resources that are used in a moment of time, to avoid excessive resource consumption.
 
-The number of resources must not be too large, not to consume lots of memory. One solution is to store in the pool a limited number of objects that allow reuse in the majority of cases. If the received request number is greater than the maximum number of reserved resources, new resources will be created. This accessory resources will not be included in the pool and will not be reused. Normally, this kind of pool handling is used for specific situations of extensive work load.
+###### Pooling
 
-A possible implementation of a Pool:
+Pooling consists of **reserving *n* resources** already created in previous instances in the application, so that when one resource of that specific kind is needed, ir is already available. In addition, pools have mechanisms of limitation on the number of resources that are used in a moment of time, to avoid excessive resource consumption.
 
-```
-private static int numMaxRecursos = 10;
-
-private static List pool = ArrayList(numMaxRecursos);
-
-// Método que obtiene un recurso del pool.
-public synchronized final static Object obtenerRecurso() {
-	if (pool.size() > 0) {
-	
-	   return pool.remove(pool.size());
-	
-	} else {
-	
-	   // Crear recurso
-	
-	   return CrearRecurso();	
-	}
-}
-
-//Método que devuelve un recurso al "pool" tras utilizarlo.
-public synchronized final static void devolverRecurso(Object recurso) {
-	if (pool.size() < numMaxRecursos) {
-	   pool.add(recurso);
-	}
-}
-
-public abstract Object CrearRecurso() {
-	//para crear un pool de un tipo específico hay que implementar una nueva clase
-	//que extienda de esta que defina este método para crear una instancia del tipo específico
-}
-```
+The number of resources must not be too large, not to consume lots of memory. One solution is to store in the pool a limited number of objects that allow reuse in the majority of cases. If the received request number is greater than the maximum number of reserved resources, new resources will can be created. This accessory resources will not be included in the pool and will not be reused. Normally, this kind of pool handling is used for specific situations of extensive work load.
 
 Ultimately, there must be a compromise between the benefits and the advantages provided by an object pool. These are the main benefits:
 
 * Reduction of the created objects and therefore, the overall memory consumption of the application. The more objects are created and the bigger is their size, the greater is the benefit.
 * Removal of the object creation time. The more objects are created and the more complex is their creation, the greater is the benefit.
 
-And the disadvantageS:
+And the main disadvantages:
 
 * Synchronizing the access to the pool can be a cause of inefficiency. The greater the concurrency is, the greater the inconvinience.
 * To a lesser extent, the occupation of memory by the constant pool throughout the execution. Possible oversizing of the pool. If the pool is too big, the objects allocated can consume memory and never be used. A previous study of volumetry is advised. It is recommended to define mechanisms to resize the pool dynamically according to the  concurrency volume. The proposed implementation is suitable in most cases.
 
-On the other hand, in order to avoid costly and repetitive accesses, a catching mechanism can be implemented. It is essential to consider the use of a cache only when the information that will contain will be reused in the application. The benefit of the use of caches is the reuse of objects, therefore, if objects are not reused, the cache only occupies memory and does not improve the performance. In particular, the developer has to ensure that the information that is being cached, is not already cached at a higher level.
+###### Catching
+
+On the other hand, in order to avoid costly and repetitive accesses, a catching mechanism can be implemented. It is essential to consider the use of a cache only when the information that will contain will be reused in the application. The benefit of the use of caches is the **reuse of objects**, therefore, if objects are not reused, the cache only occupies memory and does not improve the performance. In particular, the developer has to ensure that the information that is being cached, is not already cached at a higher level.
 
 For example, on some application operations are externalized in XML. Operations are performed in two steps: parsing the XML to a DOM object, and creating the instance of the operation from the DOM object. If there is a cache of operations, implementing a cache of DOM objects is counterproductive, because the information is cached twice.
 
-#### Access to resources
+#### Synchronization
+
+Although synchronization of code blocks and methods is required to control access to resources common to several threads, it can severely impact on performance. It should be tried to reduce its use as much as possible, extracting logic that does not need to run concurrently of synchronized code blocks.
+
+For example, if writing on a log trace must be done synchronously but some previous checks have to be done, this checks should be done out the synchronized block:
+
+```java
+	public void synchronized writeTrace(int level, String component, String message) {
+		boolean traceEnabled = isTraceEnabled(level, component);
+		if (traceEnabled) {
+			// write the trace
+		}
+	}
+```
+
+It is more efficient this way:
+
+```java
+	public void writeTrace(int level, String component, String message) {
+		boolean traceEnabled = isTraceEnabled(level, component);
+		if (traceEnabled) {
+			// write the trace
+			writeTraceSync(level, component, message);
+		}
+	}
+	
+	public synchronized void writeTraceSync(int level, String component, String message) {
+		// write the trace
+	}
+```
+
+Thus, if having into account the application's configuration, there is no need to write the trace, no kind of synchronization is performed.
+
+There are situations in which a poor synchronization may penalize performance significantly:
+
+* In an application server many requests run concurrently. Small synchronizations will affect negatively on performance. 
+* Accessing a resource to perform multiple reads or a single write.
+
+###### Using of iterators in a concurrent scenario
+
+While accessing a collection with an iterator, changing its structure e.g. in another thread by  using *put()* or *remove()*, the iterator on the next access will detect this change and launch the ConcurrentModificationException exception. This situation occurs even if the collection is synchronized.
+
+To control this situation the *ConcurrentModificationException* exception can be captured and properly treat the situation, for example, retrying the operation or if the collection that is being used is synchronized, also synchronize the access with the iterator. For example:
+
+#### Accessing external resources
 
 ##### Access to databases
 
@@ -1656,42 +1453,44 @@ For example, on some application operations are externalized in XML. Operations 
 
 On applications that access databases and that need connections repeatedly during short periods of time, a pool of connections must be used, instead of opening and closing a connection every time that it is needed. The following example shows the use of a pool of connections to Database obtained through a JNDI resource:
 
-```
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
-import java.sql.Connection;
-...
-
-// Lookup the DataSource and use it to obtain a Connection
-InitialContext context = new InitialContext();
-DataSource ds = context.lookup("java:comp/env/jdbc/MySource");
-Connection conn = ds.getConnection();
-
-// Use the connection
-...
-// Release the connection back to the pool
-conn.close();
-```
-
-###### PreparedStatement
-
-When a static statement (whose structure is fixed and from an execution to another only changes the value of the parameters) is used several times, it must be used with *PreparedStatement* instead of *Statement*, since the last one, has many disadvantages.
-
-```
-Statement stmt = conn.createStatement();
-ResultSet rs = stmt.executeQuery("SELECT COL1, COL2 WHERE COL3 = 'VALOR1'");
+```java
+	import javax.naming.InitialContext;
+	import javax.sql.DataSource;
+	import java.sql.Connection;
+	...
+	
+	// Lookup the DataSource and use it to obtain a Connection
+	InitialContext context = new InitialContext();
+	DataSource ds = context.lookup("java:comp/env/jdbc/MySource");
+	Connection conn = ds.getConnection();
+	
+	// Use the connection
+	...
+	// Release the connection back to the pool
+	conn.close();
 ```
 
-On the previous example, the values of the parameters are combined with the query, performing a one-time-only query.
+###### Using *PreparedStatements*
 
-The advantage provided by using a *PreparedStatement* versus a *Statement* is that it allows performing the step of preparation only once and carry out the execution many times. The PreparedStatements are associated with a connection to the database so they are useful when for a single connection, the same sentence is executed repeatedly.
+When a static statement is used several times, it must be used with *PreparedStatement* class instead of *Statement*, since the last one is not very optimal.
 
-In addition, since the JDBC driver processes the parameters established by *setString()* method, a potential SQL Injection attack can be avoided.
+> An static statement is the kind of whose structure is fixed and from one execution to another only changes the value of the parameters
 
+```java
+	Statement stmt = conn.createStatement();
+	ResultSet rs = stmt.executeQuery("SELECT COL1, COL2 WHERE COL3 = 'VALUE1'");
 ```
-PreparedStatement pstmt = conn.prepareStatement("SELECT COL1, COL2 WHERE COL3 = ?");
-pstm.setString(1, "VALOR1");
-ResultSet rs = pstmt.executeQuery();
+
+On the previous example, the values of the parameters are combined with the query ("VALUE1"), performing a one-time-only query.
+
+The advantage provided by using a *PreparedStatement* versus a *Statement* is that it allows performing the step of preparation only once and carry out the execution many times. The *PreparedStatements* are associated with a connection to the database so they are useful when for a single connection, the same sentence is executed repeatedly.
+
+In addition, since the JDBC driver processes the parameters established by *setString()* method, a potential **SQL Injection attack can be avoided.**
+
+```java
+	PreparedStatement pstmt = conn.prepareStatement("SELECT COL1, COL2 WHERE COL3 = ?");
+	pstm.setString(1, "VALUE1");
+	ResultSet rs = pstmt.executeQuery();
 ```
 
 > The PreparedStatements must be defined with the fixed part of the sentence, replacing variables with question marks.
@@ -1701,280 +1500,248 @@ When executing an statement, two processes take place:
 * **Preparation**: it consists in interpreting the text of the sentence and turning it into something that database can run.
 * **Execution**: the requested sentence is carried out.
 
-On web applications, whenever a conection to the database is needed, it s retrieved from a connection pool, so it might not seem interesting to use *PreparedStatements*, but that is not the case. For example, WebSphere Application Server has a cache of used *PreparedStatements* for each pool of connections. A web application that needs to access the database will retrieve a connection to the pool and when it ask to prepare a sentence, it will be searched first in the cache. If the sentence is now ready you can use it directly. If it is not in the cache it is prepared and stored for reuse in future executions.
+It might seem  that *prepareStatement()* prepares the statement on each execution, but it is not so. On the first request the sentence is prepared and is then stored on a cache. On forthcoming executions the sentence is reused from the cache.
 
-For example, to retrieve a user name when logging into the application:
-
-```
-Connection con = PoolConexiones.getConexion("MiBaseDatos");
-
-PreparedStatement pstm = con.prepareStatement("SELECT NOMBRE APELL1 APELL2 FROM CLIENTES WHERE IDCLIENTE = ?");
-
-pstm.setInt(1, idCliente);
-pstm.executeQuery();
-```
-
-It seems that *prepareStatement()* prepares the statement on each execution, but it is not so. On the first request the sentence is prepared and is then stored in the cache. On forthcoming executions the sentence is reused from the cache.
+###### Managing connection parameters
 
 It's interesting to save in the cache the parameters of access to the various databases that the application uses. If accessed through connection pools that are registered in JNDI, the name of the JNDI resource, the user and the password can be catched, if it's not defined by default on the pool.
 
-It is important to pay attention to the resources that are used, since many of them once used must be released to avoid causing a performance problem by depletion of available resources. This is the case of connections to database, that must be closed once used, or if a connection pool is being used, returning them to the pool. In the case of a database connection that is closed or returned to a pool, if commit or rollback has not been done for an executed statement, depending on the configuration of the connection (if autocommit has false value) and the implementation of the pool, an exception may be produced.
+###### Managing connections
+
+It is important to pay attention to the resources that are used, since many of them once used must be released to avoid causing a performance problem by depletion of available resources. This is the case of connections to database, that must be closed once used, or if a connection pool is being used, returning them to the pool. In the case of a database connection that is closed or returned to a pool, if *commit* or *rollback* has not been done for an executed statement, depending on the configuration of the connection (if *autocommit *has false value) and the implementation of the pool, an exception may be produced.
 
 > autocommit is a configuration parameter that allows the programmer to "forget" writing commit y close
 
-The following is a general pattern to perform a connection to a database (with autocommit stablished to false value):
+The following is a general pattern to perform a connection to a database:
 
-```
-try {
-    // Obtener conexión a BD del pool
-    // ejecutar sentencia 1 de BD
-    ...
-    // ejecutar sentencia n de BD
-} catch( ) {
-    // Gestionar excepciones
-} finally {
-    if (conexionAdquirida) {
-	    try {
-	       if (ejecucionesOK) {
-	       	commit();
-	       }
-	       else
-	       {
-	       	rollBack();
-	       }
-	    } finally {
-	       // Liberar conexión
+```java
+	try {
+	    // get the connection from the pool
+	    // executing database sentences
+	} catch( ... ) {
+	    // manage exceptions
+	} finally {
+	    if (thereIsConection) {
+		    try {
+		       if (executionsOk) {
+		       	// commit
+		       }
+		       else {
+		       	// rollback
+		       }
+		    } finally {
+		       // release the connection
+			 }
 		 }
-	 }
-}
+	}
 ```
 
-Write accesses to a database produce blocks that have an impact on performance. During execution of a transaction (doing *commit* or *rollback*), depending on the isolation degree defined (*setTransactionIsolation* of *java.sql.connection*), the operation of concurrent access by other requests is determined. The number of blocks occurred and anomalies admitted will depend on this degree of isolation (dirty readings, not repeatable readings and phantom reads). We must decide in each case what is more important.
+Write accesses to a database produce locks that have an impact on performance. During execution of a transaction (doing *commit* or *rollback*), depending on the defined isolation level, the operation of concurrent access by other requests is determined. The number of locks occurred and admitted anomalies will depend on this degree of isolation and must be set with caution.
 
-There are several alternatives to implement access to databases from Java applications. For example, from the point of view of performance, it can be better to use Stored Procedures, so that the code executes in DBMS (possibly optimized) and it prevents the transfer of commands or sentences to run between the Java application and the DBMS. JDBC also offers, as part of its API, methods for the batch execution of a command set in the DBMS, which also prevents the transfer of information to the server, and can improve performance. However, in either of these cases, there are other development implications that must be taken into account before settle on one or another alternative.
+> The Isolation Level is the setting that fine-tunes the balance between performance and reliability, consistency, and reproducibility of results when multiple transactions are making changes and performing queries at the same time
+
+There are several alternatives to implement access to databases from Java applications. For example, from the point of view of performance, it can be better to use Stored Procedures, so that the code executes in DBMS (possibly optimized) and it prevents the transfer of commands or sentences to run between the Java application and the DBMS. JDBC also offers, as part of its API, methods for the batch execution of a command set in the DBMS, which also prevents the transfer of information to the server, and can improve performance. However, in either of these cases, there are other development implications that must be taken into account before settling on one or another alternative.
 
 ##### Accesing files and other resources
 
-When resources are obtained or created (as connections to a database of a pool or by opening files and network connections) in order to free the consumed resources, the finally clause must be used to ensure that they are released.
+When resources are obtained or created (as connections to a database of a pool or by opening files and network connections) in order to free the consumed resources, the *finally* clause must be used to ensure that they are released and not avoided by a thrown exception.
 
-A method doesn't have to capture or declare that it throws exceptions inherited from RuntimeException. Failure to use the finally block could throw this kind of exception that is not controled such as *NullPointerException* or *ArrayIndexOutOfBoundsException*, and the resource can remain unreleased. It also allows to simplify the code since it is not necessary to repeat the sentences for releasing the resource at the end of the try and in the catch of the exceptions.
+A method doesn't have to capture or declare that it throws exceptions inherited from *RuntimeException*. Failure to use the *finally* block could throw this kind of exception that is not controled such as *NullPointerException* or *ArrayIndexOutOfBoundsException*, and the resource can remain unreleased. It also allows to simplify the code since it is not necessary to repeat the sentences for releasing the resource at the end of the try and in the catch of the exceptions.
 
 The recommended procedure is the following:
 
-```
-try {
-	// Obtener o crear recurso
-	// Utilizar recurso
-} catch( ) {
-	// Gestionar excepciones
-} finally {
-	if (recursoCreado) {
-   	// Liberar recurso
+```java
+	try {
+		// obtain or create a resource
+		// use the resource
+	} 
+	catch(...) {
+		// manage exceptions
+	} 
+	finally {
+		if (resourceCreated) {
+			// freeResource
+		}
 	}
-}
 ```
 
-When accessing to files, a very inefficient common practice when wanting to write in the file is opening the file, writing and closing the file. It is much more efficient to open the file at the beginning of the execution and to keep it open as long as necessary in order to write; it will we closed only at the end of the execution (including the abnormal exits caused by exceptions). The connections to database behave in a similar way. In a monothread application the same pattern should be followed. In a web application where a pool of connections is available, the pool manages the opening and closing of connections.
+When accessing to files, a very inefficient common practice when writing in the file is opening the file, writing and closing the file. It is much more efficient to open the file at the beginning of the execution and to keep it open as long as necessary in order to write and close it only at the end of the execution (including the abnormal exits caused by exceptions). The connections to database behave in a similar way. In a monothread application the same pattern should be followed. In a web application where a pool of connections is available, the pool manages the opening and closing of connections.
 
-In the reading and writing of files or network information, flows with buffer should be used such as *BufferedInputStream*, *BufferedOutputStream*, *BufferedReader* and *BufferedWriter*. Thus the number of readings is reduced and performance is increased.
+In the reading and writing of files or network information, buffered classes should be used such as *BufferedInputStream*, *BufferedOutputStream*, *BufferedReader* and *BufferedWriter*, because the number of readings is reduced and performance is increased.
 
 For example, to read a binary file the following code can be used:
 
-
-```
-FileReader fR = new FileReader("pathFichero");
-	while (!finFichero) {
-	fR.readLine();
-}
+```java
+	FileReader myReader = new FileReader(filepath";
+	while (!eof) {
+		myReader.readLine();
+	}
 ```
 
 But it is much more efficient to use:
 
+```java
+	FileReader myReader = new FileReader(filepath);
+	BufferedReader myBufferedReader = new BufferedReader(myReader);
+	while (!eof) {
+		myBufferedReader.readLine();
+	}
 ```
-FileReader fR = new FileReader("pathFichero");
-BufferedReader bR = new BufferedReader(fR);
-while (!finFichero) {
-	bR.readLine();
-}
-```
 
-This recommendation is especially efficient in a multithread system (for example a web application) whereby different threads write to a file. As it is necessary to use some synchronization mechanism for the concurrent write access to a file, the alternative with buffer in memory provides a faster write access in most of the cases (a write to memory is synchronized), and only when the buffer is full, it is transfered to a disk.
+This recommendation is especially efficient in a multithread system (for example, a web application) where different threads write to the same file. As it is necessary to use some synchronization mechanism for the concurrent write access to a file, the buffered alternatives provide a faster write access in most of the cases (a write to memory is synchronized), and only when the buffer is full, it is transfered to a disk.
 
-Another alternative to a multithread system, for example, is to implement a mechanism that writes to an intermediate structure in memory, with a separate thread with lower execution priority that transfers the contents of this structure to disk when other threads with more priority are not active.
+On this classes the main disadvantage is that, if the system crashes, the latest data may remain unwritten because the last contents of the buffer may not have been yet transfered. This drawback can be decisive to rule out the use of buffer depending on the requirements of the application (for example, this would be unacceptable in a bank transfer log). When it comes to asynchronous writings the same problem is present, since on a system crash, it is possible that the last asynchronous write request has not been executed.
 
-Another alternative that can be used from JDK 1.4 is the use of the *FileChannel* and *MappedByteBuffer* API in order to use Memory Mapped Files according to the facilities provided by the operating system. This alternative is recommended only for relatively large files.
+Another alternative for a multithread system, is to implement a mechanism that writes to an intermediate structure in memory, with a separate thread with lower execution priority that transfers the contents of this structure to disk when other threads with more priority are not active.
 
-In writings with buffer the disadvantage is that, if a system crash occurs, the latest data may remain unwritten because the last contents of the buffer have not yet transfered. This drawback can be decisive to rule out the use of buffer depending on the requirements of the application (for example, this would be unacceptable in a bank transfer log). When it comes to asynchronous writings the same problem is present, since if there is a system crash, it is possible that the last asynchronous write request is not executed yet.
+Or from JDK 1.4,  *FileChannel* and *MappedByteBuffer* API can be used, in order to use Memory Mapped Files according to the facilities provided by the operating system. This alternative is recommended only for relatively large files.
 
-##### Treatment of XML files
+##### Treating XML files
 
 XML is a language that is standard, readable and with a neutral format; it is used for defining documents with a self-defined structure, suitable for countless applications: exchange of information on the web, information exchange between applications, configuration files, application data, etc. However, the use of XML has a significant impact on performance, so it must be used only when its benefit is clear.
 
-It is interesting to avoid unnecessary outsourcing of information with XML format, since there are other alternatives that can satisfy the requirements. For example, instead of parsing an XML file, there are cases in which such information may be reflected on a Java class, replacing the expensive parsing with an instantiation of a Java object.
+There are some recomendations that must be followed in order to maintain application performance:
 
-It is essential to make sure that the same XML is not parsed several times (even if it comes from a file or from a string of characters) since it is an especially expensive processing task. When the XML is located on a text file, a cache with the XML DOM objects can be implemented, and only if the file is modified will be parsed again. Another possible cause of parsing an XML multiple times is when some method receives as input/output parameter an XML, and that internally parse the XML to access its information. In a sequence of calls to these kind of methods, each method parses the XML and after performing the corresponding process, serializes the DOM to XML to return the response. This sequence of processing is very inefficient. It is recommended to create methods that work directly with DOM objects, receiving and returning DOM objects. Likewise, when third party libraries or components are used, it is advisable to select those methods with the appropriate signature to avoid unnecessary processing with the XML items.
+* It is interesting to **avoid unnecessary externalization** of information with XML format, since there are other alternatives that can satisfy the requirements. For example, instead of parsing an XML file, there are cases in which such information may be reflected on a Java class, replacing the expensive parsing with an instantiation of a Java object.
+* It is essential to make sure that the same XML is **not parsed several times** (even if it comes from a file or from a string of characters) since it is an especially expensive processing task. When the XML is located on a text file, a cache with XML DOM objects can be implemented, and only if the file is modified parse it again.
+* Another possible cause of parsing an XML multiple times is when some method receives as input/output parameter an XML, and that **internally parse the XML to DOM** to access its information. In a sequence of calls to these kind of methods, each method parses the XML and after performing the corresponding process, serializes the DOM to XML to return the response. This sequence of processing is very inefficient.
+* It is recommended to **create methods that work directly with DOM objects**, receiving and returning DOM objects. Likewise, when third party libraries or components are used, it is advisable to select those methods with the appropriate signature to avoid unnecessary processing with the XML items.
+* Sometimes applications use DOM only as an intermediate format to pass information externalized to XML to Java data structures. In these cases, if the representation of data in a DOM tree is not required and is not used once the Java data structure is created, is recommended to release it because DOM objects occupy a lot of memory. In particular, if a DOM cache is used in these conditions, it is interesting to consider using a Java object cache in the destination format instead, since it takes much less memory and would avoid the unnecessary process of constructing of the Java object from the DOM at each access to the cache. This can present some difficulties: it may occur that these Java objects have a state that varies throughout the execution so they are not directly susceptible to be contained in a cache and should implement a mechanism to store in the cache prototype objects, which are then copied or cloned to create instances that may have their own state.
 
-Sometimes applications use DOM only as an intermediate format to pass information externalized to XML to Java data structures. In these cases, if the representation of data in a DOM tree is not required and is not used once the Java data structure is created, is recommended to release it because DOM objects occupy a lot of memory. In particular, if a DOM cache is used in these conditions, it is interesting to consider using a Java object cache in the destination format instead, since it takes much less memory and would avoid the unnecessary process of constructing of the Java object from the DOM at each access to the cache. This can present some difficulties: it may occur that these Java objects have a state that varies throughout the execution so they are not directly susceptible to be contained in a cache and should implement a mechanism to store in the cache prototype objects, which are then copied or cloned to create instances that may have their own state.
+In general, since working with XML is expensive (parsers, transformers, etc), it 's advised to look for the most efficient API for each situation.
 
 ###### Reusing objects created for the treatment of XML
 
-The *DOMBuilderFactory* object is used to obtain instances of *DOMBuilder*. Since it is expensive to create this object, and that it does not present problems of simultaneous access from different threads (is threadsafe) is recommended to reuse it.  *DOMBuilder* objects are not threadsafe, so it will be necessary that each thread uses its own instance. However, given that creating an instance of *DOMBuilder* is also an expensive process, re-using this object is insistently recommended. For example, in a web application where each request is a new thread, it's a good practice to create (or to get from a pool) a *DOMBuilder* object and use it throughout the whole request when needed, releasing it at the end of the request.
-
-There are several possibilities to transform XML with XSL, as described in the JAXP specification and in particular in the XSLT recommendation. It is recommended to invoke the transformation with a DOM from a template object (*javax.xml.transform.Templates*) built from an XSL, since it gives better performance for the following reasons:
-
-* The template already has the XSL parsed and it has not to be parsed on every XSL transformation
-* As described in the previous recommendation, if there is an already available DOM object, invoking the transformation with the DOM, avoids parsing the XML unnecesarily.
-
-Obviously, the templates should be cached for reuse in different transformations of XML, because otherwise, its use makes no sense. It must be taken into account that the template is threadsafe, but not the transformer object (*javax.xml.transform.Transformer*). So, every thread must obtain a new transformer object from the cached template.
-
-Inefficient:
-
-```
-Transformer transformer = factory.newTransformer(new StreamSource(xslt));
-```
-
-Efficient:
-
-```
-TransformerFactory factory = TransformerFactory.newInstance();
-template = factory.newTemplates(new StreamSource(xslt));
-//necesario cachear template para su reutilizacion
-Transformer transformer = template.newTransformer();
-```
-
-XSL-FO (XSL Formatting Objects) specification describes an API for the transformation of XML files to documents with print format. Different implementations of this API are very expensive in processing requirements, so it is recommended to take into account the following aspects:
-
-* He has been observed for the implementation of XSL-FO Apache important performance enhancements in the there **latest versions**. For example, the 0.20.5 Apache implementation provided significant improvements of performance comparing it to the 0.20.In general, it must be taken into account the various versions of the available implementations.
-* Using **templates** for XSL as described in the previous recommendation
-* Using **SAX API events** for FOP transformation.
-* **Simplify** as far as possible **the used XSL template**, applying properties to blocks of the document and not the same property to each element of the block separately.
-
-In general, since working with XML is expensive (parsers, transformers, etc), it 's advised to look for the most efficient API for each situation. For example, to perform XSL-FO transformations, considering that there is a DOM object available from a previous XML transformation, it is much more efficient to invoke the transformation with a DOM object than passing the XML directly, because the first step of the XSL-FO transformation will be converting that XML to a DOM object. If there is no DOM object already generated, is preferable to use the invocation from SAX Events (because it simultaneously performs the SAX parsing while performs the transformation) rather than invoking with  XML (which first parses the XML to DOM and then performs the transformation).
+The *DOMBuilderFactory* object is used to obtain instances of *DOMBuilder* class. Since it is expensive to create this object, and that it does not present problems of simultaneous access from different threads (it is threadsafe) it is recommended to reuse it.  *DOMBuilder* objects are not threadsafe, so it will be necessary that each thread uses its own instance. However, given that creating an instance of *DOMBuilder* class is also an expensive process, re-using this object is **insistently recommended**. For example, in a web application where each request is a new thread, it's a good practice to create (or to get from a pool) a *DOMBuilder* object and use it throughout the whole request when needed, releasing it at the end of the request.
 
 ##### Other recommendations
 
-This section describes additional recommendations. Some of them (or very similar recommendations) are included in other sections of this guide, but have been repeated here because its application is more general.
+###### Avoid using *final* with the purpose of improving the performance of a method
 
-###### Avoid the use of final with the purpose of improving the performance of a method.
+A method must be defined as *final* to indicate to the compiler that no subclass will overwrite this method in a more specialized way. One reason for this, is that the implementation of the method is critical to maintain consistent state of the object. Only when the application runs correctly and if a profiling tool shows that the method is very expensive, *final* should be used to improve the efficiency.
 
-In principle, a method must be defined as final to indicate to the compiler that you do not want any subclass to overwrite this method with a more specialized version. One reason for this, for example, is that the implementation of the method is critical to maintain consistent state of the object. Only when the application runs correctly and if a profiling tool shows that the method is very expensive, final should be used to improve the efficiency (in the case of a final method implemented the JVM not should check if the object is a subclass that implements a more specialized version of the method).
+###### Avoid calling to *System.out.println()* and *System.err.println()*, since they are expensive
 
-###### Avoid calls to *System.out.println()* and *System.err.println()*, since they are expensive
+These are slow synchronous operations, and normally are forgotten traces of developers. For these intent, the use of a logging library is advised (log4j, Java Logging API, etc.).
 
-These are slow synchronous operations. Normally these are forgotten traces of developers, but other times are necessary traces. For covering this last case there exist efficient implementations for logging (log4j, Java Logging API, etc.)
-
-###### Use the Reflection API (*java.lang.reflect package*) with caution.
+###### Use the Reflection API (*java.lang.reflect package*) with caution
 
 This API allows to dynamically obtain information from fields and methods of classes and objects, and operate with them. It is powerful but also expensive, so it is not recommended for repetitive actions.
 
 For example, a common use case relays in using this API to load database tables into java objects, on  a generic way, This simplifies development, but in massive processes when working with many rows it is very heavy.
 
-###### Take advantage of polymorphism
+###### Take advantage of polymorphism and inheritance
 
-These blocks often contain checking code for the type of objects, which decides which code to execute depending on the detected type. This situation is not easy to detect since it is not an explicit type or class check. Usually you can replace this type of coding with inheritance and polymorphism, avoiding explicit checking of types, in addition to being an implementation with a better design, more extensible and reliable.
+Somo developers often perform linear codebased on type-checking conditions, which decides which code to execute depending on the detected type. This situation is not easy to detect since it is not an explicit type or class check. Usually this situation can be improved with inheritance and polymorphism with a much better, more extensible and reliable code.
 
-For example, suppose an implementation of figures (circle, square, rectangle, triangle) in a single class figure, with an attribute that is the type of the figure and with methods to get the area. The example shows a very bad design, with efficiency and maintainability problems.
+For example, suppose an implementation of figures like the following:
 
-```
-Class Figura {
-	public static final int CIRCULO=0;
-	public static final int CUADRADO=1;
-	int tipo;
+```java
+	Class Figure {
+		public static final int CIRCLE = 0;
+		public static final int SQUARE = 1;
+		int type;
+		
+		public Figure (int figureType) {
+			type = figureType;
+		}
 	
-	public Figura (int tipoFigura) {
-		tipo=tipoFigura;
-	}
-
-	public int getArea() {
-		if (tipo==CIRCULO) {
-			area=PI*r*r;
-		} 
-		else if(tipo==CUADRADO) {
-			...
-		} 
-	}
-}
-
-public static Main(String args[]) {
-	Figura f=new Figura(Figura.CIRCULO);
-	System.out.println(Figura.getArea());
-}
-```
-
-Another very inefficient implementation, a symptom of a bad design, but which often arises in applications and systems, defines a hierarchy of classes for different types of data, but still  explicitly doing a class type-checking on a parent class:
-
-```
-Class Figura {
-	public int getArea() {
-		if (this instanceof Circulo) {
-			area=PI\*r\*r;
-		}
-		else if(this instanceof Cuadrado) {
-			...
+		public int getArea() {
+			if (type == CRICLE) {
+				area=PI * r * r;
+			} 
+			else if(type == SQUARE) {
+				...
+			} 
 		}
 	}
-}
-
-Class Circulo extends Figura {};
-Class Cuadrado extends Figura {};
-Class Rectangulo extends Figura {};
-Class Triangulo extends Figura {};
-```
-
-One better way to aproach this is using inheritance:
-
-```
-Class Figura {
-	int tipo;
-	public asbtract int getArea() {}
-	public abstract int getDiametro() {}
-}
-
-Class Circulo extends Figura {
-	public int getArea() {
-		return PI*r*r;
+	
+	public static Main(String args[]) {
+		Figure figure = new Figure(Figure.CIRCLE);
+		System.out.println(figure.getArea());
 	}
-}
-
-Class Cuadrado extends Figura {
-	public int getArea() {
-		return r*r;
-	}
-}
-
-public static Main(String args[]) {
-	Circulo c=new Circulo();
-	Figura f=c;
-	System.out.println(f.getArea());
-}
 ```
 
-###### Avoid calling the Garbage Collector by running *System.gc()* on the code
+Or like the following one:
 
-This does not benefit the implementation. It increases the execution time unnecessarily and interferes with the proper operation of the Garbage Collector.
+```java
+	Class Figure {
+		public int getArea() {
+			if (this instanceof Circle) {
+				area=PI * r * r;
+			}
+			else if(this instanceof Square) {
+				...
+			}
+		}
+	}
+	
+	Class Circle extends Figure {};
+	Class Square extends Figure {};
+```
 
-###### Using the type *int* if possible, rather than other types.
+The first example defines a single class that has the responsability of knowing how to perform the operations for all the figures that are being defined on it. There are several problems with that, including:
 
-Access to int type is much faster than access to other data types. In particular, it is best to use int than other types of data as an index in loops.
+* Adding a new Figure impacts directly on the code of the Figure class.
+* Ciclomatic complexity, and therefore the performnce, is directly affected by the number of figures represented on the Figures class.
+* And on and on.
+
+The second example, implements a solution that uses inheritance, but very poorly. It defines a hierarchy of classes for different types of data, but still does an explicit class type-checking on the parent class. It's mostly the same situation of the first example.
+
+One better way to aproach this is using inheritance and method overloading:
+
+```java
+	Class Figure {
+		int tipo;
+		public asbtract int getArea() {}
+	}
+	
+	Class Circle extends Figure {
+		public int getArea() {
+			return PI * r * r;
+		}
+	}
+	
+	Class Square extends Figure {
+		public int getArea() {
+			return r * r;
+		}
+	}
+	
+	public static Main(String args[]) {
+		Circle circle = new Circle();
+		Figure figure = circle;
+		System.out.println(figure.getArea());
+	}
+```
+
+###### Avoid calling the Garbage Collector by running *System.gc()* explicitly
+
+This does not benefit the implementation, increases the execution time unnecessarily and interferes with the proper operation of the Garbage Collector.
+
+###### Use the type *int* if possible, rather than other types
+
+Access to *int* type is much faster than access to other data types. In particular, it is best to use int than other types of data as an index in loops.
 
 ###### Prevent the existence of memory leaks
 
-Objects that remain in memory when they should have freed from memory (and eventually freed by the Garbage Collector). This  memory occupation increases on and on with the operation of the program, causing performance problems. If we have limited JVM memory, the Garbage Collector has to run more frequently, impacting on performance and occasionally throwing *java.lang.outOfMemory* exceptions. If the JVM has no limit, the size of the heap grows occupying more and more machine resources and causing that the Garbage Collector periods are longer and longer, since they must check more memory every time.
+Objects that remain in memory when they should have freed from memory (and eventually freed by the Garbage Collector) cause Memory Leaks. This memory occupation increases on and on with the operation of the program, causing severe performance problems. Having limited JVM memory, the Garbage Collector has to run more frequently, impacting on performance and occasionally throwing *java.lang.OutOfMemory* exceptions. If the JVM has no memory limit, the size of the heap grows occupying more and more machine resources and causing that the Garbage Collector periods are longer and longer, since they must check more memory every time.
 
 Memory leaks may occur in different situations:
 
-* objects that can be released along a logical operation but that are not released until just some operation finishes, with which they occupy memory unnecessarily. This situation is more serious, the greater is the duration of the operation.
-* another common situation is when there are objects that are referenced by data structures that have ceased to be logically accessible in the application.
-* or memory leaks in HTTP Session: memory that remains referenced, that was created for the previous session, but is no longer accessible logically by the program.
+* Objects that can be released along a logical operation but that are not released until just some operation finishes, with which they occupy memory unnecessarily. This situation is more serious, the greater is the duration of the operation.
+* Another common situation is when there are objects that are referenced by data structures that have ceased to be logically accessible in the application.
+* There may occur Memory Leaks in HTTP Session: memory that remains referenced, that was created for the previous session, but is no longer accessible logically by the program.
 
-###### Avoid code duplication:
+###### Avoid code duplication
 
-* having two distinct classes that run the same functionality creates a maintenance problem, and to a lesser extent, overhead in memory of the virtual machine that must maintain a copy of those two classes. Java has mechanisms that allow to modify the functionality of a set of classes without having to duplicate all of them (inheritance, interfaces,...)
-* having methods that do almost the same with much of the code in those clases duplicated, is a symptom of a bad design. The recommendation is to create basic class methods, which are then used (invoked) from other methods with a more specific functionality. The problem is the maintainability, and to a lesser extent the overhead of very large classes.
+Having two distinct classes that run **the same functionality** creates a maintenance problem, and to a lesser extent, overhead in memory of the virtual machine that must maintain a copy of those two classes. Java has mechanisms that allow to modify the functionality of a set of classes without having to duplicate all of them (inheritance, interfaces,...).
+
+Having methods that do **almost the same** with much of the code in those clases duplicated, is a symptom of a bad design. The recommendation is to create basic class methods, which are then invoked from other methods with a more specific functionality. The problem is the maintainability, and to a lesser extent, the overhead of very large classes.
 
 ###### Avoid the use of very complex data structures
 
-It reflects a poor design and makes efficient use of these structures in the program problematic For example, these very complex structures can not be used, since some of their inherent parts may be reusable (e.g. constant) but other parts may not.
+It reflects a poor design and makes efficient use of these structures in the program problematic. These very complex structures may not be used, since some of their functionality may be reusable but some may not.
 
 ###### Avoid the use methods with very long argument lists
 
@@ -1990,49 +1757,51 @@ There are certain specific features of the JEE application development that have
 
 A common problem that impacts performance severely on Java applications is the excessive consumption of memory and CPU, result of a massive object creation. In the case of a web application this problem may be even more critical because, because the JVM memory is shared between several users, and each users' requests are attended in different threads. In this special execution environment, performance can be increased by trying to create the minimum number of objects. Depending on each objects execution scope, different measures can be can de adopted.
 
-Some object are needed through the entire application, i.e. are needed on different requests and can be reused by all of them. For example, the application's configuration. This application scope objects must be reused, never copied.
+* Some objects are needed **through the entire application**, i.e. are needed on different requests and can be reused by all of them. For example, the application's configuration. This application scope objects must be reused, never copied.
+* Other objects must be used **across all the requests** on the same session. This information must be stored in the session (*javax.servlet.http.HttpSession*) and not obtained on each request. For example, the information of the user logon.
+* Finally, there are objects whose **duration scope is the request** and that after the request is closed, they are destroyed. Some of these objects are expensive to create and are used at various spots in the process of the request handling. For these objects, it is recommended to create them one time and reusing them on the whole request process. The request object (*javax.servlet.http.HttpRequest*) is often available in different methods of the request process, and provides an API for storing and retrieving attributes (*setAttribute()*/*getAttribute()*) that can be used as a container for these expensive objects. For example, if the request contains data in XML, it is a good idea to save the associated DOM object and reusing it in other methods during the request process. Another example is to use setAttribute to pass data to the response JSP. 
 
-Other objects have session scope, for example, the information of the user logon has done and which has been recovered from an LDAP. These objects must be used across all the requests on the same session. This information must be stored in the session (*javax.servlet.http.HttpSession*) and not obtained on each request.
+> A common mistake is to use the session scope instead of the request scope, causing collateral effects on different requests (mixing user information, for example)
 
-Finally, there are objects whose duration scope is the request, and after the request is closed, they are destroyed. Some of these objects are expensive to create and are used at various points in the process of the attendance request. For these objects, it is recommended to create 1 time and reuse them for the remainder of the request process. The request object (*javax.servlet.http.HttpRequest*) is often available in different methods of the request process, and provides an API for storing and retrieving attributes (*setAttribute()*/*getAttribute()*) that can be used as a container for these expensive objects. For example, if the request contains data in XML, it is a good idea to save the associated DOM object and reusing it in other methods during the request process. Another example is to use setAttribute to pass data to the response JSP. A wrong practice is to use the session for this same purpose.
-
-Some objects can not be shared by several requests because they are not threadsafe. In some cases the creation of this objects is expensive, so it is recommended to create a pool of objects, to improve reutilization. An example might be a pool of connections to a database.
+Some objects can not be shared by several requests because they are not threadsafe. In some cases the creation of this objects is expensive, so it is recommended to create a pools of objects, to improve reutilization. An example might be a pool of connections to a database.
 
 This is generic for web applications. In many cases however, there are some web application components hidden by the architecture itself. In particular, it's common the existence of a context manager, that encapsulates access to the global, session and request contexts. In this case, it's advised to properly select the context of each element from the application, to avoid creating more objects than needed.
 
 #### The Web Session
 
-The Java Servlet API provides the *javax.servlet.http.HttpSession* class to simulate the concept of session between client and Server, that doesn't exist on the underlying HTTP protocol. That is, access and store specific state information from the client that must persist between different requests.
+The Java Servlet API provides the *javax.servlet.http.HttpSession* class to simulate the concept of session between Client and Server, that doesn't exist on the underlying HTTP protocol. That is, access and store specific state information from the client that must persist between different requests.
 
-The session must store only user dependent information, necessary on multiple requests. The objects stored in the session must be serializable. This allows sharing the session between application servers using persistent sessions, making possible that if a server ceases service, other servers can treat its requests.
+The session must store only user dependent information, necessary on multiple requests. The objects stored in the session must be **serializable**. This allows sharing the session between application servers using persistent sessions, making possible that if a server ceases service, other servers can treat its requests.
 
-The size of the session should be small, to reduce the time required for serialize it. Application servers provide mechanisms to optimize access and object serialization, but in any case, there is still room for inefficiency. In order to obtain a small session, few objects or small objects must be saved.
+The size of the session **should be small**, to reduce the time required for serialize it. Application servers provide mechanisms to optimize access and object serialization, but in any case, there is still room for inefficiency. In order to obtain a small session, few objects or small objects must be saved.
 
-Special attention must be paid to closing sessions. This is a common memory leak. It is necessary to provide the logic to explicitly close a session so the resources can be freed up (e.g. by a logoff servlet). Furthermore, JEE defines a timeout so unused sessions will be automatically released. This timeout must be correctly stablished to not keeping resources occupied on the server unnecessarily.
+Special attention must be paid to **closing sessions**, since this is a common memory leak. It is necessary to provide the logic to explicitly close a session so the resources can be freed up (e.g. by a logoff servlet). Furthermore, JEE defines a timeout so unused sessions will be automatically released. This timeout must be correctly stablished to not keeping resources occupied on the server unnecessarily.
 
-If it is necessary to free up resources (e.g. connections to a database or opened files) when a session is closed, the valueUnbound method of the *HttpSessionBindingListener* interface can be used, implementing this interface on the resource that it has to be released. Releasing objects stored in the session as soon as possible.
+If it is necessary to free up resources (e.g. connections to a database or opened files) when a session is closed, the *valueUnbound()* method of the *HttpSessionBindingListener* interface can be used, implementing this interface on the resource that it has to be released.
 
-For example, the JSPs obtain a reference to the session of the request. When the request associated with the JSP is not using the session, the JSP creates it, with the consequent unnecessary resource consumption. If the application uses frames and each frame is a JSP, the session will be accessed for each JSP.
+###### Java Server Pages and the *Session*
 
-This is solved, if the JSP or JSPs really don't need access to the session information, with the following directive on the JSP:
+The JSPs obtain a reference to the session of the request. When the request associated with the JSP is not using the session, the JSP creates it nevertheless, with the consequent unnecessary resource consumption. If the application uses frames and each frame is a JSP, the session will be accessed for each JSP. This is solved using the following directive on the JSP:
 
-```
-<%@ page session="false" %>
+```java
+	<%@ page session="false" %>
 ```
 
 #### Obtaining JNDI resources
 
-When using resources defined in JNDI (Java Naming and Directory Interface) such as pools of connections to database, *EJBHomes* and JMS resources, the creation of the initial context of JNDI (*InitialContext*) and search (*lookup*) are costly tasks must be taken into account. It is important to perform these operations only once, save the obtained objects, and reuse them later.
+When using JNDI (Java Naming and Directory Interface) resources such as pools of connections to database, *EJBHomes* and JMS resources, the creation of the initial context of JNDI and the search method (*lookup*) are costly tasks must be taken into account. It is important to perform these operations only once, save the obtained objects, and reuse them later.
 
 #### Minimizing the use of synchronization in Servlets
 
-Usually the application server (it's web container) attend simultaneous requests on the same servlet with several threads running concurrently the service method from a single instance of the servlet. For this reason the servlets instance variables (attributes) are shared by all concurrent executions, and access to these should be synchronized using any of the mechanisms available in Java. As described in the section dedicated to synchronization, access to synchronized variables shared by several threads is expensive, so it is recommended to avoid to the extent possible the use of instance variables, for example replacing them with local variables in servlet methods.
+Usually the application server (it's web container) attend simultaneous requests on the same servlet with several threads running concurrently the service method from a single instance of the servlet. For this reason the servlets instance variables (attributes) are shared by all concurrent executions, and **access to these should be synchronized** using any of the mechanisms available in Java. As described in the section dedicated to synchronization, access to synchronized variables shared by several threads is expensive, so it is recommended to avoid to the extent possible the use of instance variables, for example replacing them with local variables in servlet methods.
 
-The servlet API offers the possibility of not using multithreading with the *SingleThreadModel* interface. Despite the fact that synchronization problems can be solved using this model, the efficiency of a server with a single thread is much less. The application servers are optimized to work in multithread mode.
+The servlet API offers the possibility of not using multithreading with the *SingleThreadModel* interface. Despite the fact that synchronization problems can be solved using this model, the efficiency of a server with a single thread is much lower.
 
 #### Other recommendations
 
-Expensive processes should not be used online, because if multiple requests are received at the same time , the rest of the requests can be affected and the server may collapse. For this situations, batch processes can be used, and prepare them to be run at times where the server is more relaxed. Sometimes the performance of a batch process is better because structures are initialized,  connections are created, etc. one single time and not one time for each request.
+Expensive processes should not be used online, because if multiple requests are received at the same time, the rest of the requests can be affected and the server may collapse. For this situations, batch processes can be used, and prepare them to be run at times where the server is less loaded. Sometimes the performance of a batch process is better because structures are initialized,  connections are created, etc. one single time and not one time for each request.
+
+> The colloquial word "online" refers to processes that are consumed, that perform some operations and return the result of that operation to the caller. The opposite to online processing is batch processing, where the result of the operations is not returned directly, but through another techniques (callbacks, publish-subscribe queues, etc.).
 
 ---
 
