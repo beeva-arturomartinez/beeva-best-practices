@@ -18,10 +18,12 @@ At this point we're going to talk about...
 
 ---
 ## Introduction
+Angel Lorigados
 ---
 ## Cloud Best Practices 
 ---
 ## Cloud Migration
+Angel Lorigados
 ---
 ## Account Management
 ---
