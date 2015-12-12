@@ -1,17 +1,16 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
+![alt text](static/docker-logo.jpg "DOCKER-LOGO")
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+# Docker best practices
 
 ## Index
 
 * [Docker for Developers](#docker-for-developers)
-* [- Docker-Compose]
-* [- Docker for testing]
-* [- Image Customization]
-* [Cloud Infrastructure]
-* [- ECS]
-* [Tips & Tricks]
+  * [Docker-Compose](#docker-compose)
+  * [Docker for testing](#docker-for-testing)
+  * [Image Customization](#image-customization)
+* [Cloud Infrastructure](#cloud-infrastructure)
+  * [ECS](#ecs)
+* [Tips & Tricks](#tips-and-tricks)
 * [References](#references)
 
 ### References
