@@ -702,6 +702,41 @@ In general, the use of decorators is recommended in order to improve code readab
 #### 16.3. Mocks
 ### 17. Project structure
 ### 18. Application packaging and distribution
+
+In Python, there are several ways for packaging and distributing applications, libraries or frameworks. Depending on the case, one might be more suitable than others. As an overview, the following is a list of the available alternatives:
+
+* PyPI
+* Package for Linux distributions
+* Application freezing
+
+#### 18.1 PyPI
+
+The most well known distribution scheme is PyPI  (Python Package Index). This makes the application freely available to anyone that uses Python to download it through pip. It is the recommended solution for open source projects since other developers will expect an active and well maintained project to be available in this form.
+
+In order to distribute the application in this way, it must be packaged in certain format. The following page indicates how to perform the packaging for this case:
+
+https://python-packaging-user-guide.readthedocs.org/en/latest/
+
+Additionally, the following tutorial indicates how to work with PyPI in order to distribute the package afterwards:
+
+https://wiki.python.org/moin/CheeseShopTutorial
+
+#### 18.2 Package for Linux distributions
+
+It is possible to package Python code in a native package of a Linux distribution. This would be a .deb package in Debian and derivative distros and .rpm packages in RHEL and derivatives. The package would be then available for installation trough the distribution repositories or personal repositories would need to be created in the case of proprietary software.
+
+If the company already has a policy for software packaging and other software it is already packaged by the same or other teams, this approach might be interesting in order to align it with the company policy and because the development teams already have the knowledge for packaging applications in this way.
+
+For more information on packaging an application for a Linux distribution, please refer to the documentation of each distribution or packaging system.
+
+#### 18.3 Application freezing
+
+For the cases when Python might not be installed in the systems where the application is going to be deployed, it is possible to employ the application freezing procedure. With this approach, the package provided also contains the Python interpreter so that the package alone is sufficient to execute the application. When the distribution targets environments such as Windows, this could be a eligible approach.
+
+For more information on application freezing, please see:
+
+http://docs.python-guide.org/en/latest/shipping/freezing/#freezing-your-code-ref
+
 ### 19. Development Environments (IDEs)
 
 To develop a Python program, it isn’t necessary to have a IDE. You can develop it in text editor, for example gedit, Sublime Text, Atom… and run it Python console. But if you want a IDE to develop, because you want features how debugger, autocomplete… Nowadays exist a lot of for Python, exists commercial and noncommercial and they have different features. In this document will list only the most popular at this moment (you should know exist other options) and it won’t compare that is the best IDE. You are free to decide, which one to use.
