@@ -1755,7 +1755,7 @@ There are certain specific features of the JEE application development that have
 
 #### Execution Scopes on Web containers
 
-A common problem that impacts performance severely on Java applications is the excessive consumption of memory and CPU, result of a massive object creation. In the case of a web application this problem may be even more critical because, because the JVM memory is shared between several users, and each users' requests are attended in different threads. In this special execution environment, performance can be increased by trying to create the minimum number of objects. Depending on each objects execution scope, different measures can be can de adopted.
+A common problem that impacts performance severely on Java applications is the excessive consumption of memory and CPU, result of a massive object creation. In the case of a web application this problem may be even more critical because, because the JVM memory is shared between several users, and each users' requests are handled in different threads. In this special execution environment, performance can be increased by trying to create the minimum number of objects. Depending on each objects execution scope, different measures can be can de adopted.
 
 * Some objects are needed **through the entire application**, i.e. are needed on different requests and can be reused by all of them. For example, the application's configuration. This application scope objects must be reused, never copied.
 * Other objects must be used **across all the requests** on the same session. This information must be stored in the session (*javax.servlet.http.HttpSession*) and not obtained on each request. For example, the information of the user logon.
@@ -1793,7 +1793,7 @@ When using JNDI (Java Naming and Directory Interface) resources such as pools of
 
 #### Minimizing the use of synchronization in Servlets
 
-Usually the application server (it's web container) attend simultaneous requests on the same servlet with several threads running concurrently the service method from a single instance of the servlet. For this reason the servlets instance variables (attributes) are shared by all concurrent executions, and **access to these should be synchronized** using any of the mechanisms available in Java. As described in the section dedicated to synchronization, access to synchronized variables shared by several threads is expensive, so it is recommended to avoid to the extent possible the use of instance variables, for example replacing them with local variables in servlet methods.
+Usually the application server (it's web container) handles simultaneous requests on the same servlet with several threads running concurrently the service method from a single instance of the servlet. For this reason the servlets instance variables (attributes) are shared by all concurrent executions, and **access to these should be synchronized** using any of the mechanisms available in Java. As described in the section dedicated to synchronization, access to synchronized variables shared by several threads is expensive, so it is recommended to avoid to the extent possible the use of instance variables, for example replacing them with local variables in servlet methods.
 
 The servlet API offers the possibility of not using multithreading with the *SingleThreadModel* interface. Despite the fact that synchronization problems can be solved using this model, the efficiency of a server with a single thread is much lower.
 
