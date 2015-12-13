@@ -12,7 +12,7 @@ The following contents table provides an index of the contents covered in this g
 * [2. The Zen of Python (Pep 20)](#2-the-zen-of-python-pep-20)
 * [3. Style guide (Pep 8)](#3-style-guide-pep-8)
 * [4. Python 2 vs Python 3](#4-python-2-vs-python-3)
-* [5. Standard libarary](#5-standard-libarary)
+* [5. Standard library](#5-standard-libarary)
 * [6. Importing libraries](#6-importing-libraries)
 * [7. Logging](#7-logging)
 * [8. Comments and documentation](#8-comments-and-documentation)
@@ -508,6 +508,95 @@ Main changes in Python 3.x respect to Python 2.x [1]:
 * And other changes, for example in improve readability.
 
 ### 5. Standard libarary
+
+The Python Standard Library contains a huge number of very useful modules. It is important that you become familiar with the Python Standard Library since most of your problems can be solved more easily and quickly if you are familiar with this library of modules.
+
+[Documentation for the standard library](//docs.python.org/library/)
+
+[Referencia de la Biblioteca de Python](http://pyspanishdoc.sourceforge.net/lib/lib.html)
+
+Some examples of modules:
+
+Sys module, os module, time module, math module and  string module. 
+
+#### 5.1 The sys module
+
+The sys module contains system-specific functionality.
+
+Example:
+
+```python
+...
+if len(sys.argv) < 2:
+    print 'No action specified.'
+    sys.exit()
+
+if sys.argv[1].startswith('--'):
+    option = sys.argv[1][2:]
+
+    if option == 'version':
+        print 'Version 1.00'
+    elif option == 'help':
+        print '''\
+...
+```
+#### 5.2 Os module
+
+This module represents operating system specific functionality. This module is especially important if you want to make your programs platform-independent i.e. it should run on Linux as well as Windows without any problems and without requiring changes.
+
+Example: To get the complete path of the current working directory enter.
+
+```python
+import os
+os.getcwd()
+```
+
+#### 5.3 Time module
+
+The time module exposes C library functions for manipulating dates and times.
+
+Example:
+
+```python
+import time
+
+print 'gmtime   :', time.gmtime()
+print 'localtime:', time.localtime()
+print 'mktime   :', time.mktime(time.localtime())
+
+t = time.localtime()
+print 'Day of month:', t.tm_mday
+print ' Day of week:', t.tm_wday
+print ' Day of year:', t.tm_yday
+```
+
+#### 5.4 Math module
+
+The math module implements many of the IEEE functions that would normally be found in the native platform C libraries for complex mathematical operations using floating point values, including logarithms and trigonometric operations.
+
+```python
+import math
+
+print 'π: %.30f' % math.pi
+print 'e: %.30f' % math.e
+```
+
+#### 5.5 String module
+
+The string module contains a number of useful constants and classes, as well as some deprecated legacy functions that are also available as methods on strings.
+
+Example:
+
+```python
+import string
+
+s = 'The quick brown fox jumped over the lazy dog.'
+
+print s
+print string.capwords(s)
+```
+
+
 ### 6. Importing libraries
 ### 7. Logging
 ### 8. Comments and documentation
