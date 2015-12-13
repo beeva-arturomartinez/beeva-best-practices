@@ -909,6 +909,96 @@ Exceptions should be class objects. The exceptions are defined in the module exc
 
 ### 14. Input / Output
 ### 15. Configuration files
+
+#### 15.1 ConfigParser
+
+Use the ConfigParser module to manage user-editable configuration files for an application. The configuration files are organized into sections, and each section can contain name-value pairs for configuration data. Value interpolation using Python formatting strings is also supported, to build values that depend on one another (this is especially handy for URLs and message strings).
+
+The file format used by ConfigParser consists of one or more named sections, each of which can contain individual options with names and values.
+
+Options are listed one per line within a section. The line starts with the name of the option, which is separated from the value by a colon (:) or equal sign (=). Whitespace around the separator is ignored when the file is parsed.
+
+
+```python
+[bug_tracker]
+url = http://localhost:8080/bugs/
+username = dhellmann
+password = SECRET
+```
+
+#### 15.2 Reading Configuration Files
+
+```python
+from ConfigParser import SafeConfigParser
+
+parser = SafeConfigParser()
+parser.read('simple.ini')
+
+print parser.get('bug_tracker', 'url')
+```
+
+#### 15.3 Modifying Settings
+
+While SafeConfigParser is primarily intended to be configured by reading settings from files, settings can also be populated by calling add_section() to create a new section, and set() to add or change an option.
+
+```python
+import ConfigParser
+
+parser = ConfigParser.SafeConfigParser()
+
+parser.add_section('bug_tracker')
+parser.set('bug_tracker', 'url', 'http://localhost:8080/bugs')
+parser.set('bug_tracker', 'username', 'dhellmann')
+parser.set('bug_tracker', 'password', 'secret')
+
+for section in parser.sections():
+    print section
+    for name, value in parser.items(section):
+        print '  %s = %r' % (name, value)
+```
+
+
+Sections and options can be removed from a SafeConfigParser with remove_section() and remove_option()
+
+```python
+from ConfigParser import SafeConfigParser
+
+parser = SafeConfigParser()
+parser.read('multisection.ini')
+
+print 'Read values:\n'
+for section in parser.sections():
+    print section
+    for name, value in parser.items(section):
+        print '  %s = %r' % (name, value)
+
+parser.remove_option('bug_tracker', 'password')
+parser.remove_section('wiki')
+        
+print '\nModified values:\n'
+for section in parser.sections():
+    print section
+    for name, value in parser.items(section):
+        print '  %s = %r' % (name, value)
+```
+
+
+#### 15.4 Saving Configuration Files
+
+```python
+import ConfigParser
+import sys
+
+parser = ConfigParser.SafeConfigParser()
+
+parser.add_section('bug_tracker')
+parser.set('bug_tracker', 'url', 'http://localhost:8080/bugs')
+parser.set('bug_tracker', 'username', 'dhellmann')
+parser.set('bug_tracker', 'password', 'secret')
+
+parser.write(sys.stdout)
+```
+
 ### 16. Testing
 #### 16.1. Tests
 #### 16.2. Librerías útiles
