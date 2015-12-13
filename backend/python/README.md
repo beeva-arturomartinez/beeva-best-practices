@@ -992,6 +992,7 @@ YAML is a configuration file format
 
 [Pyyaml documentation](http://pyyaml.org/wiki/PyYAMLDocumentation)
 
+Config file example in YAML format
 ```python
 mysql:
     host: localhost
@@ -1005,6 +1006,8 @@ other:
         - preprocessing.connect_lines
     use_anonymous: yes
 ```
+
+Example of use
 
 ```python
 import yaml
