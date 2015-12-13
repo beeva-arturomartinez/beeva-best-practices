@@ -1097,7 +1097,7 @@ The concatenation of *String* objects impacts on performance because this concon
 ```java
 	for (int i=0; i<10; i++) {
 		exampleString = exampleString + computeSuffix(i);
-}
+	}
 ```
 
 A better aproach would be:
