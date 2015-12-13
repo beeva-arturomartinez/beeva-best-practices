@@ -8,6 +8,7 @@
   * [Docker-Compose](#docker-compose)
   * [Docker for testing](#docker-for-testing)
   * [Writing dockerfiles](#writing-dockerfiles)
+  * [Security](#security)
 * [Cloud Infrastructure](#cloud-infrastructure)
   * [ECS](#ecs)
 * [Tips & Tricks](#tips-and-tricks)
@@ -47,7 +48,7 @@ kafka:
 
 ````
 
-You can run the containers with the command:
+You can run the containers with the command (by default containers are recreated if already exist)
 
 ````
 docker-compose up
@@ -59,9 +60,10 @@ Docker compose generates an isolated enviroment when launching based on the name
 docker-compose -p myproject up
 ````
 
-
-
-
+You can also specify the number of containers to run for a service. In the following example three containers will be used to run myservice
+````
+docker-compose scale myservice=3
+````
 
 ### Writing dockerfiles
 
@@ -80,6 +82,10 @@ Images can be built automatically following the instructions defined in a Docker
 * Sort multiline arguments alphanumerically to avoid duplication of packages and to improve readability
 
 
+### Security
+
+You can use the following tools to check security issues on docker images and containers:
+ * [Docker bench for security](#https://github.com/docker/docker-bench-security) It is a Script to check potential vulerabilities and best practices on docker deployments based on the [CIS Docker 1.6 benchmark document](#https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf)
 
 
 ### References
