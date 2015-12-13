@@ -9,6 +9,7 @@
   * [Docker-Compose](#docker-compose)
   * [Writing dockerfiles](#writing-dockerfiles)
   * [Docker for testing](#docker-for-testing)
+* [Security](#security)
 * [Cloud Infrastructure](#cloud-infrastructure)
   * [ECS](#ecs)
 * [References](#references)
@@ -74,7 +75,7 @@ kafka:
 
 ````
 
-You can run the containers with the command:
+You can run the containers with the command (by default containers are recreated if already exist)
 
 ````
 docker-compose up
@@ -84,6 +85,11 @@ Docker compose generates an isolated enviroment when launching based on the name
 
 ````
 docker-compose -p myproject up
+````
+
+You can also specify the number of containers to run for a service. In the following example three containers will be used to run myservice
+````
+docker-compose scale myservice=3
 ````
 
 ### Writing dockerfiles
@@ -108,6 +114,11 @@ Images can be built automatically following the instructions defined in a Docker
 ##### Consistent and Reproducible Environments
 
 Using Docker can alleviate some frustations associated with testing, first we need a consistent environment, as we have seen in the previous section, [Dockerfiles](#writing-dockerfiles) are used to define an exact template for all application needs, from operating system to libraries to open ports. In the git repository for each of our projects we include a Dockerfile right along with the source code, thus anyone who pulls the project can get it up and running with a few simple commands, this way anybody will have to install all the dependencies manually and then hope it works on their own computer, since this will all be taken care of in the Docker container. This means getting up and running is fast since the host machine requires nothing installed but the Docker service itself. Along with [Docker-Compose](#docker-compose) we will obtain a **consistent and reproducible environment** very easily.
+
+### Security
+
+You can use the following tools to check security issues on docker images and containers:
+ * [Docker bench for security](#https://github.com/docker/docker-bench-security) It is a Script to check potential vulerabilities and best practices on docker deployments based on the [CIS Docker 1.6 benchmark document](#https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf)
 
 
 ## References
