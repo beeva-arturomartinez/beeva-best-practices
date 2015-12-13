@@ -8,7 +8,7 @@
   * [Docker-Compose](#docker-compose)
   * [Docker for testing](#docker-for-testing)
   * [Writing dockerfiles](#writing-dockerfiles)
-  * [Security](#security)
+* [Security](#security)
 * [Cloud Infrastructure](#cloud-infrastructure)
   * [ECS](#ecs)
 * [Tips & Tricks](#tips-and-tricks)
