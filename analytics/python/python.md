@@ -2,7 +2,7 @@
 
 [Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
-Posible structure
+Posible structure...
 
 ## Index
   * [Load data](#load_data)
@@ -20,21 +20,54 @@ Posible structure
 
 ### Load data
 
+Some examples about how load dataset from CSV, text files and urls.
+
 ````python
+    import pandas as pd
+    df = pd.read_csv('datos.csv')
     df = read_table('document.txt',sep='\s+', index_col=None)
+````
+
+````python
+    import urllib
+    url = "http://goo.gl/j0Rvxq" #Pima Indians Diabetes dataset 
+    raw_data = urllib.urlopen(url)
 ````
 
 
 ### Numpy
 
-The main libraries for analytics in python are: 'see how split it'
+Numpy library is extension library for Python which provides mathematical functions for problems where arrays and matrices computation is needed. Who comes from **Matlab software**, Numpy library could be a great substitute. Numpy has also the advantage that was part of python from the beginning and it contents lot of developments.  Next piece of code could be used in order to load this library:
 
 ````python
     import numpy as np
 ````
 The main characteristic is array object class which is quite similar to lists in Python, except one condition, all the elements inside must be same type (ex. float, int, str ...). Numpy is used to make mathematical operations fast and more efficient than using lists.
+For example, using next code a Numpy array (2 rows and 3 columns) is created. The function `np.shape()` is used to check the dimesion and it is useful when occurs errors as array multiplication and similar. 
+
+````python
+    X = np.array( [ [1,2,3], [4,5,6]]) 
+    np.shape(X)
+````
+**How index and slice a numpy array?**
+
+This could be one of the first questions when a person starts with this kind of numerical libraries. Using previous X array, the way to access to first element in the first row and its last element is shown in the next code. It could be one of the difference between python libraries and others, the first element is indexing with 0 number and not with 1.
+
+````python
+    first = X[0][0]
+    last = X[0][-1]
+````
+As in Matlab the `eye()`function is so helpful when you want to create a 2D array with ones on the diagonal and zeros elsewhere. In almost every optimization algorithm could be used in order to reduce computational cost in all the multiplication process, diagonalization problem, resolve partial differential equations...
+
+Numpy library has lot of useful functions when you need to work with random numbers. It is called and could be imported using `numpy.random`. An import consideration when you work with this kind of function is that you must set a certain `seed()`at the first of your code in order to get **reproducible results**. 
+````python
+    np.random.seed(32) # example seed is set to 32
+````    
+Some functions as `randn()` which use a 'standard normal' distribution, `randint` which returns random integers from a low to a high input values... Function `shuffle()`	is useful to modify a input sequence by shuffling its contents, on the other hand, `permutation()`function	randomly permute a sequence. 
 
 
+### Scipy
+SciPy (Scientific Python) is a Python library which is often mentioned in the same way as NumPy. SciPy extends the capabilities of NumPy with further useful functions for minimization, regression, Fourier-transformation and many others.
 
 
 ### pandas
