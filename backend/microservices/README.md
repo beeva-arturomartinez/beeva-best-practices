@@ -472,7 +472,7 @@ eureka:
   instance:
     metadataMap:
       instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-``
+```
 
 ##### Step 1: Microservice registration in Eureka Server
 
