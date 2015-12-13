@@ -7,7 +7,7 @@
 * [Docker for Developers](#docker-for-developers)
   * [Docker-Compose](#docker-compose)
   * [Docker for testing](#docker-for-testing)
-  * [Image customization](#image-customization)
+  * [Writing dockerfiles](#writing-dockerfiles)
 * [Cloud Infrastructure](#cloud-infrastructure)
   * [ECS](#ecs)
 * [Tips & Tricks](#tips-and-tricks)
@@ -46,27 +46,47 @@ kafka:
     - /var/run/docker.sock:/var/run/docker.sock
 
 ````
-You can run the containers with the command
-````sh
+
+You can run the containers with the command:
+
+````
 docker-compose up
 ````
+
 Docker compose generates an isolated enviroment when launching based on the name of the project directory. You can set a custom project name by using the -p command line option or the COMPOSE_PROJECT_NAME environment variable
-````sh
+
+````
 docker-compose -p myproject up
 ````
 
 
 
 
-### Image customization
+
+### Writing dockerfiles
+
+Images can be built automatically following the instructions defined in a Dockerfile. These are general guidelines for writing dockerfiles:
+
+* Keep in mind that the docker containers produced by the images defined in your Dockerfile should be ephemeral. So they can be stopped, destroyed or rebuilt with minimal setup and configuration.
+
+* Use a .dockerignore file to specify excluded files and directories to increase the build performance
+
+* Keep the image as minimal as posible. Do not install unnecesary packages. Use small base images
+
+* One proccess per container. Split aplications into multiple containers and use container linking if needed
+
+* Minimize the number of layers, but also keep in mind maintainability and readability of Dockerfiles, so you need to find a balance
+
+* Sort multiline arguments alphanumerically to avoid duplication of packages and to improve readability
+
 
 
 
 ### References
 
+* https://docs.docker.com/compose/
+* https://docs.docker.com/engine/articles/dockerfile_best-practices/
 * [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
 
 ___
 
