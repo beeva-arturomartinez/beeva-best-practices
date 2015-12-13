@@ -505,7 +505,7 @@ spring:
     password: secret
 ```
 
-This kind of communication between microservice is really useful, for example when we want all the microservices to read a new property available in the Config Server.
+This kind of communication between microservice is really useful, for example when we want all the microservices to read a new property available in the Config Server. To allow this feature in a Microservice, we have to annotate that microservice with: **@RefreshScope** Spring Cloud annotation.
 
 > If you want to know more about Spring Cloud Bus, check the official Spring Cloud Github documentation at: [Spring Cloud Bus](https://github.com/spring-cloud/spring-cloud-bus)
 
