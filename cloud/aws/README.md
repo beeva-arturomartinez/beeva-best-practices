@@ -615,6 +615,33 @@ Therefore, protect your AWS account access key like you would your credit card n
 ### SNS
 ---
 ### SQS
+
+Amazon SQS is a distributed queue system that enables web service applications to quickly and reliably queue messages that one component in the application generates to be consumed by another component. A queue is a temporary repository for messages that are awaiting processing.
+
+There is some best practices that you should use to work with SQS
+
+#### Use Long Polling
+
+Long polling allows the Amazon SQS service to wait until a message is available in the queue before sending a response. So unless the connection times out, the response to the ReceiveMessage request will contain at least one of the available messages (if any) and up to the maximum number requested in the ReceiveMessage call.
+
+Long polling reduces the number of empty responses and false empty responses wich also helps to reduce your cost of using Amazon SQS.
+
+You can activate long polling by set a value between 1 - 20 seconds for Receive Message Wait Time when you create a queue.
+
+#### Visibility Timeout greater than 0 but not too high
+
+Visibility Timeout avoid that two consumers receive the same message from a queue. If you set a visibility timeout too low ( like 0 s ) multiple consumer will process the same from that queue. In the other hand if you use a high visibility timeout value ( like 12h ) and the consumer of message die before complete message process you must wait too long in order to other consumer be able to consume that message.
+
+![](/home/wankes2000/Documentos/AWSBestPractices/beeva-best-practices/cloud/aws/static/Visibility_Timeout.png) 
+
+#### Use Batching
+
+Amazon SQS queues can deliver very high throughput (many thousands of messages per second). The key to achieving this throughput is to horizontally scale message producers and consumers. In addition, you can use the batching actions in the Amazon SQS API to send, receive, or delete up to 10 messages at a time. In conjunction with horizontal scaling, batching achieves a given throughput with fewer threads, connections, and requests than would be required by individual message requests. Because Amazon SQS charges by the request instead of by the message, batching can also substantially reduce costs.
+
+#### Define Retention Period
+
+SQS automatically deletes messages that have been in a queue for more than maximum message retention period. In some use cases, messages are no longer useful few minutes after they are send to queue. Set a short retention period ( like 5 minutes ) is a good practice to reduce polling of not useful messages.
+
 ---
 
 ### References
