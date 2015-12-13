@@ -371,6 +371,7 @@ x = x + 1                 # Compensate for border
 ```
 
 #### 3.10.3 Documentation Strings
+
 Conventions for writing good documentation strings (a.k.a. "docstrings") are immortalized in PEP 257 .
 
 Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. This comment should appear after the def line.
@@ -384,19 +385,22 @@ Optional plotz says to frobnicate the bizbaz first.
 For one liner docstrings, please keep the closing """ on the same line.
 
 ### 3.11 Version Bookkeeping
+
 If you have to have Subversion, CVS, or RCS crud in your source file, do it as follows.
 
 __version__ = "$Revision$"
-# $Source$
 These lines should be included after the module's docstring, before any other code, separated by a blank line above and below.
 
 ### 3.12 Naming Conventions
+
 The currently recommended naming standards
 
 #### 3.12.1 Overriding Principle
+
 Names that are visible to the user as public parts of the API should follow conventions that reflect usage rather than implementation.
 
 #### 3.12.2 Descriptive: Naming Styles
+
 There are a lot of different naming styles. It helps to be able to recognize what naming style is being used, independently from what they are used for.
 
 The following naming styles are commonly distinguished:
@@ -434,12 +438,15 @@ __double_leading_underscore : when naming a class attribute, invokes name mangli
 __double_leading_and_trailing_underscore__ : "magic" objects or attributes that live in user-controlled namespaces. E.g. __init__ , __import__ or __file__ . Never invent such names; only use them as documented.
 
 #### 3.12.3 Prescriptive: Naming Conventions
+
 ##### 3.12.3.1 Names to Avoid
+
 Never use the characters 'l' (lowercase letter el), 'O' (uppercase letter oh), or 'I' (uppercase letter eye) as single character variable names.
 
 In some fonts, these characters are indistinguishable from the numerals one and zero. When tempted to use 'l', use 'L' instead.
 
 ##### 3.12.3.2 Package and Module Names
+
 Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability. Python packages should also have short, all-lowercase names, although the use of underscores is discouraged.
 
 When an extension module written in C or C++ has an accompanying Python module that provides a higher level (e.g. more object oriented) interface, the C/C++ module has a leading underscore (e.g. _socket ).
@@ -484,9 +491,6 @@ Note: there is some controversy about the use of __names (see below).
 
 ##### 3.12.3.9 Constants
 Constants are usually defined on a module level and written in all capital letters with underscores separating words. Examples include MAX_OVERFLOW and TOTAL .
-
-##### 3.12.3.10 Designing for inheritance
-Always decide whether a class's methods and instance variables (collectively: "attributes") should be public or non-public. If in doubt, choose non-public; it's easier to make it public later than to make a public attribute non-public.
 
 
 ### 4. Python 2 vs Python 3
