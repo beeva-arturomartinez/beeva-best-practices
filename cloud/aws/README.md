@@ -19,6 +19,37 @@ At this point we're going to talk about...
 
 ---
 ## Introduction
+
+While **Cloud** services offer flexibility, scalability and better economy of scale, there are also important concerns about security. 
+
+Cloud services such as Software as a service (SaaS), Platform as a
+service (PaaS) or Infrastructure as a service (IaaS) will each have their own security concerns that need to be addressed. 
+
+As more data moves from centrally located on-premise servers to the Cloud, the potential for personal and private data to be compromised has increased.
+
+Confidentiality, availability and integrity of data are at risk if appropriate measures and **Best Practices** are not put in place prior to selecting a Cloud vendor or implementing migrating to Cloud services.
+
+The purpose of this information is then introduce the challenge of managing an IT environment over a cloud setting by identifying the benefits of using a set of recommended **Best Practices**.
+
+This is why this document provides capital information about the best way to implement an infrastructure over the **Cloud** for the specific cases of the following:
+
+-Cloud Migration
+-Account Management
+-User Management
+-Security
+-Storage
+-Services
+
+Please also note that Information in the part of **Services** it is also split on the special cases of:
+
+-EC2
+-Scaling (ELBs y ASGs)
+-S3
+-IAM
+-SNS
+-SQS
+-DynamoDB
+
 ---
 ## Cloud Best Practices 
 
@@ -133,7 +164,7 @@ bucket
 
 ## Cloud Migration
 
-#Objective
+###Objective
 
 A poor migration strategy can be responsible for costly time delays, data loss and other problems  on your way to success modernizing your infrastructure into the cloud.
 
@@ -142,7 +173,7 @@ To help avoid all this problems we offer this guide in order to be help and refe
 The idea is not provide deep and boring documentation but highlight the roadmap to success in the migration.
 
 
-#Description
+###Description
 
 The primary technological goal of any cloud migration project is to transfer an existing compute resource/application from one on-premise environment to another in the cloud, as quickly, efficiently, and cost effectively as possible. 
 
@@ -153,7 +184,7 @@ For many companies, the initial pull to cloud based services is primary the lowe
 However many companies find themselves staying on cloud operations for other strategic reasons like improving productivity, move more swiftly and focus on business transformation related activates not just technical activities. We have had not one client move from the cloud back to on premise solutions.
 
 
-#Best Practices
+###Best Practices
 
 To help in the above premises, this is a selection of the best practices available from the Blueprint to the Cultural Change.
 
