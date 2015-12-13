@@ -13,6 +13,20 @@
 ### Writing applications
 
 #### SparkContext
+
+SparkContext object represents a connection to the spark computing cluster. Every spark application needs to configure and intialize the SparkContext. A SparkConf class instance can be created and passed to configure SparkContext initialization.
+
+````scala
+val conf = new SparkConf()
+conf.set("spark.app.name", "MyApp")
+conf.set("spark.ui.port", "36000")
+val sc = new SparkContext(conf)
+````
+The list of properties that can be defined can be found [here](#http://spark.apache.org/docs/latest/configuration.html#spark-properties)
+
+Note that these properties can also be set as arguments of spark-submit
+
+
 #### Transformations and actions
 
 Do not return all the elements of a large RDD back to the driver. Avoid using collect and count on large RDDS, use instead take or takeSample to control the number of elements returned. Be careful using actions like  countByKey, countByValue, collectAsMap.
@@ -31,6 +45,10 @@ Avoid using the flatMap + join + groupBy pattern. When two datasets are already 
 One exception to the general rule of trying to minimize the shuffles is when you force them to increase parallelism. For example, when you process a few large unsplittable files and after loading them they have not been splitted into enough partitions to take advantage of all the available cores. In this scenario invoking repartiton with a high number of partitions is preferred.
 
 #### Broadcast variables and accumulators
+
+Broadcast variables are created on the driver, and are read-only from executors. The distribution of these variables across the cluster is made through an efficient p2p broadcast algorithm, so they can be used to distribute large input datasets in an efficient manner. Take into account that once one variable has been defined and broadcasted, its value ca't be updated.
+
+Accumulators are seen as write-only variables on the executors and can be used to implement counters or sums that pushes data back to the driver through an associative operation.
 
 ### Launching applications
 
