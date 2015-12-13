@@ -472,7 +472,7 @@ eureka:
   instance:
     metadataMap:
       instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
-```
+``
 
 ##### Step 1: Microservice registration in Eureka Server
 
@@ -552,11 +552,12 @@ server:
 
 eureka:
   client:
+    registryFetchIntervalSeconds: 5
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
   instance:
-      leaseRenewalIntervalInSeconds: 5
-      healthCheckUrlPath: /health
+    leaseRenewalIntervalInSeconds: 5
+    healthCheckUrlPath: /health
 ```
 
 ### 3.5 Ribbon
