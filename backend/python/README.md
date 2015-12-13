@@ -827,7 +827,7 @@ In general, the use of decorators is recommended in order to improve code readab
 
 Python handles all errors with exceptions.
 
-An exception is a signal that an error has occurred. There are a number of built-in exceptions, which indicate conditions like reading past the end of a file, or dividing by zero. You can also define your own exceptions.
+An exception is a signal that an error has occurred. There are a number of built-in exceptions for example dividing by zero. You can also define your own exceptions.
 
 
 #### 13.1. Catching exceptions
@@ -837,9 +837,9 @@ In order to handle errors, you can set up exception handling blocks in your code
 
 ```python
 try:
-    print 1/0
+    print 5/0
 except ZeroDivisionError:
-    print "You can't divide by zero, you're silly."
+    print "My error message"
 ```
 
 
@@ -847,36 +847,36 @@ If you don't specify an exception type on the except line, it will cheerfully ca
 
 
 ```python
-def f(x):
-    return g(x) + 1
+def function1(param):
+    return function2(param) + 1
 
-def g(x):
-    if x < 0: raise ValueError, "I can't cope with a negative number here."
-    else: return 5
+def function2(param):
+    if param < 0: raise ValueError, "My error message"
+    else: return "ok"
 
 try:
-    print f(-6)
+    print function1(-100)
 except ValueError:
-    print "That value was invalid."
+    print "My error message"
 ```
 
 
 #### 13.2. Custom Exceptions
 
 ```python
- class CustomException(Exception):
+ class MyCustomException(Exception):
     def __init__(self, value):
         self.parameter = value
     def __str__(self):
         return repr(self.parameter)
 ```
 
-And then using that exception:
+Using that exception:
 
 ```python
 try:
-    raise CustomException("My Useful Error Message")
-except CustomException, (instance):
+    raise MyCustomException("My error message")
+except MyCustomException, (instance):
     print "Caught: " + instance.parameter
 ```
 
@@ -884,9 +884,7 @@ except CustomException, (instance):
 #### 13.3 Recovering and continuing with finally
 
 
-Exceptions could lead to a situation where, after raising an exception, the code block where the exception occurred might not be revisited. In some cases this might leave external resources used by the program in an unknown state.
-
-finally clause allows programmers to close such resources in case of an exception. Between 2.4 and 2.5 version of python there is change of syntax for finally clause.
+Finally clause allows programmers to close such resources in case of an exception.
 
 
 ```python
@@ -902,7 +900,7 @@ finally:
 
 #### 13.4 Built-in Exceptions
 
-Exceptions should be class objects. The exceptions are defined in the module exceptions. This module never needs to be imported explicitly: the exceptions are provided in the built-in namespace as well as the exceptions module.
+The exceptions are defined in the module exceptions. This module not needs to be imported: the exceptions are provided in the built-in namespace as well as the exceptions module.
 
 [Built-in Exceptions](https://docs.python.org/2/library/exceptions.html)
 
