@@ -365,6 +365,57 @@ Eureka server exposes the information of all of the microservices registered thr
 
 Eureka server is included in Spring Cloud as an annotation: @EnableEurekaServer
 
+```java
+@SpringBootApplication
+@EnableEurekaServer
+public class EurekaServer {
+
+    public static void main(String[] args){
+
+        new SpringApplicationBuilder(EurekaServer.class).web(true).run(args);
+    }
+}
+```
+
+Eureka Server Standalone configuration
+
+```YAML
+server:
+  port: 8761
+
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+  instance:
+    leaseRenewalIntervalInSeconds: 30
+
+```
+
+Eureka server AWS configuration
+
+```YAML
+server:
+  port: 8761
+
+eureka:
+  client:
+    region: eu-west-1
+    preferSameZone: false
+    registerWithEureka: true
+    fetchRegistry: true
+    useDnsForFetchingServiceUrls: true
+    eurekaServerDNSName: eureka.internal.com
+    eurekaServerPort: 8761
+    eurekaServerURLContext: eureka
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+  instance:
+    leaseRenewalIntervalInSeconds: 30
+```
+
 #### Eureka Client
 
 It is a Java-based client component that wraps all the neccesary requests up to interact with the REST API from the Eureka Server.
@@ -385,6 +436,41 @@ At this point we have seen a few different actors that are involved in this game
 All of them use different cache mechanisms, so it is interesting to know the different steps that are carried out when a microservice is registered in Eureka Server, and how long it takes this microservice to be avaible to recieve requests.
 
 Both @EnableEurekaServer and @EnableEurekaClient provide an implementation of Eureka Client, along with an implementation of Ribbon Load Balancer. So, even when we are not directly using some of these clients, they are there for us.
+
+```java
+@SpringBootApplication
+@EnableEurekaClient
+public class HelloApplication {
+
+    public static void main(String[] args){
+
+        new SpringApplicationBuilder(HelloApplication.class).run(args);
+    }
+}
+```
+
+```YAML
+eureka:
+  client:
+    region: eu-west-1
+    preferSameZone: false
+    registerWithEureka: true
+    fetchRegistry: true
+    useDnsForFetchingServiceUrls: true
+    eurekaServerDNSName: eureka.internal.com
+    eurekaServerPort: 8761
+    eurekaServerURLContext: eureka
+    initialInstanceInfoReplicationIntervalSeconds: 10
+    instanceInfoReplicationIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://eureka.internal.com:8761/eureka
+    registryFetchIntervalSeconds: 5
+    availabilityZones: 
+      default: defaultZone
+  instance:
+    metadataMap:
+      instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+```
 
 ##### Step 1: Microservice registration in Eureka Server
 
@@ -483,6 +569,16 @@ It provides the following features:
 - Caching as mentioned above
 
 As we have seen before, Ribbon is widely used in Zuul, Eureka and Microservices implementation.
+
+An example of a Ribbon configuration for Zuul:
+
+```YAML
+zuul:
+  ribbon:
+    ServerListRefreshInterval: 1000
+    ReadTimeout: 20000
+    ConnectTimeout: 5000
+```
 
 > If you want to know more about Ribbon, check the official Netflix Github documentation at: [Ribbon](https://github.com/Netflix/ribbon)
 
