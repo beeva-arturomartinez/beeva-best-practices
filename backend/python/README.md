@@ -583,7 +583,7 @@ print 'e: %.30f' % math.e
 
 #### 5.5 String module
 
-The string module contains a number of useful constants and classes, as well as some deprecated legacy functions that are also available as methods on strings.
+The string module contains a number of useful constants and classes.
 
 Example:
 
@@ -605,23 +605,23 @@ print string.capwords(s)
 
 Comments clarify the code and they are added with purpose of making the code easier to understand. In Python, comments begin with a hash (number sign) (#).
 
-In Python, docstrings describe modules, classes, and functions:
 
-
-
-```python
-def square_and_rooter(x):
-    """Returns the square root of self times self."""
-    ...
-```
 
 #### 8.1 Docstrings
+
+In Python, docstrings describe modules, classes, and functions, this comment should appear after the def line.
+
+```python
+def my_function(x):
+    """My documentation string."""
+    ...
+```
 
 A docstring is a string literal that occurs as the first statement in a module, function, class, or method definition.
 
 [PEP257-docstring Conventions](https://www.python.org/dev/peps/pep-0008/#comments)
 
-Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. This comment should appear after the def line.
+Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. 
 
 #### 8.2 Block comments
 
@@ -635,9 +635,9 @@ For a function or class, the leading comment block is a programmer’s note. The
 
 
 ```python
-# This function slows down program execution for some reason.
-def square_and_rooter(x):
-    """Returns the square root of self times self."""
+# This function make ...
+def my_function(x):
+    """My documentation string."
     ...
 ```
 
