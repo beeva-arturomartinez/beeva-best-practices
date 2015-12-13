@@ -181,7 +181,6 @@ The documentation tools make it possible to generate documentation directly from
 * **Java**: [Javadoc](http://www.oracle.com/technetwork/articles/java/index-jsp-135444.html)
 * **Python**: [PyDoc](https://wiki.python.org/moin/PyDoc)
 * **Javascript**: [jsdoc toolkit](https://code.google.com/p/jsdoc-toolkit/)
-* **php**: [phpDocumentor](http://www.phpdoc.org/)
 * **Ruby**: [Rubydoc](http://ruby-doc.org/)
 
 
@@ -194,7 +193,7 @@ Other tools that helps you depending on the programming language:
 
 * **Java**: [Checkstyle](http://checkstyle.sourceforge.net/) and [PMD](https://pmd.github.io/) with maven plugin, allow to configure some configuration rules and test that your code is fine when you build your java application, preserving for deployment server errors. You should configure the same rules than sonar. Other usefull tool is [FindBugs](http://findbugs.sourceforge.net/) .
 * **Python**: [Pylint](http://www.pylint.org/)
-* **PHP**: [PHPCheckstyle](https://github.com/PHPCheckstyle/phpcheckstyle)
+* **JavaScript**: [JSHint](http://jshint.com/about/) is a static code analysis tool for JavaScript. Also is recommended use a tool called [Plato](https://github.com/es-analysis/plato) that is a JavaScript source code visualization, static analysis, and complexity tool and can be integrated with the JSHint results.
 
 
 ## Code Design Patterns
