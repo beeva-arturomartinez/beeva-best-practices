@@ -1001,6 +1001,8 @@ parser.write(sys.stdout)
 
 YAML is a configuration file format
 
+[Pyyaml documentation](http://pyyaml.org/wiki/PyYAMLDocumentation)
+
 ```python
 mysql:
     host: localhost
