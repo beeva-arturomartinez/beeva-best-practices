@@ -783,6 +783,89 @@ In general, the use of decorators is recommended in order to improve code readab
 #### 12.5. Patrones de diseño
 #### OOP, estructura, funcional, ...  
 ### 13. Exceptions
+
+Python handles all errors with exceptions.
+
+An exception is a signal that an error has occurred. There are a number of built-in exceptions, which indicate conditions like reading past the end of a file, or dividing by zero. You can also define your own exceptions.
+
+
+#### 13.1. Catching exceptions
+
+In order to handle errors, you can set up exception handling blocks in your code. The keywords try and except are used to catch exceptions. When an error occurs within the try block, Python looks for a matching except block to handle it. If there is one, execution jumps there.
+
+
+```python
+try:
+    print 1/0
+except ZeroDivisionError:
+    print "You can't divide by zero, you're silly."
+```
+
+
+If you don't specify an exception type on the except line, it will cheerfully catch all exceptions. This is generally a bad idea in production code, since it means your program will blissfully ignore unexpected errors as well as ones which the except block is actually prepared to handle.
+
+
+```python
+def f(x):
+    return g(x) + 1
+
+def g(x):
+    if x < 0: raise ValueError, "I can't cope with a negative number here."
+    else: return 5
+
+try:
+    print f(-6)
+except ValueError:
+    print "That value was invalid."
+```
+
+
+#### 13.2. Custom Exceptions
+
+```python
+ class CustomException(Exception):
+    def __init__(self, value):
+        self.parameter = value
+    def __str__(self):
+        return repr(self.parameter)
+```
+
+And then using that exception:
+
+```python
+try:
+    raise CustomException("My Useful Error Message")
+except CustomException, (instance):
+    print "Caught: " + instance.parameter
+```
+
+
+#### 13.3 Recovering and continuing with finally
+
+
+Exceptions could lead to a situation where, after raising an exception, the code block where the exception occurred might not be revisited. In some cases this might leave external resources used by the program in an unknown state.
+
+finally clause allows programmers to close such resources in case of an exception. Between 2.4 and 2.5 version of python there is change of syntax for finally clause.
+
+
+```python
+try:
+    result = x / y
+except ZeroDivisionError:
+    print "division by zero!"
+else:
+    print "result is", result
+finally:
+    print "executing finally clause"
+```
+
+#### 13.4 Built-in Exceptions
+
+Exceptions should be class objects. The exceptions are defined in the module exceptions. This module never needs to be imported explicitly: the exceptions are provided in the built-in namespace as well as the exceptions module.
+
+[Built-in Exceptions](https://docs.python.org/2/library/exceptions.html)
+
+
 ### 14. Input / Output
 ### 15. Configuration files
 ### 16. Testing
