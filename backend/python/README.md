@@ -507,7 +507,7 @@ Main changes in Python 3.x respect to Python 2.x [1]:
 * Change List Comprehension.
 * And other changes, for example in improve readability.
 
-### 5. Standard libarary
+### 5. Standard library
 
 The Python Standard Library contains a huge number of very useful modules. It is important that you become familiar with the Python Standard Library since most of your problems can be solved more easily and quickly if you are familiar with this library of modules.
 
