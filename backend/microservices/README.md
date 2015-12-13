@@ -435,7 +435,7 @@ There is another type of filter that allows us to create new and **custom** filt
 
 ![Zuul Filters Overview](static/zuul-zoom-2.png)
 
-> If You want to know more about how Zuul and Filters work, see the official Netflix Github documentation at: [Zuul - How it Works](https://github.com/Netflix/zuul/wiki/How-it-Works)
+> If You want to know more about how Zuul and Filters work, check the official Netflix Github documentation at: [Zuul - How it Works](https://github.com/Netflix/zuul/wiki/How-it-Works)
 
 #### Spring Cloud Zuul Example
 
@@ -472,6 +472,19 @@ eureka:
 ```
 
 ### 3.5 Ribbon
+
+Ribbon is a client side library to communicate microservices, Eureka, Zuul and the rest of the components with each other.
+
+It provides the following features:
+
+- Load Balancing: The main purpose that we are explaning in this guide
+- Fault Tolerance: We can reintent some request if something went wrong
+- Multiple Protocol (HTTP, TCP, UDP) Async or Reactive
+- Caching as mentioned above
+
+As we have seen before, Ribbon is widely used in Zuul, Eureka and Microservices implementation.
+
+> If you want to know more about zuul, check the official Netflix Github documentation at: [Ribbon](https://github.com/Netflix/ribbon)
 
 ### 3.6 Bus
 
