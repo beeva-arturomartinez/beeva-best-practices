@@ -4,14 +4,41 @@
 
 ## Index
 
+* [Docker Essentials](#docker-essentials)
 * [Docker for Developers](#docker-for-developers)
   * [Docker-Compose](#docker-compose)
-  * [Docker for testing](#docker-for-testing)
   * [Writing dockerfiles](#writing-dockerfiles)
+  * [Docker for testing](#docker-for-testing)
 * [Cloud Infrastructure](#cloud-infrastructure)
   * [ECS](#ecs)
-* [Tips & Tricks](#tips-and-tricks)
 * [References](#references)
+
+### Docker Essentials
+
+* Make Use of Trusted Builds
+
+* Keep Layers to a Minimum
+Too many layers makes things unnecessarily complicated. The trick is to find a good balance between readability and the lowest number of layers possible. Only add additional layers when there is a strategic reason for doing so.
+
+* Use Only One Container Per Process
+Decouple applications into separate containers — one for each process. This makes horizontal scaling easier and allows you to recycle containers. To handle services that are dependent on each other, use the container linking feature instead of housing them in the same Docker container.
+
+* Don’t Install Unnecessary Packages
+Avoid installing unnecessary packages. This reduces the file size, lessens the complexity of dependencies, and cuts down on build times.
+
+* Separate data from application
+Containers should be ephemeral, in order to maintain data, use data volumes.
+
+* Don't mix Docker logs with application logs
+
+* Build Containers That Are Easy to Replace
+As said in previous point, containers should be ephemeral, that is, containers should be designed so that stopping and deleting them and replacing them with another should require only minimal setup and configuration.
+
+* Take Advantage of DockerIgnore
+DockerIgnore is a handy way to exclude unnecessary files and directories from the build context and final image.
+
+* Be Specific About Tags
+Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the -t option for the Docker Build feature.
 
 ### Docker for Developers
 
@@ -59,10 +86,6 @@ Docker compose generates an isolated enviroment when launching based on the name
 docker-compose -p myproject up
 ````
 
-
-
-
-
 ### Writing dockerfiles
 
 Images can be built automatically following the instructions defined in a Dockerfile. These are general guidelines for writing dockerfiles:
@@ -80,9 +103,14 @@ Images can be built automatically following the instructions defined in a Docker
 * Sort multiline arguments alphanumerically to avoid duplication of packages and to improve readability
 
 
+### Docker for testing
+
+##### Consistent and Reproducible Environments
+
+Using Docker can alleviate some frustations associated with testing, first we need a consistent environment, as we have seen in the previous section, [Dockerfiles](#writing-dockerfiles) are used to define an exact template for all application needs, from operating system to libraries to open ports. In the git repository for each of our projects we include a Dockerfile right along with the source code, thus anyone who pulls the project can get it up and running with a few simple commands, this way anybody will have to install all the dependencies manually and then hope it works on their own computer, since this will all be taken care of in the Docker container. This means getting up and running is fast since the host machine requires nothing installed but the Docker service itself. Along with [Docker-Compose](#docker-compose) we will obtain a **consistent and reproducible environment** very easily.
 
 
-### References
+## References
 
 * https://docs.docker.com/compose/
 * https://docs.docker.com/engine/articles/dockerfile_best-practices/
