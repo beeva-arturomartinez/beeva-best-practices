@@ -195,6 +195,41 @@ FACTER_app_tier=<app_tier> puppet agent --test (--noop)
 
 This procedure is only performed the first time, and if it is a neccessity to change the apptier it can be done by changing the fact in the instance, by hand or with the *factertags* Puppet module.
 
+---
+## Puppet Module Documentation
+----
+Based on the [Puppet Best Practices](http://projects.puppetlabs.com/projects/1/wiki/Puppet_Manifest_Documentation), in order to document the Puppet modules, it is a BEEVA best practice to use the following format in the main classes, defines, roles and profiles: 
+
+```
+# Class: nameclass
+#
+# Description:
+#
+# Parameters:
+#
+#    [*parameter1*]        - description
+#    [*parameter2*]        - description
+#
+# Actions:  
+#    - Action1
+#    - Action2
+#
+# Requires:
+#    - Requirement1
+#    - Requirement2
+#
+# Use:
+#
+#   class { 'nameclass':
+#     parameter1   => value,
+#     parameter1   => 'value',
+#   }
+#
+class nameclass {
+}
+```
+
+Notice the last line of the comments and the class definition are togerher and there is no break line. This is needed for Puppet in order to generate automatic documentation.
 ___
 
 [BEEVA](http://www.beeva.com) | 2015
