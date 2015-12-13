@@ -16,6 +16,7 @@ At this point we're going to talk about...
 * [EC2](#ec2)
 * [DynamoDB](#dynamodb)
 * [IAM](#iam)
+* [SQS](#sqs)
 
 ---
 ## Introduction
@@ -648,6 +649,7 @@ SQS automatically deletes messages that have been in a queue for more than maxim
 
 * [Architecting for the Cloud: Best Practices](http://media.amazonwebservices.com/AWS_Cloud_Best_Practices.pdf) 
 * [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
+* [AWS SQS Developer Guide](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/Welcome.html)
 
 ___
 
