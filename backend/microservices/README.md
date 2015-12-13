@@ -499,6 +499,14 @@ To enabled Spring Bus we have to add the dependency `spring-cloud-starter-bus-am
 ```YAML
 spring:
   rabbitmq:
+    addresses: amqp://localhost:5672
+```
+
+Or
+
+```YAML
+spring:
+  rabbitmq:
     host: localhost
     port: 5672
     username: user
