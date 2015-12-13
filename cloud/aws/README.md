@@ -153,20 +153,28 @@ aws_secret_access_key=<SecretKey>
 When the user want to get a set of valid credentials with anwbis (version 1.2.1, at the time of the writting), he can do it by typing the following: 
 
 ```
-anwbis  --profile <profile> -p <project> -e <environment> -r <role_name>
+anwbis  --profile <profile> -p <project> -e <environment> -r <role_name> --region <region_to_use>
 ```
 
-The profile section is only needed if the credentials are not located on the default profile.
+The profile section is only needed if the credentials are not located on the default profile. If no region is provided, *eu-west-1* is taken into account.
+
+This creates a new section into the *.aws/credentials* file, with a valid session token.
 
 ```
 [default]
 aws_access_key_id=<AccessKey>
 aws_secret_access_key=<SecretKey>
 
-[profile <name_profile>]
-aws_access_key_id=<AccessKey>
-aws_secret_access_key=<SecretKey>
+[<project>-<environment>-<role_name>]
+aws_access_key_id = <DelegatedAccessKey>
+aws_secret_access_key = <DelegatedSecretKey>
+aws_session_token = <DelegatedSessionToken>
+region = <DefaultRegion>
 ```
+
+The login into the AWS Management console can be done by providing the flag *-b*, with the browser *chrome* or *firefox* as an argument.
+
+For several scenarios, such as continuous integration, the login can be made without MFA with the flag *--nomfa*. Additional arguments such as *--refresh* (for renewing the token each time) or *--duration* (for changing the duration of the token, from 900 to 3600 seconds) are also provided.
 
 ## Security
 ---
