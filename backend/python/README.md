@@ -107,6 +107,11 @@ In general, Python developments seek avoiding optimisation of the code during th
 
 
 ### 3. Style guide (Pep 8)
+
+This section is a summary of offical PEP8 documentation, the examples are from this PEP8. Please for more information go to official PEP8 web site:
+
+https://www.python.org/dev/peps/pep-0008/#maximum-line-length
+
 #### 3.1. Indentation
 Use 4 spaces per indentation level.
 
