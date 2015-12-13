@@ -910,8 +910,6 @@ Exceptions should be class objects. The exceptions are defined in the module exc
 ### 14. Input / Output
 ### 15. Configuration files
 
-#### 15.1 ConfigParser
-
 Use the ConfigParser module to manage user-editable configuration files for an application. The configuration files are organized into sections, and each section can contain name-value pairs for configuration data. Value interpolation using Python formatting strings is also supported, to build values that depend on one another (this is especially handy for URLs and message strings).
 
 The file format used by ConfigParser consists of one or more named sections, each of which can contain individual options with names and values.
@@ -926,7 +924,7 @@ username = dhellmann
 password = SECRET
 ```
 
-#### 15.2 Reading Configuration Files
+Reading Configuration Files
 
 ```python
 from ConfigParser import SafeConfigParser
@@ -937,7 +935,7 @@ parser.read('simple.ini')
 print parser.get('bug_tracker', 'url')
 ```
 
-#### 15.3 Modifying Settings
+Modifying Settings
 
 While SafeConfigParser is primarily intended to be configured by reading settings from files, settings can also be populated by calling add_section() to create a new section, and set() to add or change an option.
 
@@ -983,7 +981,7 @@ for section in parser.sections():
 ```
 
 
-#### 15.4 Saving Configuration Files
+Saving Configuration Files
 
 ```python
 import ConfigParser
@@ -997,6 +995,48 @@ parser.set('bug_tracker', 'username', 'dhellmann')
 parser.set('bug_tracker', 'password', 'secret')
 
 parser.write(sys.stdout)
+```
+
+#### 15.2 YAML
+
+YAML is a configuration file format
+
+```python
+mysql:
+    host: localhost
+    user: root
+    passwd: my secret password
+    db: write-math
+other:
+    preprocessing_queue:
+        - preprocessing.scale_and_center
+        - preprocessing.dot_reduction
+        - preprocessing.connect_lines
+    use_anonymous: yes
+```
+
+```python
+import yaml
+
+with open("config.yml", 'r') as ymlfile:
+    cfg = yaml.load(ymlfile)
+
+for section in cfg:
+    print(section)
+print(cfg['mysql'])
+print(cfg['other'])
+It outputs:
+
+other
+mysql
+{'passwd': 'my secret password',
+ 'host': 'localhost',
+ 'db': 'write-math',
+ 'user': 'root'}
+{'preprocessing_queue': ['preprocessing.scale_and_center',
+                         'preprocessing.dot_reduction',
+                         'preprocessing.connect_lines'],
+ 'use_anonymous': True}
 ```
 
 ### 16. Testing
