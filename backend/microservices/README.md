@@ -492,20 +492,20 @@ Spring Cloud Bus enables communication between nodes in a distributed system thr
 
 In that way, when a microservice wants to send a message to another microservice, it can send it throughout the bus straight to the microservice (all nodes of one microservice as defined in Eureka), or it can broadcast that message to all of the microservices listening in the bus. Each microservice can process the message or ignore it.
 
-Currently there is only one implementation for Spring Bus and is based in an AMQP broker as the transport. By default it uses Rabbit MQ as a `ConnectionFactory`, so we must take care to have Rabbit MQ installed and ready.
+Currently there is only one implementation for Spring Bus and is based in an AMQP broker as the transport. By default it uses Rabbit MQ as a `ConnectionFactory`, so we must take care in having Rabbit MQ installed and ready.
 
 To enabled Spring Bus we have to add the dependency `spring-cloud-starter-bus-amqp` and Spring Boot will automatically load the configuration. We can, additionally, configure some parameters as shown:
 
 ```YAML
 spring:
   rabbitmq:
-    host: mybroker.com
+    host: localhost
     port: 5672
     username: user
     password: secret
 ```
 
-This kind of communication between microservice is really useful, for example when we want all the microservices to read a new property available in the Config Server. To allow this feature in a Microservice, we have to annotate that microservice with: **@RefreshScope** Spring Cloud annotation.
+This kind of communication between microservices is really useful, for example when we want all the microservices to read a new property available in the Config Server. To allow this feature in a Microservice, we have to annotate that microservice with: **@RefreshScope** Spring Cloud annotation.
 
 > If you want to know more about Spring Cloud Bus, check the official Spring Cloud Github documentation at: [Spring Cloud Bus](https://github.com/spring-cloud/spring-cloud-bus)
 
