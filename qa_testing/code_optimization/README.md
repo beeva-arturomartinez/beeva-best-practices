@@ -640,9 +640,14 @@ Some tools can you help to discover the dead code and remove it in all programmi
 
 ### References
 
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+* [O Notation](https://en.wikipedia.org/wiki/Big_O_notation))
+* [Sorting Algoritms](https://en.wikipedia.org/wiki/Sorting_algorithm)
+* [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))
+* [Hashtable](https://en.wikipedia.org/wiki/Hash_table))
+* [Trees](https://en.wikipedia.org/wiki/Tree_(data_structure))
+* [Graphs](https://en.wikipedia.org/wiki/Graph_(abstract_data_type))
+* [Profiling](https://en.wikipedia.org/wiki/Profiling_(computer_programming))
+* [Loop optimization](https://en.wikipedia.org/wiki/Loop_optimization))
 
 ___
 
