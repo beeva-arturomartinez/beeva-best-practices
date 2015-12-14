@@ -283,7 +283,21 @@ module.exports = (function () {
 
 This file it's recommended for starting application server.
 
-<<<<<<< HEAD
+```javascript
+var 	server = require('../server'),
+	config = require('../config.json'),
+	logger = require('../lib/log/logger');
+
+server.start(config).then(
+	function (server) {
+		logger.info('%s listening at %s', server.name, server.url);
+	}).fail(function (err) {
+		console.error(err);
+		process.exit(1);
+	}
+);
+```
+
 ### Security
 
 #### Conventions
@@ -356,23 +370,6 @@ For each of the middlewares, we'll talk about three things:
 
 
 You can get more information about this middleware functions in detail from this [link](https://www.npmjs.com/package/helmet)
-
-=======
-```javascript
-var 	server = require('../server'),
-	config = require('../config.json'),
-	logger = require('../lib/log/logger');
-
-server.start(config).then(
-	function (server) {
-		logger.info('%s listening at %s', server.name, server.url);
-	}).fail(function (err) {
-		console.error(err);
-		process.exit(1);
-	}
-);
-```
->>>>>>> restify structure and files
 
 ### BDD with Cucumber
 
