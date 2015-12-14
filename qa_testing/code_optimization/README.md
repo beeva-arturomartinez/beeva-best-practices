@@ -244,7 +244,7 @@ Probability search is a statistical sequential searching algorithm. In addition 
 ```
 	1.	 algorithm ProbabilitySearch(list, item)
 	2.		 Pre: list 6= ∅
-	3.		 Post: a boolean indicating where the item is found or not; in the former case swap 				founded item with its predecessor
+	3.		 Post: a boolean indicating where the item is found or not; in the former case swap	founded item with its predecessor
 	4.		 index ← 0
 	5.		 while index < list.Count and list[index] 6= item
 	6.			 index ← index + 1
