@@ -124,7 +124,7 @@ If microservices architecture has many advantages, it has many requirements and 
 
 The microservices being a variation of the classic SOA architecture, we will find the same characteristics, but with an additional level of criticality.
 
-* The system becomes distributed
+* **The system becomes distributed**
 
 Conventional architectures make it possible to ensure to have independent states between different applications: everyone is the master of his business field.
 When switching to microservices, the system becomes widely distributed. This introduces new particularly difficult issues.
@@ -139,7 +139,7 @@ It is also important to master all the service quality (SLA) for different appli
 
 Eventually the system becomes more difficult to test: integration tests increase, and require to prepare the data and be well equipped to test cases of technical and business errors.
 
-* Value-added services:
+* **Value-added services**
 
 Although the REST approach suggests to handle simple features, there is always a proportion of calls with “value-added” that involve multiple business areas.
 
@@ -149,7 +149,7 @@ This has the effect of multiplying cases of errors to manage (problem of distrib
 
 In the most critical cases, it becomes necessary to add specific services in different applications or add data caches, causing consistency issues.
 
-* DevOps and provisioning:
+* **DevOps and provisioning**
 
 Multiply applications means multiply the number of deployments and server instances.
 
@@ -187,8 +187,8 @@ If there is no magic solution, some approaches seem to emerge.
 The most attractive situation is to create a new system from scratch, nothing to challenge or to manage, this seems the ideal situation.
 Unfortunately, build microservices from scratch is the most difficult case:
 
-  -It is complicated to determine, so it seems, the limits where we need to cut out the different projects because it is not clear how the system will evolve.
-  -As we have already seen, the evolutions are more costly because you have to make cross-project refactoring.
+-It is complicated to determine, so it seems, the limits where we need to cut out the different projects because it is not clear how the system will evolve.
+-As we have already seen, the evolutions are more costly because you have to make cross-project refactoring.
 
 Unless to be already mature on a subject, it is better to go for a monolith approach to begin with.
 
@@ -198,8 +198,8 @@ The most favorable case is the monolith that we “peel”. In reviewing its org
 
 The goal is not to end up with 50 mini-projects but rather:
 
-  -One or several “core” applications of average size, consistent with each other;
-  -Microservices moving around, which are going to move away with time.
+-One or several “core” applications of average size, consistent with each other
+-Microservices moving around, which are going to move away with time
 
 This operation is made easier as the initial application is well structured in technical layers, business bricks and that this reorganisation is respected. The best practices of software developments allow to have “microservices-ready” projects. Otherwise, it takes a lot of investigation to extract some parts of the code.
 
