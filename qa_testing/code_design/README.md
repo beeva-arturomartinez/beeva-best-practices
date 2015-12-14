@@ -141,8 +141,8 @@ There are other reasons to adopt the concurrency, some systems have response tim
 #### Myths and misconceptions
 
 * Concurrency always improves performance. Not always the concurrency is the best option, sometimes is unnecessary.
-* Design does not change when writing concurrent programs TODO
-* Concurrency incurs some overhead, both in performance as well as writing additional code. TODO
+* Design does not change when writing concurrent programs
+* Concurrency incurs some overhead, both in performance as well as writing additional code.
 * Correct concurrency is complex, even for simple problems.
 * Concurrency bugs aren’t usually repeatable, so they are often ignored as one-offs instead of the true defects they are.
 * Concurrency often requires a fundamental change in design strategy
@@ -170,9 +170,31 @@ There are other reasons to adopt the concurrency, some systems have response tim
 * Automatizated
 
 ### Comments
-Is a good practice to write code in a format easy to understand without have to add any comments. In most of cases if you write a good code the comments shouldn't be needed.
+Is a good practice to write code in a format easy to understand without have to add any comments. In most of cases if you write a clean and well structured code the comments wouldn't be needed. A comments should be a way to hide a bad code structure. So often may causes problems when you write comments about code pending to finish or errors in code pending to resolve and you forget update it when you correct the problem and this comments get on production and may be readed by the client causing embarrasing situations. For this reason is very important be very carefull with your comments and that your comments be really usefull and maintain it updated.
 
-TODO
+There are some considerations to have when you comment your code:
+
+* Comments do not make up for bad code
+* Explain yourself in code
+* Good comments: some comments are necessary and beneficial:
+	* Legal comments: This is the case for legal comments, for example copyright and authorship statements are necessary and reasonable things to put into a comment at the start of each source file.
+	* Informative comments: Can be useful to provide basic information with a comment.
+	* Explanation of intent: Sometimes can be useful include useful information about the implementation providing the intent behind a decision.
+	* Clarification: Translate the meaning of some obscure argument or return value into something that's readable.
+	* Warning of consequences: Sometimes is useful to warn about certain consequences.
+	* TODO Comments: To explain why the funcion is pending to complete and what that function's future should be.
+	* Amplification: A comment may be used to amplify the importance of something that may otherwise seem inconsequential.
+	* Documentation
+* Bad comments:
+	* Redundant comments: Very obvious comments often the comments takes more time to read than the code itself
+	* Misleading comments:
+	* Journal comments: Not use comments as a version control that tools can do for you.
+	* Noise comments: Sometimes you see comments that are nothing but noise. They restate the obvious and provide no new information.
+	* Position markers: Sometimes developers like to mark a particular position in a source file.
+	* Attributions and bylines: Is better use the source code control  systems than uses comments than add noise to code.
+	* Commented-Out code: When you left a old code commented the other developers don't know the reason and make confusion about why continues here and if is important and often this code is never deleted.
+	* HTML comments: It makes the comments hard to read in the one place where they should be easy to read—the editor/IDE.
+	* Too much information: Don’t put interesting historical discussions or irrelevant descriptions of details into your comments.
 
 ### Tools
 There are a lot of tools that help you to improve your code design for all programming languages. It's very recommended to use them for help to mantain the same format in all project and prevent errors.
