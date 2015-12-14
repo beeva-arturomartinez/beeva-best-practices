@@ -526,7 +526,7 @@ The Python Standard Library contains a huge number of very useful modules. It is
 
 Some examples of modules:
 
-Sys module, os module, time module, math module and  string module. 
+Sys module, os module, time module, math module and  string module.
 
 #### 5.1 The sys module
 
@@ -630,7 +630,7 @@ A docstring is a string literal that occurs as the first statement in a module, 
 
 [PEP257-docstring Conventions](https://www.python.org/dev/peps/pep-0008/#comments)
 
-Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does. 
+Write docstrings for all public modules, functions, classes, and methods. Docstrings are not necessary for non-public methods, but you should have a comment that describes what the method does.
 
 #### 8.2 Block comments
 
@@ -652,11 +652,127 @@ def my_function(x):
 
 
 [PEP8-comments](https://www.python.org/dev/peps/pep-0008/#comments)
-  
+
 ### 9. String treatment
+
+Python has a built-in class named ***str*** which substitutes older ***string*** module.
+This class allows us to perform many operations on the right way.
+
+There exist three ways to enclose our strings in python.
+You can either use double or single quote, and each of them can contain the other one.
+To span an string literal into multiple lines, you can use the backslash at the end of each line, or use triple quoted strings which allows multiple lines of text.
+
+Python strings are ***immutable*** so they can not be changed after they are created.
+Characters in strings literals can be accessed using the standard [] syntax using zero-based indexing. Furthermore, you can use ***slice*** syntax to refer to sub-parts of sequences
+
+Python includes the ***%*** operator that allows to fill strings with variables in the same way we do it
+with printf C function.
+
+Although regular Python strings are just plain bytes, it manages i18n within its strings by using ***unicode***.
+
+### str methods
+
+Here are some of the most common string methods.
+It is recommended to use them because of performance reasons:
+
+    s.lower(), s.upper() -- returns the lowercase or uppercase version of the string
+
+    s.strip() -- returns a string with whitespace removed from the start and end
+
+    s.isalpha()/s.isdigit()/s.isspace()... -- tests if all the string chars are in the various character classes
+
+    s.startswith('other'), s.endswith('other') -- tests if the string starts or ends with the given other string
+
+    s.find('other') -- searches for the given other string (not a regular expression) within s, and returns the first index where it begins or -1 if not found
+
+    s.replace('old', 'new') -- returns a string where all occurrences of 'old' have been replaced by 'new'
+
+    s.split('delim') -- returns a list of substrings separated by the given delimiter. The delimiter is not a regular expression, it's just text. 'aaa,bbb,ccc'.split(',') -> ['aaa', 'bbb', 'ccc']. As a convenient special case s.split() (with no arguments) splits on all whitespace chars.
+
+    s.join(list) -- opposite of split(), joins the elements in the given list together using the string as the delimiter. e.g. '---'.join(['aaa', 'bbb', 'ccc']) -> aaa---bbb---ccc
+
+
+Python does not have a separate character type. Instead an expression like s[8] returns a string-length-1 containing the character. With that string-length-1, the operators ==, <=, ... all work as you would expect, so mostly you don't need to know that Python does not have a separate scalar "char" type.
+
+### Single, double and triple quoted strings
+
+Use single quoted literals for strings that relate to the functionality of the code itself (eg. dict keys, regular expressions, SQL).
+
+```python
+regular_expression = r'([A-Z])\w+'
+my_dict['key'] = 'something'
+```
+
+On the other hand, use double quoted literals for strings that might eventually be visible to the user (whether or not they need translation)
+
+```python
+print("This is what you're gonna read")
+```
+
+Finally, use triple quoted strings for documentation or raw strings with multiple lines.
+
+```python
+def cool_method(arg):
+  """ This is the cool method docstring """ # Docstring
+  raw = """
+    {
+      'key': 'something'
+      'another_key':{
+        'the_key': 'value'
+      }
+    }
+    """
+  return ''.join([raw,arg])
+
+```
+
+
+### Slice syntax
+
+Python has a printf()-like facility to put together a string. The % operator takes a printf-type format string on the left (%d int, %s string, %f/%g floating point), and the matching values in a tuple on the right (a tuple is made of values separated by commas, typically grouped inside parenthesis):
+
+```python
+
+  text = "%d little pigs come out or I'll %s and %s and %s" % (3, 'huff', 'puff', 'blow down')
+
+```
+
+The above line is kind of long -- suppose you want to break it into separate lines. You cannot just split the line after the '%' as you might in other languages, since by default Python treats each line as a separate statement (on the plus side, this is why we don't need to type semi-colons on each line). To fix this, enclose the whole expression in an outer set of parenthesis -- then the expression is allowed to span multiple lines. This code-across-lines technique works with the various grouping constructs detailed below: ( ), [ ], { }.
+
+```python
+# add parens to make the long-line work:
+    text = ("%d little pigs come out or I'll %s and %s and %s" %
+      (3, 'huff', 'puff', 'blow down'))
+```
+
+### Unicode
+
+Regular Python strings are *not* unicode, they are just plain bytes. To create an unicode string, use the 'u' prefix on the string literal:
+
+```python
+> ustring = u'A unicode \u018e string \xf1'
+> ustring
+u'A unicode \u018e string \xf1'
+```
+
+A unicode string is a different type of object from regular "str" string, but the unicode string is compatible (they share the common superclass "basestring"), and the various libraries such as regular expressions work correctly if passed a unicode string instead of a regular string.
+
+To convert a unicode string to bytes with an encoding such as 'utf-8', call the ustring.encode('utf-8') method on the unicode string. Going the other direction, the unicode(s, encoding) function converts encoded plain bytes to a unicode string:
+
+```python
+## (ustring from above contains a unicode string)
+> s = ustring.encode('utf-8')
+> s
+'A unicode \xc6\x8e string \xc3\xb1'  ## bytes of utf-8 encoding
+> t = unicode(s, 'utf-8')             ## Convert bytes back to a unicode string
+> t == ustring                      ## It's the same as the original
+True
+```
+The built-in print does not work fully with unicode strings. You can encode() first to print in utf-8 or whatever.
+
 ### 10. Operators
-#### 10.1. Asignación   
-#### 10.2. Operadores aritméticos   
+#### 10.1. Asignación
+#### 10.2. Operadores aritméticos
 #### 10.3. Operadores lógicos  
 #### 10.4. Condicionales  
 #### 10.5. Bucles
@@ -826,9 +942,9 @@ In general, the use of decorators is recommended in order to improve code readab
 
 
 ### 12. Programming paradigms
-#### 12.1. Tipo de variables   
+#### 12.1. Tipo de variables
 #### 12.2. Herencia
-#### 12.3. Sobrecarga de funciones   
+#### 12.3. Sobrecarga de funciones
 #### 12.4. Getters y setters  
 #### 12.5. Patrones de diseño
 #### OOP, estructura, funcional, ...  
