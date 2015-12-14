@@ -90,10 +90,20 @@ The components that interact in the flow are:
 
 > * The user stories.
 > * The acceptance criteria that determine the stories.
-> * The user stories.
-> * The user stories.
-> * The user stories.
-> * The user stories.
+> * Automated test criteria generated from the history.
+> * The acceptance test development refined level.
+> * Exploratory tests performed by the QA team.
+> * Las pruebas no funcionales.
+
+Example of use of flow ATDD-TDD:
+
+We started in the sprint planning with one of the prioritized stories doing the questions PO team so that they are reflected all acceptance criteria. Imagine that we`re going to tokenize card, the computer can ask questions such as:
+
+> * What happens if we try to tokenize an expired card?
+> * Are all cards valid?
+> * How do we know that has been tokenized card?
+> * What happens if we try to tokenize a card tokenized?
+> * Can you give me a card validates and invalidates tokenize?
 
 ### References
 
