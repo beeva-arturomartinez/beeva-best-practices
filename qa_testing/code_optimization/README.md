@@ -27,10 +27,10 @@ At this point we're going to talk about the best practices for optimize the code
   * [The unimodular transformation framework](#the-unimodular-transformation-framework)
   * [The polyhedral or constraint-based framework](#the-polyhedral-or-constraint-based-framework)
 * [Efficient Exceptions Management](#efficient-exceptions-management)
-  * [Tools](#tools)
-  	* [Loggers](#loggers)
-  	* [Dead code detection](#dead-code-detection)
-  * [References](#references)
+* [Tools](#tools)
+  * [Loggers](#loggers)
+  * [Dead code detection](#dead-code-detection)
+* [References](#references)
 
 
 
