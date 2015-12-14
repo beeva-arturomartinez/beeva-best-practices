@@ -132,7 +132,7 @@ Now captured as acceptance test using a framework adapted to the format that wil
 | | No tokenizada      | 0317     | 4406687108633651|
 | | No tokenizada      | 0215    | 4406687108633641|
 
-> Then the QA team has clear acceptance tests and can automate them through the framework of **Cucumber**. QA begins with the **Gherkin** language translation of the acceptance test:
+Then the QA team has clear acceptance tests and can automate them through the framework of **Cucumber**. QA begins with the **Gherkin** language translation of the acceptance test:
 
 ```
 #languaje en
@@ -142,6 +142,8 @@ As a api user I want to tokenization a pand card
     ...
     ...
 ```
+
+QA team implements the feature and proceeds to launch every time you make a specific scenario. Logically at first this scenario will be red because the development team has not implemented the functionality. Then starts the workflow development team using the TDD methodology begins with the development stage. The idea is that the acceptance test and specifically green pass this stage as soon as possible, so the team will implement the minimum necessary. For this scale acceptance tests to develop the test unit "Like". Once the acceptance test a specific scenario pass green development team can give as valid implementation. The development team is continually refactoring provided their unit tests are green. The QA team will return to launch the test. The idea is that this flow takes place as quickly as possible.
 
 ### References
 
