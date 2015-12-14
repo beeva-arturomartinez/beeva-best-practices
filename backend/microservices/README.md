@@ -169,8 +169,8 @@ However, if this is implemented in an unsuitable environment or in a bad way, we
 
 So, do not tell yourself that you need microservices, ask yourself:
 
-  -If you have issues that this approach solves
-  -If you have necessary requirements, or if you are ready to reach them before starting the migration
+* If you have issues that this approach solves
+* If you have necessary requirements, or if you are ready to reach them before starting the migration
 
 Only in this case ask yourself this question.
 
@@ -182,24 +182,24 @@ Once decided that a microservices architecture is the right solution, we need to
 
 If there is no magic solution, some approaches seem to emerge.
 
-* **The difficult case: from scratch**
+- **The difficult case: from scratch**
 
 The most attractive situation is to create a new system from scratch, nothing to challenge or to manage, this seems the ideal situation.
 Unfortunately, build microservices from scratch is the most difficult case:
 
--It is complicated to determine, so it seems, the limits where we need to cut out the different projects because it is not clear how the system will evolve.
--As we have already seen, the evolutions are more costly because you have to make cross-project refactoring.
+	- It is complicated to determine, so it seems, the limits where we need to cut out the different projects because it is not clear how the system will evolve.
+  	- As we have already seen, the evolutions are more costly because you have to make cross-project refactoring.
 
 Unless to be already mature on a subject, it is better to go for a monolith approach to begin with.
 
-* **The favorable case: peel a monolith**
+- **The favorable case: peel a monolith**
 
 The most favorable case is the monolith that we “peel”. In reviewing its organisation and its structure, we will outsource pieces to the edge of the system following the cutting lines that emerged naturally.
 
 The goal is not to end up with 50 mini-projects but rather:
 
--One or several “core” applications of average size, consistent with each other
--Microservices moving around, which are going to move away with time
+	- One or several “core” applications of average size, consistent with each other
+	- Microservices moving around, which are going to move away with time
 
 This operation is made easier as the initial application is well structured in technical layers, business bricks and that this reorganisation is respected. The best practices of software developments allow to have “microservices-ready” projects. Otherwise, it takes a lot of investigation to extract some parts of the code.
 
