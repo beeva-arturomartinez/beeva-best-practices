@@ -942,12 +942,13 @@ In general, the use of decorators is recommended in order to improve code readab
 
 
 ### 12. Programming paradigms
-Python is a multiparadigm language that allows Functional(F), Imperative (I), object oriented(OO) and procedural(P) programming.
-In large programms different paradigms can be applied, for instance by using OO for GUI and procedural or functional in processing logic.
+Python is a multi-paradigm language that allows Functional(F), Imperative (I), object oriented(OO) and procedural(P) programming.
+In large programs different paradigms can be applied, for instance by using OO for GUI and procedural or functional in processing logic.
 
 #### 12.1 Functional
 
 For functional programming Python provides lambda expressions, which allow to define functions in the same line we use them, and, to iterate over sequences, it provides list comprehensions and generators, both used over iterators.
+Use them to apply functional coding style to your project.
 
 
 ##### 12.1.1 List comprehensions and generators
@@ -973,7 +974,7 @@ for expr1 in sequence1:
              # the expression.
 ```
 
-Which can be reformated to something like:
+Make sure you use the functional way:
 ```python
 [(expr1,expr2) for expr1 in sequence1 for expr2 in sequence2] # List comprehension
 
