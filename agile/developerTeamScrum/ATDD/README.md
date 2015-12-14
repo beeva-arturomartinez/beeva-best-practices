@@ -105,6 +105,16 @@ We started in the sprint planning with one of the prioritized stories doing the 
 > * What happens if we try to tokenize a card tokenized?
 > * Can you give me a card validates and invalidates tokenize?
 
+It's time to capture specific examples using natural language:
+
+| Type        | Numeration           | Expiration  | Result |
+| :-------------: |:-------------:|:-----:|:-----------------:|
+| VISA      | 4406687108633641 | 02-19 | OK|
+| MASTERCARD      | 5558352159098664      | 03-20    | OK|
+| CHINA UNION | 6268616943177151      | 04-17     | KO|
+| VISA | 4406687108633651      | 03-17     | KO|
+| VISA | 4406687108633641      | 02-15    | KO|
+
 ### References
 
 * [Link](https://www.beeva.com/beeva-view/metodologiasagiles/atdd-la-clave-del-exito-en-equipos-agiles/) Beeva ATDD
