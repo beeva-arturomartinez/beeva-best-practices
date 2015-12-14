@@ -86,6 +86,15 @@ The iterative cycle ATDD:
 
 ![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/ATDD/static/Flujo_atdd_tdd_v3.png "WorkFlow ATDD")
 
+The components that interact in the flow are:
+
+> * The user stories.
+> * The acceptance criteria that determine the stories.
+> * The user stories.
+> * The user stories.
+> * The user stories.
+> * The user stories.
+
 ### References
 
 * [Link](https://www.beeva.com/beeva-view/metodologiasagiles/atdd-la-clave-del-exito-en-equipos-agiles/) Beeva ATDD
