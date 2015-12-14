@@ -651,8 +651,8 @@ However, even with the use of TLS/SSL credentials could be sent to the wrong ser
 
 Below is a list of sample implementations of OAuth 2.0:
 
-* [Google APIs](https://developers.google.com/identity/protocols/OAuth2)
-* [Twitter APIs](https://dev.twitter.com/oauth/overview/introduction)
+* [Google APIs](#google-apis)
+* [Twitter APIs](#twitter-apis)
 
 ## Errors
 ---
@@ -792,12 +792,12 @@ This endpoint **should not be published to third party applications** because th
 ### References
 ---
 
-* [OAuth RFC 6749](https://tools.ietf.org/html/rfc6749) OAuth RFC 6749 defined by IETF
 * <a id="rest_wikipedia">[1]</a> [REST Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer)
+* [OAuth RFC 6749](https://tools.ietf.org/html/rfc6749) OAuth RFC 6749 defined by IETF
 * <a id="rfc-6585-section-4">[2]</a> [RFC 6585 Section 4: ***HTTP - 429 Too Many Requests***](http://tools.ietf.org/html/rfc6585#section-4)
 * <a id="examples-api-throughput-restrictions">[3]</a> [Examples API Throughput Restrictions](http://stackoverflow.com/questions/16022624/examples-of-http-api-rate-limiting-http-response-headers)
-* [Google APIs](https://developers.google.com/identity/protocols/OAuth2)
-* [Twitter APIs](https://dev.twitter.com/oauth/overview/introduction)
+* <a id="google-apis">[4]</a> [Google APIs](https://developers.google.com/identity/protocols/OAuth2)
+* <a id="twitter-apis">[5]</a> [Twitter APIs](https://dev.twitter.com/oauth/overview/introduction)
 
 ---
 
