@@ -6,22 +6,22 @@ At this point we're going to talk about...
 
 ## Index
 
-1. [Introduction](#introduction)
-2. [URL construction](#url-construction)
-3. [Operations over resources](#operations-over-resources)
-4. [Status codes](#status-codes)
-5. [Payload formatting](#payload-formatting)
-6. [Filters](#filters)
-7. [Pagination](#pagination)
-8. [HATEOAS](#hateoas)
-9. [API Versioning](#api-versioning)
-10. [API throughput restrictions](#api-throughput-restrictions)
-11. [OAuth](#oauth)
-12. [Errors](#errors)
-13. [Status and Health endpoints](#status-and-health-endpoints)
-14. [References](#references)
+1. [Introduction to REST](#user-content-1-introduction-to-rest)
+2. [URL construction](#user-content-2-url-construction)
+3. [Operations over resources](#user-content-3-operations-over-resources)
+4. [Status codes](#user-content-4-status-codes)
+5. [Payload formatting](#user-content-5-payload-formatting)
+6. [Filters](#user-content-6-filters)
+7. [Pagination](#user-content-7-pagination)
+8. [HATEOAS](#user-content-8-hateoas)
+9. [API Versioning](#user-content-9-api-versioning)
+10. [API throughput restrictions](#user-content-10-api-throughput-restrictions)
+11. [OAuth](#user-content-11-oauth)
+12. [Errors](#user-content-12-errors)
+13. [Status and Health endpoints](#user-content-13-status-and-health-endpoints)
+14. [References](#user-content-14-references)
 
-## 1. Introduction
+## 1. Introduction to REST
 
 ---
 
