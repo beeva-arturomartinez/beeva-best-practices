@@ -1,29 +1,21 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
-
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
-
-## Index
-
-[Introduction](#introduction)
-
-[Data storage options](#data-storage)
-<div style="margin-left: 1em;">
-[File format](#format)</br>
-[Compression](#compression)</br>
-[Data storage system](#storage)</br>
-</div>
-[How to select the correct file format](#how-formats)
-
-[Data life cycle](#lifecycle)
-
-<a name="introduction"/>
-## Introduction
+# HADOOP Development & Best Practices
 At its core, Hadoop is a distributed data store that provides a platform for implementing powerful parallel processing frameworks. 
 
 There are a number of file formats and compression formats. Each has particular strengths that make it better suited to specific applications. Additionally, although Hadoop provides the Hadoop Distributed File System (HDFS) for storing data, there are several commonly used systems implemented on top of HDFS, such as HBase for additional data access functionality and Hive for additional data management functionality. Such systems need to be taken into consideration as well.
 
 This document defines some architectural patterns and guidelines to apply in determining how to optimally store your data in any batch Hadoop applications.
+
+[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+
+## Index
+
+* [Data storage options](#data-storage)
+	* [File format](#format)
+	* [Compression](#compression)</br>
+	* [Data storage system](#storage)</br>
+* [How to select the correct file format](#how-formats)
+* [HBase Schema Design](#hbase)
+* [Data life cycle](#lifecycle)
 
 
 <a name="data-storage"/>
@@ -473,10 +465,29 @@ joins, in particular, require sending entire tables over the network.
 2.5.1.3 Denormalizing
 2.5.2 Metadata: data about the data
 
-
+<a name="hbase"/>
 ## HBase Schema Design
+HBase is a huge hash table. Just like a hash table, you can associate values with keys and
+perform fast lookup of the values based on a given key.
+A row key in HBase is like the key in a hash table. In HBase, all the row keys are sorted and
+each region stores a range of these sorted row keys.
+HBase reads records in chunks of 64KB from the disk. Each of these chunks is called an HBase
+block.
 
+When an HBase block is read from the disk, it will be put into the block cache. A wise selection
+of row key can be used to collocate related records in the same region. A record can have a
+million columns and the next record can have a million completely different columns. This isn’t
+recommended, but it’s definitely possible.
 
+HBase stores data in a format called HFile. Each column value gets its own row in Hfile.
+* We can get one column at a time independently of the other column
+* We can modify just each column independently of the other
+* Each column will age out with a TTL independently
+
+A column family is essentially a container for columns. Two Column Families makes sense for
+the following reasons: 
+* Lower Compaction Cost, Better Use of Block Cache
+* Timetolive (TTL): the older records are removed as a part of the normal upkeep of the table
 
 <a name="lifecycle"/>
 ## Data life cycle
