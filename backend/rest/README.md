@@ -578,7 +578,7 @@ Theses are the main rules about this speficiation
 ---
 For performance reasons and to ensure a homogeneous response times APIs, it is good practice to limit the consumption of APIs. This limitation can be performed based on many factors:
 
-* **Limit requests in a time slot for an authenticated user.**. Such limitations are usually carried out in public APIs to control abusive access to the APIs. There are several approaches such as restricting the number of day / month requests for authenticated users.
+* **Limit requests in a time slot for an authenticated user**. Such limitations are usually carried out in public APIs to control abusive access to the APIs. There are several approaches such as restricting the number of day / month requests for authenticated users.
 * **Limit requests for public / private consumption API depending on the authenticated user profile**. Usually public APIs have limited consumption, always with the concept of ensuring homogeneous consumption of all users allowing resizes infrastructure in stages. Now another factor to consider, the payment appears APIs. If someone pays for higher demand requests, we can not make this service affects the service consumer of APIs, so normally corresponding changes will be made in infrastructure to ensure the number of requests the client demands, and there is a unique routing requests asigned to the user profile.
 
 To manage the rate of requests are often used the following headers in responses of each request:
@@ -587,9 +587,9 @@ To manage the rate of requests are often used the following headers in responses
 * **X-Rate-Limit-Remaining**: The number of remaining requests in the current period
 * **X-Rate-Limit-Reset**: The number of seconds left in the current period. It is necessary to clarify at this point that should not be confused with a timestamp, you should be the seconds remaining to avoid problems with time zones.
 
-As we can see in the following [link](http://stackoverflow.com/questions/16022624/examples-of-http-api-rate-limiting-http-response-headers), There are multiple APIs that use these headers (and sometimes more), to inform the user of the limits.
+As we can see in the following [link](#examples-api-throughput-restrictions), There are multiple APIs that use these headers (and sometimes more), to inform the user of the limits.
 
-For ending this section, when the request limit is reached, the response will return this code status: ***HTTP - 429 Too Many Requests*** as indicated in the [RFC 6585](http://tools.ietf.org/html/rfc6585#section-4)
+For ending this section, when the request limit is reached, the response will return this code status: ***HTTP - 429 Too Many Requests*** as indicated in the [RFC 6585 Section 4](#rfc-6585-section-4)
 
 
 ## OAuth
@@ -792,8 +792,10 @@ This endpoint **should not be published to third party applications** because th
 ### References
 ---
 
-* [OAuth RFC 6749] (https://tools.ietf.org/html/rfc6749) OAuth RFC 6749 defined by IETF
+* [OAuth RFC 6749](https://tools.ietf.org/html/rfc6749) OAuth RFC 6749 defined by IETF
 * <a id="rest_wikipedia">[1]</a> [REST Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer)
+* <a id="rfc-6585-section-4">[2]</a> [RFC 6585 Section 4: ***HTTP - 429 Too Many Requests***](http://tools.ietf.org/html/rfc6585#section-4)
+* <a id="examples-api-throughput-restrictions">[3]</a> [Examples API Throughput Restrictions](http://stackoverflow.com/questions/16022624/examples-of-http-api-rate-limiting-http-response-headers)
 
 ---
 
