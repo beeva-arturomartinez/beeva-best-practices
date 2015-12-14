@@ -239,7 +239,7 @@ If you want more information you can visit the wikipedia page [Gang Of Four](htt
 
 At this point we can define the following three categories of patterns:
 
-NOTE: all the images used in this chapter are in wikipedia.
+NOTE: all the images used in this chapter are taken from the Wikipedia.
 
 ##### Creational Patterns
 These design patterns provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using new opreator. This gives program more flexibility in deciding which objects need to be created for a given use case.
