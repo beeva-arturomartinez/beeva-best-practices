@@ -257,7 +257,7 @@ Except for alphanumeric characters, escape all characters with the format \xHH. 
 It can be done using the ESAPI library
 
 ```java
-*String safe = ESAPI.encoder().encodeForJavaScript( request.getParameter( "input" ) );*
+String safe = ESAPI.encoder().encodeForJavaScript( request.getParameter( "input" ) );
 ```
 
 **Escape CSS**
@@ -292,6 +292,7 @@ We recommend using libraries with cleaning validation policies and the HTML gene
 
 ```java
  import org.owasp.validator.html.*;
+ 
  Policy policy = Policy.getInstance(POLICY_FILE_LOCATION);
  AntiSamy as = new AntiSamy();
  CleanResults cr = as.scan(dirtyInput, policy);
@@ -302,6 +303,7 @@ We recommend using libraries with cleaning validation policies and the HTML gene
 ```java
  import org.owasp.html.Sanitizers;
  import org.owasp.html.PolicyFactory;
+ 
  PolicyFactory sanitizer = Sanitizers.FORMATTING.and(Sanitizers.BLOCKS);
  String cleanResults = sanitizer.sanitize("<p>Hello, <b>World!</b>");
 ```
@@ -362,11 +364,12 @@ First we normalize the absolute path, and then validate that the path is legal (
 
 Uncoded input:
 
-```script
+```java
 <script>alert('XSS');</script>
-
+```
 Encoded input (Unicode encoding):
 
+```java
 %3Cscript%3Ealert(%27XSS%27)%3B%3C%2Fscript%3E
 ```
 
