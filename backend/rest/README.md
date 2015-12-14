@@ -1,27 +1,30 @@
 # REST Best Practices
 At this point we're going to talk about...
 
-[Replace this logo] ![BEEVA](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![BEEVA](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+
 
 ## Index
 
-* [Introduction](#introduction)
-* [URL construction](#url-construction)
-* [Operations over resources](#operations-over-resources)
-* [Status codes](#status-codes)
-* [Payload formatting](#payload-formatting)
-* [Filters](#filters)
-* [Pagination](#pagination)
-* [HATEOAS](#hateoas)
-* [API Versioning](#api-versioning)
-* [API throughput restrictions](#api-throughput-restrictions)
-* [OAuth](#oauth)
-* [Errors](#errors)
-* [Status and Health endpoints](#status-and-health-endpoints)
-* [References](#references)
+1. [Introduction](#introduction)
+2. [URL construction](#url-construction)
+3. [Operations over resources](#operations-over-resources)
+4. [Status codes](#status-codes)
+5. [Payload formatting](#payload-formatting)
+6. [Filters](#filters)
+7. [Pagination](#pagination)
+8. [HATEOAS](#hateoas)
+9. [API Versioning](#api-versioning)
+10. [API throughput restrictions](#api-throughput-restrictions)
+11. [OAuth](#oauth)
+12. [Errors](#errors)
+13. [Status and Health endpoints](#status-and-health-endpoints)
+14. [References](#references)
 
-## Introduction
+## 1. Introduction
+
 ---
+
 In this guide we are going to describe the best practices we consider most relevant at design time for a good REST API.
 
 According with the wikipedia definition:
@@ -47,7 +50,8 @@ The REST style emphasizes that interactions between clients and services is enha
 
 The use of hypermedia both for application information as to the state transitions of the application: the representation of this state in a REST system are typically HTML, XML or JSON. As a result, it is possible to browse a resource REST to many others simply following links without requiring the use of registries or another additional infrastructure.
 
-## URL Construction
+## 2. URL Construction
+
 ---
 
 The first important thing in the URL construction is not using verbs, **only nouns**. This is because the verbs are implicit in the method:
@@ -89,7 +93,8 @@ Correct form:
 /api/v2/films/57		// Return the film 57 of version 2
 ```
 
-## Operations over resources
+## 3. Operations over resources
+
 ---
 
 The operations over resources are limited, the variety is on the resources. The operations over REST are specified as the standard HTTP methods, it constraints the construction of operations trough these methods.
@@ -164,7 +169,9 @@ All these operations, specially the basic operations must be used like they were
 
 
 
-## Status codes
+## 4. Status codes
+
+---
 
 When you are developing a REST API, a common doubt is what status code use in response.  
 
@@ -322,8 +329,9 @@ They are used to inform the user of errors in valid requests
 
 ---
 
-## Payload formatting
+## 5. Payload formatting
 
+---
 
 The payload is the actual data provided in a REST message, the payload does not include the overhead data. That means it is not either the headers or the envelope.
 
@@ -343,7 +351,9 @@ Sometimes, our API can be prepared to return the responses in xml or json format
 When we are developing a new project, it's important to define a common layout for payloads on requests and responses. It will make easier for us and the clients of our REST api. It facilitates to identify any kind of response, error or success, if the layout doesn't match, it could produce confusion and errors.
 
 
-## Filters
+## 6. Filters
+
+---
 
 There are several ways to filter the resources of a REST Api. However is a good practice to design an API with the next four features
 
@@ -389,7 +399,9 @@ GET /campaigns/search?q=PAYPAL-BBVA
 ---
 
 
-## Pagination
+## 7. Pagination
+
+---
 
 The right way to include pagination details today is using the ***Link header*** introduced by [RFC 5988](http://tools.ietf.org/html/rfc5988#page-6)
 
@@ -463,7 +475,7 @@ Sometimes, at Beeva projects, we use a link node in the responses instead of use
 ```
 ---
 
-### HATEOAS
+### 8. HATEOAS
 ---
 
 **Definition from Wikipedia:** "*HATEOAS, an abbreviation for Hypermedia as the Engine of Application State, is a constraint of the REST application architecture that distinguishes it from most other network application architectures. The principle is that a client interacts with a network application entirely through hypermedia provided dynamically by application servers. A REST client needs no prior knowledge about how to interact with any particular application or server beyond a generic understanding of hypermedia. By contrast, in some service-oriented architectures (SOA), clients and servers interact through a fixed interface shared through documentation or an interface description language (IDL). The HATEOAS constraint decouples client and server in a way that allows the server functionality to evolve independently.*"
@@ -550,13 +562,13 @@ https://api.domain.com/v1/orders/1234; rel="orders"; method:"GET"
 ```
 ---
 
-### API Versioning
+## 9. API Versioning
 ---
 
 Make the API Version mandatory and do not release an unversioned API. There are two versioning topics on wich we will talk. The first one is the what versioning specification should we use to release our api. And the second one is how and when should we engage it with our API releasing.
 
 
-#### Semantic Versioning
+### Semantic Versioning
 As a especification of our APIs we use [Semantic Versioning](http://semver.org/). This is an spefication authored by Tom Preston-Werner based on three digits *MAJOR.MINOR.PATCH*
 
 Theses are the main rules about this speficiation
@@ -574,7 +586,7 @@ Theses are the main rules about this speficiation
 * Major version X (X.y.z | X > 0) MUST be incremented if any backwards incompatible changes are introduced to the public API. It MAY include minor and patch level changes. Patch and minor version MUST be reset to 0 when major version is incremented.
 
 
-## API throughput restrictions
+## 10. API throughput restrictions
 ---
 For performance reasons and to ensure a homogeneous response times APIs, it is good practice to limit the consumption of APIs. This limitation can be performed based on many factors:
 
@@ -592,7 +604,7 @@ As we can see in the following [link](#examples-api-throughput-restrictions), Th
 For ending this section, when the request limit is reached, the response will return this code status: ***HTTP - 429 Too Many Requests*** as indicated in the [RFC 6585 Section 4](#rfc-6585-section-4)
 
 
-## OAuth
+## 11. OAuth
 ---
 
 ### Introduction
@@ -654,7 +666,7 @@ Below is a list of sample implementations of OAuth 2.0:
 * [Google APIs](#google-apis)
 * [Twitter APIs](#twitter-apis)
 
-## Errors
+## 12. Errors
 ---
 
 A major element of web services is planning for when things go wrong, and propagating error messages back to client applications. However, REST-based web services do not have a well-defined convention for returning error messages. 
@@ -762,7 +774,7 @@ or
 }
 ```
 
-## Status and Health endpoints
+## 13. Status and Health endpoints
 ---
 
 A good practice for you REST API is to reserve a couple of endpoints for checking the status and health/integrity of the API.
@@ -814,7 +826,7 @@ In case we need a more verbose response, we could enable a second endpoint whose
 
 This endpoint **should not be published to third party applications** because this information is typically needed for internal development or architecture issues.
 
-### References
+## 14. References
 ---
 
 * <a id="rest_wikipedia">[1]</a> [REST Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer)
