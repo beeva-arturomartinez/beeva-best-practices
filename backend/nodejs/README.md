@@ -68,10 +68,218 @@ You can see a perfomance comparison between Hapi, Express and Restify in the fol
 
 #### Desired structure for a Restify application
 
+This is one of desired structure for restify server application:
 
+```
+my-application/
+	config.json # logging, repository and server properties file
+	package.json # npm metadata and dependency info for application
+	server.js # starting and stopping server functions file
+	static-server.js # functions for listen connections to server
+	bin/
+		www # server starting function called from npm start
+	node_modules/ # my-application dependencies
+		restify/ # npm imported dependency for restify server
+```
+##### config.json
 
-#### Logging in Restify
+```javascript
+{
+	"name": "my-application", //server application context
+	"urlResponse": "http://localhost", //server hostname
+	"port": 3000, //server port
+	"version": "0.0.1", //application module version
+	"apiversion": "v1", //current api version
+	"store": {
+		//respository properties
+	},
+	"log": {
+		//logging properties
+	}
+}
+```
 
+##### package.json
+
+```javascript
+{
+  "name": "my-application", //application name
+  "version": "0.0.1", //application module version
+  "description": "my-application description.",
+  "authors": [
+	//application development team
+  ],
+  "keywords": [
+	"npm"
+  ],
+  "license": "ISC",
+  "dependencies": {
+	"restify": "latest"
+	//other application dependencies
+  },
+  "devDependencies": {
+ 	//development addtional dependencies
+  },
+  "engines": {
+	"node": ">= latest" //node version
+  },
+  "scripts": {
+	"test": "./node_modules/.bin/mocha --reporter spec --ui tdd ", //
+	"start": "node bin/www" //
+  },
+  "repository": {
+    //git repository connection properties
+  }
+}
+```
+
+##### server.js
+
+1. Import 'restify', 'q' dependencies and 'static-server.js', '/lib/log/logger.js' user files.
+2. Start function.
+3. Restify's createServer function invocation.
+4. Launch server database repository.
+5. Set restify server functions like CORS filters, Oauth settings, parsers, etc...
+6. Launch server listener for catching requests.
+7. Stop function.
+
+```javascript
+var 	restify = require('restify'), //1
+	Q = require('q'),
+	static_server = require('./static-server'),
+	extend = require('extend'),
+	logger = require('./lib/log/logger');
+
+module.exports = (function() {
+	var listener = null, store = null;
+
+	process.on("error", function() {
+		logger.error(arguments);
+	});
+
+	return {
+		start: function(config) {//2
+			var deferred = Q.defer();
+			logger.init(config.log);
+			var server = restify.createServer({//3
+				name: config.name,
+				version: require('./package.json').version
+			});
+			server.on('uncaughtException', function (req, res, route, err) {
+				logger.error(err.message, {
+					event: 'uncaughtException'
+				});
+				res.send(500, {
+					handler: err
+				});
+			});
+			store = require('./lib/store')(config);
+			store.init().then(function (storage) {//4
+				config.storage = storage;
+				logger.info("Storage initialized");
+				server.use(restify.CORS());//5
+				server.use(restify.acceptParser(server.acceptable));
+				server.use(restify.queryParser());
+				server.use(restify.fullResponse());
+				server.use(restify.authorizationParser());
+				server.use(function (req, res, next) {
+					req.rawBody = '';
+					req.setEncoding('utf8');
+					req.on('data', function (chunk) {
+						req.rawBody += chunk;
+						req.body = JSON.parse(req.rawBody);
+					});
+					req.on('end', function() {
+						next();
+					});
+				});
+				server.use(function (req, res, next) {
+					logger.info(req.method + ' - ' + req.url, req);
+					next();
+				});
+				require('./lib/api')(server, config);
+				listener = server.listen(config.port || 3000, function() {//6
+					var static_config = extend(true, {}, config);
+					static_config.port = (static_config.port + 5) || 3005;
+					static_server.start(static_config).then(function (data) {
+						logger.info("Server " + server.name + " started, listening on " + config.port);
+						deferred.resolve({
+							name: server.name,
+							url: server.url
+						});
+					});
+				});
+			}).fail(function (error) {
+				logger.error('Failure to start storage');
+				deferred.reject(error);
+			});
+			return deferred.promise;
+		},
+		stop: function() {//7
+			if (listener) {
+				logger.info("Stopping service", {
+					file: __filename
+				});
+				listener.close();
+				static_server.stop();
+				store.close();
+				listener = null;
+				store = null;
+			}
+		}
+	};
+})();
+```
+
+##### static-server.js
+
+This file it's recommended for creating listener to server.
+
+```javascript
+var 	restify = require('restify'),
+	Q = require('q');
+
+module.exports = (function () {
+	var listener = null;
+
+	return {
+		start: function (config) {
+			var deferred = Q.defer();
+			config = config || {};
+			config.port = config.port || 3005;
+			var server = restify.createServer();
+			listener = server.listen(config.port, function () {
+				deferred.resolve(config);
+			});
+			return deferred.promise;
+		},
+		stop: function () {
+			if (listener) {
+				listener.close();
+			}
+		}
+	};
+})();
+```
+
+##### bin/www
+
+This file it's recommended for starting application server.
+
+```javascript
+var 	server = require('../server'),
+	config = require('../config.json'),
+	logger = require('../lib/log/logger');
+
+server.start(config).then(
+	function (server) {
+		logger.info('%s listening at %s', server.name, server.url);
+	}).fail(function (err) {
+		console.error(err);
+		process.exit(1);
+	}
+);
+```
 
 ## DevOps
 
