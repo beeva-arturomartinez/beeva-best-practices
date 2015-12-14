@@ -8,7 +8,7 @@ This is how we work with Microservices at BEEVA.
 
 1. [Introduction to microservices](#1-introduction-to-microservices)
 
-2. [Microservice architectures](#2-microservice-architectures)
+2. [Microservice architecture](#2-microservice-architecture)
 
     2.1. [Overview for a microservice architecture](#21-overview-for-a-microservice-architecture)
 
@@ -63,7 +63,7 @@ This document addresses some of the challenges that arise when using an architec
 
 All these challenges are addressed using a good infrastructure, able to orchestrate all existing microservices in our application.
 
-## 2. Microservice architectures
+## 2. Microservice architecture
 ---
 
 "*As small as possible but as big as necessary*"
@@ -217,13 +217,13 @@ If later, others projects evolution are getting close to each other and more iss
 
 How do your services find each other?
 
-A microservices application is a distributed system, the components have to interact with each other in order to achieve a common goal. What is a better way to overcome the challenges in order for one microservice to find another? You have two solutions: service discovery protocol or a centralized router. Both require high availability and scalability. 
+A microservices application is a distributed system, the components have to interact with each other in order to achieve a common goal. What is a better way to overcome the challenges in order for one microservice to find another? You have two solutions: service discovery protocol and a centralized router. Both require high availability and scalability. 
 
 ![Components](static/architecure_components.png  "Components")
 
 * Centralized Router
 
-The centralized router works between the systems, it is actually proxying all the traffic and ensure load balancing. This router is built very transparently and exposed externally.
+The centralized router works between the systems, it is actually proxying all the traffic and ensure load balancing. This router exposed externally.
 
 * Service Discovery Protocol
 
