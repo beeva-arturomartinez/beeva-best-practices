@@ -233,8 +233,8 @@ A simple algorithm that search for a specific item inside a list. It operates lo
 	7.	 end while
 	8.	 if index < list.Count and list[index] = item
 	9. 		 return index
-	10.	end if
-	11.	return −1
+	10.	 end if
+	11.	 return −1
 	12. end SequentialSearch
 ```
 #### Probability Search
@@ -251,12 +251,12 @@ Probability search is a statistical sequential searching algorithm. In addition 
 	7.		 end while
 	8.		 if index ≥ list.Count or list[index] 6= item
 	9.			 return false
-	10.		end if
-	11.		if index > 0
+	10.		 end if
+	11.		 if index > 0
 	12.			Swap(list[index], list[index − 1])
-	13.		end if
-	14.		return true
-	15.	end ProbabilitySearch
+	13.		 end if
+	14.		 return true
+	15.	  end ProbabilitySearch
 ```
 
 ### Ordering
