@@ -796,7 +796,8 @@ This endpoint **should not be published to third party applications** because th
 * <a id="rest_wikipedia">[1]</a> [REST Wikipedia](https://en.wikipedia.org/wiki/Representational_state_transfer)
 * <a id="rfc-6585-section-4">[2]</a> [RFC 6585 Section 4: ***HTTP - 429 Too Many Requests***](http://tools.ietf.org/html/rfc6585#section-4)
 * <a id="examples-api-throughput-restrictions">[3]</a> [Examples API Throughput Restrictions](http://stackoverflow.com/questions/16022624/examples-of-http-api-rate-limiting-http-response-headers)
-
+* [Google APIs](https://developers.google.com/identity/protocols/OAuth2)
+* [Twitter APIs](https://dev.twitter.com/oauth/overview/introduction)
 ---
 
 [BEEVA](http://www.beeva.com) | 2015
