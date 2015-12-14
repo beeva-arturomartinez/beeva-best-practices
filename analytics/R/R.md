@@ -1,15 +1,48 @@
 
-#http://adv-r.had.co.nz/Performance.html
-#http://stackoverflow.com/questions/1330944/speed-of-r-programming-language
+####INTRODUCTION
 
+This document is a brief summary of the knowledge adquired while using R for data science. It may help to avoid some common mistakes and dead ends and cast some light on the tools, idioms and quirks of the language.
+
+There are thousands of packages available for R, but in this guide we'll mention some of the most used for different purposes.
+
+####GENERAL INFORMATION
+
+#What is R
+
+R is an scripting language designed to make data analysis and stadistics easier. It's free, open source and available on every major platform making it easily replicable.
+
+#What is R good for
+
+R has a great community behind it, and a massive set of packages for statistical modeling, machine learning, visualisation and manipulation of data. The data mungling cappabilities are second to no one, and whatever model you are trying to do, you'll have a package for almost for sure.
+
+#What isn't R good for
+
+R loads everything in memory. That's a powerful feature for iterative processes but also imposes an strong limit on the size of you data. Furthermore, some R functions don't modify the object but a copy thus requiring even more memory. The rule of thumb is 3 times higher than the data to work confortably.
+
+It's also an interpreted language, which makes it [quite slow](#http://adv-r.had.co.nz/Performance.html). You should use as much packages and functions as you can instead of building a function from zero, since most of them are interfaces to a much more optimized versions programmed in C, Fortran or C++. Some functions written in pure R can take 45 minutes and only 0.15s when using the correct package.
 
 ####LOAD DATA
+
+#SQL
+
+[RSQLite](https://cran.r-project.org/web/packages/RSQLite/index.html), [RODBC](https://cran.r-project.org/web/packages/RODBC/index.html),[RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html),[RPostgresSQL](https://cran.r-project.org/web/packages/RPostgreSQL/index.html),[RJDBC](https://cran.r-project.org/web/packages/RJDBC/index.html) are great packages to connect R to your database. Choose the package that fits your database. They use a package called *rJava* which is a simple R-to-Java interface. You should keep this in mind when retrieving data from a database: if your java heap size is too low, the function will fail. You can increase the java heap size for the session with:
+
+    options( java.parameters = "-Xmx4g")
+
+#Excel
+
+[XLConnect](https://cran.r-project.org/web/packages/XLConnect/index.html), [xlsx](https://cran.r-project.org/web/packages/xlsx/index.html) - These packages help you read and write Excel files from R.
+
+#Fast reading
+
+[data.table](https://cran.r-project.org/web/packages/data.table/index.html) ([*fread*](http://www.inside-r.org/packages/cran/data.table/docs/fread) function)and [readr](https://cran.r-project.org/web/packages/readr/) are two packages that provide function for fast tabular data reading (up to 10x-15x faster).
+
 
 ####MANIPULATE DATA
 
 #tidyr:
 
-There are two main format of data you will use, *long format* and *wide format*.
+There are two main format of data you will use, *long format* and *wide format*
 
 Long format is something you usually obtain from queries to a database, with one or more rows for each observation depending on the different features, for example:
 
@@ -219,15 +252,33 @@ Finally, saving we can save them with *ggsave("filename.jpg")*. It will autodete
 
 The [documentation](http://docs.ggplot2.org/current/) of ggplot is big, and potent.
 
-
-##gvis
-
-ggvis is a data visualization package from the same creator as ggplot2. The aim is to create interactive graphics using a similar syntax as ggplot2.
-
 ####MODEL
 
 caret
+
+The caret package contains functions to streamline the model training process for complex regression and classification problems. While it uses other external R packages, it doesn't load them until necessary.
+
+train
+* evaluate, using resampling, the effect of model tuning parameters on performance
+* choose the "optimal" model across these parameters
+* estimate model performance from a training set
+
+An example from the documentation:
+
+plsFit <- train(Class ~ .,
++                 data = training,
++                 method = "pls",
++                 ## Center and scale the predictors for the training
++                 ## set and all future samples.
++                 preProc = c("center", "scale"))
+
+
+
+
 mclust
+
+The mclust package is a contributed R package for model-based clustering, classification, and density estimation. It assumes a variety of data models and apply maximum likelihood estimation and Bayes criteria to identify the most likely model and number of clusters.
+
 randomForest
 
 ####REPORT
