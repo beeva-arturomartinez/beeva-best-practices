@@ -25,7 +25,6 @@ At this point we're going to talk about the best practices for optimize the code
 	* [Trees](#trees)
 	* [Graphs](#graphs)
 * [Profiling](#profiling)
-* [Instrumentation](#instrumentation)
 * [Loop Optimization](#loop-optimization)
   * [Common Tips](#common-tips)
   * [Optimization via a sequence of loop transformations](#optimization-via a-sequence-of-loop-transformations)
