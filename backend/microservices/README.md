@@ -261,23 +261,23 @@ Below is a list of some technologies which are often used in microservice archit
 
 ### 2.3 Communication between microservices
 
-But since each part works independently, there is the risk of latency when each piece is brought together. While the whole point of microservices is that they are able to work independently, they need to work together, which can be a repeated challenge. Particularly when many services are making calls to many others, you can have a “dogpile” of information — when one service goes down while the other connecting services don’t have any time-out mechanisms, eventually the entire app will collapse.
+Since each part works independently, there is the risk of latency when each piece is brought together. While the whole point of microservices is that they are able to work independently, they need to work together, which can be a repeated challenge. Particularly when many services are making calls to many others, you can have a “dogpile” of information — when one service goes down while the other connecting services don’t have any time-out mechanisms, eventually the entire app will collapse.
 
 #### 2.3.1. Coordination and Dumb Pipes
 
-Let’s take a closer look at what makes something a microservice as opposed to a traditional SOA. Perhaps the most important distinction is side effects. Microservices avoid them because they are on an older approach: Unix pipes.
+Let’s take a closer look at what makes something a microservice as opposed to a traditional SOA. Perhaps the most important distinction is side effects. Microservices avoid them because they are based on an older approach: Unix pipes.
 
 Composing small pieces of functionality relies on repeatable results, a standard mechanism for input and output, and an exit code for a program to indicate success or lack thereof.  We know this works from observational evidence, and we also know that a Unix pipe is a “dumb” interface because it has no control statements. The pipe pushs data from A to B, and it’s up to members of the pipeline to decide if the input is unacceptable.
 
-Pay attention to defining you business capabilities (microservices) in such a manner that autonomy is maximised, it will give you both organisational and technical advantages. A change in a service may lead to a snowball of dependent changes that must be deployed at the same moment, making changes to a module requires approval of other teams.
+A change in a service may lead to a snowball of dependent changes that must be deployed at the same moment, making changes to a module requires approval of other teams. Pay attention to defining you business capabilities (microservices) in such a manner that autonomy is maximised, it will give you both organisational and technical advantages. 
 
 Services communicate using either synchronous protocols such as HTTP/REST or asynchronous protocols such as AMQP.
 
 #### 2.3.2. Synchronous communication
 
-Synchronous dependencies between services imply that the calling service is blocked and waiting for a response by the called service before continuing it's operation. This is tight coupling, does not scale very well, and the calling service may be impacted by errors in the called service. In a high available robust Microservices landscape that is not preferable but that is not always possible. When necesary measures can be taken (for example circuit breakers) but it requires extra effort.
+Synchronous dependencies between services imply that the calling service is blocked and waiting for a response by the called service before continuing it's operation. This is tight coupling, does not scale very well, and the calling service may be impacted by errors in the called service. When necesary measures can be taken but it requires extra effort.
 
-A circuit breaker acts like a discovery service, where one microservice realizes another is “sick” and notifies the main circuit breaker. From that point on, a microservice will be able to check the service discovery to determine if the microservice it is connected to is broken in order to prevent calls being made to or from said microservice. 
+For example a circuit breaker acts like a discovery service, where one microservice realizes another is “sick” and notifies the main circuit breaker. From that point on, a microservice will be able to check the service discovery to determine if the microservice it is connected to is broken in order to prevent calls being made to or from said microservice. 
 
 #### 2.3.3. Aynchronous communication
 
