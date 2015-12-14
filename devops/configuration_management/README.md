@@ -1,15 +1,74 @@
-# Technology & type (Best Practices, Style Guide, ..) i.e. ****** Style Guide
-At this point we're going to talk about...
+# Configuration Management
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+Configuration Management is the set of processes that are used to ensure proper operation of the Informational Systems as they were previously defined, in an automated and repeatable way.
+
+Using CM we will be able to keep versioned changes that we make in our infrastructure and applications to automatically transfer this changes between environments quickly and safely.
+
+To do this work, there are a variety of tools available which facilitate the task of managing the lifecycle of the infrastructure, both physical and virtual (eg,  [TheForeman](www.theforeman.org)), and tools for automating software and services installation and configuration (eg, [Puppet](puppetlabs.com)).
+
+![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
-* Architecture, technologies and tools
-* Environment preparation
-* Foreman Stack creation
-* Workflow
-* Puppet Module documentation
+* Hiera Encryption settings
+    * Introduction and purpose
+    * Creating Puppetmaster keys and Hiera configuration
+    * Eyaml files process encryption
+        * Passwords
+        * Files
+        * Application properties
+* Deployment of static files
+    * Installation and purpose
+* Example Hiera hierarchy
+
+
+* [Foreman Stack creation](#foreman-stack-creation)
+* [Extra definitions](#extra-definitions)
+* [Hostgroups (runlist)](#hostgroups-runlist)
+* [Hosts (runlist)](#hosts-runlist)
+* [Templates](#templates)
+* [Init Script](#init-script)
+* [Puppet Module Documentation](#puppet-module-documentation)
+
+---
+## Hiera Encryption Settings
+
+Eyaml library provides us an encryption method for hiera settings.
+
+### Introduction and purpose
+
+
+
+### Creating Puppetmaster keys and Hiera configuration
+
+
+
+### Eyaml files process encryption
+
+
+
+#### Passwords
+
+
+
+#### Files
+
+
+
+#### Application properties
+
+
+
+## Deployment of static files
+
+
+
+### Installation and purpose
+
+
+
+## Example Hiera hierarchy
+
 
 ---
 ## Foreman Stack Creation
