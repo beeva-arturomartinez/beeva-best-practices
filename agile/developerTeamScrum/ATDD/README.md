@@ -115,6 +115,34 @@ It's time to capture specific examples using natural language:
 | VISA | 4406687108633651      | 03-17     | KO|
 | VISA | 4406687108633641      | 02-15    | KO|
 
+Now we start with the distillation stage:
+
+> We have obtained that we can only tokenize cards with the following criteria:
+> - We do not allow expired cards.
+> - The check digit must meet the Luhn algorithm or mod10.
+> - Only allow cards VISA or MASTERCARD.
+
+Now captured as acceptance test using a framework adapted to the format that will automate:
+
+| Test case        | Action           | Expiration  | Numeration |
+| :-------------: |:-------------:|:-----:|:-----------------:|
+| Tokenizar o no tarjetas validas o invalidas      | Tokenizada | 0219 | 4406687108633641|
+| | Tokenizada      | 0320    | 5558352159098664|
+| | No tokenizada      | 0417     | 6268616943177151|
+| | No tokenizada      | 0317     | 4406687108633651|
+| | No tokenizada      | 0215    | 4406687108633641|
+
+> Then the QA team has clear acceptance tests and can automate them through the framework of **Cucumber**. QA begins with the **Gherkin** language translation of the acceptance test:
+
+```
+#languaje en
+Feature: tokenization pan
+As a api user I want to tokenization a pand card
+    Scenario: tokenization pan service
+    ...
+    ...
+```
+
 ### References
 
 * [Link](https://www.beeva.com/beeva-view/metodologiasagiles/atdd-la-clave-del-exito-en-equipos-agiles/) Beeva ATDD
