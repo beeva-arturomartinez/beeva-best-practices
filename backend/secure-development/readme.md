@@ -45,7 +45,7 @@ We should follow a policy of proper management of cookies:
 
 A session is a set of transactions associated HTTP request and response to the same user.
 
-Any complex application today requires keeping in time information between the browser and the application server associated with the user, unfortunately, HTTP protocol does not have session management, so these have been relegated to the application layer .
+Any complex application today requires keeping in time information between the browser and the application server associated with the user, unfortunately, HTTP protocol does not have session management, so these have been relegated to the application layer.
 
 It is the responsibility of applying the proper management of the sessions. Once a user is authenticated assigned application and run a session id or session token that will be responsible for identifying communications between browser and server (in some applications for tracking sessions to unauthenticated connections are also assigned).
 
@@ -55,7 +55,7 @@ Every HTTP request we do, the session token traveling to the application server 
 
 There are dozens of possible attacks on the sessions that we must avoid theft, prediction, fixing, etc.
 
-**Features of the session id or session token**
+#### **Features of the session id or session token**
 
 There are a number of features that the session token (see sessionid, jsessionid, phpsession, etc.) must meet in order to avoid possible attacks, we will detail the most important.
 
@@ -63,11 +63,11 @@ There are a number of features that the session token (see sessionid, jsessionid
 
 The session token should not disclose information about the technologies used by the application, we recommend replacing the names of the tokens session default (jsessionid, phpsession, etc) for a generic name that does not reveal information about the framework construction the application, for example sessionid
 
-#### **Session Token length	**
+#### **Session Token length**
 
 The session token should be long enough to be resistant to brute force attacks possible. You should have a length of at least 128 bits.
 
-#### **Session Token Entropy	**
+#### **Session Token Entropy**
 
 The session token should not be predictable, it must be generated with pseudorandom techniques. To be predictable (for example sequential) an attacker could find out valid session states
 
@@ -147,15 +147,10 @@ Then we put two examples of using Java PreparedStatement generation and hibernat
 
 ```java
 String custname = request.getParameter("customerName"); // This should REALLY be validated too
-
 // perform input validation to detect attacks
-
 String query = "SELECT account_balance FROM user_data WHERE user_name = ? ";
-
 PreparedStatement pstmt = connection.prepareStatement( query );
-
 pstmt.setString( 1, custname);
-
 ResultSet results = pstmt.executeQuery( );
 ```
 
@@ -163,14 +158,14 @@ ResultSet results = pstmt.executeQuery( );
 **_HIBERNATE_**
 
 First an example of a definition insecure
-
+```java
 Query unsafeHQLQuery = session.createQuery("from Inventory where productID='"+userSuppliedParameter+"'");
-
+```
 The same example safely
-
+```java
 Query safeHQLQuery = session.createQuery("from Inventory where productID=:productid");
-
 safeHQLQuery.setParameter("productid", userSuppliedParameter);
+```
 
 #### **Use stored procedures**
 
@@ -186,17 +181,12 @@ Example java code using stored procedures
 String custname = request.getParameter("customerName"); // This should REALLY be validated
 
 try {
-
    	CallableStatement cs = connection.prepareCall("{call sp_getAccountBalance(?)}");
-
    	cs.setString(1, custname);
-
    	ResultSet results = cs.executeQuery();      	
-
    	// … result set handling
 
 } catch (SQLException se) {                	
-
    	// … logging and error handling
 ```
 
@@ -208,7 +198,9 @@ This can be done using libraries intended for such purpose as ESAPI, currently i
 
 An example to validate and would encode a query to Oracle:
 
-*ESAPI.encoder().encodeForSQL( new OracleCodec(), queryparam );*
+```java
+ESAPI.encoder().encodeForSQL( new OracleCodec(), queryparam );*
+```
 
 If you need to manually validate data entry, there will always be to use methods whitelist (explicitly define which allow) to the detriment of blacklisting (we define what we do not allow) to ensure greater safety.
 
@@ -216,11 +208,11 @@ If you need to manually validate data entry, there will always be to use methods
 
 XSS (Cross-site scripting) is a type of security flaw typical Web applications, which allows a third party to inject JavaScript code in web pages viewed by the user, avoiding control measures such as the same origin policy.
 
-These errors can be found in any application that has the ultimate objective of presenting information in a web browser. It is not limited to web sites, as it may be vulnerable to XSS local applications, or even the browser itself. The problem is usually not the input data that are used in certain application is properly validated. This vulnerability may be present directly (also called persistent) or indirectly (also called reflected).
+These errors can be found in any application that has the ultimate objective of presenting information in a web browser. It's not limited to web sites, as it may be vulnerable to XSS local applications, or even the browser itself. The problem is usually not the input data that are used in certain application is properly validated. This vulnerability may be present directly (also called persistent) or indirectly (also called reflected).
 
 ### **XSS types:**
 
-* **Direct** (Persistent): This type of XSS commonly filtering, and is dangerous to embed HTML code in places that permit; thus including tags like <script> or <iframe>.
+* **Direct** (Persistent): This type of XSS commonly filtering, and is dangerous to embed HTML code in places that permit; thus including tags like \<script\> or \<iframe\>.
 
 * **Indirect** (reflected): This type of XSS is to modify values that the Web application used to pass variables between pages without using sessions and happens when there is a message or a URL path in the browser in a cookie, or any other HTTP header (in some browsers and web applications, this could extend the browser DOM).
 
@@ -232,18 +224,19 @@ You can see the full document:
 
 [https://www.owasp.org/index.php/XSS_Prevention_Cheat_Sheet](https://www.owasp.org/index.php/XSS_Prevention_Cheat_Sheet)
 
-#### **Never insert unreliable source data in our HTML outpu**
+#### **Never insert unreliable source data in our HTML output**
 
-You try to avoid, whenever possible, insert unreliable data source (data received from external sources) in our HTML output. This includes block <script> in comments in CSS attribute names (divs), labels, etc.
+You try to avoid, whenever possible, insert unreliable data source (data received from external sources) in our HTML output. This includes block \<script\> in comments in CSS attribute names (divs), labels, etc.
 
 When you can not avoid, functionality or any other reason, we must consider the following points depending on which is where we insert the data.
 
-#### **Escape HTML**
+### **Escape HTML**
 
 It can be done using the ESAPI library:
 
+```java
 String safe = ESAPI.encoder().encodeForHTML( request.getParameter( "input" ) );
-
+```
 #### **Escape Attributes**
 
 To enter data unreliable source on attributes such as width, name, value, etc. you have to escape them, this does not apply to complex attributes href, src, style, or events like onmouseover grabbers.
@@ -252,7 +245,9 @@ Except for alphanumeric characters, escape all ASCII characters with the format 
 
 It can be done using the ESAPI library:
 
-*String safe=ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("input"));*
+```java
+String safe=ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("input"));*
+```
 
 #### **Escape JS**
 
@@ -274,7 +269,9 @@ Except for alphanumeric characters, escape all characters in the form \HH
 
 It can be done using the ESAPI library
 
-*String safe = ESAPI.encoder().encodeForCSS( request.getParameter( "input" ) );*
+```java
+String safe = ESAPI.encoder().encodeForCSS( request.getParameter( "input" ) );
+```
 
 #### **Escape URLS**
 
@@ -284,7 +281,9 @@ Except for alphanumeric characters, escape all characters with the format %HH
 
 It can be done using the ESAPI library 
 
-*String safe = ESAPI.encoder().encodeForURL( request.getParameter( "input" ) );*
+```java
+String safe = ESAPI.encoder().encodeForURL( request.getParameter( "input" ) );
+```
 
 #### **HTML libraries use policies to validate and clean HTML output**
 
@@ -292,25 +291,21 @@ We recommend using libraries with cleaning validation policies and the HTML gene
 
 *OWASP AntiSamy*
 
-* import org.owasp.validator.html.*;*
-
-* Policy policy = Policy.getInstance(POLICY_FILE_LOCATION);*
-
-* AntiSamy as = new AntiSamy();*
-
-* CleanResults cr = as.scan(dirtyInput, policy);*
-
-* MyUserDAO.storeUserProfile(cr.getCleanHTML()); // some custom function*
-
+```java
+ import org.owasp.validator.html.*;
+ Policy policy = Policy.getInstance(POLICY_FILE_LOCATION);
+ AntiSamy as = new AntiSamy();
+ CleanResults cr = as.scan(dirtyInput, policy);
+ MyUserDAO.storeUserProfile(cr.getCleanHTML()); // some custom function
+```
 *OWASP Java HTML Sanitizer*
 
-* import org.owasp.html.Sanitizers;*
-
-* import org.owasp.html.PolicyFactory;*
-
-* PolicyFactory sanitizer = Sanitizers.FORMATTING.and(Sanitizers.BLOCKS);*
-
-* String cleanResults = sanitizer.sanitize("<p>Hello, <b>World!</b>");*
+```java
+ import org.owasp.html.Sanitizers;
+ import org.owasp.html.PolicyFactory;
+ PolicyFactory sanitizer = Sanitizers.FORMATTING.and(Sanitizers.BLOCKS);
+ String cleanResults = sanitizer.sanitize("<p>Hello, <b>World!</b>");
+```
 
 #### **Use HTTPOnly flag in cookies**
 
