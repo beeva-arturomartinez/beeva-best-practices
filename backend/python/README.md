@@ -942,12 +942,187 @@ In general, the use of decorators is recommended in order to improve code readab
 
 
 ### 12. Programming paradigms
-#### 12.1. Tipo de variables
-#### 12.2. Herencia
-#### 12.3. Sobrecarga de funciones
-#### 12.4. Getters y setters  
-#### 12.5. Patrones de diseño
-#### OOP, estructura, funcional, ...  
+Python is a multiparadigm language that allows Functional(F), Imperative (I), object oriented(OO) and procedural(P) programming.
+In large programms different paradigms can be applied, for instance by using OO for GUI and procedural or functional in processing logic.
+
+#### 12.1 Functional
+
+For functional programming Python provides lambda expressions, which allow to define functions in the same line we use them, and, to iterate over sequences, it provides list comprehensions and generators, both used over iterators.
+
+
+##### 12.1.1 List comprehensions and generators
+
+The main difference between both is that list comprehensions returns a list while generators returns an iterator whose
+items are calculated when needed, so they are not in memory.
+
+A list comprehension or generator expression is equivalent to the following Python code:
+
+```python
+for expr1 in sequence1:
+    if not (condition1):
+        continue   # Skip this element
+    for expr2 in sequence2:
+        if not (condition2):
+            continue    # Skip this element
+        ...
+        for exprN in sequenceN:
+             if not (conditionN):
+                 continue   # Skip this element
+
+             # Output the value of
+             # the expression.
+```
+
+Which can be reformated to something like:
+```python
+[(expr1,expr2) for expr1 in sequence1 for expr2 in sequence2] # List comprehension
+
+#or
+
+((expr1,expr2) for expr1 in sequence1 for expr2 in sequence2) # Generator
+```
+
+###### 12.1.1.1 Yield
+
+Any function containing a yield keyword is a generator function; this is detected by Python’s bytecode compiler which compiles the function specially as a result.
+
+```python
+def generate_ints(N):
+    for i in range(N):
+        yield i
+```
+
+So if we test it
+
+```python
+>>> gen = generate_ints(3)
+>>> gen
+<generator object generate_ints at ...>
+>>> gen.next()
+0
+>>> gen.next()
+1
+>>> gen.next()
+2
+>>> gen.next()
+Traceback (most recent call last):
+  File "stdin", line 1, in ?
+  File "stdin", line 2, in generate_ints
+StopIteration
+```
+
+
+##### 12.1.2 Built-in functions
+
+You can use map and filter (which duplicate list comprehensions features).
+
+So having the upper function:
+```python
+def my_upper(s):
+  return s.upper()
+```
+To apply that function to every item on a sequence,
+
+instead of using the traditional for sentence:
+```python
+result_list = []
+for elem in some_list:
+  result_list.append(s.upper())
+return result_list
+```
+
+You can simplify it with map:
+
+```python
+map(my_upper, ['bee', 'pythonist'])
+> ['BEE', 'PYTHONIST']
+```
+
+Or even more with lambda expression, avoiding my_upper function declaration:
+
+```python
+map(lambda x: x.upper(), ['bee', 'pythonist'])
+> ['BEE', 'PYTHONIST']
+```
+
+In the same way you can use filter to get only the items that fulfill some function logic.
+
+```python
+filter(lambda x: x>3 and x<6, [0,1,2,3,4,5,6])
+> [4,5]
+```
+
+Furthermore the reduce built-in function performs the operation of applying some reducing logic by pairs.
+
+```python
+import operator
+
+reduce(lambda x,y: ''.join([x,y]), ['B','EE','VA'])
+> 'BEEVA'
+```
+
+##### 12.2 Imperative programming
+
+Python syntax allows to apply imperative programming.
+
+For instance, you can do something like:
+
+```python
+MyList = [1, 2, 3, 4, 5]
+Sum = 0
+for X in MyList:
+    Sum += X
+print(Sum)
+```
+
+##### 12.3 Object Oriented programming
+
+Python includes ***class*** keyword and allows inheritance.
+
+So for example,
+
+```python
+class Pet(object):
+
+    def __init__(self, name, species):
+        self.name = name
+        self.species = species
+
+    def getName(self):
+        return self.name
+
+    def getSpecies(self):
+        return self.species
+
+    def __str__(self):
+        return "%s is a %s" % (self.name, self.species)
+
+class Dog(Pet):
+
+    def __init__(self, name, chases_cats):
+        Pet.__init__(self, name, "Dog")
+        self.chases_cats = chases_cats
+
+    def chasesCats(self):
+        return self.chases_cats
+```
+
+##### 12.4 Procedural programming
+
+As with imperative programming, python allows to apply procedural coding style.
+For instance:
+
+```python
+def DoAdd(MyList):
+    Sum = 0
+    if type(MyList) is list:
+        for X in MyList:
+            Sum += X
+    return Sum
+MyList = [1, 2, 3, 4, 5]
+print(DoAdd(MyList))
+```
+
 ### 13. Exceptions
 
 Python handles all errors with exceptions.
