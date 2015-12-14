@@ -180,7 +180,7 @@ def add_pyspark_path(spark_home):
         print(str(e))
         exit(-1)
 ````
-
+For python applications, you need to specify all the dependencies of the application using the --py-files argument of spark-submit. As there is no "assembly with all dependencies included" solution, if you have a lot of dependencies you can also set the enviromental variables PYSPARK_PYTHON on the executors and PYSPARK_DRIVER_PYTHON on the driver to customize the python binary executable to use (Where you can pre-load all the dependencies).
 
 ### Tuning and debugging
 
@@ -189,14 +189,10 @@ def add_pyspark_path(spark_home):
 
 ### Spark on EMR
 * Launching applications
-* Connecting to cluster instances and spark UI
-
-
-### References
-
-* [Link](http://www.url.to) Description
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+SSH tunnel with master: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-ssh-tunnel.html
+Default ports used: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-web-interfaces.html
+YARN web UI: http://public-ip:9026/cluster
+Spark app web UI: http://{public-ip}:9046/proxy/{app-id}/
 
 ___
 
