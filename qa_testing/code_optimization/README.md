@@ -132,8 +132,9 @@ Several types of unnecessary code which would have to proceed to its removal:
 
 #### Dead store
 
-    In computer programming, a local variable that is assigned a value but is not read by any subsequent instruction is referred to as a dead store. Dead stores waste processor time and memory, and may be detected through the use of static program analysis.
-~~~
+In computer programming, a local variable that is assigned a value but is not read by any subsequent instruction is referred to as a dead store. Dead stores waste processor time and memory, and may be detected through the use of static program analysis.
+
+```Java
         DeadStoreExample
 
         import java.util.ArrayList;
@@ -152,45 +153,46 @@ Several types of unnecessary code which would have to proceed to its removal:
          }
         }
 
-~~~
+```
 
 #### Redundant code
 
-    Redundant code is source code or compiled code in a computer program that is unnecessary, such as recomputing a value that has previously been calculated[1] and is still available, code that is never executed (known as unreachable code), or code which is executed but has no external effect (e.g., does not change the output produced by a program; known as dead code).
+Redundant code is source code or compiled code in a computer program that is unnecessary, such as recomputing a value that has previously been calculated[1] and is still available, code that is never executed (known as unreachable code), or code which is executed but has no external effect (e.g., does not change the output produced by a program; known as dead code).
 
-~~~
+```Java
         int foo(int iX)
         {
             int iY = iX*2;
 
             return iX*2;
         }
-~~~
+```
 
-        The second iX*2 expression is redundant code and can be replaced by a reference to the variable iY. Alternatively, the definition int iY = iX*2 can instead be removed.
+The second iX\*2 expression is redundant code and can be replaced by a reference to the variable iY. Alternatively, the definition int iY = iX\*2 can instead be removed.
 
 #### Duplicate code
 
-    Duplicate code is a sequence of source code that occurs more than once, either within a program or across different programs owned or maintained by the same entity. Duplicate code is generally considered undesirable for a number of reasons.A minimum requirement is usually applied to the quantity of code that must appear in a sequence for it to be considered duplicate rather than coincidentally similar. Sequences of duplicate code are sometimes known as code clones or just clones, the automated process of finding duplications in source code is called clone detection.
+Duplicate code is a sequence of source code that occurs more than once, either within a program or across different programs owned or maintained by the same entity. Duplicate code is generally considered undesirable for a number of reasons.A minimum requirement is usually applied to the quantity of code that must appear in a sequence for it to be considered duplicate rather than coincidentally similar. Sequences of duplicate code are sometimes known as code clones or just clones, the automated process of finding duplications in source code is called clone detection.
 
 #### Unreachable code
 
-    Unreachable code is part of the source code of a program which can never be executed because there exists no control flow path to the code from the rest of the program.
+Unreachable code is part of the source code of a program which can never be executed because there exists no control flow path to the code from the rest of the program.
+
 Unreachable code is sometimes also called dead code, although dead code may also refer to code that is executed but has no effect on the output of a program.
 
-~~~
+```Java
         int foo (int iX, int iY)
          {
           return iX + iY;
           int iZ = iX*iY;
          }
-~~~
+```
 
-        The definition int iZ = iX*iY; is never reached as the function returns before the definition is reached. Therefore the definition of iZ can be discarded.
+The definition int iZ = iX\*iY; is never reached as the function returns before the definition is reached. Therefore the definition of iZ can be discarded.
 
 #### Oxbow code
 
-    Oxbow code refers to fragments of program code that were once needed but which are now never used. Such code is typically formed when a program is modified, either when an item is superseded with a newer version but the old version is not removed, or when an item is removed or replaced, but the item's supporting code is not removed.
+Oxbow code refers to fragments of program code that were once needed but which are now never used. Such code is typically formed when a program is modified, either when an item is superseded with a newer version but the old version is not removed, or when an item is removed or replaced, but the item's supporting code is not removed.
 
 ## Simple Data Structures
 
@@ -204,60 +206,58 @@ come across a node that is ∅. The two cases are as follows:
 The algorithm described is a very simple one that makes use of a simple
 while loop to check the first case.
 
-* 1) algorithm Traverse(head)
-* 2) Pre: head is the head node in the list
-* 3) Post: the items in the list have been traversed
-* 4) n ← head
-* 5) while n 6= 0
-* 6) yield n.Value
-* 7) n ← n.Next
-* 8) end while
-* 9) end Traverse
-
+```
+	1. algorithm Traverse(head)
+	2. 	Pre: head is the head node in the list
+	3. 	Post: the items in the list have been traversed
+	4. 	n ← head
+	5. 	while n 6= 0
+	6. 		yield n.Value
+	7. 		n ← n.Next
+	8. 	end while
+	9. end Traverse
+```
 ### Searching
 
 #### Sequential Search
 
-    A simple algorithm that search for a specific item inside a list. It operates
-    looping on each element O(n) until a match occurs or the end is reached.
+A simple algorithm that search for a specific item inside a list. It operates looping on each element O(n) until a match occurs or the end is reached.
 
-    * 1) algorithm SequentialSearch(list, item)
-    * 2) Pre: list 6= ∅
-    * 3) Post: return index of item if found, otherwise −1
-    * 4) index ← 0
-    * 5) while index < list.Count and list[index] 6= item
-    * 6) index ← index + 1
-    * 7) end while
-    * 8) if index < list.Count and list[index] = item
-    * 9) return index
-    * 10) end if
-    * 11) return −1
-    * 12) end SequentialSearch
-
+```
+	1.  algorithm SequentialSearch(list, item)
+	2. 	 Pre: list 6= ∅
+	3. 	 Post: return index of item if found, otherwise −1
+	4.	 index ← 0
+	5.	 while index < list.Count and list[index] 6= item
+	6. 		 index ← index + 1
+	7.	 end while
+	8.	 if index < list.Count and list[index] = item
+	9. 		 return index
+	10.	end if
+	11.	return −1
+	12. end SequentialSearch
+```
 #### Probability Search
 
-    Probability search is a statistical sequential searching algorithm. In addition to
-    searching for an item, it takes into account its frequency by swapping it with
-    it’s predecessor in the list. The algorithm complexity still remains at O(n) but
-    in a non-uniform items search the more frequent items are in the first positions,
-    reducing list scanning time.
+Probability search is a statistical sequential searching algorithm. In addition to    searching for an item, it takes into account its frequency by swapping it with it’s predecessor in the list. The algorithm complexity still remains at O(n) but in a non-uniform items search the more frequent items are in the first positions, reducing list scanning time.
 
-    * 1) algorithm ProbabilitySearch(list, item)
-    * 2) Pre: list 6= ∅
-    * 3) Post: a boolean indicating where the item is found or not;
-    * in the former case swap founded item with its predecessor
-    * 4) index ← 0
-    * 5) while index < list.Count and list[index] 6= item
-    * 6) index ← index + 1
-    * 7) end while
-    * 8) if index ≥ list.Count or list[index] 6= item
-    * 9) return false
-    * 10) end if
-    * 11) if index > 0
-    * 12) Swap(list[index], list[index − 1])
-    * 13) end if
-    * 14) return true
-    * 15) end ProbabilitySearch
+```
+	1.	 algorithm ProbabilitySearch(list, item)
+	2.		 Pre: list 6= ∅
+	3.		 Post: a boolean indicating where the item is found or not; in the former case swap 				founded item with its predecessor
+	4.		 index ← 0
+	5.		 while index < list.Count and list[index] 6= item
+	6.			 index ← index + 1
+	7.		 end while
+	8.		 if index ≥ list.Count or list[index] 6= item
+	9.			 return false
+	10.		end if
+	11.		if index > 0
+	12.			Swap(list[index], list[index − 1])
+	13.		end if
+	14.		return true
+	15.	end ProbabilitySearch
+```
 
 ### Ordering
 
@@ -282,21 +282,17 @@ Example:
 
 In the code fragment below, the value of x can be propagated to the use of x.
 
-~~~
-
+```Java
         x = 4;
         y = x + 5;
-
-~~~
+```
 
 Below is the code fragment after constant propagation and constant folding.
 
-~~~
-
+```Java
         x = 4;
         y = 9;
-
-~~~
+```
 
 Some compilers perform constant propagation within basic blocks; some compilers perform constant propagation in more complex control flow.
 
@@ -319,28 +315,25 @@ Recursion in computer science is a method where the solution to a problem depend
 Most computer programming languages support recursion by allowing a function to call itself within the program text. Some functional programming languages do not define any looping constructs but rely solely on recursion to repeatedly call code. Computability theory proves that these recursive-only languages are Turing complete; they are as computationally powerful as Turing complete imperative languages, meaning they can solve the same kinds of problems as imperative languages even without iterative control structures such as “while” and “for”.
 
 When we write a method for solving a particular problem, one of the basic design techniques is to break the task into smaller subtasks. For example, the problem of adding (or multiplying) n consecutive integers can be reduced to a problem of adding (or multiplying) n-1consecutive integers:
-~~~
 
+```Java
         1 + 2 + 3 +... + n = n + [1 + 2 + 3 + .. + (n-1)]
 
         1 * 2 * 3 *... * n = n * [1 * 2 * 3 * .. * (n-1)]
-
-~~~
+```
 
 Therefore, if we introduce a method sumR(n) (or timesR(n)) that adds (or multiplies) integers from 1 to n, then the above arithmetics can be rewritten as
 
-~~~
-
+```Java
         sumR(n) = n + sumR(n-1)
 
         timesR(n) = n * timesR(n-1)
-
-~~~
+```
 
 Such functional definition is called a recursive definition, since the definition contains a call to itself. On each recursive call the argument of sumR(n) (or timesR(n)) gets smaller by one. It takes n-1 calls until we reach the base case - this is a part of a definition that does not make a call to itself. Each recursive definition requires base cases in order to prevent infinite recursion.
 In the following example we provide iterative and recursive implementations for the addition and multiplication of n natural numbers.
 
-~~~
+```Java
 
         public int sum(int n)                   public int sumR(int n)
         {                                       {
@@ -351,7 +344,7 @@ In the following example we provide iterative and recursive implementations for 
            return res;                          }
         }
 
-~~~
+```
 
 To solve a problem recursively means that you have to first redefine the problem in terms of a smaller subproblem of the same type as the original problem. In the above summation problem, to sum-up n integers we have to know how to sum-up n-1 integers. Next, you have to figure out how the solution to smaller subproblems will give you a solution to the problem as a whole. This step is often called as a recursive leap of faith. Before using a recursive call, you must be convinced that the recursive call will do what it is supposed to do. You do not need to think how recursive calls works, just assume that it returns the correct result.
 
