@@ -356,6 +356,43 @@ For each of the middlewares, we'll talk about three things:
 
 You can get more information about this middleware functions in detail from this [link](https://www.npmjs.com/package/helmet)
 
+### Log
+
+An important part for developers is the ability to do logs, to have control over the code was developed. 
+
+The default form to do this in Nodejs is to use *console.log*. But isn't a good practices. Don't write *console.log* all over the code to debug it and then commenting them out when they are no longer needed. 
+
+For this purpose it's better to use the library to debug [Bunyan](https://github.com/trentm/node-bunyan).
+
+
+
+####Bunyan
+
+Bunyan is a **simple and fast JSON logging** library for node.js services.
+
+example:
+
+```
+var bunyan = require('bunyan');
+var log = bunyan.createLogger({name: "myapp"});
+log.info("hi");
+```
+
+Manifesto: Server logs should be structured. JSON's a good format. Let's do that. A log record is one line of **JSON.stringify**'d output.
+
+**Features**
+
+- Elegant log method API
+- Extensible streams system for controlling where log records go (to a stream, to a file, log file rotation, etc.)
+- Bunyan CLI for pretty-printing and filtering of Bunyan logs
+- Simple include of log call source location (file, line, function) with src: true
+- Lightweight specialization of Logger instances with log.child
+- Custom rendering of logged objects with "serializers"
+- Runtime log snooping via Dtrace support
+- Support for browserify. See Browserify section below.
+
+For more information see their [web](https://github.com/trentm/node-bunyan).
+
 ## Testing
 
 ### TDD with Mocha
