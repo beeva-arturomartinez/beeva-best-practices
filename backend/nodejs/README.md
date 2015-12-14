@@ -9,7 +9,7 @@ At this point we're going to talk about nodeJS, we're useing nodeJS to develop l
 * [Introduction, best practices, antipatterns](#nodejs-frameworks-best-practices)
 * [ExpressJS](#nodejs-frameworks-express)
 * [Hapi](#nodejs-frameworks-hapi)
-* [Restify](#nodejs-frameworks-restify)
+* [Restify](#restify)
 
 ## [DevOps](#nodejs-devops)
 * [Scaffolding](#nodejs-devops-scaffolding)
@@ -19,28 +19,11 @@ At this point we're going to talk about nodeJS, we're useing nodeJS to develop l
 * [Cloud](#nodejs-devops-cloud)
 
 ## [Testing](#nodejs-testing)
-* [TDD with Mocha](#nodejs-testing-mocha)
-* [BDD with Cucumber](#nodejs-testing-cucumber)
+* [TDD with Mocha](#tdd-with-mocha)
+* [BDD with Cucumber](#bdd-with-cucumber)
 
-### The Fellowship of the Ring 
 
-Some code examples: 
-````javascript
-    var http = require('http');
-    http.createServer(function (req, res) {
-      res.writeHead(200, {'Content-Type': 'text/plain'});
-      res.end('Hello World\n');
-    }).listen(1337, '127.0.0.1');
-    console.log('Server running at http://127.0.0.1:1337/');
-````
-
-### The Two Towers
-
-> Blockquotes are very handy in email to emulate reply text.
-> This line is part of the same quote.
-
-A Remarkable idea
-
+## Frameworks
 
 ### Restify
 
@@ -89,6 +72,8 @@ You can see a perfomance comparison between Hapi, Express and Restify in the fol
 
 #### Logging in Restify
 
+
+## DevOps
 
 ### Security
 
@@ -163,6 +148,215 @@ For each of the middlewares, we'll talk about three things:
 
 You can get more information about this middleware functions in detail from this [link](https://www.npmjs.com/package/helmet)
 
+## Testing
+
+### TDD with Mocha
+
+#### Focusing
+
+Test-driven development (TDD), as many of you might know, is one of the main, agile development techniques. The genius of TDD lies in increased quality of code, faster development resulting from greater programmer confidence, and improved bug detection.
+
+#### Structure for TDD
+
+```
+my-application/
+	test/
+		unit-test/
+			routes-test/
+				routes-test-file1.js # routes-unit-test files 
+				routes-test-file2.js # to test functions of 
+				routes-test-fileN.js # your application
+			controllers-test/
+				controllers-test-file1.js # controllers-unit-test files
+				controllers-test-file2.js # to test functions of 
+				controllers-test-fileN.js # your application
+			models-test/			
+				models-test-file1.js # models-unit-test files 
+				models-test-file2.js # to test functions and methods of 
+				models-test-fileN.js # your application
+			mocks/
+				mocks-file1.js # to mock functions  
+				mocks-file2.js # and data during unit 
+				mocks-fileN.js # tests of your application
+			
+```
+
+#### Dependencies
+
+##### Installation
+
+Mocha.js are available as a npm module, it should be install globally with:
+
+``` shell
+$ npm install -g mocha
+```
+
+And locally in your project as a development dependency of your application with:
+``` shell
+$ npm install --save-dev mocha
+```
+
+And also is necessary Chai.js and can be install locally as a development dependency with:
+
+``` shell
+$ npm install --save-dev chai
+```
+
+#### Develop and run test
+
+##### Describes and it functions
+
+The different test suite will be group into a describe functions, it consist in a description about the suite, and a function that contains inside the 'it' functions to include every single unit test case. Each 'it' function also contains the description of the single unit test and the function to test one component of your application (model, controller or route). If the complexity of file functions is greater probably will be necessary to use more describe functions inside another. 
+
+A structure example is the following:
+
+```javascript
+describe('UNIT TEST model1', function() {
+
+	it('model1 must exists', function () {
+        	var result = model1;
+        	expect(result).to.be.an('object');
+        	expect(result).to.include.keys(['group1', 'group1']);
+    	});
+
+    	describe('UNIT TEST group1', function() {
+
+        	it('Save in db1', function (done) {
+                	model1.db1.save(db, object, function (err, data) {
+                		expect(err).to.be.null;
+                    		expect(data).to.be.string;
+                    		done();
+                	});
+            	});
+
+		it('Update in db1', function (done) {
+                	model1.db1.update(db, object, function (err, data) {
+                		expect(err).to.be.null;
+                    		expect(data).to.be.string;
+                    		done();
+                	});
+            	});
+    	});
+
+    	describe('UNIT TEST group2', function() {
+
+		it('Create extension', function(done) {
+	    		model1.group2.create(extension, function(err,data){
+	        		expect(err).to.be.null;
+	        		expect(data).to.be.string;
+	        		done();
+	    		});
+		});
+
+		it('Update extension', function (done) {
+	        	model1.group2.save(extension, object, function (err, data) {
+	            		expect(err).to.be.null;
+	            		expect(data).to.be.string;
+	            		done();
+	        	});
+		});
+	});
+
+});
+```
+
+#### Use cases
+
+- To implement the different validations options you need to import the assert and expect libraries, you can do this with:
+```javascript
+var expect = require('chai').expect;
+var assert = require('chai').assert;
+```
+And use in the response of your functions like this:
+```javascript
+expect(err).to.be.null;
+expect(data).to.be.string;
+```
+- It's good practice to use a callback function (done), inside the 'it' unit case function to try all the validations and to finish the case. And example is the following:
+```javascript
+it('Save in Mongo', function (done) {
+	dao.save(db, data, function (err, dataRes) {
+    		expect(err).to.be.null;
+    		expect(dataRes).to.be.string;
+    		done();
+	});
+});
+```
+- To do a test of a route file, to simulate a http call with methods get, post or another, you need the library supertest, you can install as development dependency with:
+``` shell
+$ npm install --save-dev supertest
+```
+You can import with:
+```javascript
+var supertest = require('supertest');
+var host = 'http://localhost:8100';
+var server = supertest(host);
+```
+And you can use this library to try a url with http method post in a it test case function like this example:
+```javascript
+it('Execute data', function (done) {
+    server
+        .post('/api/execute')
+        .send(data)
+        .expect("Content-type", /json/)
+        .end(function (err, res) {
+            expect(err).to.be.null;
+            expect(res).to.be.string;
+            assert.equal(res.status, 200);
+            done();
+        });
+});
+```
+- Also it's a good practice to do a test cases with wrong data to try the error exceptions like this example:
+```javascript
+it('Execute data ERROR', function (done) {
+    server
+        .post('/api/execute')
+        .send(dataError)
+        .expect("Content-type", /json/)
+        .end(function (err, res) {
+            assert.equal(res.status, 500);
+            done();
+        });
+});
+```
+
+#### Recommendations and some tips and tricks 
+
+> - The same layer structure of files should be reflect in the test/unit directory. Example: If the app have directories with routes, controllers and models, is necessary to do the test for all the files.
+> - For model test you need to create a test enviroment with diferent information about start port, database name, etc... because the execution of tests can't interrupt or save data in a execution enviroment.
+> - It's necessary to do a it test case for each function of the original file (model, controller, route).
+> - Use a mock file to get some fake data to store and delete in a test database to try the model functions of crud operations.
+
+#### Hooks
+
+Hooks are functions that can be used to prepare and clean the environment before and after each test suite is executed. Hooks can use callbacks to defined if the beginning and end of the test suite case works fine. It's necessary to use this hooks always in a test suite case.
+
+
+The following example, are hooks to clean data of database (mongodb) and start/stop a server, before and after the execution of test suite case:
+
+```javascript
+before(function(done) {
+	app.start(config.server.port);
+	model1 = require('../../../lib/models/model1');
+	mongo.connect(config, function (err, db) {
+        	if (err) {
+			console.log('ERROR initializing MongoDB: ' + err);
+		} else {
+			app.db = db;
+		}
+		done();
+	});
+});
+
+after(function(done) {
+        app.db.collection('collection').remove(data,function(err,data){});
+        app.stop();
+        done();
+});
+```
+
+You can get more information about Mocha and Chai in detail from both [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/)
 
 ### BDD with Cucumber
 
@@ -562,17 +756,6 @@ var hooks = function () {
 
 module.exports = hooks;
 ```
-
-### The Return of the King
-
-A nice table
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
 
 ### References
 
