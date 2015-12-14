@@ -670,7 +670,7 @@ with printf C function.
 
 Although regular Python strings are just plain bytes, it manages i18n within its strings by using ***unicode***.
 
-### str methods
+#### 9.1 str methods
 
 Here are some of the most common string methods.
 It is recommended to use them because of performance reasons:
@@ -694,7 +694,7 @@ It is recommended to use them because of performance reasons:
 
 Python does not have a separate character type. Instead an expression like s[8] returns a string-length-1 containing the character. With that string-length-1, the operators ==, <=, ... all work as you would expect, so mostly you don't need to know that Python does not have a separate scalar "char" type.
 
-### Single, double and triple quoted strings
+#### 9.2 Single, double and triple quoted strings
 
 Use single quoted literals for strings that relate to the functionality of the code itself (eg. dict keys, regular expressions, SQL).
 
@@ -727,7 +727,7 @@ def cool_method(arg):
 ```
 
 
-### Slice syntax
+#### 9.3 Slice syntax
 
 Python has a printf()-like facility to put together a string. The % operator takes a printf-type format string on the left (%d int, %s string, %f/%g floating point), and the matching values in a tuple on the right (a tuple is made of values separated by commas, typically grouped inside parenthesis):
 
@@ -745,7 +745,7 @@ The above line is kind of long -- suppose you want to break it into separate lin
       (3, 'huff', 'puff', 'blow down'))
 ```
 
-### Unicode
+#### 9.4 Unicode
 
 Regular Python strings are *not* unicode, they are just plain bytes. To create an unicode string, use the 'u' prefix on the string literal:
 
