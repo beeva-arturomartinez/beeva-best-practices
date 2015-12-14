@@ -237,6 +237,28 @@ There are two main service discovery patterns: client-side discovery and server-
 
 #### 2.2.2. Tools and technologies used to build microservice stack
 
+Highly interdependent services requires :
+
+* a very good monitoring flows tool to find out quickly where problems arise
+* great operating maturity because it will multiply outages
+* a status state available for services consumers so they can understand where outages come from when they have consequences for them
+
+Technology choices happening in every team in a decentralized way, it is easier to make mistakes: The trade-offs between innovation and sustainability are more difficult. Enable innovation to meet new requirements means accepting to make mistakes sometimes.
+
+There is also the risk of neglecting good development practices because there are fewer challenges and risks.
+
+Finally, smaller applications have more often break periods during which there is no evolution to develop, with for instance a  change to TMA mode (Third-Party Application Maintenance). In this case, team members are spread elsewhere and the risk of loss of consciousness is important.
+
+Below is a list of some software programs which are often used in microservice architecture:
+
+* ROUTING: Apache, HAProxy, Zuul, DNS, ELB
+* CONFIGURATION: Consul, Zookeeper, Spring Config Server, Etcd
+* REGISTRING: Consul, Zookeeper, Eureka, DNS, Registrator
+* PACKAGING: Tradicional, Docker
+* CONTAINER ORCHESTRATION: Marathon, Kubernetes, ECS
+* CLUSTER: Swarm, Kubernetes, ECS
+* LANGUAGES: Java, Python, Node.JS
+
 ### 2.3 Communication between microservices
 
 Services communicate using either synchronous protocols such as HTTP/REST or asynchronous protocols such as AMQP.
