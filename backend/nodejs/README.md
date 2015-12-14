@@ -13,7 +13,7 @@ At this point we're going to talk about nodeJS, we're useing nodeJS to develop l
 
 ## [DevOps](#nodejs-devops)
 * [Scaffolding](#nodejs-devops-scaffolding)
-* [Security](#nodejs-devops-security)
+* [Security](#security)
 * [Log](#nodejs-devops-log)
 * [Clustering](#nodejs-devops-clustering)
 * [Cloud](#nodejs-devops-cloud)
@@ -89,6 +89,79 @@ You can see a perfomance comparison between Hapi, Express and Restify in the fol
 
 #### Logging in Restify
 
+
+### Security
+
+#### Conventions
+
+> - Don't use the odd versions of Node.js (5.x.x) in Production enviroments, only use pair because are longer term supported (for example the 4.x.x versions).
+> - Don't use deprecated versions of Express (for example 2.x and 3.x are no longer maintained). Security and performance issues in these versions won’t be fixed.
+
+#### Some tips
+
+> - Strict mode, please. With this flag you can opt in to use a restricted variant of JavaScript. It eliminates some silent errors and will throw them all the time.
+> - Static code analysis. Use either JSLint, JSHint or ESLint. Static code analysis can catch a lot of potential problems with your code early on.
+> - No eval, or friends. Eval is not the only one you should avoid, in the background each one of the following expressions use eval: setInterval(String, 2), setTimeout(String, 2) and new Function(String). But why should you avoid eval? It can open up your code for injections attacks and is slow (as it will run the interpreter/compiler).
+
+#### Helmet
+
+Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately. *It's not a silver bullet*, but it can help!
+
+![Helmet](static/helmet.png "Helmet")
+
+##### Quick start
+
+First, install helmet dependency into your application:
+
+```javascript
+npm install --save helmet
+```
+
+Next, you can use helmet in your application (for example in Express):
+
+```javascript
+var express = require('express');
+var helmet = require('helmet');
+ 
+var app = express();
+ 
+app.use(helmet());
+ 
+// ... 
+```
+
+##### How it works
+
+Helmet is a collection of 9 smaller middleware functions that set security-related HTTP headers:
+
+> - **contentSecurityPolicy** for setting Content Security Policy to help prevent cross-site scripting attacks and other cross-site injections.
+> - **hidePoweredBy** to remove the X-Powered-By header
+> - **hpkp** for HTTP Public Key Pinning to prevent man-in-the-middle attacks with forged certificates.
+> - **hsts** for HTTP Strict Transport Security that enforces secure (HTTP over SSL/TLS) connections to the server.
+> - **ieNoOpen** sets X-Download-Options for IE8+
+> - **noCache** to disable client-side caching
+> - **noSniff** to keep clients from sniffing the MIME type
+> - **frameguard** to prevent clickjacking
+> - **xssFilter** adds some small XSS protections in most recent web browsers.
+
+Running app.use(helmet()) will include 6 of the 9, leaving out contentSecurityPolicy, hpkp, and noCache. 
+You can also use each module individually: 
+
+```javascript
+app.use(helmet.noCache());
+app.use(helmet.frameguard());
+```
+
+##### Usage guide
+
+For each of the middlewares, we'll talk about three things:
+
+> - What's the attack we're trying to prevent?
+> - How do we use Helmet to help mitigate those issues?
+> - What are the non-obvious limitations of this middleware?
+
+
+You can get more information about this middleware functions in detail from this [link](https://www.npmjs.com/package/helmet)
 
 
 ### BDD with Cucumber
