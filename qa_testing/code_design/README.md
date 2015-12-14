@@ -224,11 +224,10 @@ Other tools that helps you depending on the programming language:
 #### Introduction of code design patterns
 The design patterns are solutions to common problems in the software development. They are defined by experienced programmers that seen a common ways to solve the similar problems.
 
-A pattern is designed according to a template
+A pattern is designed according to a more complete template, but in this chapter we are going to list the most common design patterns, and when we could/should use them.
 
-In this point we are going to list the most common design patterns, and when we could use them.
 #### Gang of four patterns
-In 1994, four authors Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides published a book titled Design Patterns - Elements of Reusable Object-Oriented Software which initiated the concept of Design Pattern in Software development.
+In 1994, four authors Erich Gamma, Richard Helm, Ralph Johnson and John Vlissides published a book titled "*Design Patterns - Elements of Reusable Object-Oriented Software*" which initiated the concept of Design Pattern in Software development.
 
 These authors are collectively known as Gang of Four (GOF). According to these authors design patterns are primarily based on the following principles of object orientated design:
 
