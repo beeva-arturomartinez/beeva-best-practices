@@ -7,9 +7,16 @@ At this point we're going to talk about the best practices for optimize the code
 * [Concepts](#concepts)
 	* [O Notation](#o-notation)
 	* [Unnecessary code](#unnecessary-code)
+		* [Dead store](#dead-store)
+		* [Redundant code](#redundant-code)
+		* [Duplicate code](#duplicate-code)
+		* [Unreachable code](#unreachable-code)
+		* [Oxbow code](#oxbow-code)
 * [Simple Data Structures](#simple-data-structures)
 	* [Route](#route)
 	* [Searching](#searching)
+		* [Sequential Search](#sequential-search)
+		* [Probability Search](#probability-search)
 	* [Ordering](#ordering)
 	* [Constants propagation](#constants-propagation)
 * [Recursivity](#recursivity)
@@ -123,7 +130,7 @@ For more information click [here][linkonotation] .
 
 Several types of unnecessary code which would have to proceed to its removal:
 
-* __Dead store__
+#### Dead store
 
     In computer programming, a local variable that is assigned a value but is not read by any subsequent instruction is referred to as a dead store. Dead stores waste processor time and memory, and may be detected through the use of static program analysis.
 ~~~
@@ -147,7 +154,7 @@ Several types of unnecessary code which would have to proceed to its removal:
 
 ~~~
 
-* __Redundant code__
+#### Redundant code
 
     Redundant code is source code or compiled code in a computer program that is unnecessary, such as recomputing a value that has previously been calculated[1] and is still available, code that is never executed (known as unreachable code), or code which is executed but has no external effect (e.g., does not change the output produced by a program; known as dead code).
 
@@ -162,11 +169,11 @@ Several types of unnecessary code which would have to proceed to its removal:
 
         The second iX*2 expression is redundant code and can be replaced by a reference to the variable iY. Alternatively, the definition int iY = iX*2 can instead be removed.
 
-* __Duplicate code__
+#### Duplicate code
 
     Duplicate code is a sequence of source code that occurs more than once, either within a program or across different programs owned or maintained by the same entity. Duplicate code is generally considered undesirable for a number of reasons.A minimum requirement is usually applied to the quantity of code that must appear in a sequence for it to be considered duplicate rather than coincidentally similar. Sequences of duplicate code are sometimes known as code clones or just clones, the automated process of finding duplications in source code is called clone detection.
 
-* __Unreachable code__
+#### Unreachable code
 
     Unreachable code is part of the source code of a program which can never be executed because there exists no control flow path to the code from the rest of the program.
 Unreachable code is sometimes also called dead code, although dead code may also refer to code that is executed but has no effect on the output of a program.
@@ -181,7 +188,7 @@ Unreachable code is sometimes also called dead code, although dead code may also
 
         The definition int iZ = iX*iY; is never reached as the function returns before the definition is reached. Therefore the definition of iZ can be discarded.
 
-* __Oxbow code__
+#### Oxbow code
 
     Oxbow code refers to fragments of program code that were once needed but which are now never used. Such code is typically formed when a program is modified, either when an item is superseded with a newer version but the old version is not removed, or when an item is removed or replaced, but the item's supporting code is not removed.
 
@@ -209,7 +216,7 @@ while loop to check the first case.
 
 ### Searching
 
-* **Sequential Search**
+#### Sequential Search
 
     A simple algorithm that search for a specific item inside a list. It operates
     looping on each element O(n) until a match occurs or the end is reached.
@@ -227,7 +234,7 @@ while loop to check the first case.
     * 11) return −1
     * 12) end SequentialSearch
 
-* **Probability Search**
+#### Probability Search
 
     Probability search is a statistical sequential searching algorithm. In addition to
     searching for an item, it takes into account its frequency by swapping it with
@@ -620,13 +627,7 @@ All programming languages have systems to print information, but in the most of 
 For improve the performance of your application is recommended that in production environments only show logs with level INFO, WARN and ERROR. For this goal its important that when you develop your application and you want to log something think about if is usefull information and if is better use debug or info level. Try to avoid print large objects or huge amount information if isn't really necesary, this type of information may be usefull when you are trying your code in local mode or development environments, but in production environments normally penalize the performance and complicate the understanding or reading of the logs.
 
 ### Dead code detection
-Dead code is also called unreachable code and is a part of a source code of a program which never is called for others parts of the application or which actions has not any effect. Its recommended to avoid to have dead code for some reasons:
-
-* Ocuppies unnecessary memory.
-* Causes unnecessary caching of instructions into the CPU instruction cache - which also decreases data locality.
-* From the perspective of program maintenance; time and effort may be spent maintaining and documenting a piece of code which is in fact unreachable, hence never executed.
-
-Some tools can you help to discover the dead code and remove it in all programming languages. There are some of them:
+Dead code is also called unreachable code and you can see more info [here](#unreachable-code). There are some tools can you help to discover the dead code and remove it in all programming languages. There are some of them:
 
 * **Java**:
   * For dynamic code analysis exists a tool [Cobertura](http://cobertura.github.io/cobertura/) that is easy to configure in maven and Jenkins tools.
