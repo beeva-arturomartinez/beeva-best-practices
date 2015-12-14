@@ -14,6 +14,7 @@ This document defines some architectural patterns and guidelines to apply in det
 	* [Compression](#compression)</br>
 	* [Data storage system](#storage)</br>
 * [How to select the correct file format](#how-formats)
+	* [Metadata: data about the data ](#metadata)
 * [HBase Schema Design](#hbase)
 * [Data life cycle](#lifecycle)
 
@@ -463,8 +464,53 @@ joins, in particular, require sending entire tables over the network.
 2.5.1.1 Partitioning
 2.5.1.2 Bucketing
 2.5.1.3 Denormalizing
-2.5.2 Metadata: data about the data
 
+<a name="metadata"/>
+### Metadata: data about the data
+This includes information like the location of a data set (directory in HDFS or the HBase table
+name), schema associated with the data set, partitioning and sorting properties of the data set, if
+any, format of the data set, if applicable (CSV, TSV, SequenceFile, etc.). Metadata is usually
+stored in a separate metadata repository.
+
+Hive stores this metadata in a relational database called the Hive metastore . Hive also includes
+a service called the hive metastore service that interfaces with the Hive metastore database. To
+enable the usage of Hive metastore outside of Hive, you can use a separate project called
+**HCatalog**.
+HCatalog is a part of Hive and serves a very important purpose of allowing other tools (like Pig
+and MapReduce) to integrate with the Hive metastore. (REST API to the Hive metastore via the
+**WebHCat server**).
+
+Hive metastore can be deployed in 3 modes: embedded metastore, local metastore and
+remote metastore. Using the Hive metastore in remote mode is a requirement for using
+HCatalog on top of the Hive metastore. **Databases that are supported as Hive metastore databases are MySQL, PostgreSQL, Derby and Oracle**.
+
+Reusing the existing database instance instead of creating a new one depends on usage
+patterns: On one hand, it’s good from an operational perspective not to have a new database
+instance for every new application (in this case the Hive metastore service handles metadata in
+the Hadoop ecosystem) but on the other hand, it makes sense not to have your Hadoop
+infrastructure crossdepending data rather than uncoupled.
+
+**Limitations of Hive metastore and HCatalog**:
+* Problems with high availability: In order to provide High Availability (HA) for Hive
+metastore, you have to provide high availability for the metastore database as well as the
+metastore service. However, at the time of this writing, that can lead to concurrency
+issues related to DDL statements and other queries being run at the same time 5 . The
+Hive community is working towards fixing these issues.
+* Fixed schema for metadata: If it doesn’t make sense to represent your data set as a
+table, say if you have image or video data, you may still have a need for storing and
+retrieving metadata but Hive metastore may not be the right tool for it.
+* You have to worry about keeping the metastore service up and securing it if/like you
+secure the rest of your Hadoop infrastructure.
+
+**Other ways of storing metadata**:
+* Embedding metadata in file paths and names: we recommend embedding some
+metadata in data set locations for organization and consistency. For example, in case of
+a partitioned data set, the directory structure would look like: `<data set
+name>/<partition_column_name=partition_column_value>/{files}`
+* Storing the metadata in HDFS: create a hidden directory, say .metadata inside the
+directory containing the data in HDFS. you will have to create, maintain and manage
+your own metadata.
+* You may, choose to use something like Kite SDK 6 to store metadata.
 <a name="hbase"/>
 ## HBase Schema Design
 HBase is a huge hash table. Just like a hash table, you can associate values with keys and
