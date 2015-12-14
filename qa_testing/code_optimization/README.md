@@ -640,8 +640,8 @@ Some tools can you help to discover the dead code and remove it in all programmi
 
 ### References
 
-* [O Notation](https://en.wikipedia.org/wiki/Big_O_notation))
-* [Sorting Algoritms](https://en.wikipedia.org/wiki/Sorting_algorithm)
+* [O Notation](https://en.wikipedia.org/wiki/Big_O_notation)
+* [Sorting Algoritms](https://en.wikipedia.org/wiki/Sorting_algorithm))
 * [Recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))
 * [Hashtable](https://en.wikipedia.org/wiki/Hash_table))
 * [Trees](https://en.wikipedia.org/wiki/Tree_(data_structure))
