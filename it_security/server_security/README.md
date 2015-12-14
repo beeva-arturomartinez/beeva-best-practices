@@ -44,7 +44,7 @@ Según [wikipedia](https://es.wikipedia.org/wiki/Credencial "wikipedia"), es lo 
 
 En este caso, vamos a dedicar el siguiente texto a las buenas prácticas que debemos realizar sobre las passwords.
 
-Para ello, hemos de saber, ¿cuánto tiempo se necesita para “reventar” una password?; el siguiente gráfico lo muestra claramente.
+Para ello hemos de saber, ¿cuánto tiempo se necesita para “reventar” una password?; el siguiente gráfico lo muestra claramente.
 
 ![alt text](static/crack.png?raw=true "passwords")
 
@@ -59,7 +59,7 @@ Con esta imagen, podemos hacer el siguiente resumen, la contraseña mínimo tien
 
 Sólo con eso, se tardaría en conseguir nuestra password 2.10 centurias, en vez de 2.42 días si solo se hiciera con minúsculas.
 
-Cuando tienes un servidor o un login, es importante controlar esto, para ellos usaremos pam.d y el fichero sshd_config.
+Cuando tienes un servidor o un login es importante controlar esto, para ellos usaremos pam.d y el fichero sshd_config.
 
 
 ### Configuración de passwords en servidores. 
@@ -132,9 +132,9 @@ Os dejamos mas información sobre esta configuración en los siguientes links.
 
 Una pregunta que todo el mundo ha de hacerse, es la siguiente **¿Cuándo he de actualizar/parchear mis sistemas?**
 
-Nuestra recomendación, es crear una política de actualizaciones, que cada X tiempo, se realicen sobre dichos sistemas. Una política puede ser, actualizar todos los sistemas cada 3 meses.
+Nuestra recomendación, es crear una política de actualizaciones que cada X tiempo, se realicen sobre dichos sistemas. Una política puede ser, actualizar todos los sistemas cada 3 meses.
 
-Esta política, siempre tiene que tener excepciones, es decir, si surge una vulnerabilidad grave como HeartBleed o Poodle, esa actualización debe ser inmediatamente; por lo que tenemos que incluir en nuestra política un control sobre la criticidad de las vulnerabilidades que aparecen.
+Esta política, siempre tiene que tener excepciones, es decir, si surge una vulnerabilidad grave como HeartBleed o Poodle, esa actualización debe ser realizada  inmediatamente; por lo que tenemos que incluir en nuestra política un control sobre la criticidad de las vulnerabilidades que aparecen.
 
 Otro ejemplo podría ser la actualización del kernel, que trae consigo actualizaciones de seguridad; habría que revisar que criticidad tienen y decidir si se aplica inmediatamente, a corto plazo (crear una ventana solo para esa actualización) o con la siguiente actualización trimestral.
 
@@ -148,7 +148,7 @@ Respecto a esto, es muy importante que intentemos tener la misma versión del so
 
 Siempre es positivo utilizar certificados SSL para cualquier acceso web, pero no siempre es necesario, ya que hay que tener en cuenta los recursos que consume la máquina al cifrar/descifrar el tráfico.
 
-Por lo que vamos a indicar, en qué casos hay que utilizar SSL/TLS:
+Por lo que vamos a indicar en qué casos hay que utilizar SSL/TLS:
 
 - Para proteger cualquier tipo de transacción online, por ejemplo, pagar con tarjeta (en este caso, sería obligatorio).
 - Proteger cualquier tipo de login o acceso a una plataforma, web, etc..
@@ -159,7 +159,9 @@ Para estos casos, recomendamos el uso de SSL/TLS.
 
 Especialmente, si tenemos accesos vía HTTPS, podemos utilizar herramientas para verificar y comprobar el estado y configuración de nuestro certificado.
 
-En Beeva, nos gusta utilizar una servicio de Qualys, que comprueba varias cosas relacionadas con SSL/TLS; además, una vez finalizada la revisión, te da una puntuación, dónde F es lo mas bajo y A+ lo mas alto.
+En Beeva nos gusta utilizar una servicio de Qualys, que comprueba varias cosas relacionadas con SSL/TLS; además, una vez finalizada la revisión te da una puntuación, dónde F es lo mas bajo y A+ lo mas alto.
+
+Nosotros recomendamos como mínimo, tener una puntuación de A.
 
 [https://www.ssllabs.com/ssltest/](https://www.ssllabs.com/ssltest/)
 
