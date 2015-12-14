@@ -3,7 +3,7 @@
 
 ## **1.1 General aspects**
 
-Here are some general aspects that we must always keep in mind when we build our applications. It is very important to consider these basics for our web applications meet security standards.
+Here are some general aspects that we must always keep in mind when we build our applications. It's very important to consider these basics for our web applications meet security standards.
 
 **Validate inputs**
 
@@ -15,11 +15,11 @@ We should always validate and control the output of our application or might be 
 
 **Check error messages**
 
-It’s important to localized and controlled error messages of our application, thus avoiding providing information to a potential attacker could force errors to obtain useful information (disk paths, names of databases or tables, variable names, etc.)
+It’s important to localize and control error messages of our application, thus avoiding providing information to a potential attacker could force errors to obtain useful information (filesystem paths, names of databases or tables, variable names, etc.)
 
 **Use HTTPS**
 
-Whenever your application return confidential information, or manages passwords, authentication, sensitive data, etc. we should use HTTPS instead of HTTP so that our trip encrypted information and to prevent a potential attacker from these data.
+Whenever your application return confidential information, or manages passwords, authentication, sensitive data, etc. we should use HTTPS instead of HTTP so our data trip encrypted and to prevent a potential attacker from access these data.
 
 **Session control**
 
@@ -43,15 +43,15 @@ We should follow a policy of proper management of cookies:
 
 ## **1.2 Cookies and Session Management**
 
-A session is a set of transactions associated HTTP request and response to the same user.
+A session is a set of transactions of HTTP requests and responses associated to the same user.
 
-Any complex application today requires keeping in time information between the browser and the application server associated with the user, unfortunately, HTTP protocol does not have session management, so these have been relegated to the application layer.
+Any complex application today requires keeping in time information between the browser and the application server associated with the user. Unfortunately, HTTP protocol does not have session management, so these have been relegated to the application layer.
 
-It is the responsibility of applying the proper management of the sessions. Once a user is authenticated assigned application and run a session id or session token that will be responsible for identifying communications between browser and server (in some applications for tracking sessions to unauthenticated connections are also assigned).
+It is responsibility of the application applying the proper management of sessions. Once a user is authenticated the application assigns a session id or session token that will be responsible for identifying communications between browser and server (in some applications unauthenticated connections are also tracked).
 
 Once a user is authenticated and assigned a session, the authentication system will be as strong as the system of sessions it is, no matter the application has a two-factor authentication or RSA tokens of a single use, if you have access to the session shall be the same as having infringed the authentication system.
 
-Every HTTP request we do, the session token traveling to the application server can identify unequivocally.
+Every HTTP request we do, the session token traveling to the application server can identify the user unequivocally.
 
 There are dozens of possible attacks on the sessions that we must avoid theft, prediction, fixing, etc.
 
@@ -110,8 +110,6 @@ SQL injection is a particular case of injection attacks. Such attacks occur when
 SQL injection is a method of infiltration arbitrary code that uses a computer vulnerability in an application on the level of input validation to query a database.
 
 The source of vulnerability lies in the wrong check and / or filtering of the variables used in a program that contains or generates SQL code. It’s, in fact, an error of a more general class of vulnerabilities that can occur in any programming language or script that is embedded within another.
-
-It’s known as SQL injection, either at the rate of vulnerability to infiltration method, the fact intruder embed SQL code and code embedded portion.
 
 It should be noted that although the SQL injection is the most widely known and used, there are all kinds of code injections, which should be protected: LDAP injection, log injection, command injection, etc…
 
@@ -205,15 +203,15 @@ If you need to manually validate data entry, there will always be to use methods
 
 ## **1.4 XSS**
 
-XSS (Cross-site scripting) is a type of security flaw typical Web applications, which allows a third party to inject JavaScript code in web pages viewed by the user, avoiding control measures such as the same origin policy.
+XSS (Cross-site scripting) is a type of security flaw typical of Web applications, which allows a third party to inject JavaScript code in web pages viewed by the user, avoiding control measures such as the same origin policy.
 
-These errors can be found in any application that has the ultimate objective of presenting information in a web browser. It's not limited to web sites, as it may be vulnerable to XSS local applications, or even the browser itself. The problem is usually not the input data that are used in certain application is properly validated. This vulnerability may be present directly (also called persistent) or indirectly (also called reflected).
+These errors can be found in any application that has the ultimate objective of presenting information in a web browser. It's not limited to web sites, as it may be vulnerable to XSS local applications, or even the browser itself. The problem is that usually the input data used in applications is not properly validated. This vulnerability may be present directly (also called persistent) or indirectly (also called reflected).
 
 **XSS types:**
 
-* **Direct** (Persistent): This type of XSS commonly filtering, and is dangerous to embed HTML code in places that permit; thus including tags like \<script\> or \<iframe\>.
+* **Direct** (Persistent): Consists in embedding dangerous HTML code in places that permit it; thus including tags like \<script\> or \<iframe\>.
 
-* **Indirect** (reflected): This type of XSS is to modify values that the Web application used to pass variables between pages without using sessions and happens when there is a message or a URL path in the browser in a cookie, or any other HTTP header (in some browsers and web applications, this could extend the browser DOM).
+* **Indirect** (reflected): This type of XSS consists in modifying values that the Web application uses to pass variables between pages without using sessions and happens when there is a message or a URL path in the browser in a cookie, or any other HTTP header (in some browsers and web applications, this could extend the browser DOM).
 
 **XSS Prevention**
 
@@ -225,9 +223,9 @@ You can see the full document:
 
 **Never insert unreliable source data in our HTML output**
 
-You try to avoid, whenever possible, insert unreliable data source (data received from external sources) in our HTML output. This includes block \<script\> in comments in CSS attribute names (divs), labels, etc.
+Try to avoid, whenever possible, inserting unreliable data source (data received from external sources) in our HTML output. This includes block \<script\> in comments in CSS attribute names (divs), labels, etc.
 
-When you can not avoid, functionality or any other reason, we must consider the following points depending on which is where we insert the data.
+When you can not avoid it, functionality or for any other reason, we must consider the following points depending on which is where we insert the data.
 
 **Escape HTML**
 
@@ -310,9 +308,7 @@ We recommend using libraries with cleaning validation policies and the HTML gene
 
 **Use HTTPOnly flag in cookies**
 
-Se recomienda usar el flag HTTPOnly en las cookies. HttpOnly es un mecanismo de seguridad que sirve para evitar la escritura/lectura de cookies en lenguajes que se ejecutan al lado del cliente, como puede ser JavaScript. Aunque no es una medida anti xss, si que disminuye el impacto de la vulnerabilidad, al no ser accesibles las cookies desde js, se evita entre otras cosas el robo de sesiones mediante XSS.
-
-We recommend using the flag HTTPOnly in cookies. HttpOnly is a security mechanism used to avoid writing / reading cookies in languages that run the client side, such as JavaScript. Although not an anti XSS as if that lessens the impact of the vulnerability, not being accessible from js cookies, session hijacking is prevented including through XSS.
+We recommend using the flag HTTPOnly in cookies. HttpOnly is a security mechanism used to avoid writing / reading cookies in languages that run the client side, such as JavaScript. Although not an anti XSS “per se”, that lessens the impact of the vulnerability, not being accessible from js cookies, session hijacking is prevented including through XSS.
 
 ## **4. Input / Output parameter management**
 
@@ -348,7 +344,7 @@ Prevention:
 
 ## **1.6 Data canonicalization**
 
-Before you validate entries, or canonizing must normalize the data. This process of converting data to its simplest or standard.This is necessary to prevent malicious data with certain encodings can pass our validations.
+Before you validate entries, you must normalize or canonize the data. This is the process of converting data to its simplest or standard form.This is necessary to prevent that malicious data with certain encodings can pass our validations.
 
 ● Filesystem path normalization
 
@@ -375,7 +371,7 @@ Encoded input (Unicode encoding):
 
 ● Multiples times encoded data normalization
 
-Some attacks are based on encode two or more entry, with the same or different coding system to overcome "naive" normalization normalizing once.
+Some attacks are based on encoding two or more times the input, with the same or different coding system to overcome "naive" normalization schemes.
 
 ```java
 <script>alert('XSS');</script>
@@ -392,9 +388,7 @@ Second URI encoding:
 
 The function canonicalize ESAPI launch an IntructionException data to detect double URI encoding, as this is never a valid case of legitimate user input.
 
-It's not always easy to determine whether an entry been coded several times, which can lead to false positives. It will be necessary to study the types of input data to determine where we can make an automatic standardization and others
-
-We should make "manually".
+It's not always easy to determine whether an entry been coded several times, which can lead to false positives. It will be necessary to study the types of input data to determine where we can make an automatic standardization and where we should make it "manually".
 
 ● Markup languages normalization
 
@@ -404,7 +398,8 @@ Dangerous injection in XML parser
 
 ● Character encoding normalization
 
-In Unicode, you can change the same character in several different ways. Prior to the validation entries must be normalized to Unicode encoded characters remain the simplest way possible.
+In Unicode, you can change the same character in several different ways. Prior to the validation entries must be normalized to Unicode encoded characters to remain the simplest form possible.
 
-It should explicitly define and charsets encodings to be used (UTF-8, ISO 8859-1 ...) depending on the needs of the application, the JVM and configure application server and the application accordingly.
+It should explicitly define the charset encodings to be used (UTF-8, ISO 8859-1 ...) depending on the needs of the application, and configure the JVM, the application server and the application accordingly.
+
 
