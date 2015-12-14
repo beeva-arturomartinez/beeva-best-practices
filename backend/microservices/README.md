@@ -249,7 +249,7 @@ There is also the risk of neglecting good development practices because there ar
 
 Finally, smaller applications have more often break periods during which there is no evolution to develop, with for instance a  change to TMA mode (Third-Party Application Maintenance). In this case, team members are spread elsewhere and the risk of loss of consciousness is important.
 
-Below is a list of some software programs which are often used in microservice architecture:
+Below is a list of some technologies which are often used in microservice architecture:
 
 * ROUTING: Apache, HAProxy, Zuul, DNS, ELB
 * CONFIGURATION: Consul, Zookeeper, Spring Config Server, Etcd
