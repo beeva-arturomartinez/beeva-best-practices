@@ -46,7 +46,7 @@ En este caso, vamos a dedicar el siguiente texto a las buenas prácticas que deb
 
 Para ello, hemos de saber, ¿cuánto tiempo se necesita para “reventar” una password?; el siguiente gráfico lo muestra claramente.
 
-![](beeva-best-practices/it_security/server_security/static/crack.png)
+![alt text](/static/crack.png "passwords")
 
 
 Con esta imagen, podemos hacer el siguiente resumen, la contraseña mínimo tiene que tener los siguientes requisitos:
