@@ -24,7 +24,7 @@ conf.set("spark.app.name", "MyApp")
 conf.set("spark.ui.port", "36000")
 val sc = new SparkContext(conf)
 ````
-The list of properties that can be defined can be found [here](#http://spark.apache.org/docs/latest/configuration.html#spark-properties)
+The list of properties that can be defined can be found here: http://spark.apache.org/docs/latest/configuration.html#spark-properties
 
 Note that these properties can also be set as arguments of spark-submit
 
@@ -32,8 +32,6 @@ Note that these properties can also be set as arguments of spark-submit
 #### Transformations and actions
 
 Do not return all the elements of a large RDD back to the driver. Avoid using collect and count on large RDDS, use instead take or takeSample to control the number of elements returned. Be careful using actions like  countByKey, countByValue, collectAsMap.
-
-Chose the transformations in order to minimize the number of shuffles.
 
 Avoid using groupByKey. Consider using the following two functions instead:
 * combineByKey can be used when you are combining elements but your return type differs from your input value type.
@@ -43,6 +41,8 @@ Avoid using groupByKey. Consider using the following two functions instead:
 Avoid using reduceByKey when the output value type differs from the input type of elements to reduce. To reduce all elements into a collection of elements consider using aggregateByKey instead.
 
 Avoid using the flatMap + join + groupBy pattern. When two datasets are already grouped by key and you want to join them and keep them grouped, you can just use cogroup.
+
+Chose the transformations in order to minimize the number of shuffles. Use shuffle operations to increase or decrease the level of parallelism by repartition rdds instead of calling repartition alone.
 
 One exception to the general rule of trying to minimize the shuffles is when you force them to increase parallelism. For example, when you process a few large unsplittable files and after loading them they have not been splitted into enough partitions to take advantage of all the available cores. In this scenario invoking repartiton with a high number of partitions is preferred.
 
@@ -54,9 +54,9 @@ Accumulators are seen as write-only variables on the executors and can be used t
 
 ### Launching applications
 
-* Driver/executors
-* Spark-submit options
-* Cluster types
+#### Driver/executors
+#### Spark-submit options
+#### Cluster types
 
 ### Deploying applications
 
@@ -96,8 +96,8 @@ mergeStrategy in assembly := {
 
 ### Spark SQL
 
-* DataFrames
-* Hive ...
+#### DataFrames
+#### Hive ...
 
 ### Spark Streaming
 
@@ -184,11 +184,22 @@ For python applications, you need to specify all the dependencies of the applica
 
 ### Tuning and debugging
 
-* Tuning spark configuration
-* Debugging spark applications
+#### Tuning spark configuration
+
+#### Debugging spark applications
+
+Set spark.executor.extraJavaOptions to include: “-XX:-PrintGCDetails -XX:+PrintGCTimeStamps” and look for long GC times on executor output
+
+Use jmap to perform heap analysis:
+* jmap -histo [pid] to get a histogram of objects in the JVM heap
+* jmap -finalizerinfo [pid] to get a list of pending finalization objects (possible memory leaks)
+
+Use jstack/ jconsole/ visualvm or other JVM profiling tool. Configure JVM arguments setting spark.executor.extraJavaOptions
+
 
 ### Spark on EMR
-* Launching applications
+#### Launching applications
+#### Connecting to EMR cluster instances
 SSH tunnel with master: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-ssh-tunnel.html
 Default ports used: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-web-interfaces.html
 YARN web UI: http://public-ip:9026/cluster
