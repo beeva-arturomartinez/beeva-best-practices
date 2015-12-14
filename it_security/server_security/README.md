@@ -34,7 +34,7 @@ If you are looking for one of the following topics, please follow the provided i
 
 ## Credential management
 
-## Credenciales ##
+### Credenciales 
 
 **¿Qué es una credencial?**
 
@@ -62,7 +62,7 @@ Sólo con eso, se tardaría en conseguir nuestra password 2.10 centurias, en vez
 Cuando tienes un servidor o un login, es importante controlar esto, para ellos usaremos pam.d y el fichero sshd_config.
 
 
-## Configuración de passwords en servidores. ##
+### Configuración de passwords en servidores. 
 
 PAM.D, son unos ficheros de configuración para autenticación de aplicaciones, por ejemplo RHEL lo tiene activo por defecto, pero en otros sistemas como Ubuntu, puede utilizarse.
 
@@ -123,7 +123,7 @@ Os dejamos mas información sobre esta configuración en los siguientes links.
 
 ## Server bastioning
 
-## Actualizaciones ##
+### Actualizaciones
 
 Una pregunta que todo el mundo ha de hacerse, es la siguiente **¿Cuándo he de actualizar/parchear mis sistemas?**
 
@@ -133,13 +133,13 @@ Esta política, siempre tiene que tener excepciones, es decir, si surge una vuln
 
 Otro ejemplo podría ser la actualización del kernel, que trae consigo actualizaciones de seguridad; habría que revisar que criticidad tienen y decidir si se aplica inmediatamente, a corto plazo (crear una ventana solo para esa actualización) o con la siguiente actualización trimestral.
 
-## Las actualizaciones de software. ##
+### Las actualizaciones de software. 
 
 Normalmente, cuando usamos un software tipo tomcat, apache, etc.. su actualización  puede llevar a problemas en nuestros aplicativos o webs. Por lo que no recomiendo su inclusión en la política trimestral, pero si una política que pruebe nuevas versiones, vea si afecta al aplicativo o web y si todo continúa correctamente, instalar la actualización.
 
 Respecto a esto, es muy importante que intentemos tener la misma versión del software en todos nuestros sistemas y entornos.
 
-## Certificados SSL/TLS ##
+### Certificados SSL/TLS
 
 Siempre es positivo utilizar certificados SSL para cualquier acceso web, pero no siempre es necesario, ya que hay que tener en cuenta los recursos que consume la máquina al cifrar/descifrar el tráfico.
 
@@ -160,7 +160,7 @@ En Beeva, nos gusta utilizar una servicio de Qualys, que comprueba varias cosas 
 
 Lo mas positivo de esta revisión, es que si detecta un fallo o vulnerabilidad en tu configuración, te proporciona diferentes links para poder solucionarlo.
 
-## Configuración SSH ##
+### Configuración SSH
 
 Junto con el PAM.D, tenemos que configurar nuestro fichero sshd_config (en RHEL) para securizar nuestro acceso a las máquinas.
 
@@ -207,8 +207,6 @@ Os indicamos un link de otros usos que se le puede dar al comando **chage**.
 
 
 ## Monitoring
-
-## Monitorización ##
 
 Siempre que se habla de la monitorización, pensamos en el estado de un servidor, CPU, disco, memoria, etc…
 
@@ -296,8 +294,6 @@ Reúnen diariamente información de seguridad de diferentes webs tanto en castel
 
 
 ## Incident response
-
-## Incidentes de Seguridad ##
 
 Toda empresa ha de disponer de un protocolo de respuesta en base a un incidente de seguridad. En Beeva, este protocolo de actuación se entrega al empleado al entrar a la empresa y se vuelve a revisar anualmente.
 
