@@ -709,7 +709,7 @@ On the other hand, use double quoted literals for strings that might eventually 
 print("This is what you're gonna read")
 ```
 
-Finally, use triple quoted strings for documentation or raw strings with multiple lines.
+Finally, use triple quoted strings for documentation or long strings with multiple lines.
 
 ```python
 def cool_method(arg):
