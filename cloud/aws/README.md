@@ -1,5 +1,4 @@
 # AWS Best Practices
-At this point we're going to talk about...
 
 ![AWS ](static/aws.png  "AWS Best Practices")
 
@@ -13,10 +12,11 @@ At this point we're going to talk about...
 * [Security](#security)
 * [Storage](#storage)
 * [Services](#services)
-* [EC2](#ec2)
-* [DynamoDB](#dynamodb)
-* [IAM](#iam)
-* [SQS](#sqs)
+	* [EC2](#ec2)
+	* [DynamoDB](#dynamodb)
+	* [IAM](#iam)
+	* [Lambda](#lambda)
+	* [SQS](#sqs)
 
 ---
 ## Introduction
@@ -613,7 +613,19 @@ Therefore, protect your AWS account access key like you would your credit card n
 - Enable AWS multifactor authentication (MFA) on your AWS account. For more information, see Using Multi-Factor Authentication (MFA) in AWS.
 
 ---
-### SNS
+### Lambda
+
+AWS Lambda is a compute service where you can upload your code to AWS Lambda and the service can run the code on your behalf using AWS infrastructure. After you upload your code and create what we call a Lambda function, AWS Lambda takes care of provisioning and managing the servers that you use to run the code. 
+
+The following are recommended best practices for using AWS Lambda:
+
+* Write your Lambda function code in a stateless style, and ensure there is no affinity between your code and the underlying compute infrastructure.
+* Lower costs and improve performance by minimizing the use of startup code not directly related to processing the current event.
+* Use the built-in CloudWatch monitoring of your Lambda functions to view and optimize request latencies.
+* Delete old Lambda functions that you are no longer using.
+* Use Lambda function versioning and aliases  to better manage your in-production Lambda function code
+* Test your functions before enable your event sources
+
 ---
 ### SQS
 
@@ -650,6 +662,7 @@ SQS automatically deletes messages that have been in a queue for more than maxim
 * [Architecting for the Cloud: Best Practices](http://media.amazonwebservices.com/AWS_Cloud_Best_Practices.pdf) 
 * [IAM Best Practices](http://docs.aws.amazon.com/IAM/latest/UserGuide/best-practices.html)
 * [AWS SQS Developer Guide](http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/Welcome.html)
+* [Lambda Developer Guide](http://docs.aws.amazon.com/lambda/latest/dg/welcome.html)
 
 ___
 
