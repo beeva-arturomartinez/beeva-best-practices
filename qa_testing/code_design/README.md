@@ -5,15 +5,7 @@ At this point we're going to talk about the code design best practices.
 ## Index
 
 * [Introduction](#introduction)
-	* [Format](#format)
-	* [Naming](#naming)
-	* [Code Documentation](#code-documentation)
-	* [Error processing](#error-processing)
-	* [Concurrency](#concurrency)
-	* [Tools](#tools)
-		* [Documentation](#documentation)
-		* [Naming and format](#naming-and-format)
-* [Code design rules](#code-design-rules)
+* [Code Design Rules](#code-design-rules)
 	* [Format](#format)
 	* [Naming](#naming)
 	* [Code Documentation](#code-documentation)
@@ -22,6 +14,10 @@ At this point we're going to talk about the code design best practices.
 		* [Myths and misconceptions](#myths-and-misconceptions)
 		* [Concurrency Defense Principles](#concurrency-defense-principles)
 		* [Testing Threaded Code](#testing-threaded-code)
+	* [Comments](#comments)
+	* [Tools](#tools)
+		* [Documentation](#documentation)
+		* [Naming and format](#naming-and-format)
 * [Code design patterns](#code-design-patterns)
 	* [Introduction of code design patterns](#introduction-of-code-design-patterns)
 	* [Gang of four patterns](#gang-of-four-patterns)
@@ -58,7 +54,7 @@ At this point we're going to talk about the code design best practices.
 
 Write a good code with a good design and format is very important for many reasons. A correct code design help to improve the maintanability, and correct readability for anybody who have to work with the code. If all team's members write the code in the same way, and comment their methods, will be easier for a new member or non familiarized with the code understand it and can work with it expending less time.
 
- ![alt text](static/codequality_wtf.png "QA's wtf measure")
+ ![QA's wtf measure](static/codequality_wtf.png "QA's wtf measure")
 
 ## Code Design Rules
 
@@ -143,6 +139,7 @@ Concurrency is a decoupling strategy that help us to know the behaviour of our c
 There are other reasons to adopt the concurrency, some systems have response time and throughput requirements that need develop concurrent solutions, for example, for proccess a lot of data in the shortest time possible.
 
 #### Myths and misconceptions
+
 * Concurrency always improves performance. Not always the concurrency is the best option, sometimes is unnecessary.
 * Design does not change when writing concurrent programs TODO
 * Concurrency incurs some overhead, both in performance as well as writing additional code. TODO
@@ -152,11 +149,11 @@ There are other reasons to adopt the concurrency, some systems have response tim
 
 #### Concurrency Defense Principles
 
-* Single Responsability Principle TODO
-* Limit the Scope of data TODO
-* Use copies of data TODO
-* Threads should be as independant as possible TODO
-* Execution Models TODO
+* Single Responsability Principle
+* Limit the Scope of data
+* Use copies of data
+* Threads should be as independant as possible
+* Execution Models
 	* Producers-Consumers
 	* Reader-Writers
 	* Dinning Philosofers
@@ -171,6 +168,11 @@ There are other reasons to adopt the concurrency, some systems have response tim
 * Instrument Your Code to Try and Force Failures
 * Hand-coded
 * Automatizated
+
+### Comments
+Is a good practice to write code in a format easy to understand without have to add any comments. In most of cases if you write a good code the comments shouldn't be needed.
+
+TODO
 
 ### Tools
 There are a lot of tools that help you to improve your code design for all programming languages. It's very recommended to use them for help to mantain the same format in all project and prevent errors.
