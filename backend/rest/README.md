@@ -699,10 +699,9 @@ or
 
 ```json
 {
-	"generalError": {
-		"codeError": "0003",
-		"description": "El atributo 'managedMerchantId' es obligatorio."
-	}
+	"error": "short_description",
+	"error_description": "longer description, human-readable,
+	"error_uri": "URI to a detailed error description on the API developer website "
 }
 ```
 
@@ -730,10 +729,37 @@ or
 
 ```json
 {
-	"generalError": {
-		"codeError": "0200",
-		"description": "No está autorizado a acceder al recurso."
+	"error": "no_credentials", 
+	"error_description": "This resource requires authorization, you must be authenticated and have the correct rights to access it"
+}
+```
+
+#### 403: Forbidden
+
+You are identified, but you do not have the necessary authorizations.
+
+```json
+{
+	"error": {
+		"errors": [
+		{
+			"domain": "global",
+			"reason": "authError",
+			"message": "Invalid Credentials",
+			"locationType": "header",
+			"location": "Authorization",
+		}],
+		"code": 401,
+		"message": "Invalid Credentials"
 	}
+}
+```
+or
+
+```json
+{
+	"error": "not_allowed", 
+	"error_description": "You're not allowed to perform this request"
 }
 ```
 
