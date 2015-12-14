@@ -627,7 +627,7 @@ All programming languages have systems to print information, but in the most of 
 For improve the performance of your application is recommended that in production environments only show logs with level INFO, WARN and ERROR. For this goal its important that when you develop your application and you want to log something think about if is usefull information and if is better use debug or info level. Try to avoid print large objects or huge amount information if isn't really necesary, this type of information may be usefull when you are trying your code in local mode or development environments, but in production environments normally penalize the performance and complicate the understanding or reading of the logs.
 
 ### Dead code detection
-Dead code is also called unreachable code and you can see more info [here](#unreachable-code). There are some tools can you help to discover the dead code and remove it in all programming languages. There are some of them:
+At above section we talk about [dead code or unreachable code](#unreachable-code). There are some tools can you help to discover and remove it in all programming languages. There are some of them:
 
 * **Java**:
   * For dynamic code analysis exists a tool [Cobertura](http://cobertura.github.io/cobertura/) that is easy to configure in maven and Jenkins tools.
