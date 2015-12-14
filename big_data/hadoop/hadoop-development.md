@@ -461,9 +461,70 @@ and few updates are expected.
 * Joins are often the slowest operations and consume the most resources from the
 cluster.Reduceside
 joins, in particular, require sending entire tables over the network.
-2.5.1.1 Partitioning
-2.5.1.2 Bucketing
-2.5.1.3 Denormalizing
+
+#### Partitioning
+
+* **Phases of the data cycle, to compact the files**.
+In ingestion phases, if too many files are given at same time and have less size than
+block size, it is recommended to compact these files at the ending of this stage. In other
+hand, could be good do a compacting task after cleansing and normalization phases in a
+temporary cycle. For example, every month or year.
+
+As a resume, the next table shows when to use this techniques, taking in consideration the
+ingestion frequency, number and size of files even query requirements:
+
+TABLE
+
+**Partitions advantages and disadvantages**
+Partitioning feature is very useful in Hive, however, a design that creates too many partitions
+may optimize some queries, but be detrimental for other important queries.
+Other drawback is having too many partitions is the large number of Hadoop files and directories
+that are created unnecessarily and overhead to NameNode since it must keep all metadata for
+the file system in memory.
+
+#### Bucketing
+Bucketing is another technique for decomposing data sets into more manageable parts.
+For example, suppose a table using the date as the toplevel
+partition and the person_id as the secondlevel partition leads to too many small partitions. Instead, if you bucket the people table and use person_id as the bucketing column, the value of this column will be hashed by a userdefined number into buckets.
+Records with the same person_id will always be stored in the same bucket. Assuming the
+number of person_id is much greater than the number of buckets, each bucket will have many
+person_id.
+
+While creating table you can specify like ‘CLUSTERED BY’ (person_id) INTO <the number of
+buckets> BUCKETS.
+
+Bucketing has several advantages. The number of buckets is fixed so it does not fluctuate with
+data. If two tables are bucketed by person_id, Hive can create a logically correct sampling.
+Bucketing also aids in doing efficient mapside
+joins etc.
+
+For example, suppose that you specify 32 buckets in the ‘CLUSTERED BY’ clause and the
+‘CREATE TABLE’ statement also contains the ‘PARTITION BY’ clause. As a hive table can have
+both partitioning and bucketing (non for the same column). Based on the partition clause, for
+each partition will have 32 buckets created.
+
+Is likely that the resulting number of partitions may be too large and resulting files may be too
+small in size. A solution is to use a hashing function to map an element into a specified number
+of subsets or buckets.
+
+Files should not be so small that you’ll need to read and manage a huge number of them, but
+also not so large that each query will be slowed down by having to scan through huge amounts
+of data.
+
+When both data sets being joined are bucketed on the join key and the number of buckets of one
+data set is a multiple of the other it is enough to join corresponding buckets individually without
+having the need to join the entire data sets. If the data in the buckets is sorted, it is also possible
+to use merge join and not store the entire bucket in memory when joining.
+
+It is recommended to use both sorting and bucketing on all large tables that are frequently joined
+together, using the join key for bucketing.
+
+
+#### Denormalizing
+Joins are often the slowest operations and consume the most resources from the cluster.
+Create prejoined
+data sets minimize the amount of work that will be done by queries by doing
+as much as possible of the required work in advance.
 
 <a name="metadata"/>
 ### Metadata: data about the data
