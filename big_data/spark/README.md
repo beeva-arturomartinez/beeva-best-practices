@@ -200,10 +200,10 @@ Use jstack/ jconsole/ visualvm or other JVM profiling tool. Configure JVM argume
 ### Spark on EMR
 #### Launching applications
 #### Connecting to EMR cluster instances
-SSH tunnel with master: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-ssh-tunnel.html
-Default ports used: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-web-interfaces.html
-YARN web UI: http://public-ip:9026/cluster
-Spark app web UI: http://{public-ip}:9046/proxy/{app-id}/
+* SSH tunnel with master: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-ssh-tunnel.html
+* Default ports used: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-web-interfaces.html
+* YARN web UI: http://public-ip:9026/cluster
+* Spark app web UI: http://{public-ip}:9046/proxy/{app-id}/
 
 ___
 
