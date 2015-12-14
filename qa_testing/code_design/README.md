@@ -66,42 +66,33 @@ Write a good code with a good design and format is very important for many reaso
 * Don't use a lot of params in a method or functions. If there are a lot of params you should consider to use one class or object.
 * Use with caution the copy & paste. When you copy a portion of code, think about if you can extract it to an method or class to reuse it.
 * Read and follow the guide for your programming language.
-* Split Your Code into Short, Focused Units. If a method have a lot of lines, probably is better to divide in more methods to improve the readability and reusability of the code.
+* Split your code into short, focused units: if a method have a lot of lines, probably is better to divide in more methods to improve the readability and reusability of the code.
 * Delete the variables not used anywhere, not only for performance reasons, also for readibility reasons.
-* Use Framework APIs and Third-Party Libraries
+* Use Framework APIs and Third-Party Libraries.
 * Be consistent: Do similar things in similar ways. If you're developing a routine whose functionality resembles that of an existing routine, use a similar name, the same parameter order, and a comparable structure for the code body.
 * Write portable code. Unless you have some compelling reason, avoid using functionality that's available only on a specific platform or framework.
-* Use efficient data structures and algorithms. Simple code is more mantainable , you can combine mantainability with efficiency using the data structures and algorithms provided by your programming framework.
+* Use efficient data structures and algorithms. Simple code is more mantainable, you can combine mantainability with efficiency using the data structures and algorithms provided by your programming framework.
 * Use UTF-8 encoding in all files (configure the ide or text editor).
 * Replace tabs with spaces (Configure the ide or text editor).
 
-
 ### Naming
-Use the same naming style for the code variables, functions, objects and constants improve the code readability and help to a team to understand easier the application code.
+Use the same naming style for the code variables, functions, objects and constants to improve the code readability and help to anybody can understand easily the source code.
 
-There are some recommendations dependant of the programming language, and others are common and usefull for all languages.
-
-Some of common recomendations:
+Some of common recomendations independant of the programming language:
 
 * Use english as common language for comments and naming for allow understand the code for everyone, no main where are they from.
 * Use only letters (without accents or similar) and numbers and _ as separator.
-* Doesn't start with numbers.
-* The constants should be writted in upper cases.
-* The names should be descriptive about the method, function or variable does.
+* Not start the variables, classes or functions with numbers.
+* The constants should be written in upper cases.
+* The names should be descriptive about what the method, function or variable does.
 * Variables should be in lower case.
 * Functions and methods with lower case.
 
+Each programming language have itself recommendations and best practices. It's important to use the standards of each language to improve the quality for your language.
 
-Recommendations based on the programming language:
-
-* Java:
-	* Classes must start with upper case.
-	* For a class name with two or more words separate it with Upper Case. For example a class called "JavaWorker".
-	* For a variable, method or function name separes words with upper case, with the first letter in lower case.
-	* Separes one word from a number with _
-* Python:
-	* Separe the words in a variable, function or method name with the character _
-	* Class names should be in lower case.
+* [Java](http://www.oracle.com/technetwork/java/codeconventions-135099.html)
+* [Python](https://www.python.org/dev/peps/pep-0008/)
+* [Javascript](http://www.w3schools.com/js/js_conventions.asp)
 
 
 ### Code Documentation
