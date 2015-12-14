@@ -633,7 +633,7 @@ You can activate long polling by set a value between 1 - 20 seconds for Receive 
 
 Visibility Timeout avoid that two consumers receive the same message from a queue. If you set a visibility timeout too low ( like 0 s ) multiple consumer will process the same from that queue. In the other hand if you use a high visibility timeout value ( like 12h ) and the consumer of message die before complete message process you must wait too long in order to other consumer be able to consume that message.
 
-![](/home/wankes2000/Documentos/AWSBestPractices/beeva-best-practices/cloud/aws/static/Visibility_Timeout.png) 
+![](static/Visibility_Timeout.png) 
 
 #### Use Batching
 
