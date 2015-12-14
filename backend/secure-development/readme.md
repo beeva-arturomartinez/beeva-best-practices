@@ -5,7 +5,7 @@
 
 Here are some general aspects that we must always keep in mind when we build our applications. It is very important to consider these basics for our web applications meet security standards.
 
-### **Validate inputs**
+**Validate inputs**
 
 We should always monitor the input data in the application, in its origins (parameters, form fields, etc.). We should not assume what we will receive and all entries of the application must be validated both syntactically and semantically, that is expected to receive and the format expected
 
@@ -13,11 +13,11 @@ We should always monitor the input data in the application, in its origins (para
 
 We should always validate and control the output of our application or might be vulnerable to attacks on the client side of our application such as XSS, is very important that all non-alphanumeric characters that our implementation of output, are validated and escaped properly depending on the context in which they appear.
 
-### **Check error messages**
+**Check error messages**
 
 It’s important to localized and controlled error messages of our application, thus avoiding providing information to a potential attacker could force errors to obtain useful information (disk paths, names of databases or tables, variable names, etc.)
 
-### **Use HTTPS**
+**Use HTTPS**
 
 Whenever your application return confidential information, or manages passwords, authentication, sensitive data, etc. we should use HTTPS instead of HTTP so that our trip encrypted information and to prevent a potential attacker from these data.
 
@@ -25,21 +25,21 @@ Whenever your application return confidential information, or manages passwords,
 
 We must have a proper management policy sessions in our application. It is advisable to delegate the management of sessions in specialized Framework.
 
-### **Use updated products**
+**Use updated products**
 
 All third-party products used by our applications (CMS, libraries, Framework, etc.) must be safe and have no known vulnerabilities, we must follow the security lists the products we use to keep up and patch or raise version of our product when affected by security vulnerabilities.
 
-### **Protect cookies**
+**Protect cookies**
 
 We should follow a policy of proper management of cookies:
 
-       - Never store critical data in cookies
+* Never store critical data in cookies
 
-       - Establish life cycle, beginning and end of validity
+* Establish life cycle, beginning and end of validity
 
-       - Avoid Using persistent cookies
+* Avoid Using persistent cookies
 
-       - Try To use the secure and our cookies policy httponly
+* Try To use the secure and our cookies policy httponly
 
 ## **1.2 Cookies and Session Management**
 
@@ -55,31 +55,31 @@ Every HTTP request we do, the session token traveling to the application server 
 
 There are dozens of possible attacks on the sessions that we must avoid theft, prediction, fixing, etc.
 
-#### **Features of the session id or session token**
+**Features of the session id or session token**
 
 There are a number of features that the session token (see sessionid, jsessionid, phpsession, etc.) must meet in order to avoid possible attacks, we will detail the most important.
 
-#### **Session Token Fingerprinter**
+**Session Token Fingerprinter**
 
 The session token should not disclose information about the technologies used by the application, we recommend replacing the names of the tokens session default (jsessionid, phpsession, etc) for a generic name that does not reveal information about the framework construction the application, for example sessionid
 
-#### **Session Token length**
+**Session Token length**
 
 The session token should be long enough to be resistant to brute force attacks possible. You should have a length of at least 128 bits.
 
-#### **Session Token Entropy**
+**Session Token Entropy**
 
 The session token should not be predictable, it must be generated with pseudorandom techniques. To be predictable (for example sequential) an attacker could find out valid session states
 
-#### **Session Token Content**
+**Session Token Content**
 
 The session token, should not contain meaningful information to prevent disclosure attacks, the session token must be a simple identifier between the client and server side application and the server side is where it should be stored information on the session (IP, user ID, privileges, roles, etc ...).
 
-### **Session Management**
+**Session Management**
 
 We will establish certain criteria when recommended to implement session management
 
-#### **Exchange mechanism and session storage**
+**Exchange mechanism and session storage**
 
 There are multiple ways of implementing the exchange and storage of sessions, but the most accepted and widespread is the use of cookies.
 
@@ -93,7 +93,7 @@ It’s important that the application have a mechanism end of session (logout). 
 
 It’s recommended to use some kind of monitoring tools sessions, scan and detect abnormalities in the same: simultaneous logins, access the same session from different locations, attempts to use brute force, etc ...
 
-### **Cookie Management**
+**Cookie Management**
 
 As noted, we consider cookies as the best mechanism for the exchange and storage of session, as a result, we will deepen recommended safety measures when working with them.
 
@@ -115,7 +115,7 @@ It’s known as SQL injection, either at the rate of vulnerability to infiltrati
 
 It should be noted that although the SQL injection is the most widely known and used, there are all kinds of code injections, which should be protected: LDAP injection, log injection, command injection, etc…
 
-### **SQL injection prevention**
+**SQL injection prevention**
 
 Below we will summarize the main measures to prevent SQL injection type attacks we must take.
 
@@ -123,7 +123,7 @@ The full list and additional information can be obtained at:
 
 [https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet](https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet)
 
-#### **Using prepared statetments (parameterized queries)**
+**Using prepared statetments (parameterized queries)**
 
 The use of prepared statements requires us to separate the logic of SQL code, input data therein, providing the database to distinguish between code and data and helping to prevent input data from becoming unwanted code.
 
@@ -154,7 +154,6 @@ pstmt.setString( 1, custname);
 ResultSet results = pstmt.executeQuery( );
 ```
 
-
 **_HIBERNATE_**
 
 First an example of a definition insecure
@@ -167,7 +166,7 @@ Query safeHQLQuery = session.createQuery("from Inventory where productID=:produc
 safeHQLQuery.setParameter("productid", userSuppliedParameter);
 ```
 
-#### **Use stored procedures**
+**Use stored procedures**
 
 As in the case of prepared statements, the use of stored procedures requires us to separate the data logic.
 
@@ -190,7 +189,7 @@ try {
    	// … logging and error handling
 ```
 
-#### **Escape and validate all user input**
+**Escape and validate all user input**
 
 In case you can’t use any of the 2 above techniques and that for reasons of performance or functionality you need to manually create dynamic queries, there will always escape and validate input data before executing the queries.
 
@@ -210,13 +209,13 @@ XSS (Cross-site scripting) is a type of security flaw typical Web applications, 
 
 These errors can be found in any application that has the ultimate objective of presenting information in a web browser. It's not limited to web sites, as it may be vulnerable to XSS local applications, or even the browser itself. The problem is usually not the input data that are used in certain application is properly validated. This vulnerability may be present directly (also called persistent) or indirectly (also called reflected).
 
-### **XSS types:**
+**XSS types:**
 
 * **Direct** (Persistent): This type of XSS commonly filtering, and is dangerous to embed HTML code in places that permit; thus including tags like \<script\> or \<iframe\>.
 
 * **Indirect** (reflected): This type of XSS is to modify values that the Web application used to pass variables between pages without using sessions and happens when there is a message or a URL path in the browser in a cookie, or any other HTTP header (in some browsers and web applications, this could extend the browser DOM).
 
-### **XSS Prevention**
+**XSS Prevention**
 
 Based on the recommendations of the OWASP project we have compiled a number of recommendations that we apply as a standard, in order to avoid XSS vulnerabilities in your applications. Here are the most significant measures.
 
@@ -224,20 +223,20 @@ You can see the full document:
 
 [https://www.owasp.org/index.php/XSS_Prevention_Cheat_Sheet](https://www.owasp.org/index.php/XSS_Prevention_Cheat_Sheet)
 
-#### **Never insert unreliable source data in our HTML output**
+**Never insert unreliable source data in our HTML output**
 
 You try to avoid, whenever possible, insert unreliable data source (data received from external sources) in our HTML output. This includes block \<script\> in comments in CSS attribute names (divs), labels, etc.
 
 When you can not avoid, functionality or any other reason, we must consider the following points depending on which is where we insert the data.
 
-### **Escape HTML**
+**Escape HTML**
 
 It can be done using the ESAPI library:
 
 ```java
 String safe = ESAPI.encoder().encodeForHTML( request.getParameter( "input" ) );
 ```
-#### **Escape Attributes**
+**Escape Attributes**
 
 To enter data unreliable source on attributes such as width, name, value, etc. you have to escape them, this does not apply to complex attributes href, src, style, or events like onmouseover grabbers.
 
@@ -249,7 +248,7 @@ It can be done using the ESAPI library:
 String safe=ESAPI.encoder().encodeForHTMLAttribute(request.getParameter("input"));*
 ```
 
-#### **Escape JS**
+**Escape JS**
 
 With regard to dynamically generated JavaScript code, the only safe place to put data from untrusted sources is within a quoted value variable. This applies to both script blocks, and events grabbers.
 
@@ -261,7 +260,7 @@ It can be done using the ESAPI library
 *String safe = ESAPI.encoder().encodeForJavaScript( request.getParameter( "input" ) );*
 ```
 
-#### **Escape CSS**
+**Escape CSS**
 
 CSS is surprisingly powerful and can be used for a wide range of attacks, it’s important to only insert data into the value CSS properties.
 
@@ -273,7 +272,7 @@ It can be done using the ESAPI library
 String safe = ESAPI.encoder().encodeForCSS( request.getParameter( "input" ) );
 ```
 
-#### **Escape URLS**
+**Escape URLS**
 
 This rule applies to the parameters sent in the URL using the GET method. It is one of the most important considerations to keep in mind because usually these parameters are the entry point of the user data.
 
@@ -285,7 +284,7 @@ It can be done using the ESAPI library
 String safe = ESAPI.encoder().encodeForURL( request.getParameter( "input" ) );
 ```
 
-#### **HTML libraries use policies to validate and clean HTML output**
+**HTML libraries use policies to validate and clean HTML output**
 
 We recommend using libraries with cleaning validation policies and the HTML generated, for example:
 
@@ -307,7 +306,7 @@ We recommend using libraries with cleaning validation policies and the HTML gene
  String cleanResults = sanitizer.sanitize("<p>Hello, <b>World!</b>");
 ```
 
-#### **Use HTTPOnly flag in cookies**
+**Use HTTPOnly flag in cookies**
 
 Se recomienda usar el flag HTTPOnly en las cookies. HttpOnly es un mecanismo de seguridad que sirve para evitar la escritura/lectura de cookies en lenguajes que se ejecutan al lado del cliente, como puede ser JavaScript. Aunque no es una medida anti xss, si que disminuye el impacto de la vulnerabilidad, al no ser accesibles las cookies desde js, se evita entre otras cosas el robo de sesiones mediante XSS.
 
@@ -349,62 +348,60 @@ Prevention:
 
 Before you validate entries, or canonizing must normalize the data. This process of converting data to its simplest or standard.This is necessary to prevent malicious data with certain encodings can pass our validations.
 
-● Routes normalization filesystem
+● Filesystem path normalization
 
 /pub/www/images/../../../etc/passwd
 
-After of normalization:
+After normalization:
 
-/etc/passwd -> Not permitted route
+/etc/passwd -> Not permitted path
 
 First we normalize the absolute path, and then validate that the path is legal (whitelist of valid routes)
 
-● Normalización de datos codificados
+● Encoded data normalization
 
-Entrada sin codificar:
-
-```script
-<script>alert('XSS');</script>
-
-Entrada codificada (Unicode encoding):
-
-%3Cscript%3Ealert(%27XSS%27)%3B%3C%2Fscript%3E
-```
-
-● Normalización de datos codificados múltiples veces
-
-Algunos ataques se apoyan en codificar dos o más veces la entrada, con el mismo o diferente sistema de codificación, para sortear normalizaciones "ingenuas" que normalizan una sola vez.
+Uncoded input:
 
 ```script
 <script>alert('XSS');</script>
 
-Primer URI encoding:
+Encoded input (Unicode encoding):
 
 %3Cscript%3Ealert(%27XSS%27)%3B%3C%2Fscript%3E
 ```
 
-Segundo URI encoding:
+● Multiples times encoded data normalization
 
-```script
+Some attacks are based on encode two or more entry, with the same or different coding system to overcome "naive" normalization normalizing once.
+
+```java
+<script>alert('XSS');</script>
+```
+First URI encoding:
+```java
+%3Cscript%3Ealert(%27XSS%27)%3B%3C%2Fscript%3E
+```
+Second URI encoding:
+
+```java
 %253Cscript%253Ealert(%2527XSS%2527)%253B%253C%252Fscript%253E
 ```
 
-La función canonicalize de ESAPI lanzará una IntrusionException al detectar datos con doble codificación de URI, ya que esto nunca es un caso válido de entrada legítima de usuario.
+The function canonicalize ESAPI launch an IntructionException data to detect double URI encoding, as this is never a valid case of legitimate user input.
 
-No siempre es sencillo determinar si una entrada a sido codificada varias veces, lo cual puede dar lugar a falsos positivos. Será necesario estudiar la tipología de los datos de entrada para determinar en qué casos podemos realizar una normalización automática y en que otros
+It's not always easy to determine whether an entry been coded several times, which can lead to false positives. It will be necessary to study the types of input data to determine where we can make an automatic standardization and others
 
-debemos realizarla "manualmente".
+We should make "manually".
 
-● Normalización de lenguajes de marcas
+● Markup languages normalization
 
-Las entradas de cadenas en lenguajes como HTML y XML deben ser también normalizadas.
+The input entries in languages such as HTML and XML should also be normalized.
 
-Peligro de inyección en parseadores de XML
+Dangerous injection in XML parser
 
-● Normalización de la codificación de los caracteres
+● Character encoding normalization
 
-En Unicode, es posible codificar un mismo caracter de varias formas distintas. Previamente a la validación se deben normalizar las entradas en Unicode para que los caracteres queden codificados de la forma mas simple posible.
+In Unicode, you can change the same character in several different ways. Prior to the validation entries must be normalized to Unicode encoded characters remain the simplest way possible.
 
-Es conveniente definir explícitamente las codificaciones y charsets que se usarán (UTF-8, ISO 8859-1...) en función de las necesidades de la aplicación, y configurar el servidor de aplicaciones, la JVM y la aplicación en consecuencia.
-
+It should explicitly define and charsets encodings to be used (UTF-8, ISO 8859-1 ...) depending on the needs of the application, the JVM and configure application server and the application accordingly.
 
