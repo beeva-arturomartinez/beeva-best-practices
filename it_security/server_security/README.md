@@ -68,7 +68,16 @@ PAM.D, son unos ficheros de configuración para autenticación de aplicaciones, 
 
 Antiguamente, se configuraba en /etc/pam.conf y actualmente es en /etc/pam.d/
 
-Ahora, hablaremos de un ejemplo de configuración en el pam.d que nos bloquea el usuario si falla la autenticación y el mínimo de configuración de contraseña permitido. Mas abajo, indicamos el significado de esta configuración, basado en colores.
+Ahora, hablaremos de un ejemplo de configuración en el pam.d que nos bloquea el usuario si falla la autenticación y el mínimo de configuración de contraseña permitido. Mas abajo, indicamos el significado de esta configuración, basado en colores (esta información es una imagen, debajo de la explicación encontrarñan el código que pueden utilizar en sus ficheros).
+
+![alt text](static/pamd_color.png?raw=true "pamd")
+
+
+Explicaremos las líneas, por colores.
+
+**Azul** - Con estas líneas indicamos, que si el usuario intenta acceder 5 veces y le da acceso denegado, al sexto acceso bloqueará al usuario durante 30 minutos, esto nos ayuda a evitar ataques de fuerza bruta.
+
+**Rojo** - Aquí forzaremos que el usuario ingrese passwords complicadas, mínimo de 8 caracteres, 1 mayúscula, 1 minúscula y 1 decimal. Además se recordarán las últimas 5 passwords cambiadas y se cifrarán en sha512. Por último, la línea “password requisite pam_passwdqc.so min=disabled,disabled,16,12,8” indica en base a los caracteres de la password, que requisitos tiene que cumplir; en nuestro caso, si la password es inferior a 12 caracteres, nos obligará a incluir un caracter especial.
 
 ***vim /etc/pam.d/system-auth***
 
@@ -83,30 +92,26 @@ Ahora, hablaremos de un ejemplo de configuración en el pam.d que nos bloquea el
     auth   [default=die] pam_faillock.so authfail audit deny=5 unlock_time=1800
     auth   sufficient pam_faillock.so authsucc audit deny=5 unlock_time=1800
     authrequired  pam_deny.so
-    
+
     account required  pam_unix.so
     account sufficientpam_localuser.so
     account sufficientpam_succeed_if.so uid < 500 quiet
     account required  pam_permit.so
-    
+
     passwordrequisite pam_cracklib.so try_first_pass retry=3 type=
     password required pam_cracklib.so try_first_pass retry=3 minlen=8,dcredit=-1,ucredit=-1,lcredit=-1
     password requisite pam_passwdqc.so min=disabled,disabled,16,12,8
     passwordsufficientpam_unix.so sha512 shadow nullok try_first_pass use_authtok
     password sufficient pam_unix.so remember=5
     passwordrequired  pam_deny.so
-    
+
     session optional  pam_keyinit.so revoke
     session required  pam_limits.so
     session [success=1 default=ignore] pam_succeed_if.so service in crond quiet use_uid
     session required  pam_unix.so
-    
 
-Explicaremos las líneas, por colores.
 
-Azul - Con estas líneas indicamos, que si el usuario intenta acceder 5 veces y le da acceso denegado, al sexto acceso bloqueará al usuario durante 30 minutos, esto nos ayuda a evitar ataques de fuerza bruta.
 
-Rojo - Aquí forzaremos que el usuario ingrese passwords complicadas, mínimo de 8 caracteres, 1 mayúscula, 1 minúscula y 1 decimal. Además se recordarán las últimas 5 passwords cambiadas y se cifrarán en sha512. Por último, la línea “password requisite pam_passwdqc.so min=disabled,disabled,16,12,8” indica en base a los caracteres de la password, que requisitos tiene que cumplir; en nuestro caso, si la password es inferior a 12 caracteres, nos obligará a incluir un caracter especial.
 
 Os dejamos mas información sobre esta configuración en los siguientes links.
 
