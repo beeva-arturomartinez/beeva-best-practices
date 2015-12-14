@@ -27,7 +27,9 @@ It's also an interpreted language, which makes it [quite slow](#http://adv-r.had
 
 [RSQLite](https://cran.r-project.org/web/packages/RSQLite/index.html), [RODBC](https://cran.r-project.org/web/packages/RODBC/index.html),[RMySQL](https://cran.r-project.org/web/packages/RMySQL/index.html),[RPostgresSQL](https://cran.r-project.org/web/packages/RPostgreSQL/index.html),[RJDBC](https://cran.r-project.org/web/packages/RJDBC/index.html) are great packages to connect R to your database. Choose the package that fits your database. They use a package called *rJava* which is a simple R-to-Java interface. You should keep this in mind when retrieving data from a database: if your java heap size is too low, the function will fail. You can increase the java heap size for the session with:
 
+```
     options( java.parameters = "-Xmx4g")
+```
 
 ##Excel
 
@@ -70,20 +72,26 @@ Wide format, on the other hand has the following properties:
 For example:
 
 
- subject sex control cond1 cond2
-       1   M     7.9  12.3  10.7
-       2   F     6.3  10.6  11.1
-       3   F     9.5  13.1  13.8
-       4   M    11.5  13.4  12.9
+| subject | sex | control | cond1 | cond2 |
+| :----: | :---: | :---: | :---: | :---: |
+|       1 |  M  |   7.9 | 12.3 | 10.7 |
+|       2 |  F  |   6.3 | 10.6 | 11.1 |
+|       3 |  F  |   9.5 | 13.1 | 13.8 |
+|       4 |  M  |  11.5 | 13.4 | 12.9 |
 
 This also known as *tidy data*, and while is the prefered format, you'll have to move between them depending on which function or algorithm you use.  The package *tidyr* has two functions for that purpose:
 
 * From wide to long:
-	- gather(*input_data*, *variable_name*, *value*, *columns_to_convert*)
-	
-* From long to wide:
-	- spread(*input_data*, *variable_column_name*, *value_column_name*)
 
+```
+	- gather(*input_data*, *variable_name*, *value*, *columns_to_convert*)
+```
+
+* From long to wide:
+
+```
+	- spread(*input_data*, *variable_column_name*, *value_column_name*)
+```
 
 [Source](http://www.cookbook-r.com/Manipulating_data/Converting_data_between_wide_and_long_format/)
 
@@ -103,9 +111,11 @@ Dplyr is one of the best packages for data manipulation (also known as *data mun
 
 A very usual example of this functions chained together is the equivalent of
 
+```
 	select id,avg(*)
 	from data
 	group by id
+```
 
 in SQL.
 
@@ -152,7 +162,7 @@ dplyr is a long package and it's extremely recommended to check it's documentati
 
 data.table is an extremely efficient version of data.frame, especially useful when working with very large datasets (from 1Gb to more than 100Gb in RAM). It's even more efficient than dplyr, notoriously when working with >100k groups.
 
-The basic command of data.table is DT[i, j, by]. The command has 3 elements: i,j and by. A rough SQL equivalent of this would be:
+The basic command of data.table is **DT[i, j, by]**. The command has 3 elements: *i*,*j* and *by*. A rough SQL equivalent of this would be:
 
 	i =  WHERE
 	j = SELECT
@@ -174,7 +184,7 @@ You can also create an index on a data.table by defining a key
 
 	setkey(DT,*column*)
 
-This will reorder the DT and will improve access time significantly. DT is also optimised to, when subsetting in the form of DT[x == .] and DT[x %in% .] and if possible, build and index automatically on the first run, so succesive runs can make use of binary search fpr fast subsets instead of vector scans.
+This will reorder the DT and will improve access time significantly. DT is also optimised to, when subsetting in the form of *DT[x == .]* and *DT[x %in% .]* and if possible, build and index automatically on the first run, so succesive runs can make use of binary search fpr fast subsets instead of vector scans.
 
 The [documentation](https://cran.r-project.org/web/packages/data.table/vignettes/datatable-intro.pdf) of data.table is extensive but very recommended.
 
@@ -186,11 +196,14 @@ On [this stackoverflow debate](http://stackoverflow.com/questions/21435339/data-
 
 There are some cases that a for-each loop is inevitable, and in some of those paralellization would improve performance greatly. *foreach* is a package created by the open-souce team at Revolution Analytics to speed up the foreach based loops running the iterations in parallel. It needs another package that acts as backend for multicore usage, such as doParallel (linux) or doMC(windows). A simple example execution would be:
 
+```
 	library(foreach)
 	library(doParallel)
 	cl<-makeCluster(4)
 	registerDoParallel(cl)
 	foreach(i=1:4) %doPar% sqrt(i)
+```
+
 
 The foreach function allows for a *combine* parameter which will process the task results as they are generated. Specifying 'c' is useful for concatenating results into a vector. The values 'rbind' and 'cbind' can combine vectors into a matrix, and values such as '+' or '*' can be used to process numerical data. By default the results are returned into a list. An important note about this is the parameter *multicombine* that allows to specify how many parameters *combine* will take. In some cases (like using *cbind*) performance will improve greatly if it's allowed to combine more than 2 elements each time.
 
@@ -212,19 +225,22 @@ There are two major functions for ggplot2:
 
 A couple of examples using the mtcars default dataset:
 
+```
 	qplot(wt, mpg, data=mtcars, geom=c("point", "smooth"),
 	      method="lm", formula=y~x, color=cyl,
 	      main="Regression of MPG on Weight",
 	      xlab="Weight", ylab="Miles per Gallon")
+```
 
 [img]
 
 (converted strings into factors)
 
+```
 	qplot(mpg, data=mtcars, geom="density", fill=gear, alpha=I(.5),
 	      main="Distribution of Gas Milage", xlab="Miles Per Gallon",
 	      ylab="Density")
-
+```
 [img]
 
 
@@ -232,22 +248,28 @@ Faceting
 
 It's very common to want to do the same plot for different subsets of data. The *facets=* argument does exactly that:
 
+```
 	qplot(hp, mpg, data=mtcars, shape=am, color=am,
 	      facets=gear~cyl, size=I(3),
 	      xlab="Horsepower", ylab="Miles per Gallon") 
+```
 
 [img]
 
 Since ggplot2 works with layers, we can add incremental changes to a plot. We could start with:
 
+```
 	g<-ggplot(data=mtcars, aes(x=cyl, y=gear, fill=am)) +
 	  geom_bar(stat="identity", position=position_dodge(), colour="black")
+```
 
 [img]
 
 Then add axis labels, titles ... 
 
+```
 	g<-g+xlab("cylinders") + ylab("gears") +ggtitle("Gears and cylinders in mtcars dataset")
+```
 
 [img]
 
@@ -270,13 +292,14 @@ train
 
 An example from the documentation:
 
+```
 plsFit <- train(Class ~ .,
 +                 data = training,
 +                 method = "pls",
 +                 ## Center and scale the predictors for the training
 +                 ## set and all future samples.
 +                 preProc = c("center", "scale"))
-
+```
 
 
 
