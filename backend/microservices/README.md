@@ -267,7 +267,11 @@ But since each part works independently, there is the risk of latency when each 
 
 You can create a circuit breaker which acts like a discovery service, where one microservice realizes another is “sick” and notifies the main circuit breaker. From that point on, a microservice will be able to check the service discovery to determine if the microservice it is connected to is broken in order to prevent calls being made to or from said microservice. Saleh recommends setting a “time out” for about ten minutes.
 
-#### 2.3.1. Coordination and Dumb Pipes
+#### 2.3.1. Dumb Pipes
+
+Let’s take a closer look at what makes something a microservice as opposed to a traditional SOA. Perhaps the most important distinction is side effects. Microservices avoid them because they are on an older approach: Unix pipes.
+
+Composing small pieces of functionality relies on repeatable results, a standard mechanism for input and output, and an exit code for a program to indicate success or lack thereof.  We know this works from observational evidence, and we also know that a Unix pipe is a “dumb” interface because it has no control statements. The pipe pushs data from A to B, and it’s up to members of the pipeline to decide if the input is unacceptable.
 
 #### 2.3.2. Synchronous communication
 
