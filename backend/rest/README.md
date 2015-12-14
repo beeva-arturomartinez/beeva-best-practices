@@ -700,8 +700,8 @@ or
 ```json
 {
 	"error": "short_description",
-	"error_description": "longer description, human-readable,
-	"error_uri": "URI to a detailed error description on the API developer website "
+	"error_description": "longer description, human-readable",
+	"error_uri": "URI to a detailed error description on the API developer website"
 }
 ```
 
@@ -745,12 +745,11 @@ You are identified, but you do not have the necessary authorizations.
 		{
 			"domain": "global",
 			"reason": "authError",
-			"message": "Invalid Credentials",
-			"locationType": "header",
+			"message": "Forbidden",
 			"location": "Authorization",
 		}],
-		"code": 401,
-		"message": "Invalid Credentials"
+		"code": 403,
+		"message": "Forbidden"
 	}
 }
 ```
