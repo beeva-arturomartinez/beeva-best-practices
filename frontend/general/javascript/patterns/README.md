@@ -9,18 +9,9 @@
   * [2\.01 Constructor Pattern](ConstructorPattern)
   * [2\.02 Module Pattern](ModulePattern)
   * [2\.03 Revealing Module Pattern](RevealingModulePattern),
-  * [2\.04 Singleton Pattern](SingletonPattern) **
-  * [2\.05 Observer Pattern](ObserverPattern) **
-  * [2\.06 Mediator Pattern](MediatorPattern) **
   * [2\.07 Prototype Pattern](PrototypePattern)
-  * [2\.08 Command Pattern](CommandPattern) **
-  * [2\.09 Facade Pattern](FacadePattern) **
-  * [2\.10 Factory Pattern](FactoryPattern) **
   * [2\.11 Mixin Pattern](MixinPattern)
-  * [2\.12 Decorator Pattern](DecoratorPattern) **
-  * [2\.13 Flyweight Pattern](FlyweightPattern) **
 * [3\. MV* Patterns](ModelViewStarPatterns)
-  * [3\.1 MVC Pattern](MVCPattern) **
   * [3\.2 MVP Pattern](MVPPattern)
   * [3\.3 MVVM Pattern](MVVMPattern)
 * [4\. Modular Patterns](ModularPatterns)
