@@ -10,7 +10,7 @@
 * [Back up and disaster recovery](#back-up-and-disaster-recovery)
 * [Monitoring](#monitoring)
 * [Vulnerabilities](#vulnerabilities)
-* [Data encryption](#data-encryption)
+* [Data encryption at rest](#data-encryption-at-rest)
 * [Security audits](#security-audits)
 * [Incident response](#incident-response)
 
