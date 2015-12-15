@@ -3,8 +3,10 @@
 ## CSS 
 
 This section describes the best practices applicable to CSS , divided into the following sections are covered:
-* [Creating style sheets](#creating-style-sheets)
- * [Rules declaration, selectors and properties]()
+* [Creating style sheets](css#creating-style-sheets)
+ * Rules declaration, selectors and properties
+ * Formating
+ * OOCSS and BEM
 * Using CSS preprocessors
 * Organize CSS
 * Selectors and types of CSS classes
@@ -35,15 +37,15 @@ selector {
 A selector is the way we identify any elements within the HTML document , you can refer to both a class attribute to any HTML element .
 ```css
 .my-class { 
- /* selector by className */ 
+ // selector by className 
 }
 
 input { 
- /* selector by HTML tag */ 
+ // selector by HTML tag 
 }
 
 [name="myname"] {
- /* selector by an attribute */ 
+ // selector by an attribute
 }
 ```
 
@@ -135,6 +137,13 @@ To optimize the use of CSS to use some working guidelines such as those in OOCSS
   * `.listing-card__title` is an “element” and represents a descendant of `.listing-card` that helps compose the block as a whole.
   * `.listing-card--featured` is a “modifier” and represents a different state or variation on the `.listing-card` block.
 
+#### ID selectors
+While it is possible to select elements by ID in CSS, it should generally be considered an anti-pattern. ID selectors introduce an unnecessarily high level of [specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) to your rule declarations, and they are not reusable.
+
+For more on this subject, read [CSS Wizardry's article](http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/) on dealing with specificity.
+
+#### JavaScript hooks
+
 ### Using CSS preprocessors
 
 Preprocessors are tools that provide meta for creating CSS files. These are translated into CSS files that will be inserted into the Web.
@@ -211,34 +220,46 @@ Returning to the example of grids, if you have two grids that have to be differe
 
 ```html
 <table class=”data-grid”>   
-<tr>   
-<td><span>column 1<span></td>   
-<td>column 2</td>   
-</tr>   
+  <tr>   
+    <td><span>column 1<span></td>   
+    <td>column 2</td>   
+  </tr>   
 </table>   
 <table class=”data-grid disabled”>   
-<tr>   
-<td><span>column 1</span></td>   
-<td>column 2</td>   
-</tr>   
+  <tr>   
+    <td><span>column 1</span></td>   
+    <td>column 2</td>   
+  </tr>   
 </table>   
 ```
 
 And in our CSS , we would have the generic properties for data- gird and , in the modifier according to the state would be sufficient to override you need:
 
 ```css
-table.data-grid {color: #000; width: 100%;}   
-table.data-grid.disabled {color: #CCC;}   
+table.data-grid {
+  color: #000; width: 100%;
+}   
+table.data-grid.disabled {
+  color: #CCC;
+}   
 ```
 
 And the same for the nodes that depend on it, as the span
 
-```
-table.data-grid {color: #000; width: 100%;}   
-table.data-grid span {font-weight: bold;}   
+```css
+table.data-grid {
+  color: #000; width: 100%;
+}   
+table.data-grid span {
+  font-weight: bold;
+}   
 
-table.data-grid.disabled {color: #CCC;}   
-table.data-grid.disabled span {font-weight: normal;}   
+table.data-grid.disabled {
+  color: #CCC;
+}   
+table.data-grid.disabled span {
+  font-weight: normal;
+}   
 ```
 
 But also , you might want to not only depended on the status of view, but on different screens, we want to be displayed differently depending on the type of display, which has a functional nature, which we will try next.
@@ -250,34 +271,34 @@ These can be either to refer to certain entities (students, courses, teachers...
 ```html
 <!-- Management Module -->   
 <div class=”administration”>   
-<table class=”data-grid”>   
-<tr>   
-<td><span>column 1<span></td>   
-<td>column 2</td>   
-</tr>   
-</table>   
-<table class=”data-grid disabled”>   
-<tr>   
-<td><span>column 1</span></td>   
-<td>column 2</td>   
-</tr>   
-</table>   
+  <table class=”data-grid”>   
+    <tr>   
+      <td><span>column 1<span></td>   
+      <td>column 2</td>   
+    </tr>   
+  </table>   
+  <table class=”data-grid disabled”>   
+    <tr>   
+      <td><span>column 1</span></td>   
+      <td>column 2</td>   
+    </tr>   
+  </table>   
 </div>   
 
 <!-- Another Module -->   
 <div class=”administration”>   
-<table class=”data-grid”>   
-<tr>   
-<td><span>column 1<span></td>   
-<td>column 2</td>   
-</tr>   
-</table>   
-<table class=”data-grid disabled”>   
-<tr>   
-<td><span>column 1</span></td>   
-<td>column 2</td>   
-</tr>   
-</table>   
+  <table class=”data-grid”>   
+    <tr>   
+      <td><span>column 1<span></td>   
+      <td>column 2</td>   
+    </tr>   
+  </table>   
+  <table class=”data-grid disabled”>   
+    <tr>   
+      <td><span>column 1</span></td>   
+      <td>column 2</td>   
+    </tr>   
+  </table>   
 </div>   
 ```
 
@@ -286,15 +307,27 @@ Well, it suffices to make the rules depend hierarchically in terms of these enti
 ```css
 /* generic Grid */   
 
-table.data-grid {color: #000; width: 100%;}   
-table.data-grid span {font-weight: bold;}   
+table.data-grid {
+  color: #000; 
+  width: 100%;
+}   
+table.data-grid span {
+  font-weight: bold;
+}   
 
-table.data-grid.disabled {color: #CCC;}   
-table.data-grid.disabled span {font-weight: normal;}   
+table.data-grid.disabled {
+  color: #CCC;
+}   
+table.data-grid.disabled span {
+  font-weight: normal;
+}   
 
 /* Management Module */   
 
-.administration table.data-grid {color: #fff;background: #000; }   
+.administration table.data-grid {
+  color: #fff;
+  background: #000; 
+}   
 ```
 
 Simply we override it what interests us, keeping the rest of default rules for both spans containing as to the disabled state, also can be overridden if interesase.
@@ -312,8 +345,12 @@ For these classes are useful, they must be located in the upper HTML node, the f
 In the css:
 
 ```css
-.user {font-size: 14;}   
-.form-user {padding: 5px;}   
+.user {
+  font-size: 14;
+}   
+.form-user {
+  padding: 5px;
+}   
 ```
 
 This would be wrong. If we want to indicate to form a class, it should not contain anything regarding user. Instead, it should be accessed through the class hierarchy:
@@ -329,8 +366,12 @@ This would be wrong. If we want to indicate to form a class, it should not conta
 In the css:
 
 ```css
-.user {font-size: 14;}   
-.user form {padding: 5px;}   
+.user {
+  font-size: 14;
+}   
+.user form {
+  padding: 5px;
+}   
 ```
 
 or, if we want to give a special class to the form so that this rule not all forms are applicable:
@@ -346,9 +387,15 @@ or, if we want to give a special class to the form so that this rule not all for
 In the css:
 
 ```css
-.user {font-size: 14;}   
-.user form {padding: 5px;}   
-.user form.registration {font-size: 11px;}   
+.user {
+  font-size: 14;
+}   
+.user form {
+  padding: 5px;
+}   
+.user form.registration {
+  font-size: 11px;
+}   
 ```
 
 Thus, all forms of user dependent class would have a font size of 14px and a general padding of 5px, except the registration form, which will overwrite the font size.
@@ -359,11 +406,11 @@ Finally, would the CSS classes of functional status, which refer to individual s
 
 ```html
 <div class=”message received”>   
-<span class=”transmitter”>Jhon Doe</span>   
-<span class=”receiver”>Jane Doe</span>   
-<span class=”send-date”>12/12/2013</span>   
-<span class=”reception-date”>-</span>   
-<span class=”ico”>-</span>   
+  <span class=”transmitter”>Jhon Doe</span>   
+  <span class=”receiver”>Jane Doe</span>   
+  <span class=”send-date”>12/12/2013</span>   
+  <span class=”reception-date”>-</span>   
+  <span class=”ico”>-</span>   
 </div>   
 ```
 
@@ -373,17 +420,23 @@ In the css...
 /*First we define the general characteristics for icons of messages. A note: use sprites for images to reduce calls to the server*/   
 
 .message span.ico {   
-display: inline-block;   
-width: 20px;   
-height: 100%;   
-background-image: url(‘sprite_path’);   
+  display: inline-block;   
+  width: 20px;   
+  height: 100%;   
+  background-image: url(‘sprite_path’);   
 }   
 
 /*Now we define the positions of images by state message*/   
 
-.message.sent span.ico {background-position: 0 0}   
-.message.received span.ico {background-position: 0 20px}   
-.message.read span.ico {background-position: 0 40px}   
+.message.sent span.ico {
+  background-position: 0 0
+}   
+.message.received span.ico {
+  background-position: 0 20px
+}   
+.message.read span.ico {
+  background-position: 0 40px
+}   
 ```
 
 Thus, we must not create lots of css classes, creating quite optimized, reusable and easy to maintain files.
@@ -401,22 +454,22 @@ And, for the switch **!important**, there are times in which it is essential. Fo
 
 #### Based on CSS JavaScript functionality
 
-In order to separate a fully the structure and functionality viewing. You need not apply functionality through JavaScript based CSS classes, for which the use of attributes in the structure of HTML like data-XXX is recommended.
+In order to separate the structure and functionality display an entirely. When applied to an element functionality through the use of CSS classes to use for this specific classes that must begin with an identification code, eg js-my-class is recommended.
 
 ```html
 <div class="container">
-  <p>This is the reference to a <span class="link" data-link>link</span></p>
+  <p>This is the reference to a <span class="link js-link-click">link</span></p>
 </div>
 ```
 
 Wrong way:
 ```javascript
-$('.link').click(function(){alert('Please use a data-XXX atribute instead of a class')});
+$('.link').click(function(){alert('Please use a js-link-click class')});
 ```
 
 Right way:
 ```javascript
-$('[data-link]').click(function(){alert('this is the right way')});
+$('.js-link-click').click(function(){alert('this is the right way')});
 ```
 
 #### Styles sheets Browsers
