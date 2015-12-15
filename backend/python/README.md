@@ -12,7 +12,7 @@ The following contents table provides an index of the contents covered in this g
 * [2. The Zen of Python (Pep 20)](#2-the-zen-of-python-pep-20)
 * [3. Style guide (Pep 8)](#3-style-guide-pep-8)
 * [4. Python 2 vs Python 3](#4-python-2-vs-python-3)
-* [5. Standard library](#5-standard-libarary)
+* [5. Standard library](#5-standard-library)
 * [6. Importing libraries](#6-importing-libraries)
 * [7. Logging](#7-logging)
 * [8. Comments and documentation](#8-comments-and-documentation)
@@ -21,7 +21,7 @@ The following contents table provides an index of the contents covered in this g
 * [11. Functions](#11-functions)
 * [12. Programming paradigms](#12-programming-paradigms)
 * [13. Exceptions](#13-exceptions)
-* [14. Input / Output](#14-input-output)
+* [14. Input Output](#14-input-output)
 * [15. Configuration files](#15-configuration-files)
 * [16. Testing](#16-testing)
 * [17. Project structure](#17-project-structure)
@@ -1308,7 +1308,7 @@ The exceptions are defined in the module exceptions. This module not needs to be
 [Built-in Exceptions](https://docs.python.org/2/library/exceptions.html)
 
 
-### 14. Input / Output
+### 14. Input Output
 In this chapter, it is to explain the basics for input and output in Python. If the programmer need a more advanced tips, go to the official documentation.
 
 #### 14.1 Print
@@ -1694,6 +1694,10 @@ Of course virtualenv has several options, you can see in the documentation:
 
 ### 21. References
 
+The following is the reference list used during the development of this best practices guide. Please follow the links in order to obtain further information regarding Python programming and best practices:
+
+* https://en.wikipedia.org/wiki/Python_(programming_language)
+* https://www.python.org/dev/peps/
 * https://gist.github.com/sloria/7001839
 * https://docs.python.org/2/howto/functional.html
 * https://docs.python.org/2/library/string.html
@@ -1704,5 +1708,7 @@ Of course virtualenv has several options, you can see in the documentation:
 * http://eric-ide.python-projects.org/
 * https://wingware.com/
 * http://www.pydev.org/
+* http://docs.python-guide.org/en/latest/
+
 
 [BEEVA](http://www.beeva.com) | 2015
