@@ -52,7 +52,7 @@ Then we could have some polymer like below:
 
 And then, we can copy our required code into the next one:
 
-```
+```javascript
 ...
   is: 'polymer-two',
   attached: function(){
@@ -72,7 +72,7 @@ That's not so maintainable since you must change every occurrence of code if you
 
 We can create a polymer element in order to use it every time we need to. 
 
-```
+```javascript
 ...
   is:'common-staff',
   attached: function(){
@@ -96,7 +96,7 @@ You can create behaviors for that. For example, you can create a behavior called
 
 Life cycle callbacks declared at behaviors are executed just before the client one that it's using the behavior.
 
-```
+```html
   <script>
     TimeStamperBehavior = {
       checkDNI: function(value){
@@ -111,7 +111,7 @@ Life cycle callbacks declared at behaviors are executed just before the client o
 
 Functions and properties declared on behaviors are included into the client's prototype. If there're already a function or property with the same name in the client, the behavior function is overwritten.
 
-```
+```html
   <script>
     ValidationUtilsBehavior = {
       attached: function(){
@@ -127,13 +127,15 @@ You can also extend the behaviors if you need, having all the related logic enca
 
 Now, if you need to use the behaviors above, you can use both, or just one of them, like this:
 
-```
+```html
   <link rel="import" href="time-stamper-behavior.html">
   <link rel="import" href="validation-utils-behavior.html">
 
-  ...
-  behaviors: [TimeStamperBehavior, ValidationUtilsBehavior],
-  ...
+  <script>
+    ...
+    behaviors: [TimeStamperBehavior, ValidationUtilsBehavior],
+    ...
+  </script>
 ```
   
 ## Using behaviors as interfaces
@@ -142,7 +144,7 @@ We can use behaviors as interfaces in order to abstract some methods to be imple
 
 As an example, imagine we have a behavior able to listen to a certain type of events. Maybe we want to delegate into client component the way this event is handled:
 
-```
+```html
   <script>
     var BoomTrigger = {
       listeners: {
@@ -167,7 +169,7 @@ Sometimes we could need extend one behavior with another one. Since behaviors ca
 Let's suppose we have a behavior that contains a function for obtaining how much cost a bag of apples depending on the weight.
 
 
-```
+```html
   <script>
     var AppleCostCalculatorBehavior = {
     
@@ -190,8 +192,7 @@ Let's suppose we have a behavior that contains a function for obtaining how much
 
 We can add functions by extending the behavior:
 
-```
-  
+```html
   <link rel="import" href="apple-cost-calculator-behavior.html">
 
   <script>
@@ -208,7 +209,7 @@ We can add functions by extending the behavior:
 
 Now you can just use this behavior in the client.
 
-```
+```javascript
   behaviors: [ApplePriceInformerBehavior];
 ```
 
@@ -216,8 +217,7 @@ Now you can just use this behavior in the client.
 
 We can modify properties:
 
-```
-  
+```html
   <link rel="import" href="apple-cost-calculator-behavior.html">
 
   <script>
@@ -238,7 +238,7 @@ We can modify properties:
 
 Now you can just use this behavior in the client.
 
-```
+```javascript
   behaviors: [ApplePriceExpensiveBehavior];
 ```
 
@@ -246,8 +246,7 @@ Now you can just use this behavior in the client.
 
 We can modify methods:
 
-```
-  
+```html
   <link rel="import" href="apple-cost-calculator-behavior.html">
 
   <script>
@@ -264,7 +263,7 @@ We can modify methods:
 
 Now you can just use this behavior in the client.
 
-```
+```javascript
   behaviors: [ApplePriceDiscountBehavior];
 ```
 
