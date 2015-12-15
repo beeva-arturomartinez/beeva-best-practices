@@ -230,7 +230,7 @@ You can use Amazon EMR Steps to submit work to the Spark framework installed on 
 
 #### EMR and S3
 
-If you terminate a running cluster, any results that have not been persisted to Amazon S3 will be lost and all Amazon EC2 instances will be shut down. It isn't a good practice to write intermediate RDDs to S3 due to IO performance.
+If you terminate a running cluster, any results that have not been persisted to Amazon S3 will be lost and all Amazon EC2 instances will be shut down so you should persist all the information you want to keep to S3. It isn't a good practice to write intermediate RDDs to S3 due to IO performance.
 
 EMRFS is an implementation of HDFS used for reading and writing regular files from Amazon EMR directly to Amazon S3. EMRFS provides the convenience of storing persistent data in Amazon S3 for use with Hadoop while also providing features like Amazon S3 server-side encryption, read-after-write consistency, and list consistency.
 
