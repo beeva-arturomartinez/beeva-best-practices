@@ -771,11 +771,156 @@ True
 The built-in print does not work fully with unicode strings. You can encode() first to print in utf-8 or whatever.
 
 ### 10. Operators
-#### 10.1. Asignación
-#### 10.2. Operadores aritméticos
-#### 10.3. Operadores lógicos  
-#### 10.4. Condicionales  
-#### 10.5. Bucles
+In this section explain about the basics of operators in Python.
+
+#### 10.1. Assignment
+The assignment in python is with **=**. It is important know that the assignment th basic types in python is by value, but complex types is by reference. For example:
+
+Basic type:
+```python
+>>> a = 1
+>>> b = a
+>>> b
+1
+>>> a += 1
+>>> a
+2
+>>> b
+1
+```
+Complex type:
+
+```python
+>>> a = [1]
+>>> b = a
+>>> b
+[1]
+>>> a.append(2)
+>>> a
+[1, 2]
+>>> b
+[1, 2]
+```
+
+#### 10.2. Arithmetic operators
+
+Python have the basic arithmetic operators like other languages: **+**, **-**, **/**, __*__, **+=**, **-=** ...
+
+#### 10.3.Logic operators
+
+Python have the basic arithmetic operators like other languages: **==**, **not**, **is**, **in**, **and**, **or** ...
+
+You should know the difference between **==** and **is**.
+* **is** compare object by reference, that is to say if two object point to same object, it will return True.
+* **==** compare if two object are equals.
+
+Other advise is to compare a object with **True**, **False** or **None**, it must be done with operator **is** and not with **==**.
+
+The operators **and**, **or** are short-circuiting.
+
+#### 10.4. Conditions
+
+The statement for conditions in python is the following:
+
+```python
+if condition:
+  # things
+elif condition:
+  # things
+else:
+  # things
+```
+
+Good practice statement **if**
+
+NO
+
+```python
+if condition: function()
+```
+
+Yes
+
+```python
+if condition:
+  function()
+```
+
+No
+```python
+if var is True:
+  ...
+```
+
+Yes
+```python
+if var:
+  ...
+```
+
+No
+
+``` python
+if var is None:
+  ...
+```
+
+Yes
+```python
+if not var:
+  ...
+```
+
+Python doesn't have statement switch, because it is not readable. It is replace by elif statement, but if the **if** will be big, it is not a good practice. Because It is not readable and it is inefficient. It is possible use a **dict** to do it. For example:
+
+* If necessary return a single value, do with this:
+
+```python
+value = 2
+switch_value = {1: 'one', 2: 'two', 3: 'three'}
+name_value = switch_value[value]
+```
+
+* If you need a more complex process, it can do with assignment with a function:
+
+```python
+value = '3'
+switch_value = {'1': _function_one, '2': _function_two, '3': _function_three}
+value_return = switch_value[value]()
+
+def _function_one():
+  # things
+def _function_two():
+  # things  
+def _function_three():
+  # things  
+```
+
+#### 10.5. Loops
+Python has the **for** and **while** loops like other languages. If you want iterate a dictionary or list use the statement **for**, it has a implicit iterator. Example:
+
+```python
+>>> my_list = [1,2,3,4]
+>>> for ele in my_list:
+...  print(ele)
+1
+2
+3
+4
+```
+
+To do a loops for x length use statement **for** with function **range** in Python 3 or **xrange** in Python 2. Don't use function **range** in python 2, because it is inefficient respect **xrange**. Example:
+
+```python
+>>>for i in range(5):
+...  print i
+0
+1
+2
+3
+4
+```
+
 ### 11. Functions
 
 Functions in Python can be used as part of a script and as part of modules, in a similar fashion as methods of a class as well. In this section their use and possibilities are covered as well as the recommended practice with functions.
