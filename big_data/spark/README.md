@@ -60,7 +60,7 @@ Usage example: If you have huge array that is accessed from Spark Closures, for 
 ### Packing applications
 
 
-If your code depends on other projects, you will need to package them alongside your application in order to distribute the code to a Spark cluster. To do this, create an assembly jar (or “uber” jar) containing your code and its dependencies. Both sbt and Maven have assembly plugins. When creating assembly jars, list Spark and Hadoop as provided dependencies; these need not be bundled since they are provided by the cluster manager at runtime. Once you have an assembled jar you can call the bin/spark-submit script as shown here while passing your jar.
+If your code depends on other projects, you will need to package them alongside your application in order to distribute the code to a Spark cluster. To do this, create an assembly jar (or “uber” jar) containing your code and its dependencies. Both sbt and Maven have assembly plugins. When creating assembly jars, list Spark and Hadoop as provided dependencies; these need not be bundled since they are provided by the cluster manager at runtime. Once you have an assembled jar you can call the bin/spark-submit script as shown later while passing your jar.
 
 build.sbt example:
 
@@ -110,6 +110,54 @@ A common deployment strategy is to submit your application from a gateway machin
 Alternatively, if your application is submitted from a machine far from the worker machines (e.g. locally on your laptop), it is common to use cluster mode to minimize network latency between the drivers and the executors. Note that cluster mode is currently not supported for Mesos clusters. Currently only YARN supports cluster mode for Python applications.
 
 [Click here](http://spark.apache.org/docs/latest/submitting-applications.html) for more information about this topic
+
+Examples:
+````shell
+# Run application locally on 8 cores
+./bin/spark-submit \
+  --class org.apache.spark.examples.SparkPi \
+  --master local[8] \
+  /path/to/examples.jar \
+  100
+
+# Run on a Spark standalone cluster in client deploy mode
+./bin/spark-submit \
+  --class org.apache.spark.examples.SparkPi \
+  --master spark://207.184.161.138:7077 \
+  --executor-memory 20G \
+  --total-executor-cores 100 \
+  /path/to/examples.jar \
+  1000
+
+# Run on a Spark standalone cluster in cluster deploy mode with supervise
+./bin/spark-submit \
+  --class org.apache.spark.examples.SparkPi \
+  --master spark://207.184.161.138:7077 \
+  --deploy-mode cluster
+  --supervise
+  --executor-memory 20G \
+  --total-executor-cores 100 \
+  /path/to/examples.jar \
+  1000
+
+# Run on a YARN cluster
+export HADOOP_CONF_DIR=XXX
+./bin/spark-submit \
+  --class org.apache.spark.examples.SparkPi \
+  --master yarn-cluster \  # can also be `yarn-client` for client mode
+  --executor-memory 20G \
+  --num-executors 50 \
+  /path/to/examples.jar \
+  1000
+
+# Run a Python application on a Spark standalone cluster
+./bin/spark-submit \
+  --master spark://207.184.161.138:7077 \
+  examples/src/main/python/pi.py \
+  1000
+
+````
+
 
 #### Cluster manager types
 
