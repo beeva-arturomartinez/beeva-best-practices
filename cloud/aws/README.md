@@ -13,6 +13,7 @@
 * [Storage](#storage)
 * [Services](#services)
 	* [EC2](#ec2)
+	* [S3](#s3)
 	* [DynamoDB](#dynamodb)
 	* [IAM](#iam)
 	* [Lambda](#lambda)
@@ -530,7 +531,7 @@ Amazon EBS (Elastic Block Storage) are persistent block-level storage for EC2 in
 
 EBS disks are used specially for data which changes frecuently, for disks in a database for example, and for data which needs a long time persistance.
 
-Also, you can perform automatic a point in time backups of EBSs. This automatic backups are called Snapshots.
+Also, you can perform automatic a point in time backups of EBSs. This automatic backups are called Snapshots, and are stored in S3.
 
 ##### Types
 
@@ -543,15 +544,7 @@ EBSs are replicated across multiple servers, but it is attached to a single Avai
 
 To maximize durability of your EBS disk, a good practice is to perform regular snapshots. For data consistency, it would be better to disable momentarily writes on disk, and then take the snapshot. Normal usage of disk can be performed while the snapshot is being taken.
 
-You can create a new Volume from a Snapshot and start using inmediately. Even if it you have configured a large amount of space.
-
-#### Instance Store
-
-#### RDS
-
-#### DynamoDB
-
-#### Redshift
+You can create a new Volume from a Snapshot and start using inmediately. Even if it you have configured a large amount of space. There is no need to wait until the whole information wille be copied from S3, it will request the pending informacion when it is demanded.
 
 ---
 ## Services
@@ -619,6 +612,28 @@ DynamoDB best feature is the high performance, this guideline is a summary of be
 ### Scaling (ELBs y ASGs)
 ---
 ### S3
+
+S3 is the petabyte-scale, fault-tolerant and highly-available distributed file system from AWS.
+
+There are some considerations to make better use of S3.
+
+* ** Make use of different object types defined by its access frecuency and criticality **. You can choose between:
+	* *Standard*.
+	* *Infrequent Accessed Data (IA)*: 99% availability instead of eleven 99,999999999. 
+	* *Reduced Redundant Storage (RRS)*: Less durability.
+
+* ** Use Server Side encryption ** for the projects which needs to store encrypted data at rest. SSE make use of AES 256 algorithm to encrypt and decrypt the information.
+
+* ** Static Web Hosting options ** allows you to serve an static webpage (eg, an informational web) at no cost other than the files size.
+
+* ** Activate S3 Server Logging ** in order to get feedback about how your users interact with your data.
+
+* ** Enable versioning at bucket level ** to be able to recover data lost by mistake or data which was deleted time ago. Rememeber you only can manage 1 version of an object at once, so when you recover the object, you loose the most recent one.
+
+* **Specify lifecycle management configuration**. Tis feature allow you to control where are your objects (S3 or Glacier) and configure one of the special object types for your objects.
+
+* **Cross-Region Replication**. This option copy objects from buckets asinchronously to other region.
+
 ---
 ### IAM
 
