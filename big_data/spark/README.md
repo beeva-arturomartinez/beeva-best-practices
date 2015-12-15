@@ -7,8 +7,6 @@
 * [Writing applications](#writing-applications)
 * [Packing applications](#packing-applications)
 * [Launching applications](#launching-applications)
-* [Spark SQL](#spark-sql)
-* [Spark Streaming](#spark-streaming)
 * [Testing](#testing)
 * [Tuning and debugging](#tuning-and-debugging)
 * [Spark on EMR](#spark-on-emr)
@@ -56,6 +54,69 @@ Broadcast variables are created on the driver, and are read-only from executors.
 Usage example: If you have huge array that is accessed from Spark Closures, for example some reference data, this array will be shipped to each spark node with closure. For example if you have 10 nodes cluster with 100 partitions (10 partitions per node), this Array will be distributed at least 100 times (10 times to each node). Using a broadcast variable you'll get huge performance benefit.
 
 [Accumulators](http://spark.apache.org/docs/latest/programming-guide.html#accumulators-a-nameaccumlinka) are variables that are only “added” to through an associative operation and can therefore be efficiently supported in parallel. They can be used to implement counters (as in MapReduce) or sums. Spark natively supports accumulators of numeric types, and programmers can add support for new types. If accumulators are created with a name, they will be displayed in Spark’s UI. This can be useful for understanding the progress of running stages (NOTE: this is not yet supported in Python).
+
+#### Spark SQL
+
+* DataFrames
+* Hive ...
+
+#### Spark Streaming
+
+Spark Streaming is not a pure streaming architecture. If the microbatches do not provide a low enough latency for your processing, you may need to consider a different framework, e.g. Storm, Samza, or Flink.
+
+It is much more efficient for large windows to use the extended windowed transformations passing an inverse function like:
+* reduceByWindow(reduceFunc: (T, T) ⇒ T, invReduceFunc: (T, T) ⇒ T, windowDuration: Duration, slideDuration: Duration): DStream[T]
+* reduceByKeyAndWindow(reduceFunc: (V, V) ⇒ V, invReduceFunc: (V, V) ⇒ V, windowDuration: Duration, slideDuration: Duration, partitioner: Partitioner, filterFunc: ((K, V)) ⇒ Boolean): DStream[(K, V)].
+
+
+Use the pattern foreachRDD-foreachPartition to reuse external connections.
+
+Bad:
+````scala
+dstream.foreachRDD { rdd =>
+  val connection = createNewConnection()
+  rdd.foreach { record =>
+    connection.send(record) // executed at the worker
+  }
+}
+````
+
+Good:
+````scala
+dstream.foreachRDD { rdd =>
+  rdd.foreachPartition { partitionOfRecords =>
+    val connection = createNewConnection()
+    partitionOfRecords.foreach(record => connection.send(record))
+    connection.close()
+  }
+}
+````
+
+Even better:
+````scala
+dstream.foreachRDD { rdd =>
+  rdd.foreachPartition { partitionOfRecords =>
+    val connection = ConnectionPool.getConnection()
+    partitionOfRecords.foreach(record => connection.send(record))
+    ConnectionPool.returnConnection(connection)  // return to the pool for future reuse
+  }
+}
+````
+
+Windowed stateful transformations requires enabling checkpointing. Checkpointing also can be optionally enabled for recovery from driver failures. To enable checkpointing you need to use StreamingContext.getOrCreate as follows:
+````scala
+def functionToCreateContext(): StreamingContext = {
+    val ssc = new StreamingContext(...)   
+    val lines = ssc.socketTextStream(...)
+    ...
+    ssc.checkpoint(checkpointDirectory)
+    ssc
+}
+
+val context = StreamingContext.getOrCreate(checkpointDirectory, functionToCreateContext _)
+````
+
+If the cluster resources is not large enough for the streaming application to process data as fast as it is being received, the receivers can be rate limited by setting a maximum rate limit in terms of records/sec. This can be achieved setting the configuration parameter spark.streaming.receiver.maxRate (spark.streaming.kafka.maxRatePerPartition for Direct Kafka approach). From spark 1.5 you can set spark.streaming.backpressure.enabled to let Spark Streaming automatically figure out the rate limits and dynamically adjust them if the processing conditions change.
 
 ### Packing applications
 
@@ -178,68 +239,6 @@ export HADOOP_CONF_DIR=XXX
   1000
 
 ````
-### Spark SQL
-
-#### DataFrames
-#### Hive ...
-
-### Spark Streaming
-
-Spark Streaming is not a pure streaming architecture. If the microbatches do not provide a low enough latency for your processing, you may need to consider a different framework, e.g. Storm, Samza, or Flink.
-
-It is much more efficient for large windows to use the extended windowed transformations passing an inverse function like:
-* reduceByWindow(reduceFunc: (T, T) ⇒ T, invReduceFunc: (T, T) ⇒ T, windowDuration: Duration, slideDuration: Duration): DStream[T]
-* reduceByKeyAndWindow(reduceFunc: (V, V) ⇒ V, invReduceFunc: (V, V) ⇒ V, windowDuration: Duration, slideDuration: Duration, partitioner: Partitioner, filterFunc: ((K, V)) ⇒ Boolean): DStream[(K, V)].
-
-
-Use the pattern foreachRDD-foreachPartition to reuse external connections.
-
-Bad:
-````scala
-dstream.foreachRDD { rdd =>
-  val connection = createNewConnection()
-  rdd.foreach { record =>
-    connection.send(record) // executed at the worker
-  }
-}
-````
-
-Good:
-````scala
-dstream.foreachRDD { rdd =>
-  rdd.foreachPartition { partitionOfRecords =>
-    val connection = createNewConnection()
-    partitionOfRecords.foreach(record => connection.send(record))
-    connection.close()
-  }
-}
-````
-
-Even better:
-````scala
-dstream.foreachRDD { rdd =>
-  rdd.foreachPartition { partitionOfRecords =>
-    val connection = ConnectionPool.getConnection()
-    partitionOfRecords.foreach(record => connection.send(record))
-    ConnectionPool.returnConnection(connection)  // return to the pool for future reuse
-  }
-}
-````
-
-Windowed stateful transformations requires enabling checkpointing. Checkpointing also can be optionally enabled for recovery from driver failures. To enable checkpointing you need to use StreamingContext.getOrCreate as follows:
-````scala
-def functionToCreateContext(): StreamingContext = {
-    val ssc = new StreamingContext(...)   
-    val lines = ssc.socketTextStream(...)
-    ...
-    ssc.checkpoint(checkpointDirectory)
-    ssc
-}
-
-val context = StreamingContext.getOrCreate(checkpointDirectory, functionToCreateContext _)
-````
-
-If the cluster resources is not large enough for the streaming application to process data as fast as it is being received, the receivers can be rate limited by setting a maximum rate limit in terms of records/sec. This can be achieved setting the configuration parameter spark.streaming.receiver.maxRate (spark.streaming.kafka.maxRatePerPartition for Direct Kafka approach). From spark 1.5 you can set spark.streaming.backpressure.enabled to let Spark Streaming automatically figure out the rate limits and dynamically adjust them if the processing conditions change.
 
 ### Testing
 For testing you can create fixtures that initializes the spark context and loads the data/creates the streams to start processing each test. If you are using python you need to explicitly load the pyspark path prior to the initialization of the SparkContext. You can use the following function to load pyspark into the python path:
