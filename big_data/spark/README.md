@@ -49,9 +49,14 @@ One exception to the general rule of trying to minimize the shuffles is when you
 
 #### Broadcast variables and accumulators
 
-Broadcast variables are created on the driver, and are read-only from executors. The distribution of these variables across the cluster is made through an efficient p2p broadcast algorithm, so they can be used to distribute large input datasets in an efficient manner. Take into account that once one variable has been defined and broadcasted, its value ca't be updated.
+[Broadcast variables](http://spark.apache.org/docs/latest/programming-guide.html#broadcast-variables) allow the programmer to keep a read-only variable cached on each machine rather than shipping a copy of it with tasks. They can be used, for example, to give every node a copy of a large input dataset in an efficient manner. Spark also attempts to distribute broadcast variables using efficient broadcast algorithms to reduce communication cost.
 
-Accumulators are seen as write-only variables on the executors and can be used to implement counters or sums that pushes data back to the driver through an associative operation.
+Broadcast variables are created on the driver, and are read-only from executors. The distribution of these variables across the cluster is made through an efficient p2p broadcast algorithm, so they can be used to distribute large input datasets in an efficient manner. Take into account that once one variable has been defined and broadcasted, its value can't be updated.
+
+Usage example: If you have huge array that is accessed from Spark Closures, for example some reference data, this array will be shipped to each spark node with closure. For example if you have 10 nodes cluster with 100 partitions (10 partitions per node), this Array will be distributed at least 100 times (10 times to each node). Using a broadcast variable you'll get huge performance benefit.
+
+[Accumulators](http://spark.apache.org/docs/latest/programming-guide.html#accumulators-a-nameaccumlinka) are variables that are only “added” to through an associative operation and can therefore be efficiently supported in parallel. They can be used to implement counters (as in MapReduce) or sums. Spark natively supports accumulators of numeric types, and programmers can add support for new types. If accumulators are created with a name, they will be displayed in Spark’s UI. This can be useful for understanding the progress of running stages (NOTE: this is not yet supported in Python).
+
 
 ### Launching applications
 
@@ -101,6 +106,8 @@ mergeStrategy in assembly := {
 #### Hive ...
 
 ### Spark Streaming
+
+Spark Streaming is not a pure streaming architecture. If the microbatches do not provide a low enough latency for your processing, you may need to consider a different framework, e.g. Storm, Samza, or Flink.
 
 It is much more efficient for large windows to use the extended windowed transformations passing an inverse function like:
 * reduceByWindow(reduceFunc: (T, T) ⇒ T, invReduceFunc: (T, T) ⇒ T, windowDuration: Duration, slideDuration: Duration): DStream[T]
