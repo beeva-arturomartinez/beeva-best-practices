@@ -61,7 +61,12 @@ Usage example: If you have huge array that is accessed from Spark Closures, for 
 ### Launching applications
 
 #### Driver/executors
+
+
 #### Spark-submit options
+
+
+
 #### Cluster types
 
 ### Deploying applications
@@ -222,6 +227,17 @@ You can use Amazon EMR Steps to submit work to the Spark framework installed on 
 * [Default ports used](http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-web-interfaces.html)
 * YARN web UI: http://public-ip:9026/cluster
 * Spark app web UI: http://{public-ip}:9046/proxy/{app-id}/
+
+#### EMR and S3
+
+If you terminate a running cluster, any results that have not been persisted to Amazon S3 will be lost and all Amazon EC2 instances will be shut down. It isn't a good practice to write intermediate RDDs to S3 due to IO performance.
+
+EMRFS is an implementation of HDFS used for reading and writing regular files from Amazon EMR directly to Amazon S3. EMRFS provides the convenience of storing persistent data in Amazon S3 for use with Hadoop while also providing features like Amazon S3 server-side encryption, read-after-write consistency, and list consistency.
+
+Note
+Previously, Amazon EMR used the S3 Native FileSystem with the URI scheme, s3n. While this still works, we recommend that you use the s3 URI scheme for the best performance, security, and reliability.
+
+Example: s3://bucket-name/path-to-file-in-bucket
 
 ___
 
