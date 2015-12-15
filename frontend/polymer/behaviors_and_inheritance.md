@@ -11,7 +11,7 @@ First good practice you must know about behaviors is that you should define a na
 
 Example:
 
-```
+```html
   <script>
     var MathsBehaviors = MathsBehaviors || {};
     MathsBehaviors.FormatBehaviors = {};
@@ -36,17 +36,17 @@ We can just copy and paste code from one component to the other, breaking the DR
 
 Then we could have some polymer like below:
 
-```
-...
-  is: 'polymer-one',
-  attached: function(){
-    this.set('timestamp', Date.now());
-  },
-...
-  checkDNI: function(value){
-    // Whatever...
-  }
-...
+```html
+  <script>
+    is: 'polymer-one',
+    attached: function(){
+      this.set('timestamp', Date.now());
+    },
+
+    checkDNI: function(value){
+      // Whatever...
+    }
+  </script>
 
 ```
 
