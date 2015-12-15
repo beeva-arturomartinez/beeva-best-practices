@@ -1178,7 +1178,7 @@ Python have a function to read from console inputs and it can interact with user
 Example:
 
 ```python
->>>age = raw_input(‘Tell your age\n’)
+>>>age = raw_input("Tell your age\n")
 Tell your age
 35
 >>>age
