@@ -1144,6 +1144,90 @@ The exceptions are defined in the module exceptions. This module not needs to be
 
 
 ### 14. Input / Output
+In this chapter, it is to explain the basics for input and output in Python. If the programmer need a more advanced tips, go to the official documentation.
+
+#### 14.1 Print
+Like others programming languages, Python have a function for print the result in console. This function is to easy to use, it is only necessary call the function with a string and it write in console. The programmer need remember, this function change in Python 3 respect Python 2. For this reason it is advisable, to use this function always with parenthesis, because in Python 3 is mandatory use their and in Python 2 is optional. Examples below:  
+
+```python
+>>>print(“Hello world”)
+Hello world
+>>>s = “String with things”
+>>print(s)
+String with things
+>>>print(10)
+10
+```
+
+On the other hand, if the programer want print a big Python objects, It has a special module to print it beautiful. The name of the module is pprint. It is necessary import it before use. Example of usage:
+
+```python
+>>>from pprint import pprint
+>>>a={1:['1111111111111111','2','33333333333333333333333'],3:'444444444444444444444444444444444444',5:{1:'333333333333333333333333333333333333333333333'}}
+>>>pprint(a)
+{1: ['1111111111111111', '2', '33333333333333333333333'],
+ 3: '444444444444444444444444444444444444',
+ 5: {1: '333333333333333333333333333333333333333333333'}}
+>>>print(a)
+{1: ['1111111111111111', '2', '33333333333333333333333'], 3: '444444444444444444444444444444444444', 5: {1: '333333333333333333333333333333333333333333333'}}
+```
+
+#### 14.2 Input
+
+Python have a function to read from console inputs and it can interact with user. The name of the function is raw_input() in Python 2 and input() in Python 3. This function will read line until the user press enter, it will transform to string.
+Example:
+
+```python
+>>>age = raw_input(‘Tell your age\n’)
+Tell your age
+35
+>>>age
+‘35’
+```
+
+#### 14.3 Files
+
+This chapter is to explain how the files work in Python.
+
+##### 14.3.1 Open
+To work with files is necessary open their before to use. This is done with the following line:
+
+```python
+file = open(filename, mode)
+```
+
+When open a file, it is necessary say the mode. In Python exists this modes:
+
+* ‘r’ → read only, it is for default. But it is a good practice write it.
+* ‘w’ → write only, if the file exists, it will be erased.
+* ‘a’ → when write it appends in the end of the file.
+* ‘+r’ → read and write.
+
+##### 14.3.2 Read
+
+To read a file in python exists several methods:
+
+* file.read(size): This read all file or the size indicate. This size is optional. When the end of the file has been reached it returns an empty string ("").
+* file.readline(): Read a single line. It stops when find a \n. When the end of the file has been reached it returns an empty string ("").
+* To save all lines in a list, it is possible used this list(f) or file.readlines()
+
+##### 14.3.3
+
+To write, it is only necessary call this function:
+
+```python
+file.write(“some thing”)
+```
+
+The writer function only accepts Strings.
+
+##### 14.3.4
+When finished the use of the file, the programmer must close it to freeze the resorce:
+
+```python
+file.close()
+```
+
 ### 15. Configuration files
 
 Use the ConfigParser module to manage user-editable configuration files for an application. The configuration files are organized into sections, and each section can contain name-value pairs for configuration data.
