@@ -1511,7 +1511,21 @@ mysql
 
 ### 16. Testing
 #### 16.1. Tests
-#### 16.2. Librerías útiles
+
+Python has in their core the package **unittest**, this package has the basic class **TestCase** to create your test with their function to initted the test and finished. This class have a lot of different assert to do your test, use theirs.
+
+#### 16.2. Utils
+
+Coverage is a external package, it is recommendable use, to verify the coverage of your code. It is easy to use:
+
+* Discover and execute the test with this code:
+
+``` coverage run -m  unittest discover tests```
+
+* Get the result in HTML:
+
+```coverage html```  
+
 #### 16.3. Mocks
 
 Tests should be isolated. Don't interact with a real database or network. Use a separate test database that gets torn down or use mock objects.
@@ -1664,6 +1678,11 @@ Of course virtualenv has several options, you can see in the documentation:
 * https://docs.python.org/2/howto/functional.html
 * https://docs.python.org/2/library/string.html
 * https://developers.google.com/edu/python/strings
-
+* https://wiki.python.org/moin/Python2orPython3
+* https://hg.python.org/peps/rev/76d43e52d978
+* https://www.jetbrains.com/pycharm/
+* http://eric-ide.python-projects.org/
+* https://wingware.com/
+* http://www.pydev.org/
 
 [BEEVA](http://www.beeva.com) | 2015
