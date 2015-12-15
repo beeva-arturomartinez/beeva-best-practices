@@ -10,7 +10,8 @@
 * [Spark SQL](#spark-sql)
 * [Spark Streaming](#spark-streaming)
 * [Testing](#testing)
-* [Tuning and debugging](#tuning-and-debuging)
+* [Tuning and debugging](#tuning-and-debugging)
+* [Spark on EMR](#spark-on-emr)
 
 ### Writing applications
 
@@ -24,7 +25,7 @@ conf.set("spark.app.name", "MyApp")
 conf.set("spark.ui.port", "36000")
 val sc = new SparkContext(conf)
 ````
-The list of properties that can be defined can be found here: http://spark.apache.org/docs/latest/configuration.html#spark-properties
+The list of properties that can be defined can be found [here](http://spark.apache.org/docs/latest/configuration.html#spark-properties)
 
 Note that these properties can also be set as arguments of spark-submit
 
@@ -199,6 +200,11 @@ Use jstack/ jconsole/ visualvm or other JVM profiling tool. Configure JVM argume
 
 ### Spark on EMR
 #### Launching applications
+
+You can use Amazon EMR Steps to submit work to the Spark framework installed on an EMR cluster. In the console and CLI, you do this using a Spark application step, which will run the spark-submit script as a step on your behalf. With the API, you use a step to invoke spark-submit using script-runner.jar.
+
+[Here](http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-spark-submit-step.html) you can find detailed information about this topic.
+
 #### Connecting to EMR cluster instances
 * Access to SparkUI: 
 
