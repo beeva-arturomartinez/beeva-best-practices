@@ -41,9 +41,9 @@ The language allows the programmer to choose between different programming parad
 * Object oriented.
 * Functional.
 
-Python is an __interpreted language__ as well. While files containing code have the .py extension, when executing the file it is partially compiled to a byte code [link goes here] file with the .pyc extension. Hence, the .py file is only compiled for the first time (unless the code is changed) an then the .pyc file is executed upon every invocation. The byte code is then translated to machine instructions by the Python Virtual Machine (PVM) during the execution. Since the byte code needs to be interpreted by the PVM, Python's  performance is in general lower than the one provided by a compiled language.
+Python is an __interpreted language__ as well. While files containing code have the .py extension, when executing the file it is partially compiled to a [bytecode](https://en.wikipedia.org/wiki/Bytecode) file with the .pyc extension. Hence, the .py file is only compiled for the first time (unless the code is changed) an then the .pyc file is executed upon every invocation. The bytecode is then translated to machine instructions by the Python Virtual Machine (PVM) during the execution. Since the bytecode needs to be interpreted by the PVM, Python's  performance is in general lower than the one provided by a compiled language.
 
-As an interpreted language, an interactive console is provided as a tool that its part of the language. The console allows to easily ensure that the code that has been just developed performs as expected. As an example, the console supports defining functions and then testing them or loading whole modules just developed and using their inner objects or functions. Therefore the use of the console is highly recommended since it allows testing anything from code snippets to multi module programs.
+As an interpreted language, an interactive console is provided as a tool that its part of the language. The console allows to easily ensure that the code that has been just developed performs as expected. As an example, the console supports defining functions and then testing them or loading whole modules just developed and using their inner objects or functions.
 
 Python allows employing object oriented design, or procedural programming depending on the needs. And the fact that it is an interpreted language, has led to its use for scripting purposes.
 
@@ -95,15 +95,19 @@ The Zen of Python:
     Namespaces are one honking great idea -- let's do more of those!
 
 
-#### 2.2.1. The Zen through examples:
+#### 2.2.1. The Zen through examples
+
+Python's Zen can be followed through example sin the following link:
 
 http://artifex.org/~hblanks/talks/2011/pep20_by_example.html
 
-ADD examples
+#### 2.2.2. Other philosophical implications
 
-#### 2.2.2. Performance optimisations
+There are other areas where Python's phylosophy affects development:
 
-In general, Python developments seek avoiding optimisation of the code during the first development. This is due to the fact that optimisations might affect code readability or complexity. It is only if performance shows to be a crucial point for operation, when optimisations are recommended.
+* Access to code: Since code is not compiled, and because of the way it is usually distributed (please see [18. Application packaging and distribution](#18-application-packaging-and-distribution)), code from libraries and frameworks is accesible to devepers in general. However, it is possible to provide bytecode only packages that do not disclose the code. 
+* Documentation: The information of modules, classes and methods is available for developers to request while developing if it has been included in the code. This allows interactively requesting information on the method to be used while developing.
+* Performance optimisations: In general, Python developments seek avoiding optimisation of the code during the first development. This is due to the fact that optimisations might affect code readability or complexity. It is only if performance shows to be a crucial point for operation, when optimisations are recommended.
 
 
 ### 3. Style guide (Pep 8)
