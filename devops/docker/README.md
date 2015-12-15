@@ -16,46 +16,66 @@
 
 ## Docker Essentials
 
-* Make Use of Trusted Builds
-
-* Keep Layers to a Minimum
-Too many layers makes things unnecessarily complicated. The trick is to find a good balance between readability and the lowest number of layers possible. Only add additional layers when there is a strategic reason for doing so.
-
-* Use Only One Container Per Process
-Decouple applications into separate containers — one for each process. This makes horizontal scaling easier and allows you to recycle containers. To handle services that are dependent on each other, use the container linking feature instead of housing them in the same Docker container.
-
-* Don’t Install Unnecessary Packages
-Avoid installing unnecessary packages. This reduces the file size, lessens the complexity of dependencies, and cuts down on build times.
-
-* Separate data from application
-Containers should be ephemeral, in order to maintain data, use data volumes.
-
-* Don't mix Docker logs with application logs
-
-* Build Containers That Are Easy to Replace
-As said in previous point, containers should be ephemeral, that is, containers should be designed so that stopping and deleting them and replacing them with another should require only minimal setup and configuration.
-
-* Take Advantage of DockerIgnore
-DockerIgnore is a handy way to exclude unnecessary files and directories from the build context and final image.
-
-* Be Specific About Tags
-Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the -t option for the Docker Build feature.
-
 ### Writing dockerfiles
 
 Images can be built automatically following the instructions defined in a Dockerfile. These are general guidelines for writing dockerfiles:
 
-* Keep in mind that the docker containers produced by the images defined in your Dockerfile should be ephemeral. So they can be stopped, destroyed or rebuilt with minimal setup and configuration.
+* Each Docker image consists of a series of layers. Docker makes use of union file systems to combine these layers into a single image. When you change a Docker image, rather than replacing the whole image or entirely rebuilding, only that layer is added or updated. In a Dockerfile, each command generates a layer, thus organize your Dockerfile so that common commands that you doesn't expect to change are located at the beginning, and .
 
-* Use a .dockerignore file to specify excluded files and directories to increase the build performance
+* Use a .dockerignore file to specify excluded files and directories to increase the build performance.
 
-* Keep the image as minimal as posible. Do not install unnecesary packages. Use small base images
+* Keep layers to a minimum: too many layers makes things unnecessarily complicated. The trick is to find a good balance between readability and the lowest number of layers possible. Only add additional layers when there is a strategic reason for doing so.
 
-* One proccess per container. Split aplications into multiple containers and use container linking if needed
+* Sort multiline arguments alphanumerically to avoid duplication of packages and to improve readability.
 
-* Minimize the number of layers, but also keep in mind maintainability and readability of Dockerfiles, so you need to find a balance
+* Be specific about tags
+Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the -t option for the Docker Build feature.
 
-* Sort multiline arguments alphanumerically to avoid duplication of packages and to improve readability
+````
+FROM debian:latest
+
+CMD ["nodejs", "main.js"]
+
+RUN apt-get update \
+    && apt-get install -y curl \
+    && curl -sL https://deb.nodesource.com/setup | bash - \
+    && apt-get install -y nodejs
+
+# Add files
+COPY main.js main.js
+COPY log4js.json log4js.json
+COPY package.json package.json
+
+RUN npm install
+````
+
+### Creating small-sized containers
+
+Keep the image as minimal as posible:
+
+* Use small base images (e.g. *debian* or *alpine*)
+
+* Don’t install unnecessary packages 
+This reduces the file size, lessens the complexity of dependencies, and cuts down on build times.
+
+* Take advantage of .dockerIgnore
+DockerIgnore is a handy way to exclude unnecessary files and directories from the build context and final image.
+
+* Remember to delete packages used to install your application after uncompressing them.
+
+### Desing your application thinking about Docker
+
+* Use only one container per process
+Decouple applications into separate containers — one for each process. This makes horizontal scaling easier and allows you to recycle containers. To handle services that are dependent on each other, use the container linking feature instead of housing them in the same Docker container.
+
+* Build containers that are portable and easy to replace
+Keep in mind that the docker containers produced by the images defined in your Dockerfile should be ephemeral. So they can be stopped, destroyed or rebuilt with minimal setup and configuration.
+
+	* Configuration parameters
+
+	* Don't mix Docker logs with application logs
+
+	* Data in separate containers
 
 ### Security
 
@@ -122,13 +142,16 @@ docker-compose scale myservice=3
 Using Docker can alleviate some frustations associated with testing, first we need a consistent environment, as we have seen in the previous section, [Dockerfiles](#writing-dockerfiles) are used to define an exact template for all application needs, from operating system to libraries to open ports. In the git repository for each of our projects we include a Dockerfile right along with the source code, thus anyone who pulls the project can get it up and running with a few simple commands, this way anybody will have to install all the dependencies manually and then hope it works on their own computer, since this will all be taken care of in the Docker container. This means getting up and running is fast since the host machine requires nothing installed but the Docker service itself. Along with [Docker-Compose](#docker-compose) we will obtain a **consistent and reproducible environment** very easily.
 
 ### Docker CI
+
+* Make Use of Trusted Builds
+
 Docker deployment solutions.
 
 ## References
 
 * https://docs.docker.com/compose/
 * https://docs.docker.com/engine/articles/dockerfile_best-practices/
-* [Link](http://www.url.to) Description
+* https://docs.docker.com/engine/introduction/understanding-docker/
 
 ___
 
