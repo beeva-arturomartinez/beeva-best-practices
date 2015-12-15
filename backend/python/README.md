@@ -942,8 +942,6 @@ In general, the use of decorators is recommended in order to improve code readab
 
 
 ### 12. Programming paradigms
-Python is a multi-paradigm language that allows Functional(F), Imperative (I), object oriented(OO) and procedural(P) programming.
-In large programs different paradigms can be applied, for instance by using OO for GUI and procedural or functional in processing logic.
 
 #### 12.1 Functional
 
@@ -1062,67 +1060,6 @@ reduce(lambda x,y: ''.join([x,y]), ['B','EE','VA'])
 > 'BEEVA'
 ```
 
-##### 12.2 Imperative programming
-
-Python syntax allows to apply imperative programming.
-
-For instance, you can do something like:
-
-```python
-MyList = [1, 2, 3, 4, 5]
-Sum = 0
-for X in MyList:
-    Sum += X
-print(Sum)
-```
-
-##### 12.3 Object Oriented programming
-
-Python includes ***class*** keyword and allows inheritance.
-
-So for example,
-
-```python
-class Pet(object):
-
-    def __init__(self, name, species):
-        self.name = name
-        self.species = species
-
-    def getName(self):
-        return self.name
-
-    def getSpecies(self):
-        return self.species
-
-    def __str__(self):
-        return "%s is a %s" % (self.name, self.species)
-
-class Dog(Pet):
-
-    def __init__(self, name, chases_cats):
-        Pet.__init__(self, name, "Dog")
-        self.chases_cats = chases_cats
-
-    def chasesCats(self):
-        return self.chases_cats
-```
-
-##### 12.4 Procedural programming
-
-As with imperative programming, python allows to apply procedural coding style.
-For instance:
-
-```python
-def DoAdd(MyList):
-    Sum = 0
-    if type(MyList) is list:
-        for X in MyList:
-            Sum += X
-    return Sum
-MyList = [1, 2, 3, 4, 5]
-print(DoAdd(MyList))
-```
 
 ### 13. Exceptions
 
