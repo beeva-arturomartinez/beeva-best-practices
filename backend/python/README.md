@@ -618,6 +618,16 @@ from datetime import date
 ```
 
 ### 7. Logging
+
+Use logging config files instead of code-logging to avoid make changes into your code every time you want to change some aspect of your logging, whenever your project allows it.
+In addition, config files allow to change in runtime your logging configuration whether you use:
+
+```python
+logging.config.listen()
+```
+
+
+
 ### 8. Comments and documentation
 
 #### 8.1 Code Documentation
