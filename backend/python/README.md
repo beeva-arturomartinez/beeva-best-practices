@@ -1275,6 +1275,11 @@ mysql
 #### 16.1. Tests
 #### 16.2. Librerías útiles
 #### 16.3. Mocks
+
+Tests should be isolated. Don't interact with a real database or network. Use a separate test database that gets torn down or use mock objects.
+
+Because too many mocks can complicate a test, making it harder for you to track down a failure, the best practice is to limit a test case to one or two mocks, or use separate test cases for each mock/subject pairing.
+
 ### 17. Project structure
 
 Projects in Python can have different structures depending on the target that they have, or depending on the needs and policies of development teams. In general, Python does not introduce hard requirements in this aspect and the development team has flexibility to decide on the best approach.
@@ -1416,7 +1421,11 @@ Of course virtualenv has several options, you can see in the documentation:
 <http://virtualenv.readthedocs.org/en/latest/index.html>
 
 ### 21. References
-### 21. Integración continua --> solo si da tiempo
+
+* https://gist.github.com/sloria/7001839
+* https://docs.python.org/2/howto/functional.html
+* https://docs.python.org/2/library/string.html
+* https://developers.google.com/edu/python/strings
 
 
 [BEEVA](http://www.beeva.com) | 2015
