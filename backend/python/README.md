@@ -1182,7 +1182,7 @@ Example:
 Tell your age
 35
 >>>age
-‘35’
+'35'
 ```
 
 #### 14.3 Files
@@ -1198,10 +1198,10 @@ file = open(filename, mode)
 
 When open a file, it is necessary say the mode. In Python exists this modes:
 
-* ‘r’ → read only, it is for default. But it is a good practice write it.
-* ‘w’ → write only, if the file exists, it will be erased.
-* ‘a’ → when write it appends in the end of the file.
-* ‘+r’ → read and write.
+* 'r' → read only, it is for default. But it is a good practice write it.
+* 'w' → write only, if the file exists, it will be erased.
+* 'a' → when write it appends in the end of the file.
+* '+r' → read and write.
 
 ##### 14.3.2 Read
 
