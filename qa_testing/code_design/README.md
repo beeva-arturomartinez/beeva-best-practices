@@ -208,7 +208,7 @@ Other tools that helps you depending on the programming language:
 
 * **Java**: [Checkstyle](http://checkstyle.sourceforge.net/) and [PMD](https://pmd.github.io/) with maven plugin, allow to configure some configuration rules and test that your code is fine when you build your java application, preserving for deployment server errors. You should configure the same rules than sonar. Other usefull tool is [FindBugs](http://findbugs.sourceforge.net/) .
 * **Python**: [Pylint](http://www.pylint.org/)
-* **JavaScript**: [JSHint](http://jshint.com/about/) is a static code analysis tool for JavaScript. Also is recommended use a tool called [Plato](https://github.com/es-analysis/plato) that is a JavaScript source code visualization, static analysis, and complexity tool and can be integrated with the JSHint results.
+* **JavaScript**: [JSHint](http://jshint.com/about/) is a static code analysis tool for JavaScript. Also is recommended use a tool called [Plato](https://github.com/es-analysis/plato) that is a JavaScript source code visualization, static analysis, and complexity tool and can be integrated with the JSHint results. You can more tools and best practices in our [Javascript Best Practices Guide](../../frontend/javascript/README.md).
 
 
 ## Code Design Patterns
