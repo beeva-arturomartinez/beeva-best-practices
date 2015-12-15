@@ -607,6 +607,16 @@ print string.capwords(s)
 
 
 ### 6. Importing libraries
+
+The best practice is to just import what you need. 
+So, do not you use ___import *___ if you do not want to hear about the lint.
+
+Instead, import exactly the modules you really need.
+
+```python
+from datetime import date
+```
+
 ### 7. Logging
 ### 8. Comments and documentation
 
