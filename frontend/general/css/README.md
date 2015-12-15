@@ -1,9 +1,10 @@
 #Front-end BEEVA Best Practices   
 
-##2.- CSS 
+## CSS 
 
 This section describes the best practices applicable to CSS , divided into the following sections are covered:
-* [Creating style sheets] (#creating-style-sheets)
+* [Creating style sheets](#creating-style-sheets)
+ * [Rules declaration, selectors and properties]()
 * Using CSS preprocessors
 * Organize CSS
 * Selectors and types of CSS classes
@@ -16,7 +17,7 @@ This section describes the best practices applicable to CSS , divided into the f
  * Based on CSS JavaScript functionality
  * Styles sheets Browsers
 
-### 2.1\. Creating style sheets
+### Creating style sheets
 
 In this section we discuss some basic rules for both the creation of new style sheets and for organizing them. The goal is to minimize the volume of the generated files and avoid having to overwrite the classes or attributes using the modifier **!important**.
    
@@ -33,9 +34,17 @@ selector {
 
 A selector is the way we identify any elements within the HTML document , you can refer to both a class attribute to any HTML element .
 ```css
-.my-class { /* selector by className */ }
-input { /* selector by HTML tag */ }
-[name="myname"] { /* selector by an attribute */ }
+.my-class { 
+ /* selector by className */ 
+}
+
+input { 
+ /* selector by HTML tag */ 
+}
+
+[name="myname"] {
+ /* selector by an attribute */ 
+}
 ```
 
 The properties are the style rules to be applied by the selector element sectioned.
@@ -46,7 +55,87 @@ The properties are the style rules to be applied by the selector element section
 }
 ```
 
-### 2.2\. Using CSS preprocessors
+#### Formating
+* Use soft tabs (2 spaces) for indentation
+* Prefer dashes over camelCasing in class names. Underscores are OK if you're using BEM (see [OOCSS and BEM](#oocss-and-bem) below).
+* Do not use ID selectors
+* When using multiple selectors in a rule declaration, give each selector its own line.
+* Put a space before the opening brace `{` in rule declarations
+* In properties, put a space after, but not before, the `:` character.
+* Put closing braces `}` of rule declarations on a new line
+* Put blank lines between rule declarations
+* The use of comments should be double bars // to block comments, the comments at the end of line is avoided. 
+* Comments book to detail not self-contained applications, such as using the z -index, or settings for browser compatibility.
+
+**Bad**
+
+```css
+.avatar{
+    border-radius:50%;
+    border:2px solid white; }
+.no, .nope, .not_good {
+    // ...
+}
+#lol-no {
+  // ...
+}
+```
+
+**Good**
+
+```css
+.avatar {
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.one,
+.selector,
+.per-line {
+  // ...
+}
+```
+
+#### OOCSS and BEM
+
+To optimize the use of CSS to use some working guidelines such as those in OOCSS and BEM is proposed. The proposed improvements are:
+  * It helps create clear, strict relationships between CSS and HTML
+  * It helps us create reusable, composable components
+  * It allows for less nesting and lower specificity
+  * It helps in building scalable stylesheets
+  
+**OOCSS**, or “Object Oriented CSS”, proposes the creation of reusable and independent blocks.
+  * Nicole Sullivan's [OOCSS wiki](https://github.com/stubbornella/oocss/wiki)
+  * Smashing Magazine's [Introduction to OOCSS](http://www.smashingmagazine.com/2011/12/12/an-introduction-to-object-oriented-css-oocss/)
+
+**BEM**, or “Block-Element-Modifier”, it is a naming convention for CSS classes by establishing a set of guidelines.
+  * CSS Trick's [BEM 101](https://css-tricks.com/bem-101/)
+  * Harry Roberts' [introduction to BEM](http://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)
+
+```html
+<article class="listing-card listing-card--featured">
+
+  <h1 class="listing-card__title">Adorable 2BR in the sunny Mission</h1>
+
+  <div class="listing-card__content">
+    <p>Vestibulum id ligula porta felis euismod semper.</p>
+  </div>
+
+</article>
+```
+
+```css
+.listing-card { }
+.listing-card--featured { }
+.listing-card__title { }
+.listing-card__content { }
+```
+
+  * `.listing-card` is the “block” and represents the higher-level component
+  * `.listing-card__title` is an “element” and represents a descendant of `.listing-card` that helps compose the block as a whole.
+  * `.listing-card--featured` is a “modifier” and represents a different state or variation on the `.listing-card` block.
+
+### Using CSS preprocessors
 
 Preprocessors are tools that provide meta for creating CSS files. These are translated into CSS files that will be inserted into the Web.
 
@@ -56,7 +145,7 @@ However, the recommendation is to use SASS/Compass, to the greatest extent in th
 
 For correct use of these tools it is necessary to have knowledge of good practice in creating CSS, in order to exploit the power of these preprocessors.   
 
-### 2.3\. Organize CSS
+### Organize CSS
 
 In the development should generate multiple CSS that will later be unified for production environments. With that we improve the encapsulation of the different needs of the project. 
 
@@ -87,7 +176,7 @@ Other components are functional, that is, focusing on all visual content having 
 
 These two approaches are not mutually exclusive. It is useful to identify elements that are general and create a reuse approach, and certainly appear specifications related to functionality, which will overload these general styles.
 
-### 2.4\. Selectors and types of CSS classes
+### Selectors and types of CSS classes
 
 In the style sheets not only the order in which the classes are defined, also depends on the accuracy of specifying a particular component.
 
@@ -100,11 +189,11 @@ It is important that our rules of CSS have a **semantic** nature, so they are ve
 * Functional entity
 * Functional status
 
-#### 2.4.1\. Structure
+#### Structure
 
 The structure css classes are those that reference **reusable components** in different applications or websites. Again become our reusable components. These must have a unique CSS class to make reference to them. For example, if we use two data grids on our website, we should never have a class grid-first and  another class grid-second, but both should have the same css class data- grid. If in any case requires the viewing is different, this is usually for functional reasons discussed below, in this case an overload of classes will be used, ie, applying a whole class to class data-grid to represent differences.
  
-#### 2.4.2\. Visual state
+#### Visual state
 
 The status display indicates which particular state of a component of any type ( structure or entity ). The most common states are:
 
@@ -154,7 +243,7 @@ table.data-grid.disabled span {font-weight: normal;}
 
 But also , you might want to not only depended on the status of view, but on different screens, we want to be displayed differently depending on the type of display, which has a functional nature, which we will try next.
 
-#### 2.4.3\. Functional entity
+#### Functional entity
 
 These can be either to refer to certain entities (students, courses, teachers...) and more global entities, as it could be an administration module. In the following example we will see how we could differentiate the grids data management module from the rest of the application:
 
@@ -264,7 +353,7 @@ In the css:
 
 Thus, all forms of user dependent class would have a font size of 14px and a general padding of 5px, except the registration form, which will overwrite the font size.
 
-#### 2.4.4\. Functional status
+#### Functional status
 
 Finally, would the CSS classes of functional status, which refer to individual states may have a particular entity. For example, for different states can have the elements of a message (header, icon, date, etc) in a messaging system. We could have many different css classes for these elements, for example, in terms of icons: ico-sent, ico-received, ico-read... A simple and semantic form, would add that state as a modifier of the css class that represents functional entity, seen in the previous point, defining the normal rules of each camp. For example, let's focus on the field icon:
 
@@ -299,18 +388,18 @@ background-image: url(‘sprite_path’);
 
 Thus, we must not create lots of css classes, creating quite optimized, reusable and easy to maintain files.
 
-### 2.5\. Other considerations
+### Other considerations
 
 Here are some notes that do not fall in the other sections even if it may have been mentioned previously discussed above.
 
-#### 2.5.1\. !important and Style
+#### !important and Style
 
 In addition to the rules seen above, must be avoided as far as possible use the switch **!important** and / or **style** property of DOM nodes.
 
 As for the style property, it is often essential to use. For example, it is imperative for many when frameworks provide dynamic attributes such as width, height, etc. to offer a dynamic and / or flexible components. However, what it is to be avoided at this property indicate attributes of constant styles. Anything must be consistent in its corresponding CSS file.
 And, for the switch **!important**, there are times in which it is essential. For example, in those cases in which frameworks accessing the style property and modify a particular attribute, for any reason, we want to be consistent and we have defined in our CSS. As inclusion in the style property overrides the classes defined in the CSS as a general rule, we can only do so using this switch, overriding the value in our style sheet, but should be limited use as far as possible.
 
-#### 2.5.2\. Based on CSS JavaScript functionality
+#### Based on CSS JavaScript functionality
 
 In order to separate a fully the structure and functionality viewing. You need not apply functionality through JavaScript based CSS classes, for which the use of attributes in the structure of HTML like data-XXX is recommended.
 
@@ -330,7 +419,7 @@ Right way:
 $('[data-link]').click(function(){alert('this is the right way')});
 ```
 
-#### 2.5.3\. Styles sheets Browsers
+#### Styles sheets Browsers
 
 Another measure that may be useful, to avoid having to include specific styles sheets for each browser, Javascript is added using a CSS class BODY DOM node, referring to the browser. For instance:
 
