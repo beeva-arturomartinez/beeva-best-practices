@@ -10,7 +10,7 @@ To do this work, there are a variety of tools available which facilitate the tas
 
 ## Index
 
-* Hiera Encryption settings
+* Hiera Encryption
     * Introduction and purpose
     * Creating Puppetmaster keys and Hiera configuration
     * Eyaml files process encryption
@@ -21,7 +21,6 @@ To do this work, there are a variety of tools available which facilitate the tas
     * Installation and purpose
 * Example Hiera hierarchy
 
-
 * [Foreman Stack creation](#foreman-stack-creation)
 * [Extra definitions](#extra-definitions)
 * [Hostgroups (runlist)](#hostgroups-runlist)
@@ -31,17 +30,70 @@ To do this work, there are a variety of tools available which facilitate the tas
 * [Puppet Module Documentation](#puppet-module-documentation)
 
 ---
-## Hiera Encryption Settings
+## Hiera Encryption
 
-Eyaml library provides us an encryption method for hiera settings.
+Certain information stored in Hiera is sensitive information. This information should not be stored in clear, so it is interesting to explore some encryption mechanisms to securize such data.
 
 ### Introduction and purpose
 
+Eyaml library provides a backend for Hiera which provides an encryption method for sensible the information stored in Hiera.
 
+Eyaml is a ruby gem which can be easily installed via terminal.
+
+```bash
+# gem install hiera-eyaml
+```
 
 ### Creating Puppetmaster keys and Hiera configuration
 
+To create a new keypair once the gem has been installed, launch:
 
+```bash
+# eyaml createkeys
+```
+
+This command creates a new keypair in the default location, which should be */etc/puppet/secure/keys*. Each Puppetmaster should have its own keypair, so it's advisable to rename the files in order to match the name of that Puppetmaster.
+
+To be able to edit already encrypted files, it requires the following config file.
+
+```
+# cat /etc/eyaml/config.yaml
+
+  pkcs7_private_key: '/etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem'
+  pkcs7_public_key:  '/etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem'
+
+```
+
+In order to use eyaml backend, we must change the following file and restart the Puppetmaster (the following hierarchy is proposal, but could change depending on concrete system)
+
+```
+# cat /etc/puppet/hiera.yaml
+---
+:backends:
+  - eyaml
+  - yaml
+  - file
+:hierarchy:
+  - %{::hostname}
+  - %{::fqdn}
+  - %{::rol}/%{::version}
+  - %{::rol}
+  - %{::proyecto}
+  - common
+
+:eyaml:
+  :datadir: "/var/lib/hiera/%{::environment}/%{::app_tier}"
+  :pkcs7_private_key: /etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem
+  :pkcs7_public_key:  /etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem
+
+:yaml:
+  :datadir: "/var/lib/hiera/%{::environment}/%{::app_tier}"
+
+:file:
+  :datadir: "/var/lib/hiera/%{::environment}/%{::app_tier}/files/%{calling_module}"
+
+:logger: console
+```
 
 ### Eyaml files process encryption
 
