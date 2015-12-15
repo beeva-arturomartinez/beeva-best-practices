@@ -1732,7 +1732,6 @@ We propose TDD Mantra: **"red, green, refactor, repeat"**:
 
     Starting with another new test, the cycle is then repeated to push forward the functionality.
 
-<<<<<<< HEAD
 # Code Design Best Practices
 At this point we're going to talk about the code design best practices.
 
