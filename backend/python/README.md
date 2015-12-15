@@ -1203,6 +1203,15 @@ When open a file, it is necessary say the mode. In Python exists this modes:
 * 'a' → when write it appends in the end of the file.
 * '+r' → read and write.
 
+But open with the last code is a bad practice. Because it doesn't ensure that the file will close. For this reason use the following code:
+
+```python
+with open(filename, mode) as f:
+    #use the file read, write ...
+```
+
+With this code if you don't close the file, it will raise a exception.
+
 ##### 14.3.2 Read
 
 To read a file in python exists several methods:
