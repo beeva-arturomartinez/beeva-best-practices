@@ -3,7 +3,7 @@
 ##2.- CSS 
 
 This section describes the best practices applicable to CSS , divided into the following sections are covered:
-* Creating style sheets
+* [Creating style sheets] (#creating-style-sheets)
 * Using CSS preprocessors
 * Organize CSS
 * Selectors and types of CSS classes
@@ -18,7 +18,33 @@ This section describes the best practices applicable to CSS , divided into the f
 
 ### 2.1\. Creating style sheets
 
-In this section we discuss some basic rules for both the creation of new style sheets and for organizing them. The goal is to minimize the volume of the generated files and avoid having to overwrite the classes or attributes using the modifier **!important**.   
+In this section we discuss some basic rules for both the creation of new style sheets and for organizing them. The goal is to minimize the volume of the generated files and avoid having to overwrite the classes or attributes using the modifier **!important**.
+   
+#### Rule declaration, selectors and properties
+
+We refer to a declaration Rule understood when we speak of a selector and a number of properties associated with this block.
+
+```css
+selector {
+ property1: value1;
+ property2: value2;
+}
+```
+
+A selector is the way we identify any elements within the HTML document , you can refer to both a class attribute to any HTML element .
+```css
+.my-class { /* selector by className */ }
+input { /* selector by HTML tag */ }
+[name="myname"] { /* selector by an attribute */ }
+```
+
+The properties are the style rules to be applied by the selector element sectioned.
+```css
+/* selector */ {
+ background: red;
+ font-size: 12px;
+}
+```
 
 ### 2.2\. Using CSS preprocessors
 
