@@ -401,34 +401,6 @@ subdirectories.
 This sections shows the configuration of both the staging host and the HDFS file systems under
 the aforementioned guidelines.
 
-Firstly and foremost, an UUAA must be created. The UUAA defines a realm in both file systems
-(staging and HDFS hosts) defining boundaries and permissions not only in data but also in
-processes, for instance, the ‘Spain Operational Reporting’ project will have the ‘UUAA’ as
-follows:
-
-<table >
-  <tr>
-    <td>UUAA </td>
-    <td>erep</td> 
-    <td>España Reporting Operaciones</td>
-  </tr>
-  
-</table>
-
-Under a UUAA are created a certain number of projects. For instance, the first project to be
-created is ‘processes’:
-
-<table >
-  <tr>
-    <td>UUAA/project </td>
-    <td>erep/processes</td> 
-    <td>Reporting de operaciones de Oficina Técnica de Procesos</td>
-  </tr>
-  
-</table>
-
-The reasons to organize the structure like this are the advantages for simplifying the assignment
-of permissions to groups and users.
 
 Within the workflow, there are directories for each stage of every single process running, input
 directories for the landing zone where the raw data arrives (black zone), others where the
