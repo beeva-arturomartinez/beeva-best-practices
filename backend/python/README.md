@@ -494,7 +494,7 @@ Constants are usually defined on a module level and written in all capital lette
 
 
 ### 4. Python 2 vs Python 3
-<<<<<<< HEAD
+
 When people talk or write for what version they should use of Python, the typical response is this appointment: “Python 2.x is legacy, Python 3.x is the present and future of the language” [1]. For this reason It shoulds use Python 3 in new projects and it is more important, if the project will be long in time. Because Python 2.x won’t receive new improvements, it only has bug support and it finishes in 2020 [2].
 
 The biggest disadvantage of  Python 3 is the support from libraries, frameworks, packages… Because nowadays have a libraries, which they only support Python 2.x, but this problem is fixing bit by bit. For this reason we only should use Python 2.x , if it needs a library that only support  Python 2.x. If the project will use Python 2.x, we should write the code thinking in the future port. For this reason we can start write code used for example:
