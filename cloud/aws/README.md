@@ -617,18 +617,18 @@ S3 is the petabyte-scale, fault-tolerant and highly-available distributed file s
 
 There are some considerations to make better use of S3.
 
-* ** Make use of different object types defined by its access frecuency and criticality **. You can choose between:
+* **Make use of different object types defined by its access frecuency and criticality**. You can choose between:
 	* *Standard*.
 	* *Infrequent Accessed Data (IA)*: 99% availability instead of eleven 99,999999999. 
 	* *Reduced Redundant Storage (RRS)*: Less durability.
 
-* ** Use Server Side encryption ** for the projects which needs to store encrypted data at rest. SSE make use of AES 256 algorithm to encrypt and decrypt the information.
+* **Use Server Side encryption** for the projects which needs to store encrypted data at rest. SSE make use of AES 256 algorithm to encrypt and decrypt the information.
 
-* ** Static Web Hosting options ** allows you to serve an static webpage (eg, an informational web) at no cost other than the files size.
+* **Static Web Hosting options** allows you to serve an static webpage (eg, an informational web) at no cost other than the files size.
 
-* ** Activate S3 Server Logging ** in order to get feedback about how your users interact with your data.
+* **Activate S3 Server Logging** in order to get feedback about how your users interact with your data.
 
-* ** Enable versioning at bucket level ** to be able to recover data lost by mistake or data which was deleted time ago. Rememeber you only can manage 1 version of an object at once, so when you recover the object, you loose the most recent one.
+* **Enable versioning at bucket level** to be able to recover data lost by mistake or data which was deleted time ago. Rememeber you only can manage 1 version of an object at once, so when you recover the object, you loose the most recent one.
 
 * **Specify lifecycle management configuration**. Tis feature allow you to control where are your objects (S3 or Glacier) and configure one of the special object types for your objects.
 
