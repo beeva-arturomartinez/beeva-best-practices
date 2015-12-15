@@ -5,8 +5,8 @@
 ## Index
 
 * [Writing applications](#writing-applications)
+* [Packing applications](#packing-applications)
 * [Launching applications](#launching-applications)
-* [Deploying applications](#deploying-applications)
 * [Spark SQL](#spark-sql)
 * [Spark Streaming](#spark-streaming)
 * [Testing](#testing)
@@ -57,21 +57,12 @@ Usage example: If you have huge array that is accessed from Spark Closures, for 
 
 [Accumulators](http://spark.apache.org/docs/latest/programming-guide.html#accumulators-a-nameaccumlinka) are variables that are only “added” to through an associative operation and can therefore be efficiently supported in parallel. They can be used to implement counters (as in MapReduce) or sums. Spark natively supports accumulators of numeric types, and programmers can add support for new types. If accumulators are created with a name, they will be displayed in Spark’s UI. This can be useful for understanding the progress of running stages (NOTE: this is not yet supported in Python).
 
-
-### Launching applications
-
-#### Driver/executors
+### Packing applications
 
 
-#### Spark-submit options
+If your code depends on other projects, you will need to package them alongside your application in order to distribute the code to a Spark cluster. To do this, create an assembly jar (or “uber” jar) containing your code and its dependencies. Both sbt and Maven have assembly plugins. When creating assembly jars, list Spark and Hadoop as provided dependencies; these need not be bundled since they are provided by the cluster manager at runtime. Once you have an assembled jar you can call the bin/spark-submit script as shown here while passing your jar.
 
-
-
-#### Cluster types
-
-### Deploying applications
-
-For Scala and Java, the preferred option is to pack the spark application and all its dependencies into an assembly JAR and pass this jar to spark-submit. In scala you can create a build.sbt and use the sbt assembly plugin as follows:
+build.sbt example:
 
 ````scala
 import AssemblyKeys._
@@ -104,6 +95,29 @@ mergeStrategy in assembly := {
   case _                                                   => MergeStrategy.first
 }
 ````
+
+For Python, you can use the --py-files argument of spark-submit to add .py, .zip or .egg files to be distributed with your application. If you depend on multiple Python files we recommend packaging them into a .zip or .egg.
+
+### Launching applications
+
+#### Driver/executors
+
+
+#### Spark-submit options
+
+A common deployment strategy is to submit your application from a gateway machine that is physically co-located with your worker machines (e.g. Master node in a standalone EC2 cluster). In this setup, client mode is appropriate. In client mode, the driver is launched directly within the spark-submit process which acts as a client to the cluster. The input and output of the application is attached to the console. Thus, this mode is especially suitable for applications that involve the REPL (e.g. Spark shell).
+
+Alternatively, if your application is submitted from a machine far from the worker machines (e.g. locally on your laptop), it is common to use cluster mode to minimize network latency between the drivers and the executors. Note that cluster mode is currently not supported for Mesos clusters. Currently only YARN supports cluster mode for Python applications.
+
+[Click here](http://spark.apache.org/docs/latest/submitting-applications.html) for more information about this topic
+
+#### Cluster manager types
+
+The system currently supports three cluster managers:
+
+* Standalone – a simple cluster manager included with Spark that makes it easy to set up a cluster.
+* Apache Mesos – a general cluster manager that can also run Hadoop MapReduce and service applications.
+* Hadoop YARN – the resource manager in Hadoop 2.
 
 ### Spark SQL
 
