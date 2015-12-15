@@ -10,9 +10,9 @@ To do this work, there are a variety of tools available which facilitate the tas
 
 ## Index
 
-* Hiera Encryption
-    * Introduction and purpose
-    * Creating Puppetmaster keys and Hiera configuration
+* [Hiera Encryption](#hiera-encryption)
+    * [Introduction and purpose](#introduction-and-purpose)
+    * [Creating Puppetmaster keys and Hiera configuration](#creating-puppetmaster-keys-and-hiera-configuration)
     * Eyaml files process encryption
         * Passwords
         * Files
@@ -41,15 +41,15 @@ Eyaml library provides a backend for Hiera which provides an encryption method f
 Eyaml is a ruby gem which can be easily installed via terminal.
 
 ```bash
-# gem install hiera-eyaml
+$ gem install hiera-eyaml
 ```
 
 ### Creating Puppetmaster keys and Hiera configuration
 
-To create a new keypair once the gem has been installed, launch:
+Once the gem has been installed, create a new keypair launching:
 
 ```bash
-# eyaml createkeys
+$ eyaml createkeys
 ```
 
 This command creates a new keypair in the default location, which should be */etc/puppet/secure/keys*. Each Puppetmaster should have its own keypair, so it's advisable to rename the files in order to match the name of that Puppetmaster.
@@ -57,7 +57,7 @@ This command creates a new keypair in the default location, which should be */et
 To be able to edit already encrypted files, it requires the following config file.
 
 ```
-# cat /etc/eyaml/config.yaml
+$ cat /etc/eyaml/config.yaml
 
   pkcs7_private_key: '/etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem'
   pkcs7_public_key:  '/etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem'
@@ -67,7 +67,7 @@ To be able to edit already encrypted files, it requires the following config fil
 In order to use eyaml backend, we must change the following file and restart the Puppetmaster (the following hierarchy is proposal, but could change depending on concrete system)
 
 ```
-# cat /etc/puppet/hiera.yaml
+$ cat /etc/puppet/hiera.yaml
 ---
 :backends:
   - eyaml
@@ -97,18 +97,31 @@ In order to use eyaml backend, we must change the following file and restart the
 
 ### Eyaml files process encryption
 
+One of the objectives of this process is that each individual Puppetmaster owns its own cypher keys, so no other Puppetmaster could decrypt those files.
 
+To encrypt the content of yaml files and the Puppetmaster be able to decrypt those files, it's necessary to copy the public Puppetmaster key locally and create a config file.
+
+```
+$ cat ~/.eyaml/config_foremandev.yaml
+---
+pkcs7_public_key: '~/.eyaml/keys/foremandev_public_key.pkcs7.pem'
+```
+
+First, it is needed to export the environment variable EYAML_CONFIG, refering the configuration file used to perform the encryption.
+
+```
+$ export EYAML_CONFIG=/home/javier/.eyaml/config_foremandev.yaml
+```
+
+From that moment, eyaml can be used as follows
 
 #### Passwords
-
 
 
 #### Files
 
 
-
 #### Application properties
-
 
 
 ## Deployment of static files
