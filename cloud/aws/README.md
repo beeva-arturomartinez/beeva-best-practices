@@ -487,6 +487,72 @@ For several scenarios, such as continuous integration, the login can be made wit
 ## Security
 ---
 ## Storage
+
+### Introduction
+
+
+AWS is a cloud computing platform which offers several options depending on the goal we want to achieve: durability, availability, latency, etc.
+
+AWS provide us different storage options within its range of services. The main features of most important are:
+
+#### S3
+
+Simple Storage Service. S3 is a highly-scalable, reliable and low-latency distributed file system. We can use S3 in combination with our EC2 instances in order to get a scalable storage decoupled from our EC2 infrastructure.
+
+##### Durability and Availability
+Amazon S3 is designed for 99,9999999% **durability** per object and 99,99% **availability** over a 1 year period.
+
+S3 provides mechanisms to prevent accidental deletion, allowing object versioning, and deletion with Multi-Factor Authentication. 
+
+Also, you can use Reduced Reduntant Storage option (RRS) which provides a lower level of durability at a lower storage cost. Even being less durable than standard S3 objects, is still designed to provide 400 times more durability than a standard disk drive.
+
+##### Scalability and Elasticity
+S3 has been designed to offer a high level of elasticity and scalability automatically. S3 distributes automatically objects in your buckets among all the servers that conforms the infrastructure of S3.
+
+##### Limits
+S3 has no limit in the number of objects that you can store in a single bucket, but it has a 5TB limit per object.
+
+##### Advanced Features
+S3 has some interesiting extra features:
+* The video streaming capacity
+* The capacity to store and serve static webpages, acting like a static webhosting.
+* Object distribution via BitTorrent protocol, in order to get less API calls and the consecuent picing benefits.
+
+#### Glacier
+
+Amazon Glacier is an extreme low-cost AWS storage designed, which has been designed for archives and historical data. It provides a flexible and high durable storage, and it integrates seamlessly with S3 to define the object lifecycle at bucket level.
+
+Glacier is commonly used to manage infrequent accessed data. The jobs to get data back to S3 used to take 2-5 hour to complete.
+
+#### EBS
+
+Amazon EBS (Elastic Block Storage) are persistent block-level storage for EC2 instances. EBSs are attached to an EC2 instance, and used as a physical hard drive. EBS disks persists independently of a running life of its attached EC2 instance.
+
+EBS disks are used specially for data which changes frecuently, for disks in a database for example, and for data which needs a long time persistance.
+
+Also, you can perform automatic a point in time backups of EBSs. This automatic backups are called Snapshots.
+
+##### Types
+
+There are different types of EBS volumes:
+
+* **Standard Volumes**. These are the cheapest one, but doesn't have a great performance.
+* **Provisioned IOPS Volumes**. PIOPS Volumes are designed to deliver high performance measured on IOPS (Inputs/Outputs Per Second). Currently, you can achieve 20.000 IOPS on a single disk. You can even stripe multiple volumes together to get hundreds of thousands of IOPS on a single instance.
+
+EBSs are replicated across multiple servers, but it is attached to a single Availability Zone.
+
+To maximize durability of your EBS disk, a good practice is to perform regular snapshots. For data consistency, it would be better to disable momentarily writes on disk, and then take the snapshot. Normal usage of disk can be performed while the snapshot is being taken.
+
+You can create a new Volume from a Snapshot and start using inmediately. Even if it you have configured a large amount of space.
+
+#### Instance Store
+
+#### RDS
+
+#### DynamoDB
+
+#### Redshift
+
 ---
 ## Services
 
