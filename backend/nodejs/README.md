@@ -25,6 +25,302 @@ At this point we're going to talk about nodeJS, we're useing nodeJS to develop l
 
 ## Frameworks
 
+### Hapi
+
+Hapi is a rich framework for building applications and services that allows developers to focus on writing reusable application logic instead of spending time building infrastructure.
+
+Hapi's extensive plugin system allows us to quickly build, extend, and compose brand-specific features on top of its rock-solid architecture.
+
+Here is a basic example in **Hapi** to launch an application and to open *http://localhost:8000/hello* in your browser:
+
+```javascript
+'use strict';
+
+const Hapi = require('hapi');
+
+// Create a server with a host and port
+const server = new Hapi.Server();
+server.connection({
+  host: 'localhost',
+  port: 8000
+});
+
+// Add the route
+server.route({
+  method: 'GET',
+  path:'/hello',
+  handler: function (request, reply) {
+    return reply('hello world');
+  }
+});
+
+// Start the server
+server.start(function() {
+  console.log('Server running at:', server.info.uri);
+});
+```
+
+As we mentioned sooner, the Hapi's great power are the plugins. Hapi has an extensive and powerful plugin system that allows you to very easily break your application up into isolated pieces of business logic, and reusable utilities.
+
+There are a lot of plugins in the community but we can write our own plugin so easy. A very simple plugin looks like:
+
+```javascript
+exports.register = function(server, options, next) {
+  // Code
+  // ...
+
+  next();
+};
+
+exports.register.attributes = {
+  name: 'my-plugin',
+  version: '1.0.0'
+};
+```
+
+The **options** parameter is the custom configuration when you use the plugin. The **next** is a method to be called when the plugin has completed the steps to be registred. And the **server** object is a reference to the *server* your plugin is being loaded in.
+
+Additionally, the **attributes** is an object to provide some additional information about the plugin, as name or version.
+
+If we want to use a plugin, first at all we need register it in the server. For example:
+
+```javascript
+// load one plugin
+server.register(
+  {
+    register: require('myplugin'),
+    options: {
+      key: 'value'
+    },
+  },
+  function (err) {
+    if (err) {
+    console.error('Failed to load plugin:', err);
+    }
+  }
+);
+
+// load multiple plugins
+server.register(
+  [
+    {
+      register: require('myplugin'),
+      options: {}
+    },
+    {
+      register: require('yourplugin')
+    }
+  ],
+  function (err) {
+    if (err) {
+      console.error('Failed to load a plugin:', err);
+    }
+  }
+);
+```
+
+#### Hapi application structure
+
+To create a new API server with **Hapi** we can use the following structure:
+
+```
++ server
+| |
+| + api
+| | |
+| | + my-endpoints
+| |   |- my-endpoints.contoller.js
+| |   |- index.js
+| |
+| + plugins
+| | |- my-plugin.js
+| |
+| + config
+| | |
+| | + environment
+| |   |- index.js
+| |   |- development.js
+| |   |- production.js
+| |   |- other-environment.js
+| |
+| |- app.js
+| |- routes.js
+|
+|- package.json
+```
+
+The **app.js** file is the main file of the application. We start the server here and configure all the plugins.
+
+```javascript
+var Hapi = require('hapi');
+var config = require('./config/environment');
+
+// Create a server with a host and port
+var server = new Hapi.Server();
+server.connection({ host: config.ip,  port: config.port , routes: { cors: true }});
+
+// Register the server and start the application
+server.register([
+    {
+      register: require('./routes') // config routes in external file
+    },
+    {
+      register: require('hapi-mongodb'),
+      options: {url: config.mongo.url}
+    }
+  ],
+  {
+    routes: {
+      prefix: config.routes.prefix // prefix for all the api routes
+    }
+  },
+  function(err) {
+    if (err) throw err;
+
+    server.start(function() {
+      console.log('Server running at', server.info.uri);
+    })
+  }
+);
+```
+
+In the **routes.js** file is configured all routes of the services. We define the routes as a plugin:
+
+```javascript
+/**
+ * Main application routes
+ */
+
+'use strict';
+
+exports.register = function(server, options, next) {
+  require('./api/my-endpoints')(server);
+
+  next();
+};
+
+exports.register.attributes = {
+  name: 'my-routes',
+  version: '0.1.0'
+};
+```
+
+In **config/environment** we put the external configuration of the application by enviroments. The **plugins** folder contains all the custom plugins that we need: routes, scheduler, utils... And finally, in **api** folder there is all the endpoints/services of the application. Each set of endpoints is a individual folder with the *index.js* and the *controller.js*.
+
+**index.js**
+```javascript
+'use strict';
+
+var Assets = require('./assets.controller');
+
+module.exports = function(server) {
+  server.route({
+    method: 'GET',
+    path: '/assets',
+    handler: function(request, reply, next) {
+      Assets.getAssetsByAttributes(request, reply, next);
+    }
+  });
+
+  server.route({
+    method: 'POST',
+    path: '/assets',
+    handler: function(request, reply, next) {
+      Assets.create(request, reply, next);
+    }
+  });
+
+  server.route({
+    method: 'PUT',
+    path: '/assets/{key}',
+    handler: function(request, reply, next) {
+      Assets.modify(request, reply, next);
+    }
+  });
+
+  server.route({
+    method: 'DELETE',
+    path: '/assets/{key}',
+    handler: function(request, reply, next) {
+      Assets.remove(request, reply, next);
+    }
+  });
+}
+```
+
+**controller.js**
+```javascript
+'use strict';
+
+exports.getAssetsByAttributes = function(req, res, next) {
+  return res([]).code(200);
+};
+
+exports.create = function(req, res, next) {
+  return res({}).code(201);
+};
+
+exports.modify = function(req, res, next) {
+  return res({}).code(200);
+};
+
+exports.remove = function(req, res, next) {
+  return res({}).code(200);
+};
+```
+
+#### Plugins
+
+There is a large set of plugins for Hapi, with which we can perform simple and configurable way a number of standard tasks. We will list the best known and used by the community and its primary mission:
+
+**Authentication**
+
+- Third-party login: [bell](https://github.com/hapijs/bell)
+- JSON Web Token (JWT): [hapi-auth-jwt](https://github.com/ryanfitz/hapi-auth-jwt)
+- Custom authentication: [hapi-auth-hawk](https://github.com/hapijs/hapi-auth-hawk)
+
+**API documentation**
+
+- Swagger: [hapi-swagger](https://github.com/glennjones/hapi-swagger)
+
+**Logging**
+
+- Multiple outputs: [good](https://github.com/hapijs/good)
+- Health server: [hapi-alive](https://github.com/idosh/hapi-alive)
+- Process dump and cleaning up: [poop](https://github.com/hapijs/poop)
+
+**Templating**
+
+- JSON view engine: [hapi-json-view](https://github.com/gergoerdosi/nesive-hapi-json-view)
+
+**Utilities**
+
+- Socket: [hapi-io](https://github.com/sibartlett/hapi-io)
+- Routes loader: [hapi-router](https://github.com/bsiddiqui/hapi-router)
+
+**Validation**
+
+- Request parameters validation: [ratify](https://github.com/mac-/ratify)
+
+**Other modules (no plugins)**
+
+- HTTP-friendly errors: [boom](https://github.com/hapijs/boom)
+- General purpose utilities: [hoek](https://github.com/hapijs/hoek)
+- Schema description and validator: [joi](https://github.com/hapijs/joi)
+- Testing utility with code coverage: [lab](https://github.com/hapijs/lab)
+- Multi-strategy object caching: [catbox](https://github.com/hapijs/catbox)
+
+#### API
+
+Hapi has a fairly extensive [API](http://hapijs.com/api), that we can refer to develop new functionality on the applications.
+
+The API is divided in four blocks:
+
+* Server
+* Request
+* Response
+* Plugins
+
 ### Restify
 
 Restify is a light framework similar to Express and very easy for building REST APIs. This is the easy way to create a REST API application:
@@ -44,15 +340,15 @@ server.listen(3000, function() {
 
 #### When use Restify instead of Express
 
-1. Exists to let you build "strict" API services that are maintanable and observable. 
+1. Exists to let you build "strict" API services that are maintanable and observable.
 
 2. Comes with automatic DTrace support for all your handlers, if you're running on a platform that supports DTrace.
 
 3. Is lighter than Express
 
-#### When do not use Restify instead of Express 
+#### When do not use Restify instead of Express
 
-1. Express use case is targeted at browser applications and contains a lot of functionality, such as templating and rendering, to support that. 
+1. Express use case is targeted at browser applications and contains a lot of functionality, such as templating and rendering, to support that.
 
 2. Restify does not support that. Express is more powerful on this.
 
@@ -60,7 +356,7 @@ server.listen(3000, function() {
 
 #### Conclusion Restify vs Express
 
-Restify: If I need a framework that gave me absolute control over interactions with HTTP and full observability into the latency and characteristics of my applications. 
+Restify: If I need a framework that gave me absolute control over interactions with HTTP and full observability into the latency and characteristics of my applications.
 
 Express: If you don't need absolute control over these interactions, or don't care about those aspect(s), and I need to manage a large number of queries.
 
@@ -315,12 +611,12 @@ Next, you can use helmet in your application (for example in Express):
 ```javascript
 var express = require('express');
 var helmet = require('helmet');
- 
+
 var app = express();
- 
+
 app.use(helmet());
- 
-// ... 
+
+// ...
 ```
 
 ##### How it works
@@ -337,8 +633,8 @@ Helmet is a collection of 9 smaller middleware functions that set security-relat
 > - **frameguard** to prevent clickjacking
 > - **xssFilter** adds some small XSS protections in most recent web browsers.
 
-Running app.use(helmet()) will include 6 of the 9, leaving out contentSecurityPolicy, hpkp, and noCache. 
-You can also use each module individually: 
+Running app.use(helmet()) will include 6 of the 9, leaving out contentSecurityPolicy, hpkp, and noCache.
+You can also use each module individually:
 
 ```javascript
 app.use(helmet.noCache());
@@ -358,9 +654,9 @@ You can get more information about this middleware functions in detail from this
 
 ### Log
 
-An important part for developers is the ability to do logs, to have control over the code was developed. 
+An important part for developers is the ability to do logs, to have control over the code was developed.
 
-The default form to do this in Nodejs is to use *console.log*. But isn't a good practices. Don't write *console.log* all over the code to debug it and then commenting them out when they are no longer needed. 
+The default form to do this in Nodejs is to use *console.log*. But isn't a good practices. Don't write *console.log* all over the code to debug it and then commenting them out when they are no longer needed.
 
 For this purpose it's better to use the library to debug [Bunyan](https://github.com/trentm/node-bunyan).
 
@@ -408,22 +704,22 @@ my-application/
 	test/
 		unit-test/
 			routes-test/
-				routes-test-file1.js # routes-unit-test files 
-				routes-test-file2.js # to test functions of 
+				routes-test-file1.js # routes-unit-test files
+				routes-test-file2.js # to test functions of
 				routes-test-fileN.js # your application
 			controllers-test/
 				controllers-test-file1.js # controllers-unit-test files
-				controllers-test-file2.js # to test functions of 
+				controllers-test-file2.js # to test functions of
 				controllers-test-fileN.js # your application
 			models-test/			
-				models-test-file1.js # models-unit-test files 
-				models-test-file2.js # to test functions and methods of 
+				models-test-file1.js # models-unit-test files
+				models-test-file2.js # to test functions and methods of
 				models-test-fileN.js # your application
 			mocks/
 				mocks-file1.js # to mock functions  
-				mocks-file2.js # and data during unit 
+				mocks-file2.js # and data during unit
 				mocks-fileN.js # tests of your application
-			
+
 ```
 
 #### Dependencies
@@ -451,7 +747,7 @@ $ npm install --save-dev chai
 
 ##### Describes and it functions
 
-The different test suite will be group into a describe functions, it consist in a description about the suite, and a function that contains inside the 'it' functions to include every single unit test case. Each 'it' function also contains the description of the single unit test and the function to test one component of your application (model, controller or route). If the complexity of file functions is greater probably will be necessary to use more describe functions inside another. 
+The different test suite will be group into a describe functions, it consist in a description about the suite, and a function that contains inside the 'it' functions to include every single unit test case. Each 'it' function also contains the description of the single unit test and the function to test one component of your application (model, controller or route). If the complexity of file functions is greater probably will be necessary to use more describe functions inside another.
 
 A structure example is the following:
 
@@ -566,7 +862,7 @@ it('Execute data ERROR', function (done) {
 });
 ```
 
-#### Recommendations and some tips and tricks 
+#### Recommendations and some tips and tricks
 
 > - The same layer structure of files should be reflect in the test/unit directory. Example: If the app have directories with routes, controllers and models, is necessary to do the test for all the files.
 > - For model test you need to create a test enviroment with diferent information about start port, database name, etc... because the execution of tests can't interrupt or save data in a execution enviroment.
@@ -613,24 +909,24 @@ my-application/
 		acceptance-test/
 			features/
 				step_definitions/
-					stepdefinition-file1 # methods, helpers and 
-					stepdefinition-file2 # variables for describing 
+					stepdefinition-file1 # methods, helpers and
+					stepdefinition-file2 # variables for describing
 					stepdefinition-fileN # step definitions
 				support/
 					hooks.js # hooks functions for clean environment
 					world.js # file with all properties and funcions to be used in step definitions
-				feature-file1.feature # feature files with scenarios 
+				feature-file1.feature # feature files with scenarios
 				feature-file2.feature # and steps for all user histories
 				feature-fileN.feature # defined in you application
 			npm-debug.log # npm  
 			my-application.log # application acceptance-test logging file
 		mocks/
-			mocks-file1.js # methods and funcions 
-			mocks-file2.js # for mocking during unit 
+			mocks-file1.js # methods and funcions
+			mocks-file2.js # for mocking during unit
 			mocks-fileN.js # tests in your application
 		unit-test/
-			unit-test-file1.js # unit-test files for testing 
-			unit-test-file2.js # functions and methods of 
+			unit-test-file1.js # unit-test files for testing
+			unit-test-file2.js # functions and methods of
 			unit-test-fileN.js # your application
 ```
 
@@ -693,7 +989,7 @@ You can also check more examples how to describe Features using Gherkin in this 
 
 #### Step Definitions
 
-Step definitions are defined in javascript files under my.application/features/step_definitions folder. This step definitions are 
+Step definitions are defined in javascript files under my.application/features/step_definitions folder. This step definitions are
 
 Best practices:
 1. Don't write redundant or near Step definitions. Example:
@@ -705,7 +1001,7 @@ Best practices:
 	Given(/^the following data for creating a notification:$/, function (table, callback) {
 		//step code
 	});
-``` 
+```
 or
 
 ``` gherkin
@@ -718,7 +1014,7 @@ or
 	});
 ```
 
-You can use the same step definition for all of them. 
+You can use the same step definition for all of them.
 
 2. Don't write ambiguos or near Step definitions:
 ``` gherkin
@@ -729,7 +1025,7 @@ You can use the same step definition for all of them.
 	Given(/^the following "([^"]*)" signature$/, function (signature, callback) {
 		//step code
 	});
-``` 
+```
 Those are the same definition for an unique step.
 
 3. Group step definitions by functionality, and use only one for common step definitions. Example:
@@ -744,9 +1040,9 @@ my-application/
 					getApp_stepdefinition.js
 					common_stepdefinitions.js
 				createApp_ok.feature
-				createApp_error.feature 
+				createApp_error.feature
 				getApp_ok.feature
-				getApp_error.feature 
+				getApp_error.feature
 
 ```
 
@@ -768,7 +1064,7 @@ my-application/
 	When(/^step 4 definition$/, function (callback) {
 		//step code
 	});
-	
+
 	Then(/^step 5 definition$/, function (callback) {
 		//step code
 	});
@@ -777,7 +1073,7 @@ my-application/
 		//step code
 	});
 
-``` 
+```
 
 Here is a simple example:
 
@@ -815,13 +1111,13 @@ You can also check more examples how to describe Step definitions in this [link]
 
 #### Support Files
 
-Support files let you setup the environment in which steps will be run, and define step definitions. The most important support file is the World function, but you may need more functions for testing. 
+Support files let you setup the environment in which steps will be run, and define step definitions. The most important support file is the World function, but you may need more functions for testing.
 
-The secondary files you need to develop and store are the hooks functions. These two with other acceptance-test functions files must be stored in support subfolder. 
+The secondary files you need to develop and store are the hooks functions. These two with other acceptance-test functions files must be stored in support subfolder.
 
 #### World function
 
-World is a constructor function with utility properties, destined to be used in step definitions. World function file should have this desired structure: 
+World is a constructor function with utility properties, destined to be used in step definitions. World function file should have this desired structure:
 
 1. Require section for imports.
 
@@ -841,7 +1137,7 @@ World is a constructor function with utility properties, destined to be used in 
 
 9. Test description function where you can prepare the request to server endpoints.
 
-This is one valid example for this structure: 
+This is one valid example for this structure:
 
 ```javascript
 var	request = require('request'),//1
@@ -962,8 +1258,8 @@ There are four different Hook function types:
 
 Best practices for using Hooks, are:
 
-* Pack all of them in a single file. 
-* Store this file with World function file. 
+* Pack all of them in a single file.
+* Store this file with World function file.
 * Use a little set of hooks.
 
 The following example are hooks for clean data repository (in mongoDB) before every scenario, and start/stop server in every Scenario:
