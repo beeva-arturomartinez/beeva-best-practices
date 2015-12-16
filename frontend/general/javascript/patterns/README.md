@@ -40,7 +40,274 @@ bennefits:
 
 ## <a name='CommonPatterns'>Common Patterns</a>
 ### <a name='ConstructorPattern'>Constructor Pattern</a>
+
+@REVIEW should this be removed? Isn't it too basic?
+
+Object constructors are used to create specific types of objects - both
+preparing the object for use and accepting arguments which a constructor can use
+to set the values of member properties and methods when the object is first
+created.
+
+These are the most common ways of creating an object
+```javascript
+// Object creation
+// -----------------------------------------------------------------------------
+var newObject = {};
+var newObject = Object.create( Object.prototype );
+var newObject = new Object();
+
+// Defining properties
+// -----------------------------------------------------------------------------
+newObject.someKey = "Hello World";
+newObject["someKey"] = "Hello World";
+Object.defineProperty( newObject, "someKey", {
+  value: "for more control of the property's behavior",
+  writable: true,
+  enumerable: true,
+  configurable: true
+});
+
+// Getting properties value
+// -----------------------------------------------------------------------------
+var key = newObject.someKey;
+var key = newObject["someKey"];
+```
+
 ### <a name='ModulePattern'>Module Pattern</a>
+
+Modules are a good way of keeping the units of a project clean, separated and
+organized. It s used to emulate the concept of classes been  able to include
+public-private methods and variables inside a single object, thus shielding
+parts from the global scope and also preventing name conflicts.
+
+![](./static/module-pattern.png)
+
+#### Advantages
+
+* cleaner for developers coming from an object-oriented background - provides
+the idea of true encapsulation.
+* It supports private data. Public parts of our code are able to touch the
+private parts but it cannot be modified from the outside.
+
+#### Disadvantages
+
+* Changes of visibility  will require code changes bot in the code of the module
+and where it is used (refactor).
+
+### Variations
+#### Import mixins
+Globals (e.g., jQuery, Underscore) can be passed in as arguments to our module’s
+anonymous function. This allows us to import them and locally alias them as
+needed.
+```javascript
+// Global module
+var myModule = (function ( jQ, _ ) {
+
+  function privateMethod1(){
+    jQ(".container").html("test");
+  }
+  function privateMethod2(){
+    console.log( _.min([10, 5, 100, 2, 1000]) );
+  }
+
+  return{
+    publicMethod: function(){
+      privateMethod1();
+  };
+
+}( jQuery, _ )); // Pull in jQuery and Underscore
+
+// Use module
+myModule.publicMethod();
+```
+#### Exports
+Allows us to declare globals without consuming them.
+```javascript
+// Global module
+var myModule = (function () {
+  // Module object
+  var module = {},
+      privateVariable = "Hello World";
+  function privateMethod() {
+    // ...
+  }
+
+  module.publicProperty = "Foobar";
+  module.publicMethod = function () {
+    console.log( privateVariable );
+  };
+
+  return module;
+}());
+```
+
+Some frameworks implementing this pattern would be:
+
+* jQuery
+* ExtJS
+* Dojo
+* ... and many more
+
+#### Options
+##### AMD modules
+The overall goal for the Asynchronous Module Definition (AMD) format is to
+provide a solution for modular JavaScript that developers can use today.
+
+The AMD module format itself is a proposal for defining modules in which both
+the module and dependencies can be asynchronously loaded. Among it's advantages
+you can find it's asynchronous and highly flexible by nature removing the tight
+coupling one might commonly find between code and module identity.
+
+A module can be defined like this
+```javascript
+define(
+  module_id /*optional*/,
+  [dependencies] /*optional*/,
+  definition function /*function for instantiating the module or object*/
+);
+```
+
+here is an example
+```javascript
+define(
+  "myModule",
+  ["foo", "bar"],
+
+  // module definition function
+  // dependencies (foo and bar) are mapped to function parameters
+  function ( foo, bar ) {
+    // return a value that defines the module export
+    // (i.e the functionality we want to expose for consumption)
+
+    var myModule = {
+      doStuff:function () {
+        console.log( "Yay! Stuff" );
+      }
+    };
+
+    return myModule;
+  }
+);
+```
+
+To consume a module we use `require`. Here is an example
+```javascript
+require(["foo", "bar"], function ( foo, bar ) {
+  // rest of your code here
+  foo.doSomething();
+});
+```
+
+##### CommonJS modules
+Proposes an API - quite simple - for declaring modules that work outside of the
+browser. Attempts to cover concerns such as IO, filesystem, promises, and more.
+
+NodeJS is a well know product that supports CommonJS.
+
+Basic example of exposition
+```javascript
+// behaviour for our module
+function foo(){
+    lib.log( "hello world!" );
+}
+// export (expose) foo to other modules
+exports.foo = foo;
+```
+
+Basic example of exposition and consumption
+```javascript
+// foo.js
+exports.helloWorld = function(){
+  return "Hello World!!"
+}
+// app.js
+var modA = require( "./foo" );
+exports.foo = function(){
+  return modA.helloWorld();
+}
+```
+##### ECMAScript 6 (Harmony) modules
+The goal is to create a format that both users of CommonJS and of AMD are happy
+with:
+
+* Similar to CommonJS, they have a compact syntax, a preference for single
+exports and support for cyclic dependencies.
+* Similar to AMD, they have direct support for asynchronous loading and
+configurable module loading.
+
+It goes beyond CommonJS and AMD:
+
+* Syntax is even more compact than CommonJS’s
+* Structure can be statically analyzed (for static checking, optimization, etc.)
+* Support for cyclic dependencies is better than CommonJS’s.
+
+The ES6 module standard has two parts:
+
+* Declarative syntax (for importing and exporting)
+* Programmatic loader API: to configure how modules are loaded and to
+conditionally load modules
+
+###### ECMAScript 6 module syntax
+
+* Named exports (several per module)
+  ```javascript
+  //------ lib.js ------
+  export const sqrt = Math.sqrt;
+  export function square(x) {
+    return x * x;
+  }
+  export function diag(x, y) {
+    return sqrt(square(x) + square(y));
+  }
+
+  //------ main.js ------
+  import { square, diag } from 'lib';
+  console.log(square(11)); // 121
+  console.log(diag(4, 3)); // 5
+
+  //------ main.js (import everythin variation)  ------
+    import * as lib from 'lib';
+    console.log(lib.square(11)); // 121
+    console.log(lib.diag(4, 3)); // 5
+  ```
+* Default exports (one per module)
+  ```javascript
+  //------ myFunc.js ------
+  export default function () { ... };     
+  //------ main1.js ------
+  import myFunc from 'myFunc';
+  myFunc();
+
+  //------ MyClass.js ------
+  export default class { ... };
+  //------ main2.js ------
+  import MyClass from 'MyClass';
+  let inst = new MyClass();  
+  ```
+
+###### ECMAScript 6 module loader API
+In addition to the declarative syntax, there is also a programmatic API that
+allows us to:
+
+* Programmatically work with modules and scripts
+* Configure module loading
+
+```javascript
+// import modules via Promises
+System.import('some_module').then(some_module => {
+  // Use some_module
+}).catch(error => {
+  ...
+});
+
+// example
+Promise.all(
+  ['module1', 'module2', 'module3'].map(x => System.import(x))
+).then(([module1, module2, module3]) => {
+  // Use module1, module2, module3
+});
+```
+
 ### <a name='RevealingModulePattern'>Revealing Module Pattern</a>
 ### <a name='PrototypePattern'>Prototype Pattern</a>
 ### <a name='MixinPattern'>Mixin Pattern</a>
@@ -190,3 +457,7 @@ The views may cause a new action to be propagated through the system in response
 * http://callmenick.com/post/instantiation-patterns-in-javascript
 * http://code.tutsplus.com/courses/put-javascript-design-patterns-into-practice
 * https://john-dugan.com/object-oriented-javascript-pattern-comparison/
+* https://shichuan.github.io/javascript-patterns/
+* http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
+* http://www.2ality.com/2014/09/es6-modules-final.html
+* http://addyosmani.com/writing-modular-js/
