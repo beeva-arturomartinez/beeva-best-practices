@@ -25,12 +25,11 @@ Images can be built automatically following the instructions defined in a Docker
 * Each Docker image consists of a series of layers. Docker makes use of union file systems to combine these layers into a single image. When you change a Docker image, rather than replacing the whole image or entirely rebuilding, only that layer is added or updated. In a Dockerfile, each command generates a layer, thus organize your Dockerfile so that common commands that you doesn't expect to change are located at the beginning.
 
 ```
-	#FROM and CMD are not expected to change, so they come first
-
+	#FROM and CMD command are not expected to change, so they come first
 	FROM debian:latest
 	CMD ["nodejs", "main.js"]
 
-	#Package installation may change, but not that often
+	#Package installation may change eventually
 	RUN apt-get update \
 		    && apt-get install -y --no-install-recommends curl \
 		    && curl -sL https://deb.nodesource.com/setup | bash - \
