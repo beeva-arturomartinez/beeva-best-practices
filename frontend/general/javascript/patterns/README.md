@@ -5,17 +5,17 @@
 ### Patterns
 
 * [1\. What is a pattern](#WhatIsAPattern)
-* [2\. Common Patterns](CommonPatterns)
-  * [2\.01 Constructor Pattern](ConstructorPattern)
-  * [2\.02 Module Pattern](ModulePattern)
-  * [2\.03 Revealing Module Pattern](RevealingModulePattern),
-  * [2\.07 Prototype Pattern](PrototypePattern)
-  * [2\.11 Mixin Pattern](MixinPattern)
-* [3\. MV* Patterns](ModelViewStarPatterns)
-  * [3\.2 MVP Pattern](MVPPattern)
-  * [3\.3 MVVM Pattern](MVVMPattern)
-* [4\. Modular Patterns](ModularPatterns)
-* [5\. Bonus](Bonus)
+* [2\. Common Patterns](#CommonPatterns)
+  * [2\.01 Constructor Pattern](#ConstructorPattern)
+  * [2\.02 Module Pattern](#ModulePattern)
+  * [2\.03 Revealing Module Pattern](#RevealingModulePattern),
+  * [2\.07 Prototype Pattern](#PrototypePattern)
+  * [2\.11 Mixin Pattern](#MixinPattern)
+* [3\. MV* Patterns](#ModelViewStarPatterns)
+  * [3\.2 MVP Pattern](#MVPPattern)
+  * [3\.3 MVVM Pattern](#MVVMPattern)
+* [4\. Modular Patterns](#ModularPatterns)
+* [5\. Bonus](#Bonus)
 
 ## <a name='WhatIsAPattern'>What is a patterm</a>
 
