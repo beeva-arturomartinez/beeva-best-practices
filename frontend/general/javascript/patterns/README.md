@@ -308,10 +308,66 @@ Promise.all(
 });
 ```
 
-### <a name='RevealingModulePattern'>Revealing Module Pattern</a>
 ### <a name='PrototypePattern'>Prototype Pattern</a>
-### <a name='MixinPattern'>Mixin Pattern</a>
+In Prototype pattern we create objects that act as prototypes for other objects.
+The prototype object itself is used as a *blueprint* for each object the
+constructor creates. If the prototype of the constructor function used contains
+a property called, i.e. name, then each object created by that same constructor
+will also have this same property.
 
+![](./static/prototype-pattern.png)
+
+**One of the benefits of using the Prototype pattern is that we’re working with
+the prototypal strengths JavaScript has to offer natively rather than attempting
+to imitate features of other languages.**
+
+It also leverages the implementation of inheritance and also provides a
+performance boost as well - when defining functions in an object, they’re all
+created by reference (so all child objects point to the same function), instead
+of creating their own individual copies.
+
+```javascript
+var myCar = {
+  name: "Ford Escort",
+  drive: function () {
+    console.log( "Weeee. I'm driving!" );
+  },
+  panic: function () {
+    console.log( "Wait. How do you stop this thing?" );
+  }
+};
+// Use Object.create to instantiate a new car
+var yourCar = Object.create( myCar );
+
+// Now we can see that one is a prototype of the other
+console.log( yourCar.name );  
+```
+
+`Object.create` allows us to implement concepts such as differential inheritance
+in which objects are able to directly inherit from other objects.
+```javascript
+var vehiclePrototype = {
+  init: function ( carModel ) {
+    this.model = carModel;
+  },
+  getModel: function () {
+    console.log( "The model of this vehicle is.." + this.model);
+  }
+};
+
+
+function vehicle( model ) {
+  function F() {};
+  F.prototype = vehiclePrototype;
+
+  var f = new F();
+  f.init( model );
+  return f;
+}
+
+var car = vehicle( "Ford Escort" );
+car.getModel();
+```
 
 ## <a name='ModelViewStarPatterns'>MV* Patterns</a>
 
