@@ -1,6 +1,6 @@
 #Front-end BEEVA Best Practices   
 
-## CSS 
+##2.- CSS 
 * Selectors and types of CSS classes
  * Rule declaration
  * ID selectors
@@ -632,4 +632,3 @@ Reusable components are those that are not part of the application itself that w
 Other components are functional, that is, focusing on all visual content having a certain functionality. They can be several pages of a traditional website based on a pattern of multiple pages, the various functional modules or applications that follow a pattern of a single page or SPA (Single Page Application ). For example, a course management application, we could have a module students with all the CSS that was related to this module located in a students.css file.
 
 These two approaches are not mutually exclusive. It is useful to identify elements that are general and create a reuse approach, and certainly appear specifications related to functionality, which will overload these general styles.
-
