@@ -7,7 +7,7 @@
 * [Docker Essentials](#docker-essentials)
 	* [Optimize your dockerfiles](#optimize-your-dockerfiles)
 	* [Create small-sized containers](#create-small-sized-containers)
-	* [Desing your application thinking about Docker](#desing-your-application-thinking-about-docker)
+	* [Design your application thinking about Docker](#design-your-application-thinking-about-docker)
 	* [Security](#security)
 * [Docker Orchestration](#docker-orchestration)
 	* [Docker for Developers](#docker-for-developers)
@@ -76,7 +76,7 @@ DockerIgnore is a handy way to exclude unnecessary files and directories from th
 
 * Remember to delete packages used to install your application after uncompressing them.
 
-### Desing your application thinking about Docker
+### Design your application thinking about Docker
 
 * Use only one container per process
 Decouple applications into separate containers — one for each process. This makes horizontal scaling easier and allows you to recycle containers. To handle services that are dependent on each other, use the container linking feature instead of housing them in the same Docker container.
