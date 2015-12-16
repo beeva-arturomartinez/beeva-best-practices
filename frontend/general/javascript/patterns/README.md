@@ -2,6 +2,11 @@
 
 ## 4.- JavaScript
 
+Although most of the patterns have been covered in
+[Code Design Best Practices](../../../../qa_testing/code_design/README.md#code-design-patterns)
+some of then need to be particularized in the front end section and, in
+particular, when talking about JavaScript.
+
 ### Patterns
 
 * [1\. What is a pattern](#WhatIsAPattern)
@@ -273,7 +278,7 @@ conditionally load modules
 * Default exports (one per module)
   ```javascript
   //------ myFunc.js ------
-  export default function () { ... };     
+  export default function () { ... };
   //------ main1.js ------
   import myFunc from 'myFunc';
   myFunc();
@@ -282,7 +287,7 @@ conditionally load modules
   export default class { ... };
   //------ main2.js ------
   import MyClass from 'MyClass';
-  let inst = new MyClass();  
+  let inst = new MyClass();
   ```
 
 ###### ECMAScript 6 module loader API
@@ -340,7 +345,7 @@ var myCar = {
 var yourCar = Object.create( myCar );
 
 // Now we can see that one is a prototype of the other
-console.log( yourCar.name );  
+console.log( yourCar.name );
 ```
 
 `Object.create` allows us to implement concepts such as differential inheritance
