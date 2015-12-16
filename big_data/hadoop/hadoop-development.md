@@ -384,9 +384,75 @@ There are many courses of action by which to attack the problem:
 * **HBase**:
 * **S3DistCp**:
 * **Using a CombineFileInputFormat**:
-* **Hive Configuration Settings**:
-* **Using Hadoop’s Appender Capabilities**:
-*
+
+#### Hive Configuration Settings
+
+If you notice that Hive creates small files in your Hadoop cluster through “create table as” or
+“insert overwrite” statements, you can adjust a few Hive specific configuration settings to
+mitigate.
+
+When used, these settings tell Hive to merge any small files that were created into larger files.
+However, there is a penalty. Hive will launch an additional MapReduce job, postquery,
+to perform the merge. Further, the merge is done before Hive indicates to the user that the query
+has finished processing instead of occurring asynchronously.
+
+It should be noted that these settings only work for files that are created by Hive. If, for example,
+you create files outside of Hive using another tool such as Sqoop to copy into the Hive table
+using a ‘hdfs fs –mv’ command, Hive will not merge the files. Therefore, this solution does not
+work when the files ingested into Hadoop are small.
+
+This solution is only recommended in Hivecentric
+architectures where a small performance
+penalty in insert overwrite and create table as statements is acceptable.
+<table>
+  <tr>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Defaukt Value</th>
+    </tr>
+  <tr>
+    <td class="tg-yw4l">hive.merge.mapfiles</td>
+    <td class="tg-yw4l">Merge small files that are produced from
+maponly
+jobs.</td>
+    <td class="tg-yw4l">true</td>
+    
+  </tr>
+  <tr>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    <td class="tg-yw4l"></td>
+    
+  </tr>
+</table>
+
+#### Using Hadoop’s Appender Capabilities
+Append was added in July of 2008 as part of Hadoop 0.19. However, after implementation (as
+early as October 2008) many issues were found and append was disabled in 0.19.1. However,
+in order to support HBase without risk of data loss append capabilities were added back to
+Hadoop in 0.20.2. So, finally, after 0.20.2 it was technically possible to perform appends in
+Hadoop.
+
+Append may be available, but **none of the major tools in the Hadoop ecosystem support it**:
+Flume, Sqoop, Pig, Hive, Spark, and Java MapReduce.
+
+MapReduce enforces a rule that the output location of a MapReduce job must not exist prior to execution. Due to this rule it is
+obviously not possible for MapReduce to append to preexisting
+files with its output. Since
+Sqoop, Pig, and Hive all use MapReduce under the covers it is also not possible for these tools
+to support append. Flume does not support append largely because it operates under the
+assumption that after a certain period either in terms of seconds, bytes, number of events, or
+seconds of inactivity, Flume will close the file and never open it again. The Flume community
+has deemed this sufficient and not demanded append support.
+
+If you truly must use appends in Hadoop, you have to write your own system to perform the
+ingestion and append to existing files. Additionally, if any of your incluster
+processing requires
+appending to existing files, you will not be able to use Spark or MapReduce. Therefore using
+HDFS append capabilities is very complex and should only be used by the most technologically
+savvy organizations. Without a significant engineering team and support commitment, this option
+is not recommended.
+
 <a name="choosing"/>
 ### Choosing a solution
 Choosing the best solution for working with small files depends on a variety of questions. It may
