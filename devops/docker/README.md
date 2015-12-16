@@ -32,9 +32,9 @@ Images can be built automatically following the instructions defined in a Docker
 
 	#Package installation may change, but not that often
 	RUN apt-get update \
-		    && apt-get install -y curl \
+		    && apt-get install -y --no-install-recommends curl \
 		    && curl -sL https://deb.nodesource.com/setup | bash - \
-		    && apt-get install -y nodejs
+		    && apt-get install -y --no-install-recommends nodejs
 
 	# Application specific files and packages will change with each release, so they come last
 	COPY main.js main.js
@@ -50,7 +50,7 @@ Images can be built automatically following the instructions defined in a Docker
 
 * Sort multiline arguments alphanumerically to avoid duplication of packages and to improve readability.
 ```
-	RUN apt-get update && apt-get install -y \
+	RUN apt-get update && apt-get install -y --no-install-recommends \
 	  	bzr \
 		cvs \
 	  	git \
@@ -69,7 +69,7 @@ Keep the image as minimal as posible:
 * Use small base images (e.g. *debian* or *alpine*)
 
 * Don’t install unnecessary packages 
-This reduces the file size, lessens the complexity of dependencies, and cuts down on build times.
+This reduces the file size, lessens the complexity of dependencies, and cuts down on build times. Use ```--no-install-recommends``` with *apt-get*
 
 * Take advantage of .dockerIgnore
 DockerIgnore is a handy way to exclude unnecessary files and directories from the build context and final image.
@@ -101,6 +101,8 @@ You can use the following tools to check security issues on docker images and co
 ## Docker Orchestration
 
 ### Docker for Developers
+
+Maintain Docker environment clean, use --rm when running interactive containers.
 
 #### Docker-Compose
 Docker-compose is a tool that allows to define multiple docker-containers using a configuration file and run them with a single command.
