@@ -269,6 +269,61 @@ For python applications, you need to specify all the dependencies of the applica
 
 ### Tuning and debugging
 
+#### Data Serialization
+
+By default, Spark serializes objects using Java’s ObjectOutputStream framework, and can work with any class you create that implements java.io.Serializable. You can also control the performance of your serialization more closely by extending java.io.Externalizable. Java serialization is flexible but often quite slow, and leads to large serialized formats for many classes.
+
+Spark can also use the Kryo library (version 2) to serialize objects more quickly. Kryo is significantly faster and more compact than Java serialization (often as much as 10x), but does not support all Serializable types and requires you to register the classes you’ll use in the program in advance for best performance. This setting configures the serializer used for not only shuffling data between worker nodes but also when serializing RDDs to disk. The only reason Kryo is not the default is because of the custom registration requirement, but we recommend trying it in any network-intensive application.
+
+To register your own custom classes with Kryo, use the registerKryoClasses method.
+
+````scala
+val conf = new SparkConf().setMaster(...).setAppName(...)
+conf.registerKryoClasses(Array(classOf[MyClass1], classOf[MyClass2]))
+val sc = new SparkContext(conf)
+````
+
+#### Memory Tuning
+
+This topic is discussed [here](http://spark.apache.org/docs/latest/tuning.html#memory-tuning)
+
+#### Level of Parallelism
+
+Clusters will not be fully utilized unless you set the level of parallelism for each operation high enough. Spark automatically sets the number of “map” tasks to run on each file according to its size (though you can control it through optional parameters to SparkContext.textFile, etc), and for distributed “reduce” operations, such as groupByKey and reduceByKey, it uses the largest parent RDD’s number of partitions. You can pass the level of parallelism as a second argument (see the spark.PairRDDFunctions documentation), or set the config property spark.default.parallelism to change the default. In general, we recommend 2-3 tasks per CPU core in your cluster.
+
+#### Memory Usage of Reduce Tasks
+
+Sometimes, you will get an OutOfMemoryError not because your RDDs don’t fit in memory, but because the working set of one of your tasks, such as one of the reduce tasks in groupByKey, was too large. Spark’s shuffle operations (sortByKey, groupByKey, reduceByKey, join, etc) build a hash table within each task to perform the grouping, which can often be large. The simplest fix here is to increase the level of parallelism, so that each task’s input set is smaller. Spark can efficiently support tasks as short as 200 ms, because it reuses one executor JVM across many tasks and it has a low task launching cost, so you can safely increase the level of parallelism to more than the number of cores in your clusters.
+
+#### Broadcasting Large Variables
+
+Using the broadcast functionality available in SparkContext can greatly reduce the size of each serialized task, and the cost of launching a job over a cluster. If your tasks use any large object from the driver program inside of them (e.g. a static lookup table), consider turning it into a broadcast variable. Spark prints the serialized size of each task on the master, so you can look at that to decide whether your 
+tasks are too large; in general tasks larger than about 20 KB are probably worth optimizing.
+
+#### Data Locality
+
+Data locality is how close data is to the code processing it. There are several levels of locality based on the data’s current location. In order from closest to farthest:
+
+* PROCESS_LOCAL data is in the same JVM as the running code. This is the best locality possible
+* NODE_LOCAL data is on the same node. Examples might be in HDFS on the same node, or in another executor on the same node. This is a little slower than PROCESS_LOCAL because the data has to travel between processes
+* NO_PREF data is accessed equally quickly from anywhere and has no locality preference
+* RACK_LOCAL data is on the same rack of servers. Data is on a different server on the same rack so needs to be sent over the network, typically through a single switch
+* ANY data is elsewhere on the network and not in the same rack
+
+Spark prefers to schedule all tasks at the best locality level, but this is not always possible. In situations where there is no unprocessed data on any idle executor, Spark switches to lower locality levels. There are two options: a) wait until a busy CPU frees up to start a task on data on the same server, or b) immediately start a new task in a farther away place that requires moving data there.
+
+What Spark typically does is wait a bit in the hopes that a busy CPU frees up. Once that timeout expires, it starts moving the data from far away to the free CPU. The wait timeout for fallback between each level can be configured individually or all together in one parameter; see the spark.locality parameters on the configuration page for details. You should increase these settings if your tasks are long and see poor locality, but the default usually works well.
+
+#### TUNING LINKS
+
+[Tuning and performance optimization guide for Spark 1.5.2](http://spark.apache.org/docs/latest/tuning.html)
+
+[Spark Streaming programming guide and tutorial for Spark 1.5.2](http://spark.apache.org/docs/latest/streaming-programming-guide.html#performance-tuning)
+
+[How-to: Tune Your Apache Spark Jobs (Part 1) - Cloudera Engineering Blog](http://blog.cloudera.com/blog/2015/03/how-to-tune-your-apache-spark-jobs-part-1/)
+
+[How-to: Tune Your Apache Spark Jobs (Part 2) - Cloudera Engineering Blog](http://blog.cloudera.com/blog/2015/03/how-to-tune-your-apache-spark-jobs-part-2/)
+
 #### Tuning spark configuration
 
 #### Debugging spark applications
