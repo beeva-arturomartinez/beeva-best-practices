@@ -30,15 +30,15 @@ To do this work, there are a variety of tools available which facilitate the tas
 	* [Hiera Encryption](#hiera-encryption)
 		* [Introduction and purpose](#introduction-and-purpose)
 		* [Creating Puppetmaster keys and Hiera configuration](#creating-puppetmaster-keys-and-hiera-configuration)
-		* Eyaml files process encryption
-			* Passwords
-			* Files
-			* Application properties
-	* Deployment of static files
-		* Installation and purpose
-	* Example Hiera hierarchy
-	* [Foreman Stack creation](#foreman-stack-creation)
-		* [Extra definitions](#extra-definitions)
+		* [Eyaml files process encryption](#eyaml-files-process-encryption)
+			* [Password encryption](#password-encryption)
+			* [File encryption](#file-encryption)
+			* [Application properties encryption](#application-properties-encryption)
+	* [Deployment of static files](#deployment-of-static-files)
+		* [Installation and purpose](#installation-and-purpose)
+	* [Example Hiera hierarchy](#example-hiera-hierarchy)
+* [Foreman Stack creation](#foreman-stack-creation)
+	* [Extra definitions](#extra-definitions)
 	* [Hostgroups (runlist)](#hostgroups-runlist)
 	* [Hosts (runlist)](#hosts-runlist)
 		* [Templates](#templates)
@@ -515,18 +515,92 @@ $ export EYAML_CONFIG=/home/javier/.eyaml/config_foremandev.yaml
 
 From that moment, eyaml can be used as follows
 
-##### Passwords
+##### Password encryption
 
+```
+$ eyaml encrypt -p
+[hiera-eyaml-core] Loaded config from /home/javier/.eyaml/config_foremandev.yaml
+Enter password: ****
+string: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQAwDQYJKoZIhvcNAQEBBQAEggEArUq53WZzWwhCveNujzECRmhumHQ7i3NtPIaHBF0oXc35II4l5r4RezH5InHnmvnignjFfZMkxq9K5L4DKAKUyWYoGcRcjcLiZ5QLgM4CmCn0+73xobHHyGoRRFLp8jEW9OQ9RlFFTSV5VikgJdvFgBH5j9eIIJgldUPSPV0aVkhEOzccYJnd6UiJXKYeDESkJiH3wNAKUDZXUo9PIAS5atwEEZ8MDv3wDtanvyL3ZtBqyXb2BspdZTWMdO2WrNHlMxZJoZ60jSUqKH6bK/Ks9LavJS3rqwWBBiC84Q9EFyTaqCNTcvCQfdlqA8wRWsL/JGx+tsXWTaWCsfLnWzi/TjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBC2DnixWHy2i0950mmwKifCgBCyNfMt0vEe2Adsx/2ls1Wb]
 
-##### Files
+OR
 
+block: >
+	ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQAw
+	DQYJKoZIhvcNAQEBBQAEggEArUq53WZzWwhCveNujzECRmhumHQ7i3NtPIaH
+	BF0oXc35II4l5r4RezH5InHnmvnignjFfZMkxq9K5L4DKAKUyWYoGcRcjcLi
+	Z5QLgM4CmCn0+73xobHHyGoRRFLp8jEW9OQ9RlFFTSV5VikgJdvFgBH5j9eI
+	IJgldUPSPV0aVkhEOzccYJnd6UiJXKYeDESkJiH3wNAKUDZXUo9PIAS5atwE
+	EZ8MDv3wDtanvyL3ZtBqyXb2BspdZTWMdO2WrNHlMxZJoZ60jSUqKH6bK/Ks
+	9LavJS3rqwWBBiC84Q9EFyTaqCNTcvCQfdlqA8wRWsL/JGx+tsXWTaWCsfLn
+	Wzi/TjA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBC2DnixWHy2i0950mmw
+	KifCgBCyNfMt0vEe2Adsx/2ls1Wb]
+```
 
-##### Application properties
+This command shows the config file from which the content is encrypted  and prompts the user for the password. Command's output is the string to be put into the hiera eyaml.
 
+This way, passwords are encrypted by environment, can be versioned safely and only the corresponding puppetmaster can decipher it.
+
+When the content is copied into the eyaml file, the parameters string or block must be replaced (for readability, block parameter used to be the preferred option) by the parameter name which will be queried from puppet's manifests.
+
+##### File encryption
+
+Hiera-eyaml can also encrypt entire files, which is idea, for example, for private apache certificates. The procedure is as follows:
+
+```
+$ eyaml encrypt -f super_secret_file
+
+[hiera-eyaml-core] Loaded config from /home/javier/.eyaml/config_foremandev.yaml
+string: ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQAwDQYJKoZIhvcNAQEBBQAEggEAeLuKPJaGv9ylIXtkR4EZ0lSzjmLayK2sZv+2CT5zgUUZ0tMXallbOR3FB+2cACGO2uXcElZDFgpb0ZGTlGZ1Ts0/U8PEaKGdHec+Au0PYNwzdJNdRZFR+yKYY7HXSCB1E6276V78AEtKfkVSmG8FdszDXedFK8+JJ72LzTCtaIcoKzuiGG2VURztmK98Cvunf3rTGbrb5lbWdm6W+NJzg9ZJXq7Y/F1GD0jY9DAkREoFa8VgWNepdQ5w8ZH0ov8Pju6gXEtAyeB7KpAV05vRRhXsnfFWDDDX8fr/PWo6R4I4NvQI1HE1hFU+tZPX7YQWIDIpwMo4GhHVtnZ+9ccIiTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCnL9yAq+6rY7xBpQoR8yf5gBDbRsT+7JPv8ODVnAoiiF8l]
+
+OR
+
+block: >
+	ENC[PKCS7,MIIBeQYJKoZIhvcNAQcDoIIBajCCAWYCAQAxggEhMIIBHQIBADAFMAACAQAw
+	DQYJKoZIhvcNAQEBBQAEggEAeLuKPJaGv9ylIXtkR4EZ0lSzjmLayK2sZv+2
+	CT5zgUUZ0tMXallbOR3FB+2cACGO2uXcElZDFgpb0ZGTlGZ1Ts0/U8PEaKGd
+	Hec+Au0PYNwzdJNdRZFR+yKYY7HXSCB1E6276V78AEtKfkVSmG8FdszDXedF
+	K8+JJ72LzTCtaIcoKzuiGG2VURztmK98Cvunf3rTGbrb5lbWdm6W+NJzg9ZJ
+	Xq7Y/F1GD0jY9DAkREoFa8VgWNepdQ5w8ZH0ov8Pju6gXEtAyeB7KpAV05vR
+	RhXsnfFWDDDX8fr/PWo6R4I4NvQI1HE1hFU+tZPX7YQWIDIpwMo4GhHVtnZ+
+	9ccIiTA8BgkqhkiG9w0BBwEwHQYJYIZIAWUDBAEqBBCnL9yAq+6rY7xBpQoR
+	8yf5gBDbRsT+7JPv8ODVnAoiiF8l]
+```
+
+Same issue here than the previous point, when the content is copied into the eyaml file, the parameters string or block must be replaced by the parameter name which will be queried from puppet's manifests
+
+##### Application properties encryption
+
+Hiera-eyaml allows also encrypt application properties content that must be privated. This is special interesting for passwords or other database sensible information.
+
+For this, we will use hiera-eyaml and augeas as follows.
+
+```
+define profiles::properties_decrypt (
+  $ensure                 	= absent,
+  $property_file          	= undef,
+  $lens                   	= 'Properties.lns',
+  $changes                	= [],
+  ) {
+  case $ensure {
+	present: {
+  	augeas { $property_file:
+    	lens  	=> $lens,
+    	incl  	=> $property_file,
+    	changes   => $changes,
+    	}
+	}
+	absent: {
+  	notify { 'profiles::properties_decrypt::ensure set to absent - Noop': }
+	}
+	default: {
+  	notify { 'profiles::properties_decrypt::ensure must be present|absent': }
+    	}
+	}
+}
+```
 
 ### Deployment of static files
-
-
 
 #### Installation and purpose
 
@@ -534,9 +608,30 @@ From that moment, eyaml can be used as follows
 
 ## Example Hiera hierarchy
 
+This is an possible Hiera hierarchy
+
+```
+/var/lib/hiera/
+└── clientapi_development
+	└── dev
+       	├── common.yaml
+    	       ├── dev-clientapi-portal.eyaml
+    	       └── files
+        	    ├── httpd
+        	    │   ├── common.d
+        	    │   │   ├── dev-clientapi-portal.conf
+        	    │   │   ├── httpd.conf
+        	    │   │   └── ssl.conf
+        	    │   └── dev-clientapi-portal.d
+        	    │   	└── dev-clientapi-portal.conf
+        	    └── tomcat
+               	    └── common.d
+                     	├── logging.properties
+                	       └── server.xml
+```
 
 ---
-### Foreman Stack Creation
+## Foreman Stack Creation
 ---
 At this point, an environment deployed with *r10k* and all the *hiera* configurations associated with it is presumed to be on the puppetmaster. The next logiacal step is to provide a quick creation of the new infrastructure stacks.
 
@@ -544,7 +639,7 @@ Although there are several ways to do it, such as manual deployment with the For
 
 Feel free to use another tool from the [Foreman-related tools](http://projects.theforeman.org/projects/foreman/wiki/List_of_Plugins) in the list of supported plugins.
 
-#### Extra definitions
+### Extra definitions
 
 In order to improve reusability, an extra definitions file could be created. It is a json file with all the variables written like *@variable_name@: value*, useful for the environment specific variables, such as security groups, AMIs, domains or project.
 
