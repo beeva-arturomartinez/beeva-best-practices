@@ -376,14 +376,75 @@ rows is rather unlikely or will never happen.
 
 ### Solving the MapReduce Performance Problem
 There are many courses of action by which to attack the problem:
-* **Change the ingestion Process/Interval**: Investigate changing your source system to generate a few large files instead, or possibly concatenating files when ingesting into HDFS. If you are only ingesting 10 MB of data every hour, determine if it’s possible to only ingest once a day. You’ll create 1x240MB file instead of
+
+#### Change the ingestion Process/Interval
+
+Investigate changing your source system to generate a few large files instead, or possibly concatenating files when ingesting into HDFS. If you are only ingesting 10 MB of data every hour, determine if it’s possible to only ingest once a day. You’ll create 1x240MB file instead of
 24x10MB files.
 
-* **Batch File Consolidation**: With this option you periodically run a simple, consolidating MapReduce job to read all of the small files in a folder and rewrite them into fewer larger files. For example, with a simple Pig program. There is also a prewritten application designed specifically for this task, called File Crush. This option does not maintain the original file names.
-* **Sequence Files**: In this solution, the filename is stored as the key in the sequence file and the file contents are stored as the value. Sequence files support block compression, and are splittable. That meaning that MapReduce jobs would only launch one map task per 128MB block instead of one map task per small file. However, if you are only ingesting a small number of small files at a time the sequence file does not work as well because Hadoop files are immutable and cannot be appended to.
-* **HBase**:
-* **S3DistCp**:
-* **Using a CombineFileInputFormat**:
+#### Batch File Consolidation
+
+With this option you periodically run a simple, consolidating MapReduce job to read all of the small files in a folder and rewrite them into fewer larger files. For example, with a simple Pig program. There is also a prewritten application designed specifically for this task, called File Crush. This option does not maintain the original file names.
+
+
+#### Sequence Files
+
+In this solution, the filename is stored as the key in the sequence file and the file contents are stored as the value. Sequence files support block compression, and are splittable. That meaning that MapReduce jobs would only launch one map task per 128MB block instead of one map task per small file. However, if you are only ingesting a small number of small files at a time the sequence file does not work as well because Hadoop files are immutable and cannot be appended to.
+
+#### HBase
+ If you are producing numerous small files, storing your data as files in HDFS may not be the best
+solution. Instead you might consider using an HBase column store. Using HBase changes your
+ingestion process from producing many small HDFS files to writing individual records into HBase
+tables.
+
+If your data access pattern is based on welldefined, randomaccess
+lookups, HBase may be
+your best alternative. It is architecturally tuned for highvelocity
+data record inserts, highvolume,
+individual record lookups and streaming based analytics. However, if your data access pattern
+tends toward full file/table scans, then HBase may not be optimal.It is possible to create a Hive
+table that maps to HBase data; however, query performance in this design will vary.
+
+Hive on HBase will shine when a single row or a range of rows is selected, but if your queries
+tend toward full table scans HBase is very inefficient. Most analytical queries, especially those
+using group bys, require full table scans.HBase provides the best ability to stream data into
+Hadoop and make it available for processing in real time. However, balancing the needs of
+HBase with other cluster processes can be challenging and requires advanced system
+administration.
+
+Additionally, HBase performance is largely dependent on data access patterns and these should
+be carefully considered before choosing HBase to solve the small file problem.
+
+#### S3DistCp
+ This solution is only available for users of Amazon EMR. Amazon EMR clusters are designed to
+be short lived, persisting their data in Amazon S3.
+
+S3DistCp is a utility provided by Amazon for distributed copying of data from S3 to ephemeral
+HDFS or even other S3 buckets. The utility provides the capability to concatenate files together
+through the use of “groupBy” and “targetSize” options. This is useful when you have thousands of small files stored in S3 that you want to process using Amazon EMR.
+
+#### Using a CombineFileInputFormat
+
+The CombineFileInputFormat is an abstract class provided by Hadoop that merges small files at
+MapReduce read time.
+
+The merged files are not persisted to disk. Instead, the process reads multiple files and merges
+them “on the fly” for consumption by a single map task. You gain the benefits of not launching
+one map task per file and not requiring that multiple files be merged into a single persisted file as
+part of a preparatory step.
+
+This solves the problem of a MapReduce job launching too many map tasks; however, since the
+job is still reading in multiple small files random disk IO is still a problem. Additionally, most
+implementations of the CombineFileInputFormat do not account for data locality and will often
+pull data from a variety of data nodes over the network. In order to implement this, the
+CombineFileInputFormat must be extended in Java for different file types.
+
+This requires significant development expertise to develop your custom input format classes.
+However, once written, you can configure a maximum split size and it will merge files until this
+size is met.
+
+Note that since the merged data is not persisted in HDFS, the CombineFileInputFormat does not
+alleviate the NameNode memory problem.
 
 #### Hive Configuration Settings
 
@@ -406,26 +467,26 @@ architectures where a small performance
 penalty in insert overwrite and create table as statements is acceptable.
 <table>
   <tr>
-    <th  bgcolor="blue">Property</th>
-    <th bgcolor="blue">Description</th>
-    <th bgcolor="blue">Defaukt Value</th>
+    <th>Property</th>
+    <th>Description</th>
+    <th>Default Value</th>
     </tr>
   <tr>
-    <td>hive.merge.mapfiles</td>
+    <td>`hive.merge.mapfiles`</td>
     <td>Merge small files that are produced from
 maponly
 jobs.</td>
-    <td class="tg-yw4l">true</td>
+    <td >true</td>
     
   </tr>
   <tr>
-    <td >hive.merge.mapredfiles</td>
+    <td >`hive.merge.mapredfiles`</td>
     <td > Merge small files that are produced from mapreduce jobs.</td>
     <td>false</td>
     
   </tr>
    <tr>
-    <td >hive.merge.size.per.task</td>
+    <td>`hive.merge.size.per.task`</td>
     <td >When merging small files the target size for the merge files at the end of the job.</td>
     <td>256000000 bytes</td>
   </tr>
