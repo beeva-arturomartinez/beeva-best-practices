@@ -1,23 +1,66 @@
 #Front-end BEEVA Best Practices   
 
 ## CSS 
-
-This section describes the best practices applicable to CSS , divided into the following sections are covered:
-* [Creating style sheets](css#creating-style-sheets)
- * Rules declaration, selectors and properties
- * Formating
- * OOCSS and BEM
-* Using CSS preprocessors
-* Organize CSS
 * Selectors and types of CSS classes
- * Structure
- * Visual state
- * Functional entity
- * Functional status
+ * Rule declaration
+ * ID selectors
+* Formating
+* Structure
+ * OOCSS and BEM
 * Other considerations
- * !important and Style
+ * Important and Style
  * Based on CSS JavaScript functionality
  * Styles sheets Browsers
+* Using CSS preprocessors
+ * SASS
+  * Syntax
+  * Ordering of property declarations
+  * Mixins
+  * Placeholders
+  * Nested selectors
+ * Organize CSS
+ 
+ 
+### Selectors and types of CSS classes
+
+#### Rule declaration
+
+We refer to a declaration Rule understood when we speak of a **selector** and a number of **properties** associated with this block.
+
+```css
+selector {
+ property1: value1;
+ property2: value2;
+}
+```
+
+A **selector** is the way we identify any elements within the HTML document , you can refer to both a class attribute to any HTML element .
+```css
+.my-class { 
+ // selector by className 
+}
+
+input { 
+ // selector by HTML tag 
+}
+
+[name="myname"] {
+ // selector by an attribute
+}
+```
+
+The **properties** are the style rules to be applied by the selector element sectioned.
+```css
+/* selector */ {
+ background: red;
+ font-size: 12px;
+}
+```
+
+#### ID selectors
+While it is possible to select elements by ID in CSS, it should generally be considered an anti-pattern. ID selectors introduce an unnecessarily high level of [specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) to your rule declarations, and they are not reusable.
+
+For more on this subject, read [CSS Wizardry's article](http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/) on dealing with specificity.
 
 ### Formating
 * Use soft tabs (2 spaces) for indentation
@@ -60,74 +103,32 @@ This section describes the best practices applicable to CSS , divided into the f
 }
 ```
 
-### Selectors and types of CSS classes
-
-#### Rule declaration
-
-We refer to a declaration Rule understood when we speak of a **selector** and a number of **properties** associated with this block.
-
-```css
-selector {
- property1: value1;
- property2: value2;
-}
-```
-
-A **selector** is the way we identify any elements within the HTML document , you can refer to both a class attribute to any HTML element .
-```css
-.my-class { 
- // selector by className 
-}
-
-input { 
- // selector by HTML tag 
-}
-
-[name="myname"] {
- // selector by an attribute
-}
-```
-
-The **properties** are the style rules to be applied by the selector element sectioned.
-```css
-/* selector */ {
- background: red;
- font-size: 12px;
-}
-```
-
-#### ID selectors
-While it is possible to select elements by ID in CSS, it should generally be considered an anti-pattern. ID selectors introduce an unnecessarily high level of [specificity](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity) to your rule declarations, and they are not reusable.
-
-For more on this subject, read [CSS Wizardry's article](http://csswizardry.com/2014/07/hacks-for-dealing-with-specificity/) on dealing with specificity.
-
 ### Structure
-In the style sheets not only the order in which the classes are defined, also depends on the accuracy of specifying a particular component.
 
-We must guide all styles of a **semantic** way so they are reusable as possible. Very specific selectors may force us to use switches **!important**, which are entirely discouraged.
-
-It is important that our rules of CSS have a **semantic** nature, so they are very intuitive. To do this, we can group the CSS classes into four types:
-
-* Structure
+To write correctly CSS files are not enough rules described above is required to have certain clear concepts before starting to develop .
+It should be clear that we can create the Laws of the Declaration with one or more of these guidelines:
+* Structural
 * Visual state
 * Functional entity
 * Functional status
 
-#### Structure
+In the style sheets not only the order in which the classes are defined, also depends on the accuracy of specifying a particular component. We must guide all styles of a **semantic** way so they are reusable as possible.
+
+1. Structural
 
 The structure css classes are those that reference **reusable components** in different applications or websites. Again become our reusable components. These must have a unique CSS class to make reference to them. For example, if we use two data grids on our website, we should never have a class grid-first and  another class grid-second, but both should have the same css class data- grid. If in any case requires the viewing is different, this is usually for functional reasons discussed below, in this case an overload of classes will be used, ie, applying a whole class to class data-grid to represent differences.
  
-#### Visual state
+2. Visual state
 
 The status display indicates which particular state of a component of any type ( structure or entity ). The most common states are:
 
-* Selected
-* Disabled
-* Focused
-* Actived
-* The hover property (eg buttons, links, row of a grid of data...)
-* Hidden
-* Editable
+  * Selected
+  * Disabled
+  * Focused
+  * Actived
+  * The hover property (eg buttons, links, row of a grid of data...)
+  * Hidden
+  * Editable
 
 Other states like unchecked, enable hidden or not editable. We can consider that a component in its normal state possesses these characteristics.
 
@@ -148,7 +149,7 @@ Returning to the example of grids, if you have two grids that have to be differe
 </table>   
 ```
 
-And in our CSS , we would have the generic properties for data- gird and , in the modifier according to the state would be sufficient to override you need:
+And in our CSS, we would have the generic properties for data-grid and, in the modifier according to the state would be sufficient to override you need:
 
 ```css
 table.data-grid {
@@ -179,7 +180,7 @@ table.data-grid.disabled span {
 
 But also , you might want to not only depended on the status of view, but on different screens, we want to be displayed differently depending on the type of display, which has a functional nature, which we will try next.
 
-#### Functional entity
+3. Functional entity
 
 These can be either to refer to certain entities (students, courses, teachers...) and more global entities, as it could be an administration module. In the following example we will see how we could differentiate the grids data management module from the rest of the application:
 
@@ -257,8 +258,6 @@ For these classes are useful, they must be located in the upper HTML node, the f
 </div> 
 ```
 
-In the css:
-
 ```css
 .user {
   font-size: 14;
@@ -277,8 +276,6 @@ This would be wrong. If we want to indicate to form a class, it should not conta
 </form>   
 </div> 
 ```
-
-In the css:
 
 ```css
 .user {
@@ -299,8 +296,6 @@ or, if we want to give a special class to the form so that this rule not all for
 </div> 
 ```
 
-In the css:
-
 ```css
 .user {
   font-size: 14;
@@ -315,7 +310,7 @@ In the css:
 
 Thus, all forms of user dependent class would have a font size of 14px and a general padding of 5px, except the registration form, which will overwrite the font size.
 
-#### Functional status
+4. Functional status
 
 Finally, would the CSS classes of functional status, which refer to individual states may have a particular entity. For example, for different states can have the elements of a message (header, icon, date, etc) in a messaging system. We could have many different css classes for these elements, for example, in terms of icons: ico-sent, ico-received, ico-read... A simple and semantic form, would add that state as a modifier of the css class that represents functional entity, seen in the previous point, defining the normal rules of each camp. For example, let's focus on the field icon:
 
@@ -328,8 +323,6 @@ Finally, would the CSS classes of functional status, which refer to individual s
   <span class=”ico”>-</span>   
 </div>   
 ```
-
-In the css...
 
 ```css
 /*First we define the general characteristics for icons of messages. A note: use sprites for images to reduce calls to the server*/   
@@ -355,6 +348,8 @@ In the css...
 ```
 
 Thus, we must not create lots of css classes, creating quite optimized, reusable and easy to maintain files.
+
+All previous considerations apply using certain forms of work are OOCSS and BEM .
 
 #### OOCSS and BEM
 
@@ -400,7 +395,7 @@ To optimize the use of CSS to use some working guidelines such as those in OOCSS
 
 Here are some notes that do not fall in the other sections even if it may have been mentioned previously discussed above.
 
-#### !important and Style
+#### Important and Style
 
 In addition to the rules seen above, must be avoided as far as possible use the switch **!important** and / or **style** property of DOM nodes.
 
