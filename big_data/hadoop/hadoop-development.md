@@ -14,7 +14,8 @@ This document defines some architectural patterns and guidelines to apply in det
 	* [Compression](#compression)</br>
 	* [Data storage system](#storage)</br>
 * [How to select the correct file format](#how-formats)
-	* [Metadata: data about the data ](#metadata)
+	* [Metadata: data about the data](#metadata)
+	* [Choosing a solution](#choosing)
 * [HBase Schema Design](#hbase)
 * [Data life cycle](#lifecycle)
 
@@ -381,11 +382,31 @@ There are many courses of action by which to attack the problem:
 * **Batch File Consolidation**: With this option you periodically run a simple, consolidating MapReduce job to read all of the small files in a folder and rewrite them into fewer larger files. For example, with a simple Pig program. There is also a prewritten application designed specifically for this task, called File Crush. This option does not maintain the original file names.
 * **Sequence Files**: In this solution, the filename is stored as the key in the sequence file and the file contents are stored as the value. Sequence files support block compression, and are splittable. That meaning that MapReduce jobs would only launch one map task per 128MB block instead of one map task per small file. However, if you are only ingesting a small number of small files at a time the sequence file does not work as well because Hadoop files are immutable and cannot be appended to.
 * **HBase**:
-2.4.2.3.5 S3DistCp
-2.4.2.3.6 Using a CombineFileInputFormat
-2.4.2.3.7 Hive Configuration Settings
-2.4.2.3.8 Using Hadoop’s Appender Capabilities
+* **S3DistCp**:
+* **Using a CombineFileInputFormat**:
+* **Hive Configuration Settings**:
+* **Using Hadoop’s Appender Capabilities**:
+*
+<a name="choosing"/>
 ### Choosing a solution
+Choosing the best solution for working with small files depends on a variety of questions. It may
+be necessary to use a combination of these solutions based on access patterns and data
+requirements. The questions that should be considered include:
+* At what point in the data flow are the small files being generated? Are the small files
+being created at ingestion, or via incluster
+processing?
+* What tool is generating the small files? Can changing tool configuration reduce the
+number of small files?
+* What level of technical skill exists within your organization? Do you have the capabilities
+to maintain input formats or writing your own ingestion engine?
+* How often are the small files being generated? How often can small files be merged in
+order to create large files?
+● What sort of data access is required to these small files? Do the files need to accessible
+through Hive?
+● What type of administrative periods might exist where processes can be run inside the
+cluster to alleviate small files?
+* What level of latency is acceptable from MapReduce processes?
+
 <a name="schema"/>
 ## HDFS Schema Design
 
@@ -547,6 +568,7 @@ name>/<partition_column_name=partition_column_value>/{files}`
 directory containing the data in HDFS. you will have to create, maintain and manage
 your own metadata.
 * You may, choose to use something like Kite SDK 6 to store metadata.
+
 <a name="hbase"/>
 ## HBase Schema Design
 HBase is a huge hash table. Just like a hash table, you can associate values with keys and
