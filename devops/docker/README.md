@@ -24,32 +24,43 @@ Images can be built automatically following the instructions defined in a Docker
 
 * Each Docker image consists of a series of layers. Docker makes use of union file systems to combine these layers into a single image. When you change a Docker image, rather than replacing the whole image or entirely rebuilding, only that layer is added or updated. In a Dockerfile, each command generates a layer, thus organize your Dockerfile so that common commands that you doesn't expect to change are located at the beginning.
 
+```
+	#FROM and CMD are not expected to change, so they come first
+
+	FROM debian:latest
+	CMD ["nodejs", "main.js"]
+
+	#Package installation may change, but not that often
+	RUN apt-get update \
+		    && apt-get install -y curl \
+		    && curl -sL https://deb.nodesource.com/setup | bash - \
+		    && apt-get install -y nodejs
+
+	# Application specific files and packages will change with each release, so they come last
+	COPY main.js main.js
+	COPY log4js.json log4js.json
+	COPY package.json package.json
+
+	RUN npm install
+```
+
 * Use a .dockerignore file to specify excluded files and directories to increase the build performance.
 
 * Keep layers to a minimum: too many layers makes things unnecessarily complicated. The trick is to find a good balance between readability and the lowest number of layers possible. Only add additional layers when there is a strategic reason for doing so.
 
 * Sort multiline arguments alphanumerically to avoid duplication of packages and to improve readability.
+```
+	RUN apt-get update && apt-get install -y \
+	  	bzr \
+		cvs \
+	  	git \
+	  	mercurial \
+	  	subversion
+```
 
 * Be specific about tags
 Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the -t option for the Docker Build feature.
 
-````
-FROM debian:latest
-
-CMD ["nodejs", "main.js"]
-
-RUN apt-get update \
-    && apt-get install -y curl \
-    && curl -sL https://deb.nodesource.com/setup | bash - \
-    && apt-get install -y nodejs
-
-# Add files
-COPY main.js main.js
-COPY log4js.json log4js.json
-COPY package.json package.json
-
-RUN npm install
-````
 
 ### Create small-sized containers
 
@@ -95,7 +106,7 @@ You can use the following tools to check security issues on docker images and co
 Docker-compose is a tool that allows to define multiple docker-containers using a configuration file and run them with a single command.
 
 This is an example of a docker-compose.yml configuration file:
-````yaml
+```yaml
 mongodb:
   image: mongodb
   command: '--smallfiles'
@@ -121,7 +132,7 @@ kafka:
   volumes:
     - /var/run/docker.sock:/var/run/docker.sock
 
-````
+```
 
 You can run the containers with the command (by default containers are recreated if already exist)
 
