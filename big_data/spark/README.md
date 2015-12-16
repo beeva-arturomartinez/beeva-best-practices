@@ -314,7 +314,7 @@ Spark prefers to schedule all tasks at the best locality level, but this is not 
 
 What Spark typically does is wait a bit in the hopes that a busy CPU frees up. Once that timeout expires, it starts moving the data from far away to the free CPU. The wait timeout for fallback between each level can be configured individually or all together in one parameter; see the spark.locality parameters on the configuration page for details. You should increase these settings if your tasks are long and see poor locality, but the default usually works well.
 
-#### TUNING LINKS
+#### Tuning links
 
 [Tuning and performance optimization guide for Spark 1.5.2](http://spark.apache.org/docs/latest/tuning.html)
 
@@ -323,8 +323,6 @@ What Spark typically does is wait a bit in the hopes that a busy CPU frees up. O
 [How-to: Tune Your Apache Spark Jobs (Part 1) - Cloudera Engineering Blog](http://blog.cloudera.com/blog/2015/03/how-to-tune-your-apache-spark-jobs-part-1/)
 
 [How-to: Tune Your Apache Spark Jobs (Part 2) - Cloudera Engineering Blog](http://blog.cloudera.com/blog/2015/03/how-to-tune-your-apache-spark-jobs-part-2/)
-
-#### Tuning spark configuration
 
 #### Debugging spark applications
 
