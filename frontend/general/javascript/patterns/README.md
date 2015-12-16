@@ -16,7 +16,7 @@ particular, when talking about JavaScript.
   * [2\.03 Revealing Module Pattern](#RevealingModulePattern),
   * [2\.07 Prototype Pattern](#PrototypePattern)
   * [2\.11 Mixin Pattern](#MixinPattern)
-* [3\. MV* Patterns](#ModelViewStarPatterns)
+* [3\. MV* Patterns](#ModelViewWhateverPatterns)
   * [3\.2 MVP Pattern](#MVPPattern)
   * [3\.3 MVVM Pattern](#MVVMPattern)
 * [4\. Modular Patterns](#ModularPatterns)
@@ -38,7 +38,7 @@ bennefits:
 * are proven solutions
 * add common vocabulary
 
-** Keep in mind that: **
+**Also, to be kept in mind:**
 
 * patterns are not exact solutions and they don't solve all the problems
 * reusing patterns help preventing issues
@@ -374,11 +374,11 @@ var car = vehicle( "Ford Escort" );
 car.getModel();
 ```
 
-## <a name='ModelViewStarPatterns'>MV* Patterns</a>
+## <a name='ModelViewWhateverPatterns'>MV* Patterns</a>
 
 A quick overview of the three patterns you can read in this section.
 
-![](./static/model-view-star-comparision.png)
+![](./static/model-view-whatever-comparision.png)
 
 <small>
 Image from http://www.dofactory.com/products/javascript-jquery-design-pattern-framework
@@ -458,7 +458,16 @@ the logic for the application.
 #### Frameworks implementing MV*
 
 ##### Angular
+For some years Angular was closer to MVC (or rather one of its client-side
+variants), but now it can be considered a MVVM – the $scope object can be
+considered the ViewModel that is being decorated by a function that we call a
+Controller.
+
 ##### Ember.js
+Based on the model-view-controller (MVC) pattern it allows developers to create
+scalable single-page web applications by incorporating common idioms and best
+practices into the framework.
+
 ##### Backbone.js
 Although the documentation says it is MVC, the community usually refers to it as
 an MVP framework where the views are html templates, the model are
@@ -466,6 +475,11 @@ an MVP framework where the views are html templates, the model are
 controller - `Backbone.Controller` - if you prefer to go with the MVC approach.
 
 ##### Knockout.js
+Knockout takes the Model-View-View-Model (MVVM) approach to application
+architecture.The key concepts it lists are declaritive bindings, automatic UI
+refresh, dependence Tracking and templating.
+
+
 ##### Riot.js
 Riot.js is a client-side library that weighs less than 1kb. Despite the small
 size, all the building blocks are there: a template engine, router, event
@@ -522,3 +536,4 @@ The views may cause a new action to be propagated through the system in response
 * http://www.adequatelygood.com/JavaScript-Module-Pattern-In-Depth.html
 * http://www.2ality.com/2014/09/es6-modules-final.html
 * http://addyosmani.com/writing-modular-js/
+* http://www.smashingmagazine.com/2012/07/journey-through-the-javascript-mvc-jungle/
