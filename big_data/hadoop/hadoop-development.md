@@ -406,24 +406,36 @@ architectures where a small performance
 penalty in insert overwrite and create table as statements is acceptable.
 <table>
   <tr>
-    <th>Property</th>
-    <th>Description</th>
-    <th>Defaukt Value</th>
+    <th  bgcolor="blue">Property</th>
+    <th bgcolor="blue">Description</th>
+    <th bgcolor="blue">Defaukt Value</th>
     </tr>
   <tr>
-    <td class="tg-yw4l">hive.merge.mapfiles</td>
-    <td class="tg-yw4l">Merge small files that are produced from
+    <td>hive.merge.mapfiles</td>
+    <td>Merge small files that are produced from
 maponly
 jobs.</td>
     <td class="tg-yw4l">true</td>
     
   </tr>
   <tr>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
-    <td class="tg-yw4l"></td>
+    <td >hive.merge.mapredfiles</td>
+    <td > Merge small files that are produced from mapreduce jobs.</td>
+    <td>false</td>
     
   </tr>
+   <tr>
+    <td >hive.merge.size.per.task</td>
+    <td >When merging small files the target size for the merge files at the end of the job.</td>
+    <td>256000000 bytes</td>
+  </tr>
+  <tr>
+    <td >hive.merge.smallfiles.avgsize</td>
+    <td >When the average size of the output files is less than this number, Hive will execute an
+additional MapReduce job to merge the files based on hive.merge.mapfiles and hive.merge.mapredfiles.</td>
+    <td>16000000 bytes</td>
+  </tr>
+  
 </table>
 
 #### Using Hadoop’s Appender Capabilities
