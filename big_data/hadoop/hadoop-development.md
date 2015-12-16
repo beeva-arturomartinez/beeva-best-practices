@@ -92,7 +92,7 @@ but you must do double­check before you make any final decision.
 Do you want to add and delete fields from a file and still be able to read old files with the
 same code?.
 
-** How important is file format “splittability”?**
+**How important is file format “splittability”?**
 
 Since Hadoop stores and processes data in blocks you must be able to begin reading
 data at any point within a file in order to take fullest advantage of Hadoop’s distributed
@@ -374,10 +374,13 @@ To summarize, archive old information when data is going to be punctually read a
 rows is rather unlikely or will never happen.
 
 ### Solving the MapReduce Performance Problem
-2.4.2.3.1 Change the ingestion Process/Interval
-2.4.2.3.2 Batch File Consolidation
-2.4.2.3.3 Sequence Files
-2.4.2.3.4 HBase
+There are many courses of action by which to attack the problem:
+* **Change the ingestion Process/Interval**: Investigate changing your source system to generate a few large files instead, or possibly concatenating files when ingesting into HDFS. If you are only ingesting 10 MB of data every hour, determine if it’s possible to only ingest once a day. You’ll create 1x240MB file instead of
+24x10MB files.
+
+* **Batch File Consolidation**: With this option you periodically run a simple, consolidating MapReduce job to read all of the small files in a folder and rewrite them into fewer larger files. For example, with a simple Pig program. There is also a prewritten application designed specifically for this task, called File Crush. This option does not maintain the original file names.
+* **Sequence Files**: In this solution, the filename is stored as the key in the sequence file and the file contents are stored as the value. Sequence files support block compression, and are splittable. That meaning that MapReduce jobs would only launch one map task per 128MB block instead of one map task per small file. However, if you are only ingesting a small number of small files at a time the sequence file does not work as well because Hadoop files are immutable and cannot be appended to.
+* **HBase**:
 2.4.2.3.5 S3DistCp
 2.4.2.3.6 Using a CombineFileInputFormat
 2.4.2.3.7 Hive Configuration Settings
