@@ -68,7 +68,7 @@ DISKS
  - One core per disk
  - In general, SATA drives are recommended over SAS
 
-![alt text](https://github.com/beeva-joseluismoreno/beeva-best-practices/blob/master/big_data/hadoop/static/disks_hbase.png")
+![alt text](https://github.com/beeva-joseluismoreno/beeva-best-practices/blob/master/big_data/hadoop/static/disks_hbase.png "HBase disks")
 
 ----------
 
