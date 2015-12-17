@@ -268,8 +268,48 @@ As can be observed, with this criterion the problem is creating unnecessary exte
 
 In this system dependencies of every module are isolated, that only the necessary for this concrete module is configured. For example, in the tomcat previous example:
 
-[code]
-
+````
+class ​ ​
+tomcat ​
+(
+$parameter = undef,
+​
+){
+include ​ ​
+'::tomcat::install'
+include ​ ​
+'::tomcat::config'
+include ​ ​
+'::tomcat::service'
+case ​ ​
+$: ​
+:tomcat::ensure ​ {
+present: ​ {
+​
+Class ​
+​
+[ ​
+'::tomcat::install' ​
+] ->
+Class ​
+​
+[ ​
+'::tomcat::config' ​
+] ~>
+Class ​
+​
+[ ​
+'::tomcat::service' ​
+] ->
+Class ​
+​
+[ ​
+'::tomcat' ​
+]
+}
+}
+}
+````
 
 Notice that the dependencies to other services had been extracted, so only the sub-modules that install and configure tomcat are called.
 
@@ -281,14 +321,131 @@ The dependencies implementation between environments and the entering of values 
 
 For example, if all the machines in certain environment will have some included classes by default, it is possible to create a profile like the next:
 
-[code]
+````
+class ​ ​
+profiles::base ​ {
+​ u_repo ​ = hiera_hash( ​
+$
+'repositories::repos::install::u_repo' ​
+)
+$u_hash ​ = hiera_hash( ​
+​
+'users::u_name' ​
+)
+​ nclude ​ ​
+i
+'::awscli'
+include ​ ​
+​
+'::factertags'
+include ​ ​
+​
+'::groups'
+include ​ ​
+​
+'::iptables'
+include ​ ​
+​
+'::java'
+include ​ ​
+​
+'::mcollective'
+include ​ ​
+​
+'::ntp'
+include ​ ​
+​
+'::openssh'
+include ​ ​
+​
+'::packages'
+include ​ ​
+​
+'::puppet_agent'
+include ​ ​
+​
+'::repositories'
+include ​ ​
+​
+'::selinux'
+include ​ ​
+​
+'::sudoers_roles'
+include ​ ​
+​
+'::timezone'
+Yumrepo ​ <| |> -> ​
+​
+Package ​ <| |>
+class ​ { ':: ​
+​
+users ​
+':
+u_name => ​
+$u_hash ​
+,
+}
+}
+
+````
 
 As can be observed in the previous example in the profile level is where the specific lookups to hiera, the particular implementation 
 The hiera_has 	use concadenate value of this variable to all the value of the hiera hierarchy.
 
 For example, for the a profile implementation that configures tomcat can be used:
 
-[code]
+````
+class ​ ​
+profiles::tomcat ​ {
+include ​ ​
+​
+'::repositories'
+include ​ ​
+​
+'::java'
+include ​ ​
+​
+'::httpd'
+include ​ ​
+​
+'::tomcat'
+$user_hash ​ = hiera_hash( ​
+​
+'users::u_name' ​
+)
+​ f ​ ​
+i
+$user_hash ​
+[tomcat][username] == ​
+'tomcat' ​ ​
+and
+$user_hash ​
+​
+[tomcat][ ​
+ensure ​
+] == ​
+'present' ​ {
+​ ser ​
+U
+[ ​
+'tomcat' ​
+] ->
+Class ​
+​
+[ ​
+'::tomcat' ​
+]
+}
+else ​ {
+​
+notify { ​
+"Verificar el estado del usuario tomcat.
+Username: ${user_hash[tomcat][username]}
+| Ensure: ${user_hash[tomcat][ensure]}" ​
+: ​ }
+}
+}
+````
 
 In that easy way it has become independent the module from the modules and the necessary order, and set abstracted to a superior level, the profiles one.If, for example, now it's desired to change httpd by nginx a new profile can be create that changes the httpd classe, or modify the tomcat profile without affecting the tomcat module.
 
@@ -300,7 +457,103 @@ If a defined project requires a different implementation it is possible to creat
 
 For example, to deploy a java application in certain project can be used something like the next, starting on main profile (note the sub-clase clienapi in profiles::clientapi::deploy_java_app):
 
-[code]
+````
+class ​ ​
+profiles::clientapi::deploy_java_app ​ {
+$java_properties ​
+​
+= hiera_hash( ​
+'app_properties::java' ​
+)
+$java_apps ​
+​
+= hiera_hash( ​
+'app_to_deploy::java' ​
+)
+$tomcat_project_name ​ = hiera( ​
+​
+'tomcat::project_name' ​
+)
+$properties_owner ​ = hiera( ​
+​
+'properties::owner' ​
+)
+$properties_group ​ = hiera( ​
+​
+'properties::group' ​
+)
+$properties_dir_mode ​ = hiera( ​
+​
+'properties::properties_dir_mode' ​
+)
+$first ​
+​
+= { tag => ​
+'first' ​ }
+$last ​
+​
+= { tag => ​
+'last' ​ }
+​ nclude ​ ​
+i
+'::profiles::clientapi::base'
+include ​ ​
+​
+'::profiles::tomcat'
+file{ ​
+"/var/properties/" ​
+:
+ensure ​ => directory,
+​
+owner => ​
+$properties_owner ​
+,
+group => ​
+$properties_group ​
+,
+mode => ​
+$properties_properties_dir_mode ​
+,
+}
+create_resources( ​
+::profiles::properties ​
+, ​
+$java_properties ​
+, ​
+$first ​
+)
+create_resources( ​
+::profiles::java_app ​
+, ​
+$java_apps ​
+, ​
+$last ​
+)
+​ lass ​ [ ​
+C
+'::profiles::tomcat' ​
+] -> ​
+File ​ [ ​
+"/var/properties/" ​
+] ->
+File ​ [ ​
+​
+"/etc/init.d/${tomcat_project_name}" ​
+] ->
+Package ​ <| tag == ​
+​
+'first' ​ |> ~> ​
+Service ​ [ ​
+'tomcat' ​
+] -> ​
+Package ​ <| tag == ​
+'last' ​ |> ->
+Class ​ [ ​
+​
+'::profiles::clientapi::deploy_java_app' ​
+]
+}
+````
 
 *Roles*
 
@@ -308,7 +561,25 @@ The last level of abstraction are the roles, that simply agglutinate in a Puppet
 
 For example, for the role clientapi-portal:
 
-[code]
+````
+class ​ ​
+roles::clientapi::clientapi ​
+- ​
+portal ​ {
+include ​ ​
+​
+'::profiles::clientapi::base'
+include ​ ​
+​
+'::profiles::clientapi::monitoring'
+include ​ ​
+​
+'::profiles::clientapi::nodejs'
+include ​ ​
+​
+'::profiles::clientapi::deploy_java_app'
+}
+````
 
 In Foreman (or the used ENC) simply will be needed to specify a associate class to every machine: the appropiate role one.
 
@@ -325,7 +596,9 @@ With the proposed system it is provided a independent git repository with a work
 
 The dynamic way environment management is made through the r10k tool. Installing it with the following command:
 
+````
 [root@foremandv ~]# gem install r10k
+````
 
 R10k will be used to manage the Puppet modules and the configuration files in each of the environments.
 
@@ -333,7 +606,18 @@ To do that it is necessary to use la dynamic environments property, that Puppet 
 
 The configuration file is found in /etc/r10k.yaml and will contain the following information:
 
-[code]
+````
+[root@foremandev ~]# cat /etc/r10k.yaml
+---
+:cachedir: '/var/cache/r10k'
+:sources:
+:puppet:
+remote: 'git@gitlab.beeva.com:puppet/r10kpuppetfile.git'
+basedir: '/etc/puppet/environments'
+:hiera:
+remote: 'git@gitlab.beeva.com:hiera/r10khieradata.git'
+basedir: '/var/lib/hiera'
+````
 
 *Is important to know that all environment or configuration file not directly ready to operate with r10k will be erased form the system, consecuently is recommended to backup in starting from a configured environment.*
 
@@ -349,7 +633,23 @@ Each branch inside this repository matches one environment that can be deployed 
 
 The Puppetfile file for an environment take the following configurations:
 
-[code]
+````
+# track master
+mod 'filemapper',
+:git => 'git://github.com/adrienthebo/puppet-filemapper.git'
+# Install the filemapper module and track the 1.1.x branch
+mod 'filemapper',
+:git => 'git://github.com/adrienthebo/puppet-filemapper.git',
+:ref => '1.1.x'
+# Install filemapper and use the 1.1.1 tag
+mod 'filemapper',
+:git => 'git://github.com/adrienthebo/puppet-filemapper.git',
+:ref => '1.1.1'
+# Install filemapper and use a specific git commit
+mod 'filemapper',
+:git => 'git://github.com/adrienthebo/puppet-filemapper.git',
+:ref => 'ec2a06d287f744e324cca4e4c8dd65c38bc996e2'
+````
 
 In the previous code there are the options to reference the code desired for these module, according the branch name, a regular expression for a versioned tag or a concrete commit.
 
@@ -370,7 +670,127 @@ In the module references it is not necessary to all the Puppetfile modules targe
 
 For example, a Puppetfile for a development environment example can be:
 
-[code]
+````
+#############################################
+#
+#
+r10k Puppetfile clientapi_development
+#
+#############################################
+forge "http://forge.puppetlabs.com"
+mod "adagios_client",
+:git => "git@gitlab.beeva.com:puppet/adagios_client.git",
+:ref => 'genoa-1.0'
+mod "amazontools",
+:git => "git@gitlab.beeva.com:puppet/amazontools.git",
+:ref => 'genoa-1.0'
+mod "autoscaling",
+:git => "git@gitlab.beeva.com:puppet/autoscaling.git",
+:ref => 'genoa-1.3'
+mod "awscli",
+:git => "git@gitlab.beeva.com:puppet/awscli.git",
+:ref => 'openp-1.0'
+mod "crontab",
+:git => "git@gitlab.beeva.com:puppet/crontab.git",
+:ref => 'baas-1.0'
+mod "backups",
+:git => "git@gitlab.beeva.com:puppet/backups.git",
+:ref => 'genoa-1.0'
+mod "elasticsearch",
+:git => "git@gitlab.beeva.com:puppet/elasticsearch.git",
+:ref => 'openp-1.0'
+mod "factertags",
+:git => "git@gitlab.beeva.com:puppet/factertags.git",
+:ref => 'openp-development'
+mod "groups",
+:git => "git@gitlab.beeva.com:puppet/puppet_groups.git",
+:ref => 'genoa-1.0'
+mod "logagent",
+:git => "git@gitlab.beeva.com:puppet/genoa-logagent.git",
+:ref => 'genoa-1.0'
+mod "java",
+:git => "git@gitlab.beeva.com:puppet/java.git",
+:ref => 'openp-1.0'
+mod "iptables",
+:git => "git@gitlab.beeva.com:puppet/iptables.git",
+:ref => 'openp-1.0'
+mod "httpd",
+:git => "git@gitlab.beeva.com:puppet/httpd.git",
+:ref => 'openp-develop'
+mod "liferay",
+:git => "git@gitlab.beeva.com:puppet/liferay.git",
+:ref => 'genoa-1.0'
+mod "logrotate",
+:git => "git@gitlab.beeva.com:puppet/logrotate.git",
+:ref => 'genoa-1.0'
+mod "logstash",
+:git => "git@gitlab.beeva.com:puppet/logstash.git",
+:ref => 'openp-1.0'
+mod "memcached",
+:git => "git@gitlab.beeva.com:puppet/memcached.git",
+:ref => 'genoa-1.0'
+mod "mcollective",
+:git => "git@gitlab.beeva.com:puppet/mcollective.git",
+:ref => 'openp-1.0'
+mod "mongodb",
+:git => "git@gitlab.beeva.com:puppet/mongodb.git",
+:ref => 'openp-1.0'
+mod "newrelic",
+:git => "git@gitlab.beeva.com:puppet/newrelic.git",
+:ref => 'genoa-1.0'
+mod "nodejs",
+:git => "git@gitlab.beeva.com:puppet/nodejs.git",
+:ref => 'opencustomer-1.4'
+mod "ntpd",
+:git => "git@gitlab.beeva.com:puppet/ntpd.git",
+:ref => 'genoa-1.0'
+mod "openssh",
+:git => "git@gitlab.beeva.com:puppet/openssh.git",
+:ref => 'genoa-1.0'
+mod "packages",
+:git => "git@gitlab.beeva.com:puppet/packages.git",
+:ref => 'genoa-1.0'
+mod "profiles",
+:git => "git@gitlab.beeva.com:puppet/profiles.git",
+:ref => 'develop'
+mod "properties",
+:git => "git@gitlab.beeva.com:puppet/properties.git",
+:ref => 'openp-1.2'
+mod "puppet_agent",
+:git => "git@gitlab.beeva.com:puppet/puppet_agent.git",
+:ref => 'genoa-1.0'
+mod "redis",
+:git => "git@gitlab.beeva.com:puppet/redis.git",
+:ref => 'openp-1.1'
+mod "repositories",
+:git => "git@gitlab.beeva.com:puppet/repositories.git",
+:ref => 'openp-1.1'
+mod "roles",
+:git => "git@gitlab.beeva.com:puppet/roles.git",
+:ref => 'develop'
+mod "security_layer",
+:git => "git@gitlab.beeva.com:puppet/security_layer.git",
+:ref => 'openp-1.0'
+mod "selinux",
+:git => "git@gitlab.beeva.com:puppet/selinux.git",
+:ref => 'openp-1.0'
+mod "sudoers_roles",
+:git => "git@gitlab.beeva.com:puppet/sudoers_roles.git",
+:ref => 'genoa-1.0'
+mod "timezone",
+:git => "git@gitlab.beeva.com:puppet/timezone.git",
+:ref => 'openp-1.0'
+mod "tomcat",
+:git => "git@gitlab.beeva.com:puppet/tomcat.git",
+:ref => 'openp-develop'
+mod "users",
+:git => "git@gitlab.beeva.com:puppet/puppet_users.git",
+:ref => 'genoa-1.1'
+mod "theforeman/concat_native", "1.3.0"
+mod "puppetlabs/stdlib", "3.2.1"
+mod "puppetlabs/ntp", "3.0.3"
+
+````
 
 Note that all modules are configured with a tag (like openp-1.0 or genoa-1.1) and, those in what a new feature is being developed, change the develop branch (like httpd, tomcat, roles or profiles). When deploying this environment all will be like in the productive environment (modules from tag) except those module desired to be change, and launched from other branches.
 
@@ -388,7 +808,49 @@ To have a truly dynamic working it integrates the Hiera data too through r10k. F
 
 In this document it is considered the following hiera hierarchy in the Puppetmaster:
 
-[code]
+````
+[root@foremandev ~]# cat /etc/puppet/hiera.yaml
+­­­ 
+:backends: 
+  ­ eyaml 
+  ­ yaml 
+  ­ file 
+:hierarchy: 
+# EYAML and YAML CONFIGURATIONS 
+  ­ “%{::app_tier}/%{::hostname}” 
+  ­ “%{::app_tier}/%{::fqdn}” 
+  ­ “%{::app_tier}/%{::rol}/%{::version}” 
+  ­ “%{::app_tier}/%{::rol}” 
+  ­ “%{::app_tier}/%{::proyecto}” 
+  ­ “%{::app_tier}/common” 
+ 
+# HIERA­FILE CONFIGURATIONS 
+  ­ “%{::hostname}” 
+  ­ “%{::fqdn}” 
+  ­ “%{::rol}/%{::version}” 
+  ­ “%{::rol}” 
+  ­ “%{::proyecto}” 
+ 
+# COMMON CONFIGS SUCH AS VATS 
+  ­ common 
+ 
+ 
+:eyaml: 
+  :datadir: "/var/lib/hiera/%{::environment}" 
+  :pkcs7_private_key: /etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem 
+  :pkcs7_public_key:  /etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem 
+ 
+:yaml: 
+  ​
+ :datadir: "/var/lib/hiera/%{::environment}" 
+ 
+:file: 
+  :datadir: "/var/lib/hiera/%{::environment}/%{::app_tier}/files/%{calling_module}" 
+  :interpolate: false 
+ 
+:logger: console 
+
+  ````
 
 In the next paragraphs topics  like the different configured backends will be discussed, but at this point is important to differentiate between the variables %{::environment} and %{::app_tier}.
 
@@ -419,7 +881,63 @@ It is possible to know a value of a parameter inside the hierarchy executing a c
 
 In example, to extract the machine variable factertags::environment with hostname dev-geno-ccenter in environment genoa_development in app_tier dev:
 
-[code]
+````
+[root@foremandev ~]# ​
+hiera 'factertags::entorno' ::environment=genoa_development
+::hostname=dev-genoa-ccenter ::app_tier=dev -d
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Hiera eYAML backend starting
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Set option: datadir =
+/var/lib/hiera/genoa_development/dev
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Setoption:pkcs7_public_key=
+/etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem
+DEBUG: Mon Feb0909:30:49+01002015:[eyaml_backend]:Setoption:pkcs7_private_key=
+/etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Lookingupfactertags::entorno
+in eYAML backend
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source
+dev-genoa-ccenter
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Found factertags::entorno in
+dev-genoa-ccenter
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Set option: datadir =
+/var/lib/hiera/genoa_development/dev
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Setoption:pkcs7_public_key=
+/etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem
+DEBUG: Mon Feb0909:30:49+01002015:[eyaml_backend]:Setoption:pkcs7_private_key=
+/etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Lookingupfacter_envineYAML
+backend
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source
+dev-genoa-ccenter
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source common
+DEBUG:
+Mon
+Feb
+09
+09:30:49
++0100
+2015:
+Cannot
+find
+datafile
+/var/lib/hiera/genoa_development/dev/common.eyaml, skipping
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Hiera YAML backend starting
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Looking up facter_env in YAML backend
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Looking for data source dev-genoa-ccenter
+DEBUG:
+Mon
+Feb
+09
+09:30:49
++0100
+2015:
+Cannot
+find
+/var/lib/hiera/genoa_development/dev/dev-genoa-ccenter.yaml, skipping
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Looking for data source common
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Found facter_env in common
+openp_dev
+
+````
 
 ##### when to use hiera
 
@@ -442,7 +960,16 @@ _*Note: This system does not work correctly in Puppet 3.3, to review when upgrad
 
 To make the variables interpolation work it is necessary to have a version above 1.3 (to check it is possible to use the command hiera --version).
 
-[code]
+````
+###################################################### HIERA VARIABLES
+hiera_version: '1.0.7'
+hiera_env: 'openp_dev'
+hiera_apptier: 'dev'
+hiera_project: 'genoa'
+hiera_foreman: 'foremandev.devopenp.com'
+hiera_s3_bucket: 'openp-genoa-dev-eu-west-1'
+interpolated_variable: ‘value’
+````
 
 To reference this variables use this format:
 ```
