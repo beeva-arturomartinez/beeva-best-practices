@@ -977,28 +977,28 @@ openp_dev
 
 ````
 
-##### when to use hiera
+##### When to use hiera?
 
 Starting from the document http://garylarizza.com/blog/2013/12/08/when-to-hiera/ in the roles an profiles section it proposes:
 
-1. No to use hiera in the roles
+1. Do not use hiera in the roles
 2. To use hiera in the profiles to get the profile specific logic data.
 3. The data no specific to the business logic (default ports, default routes, etc) can be included in the module and be overwriten by hiera at profile level.
 
 
 This brings important benefits:
 
-* Searches to hiera are rely in a class that abstracts the data outside the modules that form the profile.
+* Searches to hiera rely in a class that abstracts the data outside the modules that form the profile.
 * Parameters containing specific business data are set hierarched in hiera.
 * Data not specific to he business are outside the module (for example with a params class)
-* Profiles and roles can be included with the "include" feature, so there are not duplicity in declarations.
+* Profiles and roles can be included with the "include" function, so there are no duplicity in declarations.
 * Modules do not contain any specific business logic, so they are portables.
 
 ##### Interpolation of variables in hiera
 
 _*Note: This system does not work correctly in Puppet 3.3, to review when upgrade to Puppet 4.*_
 
-To make the variables interpolation work it is necessary to have a version above 1.3 (to check it is possible to use the command hiera --version).
+To make the variables interpolation work in Hiera it is necessary to use a version above 1.3 (to check it is possible to use the command hiera --version).
 
 ````
 ###################################################### HIERA VARIABLES
@@ -1015,7 +1015,7 @@ To reference this variables use this format:
 ```
      anothervariable: %{hiera('interpolated_variable')}
 ```
-It is recommended that global variable starts with hiera <name> so it will be easier to know where it comes from in a error case.
+It is recommended that global variable starts with ````hiera_<name>```` so it will be easier to know where it comes from in a error case.
 
 Thank that interpolation method it is possible to define variables repeated in one place of the configuration file and reference them in the rest of the hierarchy. It is recommended that the hiera configuration file to have the modules ordered alphabetically for a easier reading, the global variables will be set as first section in the file.
 
