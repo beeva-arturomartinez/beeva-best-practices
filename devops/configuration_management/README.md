@@ -618,15 +618,15 @@ In Foreman (or the used ENC) simply will be needed to specify a associate class 
 
 Thanks to this method it's easy to search a fail when it happens, following the next process:
 
-1-Search the associated role to the instance.
+1. Search the associated role to the instance.
 
-2-Check what profile includes.
+2. Check what profile includes.
 
-3-In the failed profile, check all the data coming from hiera and the included classes called.
+3. In the failed profile, check all the data coming from hiera and the included classes called.
 
-4-Browse through the hiera hierarchy until arrive to the data that are applying.
+4. Browse through the hiera hierarchy until arrive to the data that are applying.
 
-5-Go down to the code level corresponding to the module.
+5. Go down to the code level corresponding to the module.
 
 ### Dynamic environments r10k
 
@@ -981,20 +981,18 @@ openp_dev
 
 Starting from the document http://garylarizza.com/blog/2013/12/08/when-to-hiera/ in the roles an profiles section it proposes:
 
-1- No to use hiera in the roles
-
-2- To use hiera in the profiles to get the profile specific logic data.
-
-3- The data no specific to the business logic (default ports, default routes, etc) can be included in the module and be overwriten by hiera at profile level.
+1. No to use hiera in the roles
+2. To use hiera in the profiles to get the profile specific logic data.
+3. The data no specific to the business logic (default ports, default routes, etc) can be included in the module and be overwriten by hiera at profile level.
 
 
 This brings important benefits:
 
-- Searches to hiera are rely in a class that abstracts the data outside the modules that form the profile.
-- Parameters containing specific business data are set hierarched in hiera.
-- Data not specific to he business are outside the module (for example with a params class)
-- Profiles and roles can be included with the "include" feature, so there are not duplicity in declarations.
-- Modules do not contain any specific business logic, so they are portables.
+* Searches to hiera are rely in a class that abstracts the data outside the modules that form the profile.
+* Parameters containing specific business data are set hierarched in hiera.
+* Data not specific to he business are outside the module (for example with a params class)
+* Profiles and roles can be included with the "include" feature, so there are not duplicity in declarations.
+* Modules do not contain any specific business logic, so they are portables.
 
 ##### Interpolation of variables in hiera
 
