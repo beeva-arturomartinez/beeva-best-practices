@@ -126,14 +126,20 @@ Templates system based in YAML, JSON and Python for Foreman. It has been needed 
 Starting from the great documentation supplied by a PuppetLabs engineer about building a correct workflow for Puppet working. This work method is the standard to work with Puppet complex environments:
 
 [http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-1/)
+
 [http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/](http://garylarizza.com/blog/2014/02/17/puppet-workflow-part-2/)
+
 [http://garylarizza.com/blog/2014/02/18/puppet-workflow-part-3/](http://garylarizza.com/blog/2014/02/18/puppet-workflow-part-3/)
+
 [http://garylarizza.com/blog/2014/03/07/puppet-workflow-part-3b/](http://garylarizza.com/blog/2014/03/07/puppet-workflow-part-3b/)
+
 [http://garylarizza.com/blog/2014/10/24/puppet-workflows-4-using-hiera-in-anger/](http://garylarizza.com/blog/2014/10/24/puppet-workflows-4-using-hiera-in-anger/)
+
 [http://garylarizza.com/blog/2014/03/26/random-r10k-workflow-ideas/](http://garylarizza.com/blog/2014/03/26/random-r10k-workflow-ideas/)
 
 
 It is recommended to watch the half and hour video about the work flow previously mentioned, with a very complete presentation:
+
 [https://puppetlabs.com/presentations/workshop-doing-refactor-dance-making-your-puppet-modules-more-modular-gary-larizza](https://puppetlabs.com/presentations/workshop-doing-refactor-dance-making-your-puppet-modules-more-modular-gary-larizza)
 
 ### Puppet Modules
@@ -151,32 +157,59 @@ It is being considered to migrate the DNS to Route53 if AWS is used.
 Puppet Modules has been created for most of the necessary actions in a typical infrastructure creation. Besides, thanks to r10k (watch specific section) it is possible to resolv extern modules from PuppetForce. Amongst the developed modules, available in git.beeva.com, are:
 
 *amazontools:* the amazontools module installation
+
 *autoscaling:* installation and configuration of the autoscaling start script 
+
 *backups:* backups configuration (Databases and code)
+
 *crontab:* cron tasks configuration
+
 *deployment:* application deploying (developing)
+
 *factertags:* Facter tags creation to consultation from Foreman
+
 *httpd:* Apache installation and configuration. VirtualHost, SSL, httpd.conf.
+
 *iptables:* Iptables configuration.
+
 *java:* Java installation and configuration.
+
 *mcollective:* Mcollective installation and configuration.
+
 *mysql:* Installation and configuration.
+
 *nagios:* Installation an configuration of the Nagios server and plugins  (developing).
+
 *newrelic:* Installation and configuration of the NewRelic agent (server and java)
+
 *nsupdate:* systems date.
+
 *openssh:* Installation an configuration.
+
 *packages:* Installation packages Interface.
+
 *repositories:* Install a personalized repository in s3
+
 *role:* Define the instances role.
+
 *s3cmd:* Installation and configuration
+
 *selinux:* Configuration.
+
 *sshkey:* Configuration of the SSH keys for users.
+
 *stdlib:* Puppet additional library.
+
 *sudoers:* Configuration of the privileged users permissions.
+
 *timezone:* System timezone.
+
 *tomcat:* installation and configuration.
+
 *users:* system users configuration.
+
 *vcsdeploy:* Additional module to deploy SVN or git files.
+
 *properties:* Deploy of Properties files for java, PHP and nodejs (developing) files.
 
 
@@ -584,10 +617,15 @@ include ​ ​
 In Foreman (or the used ENC) simply will be needed to specify a associate class to every machine: the appropiate role one.
 
 Thanks to this method it's easy to search a fail when it happens, following the next process:
+
 1-Search the associated role to the instance.
+
 2-Check what profile includes.
+
 3-In the failed profile, check all the data coming from hiera and the included classes called.
+
 4-Browse through the hiera hierarchy until arrive to the data that are applying.
+
 5-Go down to the code level corresponding to the module.
 
 ### Dynamic environments r10k
@@ -873,7 +911,7 @@ FACTER_app_tier=dev puppet agent --test (--noop)
 ```
 The notation ```FACTER_<variable>``` generate an environment variable with the value <variable> through the facter.
 
-In the points 3.3 and 3.4 it is explained in the used backends over and above of yaml, to encrypt sensitive content (hiera-eyaml) and deploying environment independent static files (hiera-file).
+In the sections 3.3 and 3.4 it is explained in the used backends over and above of yaml, to encrypt sensitive content (hiera-eyaml) and deploying environment independent static files (hiera-file).
 
 It is possible to know a value of a parameter inside the hierarchy executing a command from the Puppetmaster. To do that it is necessary a symbolic link between /etc/hiera.yaml (the file reads hiera by default from the CLI) and /etc/puppet/hiera.yaml, where it is defined the hierarchy that Puppet will use. In this way, it is possible to know the parameter value thorugh the described syntax in:
 
@@ -942,9 +980,13 @@ openp_dev
 ##### when to use hiera
 
 Starting from the document http://garylarizza.com/blog/2013/12/08/when-to-hiera/ in the roles an profiles section it proposes:
+
 1- No to use hiera in the roles
+
 2- To use hiera in the profiles to get the profile specific logic data.
+
 3- The data no specific to the business logic (default ports, default routes, etc) can be included in the module and be overwriten by hiera at profile level.
+
 
 This brings important benefits:
 
