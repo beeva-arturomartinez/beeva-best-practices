@@ -55,10 +55,6 @@ Usage example: If you have huge array that is accessed from Spark Closures, for 
 
 [Accumulators](http://spark.apache.org/docs/latest/programming-guide.html#accumulators-a-nameaccumlinka) are variables that are only “added” to through an associative operation and can therefore be efficiently supported in parallel. They can be used to implement counters (as in MapReduce) or sums. Spark natively supports accumulators of numeric types, and programmers can add support for new types. If accumulators are created with a name, they will be displayed in Spark’s UI. This can be useful for understanding the progress of running stages (NOTE: this is not yet supported in Python).
 
-#### Spark SQL
-
-* DataFrames
-* Hive ...
 
 #### Spark Streaming
 
