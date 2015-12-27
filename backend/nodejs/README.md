@@ -3,27 +3,33 @@ At this point we're going to talk about nodeJS, we're useing nodeJS to develop l
 
 ![alt text](static/nodejs.png "nodeJS")
 
-## Index
-
 ## [Frameworks](#nodejs-frameworks)
-* [Introduction, best practices, antipatterns](#nodejs-frameworks-best-practices)
-* [ExpressJS](#nodejs-frameworks-express)
-* [Hapi](#nodejs-frameworks-hapi)
+* [Introduction, best practices, antipatterns](#introduction-best-practices)
+* [Express](#express)
+* [Hapi](#hapi)
 * [Restify](#restify)
 
-## [DevOps](#nodejs-devops)
-* [Scaffolding](#nodejs-devops-scaffolding)
+## [DevOps](#devops)
+* [Scaffolding](#scaffolding)
 * [Security](#security)
-* [Log](#nodejs-devops-log)
-* [Clustering](#nodejs-devops-clustering)
-* [Cloud](#nodejs-devops-cloud)
+* [Log](#log)
+* [Clustering](#clustering)
+* [Cloud](#cloud)
 
-## [Testing](#nodejs-testing)
+## [Testing](#testing)
 * [TDD with Mocha](#tdd-with-mocha)
 * [BDD with Cucumber](#bdd-with-cucumber)
 
 
 ## Frameworks
+
+In this section we're going to cover the mostly used frameworks in node js.
+
+### Introduction, Best Practices, Antipatterns
+
+
+### Express
+
 
 ### Hapi
 
@@ -579,6 +585,8 @@ server.start(config).then(
 
 ## DevOps
 
+### Scaffolding
+
 ### Security
 
 #### Conventions
@@ -660,8 +668,6 @@ The default form to do this in Nodejs is to use *console.log*. But isn't a good 
 
 For this purpose it's better to use the library to debug [Bunyan](https://github.com/trentm/node-bunyan).
 
-
-
 ####Bunyan
 
 Bunyan is a **simple and fast JSON logging** library for node.js services.
@@ -688,6 +694,13 @@ Manifesto: Server logs should be structured. JSON's a good format. Let's do that
 - Support for browserify. See Browserify section below.
 
 For more information see their [web](https://github.com/trentm/node-bunyan).
+
+
+### Clustering
+
+
+### Cloud
+
 
 ## Testing
 
@@ -970,7 +983,6 @@ Feature: Example feature
 		When I go to the README file
 		Then I should see "Usage" as the page title
 ```
-
 
 It's a best practice to store these files under /features in acceptance-test subfolder.
 
