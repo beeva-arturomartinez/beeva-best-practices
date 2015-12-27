@@ -1300,8 +1300,14 @@ module.exports = hooks;
 
 ### References
 
-* [nodejs.org](http://www.nodejs.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/nodejs/) A node.js full cheatsheet
+* [nodejs.org](http://www.nodejs.org)
+* [ExpressJS Framework](http://expressjs.com)
+* [HapiJS Framework](http://hapijs.com)
+* [RestifyJS Framework](http://restify.com)
+* [Overapi Cheatsheet](http://overapi.com/nodejs)
+* [Joyent Production Best Practices](https://www.joyent.com/developers/node)
+* [Risingstack Best Practices](https://blog.risingstack.com/node-js-best-practices)
+* [Heroku Best Practices](https://devcenter.heroku.com/articles/node-best-practices)
 
 ___
 
