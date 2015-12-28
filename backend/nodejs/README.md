@@ -3,13 +3,15 @@ At this point we're going to talk about nodeJS, we're useing nodeJS to develop l
 
 ![alt text](static/nodejs.png "nodeJS")
 
+In this guide, we're going to show 
+
 ## [Frameworks](#nodejs-frameworks)
 * [Introduction, best practices, antipatterns](#introduction-best-practices)
 * [Express](#express)
 * [Hapi](#hapi)
 * [Restify](#restify)
 
-## [DevOps](#devops)
+## [DevOps](#devOps)
 * [Scaffolding](#scaffolding)
 * [Security](#security)
 * [Log](#log)
