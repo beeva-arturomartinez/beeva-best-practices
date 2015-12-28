@@ -35,8 +35,6 @@ The Grunt ecosystem is huge and it's growing every day with hundreds of plugins 
 
 - And much more..
  
- 
-
 
 ## <a name='gruntfile'>Gruntfile</a>
 
