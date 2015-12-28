@@ -40,7 +40,7 @@ The Grunt ecosystem is huge and it's growing every day with hundreds of plugins 
 
 ## <a name='gruntfile'>Gruntfile</a>
 
-The configuration and execution of all tasks and pluggins is done in the configuration file <b>Gruntfile<b>.
+The configuration and execution of all tasks and pluggins is done in the configuration file <b>Gruntfile</b>.
 
 ```javascript
 module.exports = function (grunt) {
