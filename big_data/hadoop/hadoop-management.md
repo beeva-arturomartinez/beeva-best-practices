@@ -8,7 +8,7 @@
 * [JAVA](#java)
 * [Deployment](#deployment)
 * [Hadoop Distribution](#hadoop-distribution)
-* [What is HDFS?](#what-is-hdfs)
+* [HDFS](#hdfs)
 * [Apache HBase](#apache-hbase)
 
 ### Hardware Selection
@@ -135,7 +135,7 @@ The main advantages over its rivals are:
 
  - In case of using CDH, it is recommended to use parcels (not rpms) for cluster deployment.
 
-### What is HDFS?
+### HDFS
 
 ![hdfs_comic_p1](static/hdfs_comic_p1.png)
 ![hdfs_comic_p2](static/hdfs_comic_p2.png)
