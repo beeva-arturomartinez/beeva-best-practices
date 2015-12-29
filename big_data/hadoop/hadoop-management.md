@@ -158,6 +158,7 @@ Comic example how HDFS works:
 ![hdfs_comic_p5](static/hdfs_comic_p5.png)
 
 ### Apache HBase
+![Logo Hbase](static/logo_hbase.png)
 #### Main Features
 
 > - Distributed and scalable. Data is distributedly stored over hadoop storage system.
