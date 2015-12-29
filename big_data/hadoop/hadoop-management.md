@@ -137,6 +137,20 @@ The main advantages over its rivals are:
 
 ### HDFS
 
+ - It is a distributed file system designed to run on commodity hardware.
+
+ - Bringing the computing to the data instead bringing the data to the computing decrease considerably the bandwidth use and increase the parallelism to computing. Although if any node get down the data continues in the other copies and the computing can starts in one of these nodes. 
+
+ - The client can set the replica factor and the block size to increase heuristic for the data locality. Accurate block size is 128MB and replica factor, at least, three.
+
+ - NameNode handles the location of file blocks in HDFS and it's loaded in ram memory so it's limited. For this reason it's suitable to manage big/very big files instead of several little files, appending content to files. Each file registered in the NameNode needs around 150 bytes for metadata.
+
+ - Secondary NameNode is not  a failover NameNode, it have a copy in time from the NameNode to roll the changes in NameNode 'Edits' file to create a new FSImage file. It should be called 'Checkpoint NameNode'.
+
+ - To fix NameNode uniqueness the HDFS can be converted in a HA service 'NameService' where two (or more) node works as NameNode but only one in production and the other does the checkpoint task. Using Zookeeper can automatically change the state from Failover to Production NameNode. It has a disadvantage that all DataNodes need to communicate with the different nodes in the NameService increasing the bandwidth use.
+
+Comic example how HDFS works:
+
 ![hdfs_comic_p1](static/hdfs_comic_p1.png)
 ![hdfs_comic_p2](static/hdfs_comic_p2.png)
 ![hdfs_comic_p3](static/hdfs_comic_p3.png)
@@ -379,4 +393,5 @@ HBase does not overwrite row values, but rather stores different values per row 
 ___
 
 ![beeva logo](../../static/horizontal-beeva-logo.png)
+
 [BEEVA](http://www.beeva.com) | 2015
