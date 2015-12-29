@@ -8,6 +8,7 @@
 * [JAVA](#java)
 * [Deployment](#deployment)
 * [Hadoop Distribution](#hadoop-distribution)
+* [What is HDFS?](#what-is-hdfs)
 * [Apache HBase](#apache-hbase)
 
 ### Hardware Selection
@@ -72,14 +73,6 @@ hdfs  -       nproc   32768
 ...
 ````
 
-#### What is HDFS?
-
-![hdfs_comic_p1](static/hdfs_comic_p1.png)
-![hdfs_comic_p2](static/hdfs_comic_p2.png)
-![hdfs_comic_p3](static/hdfs_comic_p3.png)
-![hdfs_comic_p4](static/hdfs_comic_p4.png)
-![hdfs_comic_p5](static/hdfs_comic_p5.png)
-
 #### HOSTNAME RESOLUTION
 
  - It is recommended to configure a DNS server for hostname resolution (not to use the /etc/hosts file).
@@ -142,6 +135,13 @@ The main advantages over its rivals are:
 
  - In case of using CDH, it is recommended to use parcels (not rpms) for cluster deployment.
 
+### What is HDFS?
+
+![hdfs_comic_p1](static/hdfs_comic_p1.png)
+![hdfs_comic_p2](static/hdfs_comic_p2.png)
+![hdfs_comic_p3](static/hdfs_comic_p3.png)
+![hdfs_comic_p4](static/hdfs_comic_p4.png)
+![hdfs_comic_p5](static/hdfs_comic_p5.png)
 
 ### Apache HBase
 #### Main Features
