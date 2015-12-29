@@ -1,6 +1,6 @@
 # Best practices for Hadoop
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![alt text](../../static//horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
