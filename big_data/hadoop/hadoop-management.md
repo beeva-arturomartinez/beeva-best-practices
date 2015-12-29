@@ -74,11 +74,11 @@ hdfs  -       nproc   32768
 
 #### What is HDFS?
 
-![hdfs_comic_p1](static/static/hdfs_comic_p1.png)
-![hdfs_comic_p2](static/static/hdfs_comic_p2.png)
-![hdfs_comic_p3](static/static/hdfs_comic_p3.png)
-![hdfs_comic_p4](static/static/hdfs_comic_p4.png)
-![hdfs_comic_p5](static/static/hdfs_comic_p5.png)
+![hdfs_comic_p1](static/hdfs_comic_p1.png)
+![hdfs_comic_p2](static/hdfs_comic_p2.png)
+![hdfs_comic_p3](static/hdfs_comic_p3.png)
+![hdfs_comic_p4](static/hdfs_comic_p4.png)
+![hdfs_comic_p5](static/hdfs_comic_p5.png)
 
 #### HOSTNAME RESOLUTION
 
