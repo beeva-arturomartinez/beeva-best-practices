@@ -166,7 +166,7 @@ Comic example how HDFS works:
 
 - ResourceManager only manage the cluster resources. It decides where the Container in which NodeManager must be launched.
 
-- The client asks to the ResourceManager for a Container to run a job. Starting with the ApplicationManager (~JobTracker in MR1) and this will ask itself to the ResourceManager about it requirements to run the different tasks for the job to launch them in other containers assigned by the ResourceManager.
+- The client asks to the ResourceManager for a Container to run a job. Starting with the ApplicationManager (~JobTracker in MR1) and this will ask itself to the ResourceManager about it requirements to run the different tasks for the job to launch them in other Containers assigned by the ResourceManager in different NodeManagers.
 
 - Splits are not blocks, but can be. A job starts calculating the number of splits, by default is the number of hdfs block size. The client can increase splits number helping parallelism and decreasing them reduce the parallelism. It depends of replica factor, number of workers, task requirements.
 
