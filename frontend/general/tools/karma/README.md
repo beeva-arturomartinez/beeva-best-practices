@@ -182,7 +182,7 @@ Karma is easily integrated with Grunt through the pluggin <b>[grunt-karma](https
 
 To do this, first we install the necessary plugins as nodejs packages using NPM.
 
-```JSON
+```javascript
 //package.json
 {
   "name": "BeevaProyect",
