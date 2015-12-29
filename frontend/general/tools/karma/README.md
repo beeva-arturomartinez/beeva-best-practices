@@ -161,7 +161,7 @@ Karma automatically loads all sibling NPM modules which have a name starting wit
 
 In addition,  karma allows explicitly list plugins you want to load via the plugins configuration setting.
 
-```JSON
+```javascript
 //karma.conf.js
 plugins: [
   // Karma will require() these plugins
