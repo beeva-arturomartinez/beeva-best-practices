@@ -72,9 +72,13 @@ hdfs  -       nproc   32768
 ...
 ````
 
-#### What's HDFS?
+#### What is HDFS?
 
-[hadoop_hdfs_comic.pdf](static/hadoop_hdfs_comic.pdf "A sort introduction with a comic")
+![hdfs_comic_p1](static/static/hdfs_comic_p1.png)
+![hdfs_comic_p2](static/static/hdfs_comic_p2.png)
+![hdfs_comic_p3](static/static/hdfs_comic_p3.png)
+![hdfs_comic_p4](static/static/hdfs_comic_p4.png)
+![hdfs_comic_p5](static/static/hdfs_comic_p5.png)
 
 #### HOSTNAME RESOLUTION
 
@@ -374,5 +378,5 @@ HBase does not overwrite row values, but rather stores different values per row 
 
 ___
 
-![alt text](../../static/horizontal-beeva-logo.png "BEEVA")
+![beeva logo](../../static/horizontal-beeva-logo.png "BEEVA")
 [BEEVA](http://www.beeva.com) | 2015
