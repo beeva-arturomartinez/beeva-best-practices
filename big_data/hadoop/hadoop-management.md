@@ -74,7 +74,7 @@ hdfs  -       nproc   32768
 
 #### What's HDFS?
 
-![alt text](https://github.com/beeva-joseluismoreno/beeva-best-practices/blob/master/big_data/hadoop/static/hadoop_hdfs_comic.pdf "A sort introduction with a comic")
+![Hadoop Hdfs comic](static/hadoop_hdfs_comic.pdf "A sort introduction with a comic")
 
 #### HOSTNAME RESOLUTION
 
@@ -370,9 +370,7 @@ HBase does not overwrite row values, but rather stores different values per row 
 
 ### References
 
-* [Hadoop Hdfs comic](www.formhadoop.es/img/HDFS-comic.pdf) Hadoop Hdfs comic
-* [oficialsite.org](http://www.oficialwebsite.org) API & Docs
-* [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
+* [Hadoop Hdfs comic](http://www.formhadoop.es/img/HDFS-comic.pdf) Hadoop Hdfs comic
 
 ___
 
