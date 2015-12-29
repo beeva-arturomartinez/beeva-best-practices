@@ -71,8 +71,8 @@ module.exports = function (grunt) {
         dest: 'dist/docs',
         html5Mode: false,
         startPage: '/api',
-        title: "Rep.Operational",
-        image: "app/images/logoBBVA.png",
+        title: "Beeva Proyect",
+        image: "app/images/logoBeeva.png",
         titleLink: "/api",
         bestMatch: true
       },
@@ -462,31 +462,18 @@ module.exports = function (grunt) {
         reporter: 'html',
         htmlReporter: {
           outputFile: 'dist/reports/JS-Test/karma-test-result.html',
-          pageTitle: 'Reporting Operacional',
+          pageTitle: 'Beeva Proyect',
           subPageTitle: 'Página con los resultados de ejecución de los test Jasmine con Karma'
         }
-      },
-      backgroundUnit: {
-        configFile: 'test/karma.conf.js',
-        runnerPort: 9999,
-        reporter: 'html',
-        htmlReporter: {
-          outputFile: 'units.html',
-          pageTitle: '2Reporting Operacional',
-          subPageTitle: 'Una descripcion de los test...'
-        },
-        background: true
       }
     }
   });
-
 
   // HTTP SERVER TASK
   grunt.registerTask('server', 'Compile then start a connect web server', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
-
     grunt.task.run([
       'clean:server',
       'wiredep',
