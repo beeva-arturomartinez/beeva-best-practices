@@ -3,14 +3,48 @@
 
 ## Index
 
+* [HDFS](#hdfs)
+* [YARN](#yarn)
 * [Hardware Selection](#hardware-selection)
 * [OS Configuration](#os-configuration)
 * [JAVA](#java)
 * [Deployment](#deployment)
 * [Hadoop Distribution](#hadoop-distribution)
-* [HDFS](#hdfs)
-* [YARN](#yarn)
 * [Apache HBase](#apache-hbase)
+
+### HDFS
+
+ - It is a distributed file system designed to run on commodity hardware.
+
+ - Bringing the computing to the data instead bringing the data to the computing decrease considerably the bandwidth use and increase the parallelism to computing. Although if any node get down the data continues in the other copies and the computing can starts in one of these nodes. 
+
+ - The client can set the replica factor and the block size to increase heuristic for the data locality. Accurate block size is 128MB and replica factor, at least, three.
+
+ - NameNode handles the location of file blocks in HDFS and it's loaded in ram memory so it's limited. For this reason it's suitable to manage big/very big files instead of several little files, appending content to files. Each file registered in the NameNode needs around 150 bytes for metadata.
+
+ - Secondary NameNode is not  a failover NameNode, it have a copy in time from the NameNode to roll the changes in NameNode 'Edits' file to create a new FSImage file. It should be called 'Checkpoint NameNode'.
+
+ - To fix NameNode uniqueness the HDFS can be converted in a HA (high avaliability) service 'NameService' where two (or more) node works as NameNode but only one in production and the other does the checkpoint task. Using Zookeeper can automatically change the state from Failover to Production NameNode. It has a disadvantage that all DataNodes need to communicate with the different nodes in the NameService increasing the bandwidth use.
+
+Comic example how HDFS works:
+
+![hdfs_comic_p1](static/hdfs_comic_p1.png)
+![hdfs_comic_p2](static/hdfs_comic_p2.png)
+![hdfs_comic_p3](static/hdfs_comic_p3.png)
+![hdfs_comic_p4](static/hdfs_comic_p4.png)
+![hdfs_comic_p5](static/hdfs_comic_p5.png)
+
+### YARN
+
+- 'Yet Another Resource Negotiator', not only for Map Reduce tasks. It's a dynamic resource manager using Containers for Map Reduce, Apache Spark, Apache Flink, Impala, ... .
+
+- In Hadoop a Worker node is: DataNode + NodeManager for datalocality. Recomended 8cores and 8GB Ram memory per node.
+
+- ResourceManager only manage the cluster resources. It decides where the Container in which NodeManager must be launched.
+
+- The client asks to the ResourceManager for a Container to run a job. Starting with the ApplicationManager (~JobTracker in MR1) and this will ask itself to the ResourceManager about it requirements to run the different tasks for the job to launch them in other Containers assigned by the ResourceManager in different NodeManagers.
+
+- Splits are not blocks, but can be. A job starts calculating the number of splits, by default is the number of hdfs block size. The client can increase splits number helping parallelism and decreasing them reduce the parallelism. It depends of replica factor, number of workers, task requirements.
 
 ### Hardware Selection
 
@@ -135,40 +169,6 @@ The main advantages over its rivals are:
  - In case of using CDH, it is recommended to use Cloudera Manager for cluster deployment/administration.
 
  - In case of using CDH, it is recommended to use parcels (not rpms) for cluster deployment.
-
-### HDFS
-
- - It is a distributed file system designed to run on commodity hardware.
-
- - Bringing the computing to the data instead bringing the data to the computing decrease considerably the bandwidth use and increase the parallelism to computing. Although if any node get down the data continues in the other copies and the computing can starts in one of these nodes. 
-
- - The client can set the replica factor and the block size to increase heuristic for the data locality. Accurate block size is 128MB and replica factor, at least, three.
-
- - NameNode handles the location of file blocks in HDFS and it's loaded in ram memory so it's limited. For this reason it's suitable to manage big/very big files instead of several little files, appending content to files. Each file registered in the NameNode needs around 150 bytes for metadata.
-
- - Secondary NameNode is not  a failover NameNode, it have a copy in time from the NameNode to roll the changes in NameNode 'Edits' file to create a new FSImage file. It should be called 'Checkpoint NameNode'.
-
- - To fix NameNode uniqueness the HDFS can be converted in a HA (high avaliability) service 'NameService' where two (or more) node works as NameNode but only one in production and the other does the checkpoint task. Using Zookeeper can automatically change the state from Failover to Production NameNode. It has a disadvantage that all DataNodes need to communicate with the different nodes in the NameService increasing the bandwidth use.
-
-Comic example how HDFS works:
-
-![hdfs_comic_p1](static/hdfs_comic_p1.png)
-![hdfs_comic_p2](static/hdfs_comic_p2.png)
-![hdfs_comic_p3](static/hdfs_comic_p3.png)
-![hdfs_comic_p4](static/hdfs_comic_p4.png)
-![hdfs_comic_p5](static/hdfs_comic_p5.png)
-
-### YARN
-
-- 'Yet Another Resource Negotiator', not only for Map Reduce tasks. It's a dynamic resource manager using Containers for Map Reduce, Apache Spark, Apache Flink, Impala, ... .
-
-- In Hadoop a Worker node is: DataNode + NodeManager for datalocality. Recomended 8cores and 8GB Ram memory per node.
-
-- ResourceManager only manage the cluster resources. It decides where the Container in which NodeManager must be launched.
-
-- The client asks to the ResourceManager for a Container to run a job. Starting with the ApplicationManager (~JobTracker in MR1) and this will ask itself to the ResourceManager about it requirements to run the different tasks for the job to launch them in other Containers assigned by the ResourceManager in different NodeManagers.
-
-- Splits are not blocks, but can be. A job starts calculating the number of splits, by default is the number of hdfs block size. The client can increase splits number helping parallelism and decreasing them reduce the parallelism. It depends of replica factor, number of workers, task requirements.
 
 ### Apache HBase
 ![Logo Hbase](static/logo_hbase.png)
