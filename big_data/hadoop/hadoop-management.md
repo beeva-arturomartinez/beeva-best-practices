@@ -1,6 +1,5 @@
 # Best practices for Hadoop
-
-![alt text](../../static//horizontal-beeva-logo.png "BEEVA")
+![Hadoop logo](static/hadoop_logo.png "Hadoop logo")
 
 ## Index
 
@@ -371,10 +370,11 @@ HBase does not overwrite row values, but rather stores different values per row 
 
 ### References
 
-* [Link](http://www.url.to) Description
+* [Hadoop Hdfs comic](www.formhadoop.es/img/HDFS-comic.pdf) Hadoop Hdfs comic
 * [oficialsite.org](http://www.oficialwebsite.org) API & Docs
 * [Overapi Cheatsheet](http://overapi.com/example/) Cheatsheet
 
 ___
 
+![alt text](../../static/horizontal-beeva-logo.png "BEEVA")
 [BEEVA](http://www.beeva.com) | 2015
