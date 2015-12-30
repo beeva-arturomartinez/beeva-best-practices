@@ -13,11 +13,11 @@ In this document we're going to introduce some common good practices for develop
 
 ## Index
 
-* Think in polymer:
+* [Think in polymer](Thinking-in-polymer.md):
 
   - Best practices about how to compose using atomic design, without monolithic code
 
-* Correctly used observers: 
+* [Observers and data binding](data-binding-observers-listenes-md): 
   
   - Notify readOnly
 
@@ -31,13 +31,9 @@ In this document we're going to introduce some common good practices for develop
   
   - Inheritance emulation
 
-* Life cycle matters:
-  
-  - You have to do some stuff at the correct time
+* [Styling well](Styling.md):
 
-* Styling well:
-
-* Javascript applied to Polymer:
+* [Polymer apps](polymer_apps.md):
 
 * [Appendice](appendice.md):
   - Mediator pattern
