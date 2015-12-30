@@ -786,8 +786,159 @@ and from the node.js microservice, retrieval of information about zuul would be 
 ## 4. Using docker to deploy microservices
 ---
 
-## 5. A reference architecture for microservices in AWS
----
+Docker is all about making it easier to create, deploy, and run applications by using containers. Containers allow a developer to package up an application with all of the parts it needs, such as libraries and other dependencies, and ship it all out as one package. By doing so, thanks to the container, the developer can rest assured that the application will run on any other Linux machine regardless of any customized settings that machine might have that could differ from the machine used for writing and testing the code.
+
+In a way, Docker is a bit like a virtual machine. But unlike a virtual machine, rather than creating a whole virtual operating system, Docker allows applications to use the same Linux kernel as the system that they're running on and only requires applications be shipped with things not already running on the host computer. This gives a significant performance boost and reduces the size of the application.
+
+### 4.1 Images
+An image is an inert, immutable, file that's essentially a snapshot of a container. Images are created with the build command, and they'll produce a container when started with run. Images are stored in a Docker registry such as registry.hub.docker.com. Because they can become quite large, images are designed to be composed of layers of other images, allowing a miminal amount of data to be sent when transferring images over the network.
+
+#### Create and image with your build tool
+
+ In order for Java developers to test their applications in containers they typically have to build their code, create an image and run a container. You can use the Docker command line interface to manage images and containers.
+There are actually several Maven plugins for Docker.  A [rhuss/docker-maven-plugin](https://github.com/rhuss/docker-maven-plugin)  simple configuration for this task
+
+```xml
+<plugin>
+  <groupId>org.jolokia</groupId>
+  <artifactId>docker-maven-plugin</artifactId>
+  <version>0.13.4</version>
+  <configuration>
+    <images>
+      <image>
+        <names>simple-service-app</names>
+        <alias></alias>
+        <build>
+          <assembly>                  
+        <mode>dir</mode>              
+            <basedir>${basedir}/target</basedir>
+            <dockerFileDir>${basedir}/target</dockerfileFDir>
+          </assembly>  
+         </build>
+         <run>
+           <ports>
+             <port>8080:8080</port>
+             <port>433:433</port> 
+          </ports>
+         </run>
+       </image>
+     </images>
+   </configuration>
+</plugin>
+
+```
+With this plugin you can configure run expecific docker commands an tune different docker settings as logs, tags, names... even execute commands. 
+We can add inside <image> tag a <cmd> where we can execute commands to run our app
+```
+<cmd>
+    <shell>java -jar /maven/${project.build.finalName}.jar server /maven/docker-config.yml</shell>
+</cmd>    
+```
+
+#### Execute Goals
+
+With the plugin you can build images and run containers and also easily remove these again which is especially important in the iterative development phase.
+
+Build image:
+> mvn docker:build
+
+Run container:
+> mvn docker:start
+
+Stop and remove container:
+> mvn docker:stop
+
+Remove image:
+> mvn -Ddocker.removeAll docker:remove
+
+### 4.2 Containers
+
+With a programming metaphor, if an image is a class, then a container is an instance of a class—a runtime object. They are lightweight and portable encapsulations of an environment in which to run applications.
+
+### 4.3 DockerFile
+Each Dockerfile is a script, composed of various commands (instructions) and arguments listed successively to automatically perform actions on a base image in order to create (or form) a new one. They are used for organizing things and greatly help with deployments by simplifying the process start-to-finish.
+
+Dockerfiles begin with defining an image FROM which the build process starts. Followed by various other methods, commands and arguments (or conditions), in return, provide a new image which is to be used for creating docker containers.
+
+A docker file looks like 
+
+```
+#
+# Oracle Java 8 Dockerfile
+#
+# https://github.com/dockerfile/java
+# https://github.com/dockerfile/java/tree/master/oracle-java8
+#
+
+# Pull base image.
+FROM dockerfile/ubuntu
+
+# Install Java.
+RUN \
+  echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+  add-apt-repository -y ppa:webupd8team/java && \
+  apt-get update && \
+  apt-get install -y oracle-java8-installer && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/oracle-jdk8-installer
+
+
+# Define working directory.
+WORKDIR /data
+
+# Define commonly used JAVA_HOME variable
+ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+
+# Define default command.
+CMD ["bash"]
+```
+### 4.4 continuous integration
+One option to release a docker image inside our software process is :
+![continuous integration](static/docker-release-image.png)
+#### Link
+Linking allows containers to exchange information (like IPs or ports) without exposing them on the host system. Fortunately, the docker-maven-plugin allows us to comfortably link containers together. The only thing we have to do is to add an element in the <run> block of our microservice image configuration.
+```
+<image>
+    <alias>mongodb</alias>
+    <name>mongo:2.6.11</name>
+    <run>
+        <namingStrategy>alias</namingStrategy>
+        <cmd>--smallfiles</cmd>
+        <wait>
+            <log>waiting for connections on port</log>
+            <time>10000</time>
+        </wait>
+        <log>
+            <prefix>MongoDB</prefix>
+            <color>yellow</color>
+        </log>
+    </run>
+</image>
+
+
+<run>
+    ...
+    <links>
+        <link>mongodb:db</link>
+    </links>
+</run>
+```
+#### Deploy
+```
+<execution>
+    <id>push-to-docker-registry</id>
+    <phase>deploy</phase>
+    <goals>
+        <goal>push</goal>
+    </goals>
+</execution>
+```
+ 
+> mvn -Ddocker.username=<username> -Ddocker.password=<password> deploy
+
+To push your image to your own registry instead of Docker Hub just set the docker.registry.name property. Let’s assume your docker registry runs on your local machine on port 5000:
+> <docker.registry.name>localhost:5000/</docker.registry.name>
+
 
 ## 6. References
 ---
