@@ -40,8 +40,8 @@ In this document we're going to introduce some common good practices for develop
 * Javascript applied to Polymer:
 
 * [Appendice](appendice.md):
-  - Polymer apps
   - Mediator pattern
+  - Element Structure
   - Tools for polymer
     - Bower
     - Yeoman
