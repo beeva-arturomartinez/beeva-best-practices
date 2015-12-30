@@ -1,18 +1,19 @@
 # Calabash
 Automated acceptance testing for mobile apps. 
 
-![Logo](/static/calabash-top-bar.png "Calabash")
+![Logo](./static/calabash-top-bar.png "Calabash")
 
 Calabash enables you to write and execute automated acceptance test of mobile apps. It's cross-platform, supporting android and iOS native apps. It's open source and free, developed and maintained by Xamarin.
 
 ## Index
 
-* [Architecture - Page Objects](#architecture-page-objects)
+* [Page objects pattern](#page-objects-pattern)
 * [Project structure](#project-structure)
-* [Writing scenarios](#writing-scenarios)
+* [Background](#background)
+* [Useful commands](#useful-commands)
 * [References](#references)
 
-### Architecture - Page objects
+### Page objects pattern
 
 We've described how to improve the architecture of your test code base: using page objects you get better abstraction, reuse and cross-platform comes more easily.
 
@@ -22,14 +23,14 @@ A page object should abstract a single screen in your application. It should exp
 
 The most obvious benefit of this is abstraction and reuse. If you have several steps needing to navigate to details, the code for details(talk) is reused. Also, callers of this method need not worry about the details (e.g. query and touch) or navigating to this screen.
 
-![Page object](/static/page_object.png "Page object")
+![Page object](./static/page_object.png "Page object")
 
 You can learn about this pattern with the next guide: [Page object guide](https://github.com/calabash/x-platform-example)
 
 
 ### Project structure
 
-![Project structure](/static/project_structure.png)
+![Project structure](./static/project_structure.png)
 
 #### Folders
 
@@ -53,7 +54,7 @@ You can learn about this pattern with the next guide: [Page object guide](https:
 
 - cucumber.yml: contains the application configurations.
 
-![Cucumber YAML](/static/cucumber_yml.png "Cucumber YAML")
+![Cucumber YAML](./static/cucumber_yml.png "Cucumber YAML")
 
 The *rerun* option allow to create a file with the failed scenarios. These scenarios can be run later with the *@impl/reports/failed-steps.txt* option. Examples:
 
@@ -75,12 +76,12 @@ Execution commands:
 
 - Gemfile: contains all the gem dependencies to install with *bundle install*
 
-![Gemfile](/static/gemfile.png "Gemfile")
+![Gemfile](./static/gemfile.png "Gemfile")
 
 
-#### Background
+### Background
 
-![Background format](/static/scenario_background.png "Scenario format")
+![Background format](./static/scenario_background.png "Scenario format")
 
 The scenario data will be loaded in the initial background scenario. This data will be used by the different scenarios.
  
