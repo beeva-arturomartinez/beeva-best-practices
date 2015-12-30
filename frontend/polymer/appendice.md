@@ -1,7 +1,6 @@
 ## Appendice
 In this section we'll see some aspects related with polymer development routine (tools, common patterns...)
 
-## Polymer apps
 ## Mediator pattern
 
 When we need to communicate polymer elements inside a common context, we must use the [Mediator Pattern](https://en.wikipedia.org/wiki/Mediator_pattern).
@@ -138,11 +137,29 @@ We can implement the mediator pattern by ussing a template where two or more Pol
   </script>
 ```
 
-In the example above the host (host element) contains two guest elements into its template. These elements can communicate using guest->host communication as explained above. The host must implement all the features needed to act as a medaitor between the two guest, and then, use host->guest communication when required.
+In the example above the host (host element) contains two guest elements into its template. These elements can communicate using guest->host communication as explained above. The host must implement all the features needed to act as a mediator between the two guest, and then, use host->guest communication when required.
 
+## Element structure
+
+The best way to create a correct scaffold in Polymer is taking a look to seed-element or using yeoman (It will be explained next).
+
+In every element you must see three important parts:
+
+* **bower.json**: file to handle dependencies via bower tool
+* **demo folder**: folder when you can allocate your demo, using [<iron-component-page>](https://github.com/PolymerElements/iron-component-page) to probide documentation polymer style
+* **test folder**: test using [Web Component Tester](https://github.com/Polymer/web-component-tester)
+
+You should take into account that polymer implement docs using determinated meta tags in order to create their doc "catalog style". The best way to learn about is exploring examples of [Hydrolisis](https://github.com/Polymer/hydrolysis), the Polymer tool used to parse Polymer documentation.
 
 ## Tools for polymer
 ### Bower
-//TODO
+Bower is a javascript dependency manager commonly used when developing polymer elements or apps.
+
+Every polymer element (according to [seed-element](https://github.com/polymerelements/seed-element)) has a bower.json file with needed dependencies. you must take care of it and declare every dependency you could need on it.
+
 ### Yeoman
-//TODO
+Yeoman is a tool that creates an scaffolding for your app, component...
+
+Yeoman allow to install generators for creating different structures, from angular apps, to polymer elements, polymer apps... Generators are constantly evolving.
+
+Polymer has developed a really good generator based on seed-element and Polymer Starter Kit, you can take a look [here](https://github.com/yeoman/generator-polymer)
