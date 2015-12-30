@@ -146,8 +146,8 @@ The best way to create a correct scaffold in Polymer is taking a look to seed-el
 In every element you must see three important parts:
 
 * **bower.json**: file to handle dependencies via bower tool
-* **demo folder**: folder when you can allocate your demo, using [<iron-component-page>](https://github.com/PolymerElements/iron-component-page) to probide documentation polymer style
-* **test folder**: test using [Web Component Tester](https://github.com/Polymer/web-component-tester)
+* **demo folder**: folder when you can allocate your demo, using [iron-component-page](https://github.com/PolymerElements/iron-component-page) to provide documentation polymer style
+* **test folder**: test using [web-component-tester](https://github.com/Polymer/web-component-tester)
 
 You should take into account that polymer implement docs using determinated meta tags in order to create their doc "catalog style". The best way to learn about is exploring examples of [Hydrolisis](https://github.com/Polymer/hydrolysis), the Polymer tool used to parse Polymer documentation.
 
