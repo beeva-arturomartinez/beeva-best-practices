@@ -17,13 +17,15 @@ In this document we're going to introduce some common good practices for develop
 
   - Best practices about how to compose using atomic design, without monolithic code
 
-* [Observers and data binding](data-binding-observers-listenes-md): 
+* [Observers and data binding](data_binding_observers_listenes.md): 
   
   - Notify readOnly
 
   - {{}} vs [[]]
 
   - declarative vs imperative
+  
+  - life cycle
 
 * [Behaviors and inheritance](behaviors_and_inheritance.md):
   
