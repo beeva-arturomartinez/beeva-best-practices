@@ -21,7 +21,7 @@ The properties that use our polymer statement must be declared in the correspond
 
 If the property is simple Can we define it in a single line defining its type , whether it's a complex property it will use the complex notation.
 
-```
+```javascript
 Polymer({
 
   is: 'x-custom',
@@ -62,7 +62,7 @@ We must bear in mind that this order may vary depending on whether the browser i
 
 If you need to access items that are not prepared in the lifecycle ready we can do from the life cycle attached with async .
 
-```
+```javascript
 attached : function ( ) {
    this.async (function ( ) {
       // Access sibling or parent elements here
@@ -112,7 +112,7 @@ this kind of array observer allow us:
 
 To add EventListeners our polymer Listeners must use the function that gives polymer
 
-```
+```javascript
 Polymer({
 
      is: 'x-custom',
@@ -137,7 +137,7 @@ If you need to add EventListeners the document should be able to remove them at 
 
 We may also use on -event annotations , if we pick up a touch event , as on-tap is preferable to use on-click , since it has better performance.
 
-```
+```html
 <dom-module id="x-custom">
 
   <template>
