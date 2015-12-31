@@ -99,6 +99,6 @@ A Kanban board could bee a phisical board or a collaborative digital one. In bot
 *  The team's goal is to reduce the amount of time an issue takes to move through the entire process
 
 ### References
-* [Wikipedia](http://)
+* [Wikipedia](http://tinyurl.com/4nrxsk6)
 * [Kanban - David J. Anderson](http://www.amazon.es/dp/0984521402)
 * [Agile Coaching - Rachel Davies](http://www.amazon.es/dp/1934356433)
