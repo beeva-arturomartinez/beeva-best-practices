@@ -14,11 +14,7 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
 * [Frameworks](#frameworks)
   * [Express](#express)
   * [Hapi](#hapi)
-    * Application structure
-    * Plugins
-    * API
   * [Restify](#restify)
-    * Application structure
   * [Comparative](#comparative)
 
 * [DevOps](#devOps)
@@ -82,20 +78,149 @@ This brief section it's intended to give some easy and quick tips to rememeber d
  
 * Use tools like [PM2](https://www.npmjs.com/package/pm2) or [forever](https://www.npmjs.com/package/forever) as a tool for application restart.
 
+* [Use LTS versions of Node.js for Production](https://nodejs.org/en/blog/community/node-v5/), since 4.2.* all even versions are *LTS* and odd like 5.3.* are *Stable with latest features*.
 * Install node and npm interperters localy through [NVN](https://github.com/creationix/nvm) without using sudo. 
 * Clear the local cache after each update NPM version: *$npm cache clean*
 
 ## Frameworks
 
 In this section we're going to talk about three main frameworks that we are using on productive projects. Some of them are in microservices environments, RESTful APIs and web servers.
-Finally we offer a comparative in order to help to choose a tool for future projects with Node.js. 
+Finally we offer a comparative in order to help to choose a tool for future projects with Node.js.
 
+The node frameworks are layers on the top of http and use Middleware plugins to interact with the requests and responses. 
+Middlewares are a powerful yet simple concept: the output of one unit/function is the input for the next.
+
+At this point we're going to describe three popular node frameworks but there [are many others out there](https://www.devsaran.com/blog/10-best-nodejs-frameworks-developers).
+ 
 ### Express
 
 ![alt text](static/express.png "Express")
 
-@TODO this part
+Express is a minimal and flexible Node.js web application framework that provides a robust set of features for web and mobile applications. With a myriad of HTTP utility methods and middleware at your disposal, creating a robust API is quick and easy.
 
+Express provides a thin layer of fundamental web application features.
+
+#### Application structure
+
+One of the strengths of Express is the community and large number of application examples and proposals it has published on its [repository](https://github.com/strongloop/express/tree/master/examples). 
+
+Anyway one of the profits its the flexibility to divide the logic of our app. 
+
+##### Main file: src/index.js 
+
+```javascript
+var express = require('../..');
+
+var app = module.exports = express();
+
+app.use('/api/v1', require('./controllers/api_v1'));
+app.use('/api/v2', require('./controllers/api_v2'));
+
+app.get('/', function(req, res) {
+  res.send('Hello form root route.');
+});
+
+/* istanbul ignore next */
+if (!module.parent) {
+  app.listen(3000);
+  console.log('Express started on port 3000');
+
+```
+
+##### A controller foreach version related with the endpoint i.e. src/controller/api_v1.js & src/controller/api_v2.js  
+
+```javascript
+var express = require('../../..');
+
+var apiv1 = express.Router();
+
+apiv1.get('/', function(req, res) {
+  res.send('Hello from APIv1 root route.');
+});
+
+apiv1.get('/users', function(req, res) {
+  res.send('List of APIv1 users.');
+});
+
+module.exports = apiv1;
+```
+
+```javascript
+...
+// Another different implementation
+apiv2.get('/', function(req, res) {
+  res.send('Hello from APIv2 root route.');
+});
+...
+
+```
+
+#### Security Best Practices
+
+All these techniques are summarized and extracted from the creators of Express, check references for more detail.
+
+* Don’t use deprecated or vulnerable versions of Express.
+* Use TLS. If your app deals with or transmits sensitive data, use Transport Layer Security (TLS) to secure the connection and the data.
+* Use security middleware as [helmet](#helmet) or [lusca](#lusca) and at a minimum, disable X-Powered-By header. 
+* Use cookies securely. To ensure cookies don’t open your app to exploits, don’t use the default session cookie name and set cookie security options appropriately.
+* Ensure your dependencies are secure with [nsp](https://www.npmjs.com/package/nsp) or [requireSafe](https://www.npmjs.com/package/requiresafe).
+* Implement rate-limiting to prevent brute-force attacks against authentication. You can use middleware such as express-limiter, but doing so will require you to modify your code somewhat.
+* Use csurf middleware to protect against cross-site request forgery (CSRF).
+* Always filter and sanitize user input to protect against cross-site scripting (XSS) and command injection attacks.
+* Defend against SQL injection attacks by using parameterized queries or prepared statements.
+* Use the open-source sqlmap tool to detect SQL injection vulnerabilities in your app.
+* Use the nmap and sslyze tools to test the configuration of your SSL ciphers, keys, and renegotiation as well as the validity of your certificate.
+* Use safe-regex to ensure your regular expressions are not susceptible to regular expression denial of service attacks.
+* Revise the Node.js security [checklist](https://blog.risingstack.com/node-js-security-checklist).
+
+#### Performance Best Practices
+
+* Use gzip compression
+* Don’t use synchronous functions
+* Use middleware to serve static files
+* Do logging correctly
+* Handle exceptions properly:
+
+Try-catch is a JavaScript language construct that you can use to catch exceptions in synchronous code. Use try-catch, for example, to handle JSON parsing errors as shown below.
+
+```javascript
+app.get('/search', function (req, res) {
+  // Simulating async operation
+  setImmediate(function () {
+    var jsonStr = req.query.params;
+    try {
+      var jsonObj = JSON.parse(jsonStr);
+      res.send('Success');
+    } catch (e) {
+      res.status(400).send('Invalid JSON string');
+    }
+  })
+});
+```
+
+* Use promises
+
+Promises will handle any exceptions (both explicit and implicit) in asynchronous code blocks that use then(). Just add .catch(next) to the end of promise chains. For example:
+
+```javascript
+ // Now all errors asynchronous and synchronous get propagated to the error middleware.
+app.get('/', function (req, res, next) {
+  // do some sync stuff
+  queryDb()
+    .then(function (data) {
+      // handle data
+      return makeCsv(data)
+    })
+    .then(function (csv) {
+      // handle csv
+    })
+    .catch(next)
+})
+
+app.use(function (err, req, res, next) {
+  // handle error
+})
+```
 
 ### Hapi
 
@@ -714,6 +839,10 @@ For more information see their [web](https://github.com/trentm/node-bunyan).
 > - Strict mode, please. With this flag you can opt in to use a restricted variant of JavaScript. It eliminates some silent errors and will throw them all the time.
 > - Static code analysis. Use either JSLint, JSHint or ESLint. Static code analysis can catch a lot of potential problems with your code early on.
 > - No eval, or friends. Eval is not the only one you should avoid, in the background each one of the following expressions use eval: setInterval(String, 2), setTimeout(String, 2) and new Function(String). But why should you avoid eval? It can open up your code for injections attacks and is slow (as it will run the interpreter/compiler).
+
+#### Passport
+
+#### Lusca
 
 #### Helmet
 
@@ -1390,10 +1519,13 @@ module.exports = hooks;
 
 ### References
 
-* [Nodejs Oficial WebSite](http://www.nodejs.org)
-* [ExpressJS Framework](http://expressjs.com)
-* [HapiJS Framework](http://hapijs.com)
-* [RestifyJS Framework](http://restify.com)
+* [Node.js Oficial WebSite](http://www.nodejs.org)
+* [Node.js design patterns](https://blog.risingstack.com/fundamental-node-js-design-patterns/) 
+* [Express Framework](http://expressjs.com)
+* [Express Performance best practices](http://expressjs.com/en/advanced/best-practice-performance.html)
+* [Express Security best practices](http://expressjs.com/en/advanced/best-practice-security.html)
+* [Hapi Framework](http://hapijs.com)
+* [Restify Framework](http://restify.com)
 * [Overapi Cheatsheet](http://overapi.com/nodejs)
 * [NPM Cheatsheet](http://browsenpm.org/help)
 * [package.json full example](http://browsenpm.org/package.json)
