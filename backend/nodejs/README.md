@@ -3,27 +3,29 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
 
 ![alt text](static/nodejs.png "Node.js")
 
-## [Introduction](#introduction)
-* [Challenges](#challenges)
-* [Purpose](#purpose)
+## Index
 
-## [Patterns and antiPatterns](#patterns-and-antipatterns)
+* [Introduction](#introduction)
+  * [Challenges](#challenges)
+  * [Purpose](#purpose)
 
-## [Frameworks](#frameworks)
-* [Express](#express)
-* [Hapi](#hapi)
-* [Restify](#restify)
-* [Comparative](#comparative)
+* [Patterns and antiPatterns](#patterns-and-antipatterns)
 
-## [DevOps](#devOps)
-* [Logging](#logging)
-* [Security](#security)
-* [Clustering](#clustering)
-* [Cloud](#cloud)
+* [Frameworks](#frameworks)
+  * [Express](#express)
+  * [Hapi](#hapi)
+  * [Restify](#restify)
+  * [Comparative](#comparative)
 
-## [Testing](#testing)
-* [TDD with Mocha](#tdd-with-mocha)
-* [BDD with Cucumber](#bdd-with-cucumber)
+* [DevOps](#devOps)
+  * [Logging](#logging)
+  * [Security](#security)
+  * [Clustering](#clustering)
+  * [Cloud](#cloud)
+
+* [Testing](#testing)
+  * [TDD with Mocha](#tdd-with-mocha)
+  * [BDD with Cucumber](#bdd-with-cucumber)
 
 ## Introduction 
 
