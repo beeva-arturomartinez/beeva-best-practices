@@ -1,20 +1,22 @@
 # Node.js Style Guide & Best Pratices
-At this point we're going to talk about nodeJS, we're useing nodeJS to develop lightweight and efficient network apps using an event-driven, non-blocking I/O on the top of Chrome's V8 JavaScript engine.
+At this point we're going to talk about Node.js, we're useing Node.js to develop lightweight and efficient network apps using an event-driven, non-blocking I/O on the top of Chrome's V8 JavaScript engine.
 
-![alt text](static/nodejs.png "nodeJS")
+![alt text](static/nodejs.png "Node.js")
 
-In this guide, we're going to show 
+## [Introduction](#introduction)
+* [Challenges](#challenges)
+* [Purpose](#purpose)
 
-## [Frameworks](#nodejs-frameworks)
-* [Introduction, best practices, antipatterns](#introduction-best-practices)
+## [Patterns and antiPatterns](#patterns-and-antipatterns)
+
+## [Frameworks](#frameworks)
 * [Express](#express)
 * [Hapi](#hapi)
 * [Restify](#restify)
 
 ## [DevOps](#devOps)
-* [Scaffolding](#scaffolding)
+* [Logging](#logging)
 * [Security](#security)
-* [Log](#log)
 * [Clustering](#clustering)
 * [Cloud](#cloud)
 
@@ -22,12 +24,62 @@ In this guide, we're going to show
 * [TDD with Mocha](#tdd-with-mocha)
 * [BDD with Cucumber](#bdd-with-cucumber)
 
+## Introduction 
+
+Node.js like Python and other languages can be used to develop desktop/console tools or to develop highly scalable network applications.
+**This guide will focus on using Node.js to develop network applications**.
+Since developments are made in Javacript Node.js, we recommend reading the language specific section in this [guide](../../frontend/javascript/README.md).
+
+### Challenges
+
+The two main challenges to be resolved by a developer to program begins with Node.js are:
+ 
+* Asynchrony: Although there are several ways to manage the async flow as libraries (i.e. [async](https://www.npmjs.com/package/async), [co](https://www.npmjs.com/package/co)), promises ([q](https://www.npmjs.com/package/q), [mpromise](https://www.npmjs.com/package/mpromise), ...) or conventions ([CPS](https://en.wikipedia.org/wiki/Continuation-passing_style)), it should handle them properly and avoid excessive nesting callbacks ([Pyramid of Doom](http://tritarget.org/blog/2012/11/28/the-pyramid-of-doom-a-javascript-style-trap/)) and the excessive reliance on a particular library. A major problem arises when we are trying to follow the execution flow of our code and the error handling. Initially it's difficult to adopt this way of work and can be perceived as a loss of control over it. However, it is a powerful tool that allows us to make better use of resources.
+ 
+* Duality between Application and Server: When we are working with Node.js, we must understand that it's slightly different from those other familiar languages ​​like Java and PHP,  which for develop web applications usually have the support of Apache or Tomcat or other application servers. Although this is usually shielded by frameworks, we should not forget this part of work, which requires us to delve deeper into DevOps issues as the application log, error handling or profiling application issues ports and performance parameters.
+
+### Purpose
+
+The purpose of this guide is to share our knowledge in the development of network apps in Node.js. We choosed these areas because they are oriented to help in the built of apps scalable in a fast but reliable way.
+
+These areas are:
+* Use of Frameworks: They help us in the development of new apps through its tools and a design and struct proposal for our apps.
+
+* DevOps: We've grouped here all the techniques oriented to easy deploy, mantain and monitorize the health of our Node.js apps
+
+* Automated Testing with TDD & BDD: We offer a serie of advices in order to implement this testing philosophy in our developments.
+
+## Patterns and antiPatterns
+
+This brief section it's intended to give some easy and quick tips to rememeber during any Node.js development.
+
+* Modularize developments as far as possible.
+* Use a framework that helps us to structure the project.
+* Complete your developments with automated testing.
+
+* Avoid using console.log() in your code. 
+* Using configuration files against variables for ports, ips of other machines, ...
+* Implement differente logs for application and for Node.js.
+* Use domains facing try-catch blocks for error handling.
+* In public servers add a safety middleware as [helmet](https://www.npmjs.com/package/helmet) or [lusca](https://www.npmjs.com/package/lusca).
+
+* Include and maintain [package.json](https://docs.npmjs.com/files/package.json) file with the version number (using *$npm init*).
+* Mark the package as private: true to its release.
+* For production applications control the version number of our units (according to criticity of the project set to minor or patch).
+* Define and test entry points in the distribution file [package.json](https://docs.npmjs.com/files/package.json#scripts).
+* Use *DevDependencies* and *Dependencies* sections of [package.json](https://docs.npmjs.com/files/package.json#dependencies).
+* Use [retire](https://www.npmjs.com/package/retire) to verify outdated or unsafe dependencies.
+* Do not install units in our global development environment.
+* Before deployments delete the *node_modules* folder and check file dependencies [package.json](https://docs.npmjs.com/files/package.json).
+ 
+* Use tools like [PM2](https://www.npmjs.com/package/pm2) or [forever](https://www.npmjs.com/package/forever) as a tool for application restart.
+
+* Install node and npm interperters localy through [NVN](https://github.com/creationix/nvm) without using sudo. 
+* Clear the local cache after each update NPM version: *$npm cache clean*
 
 ## Frameworks
 
 In this section we're going to cover the mostly used frameworks in node js.
-
-### Introduction, Best Practices, Antipatterns
 
 
 ### Express
@@ -1319,6 +1371,8 @@ module.exports = hooks;
 * [HapiJS Framework](http://hapijs.com)
 * [RestifyJS Framework](http://restify.com)
 * [Overapi Cheatsheet](http://overapi.com/nodejs)
+* [NPM Cheatsheet](http://browsenpm.org/help)
+* [package.json full example](http://browsenpm.org/package.json)
 * [Joyent Production Best Practices](https://www.joyent.com/developers/node)
 * [Risingstack Best Practices](https://blog.risingstack.com/node-js-best-practices)
 * [Heroku Best Practices](https://devcenter.heroku.com/articles/node-best-practices)
