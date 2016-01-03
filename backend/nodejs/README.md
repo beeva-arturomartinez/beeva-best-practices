@@ -14,20 +14,24 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
 * [Frameworks](#frameworks)
   * [Express](#express)
   * [Hapi](#hapi)
+    * Application structure
+    * Plugins
+    * API
   * [Restify](#restify)
+    * Application structure
   * [Comparative](#comparative)
 
 * [DevOps](#devOps)
   * [Logging](#logging)
   * [Security](#security)
   * [Clustering](#clustering)
-  * [Cloud](#cloud)
+  * [Staging](#staging)
 
 * [Testing](#testing)
   * [TDD with Mocha](#tdd-with-mocha)
   * [BDD with Cucumber](#bdd-with-cucumber)
 
-## Introduction 
+## Introduction
 
 Node.js like Python and other languages can be used to develop desktop/console tools or to develop highly scalable network applications.
 **This guide will focus on using Node.js to develop network applications**.
@@ -59,6 +63,7 @@ This brief section it's intended to give some easy and quick tips to rememeber d
 * Modularize developments as far as possible.
 * Use a framework that helps us to structure the project.
 * Complete your developments with automated testing.
+* Always use a CVS like GIT, SVN, and follow its best practices like GitFlow, Trunk, Branching,... 
 
 * Avoid using console.log() in your code. 
 * Using configuration files against variables for ports, ips of other machines, ...
@@ -89,6 +94,7 @@ Finally we offer a comparative in order to help to choose a tool for future proj
 
 ![alt text](static/express.png "Express")
 
+@TODO this part
 
 
 ### Hapi
@@ -187,7 +193,7 @@ server.register(
 );
 ```
 
-#### Hapi application structure
+#### Application structure
 
 To create a new API server with **Hapi** we can use the following structure:
 
@@ -408,31 +414,7 @@ server.listen(3000, function() {
 });
 ```
 
-#### When use Restify instead of Express
-
-1. Exists to let you build "strict" API services that are maintanable and observable.
-
-2. Comes with automatic DTrace support for all your handlers, if you're running on a platform that supports DTrace.
-
-3. Is lighter than Express
-
-#### When do not use Restify instead of Express
-
-1. Express use case is targeted at browser applications and contains a lot of functionality, such as templating and rendering, to support that.
-
-2. Restify does not support that. Express is more powerful on this.
-
-3. More indicated when you have a large number of queries.
-
-#### Conclusion Restify vs Express
-
-Restify: If I need a framework that gave me absolute control over interactions with HTTP and full observability into the latency and characteristics of my applications.
-
-Express: If you don't need absolute control over these interactions, or don't care about those aspect(s), and I need to manage a large number of queries.
-
-You can see a perfomance comparison between Hapi, Express and Restify in the following [link](https://raygun.io/blog/2015/03/node-performance-hapi-express-js-restify/)
-
-#### Desired structure for a Restify application
+#### Application Structure
 
 This is one of desired structure for restify server application:
 
@@ -651,10 +633,74 @@ server.start(config).then(
 
 
 
+#### When use Restify instead of Express
+
+1. Exists to let you build "strict" API services that are maintanable and observable.
+
+2. Comes with automatic DTrace support for all your handlers, if you're running on a platform that supports DTrace.
+
+3. Is lighter than Express
+
+#### When do not use Restify instead of Express
+
+1. Express use case is targeted at browser applications and contains a lot of functionality, such as templating and rendering, to support that.
+
+2. Restify does not support that. Express is more powerful on this.
+
+3. More indicated when you have a large number of queries.
+
+#### Conclusion Restify vs Express
+
+Restify: If I need a framework that gave me absolute control over interactions with HTTP and full observability into the latency and characteristics of my applications.
+
+Express: If you don't need absolute control over these interactions, or don't care about those aspect(s), and I need to manage a large number of queries.
+
+You can see a perfomance comparison between Hapi, Express and Restify in the following [link](https://raygun.io/blog/2015/03/node-performance-hapi-express-js-restify/)
+
+
+* [DevOps](#devOps)
+  * [Logging](#logging)
+  * [Security](#security)
+  * [Clustering](#clustering)
+  * [Staging](#staging)
 
 ## DevOps
 
-### Scaffolding
+### Logging
+
+An important part for developers is the ability to do logs, to have control over the code was developed.
+
+The default form to do this in Nodejs is to use *console.log*. But isn't a good practices.
+Don't write *console.log* all over the code to debug it and then commenting them out when they are no longer needed.
+
+For this purpose it's better to use the library to debug [Bunyan](https://github.com/trentm/node-bunyan).
+
+####Bunyan
+
+Bunyan is a **simple and fast JSON logging** library for node.js services.
+
+example:
+
+```
+var bunyan = require('bunyan');
+var log = bunyan.createLogger({name: "myapp"});
+log.info("hi");
+```
+
+Manifesto: Server logs should be structured. JSON's a good format. Let's do that. A log record is one line of **JSON.stringify**'d output.
+
+**Features**
+
+- Elegant log method API
+- Extensible streams system for controlling where log records go (to a stream, to a file, log file rotation, etc.)
+- Bunyan CLI for pretty-printing and filtering of Bunyan logs
+- Simple include of log call source location (file, line, function) with src: true
+- Lightweight specialization of Logger instances with log.child
+- Custom rendering of logged objects with "serializers"
+- Runtime log snooping via Dtrace support
+- Support for browserify. See Browserify section below.
+
+For more information see their [web](https://github.com/trentm/node-bunyan).
 
 ### Security
 
@@ -724,52 +770,17 @@ For each of the middlewares, we'll talk about three things:
 > - How do we use Helmet to help mitigate those issues?
 > - What are the non-obvious limitations of this middleware?
 
-
 You can get more information about this middleware functions in detail from this [link](https://www.npmjs.com/package/helmet)
-
-### Log
-
-An important part for developers is the ability to do logs, to have control over the code was developed.
-
-The default form to do this in Nodejs is to use *console.log*. But isn't a good practices. Don't write *console.log* all over the code to debug it and then commenting them out when they are no longer needed.
-
-For this purpose it's better to use the library to debug [Bunyan](https://github.com/trentm/node-bunyan).
-
-####Bunyan
-
-Bunyan is a **simple and fast JSON logging** library for node.js services.
-
-example:
-
-```
-var bunyan = require('bunyan');
-var log = bunyan.createLogger({name: "myapp"});
-log.info("hi");
-```
-
-Manifesto: Server logs should be structured. JSON's a good format. Let's do that. A log record is one line of **JSON.stringify**'d output.
-
-**Features**
-
-- Elegant log method API
-- Extensible streams system for controlling where log records go (to a stream, to a file, log file rotation, etc.)
-- Bunyan CLI for pretty-printing and filtering of Bunyan logs
-- Simple include of log call source location (file, line, function) with src: true
-- Lightweight specialization of Logger instances with log.child
-- Custom rendering of logged objects with "serializers"
-- Runtime log snooping via Dtrace support
-- Support for browserify. See Browserify section below.
-
-For more information see their [web](https://github.com/trentm/node-bunyan).
 
 
 ### Clustering
 
-
-### Cloud
+### Staging
 
 
 ## Testing
+
+@todo enlace a QA
 
 ### TDD with Mocha
 
