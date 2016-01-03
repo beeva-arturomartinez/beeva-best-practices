@@ -782,14 +782,9 @@ Express: If you don't need absolute control over these interactions, or don't ca
 
 You can see a perfomance comparison between Hapi, Express and Restify in the following [link](https://raygun.io/blog/2015/03/node-performance-hapi-express-js-restify/)
 
-
-* [DevOps](#devOps)
-  * [Logging](#logging)
-  * [Security](#security)
-  * [Clustering](#clustering)
-  * [Staging](#staging)
-
 ## DevOps
+
+@TODO introduction
 
 ### Logging
 
@@ -800,7 +795,9 @@ Don't write *console.log* all over the code to debug it and then commenting them
 
 For this purpose it's better to use the library to debug [Bunyan](https://github.com/trentm/node-bunyan).
 
-####Bunyan
+@ Purposal dual log
+
+#### Bunyan
 
 Bunyan is a **simple and fast JSON logging** library for node.js services.
 
@@ -827,6 +824,8 @@ Manifesto: Server logs should be structured. JSON's a good format. Let's do that
 
 For more information see their [web](https://github.com/trentm/node-bunyan).
 
+#### Morgan
+
 ### Security
 
 #### Conventions
@@ -845,6 +844,8 @@ For more information see their [web](https://github.com/trentm/node-bunyan).
 #### Lusca
 
 #### Helmet
+
+@summarize
 
 Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately. *It's not a silver bullet*, but it can help!
 
@@ -904,12 +905,16 @@ You can get more information about this middleware functions in detail from this
 
 ### Clustering
 
+@TODO
+
 ### Staging
 
+@TODO with plugin and manually
 
 ## Testing
 
-@todo enlace a QA
+@TODO introduction
+@todo link to QA
 
 ### TDD with Mocha
 
