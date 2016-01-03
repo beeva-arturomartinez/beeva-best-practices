@@ -13,6 +13,7 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
 * [Express](#express)
 * [Hapi](#hapi)
 * [Restify](#restify)
+* [Comparative](#comparative)
 
 ## [DevOps](#devOps)
 * [Logging](#logging)
@@ -84,9 +85,13 @@ Finally we offer a comparative in order to help to choose a tool for future proj
 
 ### Express
 
-@TODO
+![alt text](static/express.png "Express")
+
+
 
 ### Hapi
+
+![alt text](static/hapi.png "Hapi")
 
 Hapi is a rich framework for building applications and services that allows developers to focus on writing reusable application logic instead of spending time building infrastructure.
 
@@ -384,6 +389,8 @@ The API is divided in four blocks:
 
 ### Restify
 
+![alt text](static/restify.png "Restify")
+
 Restify is a light framework similar to Express and very easy for building REST APIs. This is the easy way to create a REST API application:
 
 ``` javascript
@@ -637,6 +644,11 @@ server.start(config).then(
 	}
 );
 ```
+
+### Comparative
+
+
+
 
 ## DevOps
 
