@@ -79,11 +79,12 @@ This brief section it's intended to give some easy and quick tips to rememeber d
 
 ## Frameworks
 
-In this section we're going to cover the mostly used frameworks in node js.
-
+In this section we're going to talk about three main frameworks that we are using on productive projects. Some of them are in microservices environments, RESTful APIs and web servers.
+Finally we offer a comparative in order to help to choose a tool for future projects with Node.js. 
 
 ### Express
 
+@TODO
 
 ### Hapi
 
@@ -657,8 +658,6 @@ server.start(config).then(
 #### Helmet
 
 Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately. *It's not a silver bullet*, but it can help!
-
-![Helmet](static/helmet.png "Helmet")
 
 ##### Quick start
 
