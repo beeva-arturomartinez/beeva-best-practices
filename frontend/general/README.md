@@ -14,6 +14,11 @@ Index
   * [General](tools)
   * [Grunt](tools/grunt)
   * [Gulp](tools/gulp)
+  * [Karma](tools/karma)
+  * [Protractor](tools/protractor)
+  * [NPM](tools/npm)
+  * [Bower](tools/bower)
+  * [Yeoman](tools/yeoman)
 * [6\. Old Guide](old.md)
 * [7\. References](#references)
 
