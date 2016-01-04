@@ -9,7 +9,7 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
   * [Challenges](#challenges)
   * [Purpose](#purpose)
 
-* [Patterns and antiPatterns](#patterns-and-antipatterns)
+* [Best Practices](#best-practices)
 
 * [Frameworks](#frameworks)
   * [Express](#express)
@@ -52,11 +52,12 @@ These areas are:
 
 * Automated Testing with TDD & BDD: We offer a serie of advices in order to implement this testing philosophy in our developments.
 
-## Patterns and antiPatterns
+## Best Practices
 
 This brief section it's intended to give some easy and quick tips to rememeber during any Node.js development.
 
 * Modularize developments as far as possible.
+* Use [Javascript patterns](../../frontend/general/javascript/patterns) as possible.
 * Strict mode, please. With this flag you can opt in to use a restricted variant of JavaScript. It eliminates some silent errors and will throw them all the time.
 * Use tools for Static code analysis. Use either JSLint, JSHint or ESLint. Static code analysis can catch a lot of potential problems with your code early on.
 * No eval, or friends. Eval is not the only one you should avoid, in the background each one of the following expressions use eval: setInterval(String, 2), setTimeout(String, 2) and new Function(String). But why should you avoid eval? It can open up your code for injections attacks and is slow (as it will run the interpreter/compiler).
