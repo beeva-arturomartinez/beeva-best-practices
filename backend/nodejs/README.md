@@ -57,9 +57,13 @@ These areas are:
 This brief section it's intended to give some easy and quick tips to rememeber during any Node.js development.
 
 * Modularize developments as far as possible.
+* Strict mode, please. With this flag you can opt in to use a restricted variant of JavaScript. It eliminates some silent errors and will throw them all the time.
+* Use tools for Static code analysis. Use either JSLint, JSHint or ESLint. Static code analysis can catch a lot of potential problems with your code early on.
+* No eval, or friends. Eval is not the only one you should avoid, in the background each one of the following expressions use eval: setInterval(String, 2), setTimeout(String, 2) and new Function(String). But why should you avoid eval? It can open up your code for injections attacks and is slow (as it will run the interpreter/compiler).
 * Use a framework that helps us to structure the project.
+* Don't use deprecated versions of Express (for example 2.x and 3.x are no longer maintained). Security and performance issues in these versions won’t be fixed.
 * Complete your developments with automated testing.
-* Always use a CVS like GIT, SVN, and follow its best practices like GitFlow, Trunk, Branching,... 
+* Always use a CVS like GIT, SVN, and follow its best practices like GitFlow, Trunk, Branching,...
 
 * Avoid using console.log() in your code. 
 * Using configuration files against variables for ports, ips of other machines, ...
@@ -827,17 +831,6 @@ For more information see their [web](https://github.com/trentm/node-bunyan).
 #### Morgan
 
 ### Security
-
-#### Conventions
-
-> - Don't use the odd versions of Node.js (5.x.x) in Production enviroments, only use pair because are longer term supported (for example the 4.x.x versions).
-> - Don't use deprecated versions of Express (for example 2.x and 3.x are no longer maintained). Security and performance issues in these versions won’t be fixed.
-
-#### Some tips
-
-> - Strict mode, please. With this flag you can opt in to use a restricted variant of JavaScript. It eliminates some silent errors and will throw them all the time.
-> - Static code analysis. Use either JSLint, JSHint or ESLint. Static code analysis can catch a lot of potential problems with your code early on.
-> - No eval, or friends. Eval is not the only one you should avoid, in the background each one of the following expressions use eval: setInterval(String, 2), setTimeout(String, 2) and new Function(String). But why should you avoid eval? It can open up your code for injections attacks and is slow (as it will run the interpreter/compiler).
 
 #### Passport
 
