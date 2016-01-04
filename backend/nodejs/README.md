@@ -922,7 +922,6 @@ Helmet is a collection of 9 smaller middleware functions that set security-relat
 > - **frameguard** to prevent clickjacking
 > - **xssFilter** adds some small XSS protections in most recent web browsers.
 
-
 You can also use each module individually:
 
 ```javascript
@@ -932,7 +931,17 @@ You can also use each module individually:
 
 ### Clustering
 
-@TODO
+Using the [Node.js Cluster API](https://nodejs.org/dist/latest-v4.x/docs/api/cluster.html) could boost the performance of our app. It's useful but must be used with care. Remember that this api it's stable only in versions greater than v.4
+
+There are two ways of implement this api:
+
+* PM2 Interface It adds the support automatically it's easy and fast to implement.
+
+* Manually in our code. It's more flexible because the threads could share resources and messages between them.
+
+It's recommendable to add one thread by core, and in case of extreme stability require, one less for the management.
+
+It's useful to add a mechanism to respawn the threads and count the number of reboots to kill the app in case of unrecoverable problems, for the process management could restart the app.
 
 ### Staging
 
