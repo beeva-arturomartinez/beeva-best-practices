@@ -788,34 +788,49 @@ You can see a perfomance comparison between Hapi, Express and Restify in the fol
 
 ## DevOps
 
-@TODO introduction
+At this section we're going to cover the areas related with staging, logging security and clustering, all these issues are related with DevOps and due to the Node.js dual nature are important for developers and sysadmin.
 
 ### Logging
 
-An important part for developers is the ability to do logs, to have control over the code was developed.
+An important part for developers is the ability to do logs, to have control over the code was developed. The default form to do this in Nodejs is to use *console.log*. But isn't a good practices.
+Don't write *console.log* all over the code to debug it and then commenting them out when they are no longer needed. For this purpose it's better to use a library to logging. 
 
-The default form to do this in Nodejs is to use *console.log*. But isn't a good practices.
-Don't write *console.log* all over the code to debug it and then commenting them out when they are no longer needed.
+In some projects we're using a dual system of logging with:
+#### [Morgan](https://www.npmjs.com/package/morgan) for the apache style logs. 
 
-For this purpose it's better to use the library to debug [Bunyan](https://github.com/trentm/node-bunyan).
+Morgan is a HTTP request logger middleware for node.js.
 
-@ Purposal dual log
+Output example:
+´´´bash
+127.0.0.1 - frank [10/Jan/2016:13:55:36 -0700] "GET /favicon.ico HTTP/1.0" 200 2326
+127.0.0.1 - frank [10/Jan/2016:13:55:36 -0700] "GET /index.html HTTP/1.0" 200 2326
+´´´  
+example of use:
+```javascript
+var morgan = require('morgan')
 
-#### Bunyan
-
-Bunyan is a **simple and fast JSON logging** library for node.js services.
-
-example:
-
+morgan('combined', { skip: function (req, res) { return res.statusCode < 400 } });
 ```
+  
+#### [Bunyan](https://www.npmjs.com/package/bunyan) for the business logic logs.
+Bunyan is a simple and fast JSON logging library for node.js services. 
+Manifesto: Server logs should be structured. JSON's a good format. Let's do that. A log record is one line of *JSON.stringify*'d output.
+
+Output example: 
+´´´bash
+{"name":"myserver","hostname":"banana.local","pid":123,"req":{"method":"GET","url":"/path?q=1#anchor","headers":{"x-hi":"Mom","connection":"close"}},"level":3,"msg":"start request","time":"2012-02-03T19:02:46.178Z","v":0}
+
+´´´
+Note: Be careful with the content write to this kind of logs. the message it's fully customizable but export all the http request object or the full error stack could damage the performance.
+ 
+example of use:
+
+```javascript
 var bunyan = require('bunyan');
 var log = bunyan.createLogger({name: "myapp"});
 log.info("hi");
 ```
-
-Manifesto: Server logs should be structured. JSON's a good format. Let's do that. A log record is one line of **JSON.stringify**'d output.
-
-**Features**
+*Features*
 
 - Elegant log method API
 - Extensible streams system for controlling where log records go (to a stream, to a file, log file rotation, etc.)
@@ -824,49 +839,79 @@ Manifesto: Server logs should be structured. JSON's a good format. Let's do that
 - Lightweight specialization of Logger instances with log.child
 - Custom rendering of logged objects with "serializers"
 - Runtime log snooping via Dtrace support
-- Support for browserify. See Browserify section below.
+- Support for browserify.
 
-For more information see their [web](https://github.com/trentm/node-bunyan).
-
-#### Morgan
 
 ### Security
 
-#### Passport
+It's very important to check and verify these areas in any Node.js development, even if it still is not public:
 
-#### Lusca
+* Authentication, user an session management.
+* Configuration Management i.e. Security HTTP Headers
+* Data Validation on client side
+* Database injections,...
+* Security Transmission
+* Denial of Service
+* Error Handling
 
-#### Helmet
+All these areas are deeply covered in the security and hardening [section of this repository](../../it_security/security_hardening/README.md).
 
-@summarize
+In this section we're going to show you some references and middlewares that are easy to include as first protection. 
 
-Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately. *It's not a silver bullet*, but it can help!
+#### [Lusca](https://www.npmjs.com/package/lusca)
 
-##### Quick start
-
-First, install helmet dependency into your application:
+Lusca is Web application security middleware for Express. **It requires express-session**.
 
 ```javascript
-npm install --save helmet
+var express = require('express'),
+	app = express(),
+	session = require('express-session'),
+	lusca = require('lusca');
+	
+//this or other session management will be required 
+app.use(session({
+	secret: 'abc',
+	resave: true,
+	saveUninitialized: true
+}));
+ 
+app.use(lusca({
+    csrf: true,
+    csp: { /* ... */},
+    xframe: 'SAMEORIGIN',
+    p3p: 'ABCDEF',
+    hsts: {maxAge: 31536000, includeSubDomains: true, preload: true},
+    xssProtection: true
+}));
+```	
+
+You can opt into methods one by one:
+
+```javascript
+  app.use(lusca.csrf());
+  app.use(lusca.csp({ /* ... */}));
+  app.use(lusca.xframe('SAMEORIGIN'));
+  app.use(lusca.p3p('ABCDEF'));
+  app.use(lusca.hsts({ maxAge: 31536000 }));
+  app.use(lusca.xssProtection(true));
 ```
 
+#### [Helmet](https://www.npmjs.com/package/helmet)
+
+Helmet can help protect your app from some well-known web vulnerabilities by setting HTTP headers appropriately.
 Next, you can use helmet in your application (for example in Express):
+
+Running app.use(helmet()) will include 6 of the 9, leaving out *contentSecurityPolicy*, *hpkp*, and *noCache*.
 
 ```javascript
 var express = require('express');
-var helmet = require('helmet');
+var helmet =  require('helmet');
 
 var app = express();
-
-app.use(helmet());
-
-// ...
+    app.use(helmet());
 ```
 
-##### How it works
-
-Helmet is a collection of 9 smaller middleware functions that set security-related HTTP headers:
-
+Helmet is a collection of 9 smaller middleware functions that set security-related HTTP headers.
 > - **contentSecurityPolicy** for setting Content Security Policy to help prevent cross-site scripting attacks and other cross-site injections.
 > - **hidePoweredBy** to remove the X-Powered-By header
 > - **hpkp** for HTTP Public Key Pinning to prevent man-in-the-middle attacks with forged certificates.
@@ -877,24 +922,13 @@ Helmet is a collection of 9 smaller middleware functions that set security-relat
 > - **frameguard** to prevent clickjacking
 > - **xssFilter** adds some small XSS protections in most recent web browsers.
 
-Running app.use(helmet()) will include 6 of the 9, leaving out contentSecurityPolicy, hpkp, and noCache.
+
 You can also use each module individually:
 
 ```javascript
-app.use(helmet.noCache());
-app.use(helmet.frameguard());
+  app.use(helmet.noCache());
+  app.use(helmet.frameguard());
 ```
-
-##### Usage guide
-
-For each of the middlewares, we'll talk about three things:
-
-> - What's the attack we're trying to prevent?
-> - How do we use Helmet to help mitigate those issues?
-> - What are the non-obvious limitations of this middleware?
-
-You can get more information about this middleware functions in detail from this [link](https://www.npmjs.com/package/helmet)
-
 
 ### Clustering
 
@@ -1517,19 +1551,30 @@ module.exports = hooks;
 
 ### References
 
+Node.js and Best Practices
 * [Node.js Oficial WebSite](http://www.nodejs.org)
-* [Node.js design patterns](https://blog.risingstack.com/fundamental-node-js-design-patterns/) 
+* [Node.js design patterns](https://blog.risingstack.com/fundamental-node-js-design-patterns/)
+* [Risingstack Best Practices](https://blog.risingstack.com/node-js-best-practices)
+* [Heroku Best Practices](https://devcenter.heroku.com/articles/node-best-practices)
+
+Cheatsheets
+* [Overapi Cheatsheet](http://overapi.com/nodejs)
+* [NPM Cheatsheet](http://browsenpm.org/help) 
+ 
+Frameworks
 * [Express Framework](http://expressjs.com)
 * [Express Performance best practices](http://expressjs.com/en/advanced/best-practice-performance.html)
 * [Express Security best practices](http://expressjs.com/en/advanced/best-practice-security.html)
 * [Hapi Framework](http://hapijs.com)
 * [Restify Framework](http://restify.com)
-* [Overapi Cheatsheet](http://overapi.com/nodejs)
-* [NPM Cheatsheet](http://browsenpm.org/help)
+
+DevOps
 * [package.json full example](http://browsenpm.org/package.json)
 * [Joyent Production Best Practices](https://www.joyent.com/developers/node)
-* [Risingstack Best Practices](https://blog.risingstack.com/node-js-best-practices)
-* [Heroku Best Practices](https://devcenter.heroku.com/articles/node-best-practices)
+
+Security
+* [OWASP Web Application Security Testing Cheat Sheet](https://www.owasp.org/index.php/Web_Application_Security_Testing_Cheat_Sheet)
+* [Node.js Security Checklist](https://blog.risingstack.com/node-js-security-checklist)
 
 ___
 
