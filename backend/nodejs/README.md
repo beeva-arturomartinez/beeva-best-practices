@@ -761,8 +761,6 @@ server.start(config).then(
 
 ### Comparative
 
-
-
 #### When use Restify instead of Express
 
 1. Exists to let you build "strict" API services that are maintanable and observable.
@@ -946,14 +944,75 @@ It's useful to add a mechanism to respawn the threads and count the number of re
 
 ### Staging
 
-@TODO finish descriptions
-
 As any other server it's relevant to provide some profiling options. The common way to do this it's through a property file.
  
-* Manually through merging files with lodash.
+* Manually through merging files with lodash. 
+
+*config.json* managed by SysOps
+```javascript
+
+var config = {
+    app : {
+        name : 'Config Backend',
+        url : 'http://192.168.0.77',
+        port : 3002
+    },
+    db: {
+    	ip: '192.168.0.78',
+    	port: 6379
+    }
+}
+
+module.exports = config;
+
+````
+
+*index.js* managed by Developers
+
+```javascript
+var config = {
+    app : {
+        name : 'Config Backend',
+        url : 'http://127.0.0.1',
+        port : 3001
+    },
+    db: {
+    	ip: '127.0.0.1',
+    	port: 6379
+    }
+}
+````
+
+*index.js* Logic to merge (same file):
+
+```javascript
+
+// ...
+var systemConfig='/external/path/to/config.js'; // i.e. /var/properties/project-name/config.js
+
+// First option: manual
+if(process.env.CONFIG && fs.existsSync(process.env.CONFIG)){
+    console.log('Cargada la configuración manual de la ruta: '+process.env.CONFIG);
+    customConfig=require(process.env.CONFIG);
+// Second option: external properties file 
+} else if(fs.existsSync(systemConfig)){
+    console.log('Cargada la configuración estándar SISTEMAS de la ruta: '+systemConfig);
+    customConfig=require(systemConfig);
+// Third option: local config file    
+} else if(fs.existsSync(envConfig)){
+    console.log('Cargada la configuración local');
+    customConfig=require(envConfig);
+}
+// ...
+
+// Merging the files overriding local config with the externals
+config=_.merge(
+    config,
+    customConfig
+);
+````
 
 * Through packages as [dotenv](https://github.com/motdotla/dotenv)
-
 
 ## Testing
 
