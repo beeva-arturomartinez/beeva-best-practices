@@ -936,12 +936,18 @@ You can also use each module individually:
 
 ### Staging
 
-@TODO with plugin and manually
+@TODO finish descriptions
+
+As any other server it's relevant to provide some profiling options. The common way to do this it's through a property file.
+ 
+* Manually through merging files with lodash.
+
+* Through packages as [dotenv](https://github.com/motdotla/dotenv)
+
 
 ## Testing
 
-@TODO introduction
-@todo link to QA
+In this section we're going to offer a way to implement TDD and BDD in your Node.js developments but if you want to go deeper, please visit the [testing section of this repository](../../qa_testing/testing/README.md).
 
 ### TDD with Mocha
 
