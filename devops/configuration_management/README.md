@@ -49,32 +49,32 @@ To do this work, there are a variety of tools available which facilitate the tas
 
 ## Objectives
 
-This document aims to make a complete description of the continuous delivery architecture used in BEEVA projects, from the provisioning stage of infrastructure to the tasks configuration in the continuous integration, passing through the configuration management processes.
+This document aims at make a complete description of the continuous delivery architecture used in BEEVA projects, from the provisioning stage of infrastructure to the tasks configuration in the continuous integration, passing through the configuration management processes.
 
 
 ## Architecture, technologies and tools
 
-Here you can see a resume of the proposed architecture of continuous delivery:
+Next you can see a resume of the proposed architecture of continuous delivery:
 
 ![Continuous delivery architecture](static/continuous-delivery-architecture.png "Continuous delivery architecture")
 
 This work philosophy bets for communication between all the teams involved, extending the reach of the traditional agile development to other fields like quality and exploitation, developing intelligent systems that can evolve easily in time.
 
-Since the main difference of this method is the quick adaptation to changes, it starts deploying the infrastructure in parallel at the very first stages of development.In order to do that, it uses the infrastructure as code paradigm, where it involves the use of the infrastructure like one more piece of code. In this stage it makes use of Cloudformation, a modified version of Yactf (foreman-python), Foreman and Puppet.
+Since the main difference of this method is the quick adaptation to changes, it starts deploying the infrastructure in parallel at the very first stages of development. In order to do that, it uses the infrastructure as code paradigm, where it involves the use of the infrastructure like one more piece of code. In this stage it makes use of Cloudformation, a modified version of Yactf (foreman-python), Foreman and Puppet.
 
-In the develop stage, it uses SCRUM as methodology, encouraging the  evolutive iterative development in small Sprints coordinating by Redmine.
+In the develop stage, it uses SCRUM as methodology, encouraging the  evolutive iterative development in small Sprints coordinated by Redmine.
 
 All the code is pushed to Subversion or Git repositories to keep a ordenated version control system and improve the traceability of changes.
 
-For this document it supposes that, in new projects, starting from a Git configured project following the standard defined in the Open Platform *Software Management* document:
+For this document it's supposed that, in new projects, starting from a Git configured project following the standard defined in the Open Platform *Software Management* document:
 
 [https://docs.google.com/a/bbva.com/document/d/1g2dpCixAczQ66S3cgLfDq0I4l_sE5nSkhzkVv9wdtos/edit?usp=sharing](https://docs.google.com/a/bbva.com/document/d/1g2dpCixAczQ66S3cgLfDq0I4l_sE5nSkhzkVv9wdtos/edit?usp=sharing)
 
-Every time a sprint ends, making use of continuous integration tools like Jenkins and quality assurance (unit tests, Cucumber, Sonar, Selenium) for building the project.
+Every time a sprint ends it makes use of continuous integration tools like Jenkins and quality assurance (unit tests, Cucumber, Sonar, Selenium) for building the project.
 
-For deploying to the different environments doing it from a orchestrated way and minimizing the human error the applications are independents from environment and they get packet in a common repository to all environments.
+For deploying to the different environments doing it from a orchestrated way and minimizing the human error, the applications are independents from environment and they get packet in a common repository to all environments.
 
-So, in the configuration management stage, it uses Puppet to make the application deploying and the configurations related to that machine in an automated way in the machine. The system is ready to applications rollback or packages that contain some error and, with tools like Asgard can be changed between different versions without any loss of service.
+So, in the configuration management stage, it uses Puppet to the application deploying and the configurations related to that machine in an automated way in the architecture. The system is ready to rollback applications or packages that contain some error and, with tools like Asgard can be changed between different versions without any loss of service.
 
 In parallel it uses different exploitation tools to monitoring the platform (New Relic and Nagios), as well as backups in S3.
 
@@ -84,7 +84,9 @@ The continuous delivery flow resumes in the next picture:
 
 ![Flow](static/continuous-delivery-flow.png "Flow")
 
-[Detailed resume of every stage](https://docs.google.com/presentation/d/1RD6PimpW1QatzY1bz2rLhCgJOrZjN6fRJagZ0GHXnLE/edit#slide=id.g98d42a7a0_0_48)
+Detailed resume of every stage:
+
+[https://docs.google.com/presentation/d/1RD6PimpW1QatzY1bz2rLhCgJOrZjN6fRJagZ0GHXnLE/edit#slide=id.g98d42a7a0_0_48](https://docs.google.com/presentation/d/1RD6PimpW1QatzY1bz2rLhCgJOrZjN6fRJagZ0GHXnLE/edit#slide=id.g98d42a7a0_0_48)
 
 Below there is a list of basic information technologies used in the process.
 
@@ -93,33 +95,41 @@ Below there is a list of basic information technologies used in the process.
 
 Puppet is a configuration system management based in Ruby that allows, using a easy declarative language, to describe the desired configuration in a server.
 
-One of the main features is the idempotency (making multiple identical requests has the same effect as making a single request), that although it applies a Puppet catalog, no changes are done if the system don't requires them. To do that it defines a final state, desired state, and the resources abstraction layer is in charge of translating the necessary orders according to the used system.
+One of the main features is the idempotency (making multiple identical requests has the same effect as making a single request), that although it applies a Puppet catalog, no changes are done if the system don't requires them. To do that it defines a final state, desired state, and the resources abstraction layer is in charge of translating the necessary orders according the used system.
 
-[More information] (http://puppetlabs.com/)
+More information:
+
+[http://puppetlabs.com/] (http://puppetlabs.com/)
 
 
 ### Foreman
 
-It's a Opensource project developed by Red Hat, as an orchestration graphic interface of instances, very integrated with Puppet services. It allows multiple cloud deploying instances and has a very useful API Rest to interact with the system.
+It's a Opensource project developed by Red Hat, as an orchestration graphic interface of instances, very integrated with Puppet services. It allows multicloud deploying instances and a very useful API Rest to interact with the system.
 
-[More information] (http://theforeman.org)
+More information
+
+[http://theforeman.org/] (http://theforeman.org)
 
 ### r10k
 
 The most used system for deploying dynamic environments with Puppet is based in resolving the different versions of each module in a easy Puppetfile archive. To do that, it has a git repository for the r10k files, and a repository for each of the created modules.
 
-[More information] (http://garylarizza.com/blog/2014/18/puppet-workflow-part3/)
+More information
+
+[http://garylarizza.com/blog/2014/18/puppet-workflow-part3/] (http://garylarizza.com/blog/2014/18/puppet-workflow-part3/)
 
 ### Cloudformation
 
 The Amazon Web Services  JSON templates system for infrastructure deploying allows to deploy all type of resources, although Foreman will be used to deploy instances.
 
-[More information] (http://aws.amazon.com/es/cloudfront/)
+More information
+[http://aws.amazon.com/es/cloudfront/] (http://aws.amazon.com/es/cloudfront/)
 
 ### Yafct
 Templates system based in YAML, JSON and Python for Foreman. It has been needed to modify the code, hosted in GitHub, to extend the functionality of the component and adapt it to the proposed standard.
 
-[More information] (https://github.com/ITV/YAFCT)
+More information
+[https://github.com/ITV/YAFCT] (https://github.com/ITV/YAFCT)
 
 ## Preparing the environment
 
@@ -156,86 +166,88 @@ It is being considered to migrate the DNS to Route53 if AWS is used.
 
 Puppet Modules has been created for most of the necessary actions in a typical infrastructure creation. Besides, thanks to r10k (watch specific section) it is possible to resolv extern modules from PuppetForce. Amongst the developed modules, available in git.beeva.com, are:
 
-*amazontools:* the amazontools module installation
+_amazontools:_ the amazontools module installation
 
-*autoscaling:* installation and configuration of the autoscaling start script 
+_autoscaling:_ installation and configuration of the autoscaling start script 
 
-*backups:* backups configuration (Databases and code)
+_backups:_ backups configuration (Databases and code)
 
-*crontab:* cron tasks configuration
+_crontab:_ cron tasks configuration
 
-*deployment:* application deploying (developing)
+_deployment:_ application deploying (developing)
 
-*factertags:* Facter tags creation to consultation from Foreman
+_factertags:_ Facter tags creation to consultation from Foreman
 
-*httpd:* Apache installation and configuration. VirtualHost, SSL, httpd.conf.
+_httpd:_ Apache installation and configuration. VirtualHost, SSL, httpd.conf.
 
-*iptables:* Iptables configuration.
+_iptables:_ Iptables configuration.
 
-*java:* Java installation and configuration.
+_java:_ Java installation and configuration.
 
-*mcollective:* Mcollective installation and configuration.
+_mcollective:_ Mcollective installation and configuration.
 
-*mysql:* Installation and configuration.
+_mysql:_ Installation and configuration.
 
-*nagios:* Installation an configuration of the Nagios server and plugins  (developing).
+_nagios:_ Installation an configuration of the Nagios server and plugins  (developing).
 
-*newrelic:* Installation and configuration of the NewRelic agent (server and java)
+_newrelic:_ Installation and configuration of the NewRelic agent (server and java)
 
-*nsupdate:* systems date.
+_nsupdate:_ systems date.
 
-*openssh:* Installation an configuration.
+_openssh:_ Installation an configuration.
 
-*packages:* Installation packages Interface.
+_packages:_ Installation packages Interface.
 
-*repositories:* Install a personalized repository in s3
+_repositories:_ Install a personalized repository in s3
 
-*role:* Define the instances role.
+_role:_ Define the instances role.
 
-*s3cmd:* Installation and configuration
+_s3cmd:_ Installation and configuration
 
-*selinux:* Configuration.
+_selinux:_ Configuration.
 
-*sshkey:* Configuration of the SSH keys for users.
+_sshkey:_ Configuration of  SSH keys for users.
 
-*stdlib:* Puppet additional library.
+_stdlib:_ Puppet additional library.
 
-*sudoers:* Configuration of the privileged users permissions.
+_sudoers:_ Configuration of  privileged users permissions.
 
-*timezone:* System timezone.
+_timezone:_ System timezone.
 
-*tomcat:* installation and configuration.
+_tomcat:_ installation and configuration.
 
-*users:* system users configuration.
+_users:_ system users configuration.
 
-*vcsdeploy:* Additional module to deploy SVN or git files.
+_vcsdeploy:_ Additional module to deploy SVN or git files.
 
-*properties:* Deploy of Properties files for java, PHP and nodejs (developing) files.
+_properties:_ Deploy of Properties files for java, PHP and nodejs (developing) files.
 
 
 #### Git workflow
 
-The proposed workflow for each module, to encourage the use in different projects without influence their productive environments is the following (although it is recommended to use the *develop* notation instead of *development* notation, more standard, for developing environments)
+The proposed workflow for each module, to encourage the use in different projects without influence their productive environments is the following (although it is recommended to use the _develop_ notation instead of _development_ notation, more standard, for developing environments)
 
 ![Branches](static/branches.png "Branches")
 
 
-Since there are a lot of projects using each module and parallel developing can happen, *it is proposed that the master branch has not be used in any productive environment* and it will be a place where add the new features that each project include, in relation to create generic modules.
+Since there are a lot of projects using each module and parallel developing can happen, _it is proposed that the master branch has not be used in any productive environment_ and  be a place where add the new features that each project includes, in relation to create generic modules.
 
 In this way, any new project that requires starting to use the Puppet modules will know from what timeline it must start, downloading a concrete tag from master.
 
-It will be created a stable version tag in master (for example 1.0) and, it bugs are found that need to be fixed they will be fixed tagging the new version like 1.1 (in a finite branch to hotfix)
+It will be created a stable version tag in master (for example 1.0) and, if bugs are found that need to be fixed they will be fixed tagging the new version like 1.1 (in a finite branch to *hotfix*)
 
-When certain projects insert new features, it will make a merge request to add the changes to the master branch, changing the version to 2.0.
+When certain projects insert new features, a merge request will be made to add the changes to the master branch, changing the version to 2.0.
 
 For each of the projects, there will be two infinite timelines, following a similar schema to the [proposed] (http://nvie.com/posts/a-successful-git-branching-model/)
+
 ``
 <project_name>-master (for example openp-master)
 <project_name>-master (for example openp-develop)
-``
-Can be created infinite parallel branches to isolate each new feature if exists parallel developments, integrating the new feature to the <name_project>-develop branch.
 
-Once developed the corresponding features in specified development sprint and tested their correct behavior, they will be merged in the 
+``
+Can be created infinite parallel branches to isolate each new feature if parallel developments exists, integrating the new feature to the ``<name_project>-develop branch.``
+
+Once developed the corresponding features to specified development sprint and tested their correct behavior, they will be merged in the 
 ````
 <project_name>-master, tagging with the name 
 <project_name>-<version_number>
@@ -245,7 +257,7 @@ When one change become interesting for the global main branch, it will requested
 
 The next picture shows the work proposed in various projects (for example, Genoa and OpenPlatform). Each tag corresponding to a master version of a project will be integrated into the global master version and the rest of the projects can integrate into their development branch (dotted arrow).
 
-Notice again the use of development name, instead of develop, refering to development branch. To approach more to the git standard programming it is recommended to use the name *develop* when possible.
+Notice again the use of development name, instead of develop, to refer to development branch. To approach more to the git standard programming it is recommended to use the name _develop_ when possible.
 
 ![Branches] (static/branch2.png "Branches")
 
@@ -264,11 +276,11 @@ Complementary documentation:
 Image based in http://www.craigdunn.org/2012/05/239/
 
 
-When a Puppet module is developed is necessary trying to get detached from its dependencies to getting it independent and can be shared with others modules when they change version or technology. (+)
+When a Puppet module is developed is necessary try to abstract from its dependencies to get it independent and can be shared with others modules when they change version or technology.
 
-For example, in one project implementation tomcat can be installed and, to do this, a module dependent on the repositories, on the installed java in the machine and on an apache to shield the security.
+For example, if in one project implementation we want to install tomcat and, to do that, a module can be programmed dependent on  the repositories, on the java to be installed in the machine and apache to shield the security.
 
-The most intuitive way (*but no recommended*) is the next one:
+The most intuitive way (_but no recommended_) is the next one:
 ```
 class tomcat (
 $parameter = undef,
@@ -302,315 +314,149 @@ As can be observed, with this criterion the problem is creating unnecessary exte
 In this system dependencies of every module are isolated, that only the necessary for this concrete module is configured. For example, in the tomcat previous example:
 
 ````
-class ​ ​
-tomcat ​
-(
-$parameter = undef,
-​
+class tomcat(
+   $parameter = undef,
 ){
-include ​ ​
-'::tomcat::install'
-include ​ ​
-'::tomcat::config'
-include ​ ​
-'::tomcat::service'
-case ​ ​
-$: ​
-:tomcat::ensure ​ {
-present: ​ {
-​
-Class ​
-​
-[ ​
-'::tomcat::install' ​
-] ->
-Class ​
-​
-[ ​
-'::tomcat::config' ​
-] ~>
-Class ​
-​
-[ ​
-'::tomcat::service' ​
-] ->
-Class ​
-​
-[ ​
-'::tomcat' ​
-]
-}
-}
+
+include '::tomcat::install'
+include '::tomcat::config'
+include '::tomcat::service'
+
+case $::tomcat::ensure  {
+
+ present: {
+   Class [ '::tomcat::install' ] ->
+   Class [ '::tomcat::config' ] ~>
+   Class [ '::tomcat::service' ] ->
+   Class [ '::tomcat' ]
+   }
+ }
 }
 ````
 
-Notice that the dependencies to other services had been extracted, so only the sub-modules that install and configure tomcat are called.
+Notice that the dependencies to other services have been extracted, so only the sub-modules that install and configure tomcat are called.
 
-But then, following this system, How can the dependencies with other modules are specified? Through roles and profiles.
+But then, following this system, How can the dependencies with other modules be specified? Through roles and profiles.
 
 *Profiles*
 
-The dependencies implementation between environments and the entering of values is realized in a new module called profile. It is a Puppet module (like the tomcat one, apache and others) that reflects the particular implementation of project dependencies needed to deploy.
+The dependencies implementation between environments and the entering of values is realized in a new module called profile. It is a Puppet module (like the tomcat one, apache and others) that reflects _the particular implementation of project dependencies_ needed to deploy.
 
 For example, if all the machines in certain environment will have some included classes by default, it is possible to create a profile like the next:
 
 ````
-class ​ ​
-profiles::base ​ {
-​ u_repo ​ = hiera_hash( ​
-$
-'repositories::repos::install::u_repo' ​
-)
-$u_hash ​ = hiera_hash( ​
-​
-'users::u_name' ​
-)
-​ nclude ​ ​
-i
-'::awscli'
-include ​ ​
-​
-'::factertags'
-include ​ ​
-​
-'::groups'
-include ​ ​
-​
-'::iptables'
-include ​ ​
-​
-'::java'
-include ​ ​
-​
-'::mcollective'
-include ​ ​
-​
-'::ntp'
-include ​ ​
-​
-'::openssh'
-include ​ ​
-​
-'::packages'
-include ​ ​
-​
-'::puppet_agent'
-include ​ ​
-​
-'::repositories'
-include ​ ​
-​
-'::selinux'
-include ​ ​
-​
-'::sudoers_roles'
-include ​ ​
-​
-'::timezone'
-Yumrepo ​ <| |> -> ​
-​
-Package ​ <| |>
-class ​ { ':: ​
-​
-users ​
-':
-u_name => ​
-$u_hash ​
-,
-}
+class profiles::base  {
+
+ $u_repo  = hiera_hash( 'repositories::repos::install::u_repo' )
+ $u_hash  = hiera_hash( 'users::u_name' )
+
+ include '::awscli'
+ include '::factertags'
+ include '::groups'
+ include '::iptables'
+ include '::java'
+ include '::mcollective'
+ include '::ntp'
+ include '::openssh'
+ include '::packages'
+ include '::puppet_agent'
+ include '::repositories'
+ include '::selinux'
+ include '::sudoers_roles'
+ include '::timezone'
+
+ Yumrepo  <| |> -> Package ​ <| |>
+
+ class  { ':: users ':
+   u_name => $u_hash ,
+ }
 }
 
 ````
 
-As can be observed in the previous example in the profile level is where the specific lookups to hiera, the particular implementation 
-The hiera_has 	use concadenate value of this variable to all the value of the hiera hierarchy.
+As can be observed in the previous example the profile level is _where the specific lookups to hiera are made, the particular implementation of a system and and the module depedencies.  
+Using the hiera_hash allows concadenate values of this variable in all the values of the hiera hierarchy._
 
 For example, for the a profile implementation that configures tomcat can be used:
 
 ````
-class ​ ​
-profiles::tomcat ​ {
-include ​ ​
-​
-'::repositories'
-include ​ ​
-​
-'::java'
-include ​ ​
-​
-'::httpd'
-include ​ ​
-​
-'::tomcat'
-$user_hash ​ = hiera_hash( ​
-​
-'users::u_name' ​
-)
-​ f ​ ​
-i
-$user_hash ​
-[tomcat][username] == ​
-'tomcat' ​ ​
-and
-$user_hash ​
-​
-[tomcat][ ​
-ensure ​
-] == ​
-'present' ​ {
-​ ser ​
-U
-[ ​
-'tomcat' ​
-] ->
-Class ​
-​
-[ ​
-'::tomcat' ​
-]
+class profiles::tomcat  {
+   include '::repositories'
+   include '::java'
+   include '::httpd'
+   include '::tomcat'
+
+   $user_hash = hiera_hash( 'users::u_name' )
+
+   if $user_hash [tomcat][username] == 'tomcat' and
+   $user_hash [tomcat][ ensure ] == 'present'  {
+
+      User ['tomcat' ] -> 
+      Class [ '::tomcat' ]
+
 }
-else ​ {
-​
-notify { ​
-"Verificar el estado del usuario tomcat.
-Username: ${user_hash[tomcat][username]}
-| Ensure: ${user_hash[tomcat][ensure]}" ​
-: ​ }
-}
+ else {
+   notify { "Verify the tomcat user state.
+      Username: ${user_hash[tomcat][username]}
+      | Ensure: ${user_hash[tomcat][ensure]}":  }
+ }
 }
 ````
 
-In that easy way it has become independent the module from the modules and the necessary order, and set abstracted to a superior level, the profiles one.If, for example, now it's desired to change httpd by nginx a new profile can be create that changes the httpd classe, or modify the tomcat profile without affecting the tomcat module.
+In that easy way it has become independent the module from the modules and necessary order, and set abstracted to a superior level, the profiles one. If, for example, now it's desired to change httpd by nginx a new profile can be create that changes the httpd class, or modify the tomcat profile without affecting the tomcat module.
 
-What profiles purpose is that the code in a concrete module can be shared with other without sharing details of this particular modules implementation within the organization, while the profile contains this particular implementation inside a project or organization.
+What profiles purpose is that the code of a concrete module can be shared with others without sharing details of this particular module implementation within the organization, while the profile contains this particular implementation inside a project or organization.
 
-The general recommendation is that the profile reponds to certain technology (tomcat, java, jenkins, httpd, etc) and contain the necessary implementation to work a defined function inside the project (+). All the hiera references must be in the profile layer, so a concrete module can work with or without installed hiera.
+_The general recommendation is that the profile respond to certain technology (tomcat, java, jenkins, httpd, etc) and they contain the necessary implementation to work a defined function inside the project. All the hiera references must been in the profile layer, so a concrete module can work with or without installed hiera._
 
 If a defined project requires a different implementation it is possible to create a sub-classe that creates this function starting from the main profile (or create a new one).
 
-For example, to deploy a java application in certain project can be used something like the next, starting on main profile (note the sub-clase clienapi in profiles::clientapi::deploy_java_app):
+For example, to deploy a java application in certain project can be used something like the next, starting on main profiles (note the sub-clase clienapi in profiles::_clientapi_::deploy_java_app):
 
 ````
-class ​ ​
-profiles::clientapi::deploy_java_app ​ {
-$java_properties ​
-​
-= hiera_hash( ​
-'app_properties::java' ​
-)
-$java_apps ​
-​
-= hiera_hash( ​
-'app_to_deploy::java' ​
-)
-$tomcat_project_name ​ = hiera( ​
-​
-'tomcat::project_name' ​
-)
-$properties_owner ​ = hiera( ​
-​
-'properties::owner' ​
-)
-$properties_group ​ = hiera( ​
-​
-'properties::group' ​
-)
-$properties_dir_mode ​ = hiera( ​
-​
-'properties::properties_dir_mode' ​
-)
-$first ​
-​
-= { tag => ​
-'first' ​ }
-$last ​
-​
-= { tag => ​
-'last' ​ }
-​ nclude ​ ​
-i
-'::profiles::clientapi::base'
-include ​ ​
-​
-'::profiles::tomcat'
-file{ ​
-"/var/properties/" ​
-:
-ensure ​ => directory,
-​
-owner => ​
-$properties_owner ​
-,
-group => ​
-$properties_group ​
-,
-mode => ​
-$properties_properties_dir_mode ​
-,
-}
-create_resources( ​
-::profiles::properties ​
-, ​
-$java_properties ​
-, ​
-$first ​
-)
-create_resources( ​
-::profiles::java_app ​
-, ​
-$java_apps ​
-, ​
-$last ​
-)
-​ lass ​ [ ​
-C
-'::profiles::tomcat' ​
-] -> ​
-File ​ [ ​
-"/var/properties/" ​
-] ->
-File ​ [ ​
-​
-"/etc/init.d/${tomcat_project_name}" ​
-] ->
-Package ​ <| tag == ​
-​
-'first' ​ |> ~> ​
-Service ​ [ ​
-'tomcat' ​
-] -> ​
-Package ​ <| tag == ​
-'last' ​ |> ->
-Class ​ [ ​
-​
-'::profiles::clientapi::deploy_java_app' ​
-]
+class profiles::clientapi::deploy_java_app  {
+   $java_properties = hiera_hash( 'app_properties::java' )
+   $java_apps = hiera_hash( 'app_to_deploy::java' )
+   $tomcat_project_name  = hiera( 'tomcat::project_name' )
+   $properties_owner  = hiera( 'properties::owner' )
+   $properties_group  = hiera( 'properties::group' )
+   $properties_dir_mode  = hiera( 'properties::properties_dir_mode' )
+   $first = { tag => 'first'  }
+   $last = { tag => 'last'  }
+  
+   include '::profiles::clientapi::base'
+   include '::profiles::tomcat'
+
+   file{ "/var/properties/":
+      ensure => directory,
+      owner => $properties_owner ,
+      group => $properties_group ,
+      mode => $properties_properties_dir_mode ,
+   }  
+
+   create_resources( ::profiles::properties, $java_properties , $first )
+   create_resources( ::profiles::java_app , $java_apps , $last )
+
+   Class [ '::profiles::tomcat' ] -> 
+   File [ "/var/properties/" ] ->
+   File [ "/etc/init.d/${tomcat_project_name}" ] ->
+   Package <| tag == 'first' |> ~> Service  [ 'tomcat' ] -> Package  <| tag == 'last'  |> ->
+   Class [ '::profiles::clientapi::deploy_java_app' ]
 }
 ````
 
 *Roles*
 
-The last level of abstraction are the roles, that simply agglutinate in a Puppet module different profiles. Every instance has one Role (and only one). If one instance is equal to another but slightly different a new role will be created that reflects the state with the different profile. In this level no new data is inserted, only includes to profiles and, at most, order dependencies.
+The last level of abstraction are the roles, that simply agglutinate in a Puppet module different profiles. _Every instance has one Role (and only one). If one instance is equal to another but slightly different a new role will be created that reflects the state_ with the different profiles. In this level no new data is inserted, only includes to profiles and, at most, order dependencies.
 
 For example, for the role clientapi-portal:
 
 ````
-class ​ ​
-roles::clientapi::clientapi ​
-- ​
-portal ​ {
-include ​ ​
-​
-'::profiles::clientapi::base'
-include ​ ​
-​
-'::profiles::clientapi::monitoring'
-include ​ ​
-​
-'::profiles::clientapi::nodejs'
-include ​ ​
-​
-'::profiles::clientapi::deploy_java_app'
+class roles::clientapi::clientapi-portal  {
+   include '::profiles::clientapi::base'
+   include '::profiles::clientapi::monitoring'
+   include '::profiles::clientapi::nodejs'
+   include '::profiles::clientapi::deploy_java_app'
 }
 ````
 
@@ -620,19 +466,19 @@ Thanks to this method it's easy to search a fail when it happens, following the 
 
 1. Search the associated role to the instance.
 
-2. Check what profile includes.
+2. Check what profiles includes.
 
 3. In the failed profile, check all the data coming from hiera and the included classes called.
 
-4. Browse through the hiera hierarchy until arrive to the data that are applying.
+4. Browse through the hiera hierarchy until arrive to the data that are being applied.
 
 5. Go down to the code level corresponding to the module.
 
 ### Dynamic environments r10k
 
-With the proposed system it is provided a independent git repository with a workflow isolated by Puppet module. It is necessary a system that allow to specify what version of every module will deploy in a specified environment.
+With the proposed system it is provided a independent git repository with a workflow separated by Puppet module. It is necessary a system that allows to specify what version of every module will deploy in a specified environment.
 
-The dynamic way environment management is made through the r10k tool. Installing it with the following command:
+The dynamic way of environment management is made through the r10k tool. Installing it with the following command:
 
 ````
 [root@foremandv ~]# gem install r10k
@@ -640,26 +486,29 @@ The dynamic way environment management is made through the r10k tool. Installing
 
 R10k will be used to manage the Puppet modules and the configuration files in each of the environments.
 
-To do that it is necessary to use la dynamic environments property, that Puppet as Hiera, provide in his configuration files. This a so used feature that Puppet has included by default, deprecating . In future versions of this document 
+To do that it is necessary to use the dynamic environments property, that Puppet as Hiera, provide in his configuration files. This a so used feature that Puppet has included by default, deprecating this configuration style from Version 3.6 of Puppet.
+
+[https://github.com/adrienthebo/r10k/blob/master/doc/dynamic-environments/master-configuration.mkd](https://github.com/adrienthebo/r10k/blob/master/doc/dynamic-environments/master-configuration.mkd)
+
 
 The configuration file is found in /etc/r10k.yaml and will contain the following information:
 
 ````
 [root@foremandev ~]# cat /etc/r10k.yaml
----
-:cachedir: '/var/cache/r10k'
-:sources:
-:puppet:
-remote: 'git@gitlab.beeva.com:puppet/r10kpuppetfile.git'
-basedir: '/etc/puppet/environments'
-:hiera:
-remote: 'git@gitlab.beeva.com:hiera/r10khieradata.git'
-basedir: '/var/lib/hiera'
+   ---
+   :cachedir: '/var/cache/r10k'
+   :sources:
+      :puppet:
+         remote: 'git@gitlab.beeva.com:puppet/r10kpuppetfile.git'
+         basedir: '/etc/puppet/environments'
+      :hiera:
+         remote: 'git@gitlab.beeva.com:hiera/r10khieradata.git'
+         basedir: '/var/lib/hiera'
 ````
 
-*Is important to know that all environment or configuration file not directly ready to operate with r10k will be erased form the system, consecuently is recommended to backup in starting from a configured environment.*
+_Is important to know that all environment or configuration file not directly configured to operate with r10k will be erased form the system, consecuently is recommended to backup in starting from a configured environment._
 
-As you can check in the previous configured file, it must been created a repository for the r10k module configurations and other one for the data from hiera.It's possible to configure all in a unique repository, but it is convenient to divide code and data.
+As you can check in the previous configured file, it must been created a repository for the r10k module configurations and another for the hiera data. It's possible to configure all in a unique repository, but it is convenient to divide code and data.
 
 #### Puppetfile
 
@@ -667,44 +516,47 @@ Since that can be incompatibilities between different versions of two modules, i
 
 Created a repository so-called r10kpuppetfile that only contains a file, named Puppetfile. This file, used for the r10k program, contains all the module dependencies and versions that will be used for creating the Puppetmaster environment.
 
-Each branch inside this repository matches one environment that can be deployed in the Puppetmaster, with references to all the Puppet modules that this environment contains and his versions. Also the own git modules can be used Puppetlabs modules through the the external dependencies.
+Each branch inside this repository matches one environment that can be deployed in the Puppetmaster, with references to all the Puppet modules that this environment contains and his versions. Also the own git modules, can be used Puppetlabs modules through the the external dependencies.
 
 The Puppetfile file for an environment take the following configurations:
 
 ````
 # track master
 mod 'filemapper',
-:git => 'git://github.com/adrienthebo/puppet-filemapper.git'
+   :git => 'git://github.com/adrienthebo/puppet-filemapper.git'
+
 # Install the filemapper module and track the 1.1.x branch
 mod 'filemapper',
-:git => 'git://github.com/adrienthebo/puppet-filemapper.git',
-:ref => '1.1.x'
+   :git => 'git://github.com/adrienthebo/puppet-filemapper.git',
+   :ref => '1.1.x'
+
 # Install filemapper and use the 1.1.1 tag
 mod 'filemapper',
-:git => 'git://github.com/adrienthebo/puppet-filemapper.git',
-:ref => '1.1.1'
+   :git => 'git://github.com/adrienthebo/puppet-filemapper.git',
+   :ref => '1.1.1'
+
 # Install filemapper and use a specific git commit
 mod 'filemapper',
-:git => 'git://github.com/adrienthebo/puppet-filemapper.git',
-:ref => 'ec2a06d287f744e324cca4e4c8dd65c38bc996e2'
+   :git => 'git://github.com/adrienthebo/puppet-filemapper.git',
+   :ref => 'ec2a06d287f744e324cca4e4c8dd65c38bc996e2'
 ````
 
-In the previous code there are the options to reference the code desired for these module, according the branch name, a regular expression for a versioned tag or a concrete commit.
+The previous code shows the options to reference the code desired for these module, according the branch name, a regular expression for a versioned tag or a concrete commit.
 
-The name of the branches will be the deployed environment in the Puppetmaster. As a suggestion, it is proposed to use a branch for the development version and, not affecting the productive environments, a branch for each minor version that will be deployed:
+The name of the branches will be the deployed environment in the Puppetmaster. As a suggestion, it is proposed to use a branch for the development version and, to no affect the productive environments, a branch for each minor version that will be deployed:
 ````
-- master (global Puppetfile, not used in any productive environment)
-- <project1>_<environment>_<version>
- openp_develop
- openp_pro_3_4_0
- openp_pro_3_5_0
--<project2>_>environment>_<version>
- genoa_develop
- genoa_pro_1_0_0
+master (global Puppetfile, not used in any productive environment)
+<project1>_<environment>_<version>
+  openp_develop
+  openp_pro_3_4_0
+  openp_pro_3_5_0
+<project2>_>environment>_<version>
+  genoa_develop
+  genoa_pro_1_0_0
 ````
-As a general rule, dots can't be used to separate versions, since that files will be deployed as folders inside Puppetmaster and Puppet will not undersand them. It is recommended to use underscore characters to separate versions-
+As a general rule, dots can't be used to separate versions, since that files will be deployed as folders inside Puppetmaster and Puppet will not understand them. It is recommended to use underscore characters to separate versions-
 
-In the module references it is not necessary to all the Puppetfile modules target the development module versions, only when its needed. The only recommended rule is not to pull pre and pro files targeting to branch no being a tag in the master project.
+In the module references it is not necessary to all the Puppetfile modules target the development module versions, only when its necesary. The only recommended rule is not to pull pre and pro files targeting to branch no being a tag in the master project.
 
 For example, a Puppetfile for a development environment example can be:
 
@@ -715,122 +567,163 @@ For example, a Puppetfile for a development environment example can be:
 r10k Puppetfile clientapi_development
 #
 #############################################
+
 forge "http://forge.puppetlabs.com"
+
 mod "adagios_client",
-:git => "git@gitlab.beeva.com:puppet/adagios_client.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/adagios_client.git",
+   :ref => 'genoa-1.0'
+
 mod "amazontools",
-:git => "git@gitlab.beeva.com:puppet/amazontools.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/amazontools.git",
+   :ref => 'genoa-1.0'
+
 mod "autoscaling",
-:git => "git@gitlab.beeva.com:puppet/autoscaling.git",
-:ref => 'genoa-1.3'
+   :git => "git@gitlab.beeva.com:puppet/autoscaling.git",
+   :ref => 'genoa-1.3'
+
 mod "awscli",
-:git => "git@gitlab.beeva.com:puppet/awscli.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/awscli.git",
+   :ref => 'openp-1.0'
+
 mod "crontab",
-:git => "git@gitlab.beeva.com:puppet/crontab.git",
-:ref => 'baas-1.0'
+   :git => "git@gitlab.beeva.com:puppet/crontab.git",
+   :ref => 'baas-1.0'
+
 mod "backups",
-:git => "git@gitlab.beeva.com:puppet/backups.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/backups.git",
+   :ref => 'genoa-1.0'
+
 mod "elasticsearch",
-:git => "git@gitlab.beeva.com:puppet/elasticsearch.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/elasticsearch.git",
+   :ref => 'openp-1.0'
+
 mod "factertags",
-:git => "git@gitlab.beeva.com:puppet/factertags.git",
-:ref => 'openp-development'
+   :git => "git@gitlab.beeva.com:puppet/factertags.git",
+   :ref => 'openp-development'
+
 mod "groups",
-:git => "git@gitlab.beeva.com:puppet/puppet_groups.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/puppet_groups.git",
+   :ref => 'genoa-1.0'
+
 mod "logagent",
-:git => "git@gitlab.beeva.com:puppet/genoa-logagent.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/genoa-logagent.git",
+   :ref => 'genoa-1.0'
+
 mod "java",
-:git => "git@gitlab.beeva.com:puppet/java.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/java.git",
+   :ref => 'openp-1.0'
+
 mod "iptables",
-:git => "git@gitlab.beeva.com:puppet/iptables.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/iptables.git",
+   :ref => 'openp-1.0'
+
 mod "httpd",
-:git => "git@gitlab.beeva.com:puppet/httpd.git",
-:ref => 'openp-develop'
+   :git => "git@gitlab.beeva.com:puppet/httpd.git",
+   :ref => 'openp-develop'
+
 mod "liferay",
-:git => "git@gitlab.beeva.com:puppet/liferay.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/liferay.git",
+   :ref => 'genoa-1.0'
+
 mod "logrotate",
-:git => "git@gitlab.beeva.com:puppet/logrotate.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/logrotate.git",
+   :ref => 'genoa-1.0'
+
 mod "logstash",
-:git => "git@gitlab.beeva.com:puppet/logstash.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/logstash.git",
+   :ref => 'openp-1.0'
+
 mod "memcached",
-:git => "git@gitlab.beeva.com:puppet/memcached.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/memcached.git",
+   :ref => 'genoa-1.0'
+
 mod "mcollective",
-:git => "git@gitlab.beeva.com:puppet/mcollective.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/mcollective.git",
+   :ref => 'openp-1.0'
+
 mod "mongodb",
-:git => "git@gitlab.beeva.com:puppet/mongodb.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/mongodb.git",
+   :ref => 'openp-1.0'
+
 mod "newrelic",
-:git => "git@gitlab.beeva.com:puppet/newrelic.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/newrelic.git",
+   :ref => 'genoa-1.0'
+
 mod "nodejs",
-:git => "git@gitlab.beeva.com:puppet/nodejs.git",
-:ref => 'opencustomer-1.4'
+   :git => "git@gitlab.beeva.com:puppet/nodejs.git",
+   :ref => 'opencustomer-1.4'
+
 mod "ntpd",
-:git => "git@gitlab.beeva.com:puppet/ntpd.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/ntpd.git",
+   :ref => 'genoa-1.0'
+
 mod "openssh",
-:git => "git@gitlab.beeva.com:puppet/openssh.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/openssh.git",
+   :ref => 'genoa-1.0'
+
 mod "packages",
-:git => "git@gitlab.beeva.com:puppet/packages.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/packages.git",
+   :ref => 'genoa-1.0'
+
 mod "profiles",
-:git => "git@gitlab.beeva.com:puppet/profiles.git",
-:ref => 'develop'
+   :git => "git@gitlab.beeva.com:puppet/profiles.git",
+   :ref => 'develop'
+
 mod "properties",
-:git => "git@gitlab.beeva.com:puppet/properties.git",
-:ref => 'openp-1.2'
+   :git => "git@gitlab.beeva.com:puppet/properties.git",
+   :ref => 'openp-1.2'
+
 mod "puppet_agent",
-:git => "git@gitlab.beeva.com:puppet/puppet_agent.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/puppet_agent.git",
+   :ref => 'genoa-1.0'
+
 mod "redis",
-:git => "git@gitlab.beeva.com:puppet/redis.git",
-:ref => 'openp-1.1'
+   :git => "git@gitlab.beeva.com:puppet/redis.git",
+   :ref => 'openp-1.1'
+
 mod "repositories",
-:git => "git@gitlab.beeva.com:puppet/repositories.git",
-:ref => 'openp-1.1'
+   :git => "git@gitlab.beeva.com:puppet/repositories.git",
+   :ref => 'openp-1.1'
+
 mod "roles",
-:git => "git@gitlab.beeva.com:puppet/roles.git",
-:ref => 'develop'
+   :git => "git@gitlab.beeva.com:puppet/roles.git",
+   :ref => 'develop'
+
 mod "security_layer",
-:git => "git@gitlab.beeva.com:puppet/security_layer.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/security_layer.git",
+   :ref => 'openp-1.0'
+
 mod "selinux",
-:git => "git@gitlab.beeva.com:puppet/selinux.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/selinux.git",
+   :ref => 'openp-1.0'
+
 mod "sudoers_roles",
-:git => "git@gitlab.beeva.com:puppet/sudoers_roles.git",
-:ref => 'genoa-1.0'
+   :git => "git@gitlab.beeva.com:puppet/sudoers_roles.git",
+   :ref => 'genoa-1.0'
+
 mod "timezone",
-:git => "git@gitlab.beeva.com:puppet/timezone.git",
-:ref => 'openp-1.0'
+   :git => "git@gitlab.beeva.com:puppet/timezone.git",
+   :ref => 'openp-1.0'
+
 mod "tomcat",
-:git => "git@gitlab.beeva.com:puppet/tomcat.git",
-:ref => 'openp-develop'
+   :git => "git@gitlab.beeva.com:puppet/tomcat.git",
+   :ref => 'openp-develop'
+
 mod "users",
-:git => "git@gitlab.beeva.com:puppet/puppet_users.git",
-:ref => 'genoa-1.1'
+   :git => "git@gitlab.beeva.com:puppet/puppet_users.git",
+   :ref => 'genoa-1.1'
+
 mod "theforeman/concat_native", "1.3.0"
+
 mod "puppetlabs/stdlib", "3.2.1"
+
 mod "puppetlabs/ntp", "3.0.3"
+
 
 ````
 
-Note that all modules are configured with a tag (like openp-1.0 or genoa-1.1) and, those in what a new feature is being developed, change the develop branch (like httpd, tomcat, roles or profiles). When deploying this environment all will be like in the productive environment (modules from tag) except those module desired to be change, and launched from other branches.
+Note that all modules are configured with a tag (like openp-1.0 or genoa-1.1) and, those in what a new feature is being developed, change the develop branch (like httpd, tomcat, roles or profiles). When deploying this environment all will be like in the productive environment (modules from tag) except those desired modules to be changed, and launched from other branches.
 
 Among others advantages this system is useful to integrate new features and branches developed by other teams in a true dynamic environment that allows easily set dependencies and test new features.
 
@@ -838,39 +731,40 @@ Finally, in last lines there are references to modules (and their corresponding 
 
 To see available modules it is recommended going to:
 
-https://forge.puppetlabs.com/
+[https://forge.puppetlabs.com/](https://forge.puppetlabs.com/)
 
 #### Hieradata
 
-To have a truly dynamic working it integrates the Hiera data too through r10k. Following the recommended best practices by Puppetlabs engineers, an additional repository is created that contains the Hiera data for each of the Puppet environments. To have this system compatible with the proposed workflow the branch names of r10khieradata repositories and the r10kpuppetfile must being equals.
+To have a truly dynamic working it integrates the Hiera data too through r10k. Following the recommended best practices by Puppetlabs engineers, an additional repository is created that contains the Hiera data for each of the Puppet environments. To be this system compatible with the proposed workflow _the branch names of r10khieradata repositories and the r10kpuppetfile must be equals._
 
 In this document it is considered the following hiera hierarchy in the Puppetmaster:
 
 ````
 [root@foremandev ~]# cat /etc/puppet/hiera.yaml
 ­­­ 
+---
 :backends: 
-  ­ eyaml 
-  ­ yaml 
-  ­ file 
+  ­- eyaml 
+  ­- yaml 
+  ­- file 
 :hierarchy: 
 # EYAML and YAML CONFIGURATIONS 
-  ­ “%{::app_tier}/%{::hostname}” 
-  ­ “%{::app_tier}/%{::fqdn}” 
-  ­ “%{::app_tier}/%{::rol}/%{::version}” 
-  ­ “%{::app_tier}/%{::rol}” 
-  ­ “%{::app_tier}/%{::proyecto}” 
-  ­ “%{::app_tier}/common” 
+  ­- “%{::app_tier}/%{::hostname}” 
+  ­- “%{::app_tier}/%{::fqdn}” 
+  ­- “%{::app_tier}/%{::rol}/%{::version}” 
+  ­- “%{::app_tier}/%{::rol}” 
+  ­- “%{::app_tier}/%{::proyecto}” 
+  ­- “%{::app_tier}/common” 
  
 # HIERA­FILE CONFIGURATIONS 
-  ­ “%{::hostname}” 
-  ­ “%{::fqdn}” 
-  ­ “%{::rol}/%{::version}” 
-  ­ “%{::rol}” 
-  ­ “%{::proyecto}” 
+  ­ - “%{::hostname}” 
+  ­ - “%{::fqdn}” 
+  ­ - “%{::rol}/%{::version}” 
+  ­ - “%{::rol}” 
+  ­ - “%{::proyecto}” 
  
 # COMMON CONFIGS SUCH AS VATS 
-  ­ common 
+  ­-  common 
  
  
 :eyaml: 
@@ -879,7 +773,6 @@ In this document it is considered the following hiera hierarchy in the Puppetmas
   :pkcs7_public_key:  /etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem 
  
 :yaml: 
-  ​
  :datadir: "/var/lib/hiera/%{::environment}" 
  
 :file: 
@@ -890,7 +783,7 @@ In this document it is considered the following hiera hierarchy in the Puppetmas
 
   ````
 
-In the next paragraphs topics  like the different configured backends will be discussed, but at this point is important to differentiate between the variables %{::environment} and %{::app_tier}.
+In the next paragraphs topics like the different configured backends will be discussed, but at this point is important to differentiate between the variables %{::environment} and %{::app_tier}.
 
 The environments, %{::environment} are the corresponding to the Puppet developed modules, and to the referencies that r10k has in the Puppetfile to deploy the dependencies between modules of specified environment. For example, the preproduction and production environments need to have the same Puppet modules code, so it is defined the environment $environment = openp_master_3_7_0.
 
