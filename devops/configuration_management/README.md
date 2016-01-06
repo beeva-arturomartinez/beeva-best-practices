@@ -868,7 +868,7 @@ hiera_apptier: 'dev'
 hiera_project: 'genoa'
 hiera_foreman: 'foremandev.devopenp.com'
 hiera_s3_bucket: 'openp-genoa-dev-eu-west-1'
-**interpolated_variable: ‘value’**
+interpolated_variable: ‘value’
 ````
 
 To reference this variables use this format:
