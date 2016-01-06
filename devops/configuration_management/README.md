@@ -785,7 +785,7 @@ In this document it is considered the following hiera hierarchy in the Puppetmas
 
 In the next paragraphs topics like the different configured backends will be discussed, but at this point is important to differentiate between the variables %{::environment} and %{::app_tier}.
 
-The environments, %{::environment} are the corresponding to the Puppet developed modules, and to the referencies that r10k has in the Puppetfile to deploy the dependencies between modules of specified environment. For example, the preproduction and production environments need to have the same Puppet modules code, so it is defined the environment $environment = openp_master_3_7_0.
+The environments, %{::environment} are the corresponding to the Puppet developed modules, and to the referencies that r10k has in the Puppetfile to deploy the dependencies between modules for a specified environment. For example, the preproduction and production environments need to have the same Puppet modules code, so it is defined the environment ``$environment = openp_master_3_7_0``
 
 With this system it is assured that the version in the Puppet modules code is the desired. However, even though preproduction and production must be equals in a code level, the same does not hold in the corresponding data of the environment (users, passwords, certificates and permissions).
 To establish this difference the variable %{::app_tier} is used, that matches the application environment that will be deployed (for example dev, pre, pro, qa, etc).
@@ -794,7 +794,7 @@ For further in this design decision it is a recommended lecture:
 
 [http://garylarizza.com/blog/2014/03/26/random-r10k-workflow-ideas/](http://garylarizza.com/blog/2014/03/26/random-r10k-workflow-ideas/)
 
-As a quick reference the variable %{::environment} serve to referencing Puppet environments while the variable %{::app_tier} serves as an internal environment, that references the application environment.
+As a quick reference the variable %{::environment} serve to referencing **Puppet environments** while the variable %{::app_tier} serves as an **internal environment**, that references the application environment.
 
 Thanks that method, Puppet code and used data for a specified application are separated, even though the corresponding code can be deployed to a version with the r10k method.
 
@@ -802,7 +802,7 @@ The environment is managed from ENC (foreman), but to be executed the Puppet age
 ```
 FACTER_app_tier=dev puppet agent --test (--noop)
 ```
-The notation ```FACTER_<variable>``` generate an environment variable with the value <variable> through the facter.
+The notation ```FACTER_<variable>``` generates an environment variable with the value ``<variable>`` through the facter.
 
 In the sections 3.3 and 3.4 it is explained in the used backends over and above of yaml, to encrypt sensitive content (hiera-eyaml) and deploying environment independent static files (hiera-file).
 
@@ -810,63 +810,30 @@ It is possible to know a value of a parameter inside the hierarchy executing a c
 
 [https://docs.puppetlabs.com/hiera/1/command_line.html](https://docs.puppetlabs.com/hiera/1/command_line.html)
 
-In example, to extract the machine variable factertags::environment with hostname dev-geno-ccenter in environment genoa_development in app_tier dev:
+In example, to extract the machine variable factertags::environment with hostname dev-genoa-ccenter in environment genoa_development in app_tier dev:
 
 ````
-[root@foremandev ~]# ​
-hiera 'factertags::entorno' ::environment=genoa_development
-::hostname=dev-genoa-ccenter ::app_tier=dev -d
+[root@foremandev ~]# hiera 'factertags::entorno' ::environment=genoa_development ::hostname=dev-genoa-ccenter ::app_tier=dev -d
 DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Hiera eYAML backend starting
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Set option: datadir =
-/var/lib/hiera/genoa_development/dev
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Setoption:pkcs7_public_key=
-/etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem
-DEBUG: Mon Feb0909:30:49+01002015:[eyaml_backend]:Setoption:pkcs7_private_key=
-/etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Lookingupfactertags::entorno
-in eYAML backend
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source
-dev-genoa-ccenter
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Found factertags::entorno in
-dev-genoa-ccenter
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Set option: datadir =
-/var/lib/hiera/genoa_development/dev
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Setoption:pkcs7_public_key=
-/etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem
-DEBUG: Mon Feb0909:30:49+01002015:[eyaml_backend]:Setoption:pkcs7_private_key=
-/etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Lookingupfacter_envineYAML
-backend
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source
-dev-genoa-ccenter
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Set option: datadir = /var/lib/hiera/genoa_development/dev
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Setoption:pkcs7_public_key= /etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem
+DEBUG: Mon Feb0909:30:49+01002015:[eyaml_backend]:Setoption:pkcs7_private_key= /etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Lookingupfactertags::entorno in eYAML backend
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source dev-genoa-ccenter
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Found factertags::entorno in dev-genoa-ccenter
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Set option: datadir =/var/lib/hiera/genoa_development/dev
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Setoption:pkcs7_public_key=/etc/puppet/secure/keys/foremandev_public_key.pkcs7.pem
+DEBUG: Mon Feb0909:30:49+01002015:[eyaml_backend]:Setoption:pkcs7_private_key=/etc/puppet/secure/keys/foremandev_private_key.pkcs7.pem
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Lookingupfacter_envineYAML backend
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source dev-genoa-ccenter
 DEBUG: Mon Feb 09 09:30:49 +0100 2015: [eyaml_backend]: Looking for data source common
-DEBUG:
-Mon
-Feb
-09
-09:30:49
-+0100
-2015:
-Cannot
-find
-datafile
-/var/lib/hiera/genoa_development/dev/common.eyaml, skipping
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Cannot find datafile /var/lib/hiera/genoa_development/dev/common.eyaml, skipping
 DEBUG: Mon Feb 09 09:30:49 +0100 2015: Hiera YAML backend starting
 DEBUG: Mon Feb 09 09:30:49 +0100 2015: Looking up facter_env in YAML backend
 DEBUG: Mon Feb 09 09:30:49 +0100 2015: Looking for data source dev-genoa-ccenter
-DEBUG:
-Mon
-Feb
-09
-09:30:49
-+0100
-2015:
-Cannot
-find
-/var/lib/hiera/genoa_development/dev/dev-genoa-ccenter.yaml, skipping
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Cannot find /var/lib/hiera/genoa_development/dev/dev-genoa-ccenter.yaml, skipping
 DEBUG: Mon Feb 09 09:30:49 +0100 2015: Looking for data source common
-DEBUG: Mon Feb 09 09:30:49 +0100 2015: Found facter_env in common
-openp_dev
+DEBUG: Mon Feb 09 09:30:49 +0100 2015: Found facter_env in common openp_dev
 
 ````
 
@@ -889,7 +856,7 @@ This brings important benefits:
 
 ##### Interpolation of variables in hiera
 
-_*Note: This system does not work correctly in Puppet 3.3, to review when upgrade to Puppet 4.*_
+**Note: This system does not work correctly in Puppet 3.3, to review when upgrade to Puppet 4.**
 
 To make the variables interpolation work in Hiera it is necessary to use a version above 1.3 (to check it is possible to use the command hiera --version).
 
@@ -901,7 +868,7 @@ hiera_apptier: 'dev'
 hiera_project: 'genoa'
 hiera_foreman: 'foremandev.devopenp.com'
 hiera_s3_bucket: 'openp-genoa-dev-eu-west-1'
-interpolated_variable: ‘value’
+**interpolated_variable: ‘value’**
 ````
 
 To reference this variables use this format:
@@ -910,11 +877,11 @@ To reference this variables use this format:
 ```
 It is recommended that global variable starts with ````hiera_<name>```` so it will be easier to know where it comes from in a error case.
 
-Thank that interpolation method it is possible to define variables repeated in one place of the configuration file and reference them in the rest of the hierarchy. It is recommended that the hiera configuration file to have the modules ordered alphabetically for a easier reading, the global variables will be set as first section in the file.
+Thanks that interpolation method it is possible to define variables repeated in one place of the configuration file and reference them in the rest of the hierarchy. It is recommended that the hiera configuration file to have the modules ordered alphabetically for a easier reading, the global variables will be set as first section in the file.
 
 If possible, to changing the value easily, the interpolated variable will be set in the lower hierarchy level (for example, in common.yaml), and will be overwriten in the upper level if necessary.
 
-When refering from another file, it will be used the assigned section to global variables to point which are being used , and what level of hierarchy.
+When refering from other file, it will be used the assigned section to global variables to point which are being used , and what level of hierarchy.
 ```
 ################################################################# HIERA VARIABLES
 # Global variables used from common.yaml:
