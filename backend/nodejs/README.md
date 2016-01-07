@@ -87,6 +87,21 @@ This brief section it's intended to give some easy and quick tips to rememeber d
 * Install node and npm interperters localy through [NVN](https://github.com/creationix/nvm) without using sudo. 
 * Clear the local cache after each update NPM version: *$npm cache clean*
 
+Another interesting point thinking on how web applications should be written it's follow [The Twelve-Factor application manifesto](http://12factor.net/). 
+
+* One codebase tracked in revision control, many deploys.
+* Explicitly declare and isolate dependencies.
+* Store config in the environment.
+* Treat backing services as attached resources.
+* Strictly separate build and run stages.
+* Execute the app as one or more stateless processes.
+* Export services via port binding.
+* Scale out via the process model.
+* Maximize robustness with fast startup and graceful shutdown.
+* Keep development, staging, and production as similar as possible.
+* Treat logs as event streams.
+* Run admin/management tasks as one-off processes.
+
 ## Frameworks
 
 In this section we're going to talk about three main frameworks that we are using on productive projects. Some of them are in microservices environments, RESTful APIs and web servers.
