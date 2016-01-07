@@ -1,3 +1,5 @@
+![alt text](static/hadoop_logo.png "Hadoop")
+
 # HADOOP Development & Best Practices
 At its core, Hadoop is a distributed data store that provides a platform for implementing powerful parallel processing frameworks. 
 
