@@ -2,9 +2,9 @@
 
 ## Index
 * [User Stories](#user-stories)
-* [User Story-Writing Process](#writing-process)
-* [Frequent Mistakes in User Stories](#frequent-mistakes)
-* [Reference](#reference) 
+* [User Story-Writing Process](#user-story-writing-process)
+* [Frequent Mistakes in User Stories](#frequent-mistakes-in-user-stories)
+* [Reference](#reference)
 
 ### User Stories
 
