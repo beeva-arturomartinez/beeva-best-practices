@@ -4,7 +4,7 @@
 * [User Stories](#user-stories)
 * [User Story-Writing Process](#user-story-writing-process)
 * [Frequent Mistakes in User Stories](#frequent-mistakes-in-user-stories)
-* [Reference](#reference)
+* [References](#references)
 
 ### User Stories
 
@@ -29,7 +29,7 @@ Start by writing the title. It should be long enough to allow people on the team
 
 Now write the description. You can use the following template: 
 
-As a [user role] I want to [goal] so I can [reason]
+*As a [user role] I want to [goal] so I can [reason]*
 
 If the description becomes lengthy (more than will fit on an index card), you should revisit the user story. It is likely it needs to be split into several stories. You might also consider whether you are trying to include too much detail. Remember that the purpose of a user story is to encourage collaboration. A user story is a promise to have a future conversation; it is not meant to document every aspect of the work, as you might in a series of traditional requirements statements.
 
