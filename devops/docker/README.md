@@ -66,8 +66,7 @@ Keep the image as minimal as posible:
 
 * Use small base images (e.g. *debian* or *alpine*)
 
-* Don’t install unnecessary packages 
-This reduces the file size, lessens the complexity of dependencies, and cuts down on build times. Use ```--no-install-recommends``` with *apt-get*
+* Don’t install unnecessary packages: This reduces the file size, lessens the complexity of dependencies, and cuts down on build times. Use ```--no-install-recommends``` with *apt-get*
 
 * Take advantage of .dockerignore: DockerIgnore is a handy way to exclude unnecessary files and directories from the build context and final image.
 
