@@ -57,8 +57,7 @@ Images can be built automatically following the instructions defined in a Docker
 	  	subversion
 ```
 
-* Be specific about tags
-Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the -t option for the Docker Build feature.
+* Be specific about tags: Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the -t option for the Docker Build feature.
 
 
 ### Create small-sized containers
@@ -70,27 +69,21 @@ Keep the image as minimal as posible:
 * Don’t install unnecessary packages 
 This reduces the file size, lessens the complexity of dependencies, and cuts down on build times. Use ```--no-install-recommends``` with *apt-get*
 
-* Take advantage of .dockerIgnore
-DockerIgnore is a handy way to exclude unnecessary files and directories from the build context and final image.
+* Take advantage of .dockerignore: DockerIgnore is a handy way to exclude unnecessary files and directories from the build context and final image.
 
 * Remember to delete packages used to install your application after uncompressing them.
 
 ### Design your application thinking about Docker
 
-* Use only one container per process
-Decouple applications into separate containers — one for each process. This makes horizontal scaling easier and allows you to recycle containers. To handle services that are dependent on each other, use the container linking feature instead of housing them in the same Docker container.
+* Use only one container per process: Decouple applications into separate containers — one for each process. This makes horizontal scaling easier and allows you to recycle containers. To handle services that are dependent on each other, use the container linking feature instead of housing them in the same Docker container.
 
-* Build containers that are portable and easy to replace
-Keep in mind that the docker containers produced by the images defined in your Dockerfile should be ephemeral. So they can be stopped, destroyed or rebuilt with minimal setup and configuration. In particular, containers should be stateless, and should not contain specific data:
+* Build containers that are portable and easy to replace: Keep in mind that the docker containers produced by the images defined in your Dockerfile should be ephemeral. So they can be stopped, destroyed or rebuilt with minimal setup and configuration. In particular, containers should be stateless, and should not contain specific data:
 
-	* Configuration parameters or files
-	Any information that the application needs to run that can change between environments (such as endpoints, usernames and passwords) shouldn't be hardcoded into the container. The recommendation is to prepare your application to get that info from environment variables (and supply those variables when running the container) or using external configuration files mounted as data volumes.
+	* Configuration parameters or files: Any information that the application needs to run that can change between environments (such as endpoints, usernames and passwords) shouldn't be hardcoded into the container. The recommendation is to prepare your application to get that info from environment variables (and supply those variables when running the container) or using external configuration files mounted as data volumes.
 
-	* Don't mix Docker logs with application logs
-	Docker containers collect the output of the running process stdout into their Docker logs. This logs are ephemeral, and can grow indefinitely. It is recommended to never mix your application logs into Docker logs. Put the application logs into a file mounted as a volume on the host. This way, logs can be properly treated and rotated.
+	* Don't mix Docker logs with application logs: Docker containers collect the output of the running process stdout into their Docker logs. This logs are ephemeral, and can grow indefinitely. It is recommended to never mix your application logs into Docker logs. Put the application logs into a file mounted as a volume on the host. This way, logs can be properly treated and rotated.
 
-	* Application specific data
-	Any application specific data, such as database files, should be mounted as a volume on a separated container, using Docker link functionality.
+	* Application specific data: Any application specific data, such as database files, should be mounted as a volume on a separated container, using Docker link functionality.
 
 ### Security
 
