@@ -87,7 +87,7 @@ Keep the image as minimal as posible:
 ### Security
 
 You can use the following tools to check security issues on docker images and containers:
- * [Docker bench for security](#https://github.com/docker/docker-bench-security) It is a Script to check potential vulerabilities and best practices on docker deployments based on the [CIS Docker 1.6 benchmark document](#https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf)
+ * [Docker bench for security](https://github.com/docker/docker-bench-security): It is a Script to check potential vulerabilities and best practices on docker deployments based on the [CIS Docker 1.6 benchmark document](https://benchmarks.cisecurity.org/tools2/docker/CIS_Docker_1.6_Benchmark_v1.0.0.pdf)
 
 ## Docker Orchestration
 
