@@ -57,7 +57,7 @@ Images can be built automatically following the instructions defined in a Docker
 	  	subversion
 ```
 
-* Be specific about tags: Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the -t option for the Docker Build feature.
+* Be specific about tags: Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the ```-t`` option for the Docker Build feature.
 
 
 ### Create small-sized containers
@@ -133,7 +133,7 @@ You can run the containers with the command (by default containers are recreated
 docker-compose up
 ````
 
-Docker compose generates an isolated enviroment when launching based on the name of the project directory. You can set a custom project name by using the -p command line option or the COMPOSE_PROJECT_NAME environment variable
+Docker compose generates an isolated enviroment when launching based on the name of the project directory. You can set a custom project name by using the ```-p``` command line option or the COMPOSE_PROJECT_NAME environment variable
 
 ````
 docker-compose -p myproject up
