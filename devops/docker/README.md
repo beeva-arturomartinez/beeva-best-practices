@@ -93,10 +93,10 @@ You can use the following tools to check security issues on docker images and co
 
 ### Docker for Developers
 
-Maintain Docker environment clean, use --rm when running interactive containers.
+Maintain Docker environment clean, use ```--rm`` when running interactive containers.
 
 #### Docker-Compose
-Docker-compose is a tool that allows to define multiple docker-containers using a configuration file and run them with a single command.
+Docker-compose is a tool that allows us to define multiple docker-containers using a configuration file and run them with a single command.
 
 This is an example of a docker-compose.yml configuration file:
 ```yaml
@@ -139,7 +139,7 @@ Docker compose generates an isolated enviroment when launching based on the name
 docker-compose -p myproject up
 ````
 
-You can also specify the number of containers to run for a service. In the following example three containers will be used to run myservice
+You can also specify the number of containers to run for a service. In the following example three containers will be used to run *myservice*
 ````
 docker-compose scale myservice=3
 ````
