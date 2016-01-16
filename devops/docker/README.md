@@ -57,7 +57,7 @@ Images can be built automatically following the instructions defined in a Docker
 	  	subversion
 ```
 
-* Be specific about tags: Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the ```-t`` option for the Docker Build feature.
+* Be specific about tags: Docker Build will generate a tag that is easily read by people and this helps you manage the images more easily later so use the ```-t``` option for the Docker Build feature.
 
 
 ### Create small-sized containers
@@ -93,7 +93,7 @@ You can use the following tools to check security issues on docker images and co
 
 ### Docker for Developers
 
-Maintain Docker environment clean, use ```--rm`` when running interactive containers.
+Maintain Docker environment clean, use ```--rm``` when running interactive containers.
 
 #### Docker-Compose
 Docker-compose is a tool that allows us to define multiple docker-containers using a configuration file and run them with a single command.
