@@ -414,7 +414,7 @@ As all the users in the project has to have the right permissions to use the acc
 
 For compatibility with anwbis, the role_name is advised to be *admin*, *developer*, *user* or *devops*.
 
-In the role, the minimum permissions for the kind of user has to be provided. See [IAM](#IAM) section for more information about how to create the role.
+In the role, the minimum permissions for the kind of user has to be provided. See [IAM](#iam) section for more information about how to create the role.
 
 #### Steps in the master account
 
