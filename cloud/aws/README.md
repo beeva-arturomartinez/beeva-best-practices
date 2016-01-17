@@ -501,7 +501,7 @@ AWS provide us different storage options within its range of services. The main 
 Simple Storage Service. S3 is a highly-scalable, reliable and low-latency distributed file system. We can use S3 in combination with our EC2 instances in order to get a scalable storage decoupled from our EC2 infrastructure.
 
 ##### Durability and Availability
-Amazon S3 is designed for 99,9999999% **durability** per object and 99,99% **availability** over a 1 year period.
+Amazon S3 is designed for 99,999999999% **durability** per object and 99,99% **availability** over a 1 year period.
 
 S3 provides mechanisms to prevent accidental deletion, allowing object versioning, and deletion with Multi-Factor Authentication. 
 
