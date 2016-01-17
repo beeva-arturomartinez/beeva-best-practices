@@ -129,7 +129,7 @@ launch time and retrieve user data and instance metadata after launch.
 
 ### Think parallel
 
-You need te design your processes and workflow thinking in the concept of cloud parallelization. In order to achieve maximum performance and throughput, you should leverage request parallelization. Multi-threading
+You need to design your processes and workflow thinking in the concept of cloud parallelization. In order to achieve maximum performance and throughput, you should leverage request parallelization. Multi-threading
 your requests by using multiple concurrent threads will store or fetch the data faster than requesting it sequentially.
 
 AWS specific tactics for implementing this best practice:
@@ -234,7 +234,7 @@ Major security problems are always related to the way the security tools, method
 #### Monitoring & Alerts
 The workflow of many operations & production support teams start with the monitoring alerts typically in place for these enterprise server clusters. 
 
-Alert centralized tools do the server monitoring with a customized solution to inform the right teams and stakeholders.. Again, the application is often unaware of the surrounding support structures that exist to keep it up and running, so before migrating to the cloud it is capital to deploy mechanisms to monitor the services and not only the servers.
+Alert centralized tools do the server monitoring with a customized solution to inform the right teams and stakeholders. Again, the application is often unaware of the surrounding support structures that exist to keep it up and running, so before migrating to the cloud it is capital to deploy mechanisms to monitor the services and not only the servers.
 
 
 #### Server Sprawl
