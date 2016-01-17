@@ -516,14 +516,14 @@ S3 has no limit in the number of objects that you can store in a single bucket, 
 ##### Advanced Features
 S3 has some interesiting extra features:
 * The video streaming capacity
-* The capacity to store and serve static webpages, acting like a static webhosting.
-* Object distribution via BitTorrent protocol, in order to get less API calls and the consecuent picing benefits.
+* The capacity to store and serve static webpages, acting like a static webhosting
+* Object distribution via BitTorrent protocol, in order to get less API calls and the consecuent pricing benefits
 
 #### Glacier
 
 Amazon Glacier is an extreme low-cost AWS storage designed, which has been designed for archives and historical data. It provides a flexible and high durable storage, and it integrates seamlessly with S3 to define the object lifecycle at bucket level.
 
-Glacier is commonly used to manage infrequent accessed data. The jobs to get data back to S3 used to take 2-5 hour to complete.
+Glacier is commonly used to manage infrequent accessed data. The jobs to get data from Glacier back to S3 used to take 2-5 hour to complete.
 
 #### EBS
 
@@ -531,7 +531,7 @@ Amazon EBS (Elastic Block Storage) are persistent block-level storage for EC2 in
 
 EBS disks are used specially for data which changes frecuently, for disks in a database for example, and for data which needs a long time persistance.
 
-Also, you can perform automatic a point in time backups of EBSs. This automatic backups are called Snapshots, and are stored in S3.
+Also, you can perform automatic point in time backups of EBSs. These automatic backups are called Snapshots, and are stored in S3.
 
 ##### Types
 
