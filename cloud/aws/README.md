@@ -449,7 +449,7 @@ The users belonging to a project are attached to the group with the set of permi
 
 #### IAM Credentials and Anwbis
 
-Each user has a set of credentials (Access Key and Secret Key) with are not useful unless a MFA token is provided. In order to use the AWS cli (or other SDK), it is recomended that the file *~/.aws/credentials* is present and with the following content:
+Each user has a set of credentials (Access Key and Secret Key) which are not useful unless a MFA token is provided. In order to use the AWS cli (or other SDK), it is recomended that the file *~/.aws/credentials* is present and with the following content:
 
 ```
 [default]
