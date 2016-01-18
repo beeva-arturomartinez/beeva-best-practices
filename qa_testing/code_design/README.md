@@ -93,6 +93,7 @@ Each programming language have itself recommendations and best practices. It's i
 * [Java](http://www.oracle.com/technetwork/java/codeconventions-135099.html)
 * [Python](https://www.python.org/dev/peps/pep-0008/)
 * [Javascript](http://www.w3schools.com/js/js_conventions.asp)
+* [The twelve-factor app](http://12factor.net/): The twelve-factor app is a methodology for building software-as-a-service apps. The twelve-factor methodology can be applied to apps written in any programming language, and which use any combination of backing services (database, queue, memory cache, etc).
 
 
 ### Code Documentation
@@ -1742,13 +1743,13 @@ Behaviour Driven Development is a synthesis and refinement of practices stemming
  - Any system should have an identified, verifiable value to the business - [WheresTheBusinessValue](http://behaviourdriven.org/WheresTheBusinessValue)
  - Up-front analysis, design and planning all have a diminishing return - [EnoughIsEnough](http://behaviourdriven.org/EnoughIsEnough)
 
-#### Ubiquitous language 
+#### Ubiquitous language
 
 It is hard to form a two-way communication between groups of people that operate in different business spheres without stumbling upon situations where both sides use the same language and even words, but imply a different meaning.
 
 Ubiquitous language is a language created by developers and the business in order to discuss features and talk effectively in examples. It is not a technical language, but it is not a business language either; it is a combination of both. The key in the two sides becoming effective for joint communication lies in their ability to accept, to a certain extent, the points of view and understanding of each other. Ubiquitous language is an integral part of BDD. It is almost impossible to be effective with examples without striving for a shared language and understanding.
 
-#### Focus in goals 
+#### Focus in goals
 
 A good business goal is **specific, measurable, attainable, relevant and time-bound** (SMART).
 > **Examples:**
@@ -1761,34 +1762,34 @@ A good business goal is **specific, measurable, attainable, relevant and time-bo
 Focusing on users behaviour is the key concept behind usage-centered design and one of the most important concepts in BDD. Not only discuss examples of human behaviours and interactions, but we also discuss them from the point of view of their users. By focusing on the users and their behaviours, we understand who the system is built for and as a result, deliver software that meets the needs of all who use it.
 By analysing behaviours of people that will use the system, we constantly analyse different options and alternatives that would best meet their needs. In doing so, we are opened to different implementations and optimisations. Caring about behaviors not only helps us to deliver the software itself, but build the technical system to directly meet the needs of users.
 
-Apply the "Five Why's" principle or Impact Mapping as a techniques to describe user stories. 
+Apply the "Five Why's" principle or Impact Mapping as a techniques to describe user stories.
 
-![enter image description here](http://static1.squarespace.com/static/55bb7996e4b0682032281f3c/t/56165681e4b007142a3d792f/1444304513963/?format=500w) 
+![enter image description here](http://static1.squarespace.com/static/55bb7996e4b0682032281f3c/t/56165681e4b007142a3d792f/1444304513963/?format=500w)
 
-Try to guide development bdd test through examples to illustrate behaviour. 
+Try to guide development bdd test through examples to illustrate behaviour.
 
-#### How to write it 
+#### How to write it
 
 BDD does not have any formal requirements for exactly how these user stories must be written down, but it does insist that each team using BDD come up with a simple, standardized format for writing down. Dan North suggested a template for a textual format which has found wide following in different BDD software tools.
 > **Example:**
-> **Story**:  Create a new user 
+> **Story**:  Create a new user
 >In order to manage customer in my sytem
 >As a site administrator
 >I want to create, view and manage customer records
 
->**Scenario 1**: Create a basic customer 
+>**Scenario 1**: Create a basic customer
 >>**Given** I am logged into the site as an manager
 >**And** I can see admin user view
 >**When**I click the "Create New Customer" link
 >**Then** I enter the following information email:  beeva@rocks.com
->**And** I should see the following details on the screen: 'User was created' 
+>**And** I should see the following details on the screen: 'User was created'
 
 >**Scenario 2**:  Error when try to create a user with invalid email
 >>**Given** I am logged into the site as an manager
 >**And** I can see admin user view
 >**When**I click the "Create New Customer" link
 >**Then** I enter the following information email:  beevarocks.com
->**And** I should see the following details on the screen: 'Invalid user mail' 
+>**And** I should see the following details on the screen: 'Invalid user mail'
 
 
 The scenarios are ideally phrased declaratively rather than imperatively
@@ -1798,8 +1799,8 @@ The scenarios are ideally phrased declaratively rather than imperatively
 
  - Organizing the conversation between developers, testers and domain experts.
  - Helps focus on **system’s behavioral aspects** rather than focusing on testing your implementation
- - **Breaking the knowledge silos** in distributed team 
- -  **Are we building the right product ?**: Every member belongs to a team can check if they are building software in the right direcction. 
+ - **Breaking the knowledge silos** in distributed team
+ -  **Are we building the right product ?**: Every member belongs to a team can check if they are building software in the right direcction.
  - Helps developers to **refactor** without break main application features
 
 
