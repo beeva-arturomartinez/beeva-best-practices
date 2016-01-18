@@ -1,6 +1,6 @@
 # Angular Style Guide
 
-![alt text](https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/AngularJS_logo.svg/695px-AngularJS_logo.svg.png "Angular")
+![alt text](static/angular-logo.png "Angular")
 
 ## Index
 
