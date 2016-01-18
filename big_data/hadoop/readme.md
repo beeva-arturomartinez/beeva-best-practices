@@ -5,9 +5,9 @@ At this point we're going to talk about Hadoop
 
 ## Links
 
-* [Development](./hadoop-management.md)
-* [Management](./hadoop-development.md)
+* [Development](./hadoop-development.md)
+* [Management](./hadoop-management.md)
 
 ___
 
-[BEEVA](http://www.beeva.com) | 2015
+[BEEVA](http://www.beeva.com) | 2016
