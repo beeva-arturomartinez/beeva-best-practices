@@ -203,12 +203,12 @@ The documentation tools make it possible to generate documentation directly from
 #### Naming and format
 There are a lot of tools to help to improve the code's quality and design. These tools allows to review the application code to find naming errors, variables not used, or to force to the developer to comment his methods and classes.
 
-One of the most used tool for this goal is [Sonar](http://www.sonarqube.org/). Normally Sonar is installed in the server, configured for Continuous Integration with other tools (like Jenkins) and ensure that the code must be correct before the deployment.
+One of the most used tool for this goal is [Sonar](http://www.sonarqube.org/). There are more information about this tool in the [Sonar Best Practices Guide](../sonar/README.md).
 
 Other tools that helps you depending on the programming language:
 
-* **Java**: [Checkstyle](http://checkstyle.sourceforge.net/) and [PMD](https://pmd.github.io/) with maven plugin, allow to configure some configuration rules and test that your code is fine when you build your java application, preserving for deployment server errors. You should configure the same rules than sonar. Other usefull tool is [FindBugs](http://findbugs.sourceforge.net/) .
-* **Python**: [Pylint](http://www.pylint.org/)
+* **Java**: [Checkstyle](http://checkstyle.sourceforge.net/) and [PMD](https://pmd.github.io/) with maven plugin, allow to configure some configuration rules and test that your code is fine when you build your java application, preserving for deployment server errors. You should configure the same rules than sonar. Other useful tool is [FindBugs](http://findbugs.sourceforge.net/). In our [Java Best Practices Guide](../../backend/java/README.md) there are more information.
+* **Python**: [Pylint](http://www.pylint.org/). For more information look into our [Python guide](../../backend/python/README.md).
 * **JavaScript**: [JSHint](http://jshint.com/about/) is a static code analysis tool for JavaScript. Also is recommended use a tool called [Plato](https://github.com/es-analysis/plato) that is a JavaScript source code visualization, static analysis, and complexity tool and can be integrated with the JSHint results. You can find more tools and best practices in our [Javascript Best Practices Guide](../../frontend/javascript/README.md).
 
 
