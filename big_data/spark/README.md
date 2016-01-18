@@ -10,6 +10,7 @@
 * [Testing](#testing)
 * [Tuning and debugging](#tuning-and-debugging)
 * [Spark on EMR](#spark-on-emr)
+* [References](#references)
 
 ### Writing applications
 
@@ -293,7 +294,7 @@ Sometimes, you will get an OutOfMemoryError not because your RDDs don’t fit in
 
 #### Broadcasting Large Variables
 
-Using the broadcast functionality available in SparkContext can greatly reduce the size of each serialized task, and the cost of launching a job over a cluster. If your tasks use any large object from the driver program inside of them (e.g. a static lookup table), consider turning it into a broadcast variable. Spark prints the serialized size of each task on the master, so you can look at that to decide whether your 
+Using the broadcast functionality available in SparkContext can greatly reduce the size of each serialized task, and the cost of launching a job over a cluster. If your tasks use any large object from the driver program inside of them (e.g. a static lookup table), consider turning it into a broadcast variable. Spark prints the serialized size of each task on the master, so you can look at that to decide whether your
 tasks are too large; in general tasks larger than about 20 KB are probably worth optimizing.
 
 #### Data Locality
@@ -339,7 +340,7 @@ You can use Amazon EMR Steps to submit work to the Spark framework installed on 
 [Here](http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-spark-submit-step.html) you can find detailed information about this topic.
 
 #### Connecting to EMR cluster instances
-* Access to SparkUI: 
+* Access to SparkUI:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[1) Setup an ssh tunnel to the EMR master node](http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/emr-ssh-tunnel.html)
 
@@ -359,6 +360,15 @@ Note
 Previously, Amazon EMR used the S3 Native FileSystem with the URI scheme, s3n. While this still works, we recommend that you use the s3 URI scheme for the best performance, security, and reliability.
 
 Example: s3://bucket-name/path-to-file-in-bucket
+
+
+### References
+
+* [Learning spark](http://shop.oreilly.com/product/0636920028512.do)
+* [Spark best practices by databricks](https://databricks.gitbooks.io/databricks-spark-knowledge-base/content/best_practices/README.html)
+* [Advanced spark training](https://databricks-training.s3.amazonaws.com/slides/advanced-spark-training.pdf)
+* [Spark programming guide](http://spark.apache.org/docs/latest/programming-guide.html)
+* [Spark streaming programming guide](http://spark.apache.org/docs/latest/streaming-programming-guide.html)
 
 ___
 
