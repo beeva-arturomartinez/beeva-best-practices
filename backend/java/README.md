@@ -87,6 +87,154 @@ Regarding to the naming conventions of identifiers in Java, several communities 
 ---
 
 ## Function's design
+
+Functions are the first level of organization in any program. A function has to be easy to read and to understand by others programmers. Here you have some recomendations to achieve that yours will have a good design.
+
+A function should be **small**: there is not a standard size for a function. The recomendation have changed over time. In the eighties lines should not be 150 characters long and functions should not be 100 lines long. Actually functions should hardly ever be 20 lines long. But to reach transparency you can create functions in three or four lines long.
+
+**Use Descriptive names**: The function name should gives information about the intent of the function and describes what the function does. If you have small functions that do one thing it is easier to give them a descriptive name.
+A very nice way to choose a function name is to use a verb and a noun. 
+
+For example this function name *boolean existFile(nameField)* is better than *boolean exist(nameField)* because the name gives us information about the internal funcionality.
+
+Remember to achieve this, don’t be afraid to make a name long, it is better a long and descriptive name that a short and ambiguos name. The most important thing is the name describes what the function does
+
+Functions should **do one thing**. They should do it well. They should do only it. This is an important concept that helps you to achieve the other recomendations. In this line a function should not have side effects. We assume that we have followed the rule that a function only do one thing, but it also does other hidden things. Sometimes we have to add functionality in a function and we do not update the name. If it is not reflected in the name of the function, this can cause unexpected behavior evelopers and consequently errors in the program, and it also creates a temporal coupling and incomplete test.
+```
+public void unregisterUser(User user){
+        userDao.unregisterUser(user);
+        userDao.deleteUser(user);
+}
+```
+In this example unregister function do more than one thing and has side important functionality. The most correct options is to divide it in two functions,
+```
+public void unregisterUser(User user){
+        userDao.unregisterUser(user);
+}
+
+public void deleteUser(User user){
+        userDao.deleteUser(user);
+}
+```
+The second one gives a descriptive name, but it is always better to divide it in two functions
+```
+public void unregisterAndDeleteUser(User user){
+        userDao.unregisterUser(user);
+        userDao.deleteUser(user);
+}
+```
+
+How do we have to define our functions? You should try to build functions thinking that it has to do the necessary steps of the present level of abstraction and structure the next level of abstraction in others functions.
+
+You have to build the code thinking in not mixing the level of abstraction, it can be very confusing for others readers. If the main and detail code are in the same function, they may not be able to see whether a particular expression is an essential concept or a detail one. In conclusion, try to use **one level of abstraction in a function**.
+
+How can you organize all functions in your code? Using the **Stepdown Rule** that avoid reading code from top to bottom. To organize the code like this, you have to put the functions followed by those at the next level of abstraction, this way makes that we can read a program descending one level of abstraction while we read down the list of functions.
+
+```
+public void unregisterUser(User user){
+        userDao.unregisterUser(user);
+        userDao.deleteUser(user);
+}
+
+
+public void unregisterUser(User user){
+        userDao.unregisterUser(user);
+}
+
+public void deleteUser(User user){
+        userDao.deleteUser(user);
+}
+```
+This practice is very important because it helps us to do short functions and to make sure that they do one thing and keeping the abstraction level consistent.
+
+
+**Function Arguments**
+The right number of arguments in a functicion is zero (*niladic*), one (*monadic*) or two (*dyadic*). The use of three (*triadic*) or more arguments (*polyadic*) is not recommended. 
+
+To use the less input parameters is a good practice and it is easy to understand. Arguments are important from the testing point of view. The more arguments a function has, more test cases must be done to cover all combinations of arguments. More than three complicates exponentially.
+
+Using a *boolean input parameter* in a function is a terrible practice. It is signal that the method to do more than one thing, the first if the flag is true and another if the flag is false. Alternatively you can create two functions.
+
+  - *Common Monadic Forms*
+
+Two common monadic forms for readers with the structure one input parameter and return value
+
+Asking a question about the argument 
+
+
+```
+boolean userExists(1178);
+```
+
+Transforming the argument into something else and returning it.
+
+```
+InputStream fileOpen(“File”);
+```
+Also less common use is when the function represents an event, the form in this case has *an input argument and no output argument*. The function uses the argument to alter the state of the system. 
+
+```
+void passwordAttemptFailedNtimes(int attempts);
+```
+In three options you should choose names that make the distinction clear, and always use the forms in a consistent context, especialy in the event case.
+
+Mixing these options can be confusing, if you have a function that is going to transform the input argument, the result should be in the output argument.
+
+Indeed, StringBuffer transform(StringBuffer in) is better than void transform-(StringBuffer out) , even if the implementation in the first case just returns the input argument.
+
+
+
+ - *Dyadic Functions*
+
+A function with two arguments is harder to understand than a monadic function. Sometimes the two arguments are appropiate, for example using coordinates.
+
+However, you should be aware that they come at a cost to the readers and should take advantage of what mechanims may be available to you and try to convert them into monads 
+
+ - *Triads*
+
+ Functions with three arguments are particulary complicated to the reader. You should take care and think if you really need a triad function.
+
+ - *Polyadic*
+
+When there is a function that seems to need more than two or three arguments, this situation suggests that some of the arguments may be involved in a class that identifies, using arguments object.
+
+```
+Circle createCircle(double x, double y, double radius);
+Circle createCircle(Point center, double radius);
+```
+
+If you can't do this and you need to transfer a variable number of arguments, a good solution is to use a *single argument of type List*.
+
+
+
+**Exceptions vs Returning Error Codes**
+
+Using return error codes in a function implies the use* if statements* in the code, and can produce deeply structure. Useing exceptions offer us separate the error processing code from the  happy path code. This is clearer for the reader.
+
+Using *try/catch blocks* can confuse the structure of the code. A good practice is extract the bodies of the the try and catch block out into functions. Here you have an example where you can see that is a good path to use the try/cacth blocks with exceptions that provides a nice separation that makes the code easier to understand and modify.
+
+*Error Handling Is One Thing*: A function that handles errors should not do others things.
+
+```
+public void delete(User user) {
+       try {
+              deleteUserAndAllTransactions(user);
+       }
+       catch (Exception e) {
+              logError(e);
+       }
+}
+private void deleteUserAndAllTransactions(User user) throws Exception {
+       deleteUser(user);
+       deleteTransactions(user);
+}
+
+private void logError(Exception e) {
+       logger.log(e.getMessage());
+}
+```
+
+
 ---
 
 ## Comments and documentation
