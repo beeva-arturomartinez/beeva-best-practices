@@ -24,7 +24,7 @@ If you think any information is wrong or missing please write us an email or dir
 
 ### DevOps
 * [Continuous Integration](devops/continuous_integration/README.md) (Jenkins & Bamboo)
-* [Configuration Management (puppet)](devops/configuration_management/README.md)
+* [Configuration Management](devops/configuration_management/README.md) (Foreman & Puppet)
 * [Docker](devops/docker/README.md)
 * [Infrastructure Management](devops/infrastructure/README.md) (Mongo, Elasticsearch, Kafka, Logstash)
 * [Gitflow](devops/gitflow/README.md)
