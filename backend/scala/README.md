@@ -929,14 +929,11 @@ try {
 
 is almost always wrong, as it would catch fatal errors that need to be propagated.
 
-**[Index](#index)**
-
 ### References
 
 * [Scala Lang](http://www.scala-lang.org/) Documentation and download
 * [Scala Cheat Sheet](http://docs.scala-lang.org/cheatsheets/) A scala full cheatsheet
-
-**[Index](#index)**
+* [Scala Effective](http://twitter.github.io/effectivescala/)
 
 ___
 
