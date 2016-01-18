@@ -302,24 +302,14 @@ On the other hand the code and comments that remain in the code file are for dev
 
 As mentioned before it is sometimes said that most comments are just code smell. I guess that what they are really referring to is that comments which do not bring anything interesting to our program should be avoided. Some wrong behaviours would be:
 
-	* Redundancy
-```java
-	/**
-	* @param sellRequest
-	* @return
-	* @throws ManagedComponentException
-	*/
-	public SellResponse beginSellItem(SellRequest sellRequest)
-	throws ManagedComponentException
-```
-	* State the obvious
-```java
-		i++; // increment i
-```
-	* Commented-out code
-	* Comments right after closing a brace
-	* Misplace (as in source control)
-	* In general any noise to the code
+1. Redundancy in instance/class names   
+   public SellResponse beginSellItem(SellRequest sellRequest) throws ManagedComponentException
+2. State the obvious like   
+   i++; // increment i
+3. Commented-out code
+4. Comments right after closing a brace
+5. Misplace (as in source control)
+6. In general any noise to the code
 
 To minimize the probability to fall in one of those bullet cases above, as a simple rule of thumb, it is best to try to keep it simple and write as few comments as possible. At least, think twice before write, see if the code can be written in a way that can elude the comment. And as usual, nothing like a good example to illustrate easier and better what we are trying to explain:
 
