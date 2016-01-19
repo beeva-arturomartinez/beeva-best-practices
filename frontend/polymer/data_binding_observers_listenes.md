@@ -5,7 +5,7 @@
 
 The polymer HTML must have a semantic markup, use semantic Classes  Beyond appropriate element names, classes and IDs are semantic: they describe themselves without specifying.
 
-If we detect a node of the DOM that will have a lot of access and this node isn't inside a DOM-IF or a DOM-REPEAT, we recommend labeling it with an id, because polymer indexes this nodes. We can access this with ```this.$.id```, saving the search.
+If we detect a node of the DOM that will have a lot of access and this node isn't inside a DOM-IF or a DOM-REPEAT, we recommend labeling it with an id, because polymer indexes those nodes. We can access them with ```this.$.id```.
 
 Make accessible our component,use correctly ARIA-ROLES.
 
