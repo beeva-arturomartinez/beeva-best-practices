@@ -31,6 +31,8 @@ Now write the description. You can use the following template:
 
 *As a [user role] I want to [goal] so I can [reason]*
 
+![alt text](./static/userStoryCard.png "User Story Card")
+
 If the description becomes lengthy (more than will fit on an index card), you should revisit the user story. It is likely it needs to be split into several stories. You might also consider whether you are trying to include too much detail. Remember that the purpose of a user story is to encourage collaboration. A user story is a promise to have a future conversation; it is not meant to document every aspect of the work, as you might in a series of traditional requirements statements.
 
 When writing a user story, you might include some acceptance criteria, perhaps in the form of a test case or a brief description of "done," if those criteria help make the intent of the user story easier to remember. When the team is ready to work on that story, however, the team and the product owner must discuss the user story. This process will include (indeed must include) adding acceptance criteria so the team will know what done means. Later, as the team members begin to work on the story, they might contact the product owner and discuss new/different acceptance criteria as their understanding of the story grows – acceptance criteria enrich the understanding of the story, which in turn brings out new acceptance criteria and more meaningful conversations about what the customer really wants.
