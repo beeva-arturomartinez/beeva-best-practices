@@ -2,9 +2,9 @@
 
 ### 1.1. Atomic Design
 
-Polymer follows the atomic design methodology for creating components. This is, applications are made up of small components, atomic elements, which can combine together to form molecules and these can combine further to form relatively complex organisms, that´s the basic idea of atomic design.
+Polymer follows the atomic design methodology for creating components. This is, applications are made up of small components, atomic elements, which can be combined together to form molecules and they can be combineb further to form relatively complex organisms, that´s the basic idea of atomic design.
 
-There are five distinc levels:
+There are five different levels:
 
   1. Atoms
   2. Molecules
@@ -31,10 +31,11 @@ Atoms include basic HTML tags like labels, inputs, buttons, and all other elemen
   ```html
   <input type="submit" value="Send">
   ```
-Atoms can also include more abstract elemental items like color palettes, font stacks, and  invisible elements like animations. Defining these elemental properties of our UIs help promote consistency and cohesion.
+Atoms can also include more abstract elemental items like color palettes, font stacks, and  invisible elements like animations. Defining these elemental properties of our UIs helps promote consistency and cohesion.
 
 #### 1.1.2. Molecules
-Molecules are simple groups of atomic UI elements functioning together as a unit. For example, a form label, search input, and a button can combine together to create a search form molecule.
+Molecules are simple groups of atomic UI elements working together as a unit. For example, a form label, search input, and a button can be combined together to create a search form molecule.
+
 ```html
 <form action="demo">
   <label for="name">Name</label>
@@ -52,15 +53,15 @@ Organisms are relatively complex UI components composed of groups of molecules a
 Organisms can consist of similar or different molecule types. A body organism might consist of different elements such as a logo image, navigation list and personal data form. While some organisms might consist of different types of molecules, others might consist of the same molecule repeated over and over again.
 
 ### 1.2. Web Components
-Web components are a set of atomic designed elements that enable developers to build applications in a declarative, composed way. There's a list of best practices to ensure elements are defined in a properly.
+Web components are a set of atomic designed elements that enable developers to build applications in a declarative, composed way. There's a list of best practices to ensure elements are defined properly.
 
 #### 1.2.1. Namespacing
-Custom elements must have a dash in their name:
+Custom elements must have a dash character in their name:
 ```html
 <my-element></my-element>
 ```
 
-The text before the dash is, normaly, a namespace. You should keep it short but also unique. Try not to overlap on someone else's prefix if possible, only use a prefix shorter than three characters if you already have lots of developer interest in your set of components.
+The text before the dash is, usually, a namespace. You should keep it short but also unique. Try not to overlap on someone else's prefix if possible, only use a prefix shorter than three characters if you already have lots of developer interest in your set of components.
 
 #### 1.2.2. Polymer Template
 A simple Polymer template has a defined structure:
@@ -91,7 +92,7 @@ Components should act like native DOM elements, so avoid creating elements that 
   <div>
 </ul>
 ```
-If you place a `<div>` inside a `<ul>` it may not behave or render normally but it shouldn't throw errors either.
+If you place a `<div>` inside a `<ul>` it may not behave or render properly but it shouldn't throw errors either.
 
 #### 1.2.4. Attributes for data in
 Use attributes to pass configuration in. Use boolean attributes for boolean values.
