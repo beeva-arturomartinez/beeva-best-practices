@@ -3,23 +3,23 @@
 
 ### HTML construction
 
-The polymer HTML must have a semantic markup, use semantic Classes  Beyond appropriate element names, classes and IDs are semantic: they describe without specifying.
+The polymer HTML must have a semantic markup, use semantic Classes  Beyond appropriate element names, classes and IDs are semantic: they describe themselves without specifying.
 
-If we detect a node of the DOM that will have a lot of access and this node isn't inside a DOM-IF or a DOM-REPEAT we recommend labeling it with an id, since polymer indexes this nodes, we can access this with this.$.id, saving the search.
+If we detect a node of the DOM that will have a lot of access and this node isn't inside a DOM-IF or a DOM-REPEAT, we recommend labeling it with an id, because polymer indexes this nodes. We can access this with ```this.$.id```, saving the search.
 
 Make accessible our component,use correctly ARIA-ROLES.
 
-We always must test our web components in all available browsers and if it's possible on mobile devices or simulators.
+We always must test our web components in all available browsers and when possible, on mobile devices or simulators.
 
 ### JS construction
 
 Our polymers should be simple to use and with a simple coding.
 
-Our Web component are like API's to develop polymers we must comment in detail the methods and properties, to make it useful for our partners and those know how to manage and integrate it.
+Our Web component are like API's. To develop polymers we must comment in detail the methods and properties, to make it useful for our partners and those know how to manage and integrate it.
 
 The properties that use our polymer statement must be declared in the corresponding section.
 
-If the property is simple Can we define it in a single line defining its type , whether it's a complex property it will use the complex notation.
+If the property is simple we can define it in a single line beside its type , however if it's a complex property, it will use the complex notation.
 
 ```javascript
 Polymer({
@@ -38,19 +38,17 @@ Polymer({
 
 ```
 
-Our components must be operable from keyboard when necessary .
+Our components must be operable from keyboard when necessary.
 
-JavaScript is not always the answer, think if our solution is the correct one or if we could use CSS techniques and apply it correctly.
+JavaScript is not always the answer. We have to think if our solution is the correct one or if we could use CSS techniques and apply them properly.
 
-Of course all our components must be tested, WCT ( web component tester) has Chai and Mocha, we must do unit, functional and integration test.
+Of course all of our components must be tested. WCT ( web component tester) includes Chai and Mocha. We recommend building unit, functional and integration test.
 
-For other use we will follow the recommendations of guideline  javascript, define the variable that we use above methods do not abuse the searches in the DOM
+For other uses, we will follow the recommendations of javascript guideline. Defining the variable that we use above methods do not abuse the searches in the DOM.
 
 ### Polymer and lifecycles
 
-Si uno de nuestros polymers va a usar o necesitar atributos se recomienda inicializarlos en la fase de creación y deben ser declarados en las propiedades por medio del hostAttributes.
-
-We never rely on the life cycles of polymer their order is as follows :
+We never rely on the life cycles of polymer its order is as follows :
 
 * Created callback
 * Local DOM initialized
@@ -60,7 +58,7 @@ We never rely on the life cycles of polymer their order is as follows :
 
 We must bear in mind that this order may vary depending on whether the browser includes native support for web components.
 
-If you need to access items that are not prepared in the lifecycle ready we can do from the life cycle attached with async .
+If you need to access items that are not prepared in the lifecycle yet, you can do it from the life cycle attached with async .
 
 ```javascript
 attached : function ( ) {
@@ -70,7 +68,7 @@ attached : function ( ) {
 }
 ```
 
-If one of our polymers will use or need attributes we recommended to initialize it in the creation phase and must be declared in the properties through hostAttributes.
+If one of our polymers uses or needs attributes, we recommend initializing them in creation phase and they must be declared in properties through *hostAttributes*.
 
 ### Polymer Communication  Data binding
 
@@ -78,7 +76,7 @@ Data binding binds a property or sub-property of a custom element (the host elem
 
 A binding is created with a binding annotation in the host element’s local DOM.
 
-First at all we must know the kind of Data binding.
+First of all, we must know the kind of Data binding.
 
 A binding annotation consists of a property name or subproperty name enclosed in curly brackets ({{}}) or square brackets ([[]]).
 
@@ -86,31 +84,30 @@ A binding annotation consists of a property name or subproperty name enclosed in
 
 * Curly brackets ({{}}) create automatic bindings. Data flow is one-way or two-way, depending whether the target property is configured for two-way binding.
 
-When we make a bind on a polymer, this from below make a set function, that deals with it making a dirty-checking, apply property-effects to the propertie of the bind and launch an event 'name'-changed , beside this, if our binding is "two-way" polymer establish a eventListener to detect changes and to apply them up , for this reason to establish binds in our application we take into account the following considerations .
+When we make a bind on a polymer, this from below make a set function, that deals with it making a dirty-checking, apply property-effects to the property of the bind and launch an event 'name'-changed , beside this, if our binding is "two-way" polymer establishes an eventListener to detect changes and to apply them up. For this reason, to establish binds in our application we will take into account the following considerations:
 
-
-* If the data is to be read for example linked lists , always we use a "one-way" binding.
-* If the created property only produce data this property shall be marked with the read-only flag , as it avoids the creation of the setter.
-* When we do bindings to objects, and we want to modify a subproperty never overwrite the entire object , use the methods given by polymer , which already use below 'notifyPath' to notify the changes.
-* The 'DOM-IF' helpers must be use to reduce the rendering of the DOM, the function of this helper is to leave part of the template without rendering when your property is false , if we want are features show and hide, use the attribute Hiden giving in polymer.
-* When handling Array's binding if we want to reflect changes or update any member of the array must update the property by an 'observer' or 'Computed bindings'.
+* If the data will be read from linked lists , we will always use a "one-way" binding.
+* If the created property only produces data, this property shall be marked with the read-only flag , as it avoids the creation of the setter.
+* When we do bindings to objects and we want to modify a subproperty, we will never overwrite the entire object ,instead we will use the methods given by polymer , which already use below 'notifyPath' to notify the changes.
+* The 'DOM-IF' helpers must be use to reduce the rendering of the DOM, the task of this helper is to leave part of the template without rendering when your property is false , if we want features to show and hide, use the attribute *Hidden* giving in polymer.
+* When handling Array's binding if we want to reflect changes or update any member of the array, we must update the property by an 'observer' or 'Computed bindings'.
 
 
 ### Observers in Polymer
 
-the use of properties observer from inside properties and outside Observers are different the first one are use for simple properties and detect changes , this function will always receive the old value and the new value.
+The use of properties observer from inside properties and outside Observers are different. 
 
-The second one observers are used for arrays and objects can also observe several properties at once.
+The first one is used for simple properties and to detect changes , this function will always receive the old value and the new value. The second one, observers that are used for arrays and objects can also observe several properties at once.
 
-this kind of array observer allow us:
+This kind of array observer allow us to:
 
-* Observer two properties at a time and react when the two are complete, if one of the two is undefined , the function assigned not jump , until the values ​​are different from undefined.
+* Observe two properties at a time and react when the two are complete. If one of the two is undefined , the function assigned will not run , until the values are different from undefined.
 
 * In this type of observers when we use a "_ * _ " (deep )we will receive an object (change record) in the function with the following properties : path (path of the property has changed) , value ( the new value ) and base ( the part not included in the _ _ * ) , we recommend using this object.
 
 ### Listeners in Polymer
 
-To add EventListeners our polymer Listeners must use the function that gives polymer
+To add EventListeners our polymer Listeners must use the function that polymer provides
 
 ```javascript
 Polymer({
@@ -133,9 +130,9 @@ Polymer({
    });
 ```
 
-If you need to add EventListeners the document should be able to remove them at the time that we require or allways if a lifecycle 'detached' occurs in our polymer , for it will consider our eventListener will not tied to an anonymous function , as this may cause memory leaks, we must also remember that , if it's necessary use the this context we must pass it through our function by different means available for example bind.
+If you need to add EventListeners the document should be able to remove them when required or always if a lifecycle 'detached' occurs in our polymer , for it will consider our eventListener will not tied to an anonymous function , as this may cause memory leaks, we must also remember that , if it's necessary use the this context we must pass it through our function by different means available for example bind.
 
-We may also use on -event annotations , if we pick up a touch event , as on-tap is preferable to use on-click , since it has better performance.
+We may also use on-event annotations , if we pick up a touch event , as on-tap, is desirable to use on-click , since it has better performance.
 
 ```html
 <dom-module id="x-custom">
