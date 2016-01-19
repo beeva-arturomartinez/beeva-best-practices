@@ -33,13 +33,13 @@ Some examples of Team Working Agreements are Definition of Ready and Definition 
 
 ### Definition of Ready
 
-Scrum has two stable states, *ready* and *done*, which are linked to user stories. These two states lead to the following Scrum principle:
+Scrum has two stable states, **Ready** and **Done**, which are linked to user stories. These two states lead to the following Scrum principle:
 
-*Never pull anything into a sprint that is not ready, and never let anything out of the sprint that is not done.*
+> *Never pull anything into a sprint that is not ready, and never let anything out of the sprint that is not done.*
 
-The Definition of Ready (DoR) defines the *ready* state. In simple terms, a user story needs to meet some criteria (or conditions) before it can be picked up for a sprint. The DoR collects all the conditions necessary for a user story to be developed in the current sprint. These conditions are defined by discussion among the Team, the Product Owner, and the Scrum Master. The DoR is important so that everyone on the team is aware of when to pull a user story in which sprint.
+The **Definition of Ready (DoR)** defines the **ready** state. In simple terms, a user story needs to meet some criteria (or conditions) before it can be picked up for a sprint. The DoR collects all the conditions necessary for a user story to be developed in the current sprint. These conditions are defined by discussion among the Team, the Product Owner, and the Scrum Master. The DoR is important so that everyone on the team is aware of when to pull a user story in which sprint.
 
-In DoR, the team is the "client" and the product owner is the "supplier". Some examples of criteria on a DoR, that can be established as team working agreements, are: 
+In DoR, the team is the "client" and the product owner is the "supplier". Some examples of criteria on a DoR, defined as Team Working Agreements, can be the following: 
 
 * *Story contains actors, problem, and value*
 * *Story should fit in a sprint*
