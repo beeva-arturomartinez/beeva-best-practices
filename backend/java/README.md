@@ -2046,7 +2046,7 @@ Expensive processes should not be used online, because if multiple requests are 
 ## References
 ---
 
-* [Sample reference] (http://www.beeva.es) Sample reference description
+* Martin, Robert Cecil (2009). Clean code: a handbook of agile software craftsmanship
 
 ___
 
