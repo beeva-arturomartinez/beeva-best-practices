@@ -2,7 +2,7 @@
 
 ### 1.1. Atomic Design
 
-Polymer follows the atomic design methodology for creating components. This is, applications are made up of small components, atomic elements, which can be combined together to form molecules and they can be combineb further to form relatively complex organisms, that´s the basic idea of atomic design.
+Polymer follows the atomic design methodology for creating components. This is, applications are made up of small components, atomic elements, which can be combined together to form molecules and they can be combined further to form relatively complex organisms, that´s the basic idea of atomic design.
 
 There are five different levels:
 
