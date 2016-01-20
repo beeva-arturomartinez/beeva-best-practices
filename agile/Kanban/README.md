@@ -50,9 +50,9 @@ A Kanban board could bee a phisical board or a collaborative digital one. In bot
 
   Then you begin to know what is your workflow you can improve your process and add new columns that represent the workflow more realistic. For example:
 
->| To Do | Plan | Develop | Test | Deploy | Done|
- |:-----:|:----:|:-------:|:----:|:------:|:---:|
- |       |      | In progress / Done | | | | |
+> | To Do | Plan | Develop | Test | Deploy | Done|
+> |:-----:|:----:|:-------:|:----:|:------:|:---:|
+> |       |      | In progress / Done | | | | |
 
 * **Bottlenecks**: The board is the tool used for detect bottleneck. When a task cannot advance in the workflow defined we can have a bottleneck. It is important to pay attention to that kind of tasks and see the opportunity of improve the process.
 
