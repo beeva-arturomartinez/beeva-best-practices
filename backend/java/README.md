@@ -9,7 +9,7 @@ This is how we work with Java at BEEVA.
 
 * [Introduction](#java-introduction)
 * [Choosing proper names inside our code](#choosing-proper-names-inside-our-code)
-* [Function's design](#function's-design)
+* [Function's design](#functions-design)
 * [Comments and documentation](#comments-and-documentation)
 * [Formatting and code styling](#formatting-and-code-styling)
 * [Encapsulation](#encapsulation)
