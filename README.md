@@ -6,45 +6,47 @@ Here is the list of best practices, guidelines, codestyles and recommendations t
 
 If you think any information is wrong or missing please write us an email or directly create an issue inside this repo.
 
-### Cloud Computing
-* [Amazon Web Services](cloud/aws/README.md)
-* [Google App Engine](cloud/gae/README.md)
-
 ### Backend
-* ** [Java] (backend/java/README.md)
-* [Python](backend/python/README.md)
+* [Java](backend/java/README.md)
+* [Microservices](backend/microservices/README.md)
 * [Nodejs](backend/nodejs/README.md)
-* ** [Scala/Akka](backend/akka/README.md)
+* [Python](backend/python/README.md)
 * [REST Services](backend/rest/README.md)
-* ** [Microservices] (backend/microservices/README.md)
+* [Scala/Akka](backend/akka/README.md)
 * [Secure Development](backend/secure-development/README.md)
 
 ### Big Data
-* ** [Hadoop] (big_data/hadoop/README.md) (pig, hive, parquet, AVRO, Oozie, HDFS, EMR)
-* [Spark](big_data/spark/README.md)
+* [Best practices for Hadoop](./hadoop-management.md)
+* [Hadoop Development & Best Practices](./hadoop-development.md)
+* [Hadoop Management Hardware and OS](./hadoop-management-hardware-and-os.md)
+* [Hadoop Management](./hadoop-management-hbase.md)
+* [Spark Best Practices](big_data/spark/README.md)
+
+### Cloud Computing
+* [Amazon Web Services](cloud/aws/README.md)
 
 ### DevOps
-* [Continuous Integration](devops/continuous_integration/README.md) (Jenkins & Bamboo)
-* [Configuration Management](devops/configuration_management/README.md) (Foreman & Puppet)
+* [Configuration Management](devops/configuration_management/README.md)
 * [Docker](devops/docker/README.md)
-* [Infrastructure Management](devops/infrastructure/README.md) (Mongo, Elasticsearch, Kafka, Logstash)
-* [Gitflow](devops/gitflow/README.md)
+* [Infrastructure Management](devops/infrastructure/README.md)
+* [Git](devops/git/README.md)
 
 ### Frontend & Data Visualization
-* [General frontend techniques](frontend/general/README.md)
-* [CSS & styling](frontend/styling/README.md)
-* [Angularjs](frontend/angular/README.md)
-* [Backbone](frontend/backbone/README.md)
+* [Angular.js](frontend/angular/README.md)
+* [Frontend Best Practices and tools](frontend/general/README.md)
 * [Polymer](frontend/polymer/README.md)
 
 ### IT Security & Hardening
-* [Security and application hardening](it_security/security_hardening/README.md)
+* [Server security](it_security/server_security/README.md)
 
 ### Quality Assurance
+* [ATDD Acceptance Test-driven Development](agile/developerTeamScrum/ATDD/README.md)
+* [TDD Test-driven Development](agile/developerTeamScrum/TDD/README.md)
+* [Calabash](qa_testing/calabash/README.md)
 * [Code Design](qa_testing/code_design/README.md)
 * [Code Optimization](qa_testing/code_optimization/README.md)
-* [Code Quality with Sonar](qa_testing/sonar/README.md)
-* [Testing](qa_testing/testing/README.md)
+* [Testing techniques](qa_testing/testing/README.md)
+
 
 ## Contrib Guidelines
 * To contrib use [pull requests](https://help.github.com/articles/using-pull-requests/) ...
