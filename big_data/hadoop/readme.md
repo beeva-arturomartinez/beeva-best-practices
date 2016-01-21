@@ -5,8 +5,10 @@ At this point we're going to talk about Hadoop
 
 ## Links
 
-* [Development](./hadoop-development.md)
-* [Management](./hadoop-management.md)
+* [Hadoop Development & Best Practices](./hadoop-development.md)
+* [Hadoop Management Hardware and OS](./hadoop-management-hardware-and-os.md)
+* [Hadoop Management](./hadoop-management-hbase.md)
+* [Best practices for Hadoop](./hadoop-management.md)
 
 ___
 
