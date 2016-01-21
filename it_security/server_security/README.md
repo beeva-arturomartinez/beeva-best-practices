@@ -4,7 +4,7 @@
 
 * [Introduction](#introduction)
 * [Credential management](#credential-management)
-* [Public Key Infrastructure solutions](#public-key-infrastructure-(PKI)-solutions)
+* [Public Key Infrastructure solutions](#public-key-infrastructure-pki-solutions)
 * [Network security](#network-security)
 * [Server bastioning](#server-bastioning)
 * [Back up and disaster recovery](#back-up-and-disaster-recovery)
@@ -32,50 +32,63 @@ If you are looking for one of the following topics, please follow the provided i
 
 ## Credential management
 
-### Credenciales 
+### Credentials
 
-**¿Qué es una credencial?**
+**¿What's a credential?**
 
-Según [wikipedia](https://es.wikipedia.org/wiki/Credencial "wikipedia"), es lo siguiente:
+According to [wikipedia](https://es.wikipedia.org/wiki/Credential "wikipedia"), the following is:
 
-“Una credencial es una orden o un documento que atestigua o autoriza la cualificación, competencia o autoridad otorgada a un individuo por un tercero con autoridad de iure o de facto. Su fin es que se dé posesión al empleado de su plaza (o al estudiante de sus cursos o de su grado), sin perjuicio de obtener luego el título correspondiente.”
+"A credential is an attestation of qualification, competence, or authority issued to an individual by a third party with a relevant or de facto authority or assumed competence to do so. Examples of credentials include academic diplomas, academic degrees, certifications, security clearances, identification documents, badges, passwords, user names, keys, powers of attorney, and so on."
 
-En este caso, vamos a dedicar el siguiente texto a las buenas prácticas que debemos realizar sobre las passwords.
+In this case, the following text will be devoted to the good practice in the password area.
 
-Para ello hemos de saber, ¿cuánto tiempo se necesita para “reventar” una password?; el siguiente gráfico lo muestra claramente.
-
-![alt text](static/crack.png?raw=true "passwords")
+As a starting point, we need to know how much time is required to "break" a password. That is, to test all possible combinations until its found. The following table shows this clearly:
 
 
-Con esta imagen, podemos hacer el siguiente resumen, la contraseña mínimo tiene que tener los siguientes requisitos:
+| Password length | All characters            | Lower case only |
+| --------------- |:--------------------------|:----------------|
+| 3 characters    | 0.86 seconds              | 0.02 seconds    |
+| 4 characters    | 1.36 minutes              | 0.46 seconds    |
+| 5 characters    | 2.15 hours                | 11.9 seconds    |
+| 6 characters    | 8.51 days                 | 5.15 minutes    |
+| 7 characters    | 2.21 years                | 2.23 hours      |
+| 8 characters    | 2.10 centuries            | 2.42 days       |
+| 9 characters    | 20 millennia              | 2.07 months     |
+| 10 characters   | 1,899 millennia           | 4.48 years      |
+| 11 characters   | 180,365 millennia         | 1.16 centurie   |
+| 12 characters   | 17,184,705 millennia      | 3.03 millennia  |
+| 13 characters   | 1,627,797,068 millennia   | 78.7 millennia  |
+| 14 characters   | 154,640,721,434 millennia | 2,046 millennia |
 
-- **Longitud mínima de 8 caracteres**
-- **Mayúsculas**
-- **Minúsculas**
-- **Números**
-- **Caracteres especiales (_-!@.....)**
 
-Sólo con eso, se tardaría en conseguir nuestra password 2.10 centurias, en vez de 2.42 días si solo se hiciera con minúsculas.
+With this table in mind, it is possible to summarise that the password has to comply, at least, with the following requirements:
 
-Cuando tienes un servidor o un login es importante controlar esto, para ellos usaremos pam.d y el fichero sshd_config.
+- **Minimum length of 8 characters**
+- **Includes upper case letters**
+- **Includes lower case letters**
+- **Includes numbers**
+- **Includes special characters (_-!@.....)**
+
+By meeting those requirements alone, 2.10 centuries would be required to obtain the password. In contrast only, 2.24 days would suffice to obtain it if only lower case letters would be used.
+
+When managing a server or a login service, this is a fact that needs to be controlled. In order to perform it, the pam.d and the sshd_config files are used.
 
 
-### Configuración de passwords en servidores. 
+### Password configuration in servers 
 
-PAM.D, son unos ficheros de configuración para autenticación de aplicaciones, por ejemplo RHEL lo tiene activo por defecto, pero en otros sistemas como Ubuntu, puede utilizarse.
+Pluggable Authentication Modules (PAM) is a common authentication scheme for Linux environments. The name of the daemon is pam.d and it has some configuration files associated. PAM is enabled by default in RHEL and it is available for use in other systems such as Ubuntu.
 
-Antiguamente, se configuraba en /etc/pam.conf y actualmente es en /etc/pam.d/
+The service was previously configured in /etc/pam.conf. Currently this is performed in /etc/pam.d/
 
-Ahora, hablaremos de un ejemplo de configuración en el pam.d que nos bloquea el usuario si falla la autenticación y el mínimo de configuración de contraseña permitido. Mas abajo, indicamos el significado de esta configuración, basado en colores (esta información es una imagen, debajo de la explicación encontrarñan el código que pueden utilizar en sus ficheros).
+Now, a configuration sample for pam.d is reviewed in which the authentication is blocked for the user upon failure and in which the password requirements are enforced. Below, the meaning of the configuration is explained for the colour highlighted lines. (Please note that the configuration provided is an image, Scroll further down for selectable configuration).
 
 ![alt text](static/pamd_color.png?raw=true "pamd")
 
+Lines will be explained by colours:
 
-Explicaremos las líneas, por colores.
+**Blue** - With these lines we indicate that if the user tries to access for 5 times with an access denied response, the sixth attempt will block the user for 30 minutes. This behaviour helps protecting against brute force attacks.
 
-**Azul** - Con estas líneas indicamos, que si el usuario intenta acceder 5 veces y le da acceso denegado, al sexto acceso bloqueará al usuario durante 30 minutos, esto nos ayuda a evitar ataques de fuerza bruta.
-
-**Rojo** - Aquí forzaremos que el usuario ingrese passwords complicadas, mínimo de 8 caracteres, 1 mayúscula, 1 minúscula y 1 decimal. Además se recordarán las últimas 5 passwords cambiadas y se cifrarán en sha512. Por último, la línea “password requisite pam_passwdqc.so min=disabled,disabled,16,12,8” indica en base a los caracteres de la password, que requisitos tiene que cumplir; en nuestro caso, si la password es inferior a 12 caracteres, nos obligará a incluir un caracter especial.
+**Red** - With this part it is possible to force the user to introduce complex passwords. Specifically, the ones that have a minimum of 8 characters, at least 1 upper case letter, 1 lower case letter and 1 number. Additionally, the hash (sha512) of the last 5 password will be remembered. Lastly, the line with “password requisite pam_passwdqc.so min=disabled,disabled,16,12,8” indicates the requirements to comply based on the length on the password. For example, if the length of the password is lower than 12 characters, the system will require introducing a special character.
 
 ***vim /etc/pam.d/system-auth***
 
@@ -109,9 +122,7 @@ Explicaremos las líneas, por colores.
     session required  pam_unix.so
 
 
-
-
-Os dejamos mas información sobre esta configuración en los siguientes links.
+More information on this configuration can be found in the following links:
 
 [https://peterpap.net/index.php/Enforcing_Password_Complexity_on_CentOS/RedHat](https://peterpap.net/index.php/Enforcing_Password_Complexity_on_CentOS/RedHat)
 
@@ -206,7 +217,7 @@ For bastioning a host (please see next section), the following operations are th
 * As a default, block all incoming traffic.
 * Provide access to service ports only.
 * Limit the rate of calling to certain hosts.
-* Create blacklists (origins whose packets are dopped) to be dynamic.
+* Create blacklists (origins whose packets are dropped) to be dynamic.
 * Protect against known attacks such as SYN flooding and SYN spoofing.
 
 
@@ -217,67 +228,67 @@ Bastioning is the procedure of protecting a server to convert it into a bastion.
 The following is an overview of the tasks that need to be performed in order to obtain a bastion host:
 
 * __Update all services and apply security patches:__ This will try to remove already known and therefore open security holes.
-* __Protect the networking of the server with a firewall:__ This will drop all packets to ports not offering service or from unauthorised origins. It might be recommended to use some throttling solution in some cases, which blacklists the requester for some time in order to preven brute force and Denial os Service (DoS) attacks.
+* __Protect the networking of the server with a firewall:__ This will drop all packets to ports not offering service or from unauthorised origins. It might be recommended to use some throttling solution in some cases, which blacklists the requester for some time in order to prevent brute force and Denial of Service (DoS) attacks.
 * __Remove unnecessary users from the host:__ As an example, if there is a user for the printer and the server is not a printing server, that user needs to be removed. The less accounts available the better in order to avoid permission escalations.
-* __Set aggressive perimission schemes for users and services:__ Users should only be capable of the minimum when connecting to the system. That way, intentional or unintentional damages, and permission escalations are limited.
+* __Set aggressive permission schemes for users and services:__ Users should only be capable of the minimum when connecting to the system. That way, intentional or unintentional damages, and permission escalations are limited.
 * __Configure the services to be offered by the server, with the most strict secure options:__ For example, if SSH is one of the services to be offered, disable tcp forwarding. A user should not be able to reach ports that are protected by the firewall.
 
 
-### Actualizaciones
+### System update policy
 
-Una pregunta que todo el mundo ha de hacerse, es la siguiente **¿Cuándo he de actualizar/parchear mis sistemas?**
+A key question to make oneself is: **When should I update or patch my systems?**
 
-Nuestra recomendación, es crear una política de actualizaciones que cada X tiempo, se realicen sobre dichos sistemas. Una política puede ser, actualizar todos los sistemas cada 3 meses.
+Our recommendation is to create an update policy that ensures system updating periodically, once in a certain amount of time. For example, the policy can ensure that all systems are updated every three months.
 
-Esta política, siempre tiene que tener excepciones, es decir, si surge una vulnerabilidad grave como HeartBleed o Poodle, esa actualización debe ser realizada  inmediatamente; por lo que tenemos que incluir en nuestra política un control sobre la criticidad de las vulnerabilidades que aparecen.
+The policy, should always be used as a base and it should include exceptions for more urgent matters. For example, if a serious vulnerability is identified, such as the HeartBleed or Poodle cases, the update should be applied as soon as possible. Therefore, the policy should cover the criticality level of the vulnerability in order to assess how soon the patch or update needs to be applied.
 
-Otro ejemplo podría ser la actualización del kernel, que trae consigo actualizaciones de seguridad; habría que revisar que criticidad tienen y decidir si se aplica inmediatamente, a corto plazo (crear una ventana solo para esa actualización) o con la siguiente actualización trimestral.
+Another point to take into account are Kernel updates, which might bring security fixes along. For this case as well, the criticality level of the security fixes should be evaluated in order to decide whether the update should be applied immediately by creating an update window for that purpose or if the update should be held until the periodic update window.
 
-### Las actualizaciones de software. 
+### Software updates 
 
-Normalmente, cuando usamos un software tipo tomcat, apache, etc.. su actualización  puede llevar a problemas en nuestros aplicativos o webs. Por lo que no recomiendo su inclusión en la política trimestral, pero si una política que pruebe nuevas versiones, vea si afecta al aplicativo o web y si todo continúa correctamente, instalar la actualización.
+Usually, the update of web or application server products, such as Tomcat, Apache, etc can create problems with the services deployed. Due to this fact, their upgrade should be kept out of the scope of regular upgrade windows and it should be covered separately. Instead, it should be covered as a separate policy that takes case of testing and evaluating new versions in order to identify if the applications run correctly with such version. In case everything is correct for the new version the update process would be arranged and completed.
 
-Respecto a esto, es muy importante que intentemos tener la misma versión del software en todos nuestros sistemas y entornos.
+Another relevant point to take into account is trying to keep the same version of services along all systems and environments deployed. This approach allows predicting the behaviour of systems during updates.
 
-### Configuración SSH
+### SSH configuration
 
-Junto con el PAM.D, tenemos que configurar nuestro fichero sshd_config (en RHEL) para securizar nuestro acceso a las máquinas.
+Along with pam.d, the sshd_config file (in RHEL) needs to be filled in order to secure the access to servers.
 
-Una configuración básica que recomendamos, sería la siguiente:
+A recommended basic configuration is the following one:
 
 ***vim /etc/ssh/sshd_config***
 
-- ClientAliveInterval 900  -  Cierra la sesión del usuario después de 15 minutos de inactividad.
+- ClientAliveInterval 900  -  Closes the user's session after 15 minutes of inactivity.
 
-- Ciphers aes128-ctr,aes192-ctr,aes256-ctr - Cifrado permitido por ssh
+- Ciphers aes128-ctr,aes192-ctr,aes256-ctr - Allowed ciphers for ssh
 
-- Banner /path/del/banner  - cuando alguien acceda a las máquinas, le aparecerá el banner, normalmente se pone información que indique la prohibición de acceso a las máquinas si no estás autorizado, algo del tipo:
+- Banner /path/del/banner  - When someone accesses the servers a banner will be displayed, which normally indicates that unauthorised access is forbidden. A usual message would be:
 
 *“ALERT! You are entering into a secured area! Your IP, Login Time, Username has been noted and has been sent to the server administrator!
 This service is restricted to authorized users only. All activities on this system are logged.
 Unauthorized access will be fully investigated and reported to the appropriate law enforcement agencies.”* 
 
-Otra recomendación, es cambiar el puerto de acceso a ssh y así evitar el ataque directo al puerto 22.
+Another recommendation is to change the ssh port so that a direct attack to port 22 can be avoided.
 
-Cambiaríamos
+We would change
 
 **port 22**
 
-por
+by
 
 **port 8222**
 
-Por último, hablaremos de la rotación de passwords, se recomienda un cambio de passwords cada 90 días, esta rotación, se realizará modificando el fichero ***/etc/login.defs*** y modificaremos la siguiente línea:
+Lastly, password rotation needs to be assessed. A password change is recommended every 90 days. The rotation will be enforced by modifying the ***/etc/login.defs*** file and setting the following line:
 
     PASS_MAX_DAYS   90
 
-Si hemos creado usuarios anteriormente, ejecutaremos el siguiente comando:
+If users have been previously created, the following command needs to be executed:
 
-    chage -d 0 usuario
+    chage -d 0 user
 
-Esto obligará al usuario a cambiar la password en el siguiente login y entrará en la rotación de passwords cada 90 días.
+This will force the user to change the password in its next login and it will enter the 90 day password rotation scheme.
 
-Os indicamos un link de otros usos que se le puede dar al comando **chage**.
+A link is provided where other uses of the **chage** command are described:
 
 [http://rm-rf.es/comando-chage-tiempo-de-vida-de-claves-y-usuarios-en-gnulinux/](http://rm-rf.es/comando-chage-tiempo-de-vida-de-claves-y-usuarios-en-gnulinux/)
 
@@ -350,82 +361,77 @@ Once the incident is resolved, it is good practice to perform an analysis of:
 
 ## Monitoring
 
-Siempre que se habla de la monitorización, pensamos en el estado de un servidor, CPU, disco, memoria, etc…
+Every time the "monitoring" word is mentioned the first idea that comes up is tracking the status of a server, usually in relation to its CPU, Memory and Drive usage. However, in the security area there are other monitoring types. In this case the focus is set in Intrusion detection and in security related events.
 
-En la seguridad hay otros tipos de monitorización, en este caso nos vamos a centrar en la detección de intrusos y eventos de seguridad.
+In order to monitor intrusion related events, Intrusion Detection Systems (IDS) exist, which divide into two categories, NIDS and HIDS. While the main focus of this document is in latter, some tips are also provided for the former.
 
-Para ello, existen los IDS (Sistema de detección de instrusos), que se divide en 2 categorías, HIDS y NIDS. En este documento nos vamos a centrar en el HIDS, pero os dejamos unos “tips” sobre los NIDS.
+**NIDS**
 
-**NIDS** 
+NIDS are network based IDS systems. They are usually traffic "sniffers" that can watch over local, incoming or outgoing traffic. The functionality can be deployed as dedicated hardware applaiances or as a software solution in a server. There are commercial solutions available for both cases.
 
-Es un IDS basado en red, normalmente son unos “sniffers” de tráfico que pueden vigilar tanto el tráfico entrante, saliente o el tráfico local.
+Open source alternatives are also available, such as Snort ([https://www.snort.org](https://www.snort.org)) or Suricata ([http://suricata-ids.org/](http://suricata-ids.org/)), which are perfect to start with IDS solutions and keep a controlled and secure environment.
 
-Para ello, se puede instalar desde “appliances” de marcas comerciales, o software en uno de nuestros servidores.
+As a complement to these IDSs, it is possible to add Snorby ([https://github.com/Snorby/snorby](https://github.com/Snorby/snorby)), a web page built in Ruby that shows traffic metrics of the traffic captured by the IDS systems.
 
-También existe software Open Source como Snort ([https://www.snort.org](https://www.snort.org))  o Suricata ([http://suricata-ids.org/](http://suricata-ids.org/)) , perfectos para comenzar en el mundo de los IDS y tener un entorno seguro y controlado.
-
-Como pareja a estos IDS, podemos añadir Snorby ([https://github.com/Snorby/snorby](https://github.com/Snorby/snorby)) , una aplicación web, hecha en ruby, que facilita y nos muestra gráficas del tráfico capturado por nuestros IDS.
 
 **HIDS**
 
-Los HIDS son IDS para Hosts, es decir, se instalan en nuestros servidores y en base a logs, eventos, modificaciones, etc… nos reportan si en nuestro sistema ha sucedido algo que atente contra la integridad de nuestro sistema, tanto a nivel de ficheros, accesos y red.
+HIDS are IDS solutions for hosts, that is, the solution is installed in the server and based on logs, events and modifications report whether something harmful has happened in the system. They cover the file system the login and network layers.
 
-En este documento, vamos a hablar de OSSEC ([http://ossec.github.io/](http://ossec.github.io/)) , un HIDS muy potente sin costo con licencia GNU.
+Ossec ([http://ossec.github.io/](http://ossec.github.io/)) is a very powerful HIDS that is open source and distributed under the GNU license.
 
-En Beeva, ya comentamos como hacer la instalación ([https://www.beeva.com/beeva-view/sistemas/instalando-ossec-como-detector-de-intrusos-en-el-host/](https://www.beeva.com/beeva-view/sistemas/instalando-ossec-como-detector-de-intrusos-en-el-host/)) , por lo que no vamos a centrarnos en esa información.
+At Beeva's blog it was already covered how to perform the installation: [https://www.beeva.com/beeva-view/sistemas/instalando-ossec-como-detector-de-intrusos-en-el-host/](https://www.beeva.com/beeva-view/sistemas/instalando-ossec-como-detector-de-intrusos-en-el-host/).
 
-Para el buen funcionamiento de Ossec, lo ideal es instalar agentes en todas las máquinas y centralizarlo en un único servidor Ossec, que además puede llevar instalada una web, para visualizar de forma más cómoda la información.
+For a good workflow with Ossec, the ideal solution is to have an Ossec agent installed in every server and to centralise all information in an Ossec server. This Ossec server can have a web page installed which facilitates information visualisation.
 
+Once deployed, the first step taken by Ossec is to complete the **checksum verification** of some paths defined in its configuration. With this process Ossec can detect wether any file in those paths has been modified and if so a an email will be sent indicating what has happened. This can be in a real time fashion or in one of the periodic scans.
 
-Una vez instalado, Ossec lo primero que hace, es** verificar el checksum** de unas rutas ya definidas en su configuración; ¿esto qué significa? Que al realizar su escaneo o en tiempo real, si hay alguna modificación de esos ficheros, se nos enviará un correo indicando lo que ha pasado.
+For the case of web servers, where Ossec agents are installed, it is possible to configure an **Active response**. This is performed by analysing the logs from **Mod_security and Apache/Nginx**, and if an attack is detected form a given IP based on a previously introduced ruleset, then such IP will be blocked.
 
-Si por ejemplo tenemos un servidor web, al que le hemos instalado un agente de Ossec, podemos iniciar su **“respuesta activa”** y esto hará que revisando los logs de **Mod_security y Apache/Nginx**, si detecta un ataque en base a sus reglas, bloqueará esa IP, denegando el acceso desde ella.
+However, the active response might be dangerous if not configured properly by activating the **X-Forwarded-For** option. In such case, it could be possible for the active response to block an internal IP (e.g. the one used by a load balancer), and to bring the service down form the user perspective.
 
-Esta respuesta activa, puede ser peligrosa si no está bien configurada y no nos aseguramos de que tenemos el **X-Forwarded-Fo**r activado, ya que podría bloquear una IP interna (p.e: un balanceador) en vez de la IP cliente y provocar un corte de servicio de cara a internet.
+In addition to the previously presented functionality, Ossec also informs on security events related to SSH logins, sudo, file permissions etc. That is, for every resource that is monitored under Ossec if an action occurs an email is sent informing on such event.
 
-Ossec también revisa los eventos de seguridad como accesos SSH, sudo, cambio de permisos, etc…
+Finally, Ossec also allows to create custom rules so that notifications a generated when certain information appears in the logs. For example, a custom rule would be to create an email notification if a deployed Java application generated a "null pointer" exception in a log.
 
-Es decir, cada vez que una persona accede al servidor, se nos enviará un mail comunicando esta acción. Si esa persona realiza un sudo, pasará exactamente lo mismo y si además cambia los permisos de una ruta que tenemos vigilada por Ossec, este también nos informará.
-
-Aparte de todo esto, en Ossec podemos crear nuestras propias reglas y podría avisarnos de información que ocurriera en nuestros logs que fuera de nuestro interés, por ejemplo, un “null pointer” en nuestra aplicación de Java.
-
-Es por toda la información que Ossec maneja y puede entregarnos, aparte de su alta configuración, que pensamos que es una herramienta imprescindible para cualquier entorno.
+Due to all the information that Ossec manages and that it can provide, as well as due to all of its configuration options, it results a very relevant tool for any environment.
 
 
 ## Vulnerabilities
 
-**¿Cómo estar al día de las vulnerabilidades?**
+**How to keep up to date with vulnerabilities?**
 
-Salen vulnerabilidades nuevas diariamente y es muy complicado estar completamente al día, es por ello que os vamos a hacer unas recomendaciones para que vuestros entornos estén seguros de la forma más sencilla posible.
+New vulnerabilities are made public on a daily basis and it is quite difficult to be completely updated. For that reason, several recommendations are placed so that environments can be kept secure in the most simple manner.
 
-Listas de correo:
+Mailing lists:
 
-Consideramos importantísimas 3 listas de correo, por ellas pasan prácticamente todas las vulnerabilidades de casi todo el software; estas son:
-
+There are three mailing lists that are very relevant to this matter since almost all software related vulnerabilities show up. The following is a quick description of each of them:
 
 [https://public.govdelivery.com/accounts/USDHSUSCERT/subscriber/new](https://public.govdelivery.com/accounts/USDHSUSCERT/subscriber/new)
 
-De los EEUU, especialmente está basado en vulnerabilidades de marcas como Microsoft, RHEL, y vulnerabilidades con criticidad alta, además, envían un resumen semanal.
+This list is developed in the US and it specially focuses on brands such as Microsoft or Red Hat and it covers vulnerabilities with a high level of criticality. Additionally, a weekly summary is sent.
 
 [http://www.securityfocus.com/archive/1/description](http://www.securityfocus.com/archive/1/description)
 
-Bugtraq, de las más importantes, sobre vulnerabilidades y 0-days.
+Bugtraq is one of the most relevant ones and covers vulnerabilities and 0-days.
 
 [http://nmap.org/mailman/listinfo/fulldisclosure](http://nmap.org/mailman/listinfo/fulldisclosure)
 
-Full Disclosure, la lista por excelencia, tuvieron un problemilla en 2014 y fue cerrada, pero Fyodor, creador de Nmap, la volvió a abrir.
+Full Disclosure is __The__ vulnerability mailing list. It was closed during 2014 but reopened afterwards by Foydor, Nmap's creator.
 
-Tanto Bugtraq como Full Disclosure, tienen bastante movimiento de correos, por lo que os recomendamos su filtrado y tenerlo todo centralizado.
+Both Bugtraq and Full Disclosure have quite a level of mail traffic and therefore their filtering and centralisation is recommended.
 
-Otra forma, es acudir a blogs especializados, por ejemplo:
+Blogs:
+
+Another way to stay up to date is to consult specialised blogs. For example:
 
 [http://unaaldia.hispasec.com/](http://unaaldia.hispasec.com/)
 
-En este blog siempre nos contarán una vulnerabilidad nueva.
+In this blog a new vulnerability is covered every day.
 
 [http://blog.segu-info.com.ar/](http://blog.segu-info.com.ar/)
 
-Reúnen diariamente información de seguridad de diferentes webs tanto en castellano como en inglés. Normalmente las traducen al castellano.
+And this one gathers security information from different webs and it is usually tranlated to spanish.
 
 
 ## Data encryption at rest
@@ -441,7 +447,7 @@ Data encryption also applies to backups since it does not make sense to have dat
 
 ## Security audits
 
-When a solution is to be deployed and the final configuration is already designed it is good practice to heavily attack a solution clone in order to identify potential vulnerabilities. Once in production, this task should be perfomed with caution so that the solution is not affected. This task is one of which is usually understimated and which might leave attackers an open door if room is left for a simple attack to be performed.
+When a solution is to be deployed and the final configuration is already designed it is good practice to heavily attack a solution clone in order to identify potential vulnerabilities. Once in production, this task should be performed with caution so that the solution is not affected. This task is one of which is usually underestimated and which might leave attackers an open door if room is left for a simple attack to be performed.
 
 Beyond attacking solutions, it is also necessary to perform audits periodically in order to detect deficiencies. The outcome of audits might impact on deployed solutions or even or company processes.
 
@@ -450,12 +456,16 @@ In general, security is a periodic job more than a one time task. Therefore, it 
 
 ## Incident response
 
-Toda empresa ha de disponer de un protocolo de respuesta en base a un incidente de seguridad. En Beeva, este protocolo de actuación se entrega al empleado al entrar a la empresa y se vuelve a revisar anualmente.
+Every company needs to have a protocol in order to response a security incident. In Beeva, this actuation protocol is provided to employees in their first day and it is annually reviewed. Any Beeva employee can download it from the company's intranet.
 
-Cualquier empleado de Beeva puede descargarlo de la intranet:
+If there is no procedure defined and one is required, the first thing to get to know is [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control "RBAC").
 
-[Normativa de Seguridad de la Información](https://intranet.beeva.com/wp-content/uploads/2015/08/Normativa-de-seguridad-de-la-informaci%C3%B3n_5.0.pdf)
+RBAC is a role hierarchy that is thought for describing the responsibility of a person, department or position when accessing a system and which should would be its behaviour in case of problems or incidents.
 
-Si no se dispone de un procedimiento y quiere implementar uno, ha de empezar por conocer [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control "RBAC").
+## References
 
-RBAC, es una jerarquía de roles, pensados para indicar la responsabilidad de una persona/departamento/cargo al acceder a un sistema y cuál sería su actuación frente a problemas o incidentes. 
+The following is the list covers additional references used during the development of this guide:
+
+* Linux Server Security - Michael d. Bauer - O'reilly media 2005
+
+
