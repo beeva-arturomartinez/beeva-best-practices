@@ -660,7 +660,7 @@ Protractor leverages web drivers (just as Selenium or other tools do) to launch 
 Angular is a great tool, but its learning curve could be tricky. It's full of complex stuff and it's so complete, that along with your experience gaining you'll feel stuck somewhere. Don't panic, and try to keep going. Eventually you'll overcome its rollercoaster learning curve:
 
 ![alt text](static/feelings-angular.png "Experience on Angular over time")
-_Image provided by Ben Nadel on it's article [My experience with AngularJS](http://www.bennadel.com/blog/2439-my-experience-with-angularjs---the-super-heroic-javascript-mvw-framework.htm)_
+_Image provided by Ben Nadel on his article [My experience with AngularJS](http://www.bennadel.com/blog/2439-my-experience-with-angularjs---the-super-heroic-javascript-mvw-framework.htm)_
 
 ### Trust the community
 
