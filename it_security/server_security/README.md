@@ -25,7 +25,6 @@ This best practices guide provides an overview of the main topics regarding secu
 
 If you are looking for one of the following topics, please follow the provided instructions in each case:
 
-* For developing secure code check [this other](../../it_security/security_hardening/README.md) best practices guide form Beeva.
 * For security best practices in AWS, please check: http://media.amazonwebservices.com/AWS_Security_Best_Practices.pdf
 * For company wide security procedures and policies please check the ISO 27000 standard family: https://en.wikipedia.org/wiki/ISO/IEC_27000
 
