@@ -2,12 +2,12 @@
 
 ##3.- HTML
 
-* semantic Web
-* accesibilidad
-* SEO (básico)
+* Semantic Web
+* Accessibility
+* SEO (basic)
 
 
-### Web Semantica
+### Semantic Web
 HTML offers a limited number of tags , which usually fall short for the number of elements that are mounted in a Web .
 A first level of semantics can be added with the Class attribute, but this only has value at the level of the developer provided they are used in an organized way (see CSS section of this guide), not for HTML renderers.
 
@@ -80,23 +80,14 @@ We can define an outline of HTML document using h1 to h6 elements:
 
 ```hmtl
 <h1><span class="pln">Genbeta Dev</span></h1>
-<span class="pln"></span>
 <h2><span class="pln">Editores</span></h2>
-<span class="pln"></span>
 <p><span class="pln">Sigue todos los posts de nuestros editores en Genbeta Dev</span></p>
-<span class="pln"></span>
 <h3><span class="pln">Txema Rodriguez</span></h3>
-<span class="pln"></span>
 <p><span class="pln">Apasionado por la tecnología trabaja en Madrid...</span></p>
-<span class="pln"></span>
 <h3><span class="pln">Jorge Ruvira</span></h3>
-<span class="pln"></span>
 <p><span class="pln">Ingeniero Técnico de informática de sistemas por la...</span></p>
-<span class="pln"></span>
 <h3><span class="pln">Carlos Paramio</span></h3>
-<span class="pln"></span>
 <p><span class="pln">Tiene 33 años y vive en la ciudad de Algeciras Cádiz...</span></p>
-<span class="pln"></span>
 <small><span class="pln">Los editores son todos unos frikis del quince</span></small>
 ```
 With the next schema:
@@ -108,29 +99,18 @@ Genbeta Dev
       
       
 All content appearing after a hX associated with that element, but what about the small element? Must be related to the entire document, but the browser could not tell if the document or previous hX element.
-``html
+```html
 <h1><span class="pln">Genbeta Dev</span></h1>
-<span class="pln"></span>
 <section>
-<span class="pln"></span>
-<h2><span class="pln">Editores</span></h2>
-<span class="pln"></span>
-<p><span class="pln">Sigue todos los posts de nuestros editores en Genbeta Dev</span></p>
-<span class="pln"></span>
-<h3><span class="pln">Txema Rodriguez</span></h3>
-<span class="pln"></span>
-<p><span class="pln">Apasionado por la tecnología trabaja en Madrid...</span></p>
-<span class="pln"></span>
-<h3><span class="pln">Jorge Ruvira</span></h3>
-<span class="pln"></span>
-<p><span class="pln">Ingeniero Técnico de informática de sistemas por la...</span></p>
-<span class="pln"></span>
-<h3><span class="pln">Carlos Paramio</span></h3>
-<span class="pln"></span>
-<p><span class="pln">Tiene 33 años y vive en la ciudad de Algeciras Cádiz...</span></p>
-<span class="pln"></span>
+    <h2><span class="pln">Editores</span></h2>
+    <p><span class="pln">Sigue todos los posts de nuestros editores en Genbeta Dev</span></p>
+    <h3><span class="pln">Txema Rodriguez</span></h3>
+    <p><span class="pln">Apasionado por la tecnología trabaja en Madrid...</span></p>
+    <h3><span class="pln">Jorge Ruvira</span></h3>
+    <p><span class="pln">Ingeniero Técnico de informática de sistemas por la...</span></p>
+    <h3><span class="pln">Carlos Paramio</span></h3>
+    <p><span class="pln">Tiene 33 años y vive en la ciudad de Algeciras Cádiz...</span></p>
 </section>
-<span class="pln"></span>
 <small><span class="pln">Los editores son todos unos frikis del quince</span></small>
 ```
 
@@ -206,10 +186,8 @@ Sometimes we will want to use a title or header element but will not want to alt
 
 ```html
 <hgroup>
-<span class="pln"></span>
-<h1><span class="pln">Genbeta Dev</span></h1>
-<span class="pln"></span>
-<h2><span class="pln">Pasión por el Software</span></h2>
+    <h1><span class="pln">Genbeta Dev</span></h1>
+    <h2><span class="pln">Pasión por el Software</span></h2>
 </hgroup>
 ```
 
@@ -218,3 +196,6 @@ Here h2 is the slogan of the first h1 and not taken into account in the document
 The fieldset, blockquote and td elements are not taken into account at all in the algorithm outlined in the document. Therefore, these elements are called "sectioning roots" and can be said to be either invisible or innocuous to the document outline.
 
 
+### Accessibility
+
+### SEO (basic)
