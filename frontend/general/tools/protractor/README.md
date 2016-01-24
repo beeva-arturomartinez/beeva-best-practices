@@ -6,7 +6,6 @@
 * [Introduction](#introduction)
 * [How It Works](#how-it-works)
 * [Installation & Configuration](#installation-configuration)
-* [Protactor & Grunt](#protactor-grunt)
 * [Links](#links)
 
 ----
@@ -144,12 +143,6 @@ describe('Array', function() {
 		```
 		
 The complete guide of frameworks  installation and configuration can be found [here](https://angular.github.io/protractor/#/frameworks).
-
-
-
-## <a name='protactor-grunt'>Protactor & Grunt</a>
-
-## TO DO....
 
 
 ## <a name='links'>Links</a>
