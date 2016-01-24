@@ -79,114 +79,114 @@ The new structural elements form a new content model called "sectioning content"
 We can define an outline of HTML document using h1 to h6 elements:
 
 ```hmtl
-<h1><span class="pln">Genbeta Dev</span></h1>
-<h2><span class="pln">Editores</span></h2>
-<p><span class="pln">Sigue todos los posts de nuestros editores en Genbeta Dev</span></p>
-<h3><span class="pln">Txema Rodriguez</span></h3>
-<p><span class="pln">Apasionado por la tecnología trabaja en Madrid...</span></p>
-<h3><span class="pln">Jorge Ruvira</span></h3>
-<p><span class="pln">Ingeniero Técnico de informática de sistemas por la...</span></p>
-<h3><span class="pln">Carlos Paramio</span></h3>
-<p><span class="pln">Tiene 33 años y vive en la ciudad de Algeciras Cádiz...</span></p>
-<small><span class="pln">Los editores son todos unos frikis del quince</span></small>
+<h1><span class="pln">NBA</span></h1>
+<h2><span class="pln">Players</span></h2>
+<p><span class="pln">Working team</span></p>
+<h3><span class="pln">Michael Jordan</span></h3>
+<p><span class="pln">Aerolineas Air Jordan</span></p>
+<h3><span class="pln">Kobe Bryant</span></h3>
+<p><span class="pln">The number 24</span></p>
+<h3><span class="pln">Tracy McGrady</span></h3>
+<p><span class="pln">Porqué eres tan bueno McGrady</span></p>
+<small><span class="pln">Jugones</span></small>
 ```
 With the next schema:
-Genbeta Dev
- |_ Editores
-      |_ Txema Rodriguez
-      |_ Jorge Ruvira
-      |_ Carlos Paramio
+NBA
+ |_ Players
+      |_ Michael Jordan
+      |_ Kobe Bryant
+      |_ Tracy McGrady
       
       
 All content appearing after a hX associated with that element, but what about the small element? Must be related to the entire document, but the browser could not tell if the document or previous hX element.
 ```html
-<h1><span class="pln">Genbeta Dev</span></h1>
+<h1><span class="pln">NBA</span></h1>
 <section>
-    <h2><span class="pln">Editores</span></h2>
-    <p><span class="pln">Sigue todos los posts de nuestros editores en Genbeta Dev</span></p>
-    <h3><span class="pln">Txema Rodriguez</span></h3>
-    <p><span class="pln">Apasionado por la tecnología trabaja en Madrid...</span></p>
-    <h3><span class="pln">Jorge Ruvira</span></h3>
-    <p><span class="pln">Ingeniero Técnico de informática de sistemas por la...</span></p>
-    <h3><span class="pln">Carlos Paramio</span></h3>
-    <p><span class="pln">Tiene 33 años y vive en la ciudad de Algeciras Cádiz...</span></p>
+    <h2><span class="pln">Players</span></h2>
+    <p><span class="pln">Working team</span></p>
+    <h3><span class="pln">Michael Jordan</span></h3>
+    <p><span class="pln">The 23 number</span></p>
+    <h3><span class="pln">Kobe Bryant</span></h3>
+    <p><span class="pln">The number 24</span></p>
+    <h3><span class="pln">Tracy McGrady</span></h3>
+    <p><span class="pln">Porqué eres tan bueno McGrady</span></p>
 </section>
-<small><span class="pln">Los editores son todos unos frikis del quince</span></small>
+<small><span class="pln">Jugones</span></small>
 ```
 
 We can define a section within the hx element that encompasses us what is in this block.
 ```html
-<h1>Genbeta Dev</h1>
+<h1>NBA</h1>
 <section>
     <header>
-        <h2>Editores</h2>
+        <h2>Players</h2>
     </header>
-    <p>Sigue todos los posts de nuestros editores en Genbeta Dev</p>
+    <p>Working team</p>
     <section>
         <header>
-            <h3>Txema Rodriguez</h3>
+            <h3>Michael Jordan</h3>
         </header>
-        <p>Apasionado por la tecnología trabaja en Madrid...</p>
+        <p>The 23 number</p>
     </section>
     <section>
         <header>
-            <h3>Jorge Ruvira</h3>
+            <h3>Kobe Bryant</h3>
         </header>
-        <p>Ingeniero Técnico de informática de sistemas por la...</p>
+        <p>The number 24</p>
     </section>
     <section>
         <header>
-            <h3>Carlos Paramio</h3>
+            <h3>Tracy McGrady</h3>
         </header>    
-        <p>Tiene 33 años y vive en la ciudad de Algeciras Cádiz...</p>
+        <p>Porqué eres tan bueno McGrady</p>
     </section>
 </section>
-<small>Los editores son todos unos frikis del quince</small>
+<small>Jugones</small>
 ```
 We can even use the h1 element at all levels because the structure of the Web content is maintained.
 
 ```html
-<h1>Genbeta Dev</h1>
+<h1>NBA</h1>
 <section>
     <header>
-        <h1>Editores</h1>
+        <h1>Players</h1>
     </header>
-    <p>Sigue todos los posts de nuestros editores en Genbeta Dev</p>
+    <p>Working team</p>
     <section>
         <header>
-            <h1>Txema Rodriguez</h1>
+            <h1>Michael Jordan</h1>
         </header>
-        <p>Apasionado por la tecnología trabaja en Madrid...</p>
+        <p>The 23 number</p>
     </section>
     <section>
         <header>
-            <h1>Jorge Ruvira</h1>
+            <h1>Kobe Bryant</h1>
         </header>
-        <p>Ingeniero Técnico de informática de sistemas por la...</p>
+        <p>The number 24</p>
     </section>
     <section>
         <header>
-            <h1>Carlos Paramio</h1>
+            <h1>Tracy McGrady</h1>
         </header>    
-        <p>Tiene 33 años y vive en la ciudad de Algeciras Cádiz...</p>
+        <p>Porqué eres tan bueno McGrady</p>
     </section>
 </section>
-<small>Los editores son todos unos frikis del quince</small>
+<small>Jugones</small>
 ```
 This would not be possible in previous versions , because the resulting structure would be flat.
 
-Genbeta Dev
+NBA
 Autores
-Txema Rodriguez
-Jorge Ruvira
-Carlos Paramio
+Michael Jordan
+Kobe Bryant
+Tracy McGrady
 
 ##### hgroup
 Sometimes we will want to use a title or header element but will not want to alter the document outline . For this we use the hgroup element that serves precisely for that:
 
 ```html
 <hgroup>
-    <h1><span class="pln">Genbeta Dev</span></h1>
+    <h1><span class="pln">NBA</span></h1>
     <h2><span class="pln">Pasión por el Software</span></h2>
 </hgroup>
 ```
