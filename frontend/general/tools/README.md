@@ -15,4 +15,4 @@ Index
 
 ## <a name='general'>General</a>
 
-BLABLABLA
+Testing and good practices QA guide: [https://drive.google.com/open?id=0Bz3Tmo-AZB7EdjRrMEE0bmhFQmM](https://drive.google.com/open?id=0Bz3Tmo-AZB7EdjRrMEE0bmhFQmM)
