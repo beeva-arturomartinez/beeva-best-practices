@@ -28,22 +28,22 @@ In the last years, In the world of web development they have appeared a large se
 The most important tools in web development are:
 
   - <b>NPM</b>.
-   NPM is a Node.js package manager and facilitates the manage the dependencies of our project.  <a name='npm'>More info...</a>
+   NPM is a Node.js package manager and facilitates the manage the dependencies of our project.  [More info...](npm)
 
   - <b>Bower</b>.
-   Bower is an open source dependencies manager optimized for front applications. <a name='bower'>More info...</a>
+   Bower is an open source dependencies manager optimized for front applications. [More info...](bower)
 
   - <b>Grunt</b>.
-   Grunt, the JavaScript Task Runner is implemented with NodeJS and used for configuration and implementation of automated tasks. <a name='grunt'>More info...</a>
+   Grunt, the JavaScript Task Runner is implemented with NodeJS and used for configuration and implementation of automated tasks. [More info...](grunt)
 
   - <b>Gulp</b>.
-   Gulp is a open source  build system built on Node.js and used in the world of web development to automate tasks <a name='gulp'>More info...</a>
+   Gulp is a open source  build system built on Node.js and used in the world of web development to automate tasks. [More info...](gulp)
 
   - <b>Karma</b>.
-   Karma is a test runner developed by the team of angular and its main objective is to provide a productive testing environment to developers that fits all their needs. <a name='karma'>More info...</a>
+   Karma is a test runner developed by the team of angular and its main objective is to provide a productive testing environment to developers that fits all their needs. [More info...](karma) 
 
   - <b>Protractor</b>.
-   Protractor is an end-to-end test framework for AngularJS applications. <a name='protactor'>More info...</a>
+   Protractor is an end-to-end test framework for AngularJS applications.  [More info...](protactor) 
 
 <br/>
 
