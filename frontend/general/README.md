@@ -10,7 +10,7 @@ Index
   * [Patterns](javascript/patterns)
   * [Performance](javascript/performance)
   * [Style Guide](javascript/style_guide)
-* [5\. Tools](javascript/tools)
+* [5\. Tools](tools)
   * [General](tools)
   * [Grunt](tools/grunt)
   * [Gulp](tools/gulp)
