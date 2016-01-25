@@ -29,3 +29,4 @@ BLABLABLA
 ## <a name='references'>References</a>
 
 * [AirBnB JS Style Guide](https://github.com/airbnb/javascript)
+* [Previous documents](reference/manuDeLaVega.md)
