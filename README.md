@@ -6,6 +6,11 @@ Here is the list of best practices, guidelines, codestyles and recommendations t
 
 If you think any information is wrong or missing please write us an email or directly create an issue inside this repo.
 
+### Agile
+* [Kanban](agile/Kanban/README.md)
+* [User Stories](agile/userStories/README.md)
+* [Working Agreements](agile/workingAgreements/README.md)
+
 ### Backend
 * [Java](backend/java/README.md)
 * [Microservices](backend/microservices/README.md)
@@ -40,13 +45,12 @@ If you think any information is wrong or missing please write us an email or dir
 * [Server security](it_security/server_security/README.md)
 
 ### Quality Assurance
-* [ATDD Acceptance Test-driven Development](agile/developerTeamScrum/ATDD/README.md)
-* [TDD Test-driven Development](agile/developerTeamScrum/TDD/README.md)
+* [ATDD Acceptance Test-driven Development](qa_testing/testing/ATDD/README.md)
 * [Calabash](qa_testing/calabash/README.md)
 * [Code Design](qa_testing/code_design/README.md)
 * [Code Optimization](qa_testing/code_optimization/README.md)
 * [Testing techniques](qa_testing/testing/README.md)
-
+* [TDD Test-driven Development](qa_testing/testing/TDD/README.md)
 
 ## Contrib Guidelines
 * To contrib use [pull requests](https://help.github.com/articles/using-pull-requests/) ...
