@@ -1,4 +1,4 @@
-# Testing techniquies TDD, BDD and Acceptance Test
+# Testing techniques TDD, BDD and Acceptance Test
 
 ###Índex
 

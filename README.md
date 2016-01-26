@@ -50,6 +50,7 @@ If you think any information is wrong or missing please write us an email or dir
 * [Code Design](qa_testing/code_design/README.md)
 * [Code Optimization](qa_testing/code_optimization/README.md)
 * [Testing techniques](qa_testing/testing/README.md)
+* [TDD, BDD and Acceptance Test](qa_testing/testing/GoodPracticesBDD.md)
 * [TDD Test-driven Development](qa_testing/testing/TDD/README.md)
 
 ## Contrib Guidelines

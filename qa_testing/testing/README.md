@@ -5,7 +5,7 @@
 ## Index
 
 * [ATDD Acceptance Test-driven Development](./ATDD/README.md)
-* [Good Practices BDD](./GoodPracticesBDD.md)
+* [Testing techniques TDD, BDD and Acceptance Test](./GoodPracticesBDD.md)
 * [TDD Test-driven Development](./TDD/README.md)
 * [Testing techniques](./TestTechniques.md)
 
