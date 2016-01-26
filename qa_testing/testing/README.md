@@ -1,11 +1,13 @@
 ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
-#QA TESTING GUIDE
+# QA TESTING GUIDE
 
 ## Index
 
-* [Good Practices BDD](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/GoodPracticesBDD.md)
-* [Technic Test](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/TechnicTest.md)
+* [ATDD Acceptance Test-driven Development](./ATDD/README.md)
+* [Good Practices BDD](./GoodPracticesBDD.md)
+* [TDD Test-driven Development](./TDD/README.md)
+* [Testing techniques](./TestTechniques.md)
 
 ___
 
