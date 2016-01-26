@@ -18,7 +18,6 @@ If you think any information is wrong or missing please write us an email or dir
 * [Python](backend/python/README.md)
 * [REST Services](backend/rest/README.md)
 * [Scala/Akka](backend/akka/README.md)
-* [Secure Development](backend/secure-development/README.md)
 
 ### Big Data
 * [Best practices for Hadoop](./hadoop-management.md)
@@ -43,6 +42,7 @@ If you think any information is wrong or missing please write us an email or dir
 
 ### IT Security & Hardening
 * [Server security](it_security/server_security/README.md)
+* [Secure Development](it_security/secure-development/README.md)
 
 ### Quality Assurance
 * [ATDD Acceptance Test-driven Development](qa_testing/testing/ATDD/README.md)
