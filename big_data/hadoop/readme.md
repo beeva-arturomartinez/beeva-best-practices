@@ -5,9 +5,11 @@ At this point we're going to talk about Hadoop
 
 ## Links
 
-* [Development](./hadoop-management.md)
-* [Management](./hadoop-development.md)
+* [Hadoop Development & Best Practices](./hadoop-development.md)
+* [Hadoop Management Hardware and OS](./hadoop-management-hardware-and-os.md)
+* [Hadoop Management](./hadoop-management-hbase.md)
+* [Best practices for Hadoop](./hadoop-management.md)
 
 ___
 
-[BEEVA](http://www.beeva.com) | 2015
+[BEEVA](http://www.beeva.com) | 2016
