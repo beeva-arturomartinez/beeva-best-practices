@@ -480,7 +480,6 @@ Knockout takes the Model-View-View-Model (MVVM) approach to application
 architecture.The key concepts it lists are declaritive bindings, automatic UI
 refresh, dependence Tracking and templating.
 
-
 ##### Riot.js
 Riot.js is a client-side library that weighs less than 1kb. Despite the small
 size, all the building blocks are there: a template engine, router, event
@@ -538,3 +537,5 @@ The views may cause a new action to be propagated through the system in response
 * http://www.2ality.com/2014/09/es6-modules-final.html
 * http://addyosmani.com/writing-modular-js/
 * http://www.smashingmagazine.com/2012/07/journey-through-the-javascript-mvc-jungle/
+
+[BEEVA](https://www.beeva.com) | 2015
