@@ -1,10 +1,11 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
-##5.- Tools
+<img src="../static/grunt-logo.png" height="80px"/> GRUNT 
 
-### <img src="http://gruntjs.com/img/grunt-logo.png" height="80px"/> GRUNT 
+## Grunt
 
-*  [Introduction](#introduction)
+* [Introduction](#introduction)
 * [Gruntfile](#gruntfile)
 * [Pluggins](#pluggins)
 * [Links](#links)
