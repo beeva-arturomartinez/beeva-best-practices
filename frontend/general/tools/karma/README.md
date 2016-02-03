@@ -1,8 +1,10 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
-##5.- Tools
+<img src="../static/karma.png" height="60px"/>
 
-### <img src="http://karma-runner.github.io/assets/img/banner.png" height="60px"/>  
+## Karma
+  
 *  [Introduction](#introduction)
 * [Karma Configuration File](#karma-configuration-file)
 * [Browsers](#browsers)
@@ -314,10 +316,8 @@ module.exports = function(config) {
 
 ```
 
-
-
 ## <a name='links'>Links</a>
  -  Home... http://karma-runner.github.io/0.13/index.html
  -  The complete list of pluggins is in... (https://www.npmjs.com/browse/keyword/karma-plugin).
 
-
+[BEEVA](https://www.beeva.com) | 2015
