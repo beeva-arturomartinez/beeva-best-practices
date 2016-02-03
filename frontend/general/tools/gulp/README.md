@@ -1,8 +1,9 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
-##5.- Tools
+<img src="../static/gulp.png" height="80px"/>
 
-#### <img src="https://raw.githubusercontent.com/gulpjs/artwork/master/gulp.png" height="80px"/> Gulp
+## Gulp
 
 *  [Introduction](#introduction)
 * [Gulpfile](#gulpfile)
