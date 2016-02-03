@@ -1,8 +1,9 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
-##5.- Tools
+## Tools
 
-Index  
+### Index
 
 * [General](#general)
 * [NPM](npm)
@@ -12,7 +13,7 @@ Index
 * [Karma](karma)
 * [Protractor](protractor)
 
-## <a name='general'>General</a>
+## General
 
 In the last years, In the world of web development they have appeared a large set of tools to:
 
@@ -45,6 +46,4 @@ The most important tools in web development are:
   - <b>Protractor</b>.
    Protractor is an end-to-end test framework for AngularJS applications.  [More info...](protactor) 
 
-<br/>
 
-Testing and good practices QA guide: [https://drive.google.com/open?id=0Bz3Tmo-AZB7EdjRrMEE0bmhFQmM](https://drive.google.com/open?id=0Bz3Tmo-AZB7EdjRrMEE0bmhFQmM)
