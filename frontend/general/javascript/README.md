@@ -1,6 +1,7 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
-##4.- JavaScript
+##JavaScript
 
 ###Index  
 
