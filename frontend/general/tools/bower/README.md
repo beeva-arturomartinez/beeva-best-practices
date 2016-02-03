@@ -1,6 +1,9 @@
+![alt text](../../../../static/horizontal-beeva-logo.png "BEEVA")
+
+
 # Front-end Development Best Practices
 
-<img src="../static/bower-logo.svg" height="80px"/>
+<img src="../static/bower-logo.png" height="80px"/>
 
 ##  Bower 
 * [Introduction](#introduction)
