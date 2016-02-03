@@ -788,3 +788,5 @@ f(1, 2, ...params) === 9
 var str = "foo"
 var chars = [ ...str ] // [ "f", "o", "o" ]
 ```
+
+[BEEVA](https://www.beeva.com) | 2015
