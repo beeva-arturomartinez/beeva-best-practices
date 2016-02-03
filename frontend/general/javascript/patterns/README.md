@@ -1,6 +1,7 @@
-# Front-end BEEVA Best Practices
+![alt text](../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
-## 4.- JavaScript
+## Javascript Patterns
 
 Although most of the patterns have been covered in
 [Code Design Best Practices](../../../../qa_testing/code_design/README.md#code-design-patterns)
