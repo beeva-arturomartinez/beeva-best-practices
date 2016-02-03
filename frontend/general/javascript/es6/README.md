@@ -1,4 +1,5 @@
-![alt text](../../../static/horizontal-beeva-logo.png "BEEVA")
+![alt text](../../../../static/horizontal-beeva-logo.png "BEEVA")
+
 # Front-end Development Best Practices
 
 ## ES6
