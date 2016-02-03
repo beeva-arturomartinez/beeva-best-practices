@@ -1,6 +1,8 @@
+![alt text](../../../../static/horizontal-beeva-logo.png "BEEVA")
+
 # Front-end Development Best Practices
 
-<img src="../static/npm-logo.svg" height="60px"/>
+<img src="../static/npm-logo.png" height="60px"/>
 
 ## NPM
 
