@@ -1,8 +1,9 @@
-#Front-end BEEVA Best Practices   
+# Front-end Development Best Practices
 
-##5.- Tools
+<img src="../static/protractor-logo-300.png" height="70px"/>
 
-### <img src="https://raw.githubusercontent.com/angular/protractor/master/website/img/protractor-logo-300.png" height="70px"/>  
+## Protractor
+ 
 * [Introduction](#introduction)
 * [How It Works](#how-it-works)
 * [Installation & Configuration](#installation-configuration)
@@ -165,9 +166,4 @@ The complete guide of frameworks  installation and configuration can be found [h
  - WebDriverJs Wiki.. 
      https://github.com/SeleniumHQ/selenium/wiki/WebDriverJs
 
-
-
-
-
-
-
+[BEEVA](https://www.beeva.com) | 2015

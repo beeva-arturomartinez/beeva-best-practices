@@ -1,8 +1,8 @@
-#Front-end BEEVA Best Practices   
+# Front-end Development Best Practices
 
-##5.- Tools
+<img src="../static/bower-logo.svg" height="80px"/>
 
-### <img src="http://bower.io/img/bower-logo.svg" height="80px"/> Bower 
+##  Bower 
 * [Introduction](#introduction)
 * [Integration Tools](#integration-tools)
 	* [Grunt](#grunt)
@@ -88,3 +88,4 @@ A gulp plugin to copy files into a normalized file structure, arranged by packag
  - <b>Dandelion</b>
 Dandelion provides an integration with Bower. All Bower components are scanned and automatically converted into vendor bundles.
 
+[BEEVA](https://www.beeva.com) | 2015

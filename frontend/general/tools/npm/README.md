@@ -1,8 +1,9 @@
-#Front-end BEEVA Best Practices   
+# Front-end Development Best Practices
 
-##5.- Tools
+<img src="../static/npm-logo.svg" height="60px"/>
 
-### <img src="https://www.npmjs.com/static/images/npm-logo.svg" height="60px"/>  
+## NPM
+
 * [Introduction](#introduction)
 * [Installation](#installation)
 * [Package Configuration File](#package-configuration-file)
@@ -213,3 +214,5 @@ After updating the version number, you can npm publish again.
 
  -  Home... https://www.npmjs.com/
  -  Documentation... https://docs.npmjs.com/
+ 
+[BEEVA](https://www.beeva.com) | 2015
