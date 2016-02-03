@@ -1,9 +1,9 @@
 ![alt text](../../../../static/horizontal-beeva-logo.png "BEEVA")
 # Front-end Development Best Practices
 
-<img src="../static/grunt-logo.png" height="80px"/> GRUNT 
+<img src="../static/grunt-logo.png" height="80px"/>  
 
-## Grunt
+## GRUNT
 
 * [Introduction](#introduction)
 * [Gruntfile](#gruntfile)
