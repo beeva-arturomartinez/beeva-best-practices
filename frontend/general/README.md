@@ -25,7 +25,6 @@ There are another sections of this repository specifically oriented to framework
   * [Protractor](tools/protractor)
   * [NPM](tools/npm)
   * [Bower](tools/bower)
-  * [Yeoman](tools/yeoman)
 * [References](#references)
 
 ## References
