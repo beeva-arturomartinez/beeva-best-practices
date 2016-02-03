@@ -1,6 +1,8 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../static/horizontal-beeva-logo.png "BEEVA")
 
-##2.- CSS 
+# Front-end Development Best Practices
+
+## CSS 
 * Selectors and types of CSS classes
  * Rule declaration
  * ID selectors
