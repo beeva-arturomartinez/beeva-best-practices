@@ -1,6 +1,8 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../../static/horizontal-beeva-logo.png "BEEVA")
 
-##3.- HTML
+# Front-end Development Best Practices
+
+## HTML
 
 * Semantic Web
  * Structural
