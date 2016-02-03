@@ -1,8 +1,7 @@
-#Front-end BEEVA Best Practices   
+![alt text](../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
-##4.- JavaScript
-
-### ES6
+## ES6
 
 ECMAScript is a trademarked scripting language specification standardized by Ecma International in ECMA-262 and ISO/IEC 16262. Well-known implementations of the language, such as JavaScript, JScript and ActionScript are widely used for client-side scripting on the Web.
 
