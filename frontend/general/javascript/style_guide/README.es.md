@@ -1,7 +1,9 @@
-# Guía de estilos para Javascript (ES5 y ES6)
+![alt text](../../../../static/horizontal-beeva-logo.png "BEEVA")
+# Front-end Development Best Practices
 
+## Guía de estilos para Javascript (ES5 y ES6)
 
-## <a name='TOC'>Tabla de Contenido</a>
+### Tabla de Contenido
 
   1. [Tipos](#types)
   1. [Referencias](#referencias)
@@ -1903,5 +1905,5 @@
 
   **[[⬆ regresar a la Tabla de Contenido]](#TOC)**
 
-
+[BEEVA](https://www.beeva.com) | 2015
 
