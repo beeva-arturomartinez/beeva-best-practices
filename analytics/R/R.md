@@ -232,8 +232,6 @@ A couple of examples using the mtcars default dataset:
 	      xlab="Weight", ylab="Miles per Gallon")
 ```
 
-[img]
-
 (converted strings into factors)
 
 ```
@@ -241,7 +239,6 @@ A couple of examples using the mtcars default dataset:
 	      main="Distribution of Gas Milage", xlab="Miles Per Gallon",
 	      ylab="Density")
 ```
-[img]
 
 
 Faceting
@@ -254,7 +251,6 @@ It's very common to want to do the same plot for different subsets of data. The 
 	      xlab="Horsepower", ylab="Miles per Gallon") 
 ```
 
-[img]
 
 Since ggplot2 works with layers, we can add incremental changes to a plot. We could start with:
 
@@ -263,7 +259,6 @@ Since ggplot2 works with layers, we can add incremental changes to a plot. We co
 	  geom_bar(stat="identity", position=position_dodge(), colour="black")
 ```
 
-[img]
 
 Then add axis labels, titles ... 
 
@@ -271,7 +266,6 @@ Then add axis labels, titles ...
 	g<-g+xlab("cylinders") + ylab("gears") +ggtitle("Gears and cylinders in mtcars dataset")
 ```
 
-[img]
 
 We could add lines or other elements, since they are treated as independet layers.
 
@@ -306,10 +300,4 @@ plsFit <- train(Class ~ .,
 ###mclust
 
 The mclust package is a contributed R package for model-based clustering, classification, and density estimation. It assumes a variety of data models and apply maximum likelihood estimation and Bayes criteria to identify the most likely model and number of clusters.
-
-###randomForest
-
-#REPORT
-
-###knitr
 
