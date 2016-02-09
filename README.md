@@ -14,16 +14,16 @@ If you think any information is wrong or missing please write us an email or dir
 ### Backend
 * [Java](backend/java/README.md)
 * [Microservices](backend/microservices/README.md)
-* [Nodejs](backend/nodejs/README.md)
+* [Node.js](backend/nodejs/README.md)
 * [Python](backend/python/README.md)
 * [REST Services](backend/rest/README.md)
 * [Scala/Akka](backend/akka/README.md)
 
 ### Big Data
-* [Best practices for Hadoop](./hadoop-management.md)
-* [Hadoop Development & Best Practices](./hadoop-development.md)
-* [Hadoop Management Hardware and OS](./hadoop-management-hardware-and-os.md)
-* [Hadoop Management](./hadoop-management-hbase.md)
+* [Best practices for Hadoop](big_data/hadoop/hadoop-management.md)
+* [Hadoop Development & Best Practices](big_data/hadoop/hadoop-development.md)
+* [Hadoop Management Hardware and OS](big_data/hadoop/hadoop-management-hardware-and-os.md)
+* [Hadoop Management](big_data/hadoop/hadoop-management-hbase.md)
 * [Spark Best Practices](big_data/spark/README.md)
 
 ### Cloud Computing
@@ -35,13 +35,16 @@ If you think any information is wrong or missing please write us an email or dir
 * [Infrastructure Management](devops/infrastructure/README.md)
 * [Git](devops/git/README.md)
 
-### Frontend & Data Visualization
+### Frontend
 * [Angular.js](frontend/angular/README.md)
-* [Frontend Best Practices and tools](frontend/general/README.md)
+* [HTML5](frontend/general/html/README.md)
+* [Javascript](frontend/general/javascript/README.md)
+* [CSS & Styling](frontend/general/css/README.md)
+* [Frontend Tool Ecosystem](frontend/general/tools/README.md)
 * [Polymer](frontend/polymer/README.md)
 
 ### IT Security & Hardening
-* [Server security](it_security/server_security/README.md)
+* [Server Security](it_security/server_security/README.md)
 * [Secure Development](it_security/secure-development/README.md)
 
 ### Quality Assurance
@@ -49,7 +52,7 @@ If you think any information is wrong or missing please write us an email or dir
 * [Calabash](qa_testing/calabash/README.md)
 * [Code Design](qa_testing/code_design/README.md)
 * [Code Optimization](qa_testing/code_optimization/README.md)
-* [Testing techniques](qa_testing/testing/README.md)
+* [Testing techniques](qa_testing/testing/TestTechniques.md)
 * [TDD, BDD and Acceptance Test](qa_testing/testing/GoodPracticesBDD.md)
 * [TDD Test-driven Development](qa_testing/testing/TDD/README.md)
 
