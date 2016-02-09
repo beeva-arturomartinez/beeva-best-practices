@@ -1,5 +1,5 @@
-# TUNEADO DE LA CONSOLA PARA GIT:
-# Para aplicar los cambios, ejecutar $> . ~/.bashrc
+# Terminal Snippet to show current branch
+# To apply, use $> . ~/.bashrc
 #########################################################################################
 # function hasBranch {
 #    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/{\1}/"
