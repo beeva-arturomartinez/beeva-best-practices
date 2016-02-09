@@ -1,4 +1,4 @@
-# IT Security
+# Server Security
 
 ## Content index
 
