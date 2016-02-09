@@ -7,9 +7,7 @@
 
 * [ES6](es6)
 * [Patterns](patterns)
-* [Performance](performance)
 * [Style Guide](style_guide)
-
 
 ### Testing
 
