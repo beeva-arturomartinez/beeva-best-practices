@@ -3,11 +3,13 @@
 
 ##JavaScript
 
-###Index  
+###Index
 
 * [ES6](es6)
 * [Patterns](patterns)
 * [Style Guide](style_guide)
+* [Testing](#testing)
+* [Resources](#resources)
 
 ### Testing
 
