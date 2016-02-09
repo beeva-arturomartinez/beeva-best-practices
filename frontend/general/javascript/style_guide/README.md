@@ -1,6 +1,6 @@
 #Front-end BEEVA Best Practices   
 
-##4.- JavaScript
+## JavaScript
 
 ### Style Guide
 
