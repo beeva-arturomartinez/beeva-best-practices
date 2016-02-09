@@ -1,8 +1,7 @@
 # REST Best Practices
-At this point we're going to talk about...
+At this point we're going to talk about best practices for develop Restful API
 
 ![BEEVA](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
-
 
 ## Index
 
