@@ -1,6 +1,6 @@
-# Testing techniquies 
+# Testing techniques 
 
-##Índex
+##Index
 
 
 [Testing Techniques](#testing-techniques)
