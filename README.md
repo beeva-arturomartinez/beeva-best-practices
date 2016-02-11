@@ -2,7 +2,7 @@
 
 #Best Practices in BEEVA
 
-Here is the list of best practices, guidelines, codestyles and recommendations that we follow and recommend in Beeva, please read the contrib [guidelines](#contrib-guidelines) before sending your pull request with your content.
+Here is the list of best practices, guidelines, codestyles and recommendations that we follow and encourage in Beeva, please read the contrib [guidelines](#contrib-guidelines) before sending your pull request with your content.
 
 If you think any information is wrong or missing please write us an email or directly create an issue inside this repo.
 
