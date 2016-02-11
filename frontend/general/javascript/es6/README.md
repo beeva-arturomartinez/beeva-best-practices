@@ -789,4 +789,4 @@ var str = "foo"
 var chars = [ ...str ] // [ "f", "o", "o" ]
 ```
 
-[BEEVA](https://www.beeva.com) | 2015
+[BEEVA](https://www.beeva.com) | 2016

@@ -408,4 +408,4 @@ ___
 
 ![beeva logo](../../static/horizontal-beeva-logo.png)
 
-[BEEVA](http://www.beeva.com) | 2015
+[BEEVA](http://www.beeva.com) | 2016

@@ -320,4 +320,4 @@ module.exports = function(config) {
  -  Home... http://karma-runner.github.io/0.13/index.html
  -  The complete list of pluggins is in... (https://www.npmjs.com/browse/keyword/karma-plugin).
 
-[BEEVA](https://www.beeva.com) | 2015
+[BEEVA](https://www.beeva.com) | 2016

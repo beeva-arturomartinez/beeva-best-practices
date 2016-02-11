@@ -32,4 +32,4 @@ There are another sections of this repository specifically oriented to framework
 * [AirBnB JS Style Guide](https://github.com/airbnb/javascript)
 * [Previous Documents](reference/beeva-manueldelavega.md)
 
-[BEEVA](https://www.beeva.com) | 2015
+[BEEVA](https://www.beeva.com) | 2016
