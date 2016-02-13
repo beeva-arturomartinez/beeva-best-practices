@@ -303,9 +303,9 @@ On the other hand the code and comments that remain in the code file are for dev
 As mentioned before it is sometimes said that most comments are just code smell. I guess that what they are really referring to is that comments which do not bring anything interesting to our program should be avoided. Some wrong behaviours would be:
 
 1. Redundancy in instance/class names   
-   public SellResponse beginSellItem(SellRequest sellRequest) throws ManagedComponentException
+   ```java public SellResponse beginSellItem(SellRequest sellRequest) throws ManagedComponentException```
 2. State the obvious like   
-   i++; // increment i
+   ```java i++; // increment i```
 3. Commented-out code
 4. Comments right after closing a brace
 5. Misplace (as in source control)
@@ -322,7 +322,7 @@ float a, b, c; a=9.81; b=5; c= .5*a*(b^2);
 I think everybody will agree that this is awful. No possible reader could take a look at this code and form a minimal idea about what the excerpt is pursuing, let alone if no other context is provided. One could be tempted to simply add some comments to fix it and write something like this:
 
 ```java
-const float a = 9.81; //gravitational force 
+float a = 9.81; //gravitational force 
 float b = 5; //time in seconds 
 float c = (1/2)*a*(b^2) //multiply the time and gravity together to get displacement.
 ```
@@ -331,7 +331,7 @@ Although this is clearly much better than the initial one, it looks like it’s 
 
 ```java
 /* compute displacement with Newton's equation x = vₒt + ½at² */ 
-const float gravitationalForce = 9.81; 
+float gravitationalForce = 9.81; 
 float timeInSeconds = 5; 
 float displacement = (1 / 2) * gravitationalForce * (timeInSeconds ^ 2)
 ```
@@ -339,7 +339,7 @@ float displacement = (1 / 2) * gravitationalForce * (timeInSeconds ^ 2)
 Again better than before, this code is fine, but it could be rewritten in an equally informative way without any comment, for instance:
 
 ```java
-const float accelerationDueToGravity = 9.81;
+float accelerationDueToGravity = 9.81;
 float timeInSeconds = 5; 
 float displacement = NewtonianPhysics.CalculateDisplacement(accelerationDueToGravity);
 ```
