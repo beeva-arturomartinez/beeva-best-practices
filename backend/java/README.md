@@ -303,9 +303,9 @@ On the other hand the code and comments that remain in the code file are for dev
 As mentioned before it is sometimes said that most comments are just code smell. I guess that what they are really referring to is that comments which do not bring anything interesting to our program should be avoided. Some wrong behaviours would be:
 
 1. Redundancy in instance/class names   
-   ```java public SellResponse beginSellItem(SellRequest sellRequest) throws ManagedComponentException```
+   ```public SellResponse beginSellItem(SellRequest sellRequest) throws ManagedComponentException```
 2. State the obvious like   
-   ```java i++; // increment i```
+   ```i++; // increment i```
 3. Commented-out code
 4. Comments right after closing a brace
 5. Misplace (as in source control)
