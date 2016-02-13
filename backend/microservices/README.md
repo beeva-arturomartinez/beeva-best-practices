@@ -793,7 +793,7 @@ In a way, Docker is a bit like a virtual machine. But unlike a virtual machine, 
 ### 4.1 Images
 An image is an inert, immutable, file that's essentially a snapshot of a container. Images are created with the build command, and they'll produce a container when started with run. Images are stored in a Docker registry such as registry.hub.docker.com. Because they can become quite large, images are designed to be composed of layers of other images, allowing a miminal amount of data to be sent when transferring images over the network.
 
-#### Create and image with your build tool
+#### Create an image with your build tool
 
  In order for Java developers to test their applications in containers they typically have to build their code, create an image and run a container. You can use the Docker command line interface to manage images and containers.
 There are actually several Maven plugins for Docker.  A [rhuss/docker-maven-plugin](https://github.com/rhuss/docker-maven-plugin)  simple configuration for this task
@@ -810,7 +810,7 @@ There are actually several Maven plugins for Docker.  A [rhuss/docker-maven-plug
         <alias></alias>
         <build>
           <assembly>                  
-        <mode>dir</mode>              
+            <mode>dir</mode>              
             <basedir>${basedir}/target</basedir>
             <dockerFileDir>${basedir}/target</dockerfileFDir>
           </assembly>  
