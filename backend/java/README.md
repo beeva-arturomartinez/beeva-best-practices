@@ -100,14 +100,14 @@ For example this function name *boolean existFile(nameField)* is better than *bo
 Remember to achieve this, don’t be afraid to make a name long, it is better a long and descriptive name that a short and ambiguos name. The most important thing is the name describes what the function does
 
 Functions should **do one thing**. They should do it well. They should do only it. This is an important concept that helps you to achieve the other recomendations. In this line a function should not have side effects. We assume that we have followed the rule that a function only do one thing, but it also does other hidden things. Sometimes we have to add functionality in a function and we do not update the name. If it is not reflected in the name of the function, this can cause unexpected behavior evelopers and consequently errors in the program, and it also creates a temporal coupling and incomplete test.
-```
+``` java
 public void unregisterUser(User user){
         userDao.unregisterUser(user);
         userDao.deleteUser(user);
 }
 ```
 In this example unregister function do more than one thing and has side important functionality. The most correct options is to divide it in two functions,
-```
+``` java
 public void unregisterUser(User user){
         userDao.unregisterUser(user);
 }
@@ -117,7 +117,7 @@ public void deleteUser(User user){
 }
 ```
 The second one gives a descriptive name, but it is always better to divide it in two functions
-```
+``` java
 public void unregisterAndDeleteUser(User user){
         userDao.unregisterUser(user);
         userDao.deleteUser(user);
@@ -130,7 +130,7 @@ You have to build the code thinking in not mixing the level of abstraction, it c
 
 How can you organize all functions in your code? Using the **Stepdown Rule** that avoid reading code from top to bottom. To organize the code like this, you have to put the functions followed by those at the next level of abstraction, this way makes that we can read a program descending one level of abstraction while we read down the list of functions.
 
-```
+``` java
 public void unregisterUser(User user){
         userDao.unregisterUser(user);
         userDao.deleteUser(user);
@@ -162,18 +162,18 @@ Two common monadic forms for readers with the structure one input parameter and 
 Asking a question about the argument 
 
 
-```
+``` java
 boolean userExists(1178);
 ```
 
 Transforming the argument into something else and returning it.
 
-```
+``` java
 InputStream fileOpen(“File”);
 ```
 Also less common use is when the function represents an event, the form in this case has *an input argument and no output argument*. The function uses the argument to alter the state of the system. 
 
-```
+``` java
 void passwordAttemptFailedNtimes(int attempts);
 ```
 In three options you should choose names that make the distinction clear, and always use the forms in a consistent context, especialy in the event case.
@@ -198,7 +198,7 @@ However, you should be aware that they come at a cost to the readers and should 
 
 When there is a function that seems to need more than two or three arguments, this situation suggests that some of the arguments may be involved in a class that identifies, using arguments object.
 
-```
+``` java
 Circle createCircle(double x, double y, double radius);
 Circle createCircle(Point center, double radius);
 ```
@@ -215,7 +215,7 @@ Using *try/catch blocks* can confuse the structure of the code. A good practice 
 
 *Error Handling Is One Thing*: A function that handles errors should not do others things.
 
-```
+``` java
 public void delete(User user) {
        try {
               deleteUserAndAllTransactions(user);
@@ -756,7 +756,7 @@ public class ExceptionHandling {
 
 The output of the program is:
 
-```
+``` 
 java.io.FileNotFoundException: Negative Integer -5
   at com.journaldev.exceptions.ExceptionHandling.testException(ExceptionHandling.java:24)
   at com.journaldev.exceptions.ExceptionHandling.main(ExceptionHandling.java:10)
@@ -1284,8 +1284,8 @@ It's more efficient to do it like this:
 	Boolean compareDayOfTheWeek (String s)
 	{
 		String s2 = s.intern ();
-		if (s == "Monday") {	...}
-		else if (s == "Tuesday") {...}
+		if (s2 == "Monday") {	...}
+		else if (s2 == "Tuesday") {...}
 	}
 ```
 
@@ -1301,8 +1301,8 @@ Instead of performing a loop to copying arrays
 
 ```java
 	int len = arr1.length;
-	for (int i = 0; i)< len; i++) {
-		arr2 [i] = arr1 [i];
+	for (int i = 0; i< len; i++) {
+		arr2[i] = arr1[i];
 	}
 ```
 
