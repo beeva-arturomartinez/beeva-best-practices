@@ -1,4 +1,5 @@
-![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/Que-es-TDD.png "TDD")
+<img src="static/Que-es-TDD.png" width="128" alt="TDD">
+
 # TDD (Test-driven development)
 
 ## Index
@@ -68,7 +69,7 @@ All unit test that applies tdd must to be:
 ### Cycle of TDD 
 The iterative cycle methodology is divided in three easy steps: *RED - GREEN - REFACTOR*
 
-![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/TDD/static/red-green-refactor.png "Reed-Green-Refactor")
+![alt text](static/red-green-refactor.png "Reed-Green-Refactor")
 
 * We write a test
 * We run all tests
