@@ -92,7 +92,7 @@ In DB not only tested units or classes, test scenarios and behavior when
 classes meet those scenarios, which can be composed of various kinds.
 
  
-![BDD + TDD](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/static/BDD1.jpg "BBD + TDD")
+![BDD + TDD](static/BDD1.jpg "BBD + TDD")
  
 
 BDD habits, adding that TDD provides are:
@@ -139,7 +139,7 @@ functional part that meets the expectations created at the beginning
 Sprint.
 
  
-![Acceptance test](https://github.com/beeva-josemiguelmorales/beeva-best-practices/blob/master/qa_testing/testing/static/BDD2.jpg "Acceptance test")
+![Acceptance test](static/BDD2.jpg "Acceptance test")
 
 
 DSL's DB and practices give us an extra point of abstraction in
