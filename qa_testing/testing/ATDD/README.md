@@ -1,4 +1,5 @@
-![alt text](https://github.com/beeva-danielpetrovic/beeva-best-practices/blob/master/agile/developerTeamScrum/ATDD/static/atdd-cycle.png "ATDD")
+<img src="static/atdd-cycle.png" width="512" alt="ATDD">
+
 # ATDD (Acceptance Test-driven development)
 At this point we're going to talk about atdd
 
