@@ -7,7 +7,7 @@ There are a number of file formats and compression formats. Each has particular 
 
 This document defines some architectural patterns and guidelines to apply in determining how to optimally store your data in any batch Hadoop applications.
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
+![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
 
 ## Index
 
