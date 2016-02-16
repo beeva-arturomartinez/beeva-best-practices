@@ -14,7 +14,7 @@ Amazon Redshift is a cloud-based massively parallel processing (MPP) columnar da
 Redshift's architecture is based in a Master-Slave pattern where client applications (e.g. BI tools or SQL clients) connect via JDBC/ODBC with
 a Leader node that manages communication, executes query plans and distributes workloads among compute nodes.
 
-<p align="center"><img source="static/redshift-architecture.png"/></p>
+![alt text](static/redshift-architecture.png "REDSHIFT")
 
 ### Designing Tables
 
