@@ -24,3 +24,5 @@ a Leader node that manages communication, executes query plans and distributes w
 #### Sort Key
 
 #### Encoding
+
+### Workload Management
