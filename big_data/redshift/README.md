@@ -6,6 +6,7 @@
 
 * [Overview](#overview)
 * [Designing Tables](#designing-tables)
+* [Workload Management](#workload-management)
 
 ### Overview
 
