@@ -25,6 +25,7 @@ If you think any information is wrong or missing please write us an email or dir
 * [Hadoop Management Hardware and OS](big_data/hadoop/hadoop-management-hardware-and-os.md)
 * [Hadoop Management](big_data/hadoop/hadoop-management-hbase.md)
 * [Spark Best Practices](big_data/spark/README.md)
+* [Amazon Redshift Best Practices](big_data/redshift/README.md)
 
 ### Cloud Computing
 * [Amazon Web Services](cloud/aws/README.md)
