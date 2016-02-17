@@ -549,9 +549,9 @@ There are four standard types of filters that are related to the lifecycle of a 
 - **PRE Filter**: These type of filters are executed before the request arrives at the destination
 - **ROUTING Filter**: These type of filters handle routing request to an origin. Here is where **Ribbon Client** acts
 - **POST Filter**: These type of filters are executed after the request has been routed to the destination. For example, we can modify some aspects of the response as headers, before sending it back to clients
-- **ERROR Filter**: When there an error arises from one of the previous described filters, this type of filter comes into action
+- **ERROR Filter**: When an error arises from one of the previous described filters, this type of filter comes into action
 
-There is another type of filter that allows us to create new and **custom** filters that executes explicitly, that is, these filters respond the request by themselves and prevent the request from spreading to the microservices. This behaviour can be useful to define some endpoints for health checking purposes.
+There is another type of filter that allows us to create new and **custom** filters that executes explicitly, that is, these filters respond the request by themselves and prevent the request from spreading to the microservices. This behaviour can be useful to define some endpoints for health checking purposes. [Zuul Special Filters](https://github.com/Netflix/zuul/wiki/Writing-Filters#special-filter-extensions)
 
 ![Zuul Filters Overview](static/zuul-zoom-2.png)
 
