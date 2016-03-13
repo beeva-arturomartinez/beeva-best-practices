@@ -177,19 +177,18 @@ A less common use of this pattern is when the function represents an event. The 
 ``` java
 void passwordAttemptFailedNtimes(int attempts);
 ```
-In three options you should choose names that make the distinction clear, and always use the forms in a consistent context, especialy in the event case.
+In all three cases, you should choose names that make the distinction clear, and always use the forms in a consistent context, especialy in the event case.
 
-Mixing these options can be confusing, if you have a function that is going to transform the input argument, the result should be in the output argument.
+Mixing these options could lead to confusion. If you have a function that is going to transform the input argument, the result should be in the output argument.
 
 Indeed, StringBuffer transform(StringBuffer in) is better than void transform-(StringBuffer out) , even if the implementation in the first case just returns the input argument.
 
 
-
  - *Dyadic Functions*
 
-A function with two arguments is harder to understand than a monadic function. Sometimes the two arguments are appropiate, for example using coordinates.
+A function with two arguments is harder to understand than a monadic function. However, there are times when using two arguments is appropiate. A good example for this are functions working with coordinates.
 
-However, you should be aware that they come at a cost to the readers and should take advantage of what mechanims may be available to you and try to convert them into monads 
+However, you should be aware that they come at a cost to the readers and should take advantage of what mechanims may be available to you in order to try to convert them into monads 
 
  - *Triads*
 
@@ -197,7 +196,7 @@ However, you should be aware that they come at a cost to the readers and should 
 
  - *Polyadic*
 
-When there is a function that seems to need more than two or three arguments, this situation suggests that some of the arguments may be involved in a class that identifies, using arguments object.
+When there is a function that seems to need more than two or three arguments, the situation suggests that some of the arguments may be involved in a class that identifies them, using then an object as argument.
 
 ``` java
 Circle createCircle(double x, double y, double radius);
@@ -210,9 +209,9 @@ If you can't do this and you need to transfer a variable number of arguments, a 
 
 **Exceptions vs Returning Error Codes**
 
-Using return error codes in a function implies the use* if statements* in the code, and can produce deeply structure. Useing exceptions offer us separate the error processing code from the  happy path code. This is clearer for the reader.
+Using return error codes in a function implies the use of* if statements* in the code, and can produce convoluted structures. Using exceptions offers us separate the error processing code from the happy path code. This is clearer for the reader.
 
-Using *try/catch blocks* can confuse the structure of the code. A good practice is extract the bodies of the the try and catch block out into functions. Here you have an example where you can see that is a good path to use the try/cacth blocks with exceptions that provides a nice separation that makes the code easier to understand and modify.
+Using *try/catch blocks* can confuse the structure of the code. A good practice is extracting the bodies of the the try and catch block out into functions. Here you have an example where you can see that is a good path to use the try/catch blocks with exceptions that provides a nice separation, making the code easier to understand and modify.
 
 *Error Handling Is One Thing*: A function that handles errors should not do others things.
 
@@ -244,7 +243,7 @@ private void logError(Exception e) {
  
 There’s always been controversy around code documentation and comments: one side is defending a more verbose approach by writing a lot of comments inside the code and creating large documents where everything is explained in detail whereas the other is claiming that source code should remain as neater as possible and be auto-explanatory, i.e. include as less comments and docs as possible, since they are not needed if the code is clean and structured. Some go even further and state that comments are code smell. 
 
-Well, as in many other aspects, maybe the best choice is to meet halfway so that’s why we will try here to give some tips which we think it may help encounter a reasonable compromise in between. After all they say virtue is in the middle course.
+As in many other aspects, the best choice may be to meet both sides halfway, so that’s what we will try here with some tips. We think they may help reach a reasonable compromise in between. After all, don't they say that virtue is in the middle course?
 
 ### Documenting your code
 
