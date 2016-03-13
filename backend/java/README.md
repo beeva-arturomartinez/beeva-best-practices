@@ -8,8 +8,8 @@ This is how we work with Java at BEEVA.
 ## Index
 
 * [Introduction](#java-introduction)
-* [Choosing proper names inside our code](#choosing-proper-names-inside-our-code)
-* [Function's design](#functions-design)
+* [Choosing the proper names inside our code](#choosing-proper-names-inside-our-code)
+* [Function design](#functions-design)
 * [Comments and documentation](#comments-and-documentation)
 * [Formatting and code styling](#formatting-and-code-styling)
 * [Encapsulation](#encapsulation)
@@ -21,17 +21,17 @@ This is how we work with Java at BEEVA.
 
 ## Introduction
 
-This document set some principles and recommendations for developing JAVA applications.
+This document sets some principles and recommendations for developing JAVA applications.
 
-The most important thing that we, as developers, must have in our minds is that our code is written for other persons, and not for compilers. For this reason, we really care about readability, clarity and good structure of our code.
+The most important thing that we, as developers, must have in our minds is that our code is written for other persons, and not for compilers. For this reason, we really care about the readability, clarity and good structure of our code.
 
-It is also very important to backup our code with a good automated battery test, raising the level of confidence when complex refactors or simply improvements in code are needed.
+It is also very important to backup our code with a good automated test batttery, raising the level of confidence when complex refactors or simply improvements in the code are needed.
 
 This is not an static document, but a living one. We will be adding new hints and sections as we go through the path to have an exceptional code.
 
 ---
 
-## Choosing proper names inside our code
+## Choosing the proper names inside our code
 
 
 When we choose a name for variables, functions, arguments, classes, etc, it is important to apply a set of rules that will help us to make our code more consistent, and easier to read and understand. What follows are some of these basic rules for creating correct names:
@@ -60,53 +60,54 @@ When we choose a name for variables, functions, arguments, classes, etc, it is i
 
 - Avoid encodings, because names encoded are unpronounceable and are usually written incorrectly. In Java there is no need to encode types, as is done in other languages with the Hungarian Notation (HN consists in prefixes in lowercase added to the names of the variables, and that indicate its type; the rest of the name indicates, as clearly as possible, the function that performs the variable), so we have to avoid this encoding as it makes it more difficult the readability of the code, may confuse the reader, and makes it more complicated to change the name or the type of a variable or class.
 
-- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, that must be in uppercase, as well as the first letter of any word not initial (naming convention CamelCase).
+- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, which must be in uppercase. Each subsequent word inside the name should be capitalzied, according to the CamelCase naming convention. as well as the first letter of any word not initial (naming convention CamelCase).
+- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, which must be in uppercase. Each subsequent word inside the name should be capitalzied, according to the CamelCase naming convention.
 
 - Use uppercase in the first letter of standard acronyms. The names will generally have standard abbreviations, such as SQL by Standard Query Language. Names such as *sqlDatabase* for an attribute or *SqlDatabase* for a class are much easier to read than *sQLDatabase* and *SQLDatabase*.
 
-- The names of the classes and objects must be nouns or phrases of nouns. For example, *Customer* or *BankAssistant*. The name of a class should not be a verb.
+- Names for classes and objects must be nouns or phrases of nouns. For example, *Customer* or *BankAssistant*. The name of a class should not be a verb.
 
-- Methods must have names of verb. For example, *save* or *retrieveResult*. The methods of access, modification and the predicates must have as name its value and use as a prefix get, set, and is. For example:
+- Methods should be called after verbs. For example, *save* or *retrieveResult*. The methods of access, modification and the predicates must have as name its value and use as a prefix get, set, and is. For example:
 
 	*String name = client.getName( );*
 
 - Choose a word for each abstract concept and maintain it. It is very confusing to use names such as *get* and *retrieve* as equivalent methods from different classes, to be difficult to remember which method corresponds to each class. The names of functions must be independent and consistent in order to choose the correct method without need of additional searches. A coherent lexicon is a great advantage for developers who have to use our code.
 
-- Avoid using the same word for two different purposes. For example, if we have several classes with a method *add* that it does is to create a new value by adding two existing values, and we create a new class with a method that adds a value to a list, in this new method we could name it such as *add*, but in this case there is a difference in semantics, and we should use another name such as *insert*. We have to facilitate the understanding of our code.
+- Avoid using the same word for two different purposes. Consider the example of having several classes in which a method *add* creates a new value by adding two existing values, and we a new class with a method that adds a value to a list. We could name this method as *add*, but since there is a difference in semantics, we should use another name such as *insert*. We should always try to facilitate the understanding of our code.
 
-- Use terminology applicable to the domain of solutions and/or of the problem. It is advisable to use computer terms, algorithms, patterns names, and other mathematical terms, i.e. choose technical names to define technical stuff. However when there is not a programming term for that is being done, we should use a domain name of the problem. Many developers make the mistake of creating generic terms for concepts when there are already perfectly useable terms in the domain. For example, if our users relate to their customers as consumers, we have to use the term *Customer* for the class, not *Client*.
+- Use terminology applicable to the domain of solutions and/or of the problem. It is advisable to use computer terms, algorithms, patterns names, and other mathematical terms, i.e. choose technical names to define technical stuff. However when there is not a programming term for what is being done, we should use a domain name of the problem. Many developers make the mistake of creating generic terms for concepts when there are already perfectly useable terms in the domain. For example, if our users relate to their customers as consumers, we have to use the term *Customer* for the corresponding class, not *Client*.
 
-- Some names have a meaning by themselves, but not the majority, so they must be included in a context, in classes, functions and namespaces with appropriate names. For example, we have the variables *firstname*, *lastname*, *street*, *number*, *city* and *country*, that combined, they obviously form an address, but if the variable *number* is used in isolation on a method, we would not be able to identify that is a part of an address. For this, the best would be to create the class *Address*, so we would know that the variables belong to a broader concept.
+- Some names have a meaning by themselves, but this is a rare case. Generally, they must be included in a context, in classes, functions and namespaces with appropriate names. For example, consider the variables *firstname*, *lastname*, *street*, *number*, *city* and *country*. When combined, it becoumes obvious that they refer to an address, but if the variable *number* is used in isolation on a method, we might not be able to identify that is a part of an address. In this case, the best course of action would be to create the *Address* class, so it would be clear that the variables belong to a broader concept.
 
 - Short names are usually more appropriate than the extensive, provided they are clear. For example, the names *AccountAddress* and *ClientAddress* are perfect for instances of the class *Address*, but do not serve as the class name. *Address* serves better as the class name.
 
-Regarding to the naming conventions of identifiers in Java, several communities have established and proposed their owns. In the following link, you can see the naming conventions established by Sun Microsystems:
+Regarding the matter of naming conventions of Java identifiers, several communities have established and proposed their own. In the following link, you can see the conventions established by Sun Microsystems:
 
 [http://www.oracle.com/technetwork/java/codeconventions-135099.html](http://www.oracle.com/technetwork/java/codeconventions-135099.html)
 
 ---
 
-## Function's design
+## Function design
 
-Functions are the first level of organization in any program. A function has to be easy to read and to understand by others programmers. Here you have some recomendations to achieve that yours will have a good design.
+Functions are the first level of organization in any program. A function has to be easy to read and understand by other programmers. Here, you'll find some recomendations in order to assure that yours will have a good design.
 
-A function should be **small**: there is not a standard size for a function. The recomendation have changed over time. In the eighties lines should not be 150 characters long and functions should not be 100 lines long. Actually functions should hardly ever be 20 lines long. But to reach transparency you can create functions in three or four lines long.
+A function should be **small**: there is not a standard size for a function. The recomendation have changed over time. In the eighties lines should not exceed 150 characters of length and functions should not be over 100 lines. Currently, functions should hardly ever be 20 lines long. But to reach transparency you can could even create functions with only three or four lines of length.
 
-**Use Descriptive names**: The function name should gives information about the intent of the function and describes what the function does. If you have small functions that do one thing it is easier to give them a descriptive name.
+**Use Descriptive names**: The function's name should give information about the intent of said function and describe what it does. If you have small functions with a single purpose it is easier to give them a descriptive name.
 A very nice way to choose a function name is to use a verb and a noun. 
 
 For example this function name *boolean existFile(nameField)* is better than *boolean exist(nameField)* because the name gives us information about the internal funcionality.
 
-Remember to achieve this, don’t be afraid to make a name long, it is better a long and descriptive name that a short and ambiguos name. The most important thing is the name describes what the function does
+Remember: Don’t be afraid to make of long names, as it is better to have a long and descriptive name that a short and ambiguos one. The most important thing is making the function's intention clear.
 
-Functions should **do one thing**. They should do it well. They should do only it. This is an important concept that helps you to achieve the other recomendations. In this line a function should not have side effects. We assume that we have followed the rule that a function only do one thing, but it also does other hidden things. Sometimes we have to add functionality in a function and we do not update the name. If it is not reflected in the name of the function, this can cause unexpected behavior evelopers and consequently errors in the program, and it also creates a temporal coupling and incomplete test.
+Functions should **do one thing**. They should do it well. They should do only it. This is an important concept that helps you achieve the other recomendations. In this line a function should not have side effects. We assume that we have followed the rule that a function only do one thing, but it also does other hidden things. Sometimes we have to add functionality in a function and we do not update the name. If it is not reflected in the name of the function, it can cause unexpected behaviors and consequently errors in the program. Furthermore, it also creates a temporal coupling and incomplete test.
 ``` java
 public void unregisterUser(User user){
         userDao.unregisterUser(user);
         userDao.deleteUser(user);
 }
 ```
-In this example unregister function do more than one thing and has side important functionality. The most correct options is to divide it in two functions,
+In this example, the unregister function does more than one thing and has an important side functionality. The most correct option is to divide it in two functions,
 ``` java
 public void unregisterUser(User user){
         userDao.unregisterUser(user);
@@ -116,7 +117,7 @@ public void deleteUser(User user){
         userDao.deleteUser(user);
 }
 ```
-The second one gives a descriptive name, but it is always better to divide it in two functions
+This second case gives a descriptive name, but nevertheless it would still be better to divide it into two separate functions
 ``` java
 public void unregisterAndDeleteUser(User user){
         userDao.unregisterUser(user);
@@ -124,11 +125,11 @@ public void unregisterAndDeleteUser(User user){
 }
 ```
 
-How do we have to define our functions? You should try to build functions thinking that it has to do the necessary steps of the present level of abstraction and structure the next level of abstraction in others functions.
+How do we define our functions? We should try to build functions thinking that they have to do the necessary steps in the current level of abstraction, and delegate the following abstraction levels to other functions.
 
-You have to build the code thinking in not mixing the level of abstraction, it can be very confusing for others readers. If the main and detail code are in the same function, they may not be able to see whether a particular expression is an essential concept or a detail one. In conclusion, try to use **one level of abstraction in a function**.
+You have to avoid mixing levels of abstraction when coding, as it can be very confusing for others readers. If the main and detail code are in the same function, they may not be able to see whether a particular expression is an essential concept or a detail one. In conclusion, try to use **a single level of abstraction in a function**.
 
-How can you organize all functions in your code? Using the **Stepdown Rule** that avoid reading code from top to bottom. To organize the code like this, you have to put the functions followed by those at the next level of abstraction, this way makes that we can read a program descending one level of abstraction while we read down the list of functions.
+How can you organize all functions in your code? Using the **Stepdown Rule** that lets others read the code from top to bottom. To organize the code like this, you have to place the functions followed by those at the next level of abstraction.
 
 ``` java
 public void unregisterUser(User user){
@@ -149,11 +150,11 @@ This practice is very important because it helps us to do short functions and to
 
 
 **Function Arguments**
-The right number of arguments in a functicion is zero (*niladic*), one (*monadic*) or two (*dyadic*). The use of three (*triadic*) or more arguments (*polyadic*) is not recommended. 
+The right number of arguments in a functicion is zero (*niladic*), one (*monadic*) or two (*dyadic*). The use of three (*triadic*) or more arguments (*polyadic*) is not recommended and should be avoided in most cases. 
 
-To use the less input parameters is a good practice and it is easy to understand. Arguments are important from the testing point of view. The more arguments a function has, more test cases must be done to cover all combinations of arguments. More than three complicates exponentially.
+Using the least possible input parameters is a good practice. Not only does it make a function to understand, but arguments are also very important from the testing point of view. The more arguments a function has, more test cases must be done to cover all argument combinations. More than three of them complicates matters exponentially.
 
-Using a *boolean input parameter* in a function is a terrible practice. It is signal that the method to do more than one thing, the first if the flag is true and another if the flag is false. Alternatively you can create two functions.
+Using a *boolean input parameter* in a function is a terrible practice. It is a signal that the method does more than one thing, the first if the flag is true and another if the flag is false. A good alternative to this is creating two separate functions.
 
   - *Common Monadic Forms*
 
@@ -171,7 +172,7 @@ Transforming the argument into something else and returning it.
 ``` java
 InputStream fileOpen(“File”);
 ```
-Also less common use is when the function represents an event, the form in this case has *an input argument and no output argument*. The function uses the argument to alter the state of the system. 
+A less common use of this pattern is when the function represents an event. The form in this case has *an input argument and no output arguments*. The function uses that argument to alter the state of the system. 
 
 ``` java
 void passwordAttemptFailedNtimes(int attempts);
