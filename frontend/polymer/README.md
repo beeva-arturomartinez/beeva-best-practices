@@ -2,14 +2,14 @@
 
 ![Polymer logo](https://www.polymer-project.org/images/logos/lockup.svg "BEEVA")
 
-Polymer is a library created to develop web components in order to compose apps with. It relies on Web Components standard from W3C. It is supported by Google and, by now, it has released its 1.2.4 version.
+Polymer is a library created to help develop web components in that can be composed into apps. It relies on the Web Components standard from W3C. It is supported by Google and, as of now, the latest released version is 1.3.1
 
 Since Polymer is based on Web Components it has two different contexts:
  
 * **Component context:** when you develop standalone components to be used by other web components, or component based apps.
-* **App context:** When you use web components to compose your app with, taking care on how they interact.
+* **App context:** When you use web components to compose your app, taking care on how they interact.
 
-In this document we're going to introduce some common good practices for developing polymer components, also polymer based apps.
+In this document we're going to introduce some common good practices for developing polymer components, and also polymer based apps.
 
 ## Index
 
