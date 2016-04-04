@@ -20,14 +20,14 @@ Redshift's three main design concepts are:
 
 #### Usage Patterns
 
-Redshift ideal use case is online analytical processing (OLAP) with BI tools or SQL clients.
+Redshift ideal use case is large datasets online analytical processing (OLAP) with BI tools or SQL clients.
 
 You shouldn't use it for:
 
- - Small datasets (<100 GB): Redshift is architected for parallel and distributed processing over large amounts of data. For small datasets you'll get better performance using other technologies like PostgreSQL, MySQL, Aurora, etc...
- - Transactional / Operational repositories (OLTP): Redshift is intended for analytical purposes and informational data. If you need a transactional system, it would be better to choose a RDMS or NoSQL database.
- - Unstructured data: data stored in Redshift must be defined by a formal structured schema. If you want to analyze/explore unstructured data or develop ETL tasks it is better to choose technologies like EMR, Spark, Pig, Hadoop, etc...
- - BLOB data: Redshift is no designed for binary data storing. If you want to store binary objects there are better alternatives such as Amazon S3.
+ - **Small datasets (<100 GB)**: Redshift is architected for parallel and distributed processing over large amounts of data. For small datasets you'll get better performance using other technologies like PostgreSQL, MySQL, Aurora, etc...
+ - **Transactional / Operational repositories (OLTP)**: Redshift is intended for analytical purposes and informational data. If you need a transactional system, it would be better to choose a RDMS or NoSQL database.
+ - **Unstructured data**: data stored in Redshift must be defined by a formal structured schema. If you want to analyze/explore unstructured data or develop ETL tasks it is better to choose technologies like EMR, Spark, Pig, Hadoop, etc...
+ - **BLOB data**: Redshift is no designed for binary data storing. If you want to store binary objects there are better alternatives such as Amazon S3.
 
 #### Architecture
 
