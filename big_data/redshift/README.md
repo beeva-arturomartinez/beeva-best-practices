@@ -28,6 +28,7 @@ You **SHOULD NOT** use it for:
  - **Transactional / Operational repositories (OLTP)**: Redshift is intended for analytical purposes and informational data. If you need a transactional system, it would be better to choose a RDMS or NoSQL database.
  - **Unstructured data**: data stored in Redshift must be defined by a formal structured schema. If you want to analyze/explore unstructured data or develop ETL tasks it is better to choose technologies like EMR, Spark, Pig, Hadoop, etc...
  - **BLOB data**: Redshift is no designed for binary data storing. If you want to store binary objects there are better alternatives such as Amazon S3.
+ - **SELECT * FROM...**: The Horror! The Horror! Redshift uses columnar storage. Accessing all columns at the same time is not very efficient with this model.
 
 #### Architecture
 
