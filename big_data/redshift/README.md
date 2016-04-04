@@ -31,10 +31,31 @@ You **SHOULD NOT** use it for:
 
 #### Architecture
 
-Redshift's architecture is based in a Master-Slave pattern where client applications (e.g. BI tools or SQL clients) connect via JDBC/ODBC with
-a Leader node that manages communication, executes query plans and distributes workloads among compute nodes.
+Redshift has a **Master-Slave architecture pattern** where client applications (e.g. BI tools or SQL clients) connect via **JDBC/ODBC** with
+a **Leader node** that manages communication, executes query plans and distributes workloads among compute nodes.
 
 ![alt text](static/redshift-architecture.png "REDSHIFT")
+
+**Compute nodes** store data and execute the compiled code returning intermediate results to the leader node for final aggregation. Each one has
+its own dedicated CPU, memory and disk. Data is replicated across the cluster and automatically backed up in S3 for fault-tolerance purposes. Compute nodes are connected in a high-bandwidth private network with close proximity that client applications can never access directly.
+
+Each compute node is partitioned into **slices** depending on the node size of the cluster. The number of slices determines the parallelism level of the cluster. There are two instance families for compute nodes:
+
+ - **Dense Storage (DS)**: intended for huge datasets where disk capacity is key driver for your architecture (less slices per GB)
+ - **Dense Compute (DC)**: in exchange for less disk capacity, these instances provide SSD disks and more RAM and CPU. Thus, you should use
+ DC nodes when computing capacity is more important than disk capacity (more slices per GB)
+
+In order to scale-out/in/up/down your cluster you can perform a **Resize** at any time. This process will: 
+
+ 1. Put your cluster in read-only mode
+ 2. Provision a new cluster with the desired capacity in parallel (you only pay for the active cluster)
+ 3. Copy all data from the old cluster to the new one
+ 4. Redirect your URL to point to the new cluster (it doesn't change)
+ 5. Drop the old cluster
+
+##### Columnar Storage
+
+##### Workload Management
 
 ### Designing Tables
 
