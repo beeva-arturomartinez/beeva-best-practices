@@ -45,7 +45,7 @@ Each compute node is partitioned into **slices** depending on the node size of t
  - **Dense Compute (DC)**: in exchange for less disk capacity, these instances provide SSD disks and more RAM and CPU. Thus, you should use
  DC nodes when computing capacity is more important than disk capacity (more slices per GB)
 
-In order to scale-out/in/up/down your cluster you can perform a **Resize** at any time. This process will: 
+In order to scale-out/in/up/down your cluster you can perform a **Resize** at any time. This process will:
 
  1. Put your cluster in read-only mode
  2. Provision a new cluster with the desired capacity in parallel (you only pay for the active cluster)
@@ -53,7 +53,16 @@ In order to scale-out/in/up/down your cluster you can perform a **Resize** at an
  4. Redirect your URL to point to the new cluster (it doesn't change)
  5. Drop the old cluster
 
-##### Columnar Storage
+##### Columnar Storage and Compression
+
+Columnar storage is a key design principle for the majority of analytical databases and it drastically improves performance in OLAP use cases with large datasets.
+
+Row-wise databases save data as tuples where data blocks are stored sequentially and contain every field (column) of that row. This model is well suited for OLTP operational applications where transactions frequently read or write one or few rows at a time and use most of the fields of that rows.
+
+On the other hand, OLAP informational applications tend to read to large amounts of rows using a few fields as dimensions and/or aggregations. Thus, a column-wise
+schema, where data is stored in blocks that contain values of the same column for different rows, is a better alternative as it **avoids reading non necessary columns and reduces the amount of data that needs to be retrieved**.
+
+In addition to this, **this model lets us choose the best compression algorithm for each column type** reducing the volume of the data at rest, transit and memory. For instance, a text column could be compressed as LZO while a numeric column could use a DELTA encoding.
 
 ##### Workload Management
 
