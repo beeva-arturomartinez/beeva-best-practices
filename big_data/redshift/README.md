@@ -65,7 +65,15 @@ schema, where data is stored in blocks that contain values of the same column fo
 
 In addition to this, **this model lets us choose the best compression algorithm for each column type** reducing the volume of the data at rest, transit and memory. For instance, a text column could be compressed as LZO while a numeric column could use a DELTA encoding.
 
-##### Workload Management
+##### Workload Management (WLM)
+
+In order to manage concurrency and resource planning Redshift provides execution queues. Each queue can be configured with the following parameters:
+
+ 1. **Slots**: number of concurrent queries that can be executed in this queue.
+ 2. **Working memory**: percentage of memory assigned to this queue.
+ 3. **Max. Execution Time**: the amount of time a query is allowed to run before it is terminated.
+
+Queries can be routed to different queues using Query Groups and User Groups. As a rule of thumb, is considered a best practice to have separate queues for long running resource-intensive queries and fast queries that don't require big amounts of memory and CPU.
 
 ### Designing Tables
 
