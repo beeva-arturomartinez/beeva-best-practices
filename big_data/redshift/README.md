@@ -20,9 +20,9 @@ Redshift's three main design concepts are:
 
 #### Usage Patterns
 
-Redshift ideal use case is large datasets online analytical processing (OLAP) with BI tools or SQL clients.
+Redshift **ideal use case is large dataset online analytical processing (OLAP)** with BI tools or SQL clients.
 
-You shouldn't use it for:
+You **SHOULD NOT** use it for:
 
  - **Small datasets (<100 GB)**: Redshift is architected for parallel and distributed processing over large amounts of data. For small datasets you'll get better performance using other technologies like PostgreSQL, MySQL, Aurora, etc...
  - **Transactional / Operational repositories (OLTP)**: Redshift is intended for analytical purposes and informational data. If you need a transactional system, it would be better to choose a RDMS or NoSQL database.
