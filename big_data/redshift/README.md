@@ -1,4 +1,4 @@
-![alt text](static/redshift-logo.png "REDSHIFT" =250x)
+![alt text](static/redshift-logo.png "REDSHIFT")
 
 # Amazon Redshift Best Practices
 
