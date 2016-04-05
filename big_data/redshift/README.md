@@ -6,7 +6,7 @@
 
 * [Overview](#overview)
 * [Designing Tables](#designing-tables)
-* [Workload Management](#workload-management)
+* [References](#references)
 
 ### Overview
 
@@ -77,10 +77,49 @@ Queries can be routed to different queues using Query Groups and User Groups. As
 
 ### Designing Tables
 
-#### Distribution Key
+Working with large datasets requires a high degree of resource optimization and we often find I/O, CPU, Memory or Disk bottlenecks due to wrong table designs.
+
+In order to optimize your cluster you should understand and properly design your tables with these three concepts in mind:
+
+ 1. Data distribution (sharding)
+ 2. Sorting
+ 3. Encoding (compression)
+
+#### Distribution Style
+
+Table distribution style determines how data is distributed across compute nodes and we have three options:
+
+##### Key
+A column acts as distribution key (DISTKEY). As a rule of thumb you should choose a column that:
+
+ 1. Is uniformly distributed. Otherwise skew data will cause deviations in the amount of data that will be stored in each compute node leading to undesired situations where some slices will process bigger amounts of data than others causing bottlenecks.
+ 2. If this table is related with dimensions tables (star-schema), it is better to choose as DISTKEY the field that acts as the JOIN field with the larger dimension table. This way, related data (same join-field values) will reside in the same node, reducing the amount of data that needs to be broadcasted through the network.
+
+##### Even
+Default. Data is distributed automatically using a round-robin algorithm. This is better when the table does not take part in joins or it is not clear which column can act as DISTKEY.
+
+##### All
+The whole table is replicated in every compute node. This distribution style is intended for small tables that don't change too often. For instance, small dimension tables are good candidates. Having data available in each compute node also reduces the amount of data that needs to be broadcasted through the network when executing joins.
 
 #### Sort Key
+TBD
+
+##### Interleaved Sort Keys
+TBD
 
 #### Encoding
+As discussed above, columnar storage let us chose the best compression/encoding model for each row. There are two ways to setup encodings:
 
-### Workload Management
+1. If you load data into an empty table the for the first time with the **COPY command**, then Redshift will automatically apply the best compression based in a sample of the data (be sure that this data is a good sample of the whole dataset for that table).
+
+2. You can run the **ANALYZE COMPRESSION [tablename]** command at any moment to obtain a list of recommended encodings for your table. This is useful when the COPY command is not an option (for instance, SELECT INSERT). As a best practice, you can load a sample of your data into an empty table, then run ANALYZE COMPRESSION, then create a new table with the recommended encodings and load your dataset into the new table.
+
+**You cannot change column encodings once created**.
+
+#### Constraints
+
+You can create **UNIQUE, PRIMARY KEY and FOREIGN KEY** constraints in Redshift but only with informational purposes. **Redshift does not perform integrity checks for these constraints**. Anyway, creating constraints is a best practice since it provides useful information for the query planner in order to optimize executions.
+
+You can also create **NOT NULL** constraints. **Redshift does enforce NOT NULL column constraints.**
+
+### References
