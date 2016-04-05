@@ -87,33 +87,40 @@ In order to optimize your cluster you should understand and properly design your
 
 #### Distribution Style
 
-Table distribution style determines how data is distributed across compute nodes and we have three options:
+Table distribution style determines **how data is distributed across compute nodes** and we have three options:
 
 ##### Key
 A column acts as distribution key (DISTKEY). As a rule of thumb you should choose a column that:
 
- 1. Is uniformly distributed. Otherwise skew data will cause deviations in the amount of data that will be stored in each compute node leading to undesired situations where some slices will process bigger amounts of data than others causing bottlenecks.
+ 1. **Is uniformly distributed.** Otherwise skew data will cause deviations in the amount of data that will be stored in each compute node leading to undesired situations where some slices will process bigger amounts of data than others causing bottlenecks.
  2. If this table is related with dimensions tables (star-schema), it is better to choose as DISTKEY the field that acts as the JOIN field with the larger dimension table. This way, related data (same join-field values) will reside in the same node, reducing the amount of data that needs to be broadcasted through the network.
 
 ##### Even
-Default. Data is distributed automatically using a round-robin algorithm. This is better when the table does not take part in joins or it is not clear which column can act as DISTKEY.
+Default. **Data is distributed automatically using a round-robin algorithm.** This is better when the table does not take part in joins or it is not clear which column can act as DISTKEY.
 
 ##### All
-The whole table is replicated in every compute node. This distribution style is intended for small tables that don't change too often. For instance, small dimension tables are good candidates. Having data available in each compute node also reduces the amount of data that needs to be broadcasted through the network when executing joins.
+The whole **table is replicated in every compute node**. This distribution style is intended for small tables that don't change too often. For instance, small dimension tables are good candidates. Having data available in each compute node also reduces the amount of data that needs to be broadcasted through the network when executing joins.
 
 #### Sort Key
-Sort keys define in which order data will be stored. When you load data in a table for the first time it will be stored in order and Redshift will register metadata with max and min sortkey values for each disk block. This metadata will be used for the query planner to truncate the search tree and drastically improve execution plans for range-restricted queries.
+Sort keys define in which order data will be stored. When you load data in a table for the first time it will be stored in order and Redshift will register metadata with max and min sortkey values for each disk block (**zone map**). This zone map will be used for the query planner to prune the search tree and drastically improve execution plans for range-restricted queries.
 
 As rule of thumb, you should select columns with range filtering in WHERE clauses. For instance, timestamp columns tend to be good candidates.
 
-If you add unsorted rows to a table that is already sorted is a best practice to perform VACUUM SORT ONLY [tablename] in order to obtain the maximum performance from your sortkey.
+If you add unsorted rows to a table that is already sorted is a best practice to perform **VACUUM SORT ONLY [tablename]** in order to obtain the maximum performance from your sortkey.
+
+The are two kinds of sort keys in Redshift: Compund and Interleaved.
 
 ##### Compound Keys
-You can specify more than one column as SORTKEY.
+
+This is the default mode. You can specify more than one column as SORTKEY. Data will be sorted using SORTKEY definition order: first column will act as the first order key, second column next and so on.
+
+Zone maps with compound keys provide better performance when pruning occurs in the leading columns and decreases as we move to the trailing ones. Thus, this kind of keys are recommended when there is a clear column candidate mostly used for sorting and filtering data (e.g: a timestamp).
 
 ##### Interleaved Sort Keys
-TBD
 
+Performing ad-hoc multi-dimensional analytics often requires pivoting, filtering and grouping data using different columns as query dimensions. This leads to scenarios where compound key ordering is not flexible enough and performance decreases.
+
+Interleaved Sort Keys is Amazon Redshift implementation for **Z-order curve** ordering. This model is preferable when dealing with muli-dimensional analytics.
 
 #### Encoding
 As discussed above, columnar storage let us chose the best compression/encoding model for each row. There are two ways to setup encodings:
@@ -136,3 +143,4 @@ You can also create **NOT NULL** constraints. **Redshift does enforce NOT NULL c
 - [Optimizing for Star Schemas and Interleaved Sorting on Amazon Redshift](https://blogs.aws.amazon.com/bigdata/post/Tx1WZP38ERPGK5K/Optimizing-for-Star-Schemas-and-Interleaved-Sorting-on-Amazon-Redshift "Optimizing for Star Schemas and Interleaved Sorting on Amazon Redshift")
 - [Understanding Interleaved Sort Keys in Amazon Redshift](https://blog.chartio.com/blog/understanding-interleaved-sort-keys-in-amazon-redshift-part-1 "Understanding Interleaved Sort Keys in Amazon Redshift")
 - [Top 10 Performance Tuning Techniques for Amazon Redshift](https://blogs.aws.amazon.com/bigdata/post/Tx31034QG0G3ED1/Top-10-Performance-Tuning-Techniques-for-Amazon-Redshift "Top 10 Performance Tuning Techniques for Amazon Redshift")
+- [Z Order Curve](https://en.wikipedia.org/wiki/Z-order_curve "Z Order Curve")
