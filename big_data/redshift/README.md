@@ -102,10 +102,18 @@ Default. Data is distributed automatically using a round-robin algorithm. This i
 The whole table is replicated in every compute node. This distribution style is intended for small tables that don't change too often. For instance, small dimension tables are good candidates. Having data available in each compute node also reduces the amount of data that needs to be broadcasted through the network when executing joins.
 
 #### Sort Key
-TBD
+Sort keys define in which order data will be stored. When you load data in a table for the first time it will be stored in order and Redshift will register metadata with max and min sortkey values for each disk block. This metadata will be used for the query planner to truncate the search tree and drastically improve execution plans for range-restricted queries.
+
+As rule of thumb, you should select columns with range filtering in WHERE clauses. For instance, timestamp columns tend to be good candidates.
+
+If you add unsorted rows to a table that is already sorted is a best practice to perform VACUUM SORT ONLY [tablename] in order to obtain the maximum performance from your sortkey.
+
+##### Compound Keys
+You can specify more than one column as SORTKEY.
 
 ##### Interleaved Sort Keys
 TBD
+
 
 #### Encoding
 As discussed above, columnar storage let us chose the best compression/encoding model for each row. There are two ways to setup encodings:
@@ -123,3 +131,8 @@ You can create **UNIQUE, PRIMARY KEY and FOREIGN KEY** constraints in Redshift b
 You can also create **NOT NULL** constraints. **Redshift does enforce NOT NULL column constraints.**
 
 ### References
+
+- [Amazon Redshift Documentation](https://aws.amazon.com/documentation/redshift/ "Amazon Redshift Documentation")
+- [Optimizing for Star Schemas and Interleaved Sorting on Amazon Redshift](https://blogs.aws.amazon.com/bigdata/post/Tx1WZP38ERPGK5K/Optimizing-for-Star-Schemas-and-Interleaved-Sorting-on-Amazon-Redshift "Optimizing for Star Schemas and Interleaved Sorting on Amazon Redshift")
+- [Understanding Interleaved Sort Keys in Amazon Redshift](https://blog.chartio.com/blog/understanding-interleaved-sort-keys-in-amazon-redshift-part-1 "Understanding Interleaved Sort Keys in Amazon Redshift")
+- [Top 10 Performance Tuning Techniques for Amazon Redshift](https://blogs.aws.amazon.com/bigdata/post/Tx31034QG0G3ED1/Top-10-Performance-Tuning-Techniques-for-Amazon-Redshift "Top 10 Performance Tuning Techniques for Amazon Redshift")
