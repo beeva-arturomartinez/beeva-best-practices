@@ -151,4 +151,5 @@ You can also create **NOT NULL** constraints. **Redshift does enforce NOT NULL c
 - [Optimizing for Star Schemas and Interleaved Sorting on Amazon Redshift](https://blogs.aws.amazon.com/bigdata/post/Tx1WZP38ERPGK5K/Optimizing-for-Star-Schemas-and-Interleaved-Sorting-on-Amazon-Redshift "Optimizing for Star Schemas and Interleaved Sorting on Amazon Redshift")
 - [Understanding Interleaved Sort Keys in Amazon Redshift](https://blog.chartio.com/blog/understanding-interleaved-sort-keys-in-amazon-redshift-part-1 "Understanding Interleaved Sort Keys in Amazon Redshift")
 - [Top 10 Performance Tuning Techniques for Amazon Redshift](https://blogs.aws.amazon.com/bigdata/post/Tx31034QG0G3ED1/Top-10-Performance-Tuning-Techniques-for-Amazon-Redshift "Top 10 Performance Tuning Techniques for Amazon Redshift")
+- [Best Practices for Micro-Batch Loading on Amazon Redshift](http://blogs.aws.amazon.com/bigdata/post/Tx2ANLN1PGELDJU/-Best-Practices-for-Micro-Batch-span-class-matches-Loading-span-on-Amazon-Redshi "Best Practices for Micro-Batch Loading on Amazon Redshift")
 - [Z Order Curve](https://en.wikipedia.org/wiki/Z-order_curve "Z Order Curve")
