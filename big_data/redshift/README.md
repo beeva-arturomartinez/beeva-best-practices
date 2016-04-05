@@ -101,7 +101,7 @@ Table distribution style determines **how data is distributed across compute nod
 A column acts as distribution key (DISTKEY). As a rule of thumb you should choose a column that:
 
  1. **Is uniformly distributed.** Otherwise skew data will cause deviations in the amount of data that will be stored in each compute node leading to undesired situations where some slices will process bigger amounts of data than others causing bottlenecks.
- 2. If this table is related with dimensions tables (star-schema), it is better to choose as DISTKEY the field that acts as the JOIN field with the larger dimension table. This way, related data (same join-field values) will reside in the same node, reducing the amount of data that needs to be broadcasted through the network.
+ 2. If this table is related with dimensions tables (star-schema), it is better to **choose as DISTKEY the field that acts as the JOIN field with the larger dimension table.** This way, related data (same join-field values) will reside in the same node, **reducing the amount of data that needs to be broadcasted through the network**.
 
 ##### Even
 Default. **Data is distributed automatically using a round-robin algorithm.** This is better when the table does not take part in joins or it is not clear which column can act as DISTKEY.
