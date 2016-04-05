@@ -14,6 +14,9 @@
   * [Sort Key](#sort-key)
   * [Encoding](#encoding)
   * [Constraints](#constraints)
+* [Loading Data](#loading-data)
+* [User Defined Functions](#user-defined-functions)
+* [Maintenance](#maintenance)
 * [References](#references)
 
 ### Overview
@@ -144,6 +147,15 @@ As discussed above, columnar storage let us chose the best compression/encoding 
 You can create **UNIQUE, PRIMARY KEY and FOREIGN KEY** constraints in Redshift but only with informational purposes. **Redshift does not perform integrity checks for these constraints**. Anyway, creating constraints is a best practice since it provides useful information for the query planner in order to optimize executions.
 
 You can also create **NOT NULL** constraints. **Redshift does enforce NOT NULL column constraints.**
+
+### Loading Data
+TBD
+
+### User Defined Functions
+TBD
+
+### Maintenance
+TBD
 
 ### References
 
