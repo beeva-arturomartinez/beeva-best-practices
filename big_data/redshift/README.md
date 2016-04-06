@@ -16,6 +16,9 @@
   * [Constraints](#constraints)
 * [Loading Data](#loading-data)
 * [User Defined Functions](#user-defined-functions)
+* [Security](#security)
+  * [Authentication and Authorization](#authentication-and-authorization)
+  * [Encryption](#encryption)
 * [Maintenance](#maintenance)
 * [References](#references)
 
@@ -69,12 +72,12 @@ In order to scale-out/in/up/down your cluster you can perform a **Resize** at an
 
 Columnar storage is a key design principle for the majority of analytical databases and it drastically improves performance in OLAP use cases with large datasets.
 
-Row-wise databases save data as tuples where data blocks are stored sequentially and contain every field (column) of that row. This model is well suited for OLTP operational applications where transactions frequently read or write one or few rows at a time and use most of the fields of that rows.
+Row-wise databases save data as tuples where data blocks are stored sequentially and contain every field (column) of that row. This model is well suited for OLTP operational applications where transactions frequently read or write one or a few rows at a time and use most of the fields of that rows.
 
 On the other hand, OLAP informational applications tend to read to large amounts of rows using a few fields as dimensions and/or aggregations. Thus, a column-wise
 schema, where data is stored in blocks that contain values of the same column for different rows, is a better alternative as it **avoids reading non necessary columns and reduces the amount of data that needs to be retrieved**.
 
-In addition to this, **this model lets us choose the best compression algorithm for each column type** reducing the volume of the data at rest, transit and memory. For instance, a text column could be compressed as LZO while a numeric column could use a DELTA encoding.
+In addition to this, **this model lets us choose the best compression algorithm for each column type** reducing the volume of the data at rest, transit and memory usage. For instance, a text column could be compressed as LZO while a numeric column could use a DELTA encoding.
 
 ##### Workload Management
 
@@ -101,37 +104,37 @@ In order to optimize your cluster you should understand and properly design your
 Table distribution style determines **how data is distributed across compute nodes** and we have three options:
 
 ##### Key
-A column acts as distribution key (DISTKEY). As a rule of thumb you should choose a column that:
+A single column acts as distribution key (DISTKEY). As a rule of thumb you should choose a column that:
 
- 1. **Is uniformly distributed.** Otherwise skew data will cause deviations in the amount of data that will be stored in each compute node leading to undesired situations where some slices will process bigger amounts of data than others causing bottlenecks.
+ 1. **Is uniformly distributed.** Otherwise skew data will cause unbalances in the volume of data that will be stored in each compute node leading to undesired situations where some slices will process bigger amounts of data than others and causing bottlenecks.
  2. If this table is related with dimensions tables (star-schema), it is better to **choose as DISTKEY the field that acts as the JOIN field with the larger dimension table.** This way, related data (same join-field values) will reside in the same node, **reducing the amount of data that needs to be broadcasted through the network**.
 
 ##### Even
 Default. **Data is distributed automatically using a round-robin algorithm.** This is better when the table does not take part in joins or it is not clear which column can act as DISTKEY.
 
 ##### All
-The whole **table is replicated in every compute node**. This distribution style is intended for small tables that don't change too often. For instance, small dimension tables are good candidates. Having data available in each compute node also reduces the amount of data that needs to be broadcasted through the network when executing joins.
+The whole **table is replicated in every compute node**. This distribution style is intended for small tables that don't change too often. For instance, small dimension tables are good candidates. Having data available in each compute node reduces the amount of data that needs to be broadcasted through the network when executing joins.
 
 #### Sort Key
-Sort keys define in which order data will be stored. When you load data in a table for the first time it will be stored in order and Redshift will register metadata with max and min sortkey values for each disk block (**zone map**). This zone map will be used for the query planner to prune the search tree and drastically improve execution plans for range-restricted queries.
+Sort keys define in which order data will be stored. You can define only one sort key per table, but it can be composed with one or more columns. The are two kinds of sort keys in Redshift: Compound and Interleaved.
 
-As rule of thumb, you should select columns with range filtering in WHERE clauses. For instance, timestamp columns tend to be good candidates.
+When you load data in a table for the first time it will be stored in order and Redshift will register metadata with max and min sortkey values for each disk block in a **zone map**. This zone map will be used for the query planner to prune the search tree and drastically improve execution plans for range-restricted queries.
 
 If you add unsorted rows to a table that is already sorted is a best practice to perform **VACUUM SORT ONLY [tablename]** in order to obtain the maximum performance from your sortkey.
-
-The are two kinds of sort keys in Redshift: Compund and Interleaved.
 
 ##### Compound Keys
 
 This is the default mode. You can specify more than one column as SORTKEY. Data will be sorted using SORTKEY definition order: first column will act as the first order key, second column next and so on.
 
-Zone maps with compound keys provide better performance when pruning occurs in the leading columns and decreases as we move to the trailing ones. Thus, this kind of keys are recommended when there is a clear column candidate mostly used for sorting and filtering data (e.g: a timestamp).
+Zone maps with compound keys provide better performance when pruning occurs in the leading columns and decreases if we use the trailing ones. Thus, this kind of keys are recommended when there is a clear column candidate mostly used for sorting and filtering data.
+
+As rule of thumb, you should select columns with range or equality filtering in WHERE clauses. For instance, timestamp columns in fact tables tend to be good candidates. It is also considered a best practice to use the primary key (id) as the sortkey for secondary dimension tables.
 
 ##### Interleaved Sort Keys
 
 Performing ad-hoc multi-dimensional analytics often requires pivoting, filtering and grouping data using different columns as query dimensions. This leads to scenarios where compound key ordering is not flexible enough and performance decreases.
 
-Interleaved Sort Keys is Amazon Redshift implementation for **Z-order curve** ordering. This model is preferable when dealing with muli-dimensional analytics.
+Interleaved Sort Keys is Amazon Redshift implementation for **Z-order curve** ordering. This model is preferable when dealing with muli-dimensional analytics as it provides worst performance than compound keys for the leading columns but better average performance for the whole sortkey if we use different arbitrary.
 
 #### Encoding
 As discussed above, columnar storage let us chose the best compression/encoding model for each row. There are two ways to setup encodings:
@@ -154,8 +157,18 @@ TBD
 ### User Defined Functions
 TBD
 
-### Maintenance
+### Security
 TBD
+
+#### Authentication and Authorization
+TBD
+
+#### Encryption
+TBD
+
+### Maintenance
+
+It is a best practice to define weekly or daily maintenance task for your clusters. Running ANALYZE and VACUUM regularly is important in order to keep statistics up to date, data sorted and free and reclaim disk space occupied by rows that were marked for deletion.
 
 ### References
 
