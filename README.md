@@ -64,4 +64,11 @@ If you think any information is wrong or missing please write us an email or dir
 * Add attributions and references if necessary to external sites, it's nice when your work is recognized by others.
 * Please add the images that you required to this repo in the *static* subfolder of each subsection, in this way we ensure no broken links will be ever created, avoid using external image links.
 
+
+---
+
+# Licence
+
+Please see [LICENSE](LICENSE).
+
 [BEEVA](http://www.beeva.com) | 2016
