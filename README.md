@@ -58,7 +58,8 @@ If you think any information is wrong or missing please write us an email or dir
 * [TDD Test-driven Development](qa_testing/testing/TDD/README.md)
 
 ## Contrib Guidelines
-* To contrib use [pull requests](https://help.github.com/articles/using-pull-requests/) ...
+* To contrib using issues and [pull requests](https://help.github.com/articles/using-pull-requests/). For instance if you want to contrib to the documents of __Calabash__ and __Server Security__ you first should check if there is an [__issue__](https://github.com/beeva/beeva-best-practices/issues) about those subjects, if there isn't you should create 2 separate issues, and explain on the body of the issue what contributions you want to make, the whole idea behind this is that if another employee wants to contribute to the same document you both don't duplicate content, so issue will be the communication methods between the __committers__. Once you agree on what you will work (alone or with your colleagues) you can create a fork from the repo, you and other committers of the same document have to use the same forked repository so you need to agree who will be the "fork" responsible.
+* Once all your contributions are finished on your fork, you should send a Pull Request petition so the integrators can review it and merge it into the main repository of best practices.
 * [Here is](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) the markdown cheatsheet you can use to create your documents.
 * Write in english please :), don't worry if everything is not perfect as we will continue improving this guidelines overtime as we find and implement new best practices.
 * Add attributions and references if necessary to external sites, it's nice when your work is recognized by others.
