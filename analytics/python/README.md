@@ -6,14 +6,9 @@
   * [Load data](#load_data)
   * [Work with data](#work_data)
     * [Numpy](#numpy)
-    * [pandas](#pandas)
     * [SciPy](#scipy)
+    * [pandas](#pandas)
   * [Visualization](#visualization)
-  * [Machine Learning](#ml)
-    * [Scikit-learn](#scikit-learn)
-    * [Shogun](#shogun)
-  * [Report](#report)
-  * [References](#references)
 
 
 ### Load data
