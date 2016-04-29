@@ -1,8 +1,6 @@
-#Best Practices in BEEVA
+# Python for Data Science
 
-[Replace this logo] ![alt text](https://github.com/beeva/beeva-best-practices/blob/master/static/horizontal-beeva-logo.png "BEEVA")
-
-Posible structure...
+![alt text](static/python-logo.png "Python")
 
 ## Index
   * [Load data](#load_data)
