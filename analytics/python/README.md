@@ -13,7 +13,7 @@
 
 ### Load data
 
-Some examples about how load dataset from CSV, text files and urls.
+Some examples about how to load a dataset from CSV, text files and urls.
 
 ````python
     import pandas as pd
@@ -30,33 +30,33 @@ Some examples about how load dataset from CSV, text files and urls.
 
 ### Numpy
 
-Numpy library is an extension for Python which provides mathematical functions for problems where arrays and matrices computation is needed. Who comes from **Matlab software**, Numpy library could be a great substitute. Numpy has also the advantage that was part of python from the beginning and it has a lot of developments.  Next piece of code could be used in order to load this library:
+Numpy library is an extension for Python which provides mathematical functions for problems where arrays and matrix computations are required. For **Matlab software** users, Numpy library could be a great substitute. Numpy has also the advantage that was part of python from the beginning and it has a lot of developments. Next piece of code could be used in order to load this library:
 
 ````python
     import numpy as np
 ````
-The main characteristic is array object class which is quite similar to lists in Python, except one condition. In a numpy array all the elements must be of the same type (ex. float, int, str ...). Numpy is used to make mathematical operations faster and more efficient than using lists.
-For example, using next code a Numpy array (2 rows and 3 columns) is created. The function `np.shape()` is used to check the dimension, and it is useful in case of errors as array multiplication. 
+The main characteristic of Numpy is array object class. It is quite similar to lists in Python, except one condition. In a numpy array all the elements must be of the same type (ex. float, int, str ...). It is used to make mathematical operations faster and more efficient than using lists.
+For example, using next code a Numpy array (2 rows and 3 columns) is created. The function `np.shape()` is used to check the dimension, and it is useful in case of array multiplication errors. 
 
 ````python
     X = np.array( [ [1,2,3], [4,5,6]]) 
     np.shape(X)
 ````
-**How index and slice a numpy array?**
+**How to index and slice a numpy array?**
 
-This could be one of the first questions when a person starts with this kind of numerical libraries. Using previous X array, the way to access to first element in the first row and its last element is shown in the next code. It could be one of the differences between python libraries and others, the first element is indexing with 0 number and not with 1.
+This could be one of the first questions when a person starts with this kind of numerical libraries. Using previous X array, the way to access to first element in the first row and its last element is shown in the next code. Unlike Matlab (or R) Numpy uses zero-based indexing, i.e. the first element is indexed with 0 and not with 1.
 
 ````python
     first = X[0][0]
     last = X[0][-1]
 ````
-As in Matlab the `eye()`function is so helpful when you want to create a 2D array with ones on the diagonal and zeros elsewhere. In almost every optimization algorithm it could be used in order to reduce computational cost in all the multiplication process, diagonalization problem, resolve partial differential equations...
+As in Matlab the `eye()`function is helpful when you want to create a 2D array with ones on the diagonal and zeros elsewhere. It can be used to reduce computational cost in many optimization algorithms...
 
-Numpy library has a lot of useful functions when you need to work with random numbers. It could be imported using `numpy.random`. An import consideration when you work with this kind of function is that you must set a certain `seed()`at the first of your code in order to get **reproducible results**. 
+Numpy library has a lot of useful functions when you need to work with random numbers. These functions can be imported using `numpy.random`. Notice that you must set a certain `seed()` before using these functions in order to get **reproducible results**. 
 ````python
     np.random.seed(32) # example seed is set to 32
 ````    
-Some functions as `randn()` which use a 'standard normal' distribution, `randint` which returns random integers from a low to a high input values... Function `shuffle()`	is useful to modify an input sequence by shuffling its contents. On the other hand, `permutation()`function	randomly permutes a sequence. 
+Some functions from `numpy.random`are: `randn()` which generates a 'standard normal' distribution; `randint` which returns random integers from a low to a high input values; `shuffle()`	is useful to modify an input sequence by shuffling its contents; `permutation()` randomly permutes a sequence...
 
 
 ### Scipy
@@ -81,7 +81,7 @@ In order to introduce this library some tipical questions are answered.
 
 **How to get information from a DataFrame structure?**
 
-It is useful for extracting and getting information from your DataFrame, for example with the functions `df.info` and `df.describe`.The second one also provides a brief statistical description about your dataset, for example the mean, standard deviation, maximum values and percentiles…
+It is useful to extract and get some information from your DataFrame, for example with the functions `df.info` and `df.describe`. The second one also provides a brief statistical description about your dataset, for example the mean, standard deviation, maximum values and percentiles…
 
 A really good function in order to check all the types which compose your DataFrame structure is `df.dtypes`.
 
@@ -89,8 +89,7 @@ A quickly way to see the first and the last records is to use `df.head(N)` and `
 
 **How to select a certain field or slicing a DataFrame structure?**
 
-The easy way to select a column or field in a DataFrame is using the notation `df[‘name’]`. A great thing is to use previous function in order to get information just for this column as for example `df[‘name’].describe()` and `df[‘name’].dtypes`. Several columns can be selected with an additional bracket as `df[[‘name1’, ‘name2’]]`.
-
+The easy way to select a column or field in a DataFrame is using the notation `df[‘name’]`. A great thing is to use the previous functions in order to get information just for this column. For example: `df[‘name’].describe()` or `df[‘name’].dtypes`. Several columns can be selected with an additional bracket as `df[[‘name1’, ‘name2’]]`.
 
 **How to join, combine and group several DataFrame structures?**
 
@@ -109,7 +108,7 @@ For SQL programmers, `merge()`function provides two DataFrames to be joined on o
     pd.merge(df1,df2, on ='key', how= 'outer')
 ````
 
-This library also provides `concat()`as a way to combine DataFrame structures. It is similar to `UNION`function in SQL language. So useful when a different approach and model provides a part of the final result and you just want to combine. 
+This library also provides `concat()`as a way to combine DataFrame structures. It is similar to `UNION` function in SQL language. So useful when a different approach and model provides a part of the final result and you just want to combine. 
 
 ````python
     pd.concat([df1, df2])
