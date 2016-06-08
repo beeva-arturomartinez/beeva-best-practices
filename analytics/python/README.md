@@ -9,6 +9,8 @@
     * [SciPy](#scipy)
     * [pandas](#pandas)
   * [Visualization](#visualization)
+  * [Machine Learning](machine_learning)
+    * [scikit-learn](#scikit-learn)
 
 
 ### Load data
@@ -114,7 +116,6 @@ This library also provides `concat()`as a way to combine DataFrame structures. I
     pd.concat([df1, df2])
 ````
 
-
 ### Visualization
 Matplotlib, seaborn and Bokeh libraries are used for plotting and visualization.
 ````python
@@ -122,3 +123,13 @@ Matplotlib, seaborn and Bokeh libraries are used for plotting and visualization.
     import seaborn as sn
     import bokeh as bk
 ````
+
+### scikit-learn
+The main python library for Machine Learning is [scikit-learn](http://scikit-learn.org/). It is built on top of Numpy, Scipy and Matplotlib. And it's well documented.
+````python
+    # k nearest neighbours
+    from sklearn.neighbors import KNeighborsClassifier
+    # Random Forest
+    from sklearn.ensemble import RandomForestClassifier
+````
+
