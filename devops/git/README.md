@@ -29,7 +29,7 @@ At this point we're going to talk about best practices to work with git.
 		* [Releases](#releases)
 		* [Hotfixes](#hotfixes)
 	* [Support branches](#support-branches)
-* [Working in a Git Project](#git-project)
+* [Working Git Project](#working-git-project)
 * [Tips](#tips)
 	* [Versioning](#versioning)
 		* [Semantic Versioning](#semantic-versioning)
@@ -282,13 +282,12 @@ git push origin develop
 git push origin master
 ```
 
-## Working in a Git Project
+## Working Git Project
 
-When we are working in a real git project in addition to use [Git Flow](git-flow), also we must know stage where we are working, that is to say, having to play two types of repositories:
+When we are in a real git project in addition to use [Git Flow](git-flow), also we must know stage where we are working, that is to say, leads to having to play two different types of repositories:
 
-![Image of stage git project](static/repositories.png)
+![stage git project image](static/repositories.png)
 
-### 
 
 ## Tips
 
