@@ -284,7 +284,7 @@ git push origin master
 
 ## Working Git Project
 
-When we are in a real git project in addition to use [Git Flow](git-flow), also we must know stage where we are working, that is to say, leads to having to play two different types of repositories:
+When we are in a real git project in addition to use [Git Flow](#git-flow), also we must know stage where we are working, that is to say, leads to having to play two different types of repositories:
 
 ![stage git project image](static/repositories.png)
 
