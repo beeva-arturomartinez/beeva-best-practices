@@ -30,7 +30,7 @@ At this point we're going to talk about best practices to work with git.
 		* [Hotfixes](#hotfixes)
 	* [Support branches](#support-branches)
 * [Working Git Project](#working-git-project)
-	* [Repository](#repository)
+	* [Repositories](#repositories)
 * [Tips](#tips)
 	* [Versioning](#versioning)
 		* [Semantic Versioning](#semantic-versioning)
@@ -287,9 +287,9 @@ git push origin master
 
 When we are in a real git project in addition to use [Git Flow](#git-flow), also we must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
 
-### Repository
+### Repositories
 
-The purpose of Git is to manage a project or a set of files, as they change over time. Git stores this information in a data structure called a **repository** which often lives in a ``.git``` subdirectory at the root of working tree.
+The purpose of Git is to manage a project or a set of files, as they change over time. Git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working tree.
 
 ![stage git project image](static/repositories.png)
 
