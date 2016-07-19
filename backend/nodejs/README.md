@@ -24,7 +24,7 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
   * [Staging](#staging)
 
 * [Testing](#testing)
-  * [TDD with Mocha](#tdd-with-mocha)
+  * [TDD with Mocha, Sinon and Proxyquire](#tdd-with-mocha,-sinon-and-proxyquire)
   * [BDD with Cucumber](#bdd-with-cucumber)
 
 ## Introduction
@@ -36,7 +36,7 @@ Since developments are made in Javacript Node.js, we recommend reading the langu
 ### Challenges
 
 The two main challenges to be resolved by a developer to program begins with Node.js are:
- 
+
 * Asynchrony: Although there are several ways to manage the async flow as libraries (i.e. [async](https://www.npmjs.com/package/async), [co](https://www.npmjs.com/package/co)), promises ([q](https://www.npmjs.com/package/q), [mpromise](https://www.npmjs.com/package/mpromise), ...) or conventions ([CPS](https://en.wikipedia.org/wiki/Continuation-passing_style)), it should handle them properly and avoid excessive nesting callbacks ([Pyramid of Doom](http://tritarget.org/blog/2012/11/28/the-pyramid-of-doom-a-javascript-style-trap/)) and the excessive reliance on a particular library. A major problem arises when we are trying to follow the execution flow of our code and the error handling. Initially it's difficult to adopt this way of work and can be perceived as a loss of control over it. However, it is a powerful tool that allows us to make better use of resources.
  
 * Duality between Application and Server: When we are working with Node.js, we must understand that it's slightly different from those other familiar languages ​​like Java and PHP,  which for develop web applications usually have the support of Apache or Tomcat or other application servers. Although this is usually shielded by frameworks, we should not forget this part of work, which requires us to delve deeper into DevOps issues as the application log, error handling or profiling application issues ports and performance parameters.
@@ -1009,11 +1009,11 @@ var systemConfig='/external/path/to/config.js'; // i.e. /var/properties/project-
 if(process.env.CONFIG && fs.existsSync(process.env.CONFIG)){
     console.log('Cargada la configuración manual de la ruta: '+process.env.CONFIG);
     customConfig=require(process.env.CONFIG);
-// Second option: external properties file 
+// Second option: external properties file
 } else if(fs.existsSync(systemConfig)){
     console.log('Cargada la configuración estándar SISTEMAS de la ruta: '+systemConfig);
     customConfig=require(systemConfig);
-// Third option: local config file    
+// Third option: local config file
 } else if(fs.existsSync(envConfig)){
     console.log('Cargada la configuración local');
     customConfig=require(envConfig);
@@ -1033,7 +1033,7 @@ config=_.merge(
 
 In this section we're going to offer a way to implement TDD and BDD in your Node.js developments but if you want to go deeper, please visit the [testing section of this repository](../../qa_testing/testing/README.md).
 
-### TDD with Mocha, Sinon y Proxyquire
+### TDD with Mocha, Sinon and Proxyquire
 
 #### Focusing
 
@@ -1108,50 +1108,54 @@ A structure example is the following:
 ```javascript
 describe('UNIT TEST model1', function() {
 
-	it('model1 must exists', function () {
-        	var result = model1;
-        	expect(result).to.be.an('object');
-        	expect(result).to.include.keys(['group1', 'group1']);
-    	});
+    it('model1 must exists', function () {
+        var result = model1;
+        expect(result).to.be.an('object');
+        expect(result).to.include.keys(['group1', 'group1']);
+    });
 
-    	describe('UNIT TEST group1', function() {
+    describe('UNIT TEST group1', function() {
 
-        	it('Save in db1', function (done) {
-                	model1.db1.save(db, object, function (err, data) {
-                		expect(err).to.be.null;
-                    		expect(data).to.be.string;
-                    		done();
-                	});
-            	});
+        it('Save in db1 Ok', function (done) {
+            var expectedResult = { success: true};
+            var db = {
+                insert : function (){},
+                update : function (){},
+                delete : function (){}
+            };
+            var object = {};
+            var stub = sinon.stub(db, 'insert');
+            stub.yields(null, expectedResult);
+            var callback = sinon.spy();
 
-		it('Update in db1', function (done) {
-                	model1.db1.update(db, object, function (err, data) {
-                		expect(err).to.be.null;
-                    		expect(data).to.be.string;
-                    		done();
-                	});
-            	});
-    	});
+            model1.db1.save(db, object, callback);
 
-    	describe('UNIT TEST group2', function() {
+            sinon.assert.calledOnce(stub);
+            sinon.assert.calledOnce(callback);
+            sinon.assert.calledWith(callback, null, expectedResult);
+            stub.restore();
+        });
 
-		it('Create extension', function(done) {
-	    		model1.group2.create(extension, function(err,data){
-	        		expect(err).to.be.null;
-	        		expect(data).to.be.string;
-	        		done();
-	    		});
-		});
+        it('Save in db1 Error', function (done) {
+            var error =  new Error("Error");
+            var db = {
+                insert : function (){},
+                update : function (){},
+                delete : function (){}
+            };
+            var object = {};
+            var stub = sinon.stub(db, 'insert');
+            stub.yields(error);
+            var callback = sinon.spy();
 
-		it('Update extension', function (done) {
-	        	model1.group2.save(extension, object, function (err, data) {
-	            		expect(err).to.be.null;
-	            		expect(data).to.be.string;
-	            		done();
-	        	});
-		});
-	});
+            model1.db1.save(db, object, callback);
 
+            sinon.assert.calledOnce(stub);
+            sinon.assert.calledOnce(callback);
+            sinon.assert.calledWith(callback, null, expectedResult);
+            stub.restore();
+        });
+    });
 });
 ```
 
