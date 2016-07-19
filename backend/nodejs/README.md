@@ -1033,7 +1033,7 @@ config=_.merge(
 
 In this section we're going to offer a way to implement TDD and BDD in your Node.js developments but if you want to go deeper, please visit the [testing section of this repository](../../qa_testing/testing/README.md).
 
-### TDD with Mocha
+### TDD with Mocha, Sinon y Proxyquire
 
 #### Focusing
 
@@ -1053,12 +1053,12 @@ my-application/
 				controllers-test-file1.js # controllers-unit-test files
 				controllers-test-file2.js # to test functions of
 				controllers-test-fileN.js # your application
-			models-test/			
+			models-test/
 				models-test-file1.js # models-unit-test files
 				models-test-file2.js # to test functions and methods of
 				models-test-fileN.js # your application
 			mocks/
-				mocks-file1.js # to mock functions  
+				mocks-file1.js # to mock functions
 				mocks-file2.js # and data during unit
 				mocks-fileN.js # tests of your application
 
@@ -1072,6 +1072,18 @@ Mocha.js are available as a npm module, it should be install globally with:
 
 ``` shell
 $ npm install -g mocha
+```
+
+Sinon.js are available as a npm module, it should be install globally with:
+
+``` shell
+$ npm install sinon
+```
+
+Proxyquire.js are available as a npm module, it should be install globally with:
+
+``` shell
+$ npm install proxyquire
 ```
 
 And locally in your project as a development dependency of your application with:
