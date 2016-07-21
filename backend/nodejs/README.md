@@ -24,7 +24,7 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
   * [Staging](#staging)
 
 * [Testing](#testing)
-  * [TDD with Mocha, Sinon and Proxyquire](#tdd-with-mocha,-sinon-and-proxyquire)
+  * [TDD with Sinon and Proxyquire](#tdd-with-sinon-and-proxyquire)
   * [BDD with Cucumber](#bdd-with-cucumber)
 
 ## Introduction
@@ -1101,7 +1101,7 @@ config=_.merge(
 
 In this section we're going to offer a way to implement TDD and BDD in your Node.js developments but if you want to go deeper, please visit the [testing section of this repository](../../qa_testing/testing/README.md).
 
-### TDD with Mocha, Sinon and Proxyquire
+### TDD with Sinon and Proxyquire
 
 #### Focusing
 
