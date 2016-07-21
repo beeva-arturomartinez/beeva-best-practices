@@ -1266,7 +1266,7 @@ expect(err).to.be.null;
 expect(data).to.be.string;
 ```
 - This Test uses different mocks for functions and methods.
-	-  
+	- Use proxyquire for mock all functions 
 
 - It's good practice to use a callback function (done), inside the 'it' unit case function to try all the validations and to finish the case. And example is the following:
 ```javascript
