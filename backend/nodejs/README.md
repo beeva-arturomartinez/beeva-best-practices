@@ -279,7 +279,75 @@ server.start(function() {
 });
 ```
 
-As we mentioned sooner, the Hapi's great power are the plugins. Hapi has an extensive and powerful plugin system that allows you to very easily break your application up into isolated pieces of business logic, and reusable utilities.
+As we mentioned sooner, the Hapi's great power are the plugins. Hapi has an extensive and powerful plugin system that allows you to very easily break your application up into isolated pieces of business logic, and reusable utilities.'use strict';
+
+var chai       = require('chai');
+var expect     = chai.expect;
+var sinon      = require('sinon');
+var proxyquire = require('proxyquire');
+
+var alertsDao = require('../../../../lib/daos/alerts.dao');
+var alertsController = require('../../../../lib/controllers/alerts.controller');
+
+var object = {
+    counter : 1,
+    id : "1234567890123456789012345",
+    campaign : "123456789"
+};
+
+var expectedResult = {
+    ID_SUBSCRIBER: '1234567890123456789012345',
+    COD_ACOM: '123456789',
+    QNU_SECNUM: 1
+};
+
+var error = new Error('ERROR');
+
+var appMock =  {
+    logger : {
+        debug : sinon.spy()
+    }
+};
+
+var alertsControllerMock = proxyquire('../../../../lib/controllers/alerts.controller',
+    {'../app':appMock});
+
+describe('UNIT Test for Alerts CONTROLLER', function() {
+
+    it('AlertsController must exists', function () {
+        var result = alertsController;
+        expect(result).to.be.an('object');
+        expect(result).to.include.keys(['createDE', 'store']);
+    });
+
+    it('Test should call all functions on createDE method', function () {
+        var stub = sinon.stub(alertsDao.exacttarget, 'createDE');
+        var callback = sinon.spy();
+
+        alertsControllerMock.createDE(callback);
+
+        sinon.assert.calledOnce(stub);
+        stub.restore();
+    });
+
+    it("Test should call all functions on save method", function (done) {
+        var args = {"ID_SUBSCRIBER": object.id, "COD_ACOM": object.campaign};
+        var stub = sinon.stub(alertsDao.database, 'save');
+        stub.yields(null, expectedResult);
+
+        alertsControllerMock.store(args,function(err,data) {
+            expect(data).to.be.an('Object');
+            expect(data.ID_SUBSCRIBER).to.be.an('String');
+            expect(data.ID_SUBSCRIBER).to.be.equal(object.id);
+            expect(data.COD_ACOM).to.be.an('String');
+            expect(data.COD_ACOM).to.be.equal(object.campaign);
+            expect(data.QNU_SECNUM).to.be.an('number');
+            expect(data.QNU_SECNUM).to.be.equal(object.counter);
+            done();
+        });
+        stub.restore();
+    });
+});
 
 There are a lot of plugins in the community but we can write our own plugin so easy. A very simple plugin looks like:
 
@@ -1106,55 +1174,81 @@ The different test suite will be group into a describe functions, it consist in 
 A structure example is the following:
 
 ```javascript
-describe('UNIT TEST model1', function() {
+var chai       = require('chai');
+var expect     = chai.expect;
+var sinon      = require('sinon');
+var proxyquire = require('proxyquire');
 
-    it('model1 must exists', function () {
-        var result = model1;
+var model = require('../lib/daos/model1');
+var controller = require('../lib/controllers/controller1');
+
+var object = {
+    counter : 1,
+    id : "1234567890123456789012345",
+    description : "New unit test for NodeJs"
+};
+
+var expectedResult = {
+    ID : '1234567890123456789012345',
+    DESCRIPTION : 'New unit test for NodeJs'
+};
+
+var error = new Error('ERROR');
+
+var appMock =  {
+    logger : {
+        debug : sinon.spy()
+    }
+};
+
+var controllerMock = proxyquire('../lib/controllers/controller1',
+    {'../app':appMock});
+
+describe('UNIT Test for CONTROLLER', function() {
+
+    it('must exists', function () {
+        var result = controller;
         expect(result).to.be.an('object');
-        expect(result).to.include.keys(['group1', 'group1']);
+        expect(result).to.include.keys(['createDE', 'store']);
     });
 
-    describe('UNIT TEST group1', function() {
+    it('Test should call all functions on createDE method', function () {
+        var stub = sinon.stub(model.db, 'createDE');
+        var callback = sinon.spy();
 
-        it('Save in db1 Ok', function (done) {
-            var expectedResult = { success: true};
-            var db = {
-                insert : function (){},
-                update : function (){},
-                delete : function (){}
-            };
-            var object = {};
-            var stub = sinon.stub(db, 'insert');
-            stub.yields(null, expectedResult);
-            var callback = sinon.spy();
+        controllerMock.createDE(callback);
 
-            model1.db1.save(db, object, callback);
+        sinon.assert.calledOnce(stub);
+        stub.restore();
+    });
 
-            sinon.assert.calledOnce(stub);
-            sinon.assert.calledOnce(callback);
-            sinon.assert.calledWith(callback, null, expectedResult);
-            stub.restore();
+    it("Test should call all functions on save method - OK", function (done) {
+        var args = {"ID": object.id, "DESCRIPTION": object.description};
+        var stub = sinon.stub(model.db, 'save');
+        stub.yields(null, expectedResult);
+
+        controllerMock.store(args,function(err,data) {
+            expect(data).to.be.an('Object');
+            expect(data.ID).to.be.an('String');
+            expect(data.ID).to.be.equal(object.id);
+            expect(data.DESCRIPTION).to.be.an('String');
+            expect(data.DESCRIPTION).to.be.equal(object.description);
+            done();
         });
+        stub.restore();
+    });
 
-        it('Save in db1 Error', function (done) {
-            var error =  new Error("Error");
-            var db = {
-                insert : function (){},
-                update : function (){},
-                delete : function (){}
-            };
-            var object = {};
-            var stub = sinon.stub(db, 'insert');
-            stub.yields(error);
-            var callback = sinon.spy();
+    it("Test should call all functions on save method - Error", function (done) {
+        var args = {"ID": object.id, "DESCRIPTION": object.description};
+        var stub = sinon.stub(model.db, 'save');
+        stub.yields(null, error);
 
-            model1.db1.save(db, object, callback);
-
-            sinon.assert.calledOnce(stub);
-            sinon.assert.calledOnce(callback);
-            sinon.assert.calledWith(callback, null, expectedResult);
-            stub.restore();
+        controllerMock.store(args,function(err,data) {
+            expect(err).to.be.an('Object');
+            expect(data).to.be.null;
+            done();
         });
+        stub.restore();
     });
 });
 ```
@@ -1171,15 +1265,23 @@ And use in the response of your functions like this:
 expect(err).to.be.null;
 expect(data).to.be.string;
 ```
+- This Test uses different mocks for functions and methods.
+	-  
+
 - It's good practice to use a callback function (done), inside the 'it' unit case function to try all the validations and to finish the case. And example is the following:
 ```javascript
-it('Save in Mongo', function (done) {
-	dao.save(db, data, function (err, dataRes) {
-    		expect(err).to.be.null;
-    		expect(dataRes).to.be.string;
-    		done();
-	});
+controllerMock.store(args,function(err,data) {
+    expect(data).to.be.an('Object');
+    expect(data.ID).to.be.an('String');
+    expect(data.ID).to.be.equal(object.id);
+    expect(data.DESCRIPTION).to.be.an('String');
+    expect(data.DESCRIPTION).to.be.equal(object.description);
+    done();
 });
+```
+- Another good practices is to use a restore() functions before finish test:
+```javascript
+stub.restore();
 ```
 - To do a test of a route file, to simulate a http call with methods get, post or another, you need the library supertest, you can install as development dependency with:
 ``` shell
