@@ -1265,9 +1265,23 @@ And use in the response of your functions like this:
 expect(err).to.be.null;
 expect(data).to.be.string;
 ```
-- This Test uses different mocks for functions and methods.
-	- Use proxyquire for mock all functions 
-
+- This Test uses different mocks for functions and methods. For example:
+	- Proxyquire. This library override methods of a module behave like the original. The original method invokes the app.js file. The test mock this invocation.
+```javascript
+var controllerMock = proxyquire('../lib/controllers/controller1',
+							{'../app':appMock});
+```
+	- Sinon. Stub it allows us to preprogram the output method. This method is very interesting because us can try differents outputs "Ok" or "Error".
+```javascript
+var stub = sinon.stub(model.db, 'save');
+stub.yields(null, expectedResult);
+```
+or
+```javascript
+var stub = sinon.stub(model.db, 'save');
+stub.yields(null, error);
+```
+	- Sinon. Assert
 - It's good practice to use a callback function (done), inside the 'it' unit case function to try all the validations and to finish the case. And example is the following:
 ```javascript
 controllerMock.store(args,function(err,data) {
@@ -1279,7 +1293,7 @@ controllerMock.store(args,function(err,data) {
     done();
 });
 ```
-- Another good practices is to use a restore() functions before finish test:
+- Another good practices is to use a "restore()" functions before finish test:
 ```javascript
 stub.restore();
 ```
