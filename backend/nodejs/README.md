@@ -1267,10 +1267,12 @@ expect(data).to.be.string;
 ```
 - This Test uses different mocks for functions and methods. For example:
 	- Proxyquire. This library override methods of a module behave like the original. The original method invokes the app.js file. The test mock this invocation.
+
         ```javascript
         var controllerMock = proxyquire('../lib/controllers/controller1',
-        					{'../app':appMock});
+        {'../app':appMock});
         ```
+
 	- Sinon. Stub it allows us to preprogram the output method. This method is very interesting because us can try differents outputs "Ok" or "Error".
         ```javascript
         var stub = sinon.stub(model.db, 'save');
