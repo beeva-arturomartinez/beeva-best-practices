@@ -1270,19 +1270,23 @@ expect(data).to.be.string;
 
         ```javascript
         var controllerMock = proxyquire('../lib/controllers/controller1',
-        {'../app':appMock});
+        					{'../app':appMock});
         ```
 
 	- Sinon. Stub it allows us to preprogram the output method. This method is very interesting because us can try differents outputs "Ok" or "Error".
+
         ```javascript
         var stub = sinon.stub(model.db, 'save');
         stub.yields(null, expectedResult);
         ```
-		or
+
+        or
+
         ```javascript
         var stub = sinon.stub(model.db, 'save');
         stub.yields(null, error);
         ```
+
 	- Sinon. Assert
 - It's good practice to use a callback function (done), inside the 'it' unit case function to try all the validations and to finish the case. And example is the following:
 ```javascript
