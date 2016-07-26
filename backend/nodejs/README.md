@@ -1287,7 +1287,12 @@ expect(data).to.be.string;
         stub.yields(null, error);
         ```
 
-	- Sinon. Assert
+	- Sinon. Assert it allows us to know how many times we pass this method only once.
+
+		```javascript
+        sinon.assert.calledOnce(stub);
+        ```
+
 - It's good practice to use a callback function (done), inside the 'it' unit case function to try all the validations and to finish the case. And example is the following:
 ```javascript
 controllerMock.store(args,function(err,data) {
