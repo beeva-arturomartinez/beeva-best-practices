@@ -26,6 +26,7 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
 * [Testing](#testing)
   * [TDD with Sinon and Proxyquire](#tdd-with-sinon-and-proxyquire)
   * [BDD with Cucumber](#bdd-with-cucumber)
+  * [Integration Testing with Mocha](#integration-testing-with-mocha)
 
 ## Introduction
 
@@ -1125,22 +1126,12 @@ my-application/
 				models-test-file1.js # models-unit-test files
 				models-test-file2.js # to test functions and methods of
 				models-test-fileN.js # your application
-			mocks/
-				mocks-file1.js # to mock functions
-				mocks-file2.js # and data during unit
-				mocks-fileN.js # tests of your application
 
 ```
 
 #### Dependencies
 
 ##### Installation
-
-Mocha.js are available as a npm module, it should be install globally with:
-
-``` shell
-$ npm install -g mocha
-```
 
 Sinon.js are available as a npm module, it should be install globally with:
 
@@ -1152,11 +1143,6 @@ Proxyquire.js are available as a npm module, it should be install globally with:
 
 ``` shell
 $ npm install proxyquire
-```
-
-And locally in your project as a development dependency of your application with:
-``` shell
-$ npm install --save-dev mocha
 ```
 
 And also is necessary Chai.js and can be install locally as a development dependency with:
@@ -1403,7 +1389,7 @@ my-application/
 				feature-file1.feature # feature files with scenarios
 				feature-file2.feature # and steps for all user histories
 				feature-fileN.feature # defined in you application
-			npm-debug.log # npm  
+			npm-debug.log # npm
 			my-application.log # application acceptance-test logging file
 		mocks/
 			mocks-file1.js # methods and funcions
@@ -1664,7 +1650,7 @@ var	World = function World(callback) {//2
 	};
 
 	var config = this.config = {//5
-		//API properties		
+		//API properties
 		name: 'my-application',
 		port: 3000,
 		version: "0.0.1",
@@ -1782,6 +1768,42 @@ var hooks = function () {
 module.exports = hooks;
 ```
 
+### Integration Testing with Mocha
+
+#### Structure for Integration Testing
+
+```
+my-application/
+	test/
+		integration-test/
+			lib/
+				app-test.js # your application
+			models-test/
+				models-test-file1.js # models-integration-test files
+				models-test-file2.js # to test functions and methods of
+				models-test-fileN.js # your application
+
+```
+
+#### Dependencies
+
+##### Installation
+
+Mocha.js are available as a npm module, it should be install globally with:
+
+``` shell
+$ npm install -g mocha
+```
+
+And locally in your project as a development dependency of your application with:
+``` shell
+$ npm install --save-dev mocha
+```
+
+
+
+
+
 ### References
 
 Node.js and Best Practices
@@ -1794,7 +1816,7 @@ Node.js and Best Practices
 Cheatsheets
 * [Overapi Cheatsheet](http://overapi.com/nodejs)
 * [NPM Cheatsheet](http://browsenpm.org/help) 
- 
+
 Frameworks
 * [Express Framework](http://expressjs.com)
 * [Express Performance best practices](http://expressjs.com/en/advanced/best-practice-performance.html)
