@@ -1720,6 +1720,9 @@ module.exports = hooks;
 
 ### Integration Testing with Mocha
 
+#### Focusing
+Integration testing is where we write end-to-end tests, verifying the state of the app/UI along the way.
+
 #### Structure for Integration Testing
 
 ```
@@ -1750,6 +1753,149 @@ And locally in your project as a development dependency of your application with
 $ npm install --save-dev mocha
 ```
 
+And also is necessary Chai.js and can be install locally as a development dependency with:
+``` shell
+$ npm install --save-dev chai
+```
+
+#### Develop an run test
+
+##### Describes and it functions
+The purpose of integration testing is to verify functional, performance, and reliability requirements placed on major design items. These "design items", i.e., assemblages (or groups of units), are exercised through their interfaces using black box testing, success and error cases being simulated via appropriate parameter and data inputs. Simulated usage of shared data areas and inter-process communication is tested and individual subsystems are exercised through their input interface. Test cases are constructed to test whether all the components within assemblages interact correctly, for example across procedure calls or process activations, and this is done after testing individual modules, i.e., unit testing. The overall idea is a "building block" approach, in which verified assemblages are added to a verified base which is then used to support the integration testing of further assemblages.
+
+A structure example is the following:
+
+```javascript
+var assert = require('chai').assert;
+var pg = require('pg');
+var supertest = require('supertest');
+var commons = require('commons');
+var commonsUtils = commons.utils;
+
+var app = require('../../../lib/app');
+var config = require('../../../config/env');
+var models = require('../model/alerts');
+
+function checkQueues(client, data, done) {
+    data.FEC_INI = commonsUtils.getTodayDate();
+    data.FEC_FIN = commonsUtils.getTodayDate();
+    checkQueue(client, config.queue.name, data, done);
+}
+
+function checkQueue(client, queueName, alerts, callback) {
+    //Check message in next queue
+    client.receiveMessage({qname: queueName}, function (err, message) {
+        if (err) {
+            callback(err);
+        } else {
+            if (message && message.id && message.message) {
+                var data = JSON.parse(message.message);
+                if (data.type === 'new_alert') {
+                    delete data.ID;
+                    delete alerts.ID;
+                    assert.deepEqual(alerts, data);
+                    callback();
+                } else
+                    callback("Data is wrong type");
+            } else
+                callback('Empty message in next queue');
+        }
+    });
+}
+
+function clearCounter(data, callback) {
+    pg.connect(config.postgres.url, function (err, db, done) {
+        if (err) {
+            callback(err);
+        } else {
+            db.query("delete from " + config.postgres.tables.counter + " where DES_ALERT = \'" + data.DES_ALERT + "\' and COD_ALERT = \'" + data.COD_ALERT + "\';", function (err, result) {
+                done();
+                if (err) {
+                    callback(err);
+                } else {
+                    callback();
+                }
+            });
+        }
+    });
+}
+
+function init(callback) {
+    commons.redisMQ.connect(config.redis, function (err, client) {
+        if (err)
+            callback(err);
+        else {
+            client.deleteQueue({qname: config.queue.name}, function (err, data) {
+                client.createQueue({qname: config.queue.name}, function (err, data) {
+                    if (err)
+                        callback(err);
+                    else
+                        callback(null, client);
+                });
+            });
+        }
+    });
+}
+
+describe('Activity New Alerts', function () {
+    this.timeout(0);
+
+    var client, request;
+    before('Creating Redis client, deleting queue, clear database, creating HTTP client', function (done) {
+        init(function (err, cl) {
+            if (err)
+                done(err);
+            else {
+                client = cl;
+                request = supertest('http://' + config.server.host);
+                app.start(config.server.port);
+                setTimeout(done, 5000);
+            }
+        });
+    });
+
+    describe('Testing Execute.', function () {
+
+        beforeEach('Clearing counter in database', function (done) {
+            clearCounter(models.data, done);
+        });
+
+        it('Should execute ok', function (done) {
+            request.post('/jb/alerts/execute')
+                .set('Accept', 'application/json')
+                .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+                .set('Content-Type', 'application/json')
+                .send(models.args)
+                .end(function (err, res) {
+                    if (err)
+                        done(err);
+                    else {
+                        assert.equal(res.status, 200);
+                        setTimeout(function () {
+                            checkQueues(client, models.data, done);
+                        }, 10000);
+                    }
+                });
+        });
+
+        it('Should fail validate', function (done) {
+            request.post('/jb/alerts/execute')
+                .set('Accept', 'application/json')
+                .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+                .set('Content-Type', 'application/json')
+                .send(models.argsError)
+                .end(function (err, res) {
+                    if (err)
+                        done(err);
+                    else {
+                        assert.equal(res.status, 500);
+                        done();
+                    }
+                });
+        });
+    });
+});
+```
 
 
 
