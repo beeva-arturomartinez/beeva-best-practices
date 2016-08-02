@@ -1115,17 +1115,17 @@ my-application/
 	test/
 		unit-test/
 			routes-test/
-				routes-test-file1.js # routes-unit-test files
-				routes-test-file2.js # to test functions of
-				routes-test-fileN.js # your application
-			controllers-test/
-				controllers-test-file1.js # controllers-unit-test files
-				controllers-test-file2.js # to test functions of
-				controllers-test-fileN.js # your application
-			models-test/
-				models-test-file1.js # models-unit-test files
-				models-test-file2.js # to test functions and methods of
-				models-test-fileN.js # your application
+                routes-test-file1.js # routes-unit-test files
+                routes-test-file2.js # to test functions of
+                routes-test-fileN.js # your application
+            controllers-test/
+                controllers-test-file1.js # controllers-unit-test files
+                controllers-test-file2.js # to test functions of
+                controllers-test-fileN.js # your application
+            models-test/
+                models-test-file1.js # models-unit-test files
+                models-test-file2.js # to test functions and methods of
+                models-test-fileN.js # your application
 
 ```
 
@@ -1294,81 +1294,31 @@ controllerMock.store(args,function(err,data) {
 ```javascript
 stub.restore();
 ```
-- To do a test of a route file, to simulate a http call with methods get, post or another, you need the library supertest, you can install as development dependency with:
-``` shell
-$ npm install --save-dev supertest
-```
-You can import with:
-```javascript
-var supertest = require('supertest');
-var host = 'http://localhost:8100';
-var server = supertest(host);
-```
-And you can use this library to try a url with http method post in a it test case function like this example:
-```javascript
-it('Execute data', function (done) {
-    server
-        .post('/api/execute')
-        .send(data)
-        .expect("Content-type", /json/)
-        .end(function (err, res) {
-            expect(err).to.be.null;
-            expect(res).to.be.string;
-            assert.equal(res.status, 200);
-            done();
-        });
-});
-```
-- Also it's a good practice to do a test cases with wrong data to try the error exceptions like this example:
-```javascript
-it('Execute data ERROR', function (done) {
-    server
-        .post('/api/execute')
-        .send(dataError)
-        .expect("Content-type", /json/)
-        .end(function (err, res) {
-            assert.equal(res.status, 500);
-            done();
-        });
-});
-```
 
 #### Recommendations and some tips and tricks
 
 > - The same layer structure of files should be reflect in the test/unit directory. Example: If the app have directories with routes, controllers and models, is necessary to do the test for all the files.
-> - For model test you need to create a test enviroment with diferent information about start port, database name, etc... because the execution of tests can't interrupt or save data in a execution enviroment.
 > - It's necessary to do a it test case for each function of the original file (model, controller, route).
-> - Use a mock file to get some fake data to store and delete in a test database to try the model functions of crud operations.
 
 #### Hooks
 
 Hooks are functions that can be used to prepare and clean the environment before and after each test suite is executed. Hooks can use callbacks to defined if the beginning and end of the test suite case works fine. It's necessary to use this hooks always in a test suite case.
 
 
-The following example, are hooks to clean data of database (mongodb) and start/stop a server, before and after the execution of test suite case:
+The following example, are hooks to create mock that will be used in different test, before and after the execution of test suite case:
 
 ```javascript
 before(function(done) {
-	app.start(config.server.port);
-	model1 = require('../../../lib/models/model1');
-	mongo.connect(config, function (err, db) {
-        	if (err) {
-			console.log('ERROR initializing MongoDB: ' + err);
-		} else {
-			app.db = db;
-		}
-		done();
-	});
+	var stub = sinon.stub(model.db, 'save');
+	stub.yields(null, expectedResult);
 });
 
 after(function(done) {
-        app.db.collection('collection').remove(data,function(err,data){});
-        app.stop();
-        done();
+   sinon.assert.calledOnce(stub);
 });
 ```
 
-You can get more information about Mocha and Chai in detail from both [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/)
+You can get more information about Mocha and Chai in detail from both [Sinon](http://sinonjs.org/) and [Proxyquire](https://www.npmjs.com/package/proxyquire)
 
 ### BDD with Cucumber
 
