@@ -1774,7 +1774,7 @@ var commonsUtils = commons.utils;
 
 var app = require('../../../lib/app');
 var config = require('../../../config/env');
-var models = require('../model/alerts');
+var models = require('../model/object');
 
 function checkQueues(client, data, done) {
     data.FEC_INI = commonsUtils.getTodayDate();
@@ -1782,7 +1782,7 @@ function checkQueues(client, data, done) {
     checkQueue(client, config.queue.name, data, done);
 }
 
-function checkQueue(client, queueName, alerts, callback) {
+function checkQueue(client, queueName, object, callback) {
     //Check message in next queue
     client.receiveMessage({qname: queueName}, function (err, message) {
         if (err) {
@@ -1790,10 +1790,10 @@ function checkQueue(client, queueName, alerts, callback) {
         } else {
             if (message && message.id && message.message) {
                 var data = JSON.parse(message.message);
-                if (data.type === 'new_alert') {
+                if (data.type === 'object') {
                     delete data.ID;
-                    delete alerts.ID;
-                    assert.deepEqual(alerts, data);
+                    delete object.ID;
+                    assert.deepEqual(object, data);
                     callback();
                 } else
                     callback("Data is wrong type");
@@ -1808,7 +1808,7 @@ function clearCounter(data, callback) {
         if (err) {
             callback(err);
         } else {
-            db.query("delete from " + config.postgres.tables.counter + " where DES_ALERT = \'" + data.DES_ALERT + "\' and COD_ALERT = \'" + data.COD_ALERT + "\';", function (err, result) {
+            db.query("delete from " + config.postgres.tables.counter + " where DES_OBJECT = \'" + data.DES_OBJECT + "\' and COD_OBJECT = \'" + data.COD_OBJECT + "\';", function (err, result) {
                 done();
                 if (err) {
                     callback(err);
@@ -1837,7 +1837,7 @@ function init(callback) {
     });
 }
 
-describe('Activity New Alerts', function () {
+describe('INTEGRATION TEST - object', function () {
     this.timeout(0);
 
     var client, request;
@@ -1861,7 +1861,7 @@ describe('Activity New Alerts', function () {
         });
 
         it('Should execute ok', function (done) {
-            request.post('/jb/alerts/execute')
+            request.post('/api/execute')
                 .set('Accept', 'application/json')
                 .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
                 .set('Content-Type', 'application/json')
@@ -1879,7 +1879,7 @@ describe('Activity New Alerts', function () {
         });
 
         it('Should fail validate', function (done) {
-            request.post('/jb/alerts/execute')
+            request.post('/api/execute')
                 .set('Accept', 'application/json')
                 .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
                 .set('Content-Type', 'application/json')
@@ -1897,8 +1897,95 @@ describe('Activity New Alerts', function () {
 });
 ```
 
+#### Use cases
 
+- To implement the different validations options you need to import the assert and expect libraries, you can do this with:
 
+    ```javascript
+var assert = require('chai').assert;
+    ```
+
+	And use in the response of your functions like this:
+
+    ``` javascript
+assert.equal(res.status, 200);
+    ```
+
+- It's good practice to use a callback function (done), inside the 'it' integration case function to try all the validations and to finish the case. And example is the following:
+
+    ```javascript
+.end(function (err, res) {
+    if (err)
+        done(err);
+    else {
+        assert.equal(res.status, 200);
+        setTimeout(function () {
+            checkQueues(client, models.data, done);
+        }, 10000);
+    }
+});
+    ```
+
+- To do a test of a route file, to simulate a http call with methods get, post or another, you need the library supertest, you can install as development dependency with:
+
+    ```javascript
+$ npm install --save-dev supertest
+    ```
+
+- You can import with:
+
+    ```javascript
+var supertest = require('supertest');
+var request = supertest('http://' + config.server.host);
+    ```
+- And you can use this library to try a url with http method post in a it test case function like this example:
+
+	```javascript
+it('Should execute ok', function (done) {
+    request.post('/api/execute')
+        .set('Accept', 'application/json')
+        .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+        .set('Content-Type', 'application/json')
+        .send(models.args)
+        .end(function (err, res) {
+            if (err)
+                done(err);
+            else {
+                assert.equal(res.status, 200);
+                setTimeout(function () {
+                    checkQueues(client, models.data, done);
+                }, 10000);
+            }
+        });
+});
+	```
+
+- Also it's a good practice to do a test cases with wrong data to try the error exceptions like this example:
+
+    ```javascript
+it('Should fail validate', function (done) {
+    request.post('/api/execute')
+        .set('Accept', 'application/json')
+        .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+        .set('Content-Type', 'application/json')
+        .send(models.argsError)
+        .end(function (err, res) {
+            if (err)
+                done(err);
+            else {
+                assert.equal(res.status, 500);
+                done();
+            }
+        });
+});
+    ```
+
+#### Recommendations and some tips and tricks
+
+> - For model test you need to create a test enviroment with diferent information about start port, database name, etc... because the execution of tests can't interrupt or save data in a execution enviroment. Example: config.server.port
+> - Use a mock file to get some fake data to store and delete in a test database to try the model functions of crud operations.
+
+You can get more information about Mocha and Chai in detail from both [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/)
 
 ### References
 
