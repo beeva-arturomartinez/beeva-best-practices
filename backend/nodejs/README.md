@@ -24,8 +24,9 @@ At this point we're going to talk about Node.js, we're useing Node.js to develop
   * [Staging](#staging)
 
 * [Testing](#testing)
-  * [TDD with Mocha](#tdd-with-mocha)
+  * [TDD with Sinon and Proxyquire](#tdd-with-sinon-and-proxyquire)
   * [BDD with Cucumber](#bdd-with-cucumber)
+  * [Integration Testing with Mocha](#integration-testing-with-mocha)
 
 ## Introduction
 
@@ -36,7 +37,7 @@ Since developments are made in Javacript Node.js, we recommend reading the langu
 ### Challenges
 
 The two main challenges to be resolved by a developer to program begins with Node.js are:
- 
+
 * Asynchrony: Although there are several ways to manage the async flow as libraries (i.e. [async](https://www.npmjs.com/package/async), [co](https://www.npmjs.com/package/co)), promises ([q](https://www.npmjs.com/package/q), [mpromise](https://www.npmjs.com/package/mpromise), ...) or conventions ([CPS](https://en.wikipedia.org/wiki/Continuation-passing_style)), it should handle them properly and avoid excessive nesting callbacks ([Pyramid of Doom](http://tritarget.org/blog/2012/11/28/the-pyramid-of-doom-a-javascript-style-trap/)) and the excessive reliance on a particular library. A major problem arises when we are trying to follow the execution flow of our code and the error handling. Initially it's difficult to adopt this way of work and can be perceived as a loss of control over it. However, it is a powerful tool that allows us to make better use of resources.
  
 * Duality between Application and Server: When we are working with Node.js, we must understand that it's slightly different from those other familiar languages ​​like Java and PHP,  which for develop web applications usually have the support of Apache or Tomcat or other application servers. Although this is usually shielded by frameworks, we should not forget this part of work, which requires us to delve deeper into DevOps issues as the application log, error handling or profiling application issues ports and performance parameters.
@@ -279,7 +280,75 @@ server.start(function() {
 });
 ```
 
-As we mentioned sooner, the Hapi's great power are the plugins. Hapi has an extensive and powerful plugin system that allows you to very easily break your application up into isolated pieces of business logic, and reusable utilities.
+As we mentioned sooner, the Hapi's great power are the plugins. Hapi has an extensive and powerful plugin system that allows you to very easily break your application up into isolated pieces of business logic, and reusable utilities.'use strict';
+
+var chai       = require('chai');
+var expect     = chai.expect;
+var sinon      = require('sinon');
+var proxyquire = require('proxyquire');
+
+var alertsDao = require('../../../../lib/daos/alerts.dao');
+var alertsController = require('../../../../lib/controllers/alerts.controller');
+
+var object = {
+    counter : 1,
+    id : "1234567890123456789012345",
+    campaign : "123456789"
+};
+
+var expectedResult = {
+    ID_SUBSCRIBER: '1234567890123456789012345',
+    COD_ACOM: '123456789',
+    QNU_SECNUM: 1
+};
+
+var error = new Error('ERROR');
+
+var appMock =  {
+    logger : {
+        debug : sinon.spy()
+    }
+};
+
+var alertsControllerMock = proxyquire('../../../../lib/controllers/alerts.controller',
+    {'../app':appMock});
+
+describe('UNIT Test for Alerts CONTROLLER', function() {
+
+    it('AlertsController must exists', function () {
+        var result = alertsController;
+        expect(result).to.be.an('object');
+        expect(result).to.include.keys(['createDE', 'store']);
+    });
+
+    it('Test should call all functions on createDE method', function () {
+        var stub = sinon.stub(alertsDao.exacttarget, 'createDE');
+        var callback = sinon.spy();
+
+        alertsControllerMock.createDE(callback);
+
+        sinon.assert.calledOnce(stub);
+        stub.restore();
+    });
+
+    it("Test should call all functions on save method", function (done) {
+        var args = {"ID_SUBSCRIBER": object.id, "COD_ACOM": object.campaign};
+        var stub = sinon.stub(alertsDao.database, 'save');
+        stub.yields(null, expectedResult);
+
+        alertsControllerMock.store(args,function(err,data) {
+            expect(data).to.be.an('Object');
+            expect(data.ID_SUBSCRIBER).to.be.an('String');
+            expect(data.ID_SUBSCRIBER).to.be.equal(object.id);
+            expect(data.COD_ACOM).to.be.an('String');
+            expect(data.COD_ACOM).to.be.equal(object.campaign);
+            expect(data.QNU_SECNUM).to.be.an('number');
+            expect(data.QNU_SECNUM).to.be.equal(object.counter);
+            done();
+        });
+        stub.restore();
+    });
+});
 
 There are a lot of plugins in the community but we can write our own plugin so easy. A very simple plugin looks like:
 
@@ -1009,11 +1078,11 @@ var systemConfig='/external/path/to/config.js'; // i.e. /var/properties/project-
 if(process.env.CONFIG && fs.existsSync(process.env.CONFIG)){
     console.log('Cargada la configuración manual de la ruta: '+process.env.CONFIG);
     customConfig=require(process.env.CONFIG);
-// Second option: external properties file 
+// Second option: external properties file
 } else if(fs.existsSync(systemConfig)){
     console.log('Cargada la configuración estándar SISTEMAS de la ruta: '+systemConfig);
     customConfig=require(systemConfig);
-// Third option: local config file    
+// Third option: local config file
 } else if(fs.existsSync(envConfig)){
     console.log('Cargada la configuración local');
     customConfig=require(envConfig);
@@ -1033,7 +1102,7 @@ config=_.merge(
 
 In this section we're going to offer a way to implement TDD and BDD in your Node.js developments but if you want to go deeper, please visit the [testing section of this repository](../../qa_testing/testing/README.md).
 
-### TDD with Mocha
+### TDD with Sinon and Proxyquire
 
 #### Focusing
 
@@ -1046,21 +1115,17 @@ my-application/
 	test/
 		unit-test/
 			routes-test/
-				routes-test-file1.js # routes-unit-test files
-				routes-test-file2.js # to test functions of
-				routes-test-fileN.js # your application
-			controllers-test/
-				controllers-test-file1.js # controllers-unit-test files
-				controllers-test-file2.js # to test functions of
-				controllers-test-fileN.js # your application
-			models-test/			
-				models-test-file1.js # models-unit-test files
-				models-test-file2.js # to test functions and methods of
-				models-test-fileN.js # your application
-			mocks/
-				mocks-file1.js # to mock functions  
-				mocks-file2.js # and data during unit
-				mocks-fileN.js # tests of your application
+                routes-test-file1.js # routes-unit-test files
+                routes-test-file2.js # to test functions of
+                routes-test-fileN.js # your application
+            controllers-test/
+                controllers-test-file1.js # controllers-unit-test files
+                controllers-test-file2.js # to test functions of
+                controllers-test-fileN.js # your application
+            models-test/
+                models-test-file1.js # models-unit-test files
+                models-test-file2.js # to test functions and methods of
+                models-test-fileN.js # your application
 
 ```
 
@@ -1068,15 +1133,16 @@ my-application/
 
 ##### Installation
 
-Mocha.js are available as a npm module, it should be install globally with:
+Sinon.js are available as a npm module, it should be install globally with:
 
 ``` shell
-$ npm install -g mocha
+$ npm install sinon
 ```
 
-And locally in your project as a development dependency of your application with:
+Proxyquire.js are available as a npm module, it should be install globally with:
+
 ``` shell
-$ npm install --save-dev mocha
+$ npm install proxyquire
 ```
 
 And also is necessary Chai.js and can be install locally as a development dependency with:
@@ -1094,52 +1160,82 @@ The different test suite will be group into a describe functions, it consist in 
 A structure example is the following:
 
 ```javascript
-describe('UNIT TEST model1', function() {
+var chai       = require('chai');
+var expect     = chai.expect;
+var sinon      = require('sinon');
+var proxyquire = require('proxyquire');
 
-	it('model1 must exists', function () {
-        	var result = model1;
-        	expect(result).to.be.an('object');
-        	expect(result).to.include.keys(['group1', 'group1']);
-    	});
+var model = require('../lib/daos/model1');
+var controller = require('../lib/controllers/controller1');
 
-    	describe('UNIT TEST group1', function() {
+var object = {
+    counter : 1,
+    id : "1234567890123456789012345",
+    description : "New unit test for NodeJs"
+};
 
-        	it('Save in db1', function (done) {
-                	model1.db1.save(db, object, function (err, data) {
-                		expect(err).to.be.null;
-                    		expect(data).to.be.string;
-                    		done();
-                	});
-            	});
+var expectedResult = {
+    ID : '1234567890123456789012345',
+    DESCRIPTION : 'New unit test for NodeJs'
+};
 
-		it('Update in db1', function (done) {
-                	model1.db1.update(db, object, function (err, data) {
-                		expect(err).to.be.null;
-                    		expect(data).to.be.string;
-                    		done();
-                	});
-            	});
-    	});
+var error = new Error('ERROR');
 
-    	describe('UNIT TEST group2', function() {
+var appMock =  {
+    logger : {
+        debug : sinon.spy()
+    }
+};
 
-		it('Create extension', function(done) {
-	    		model1.group2.create(extension, function(err,data){
-	        		expect(err).to.be.null;
-	        		expect(data).to.be.string;
-	        		done();
-	    		});
-		});
+var controllerMock = proxyquire('../lib/controllers/controller1',
+    {'../app':appMock});
 
-		it('Update extension', function (done) {
-	        	model1.group2.save(extension, object, function (err, data) {
-	            		expect(err).to.be.null;
-	            		expect(data).to.be.string;
-	            		done();
-	        	});
-		});
-	});
+describe('UNIT Test for CONTROLLER', function() {
 
+    it('must exists', function () {
+        var result = controller;
+        expect(result).to.be.an('object');
+        expect(result).to.include.keys(['createDE', 'store']);
+    });
+
+    it('Test should call all functions on createDE method', function () {
+        var stub = sinon.stub(model.db, 'createDE');
+        var callback = sinon.spy();
+
+        controllerMock.createDE(callback);
+
+        sinon.assert.calledOnce(stub);
+        stub.restore();
+    });
+
+    it("Test should call all functions on save method - OK", function (done) {
+        var args = {"ID": object.id, "DESCRIPTION": object.description};
+        var stub = sinon.stub(model.db, 'save');
+        stub.yields(null, expectedResult);
+
+        controllerMock.store(args,function(err,data) {
+            expect(data).to.be.an('Object');
+            expect(data.ID).to.be.an('String');
+            expect(data.ID).to.be.equal(object.id);
+            expect(data.DESCRIPTION).to.be.an('String');
+            expect(data.DESCRIPTION).to.be.equal(object.description);
+            done();
+        });
+        stub.restore();
+    });
+
+    it("Test should call all functions on save method - Error", function (done) {
+        var args = {"ID": object.id, "DESCRIPTION": object.description};
+        var stub = sinon.stub(model.db, 'save');
+        stub.yields(null, error);
+
+        controllerMock.store(args,function(err,data) {
+            expect(err).to.be.an('Object');
+            expect(data).to.be.null;
+            done();
+        });
+        stub.restore();
+    });
 });
 ```
 
@@ -1155,91 +1251,74 @@ And use in the response of your functions like this:
 expect(err).to.be.null;
 expect(data).to.be.string;
 ```
+- This Test uses different mocks for functions and methods. For example:
+	- Proxyquire. This library override methods of a module behave like the original. The original method invokes the app.js file. The test mock this invocation.
+
+        ```javascript
+        var controllerMock = proxyquire('../lib/controllers/controller1',
+        					{'../app':appMock});
+        ```
+
+	- Sinon. Stub it allows us to preprogram the output method. This method is very interesting because us can try differents outputs "Ok" or "Error".
+
+        ```javascript
+        var stub = sinon.stub(model.db, 'save');
+        stub.yields(null, expectedResult);
+        ```
+
+        or
+
+        ```javascript
+        var stub = sinon.stub(model.db, 'save');
+        stub.yields(null, error);
+        ```
+
+	- Sinon. Assert it allows us to know how many times we pass this method only once.
+
+		```javascript
+        sinon.assert.calledOnce(stub);
+        ```
+
 - It's good practice to use a callback function (done), inside the 'it' unit case function to try all the validations and to finish the case. And example is the following:
 ```javascript
-it('Save in Mongo', function (done) {
-	dao.save(db, data, function (err, dataRes) {
-    		expect(err).to.be.null;
-    		expect(dataRes).to.be.string;
-    		done();
-	});
+controllerMock.store(args,function(err,data) {
+    expect(data).to.be.an('Object');
+    expect(data.ID).to.be.an('String');
+    expect(data.ID).to.be.equal(object.id);
+    expect(data.DESCRIPTION).to.be.an('String');
+    expect(data.DESCRIPTION).to.be.equal(object.description);
+    done();
 });
 ```
-- To do a test of a route file, to simulate a http call with methods get, post or another, you need the library supertest, you can install as development dependency with:
-``` shell
-$ npm install --save-dev supertest
-```
-You can import with:
+- Another good practices is to use a "restore()" functions before finish test:
 ```javascript
-var supertest = require('supertest');
-var host = 'http://localhost:8100';
-var server = supertest(host);
-```
-And you can use this library to try a url with http method post in a it test case function like this example:
-```javascript
-it('Execute data', function (done) {
-    server
-        .post('/api/execute')
-        .send(data)
-        .expect("Content-type", /json/)
-        .end(function (err, res) {
-            expect(err).to.be.null;
-            expect(res).to.be.string;
-            assert.equal(res.status, 200);
-            done();
-        });
-});
-```
-- Also it's a good practice to do a test cases with wrong data to try the error exceptions like this example:
-```javascript
-it('Execute data ERROR', function (done) {
-    server
-        .post('/api/execute')
-        .send(dataError)
-        .expect("Content-type", /json/)
-        .end(function (err, res) {
-            assert.equal(res.status, 500);
-            done();
-        });
-});
+stub.restore();
 ```
 
 #### Recommendations and some tips and tricks
 
 > - The same layer structure of files should be reflect in the test/unit directory. Example: If the app have directories with routes, controllers and models, is necessary to do the test for all the files.
-> - For model test you need to create a test enviroment with diferent information about start port, database name, etc... because the execution of tests can't interrupt or save data in a execution enviroment.
 > - It's necessary to do a it test case for each function of the original file (model, controller, route).
-> - Use a mock file to get some fake data to store and delete in a test database to try the model functions of crud operations.
 
 #### Hooks
 
 Hooks are functions that can be used to prepare and clean the environment before and after each test suite is executed. Hooks can use callbacks to defined if the beginning and end of the test suite case works fine. It's necessary to use this hooks always in a test suite case.
 
 
-The following example, are hooks to clean data of database (mongodb) and start/stop a server, before and after the execution of test suite case:
+The following example, are hooks to create mock that will be used in different test, before and after the execution of test suite case:
 
 ```javascript
 before(function(done) {
-	app.start(config.server.port);
-	model1 = require('../../../lib/models/model1');
-	mongo.connect(config, function (err, db) {
-        	if (err) {
-			console.log('ERROR initializing MongoDB: ' + err);
-		} else {
-			app.db = db;
-		}
-		done();
-	});
+	var stub = sinon.stub(model.db, 'save');
+	stub.yields(null, expectedResult);
 });
 
 after(function(done) {
-        app.db.collection('collection').remove(data,function(err,data){});
-        app.stop();
-        done();
+   sinon.assert.calledOnce(stub);
 });
 ```
 
-You can get more information about Mocha and Chai in detail from both [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/)
+You can get more information about Mocha and Chai in detail from both [Sinon](http://sinonjs.org/) and [Proxyquire](https://www.npmjs.com/package/proxyquire)
 
 ### BDD with Cucumber
 
@@ -1260,7 +1339,7 @@ my-application/
 				feature-file1.feature # feature files with scenarios
 				feature-file2.feature # and steps for all user histories
 				feature-fileN.feature # defined in you application
-			npm-debug.log # npm  
+			npm-debug.log # npm
 			my-application.log # application acceptance-test logging file
 		mocks/
 			mocks-file1.js # methods and funcions
@@ -1521,7 +1600,7 @@ var	World = function World(callback) {//2
 	};
 
 	var config = this.config = {//5
-		//API properties		
+		//API properties
 		name: 'my-application',
 		port: 3000,
 		version: "0.0.1",
@@ -1639,6 +1718,275 @@ var hooks = function () {
 module.exports = hooks;
 ```
 
+### Integration Testing with Mocha
+
+#### Focusing
+Integration testing is where we write end-to-end tests, verifying the state of the app/UI along the way.
+
+#### Structure for Integration Testing
+
+```
+my-application/
+	test/
+		integration-test/
+			lib/
+				app-test.js # your application
+			models-test/
+				models-test-file1.js # models-integration-test files
+				models-test-file2.js # to test functions and methods of
+				models-test-fileN.js # your application
+
+```
+
+#### Dependencies
+
+##### Installation
+
+Mocha.js are available as a npm module, it should be install globally with:
+
+``` shell
+$ npm install -g mocha
+```
+
+And locally in your project as a development dependency of your application with:
+``` shell
+$ npm install --save-dev mocha
+```
+
+And also is necessary Chai.js and can be install locally as a development dependency with:
+``` shell
+$ npm install --save-dev chai
+```
+
+#### Develop an run test
+
+##### Describes and it functions
+The purpose of integration testing is to verify functional, performance, and reliability requirements placed on major design items. These "design items", i.e., assemblages (or groups of units), are exercised through their interfaces using black box testing, success and error cases being simulated via appropriate parameter and data inputs. Simulated usage of shared data areas and inter-process communication is tested and individual subsystems are exercised through their input interface. Test cases are constructed to test whether all the components within assemblages interact correctly, for example across procedure calls or process activations, and this is done after testing individual modules, i.e., unit testing. The overall idea is a "building block" approach, in which verified assemblages are added to a verified base which is then used to support the integration testing of further assemblages.
+
+A structure example is the following:
+
+```javascript
+var assert = require('chai').assert;
+var pg = require('pg');
+var supertest = require('supertest');
+var commons = require('commons');
+var commonsUtils = commons.utils;
+
+var app = require('../../../lib/app');
+var config = require('../../../config/env');
+var models = require('../model/object');
+
+function checkQueues(client, data, done) {
+    data.FEC_INI = commonsUtils.getTodayDate();
+    data.FEC_FIN = commonsUtils.getTodayDate();
+    checkQueue(client, config.queue.name, data, done);
+}
+
+function checkQueue(client, queueName, object, callback) {
+    //Check message in next queue
+    client.receiveMessage({qname: queueName}, function (err, message) {
+        if (err) {
+            callback(err);
+        } else {
+            if (message && message.id && message.message) {
+                var data = JSON.parse(message.message);
+                if (data.type === 'object') {
+                    delete data.ID;
+                    delete object.ID;
+                    assert.deepEqual(object, data);
+                    callback();
+                } else
+                    callback("Data is wrong type");
+            } else
+                callback('Empty message in next queue');
+        }
+    });
+}
+
+function clearCounter(data, callback) {
+    pg.connect(config.postgres.url, function (err, db, done) {
+        if (err) {
+            callback(err);
+        } else {
+            db.query("delete from " + config.postgres.tables.counter + " where DES_OBJECT = \'" + data.DES_OBJECT + "\' and COD_OBJECT = \'" + data.COD_OBJECT + "\';", function (err, result) {
+                done();
+                if (err) {
+                    callback(err);
+                } else {
+                    callback();
+                }
+            });
+        }
+    });
+}
+
+function init(callback) {
+    commons.redisMQ.connect(config.redis, function (err, client) {
+        if (err)
+            callback(err);
+        else {
+            client.deleteQueue({qname: config.queue.name}, function (err, data) {
+                client.createQueue({qname: config.queue.name}, function (err, data) {
+                    if (err)
+                        callback(err);
+                    else
+                        callback(null, client);
+                });
+            });
+        }
+    });
+}
+
+describe('INTEGRATION TEST - object', function () {
+    this.timeout(0);
+
+    var client, request;
+    before('Creating Redis client, deleting queue, clear database, creating HTTP client', function (done) {
+        init(function (err, cl) {
+            if (err)
+                done(err);
+            else {
+                client = cl;
+                request = supertest('http://' + config.server.host);
+                app.start(config.server.port);
+                setTimeout(done, 5000);
+            }
+        });
+    });
+
+    describe('Testing Execute.', function () {
+
+        beforeEach('Clearing counter in database', function (done) {
+            clearCounter(models.data, done);
+        });
+
+        it('Should execute ok', function (done) {
+            request.post('/api/execute')
+                .set('Accept', 'application/json')
+                .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+                .set('Content-Type', 'application/json')
+                .send(models.args)
+                .end(function (err, res) {
+                    if (err)
+                        done(err);
+                    else {
+                        assert.equal(res.status, 200);
+                        setTimeout(function () {
+                            checkQueues(client, models.data, done);
+                        }, 10000);
+                    }
+                });
+        });
+
+        it('Should fail validate', function (done) {
+            request.post('/api/execute')
+                .set('Accept', 'application/json')
+                .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+                .set('Content-Type', 'application/json')
+                .send(models.argsError)
+                .end(function (err, res) {
+                    if (err)
+                        done(err);
+                    else {
+                        assert.equal(res.status, 500);
+                        done();
+                    }
+                });
+        });
+    });
+});
+```
+
+#### Use cases
+
+- To implement the different validations options you need to import the assert and expect libraries, you can do this with:
+
+    ```javascript
+var assert = require('chai').assert;
+    ```
+
+	And use in the response of your functions like this:
+
+    ``` javascript
+assert.equal(res.status, 200);
+    ```
+
+- It's good practice to use a callback function (done), inside the 'it' integration case function to try all the validations and to finish the case. And example is the following:
+
+    ```javascript
+.end(function (err, res) {
+    if (err)
+        done(err);
+    else {
+        assert.equal(res.status, 200);
+        setTimeout(function () {
+            checkQueues(client, models.data, done);
+        }, 10000);
+    }
+});
+    ```
+
+- To do a test of a route file, to simulate a http call with methods get, post or another, you need the library supertest, you can install as development dependency with:
+
+    ```javascript
+$ npm install --save-dev supertest
+    ```
+
+- You can import with:
+
+    ```javascript
+var supertest = require('supertest');
+var request = supertest('http://' + config.server.host);
+    ```
+- And you can use this library to try a url with http method post in a it test case function like this example:
+
+	```javascript
+it('Should execute ok', function (done) {
+    request.post('/api/execute')
+        .set('Accept', 'application/json')
+        .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+        .set('Content-Type', 'application/json')
+        .send(models.args)
+        .end(function (err, res) {
+            if (err)
+                done(err);
+            else {
+                assert.equal(res.status, 200);
+                setTimeout(function () {
+                    checkQueues(client, models.data, done);
+                }, 10000);
+            }
+        });
+});
+	```
+
+- Also it's a good practice to do a test cases with wrong data to try the error exceptions like this example:
+
+    ```javascript
+it('Should fail validate', function (done) {
+    request.post('/api/execute')
+        .set('Accept', 'application/json')
+        .set('x-unique-id', '5115bcce-59bf-4948-9441-4bb1f2e2d388')
+        .set('Content-Type', 'application/json')
+        .send(models.argsError)
+        .end(function (err, res) {
+            if (err)
+                done(err);
+            else {
+                assert.equal(res.status, 500);
+                done();
+            }
+        });
+});
+    ```
+
+#### Recommendations and some tips and tricks
+
+> - For model test you need to create a test enviroment with diferent information about start port, database name, etc... because the execution of tests can't interrupt or save data in a execution enviroment. Example: config.server.port
+> - Use a mock file to get some fake data to store and delete in a test database to try the model functions of crud operations.
+
+You can get more information about Mocha and Chai in detail from both [Mocha](https://mochajs.org/) and [Chai](http://chaijs.com/)
+
 ### References
 
 Node.js and Best Practices
@@ -1651,7 +1999,7 @@ Node.js and Best Practices
 Cheatsheets
 * [Overapi Cheatsheet](http://overapi.com/nodejs)
 * [NPM Cheatsheet](http://browsenpm.org/help) 
- 
+
 Frameworks
 * [Express Framework](http://expressjs.com)
 * [Express Performance best practices](http://expressjs.com/en/advanced/best-practice-performance.html)
