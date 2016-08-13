@@ -285,22 +285,22 @@ git push origin master
 
 ## Working Git Project
 
-When we are in a real git project in addition to use [Git Flow](#git-flow), also we must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
+In a real git project in addition to use [Git Flow](#git-flow), also we must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
 
 ### Repositories
 
-The purpose of Git is to manage a project or a set of files, as they change over time. Git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working tree.
+The purpose of Git is to manage a project or a set of files as they change over time, therefore, git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working tree.
 
 ![stage git project image](static/repositories.png)
 
 As shown in the image above, git project is made up of:
 
-* Local repository:
-	* Working directory:
-	* Staging area:
-	* HEAD:
+* Local repository: local work area
+	* Working directory: files that you are currently working on.
+	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working tree go into the next level.
+	* HEAD: a reference to a specific commit, it usually points to last commit in local repository.
 
-* Remote repository:
+* Remote repository: remote work area
 
 
 
