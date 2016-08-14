@@ -31,6 +31,7 @@ At this point we're going to talk about best practices to work with git.
 	* [Support branches](#support-branches)
 * [Working Git Project](#working-git-project)
 	* [Repositories](#repositories)
+	* [Useful commands](#useful-commands)
 * [Tips](#tips)
 	* [Versioning](#versioning)
 		* [Semantic Versioning](#semantic-versioning)
@@ -298,9 +299,12 @@ As shown in the image above, Git project is made up of:
 * Local repository: local work area is split into:
 	* Working directory: folders/files that you are currently working on.
 	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working tree go into the next level.
-	* HEAD: a reference to a specific commit and it serves two major purposes: it tells Git which commit to take files from when you checkout and it tells Git where to put new commits when you commit.
+	* HEAD: a reference to a specific commit and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
 
-* Remote repository: place where code is stored as GitHub, Bitbucket, ...
+* Remote repository: place where code is stored as GitHub, Bitbucket, etc.
+
+
+### Useful commands
 
 
 
