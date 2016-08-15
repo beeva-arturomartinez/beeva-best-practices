@@ -299,7 +299,7 @@ As shown in the image above, Git project is made up of:
 * Local repository: local work area is split into:
 	* Working directory: folders/files that you are currently working on.
 	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working tree go into the next level.
-	* Local Repository (HEAD): a reference to a specific commit and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
+	* Local Repository (HEAD): a reference to a specific commit(usually points to the most recent commit on the current branch) and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
 
 * Remote repository: place where code is stored like GitHub, Bitbucket, etc.
 
@@ -309,6 +309,10 @@ As shown in the image above, Git project is made up of:
 Once we know the work area of Git project we can start using Git commands, as shown in the image below:
 
 ![git commands image](static/git-commands.png)
+
+Following, we will explain each of them separately:
+
+
 
 
 ## Tips
