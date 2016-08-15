@@ -314,6 +314,18 @@ Following, we will learn each of them separately:
 
 * ``git init``
 * ``git clone``
+* ``git add``
+* ``git rm``
+* ``git push``
+* ``git pull``
+* ``git fetch``
+* ``git checkout``
+* ``git diff``
+* ``git branch``
+* ``git merge``
+* ``git stash``
+* ``git log``
+* ``git reset``
 
 
 ## Tips
