@@ -306,7 +306,9 @@ As shown in the image above, Git project is made up of:
 
 ### Useful commands
 
-Once we know the stage of Git project we can start using Git commands, a little example is shown in below image
+Once we know the work area of Git project we can start using Git commands, as shown in the image below:
+
+![git commands image](static/git-commands.png)
 
 
 ## Tips
