@@ -310,7 +310,7 @@ Once we know the work area of Git project we can start using Git commands, as sh
 
 ![git commands image](static/git-commands.png)
 
-Following, we will learn each of them separately:
+Following, we will learn each of Git commands separately:
 
 #### git init
 It creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
@@ -318,10 +318,11 @@ It creates a new Git repository so that can transform an existing and unversione
 ``git init``
 
 #### git clone
-It copies an existing Git repository.
+It clones an existing Git repository into a new directory.
 
-``git clone <repo>``
-``git clone <repo> <directory>``
+``git clone <repository>``
+
+``git clone <repository> <directory>``
 
 
 * ``git clone``copies an existing Git repository
