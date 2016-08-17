@@ -318,15 +318,20 @@ It creates a new Git repository so that can transform an existing and unversione
 ``git init``
 
 #### git clone
-It clones an existing Git repository into a new directory.
+It clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
 
 ``git clone <repository>``
 
 ``git clone <repository> <directory>``
 
+#### git add
+It adds the new/modified current content in the working tree to the staging area(Index) for the next commit.
 
-* ``git clone``copies an existing Git repository
-* ``git add``
+``git add .``
+
+``git add``
+
+
 * ``git rm``
 * ``git push``
 * ``git pull``
