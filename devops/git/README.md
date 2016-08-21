@@ -325,15 +325,26 @@ It clones an existing Git repository into a new directory with a isolated enviro
 ``git clone <repository> <directory>``
 
 #### git add
-It adds the new/modified current content in the working tree to the staging area(Index) for the next commit.
+It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
 
-``git add .``
+``git add <file>``
 
-``git add``
+``git add <directory>``
+
+#### git rm
+It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
+
+``git rm <file>``: deletes a single file from Git repository and also deletes from the working directory.
+
+``git rm --cached <file>``: deletes a single file from Git repository without deleting from working directory.
+
+#### git commit 
+
+#### git status
+
+#### git push
 
 
-* ``git rm``
-* ``git push``
 * ``git pull``
 * ``git fetch``
 * ``git checkout``
