@@ -16,6 +16,9 @@ At this point we're going to talk about best practices to work with git.
 	* [Moving files](#moving-files)
 	* [Large files](#large-files)
 	* [README.md](#readme-md)
+* [Working Git Project](#working-git-project)
+	* [Repositories](#repositories)
+	* [Useful commands](#useful-commands)
 * [Git Flow](#git-flow)
 	* [Git Flow Rules](#git-flow-rules)
 	* [Branches](#branches)
@@ -29,9 +32,6 @@ At this point we're going to talk about best practices to work with git.
 		* [Releases](#releases)
 		* [Hotfixes](#hotfixes)
 	* [Support branches](#support-branches)
-* [Working Git Project](#working-git-project)
-	* [Repositories](#repositories)
-	* [Useful commands](#useful-commands)
 * [Tips](#tips)
 	* [Versioning](#versioning)
 		* [Semantic Versioning](#semantic-versioning)
@@ -139,6 +139,86 @@ It is highly recommended that **all team members follow the same procedural rule
 ![git flow graph][]
 
 [git flow graph]: static/gitflow.jpg "git flow graph"
+
+## Working Git Project
+
+In a real Git project in addition to use [Git Flow](#git-flow), users must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
+
+### Repositories
+
+The purpose of Git is to manage a project or a set of files as they change over time, therefore, Git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working tree.
+
+![stage git project image](static/repositories.png)
+
+As shown in the image above, Git project is made up of:
+
+* Local repository: local work area is split into:
+	* Working directory: folders/files that you are currently working on.
+	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working directory go into the next level.
+	* Local Repository (HEAD): a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
+
+* Remote repository: place where code is stored like GitHub, Bitbucket, etc.
+
+
+### Useful commands
+
+Once we know the work area of Git project we can start using Git commands, as shown in the image below:
+
+![git commands image](static/git-commands.png)
+
+Following, we will learn each of Git commands separately:
+
+#### git init
+It creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
+
+``git init``
+
+#### git clone
+It clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
+
+``git clone <repository>``
+
+``git clone <repository> <directory>``
+
+#### git add
+It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
+
+``git add <file>``
+
+``git add <directory>``
+
+#### git rm
+It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
+
+``git rm <file>`` deletes a single file from Git repository and also deletes from the working directory.
+
+``git rm --cached <file>`` deletes a single file from Git repository without deleting from working directory.
+
+#### git status
+It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
+
+``git status``
+
+#### git commit 
+It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
+
+``git commit``
+
+``git commit -m <message>``
+
+#### git push
+
+
+* ``git pull``
+* ``git fetch``
+* ``git checkout``
+* ``git diff``
+* ``git branch``
+* ``git merge``
+* ``git stash``
+* ``git log``
+* ``git reset``
+
 
 ### Git Flow Rules
 
@@ -283,86 +363,6 @@ git branch -d hotfix/0.1.1
 git push origin develop
 git push origin master
 ```
-
-## Working Git Project
-
-In a real Git project in addition to use [Git Flow](#git-flow), users must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
-
-### Repositories
-
-The purpose of Git is to manage a project or a set of files as they change over time, therefore, Git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working tree.
-
-![stage git project image](static/repositories.png)
-
-As shown in the image above, Git project is made up of:
-
-* Local repository: local work area is split into:
-	* Working directory: folders/files that you are currently working on.
-	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working directory go into the next level.
-	* Local Repository (HEAD): a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
-
-* Remote repository: place where code is stored like GitHub, Bitbucket, etc.
-
-
-### Useful commands
-
-Once we know the work area of Git project we can start using Git commands, as shown in the image below:
-
-![git commands image](static/git-commands.png)
-
-Following, we will learn each of Git commands separately:
-
-#### git init
-It creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
-
-``git init``
-
-#### git clone
-It clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
-
-``git clone <repository>``
-
-``git clone <repository> <directory>``
-
-#### git add
-It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
-
-``git add <file>``
-
-``git add <directory>``
-
-#### git rm
-It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
-
-``git rm <file>`` deletes a single file from Git repository and also deletes from the working directory.
-
-``git rm --cached <file>`` deletes a single file from Git repository without deleting from working directory.
-
-#### git status
-It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
-
-``git status``
-
-#### git commit 
-It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
-
-``git commit``
-
-``git commit -m <message>``
-
-#### git push
-
-
-* ``git pull``
-* ``git fetch``
-* ``git checkout``
-* ``git diff``
-* ``git branch``
-* ``git merge``
-* ``git stash``
-* ``git log``
-* ``git reset``
-
 
 ## Tips
 
