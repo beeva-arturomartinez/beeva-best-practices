@@ -334,13 +334,21 @@ It adds the new/updated content in the Working directory to the Staging area(Ind
 #### git rm
 It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
 
-``git rm <file>``: deletes a single file from Git repository and also deletes from the working directory.
+``git rm <file>`` deletes a single file from Git repository and also deletes from the working directory.
 
-``git rm --cached <file>``: deletes a single file from Git repository without deleting from working directory.
-
-#### git commit 
+``git rm --cached <file>`` deletes a single file from Git repository without deleting from working directory.
 
 #### git status
+It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
+
+``git status``
+
+#### git commit 
+It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
+
+``git commit``
+
+``git commit -m <message>``
 
 #### git push
 
