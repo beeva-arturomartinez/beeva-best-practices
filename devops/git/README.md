@@ -132,14 +132,6 @@ Write a text file called README.md in the main directory of project. This file m
 * If is a application or library that you can invoke, like an web application or an service web, is important include the information about you can call it.
 * For applications which will run on Docker container, is important include here the information necessary to build the Docker image and how run the container.
 
-## Git Flow
-
-It is highly recommended that **all team members follow the same procedural rules** when using git. The workflow described below is an accepted procedure worldwide for small work teams.
-
-![git flow graph][]
-
-[git flow graph]: static/gitflow.jpg "git flow graph"
-
 ## Working Git Project
 
 In a real Git project in addition to use [Git Flow](#git-flow), users must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
@@ -219,6 +211,14 @@ It stores the current contents of the Staging area to HEAD in a new commit along
 * ``git log``
 * ``git reset``
 
+
+## Git Flow
+
+It is highly recommended that **all team members follow the same procedural rules** when using git. The workflow described below is an accepted procedure worldwide for small work teams.
+
+![git flow graph][]
+
+[git flow graph]: static/gitflow.jpg "git flow graph"
 
 ### Git Flow Rules
 
