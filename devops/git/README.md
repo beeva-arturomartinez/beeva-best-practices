@@ -286,7 +286,7 @@ git push origin master
 
 ## Working Git Project
 
-In a real Git project in addition to use [Git Flow](#git-flow), also we must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
+In a real Git project in addition to use [Git Flow](#git-flow), users must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
 
 ### Repositories
 
@@ -298,7 +298,7 @@ As shown in the image above, Git project is made up of:
 
 * Local repository: local work area is split into:
 	* Working directory: folders/files that you are currently working on.
-	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working tree go into the next level.
+	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working directory go into the next level.
 	* Local Repository (HEAD): a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
 
 * Remote repository: place where code is stored like GitHub, Bitbucket, etc.
