@@ -198,11 +198,30 @@ It stores the current contents of the Staging area to HEAD in a new commit along
 
 ``git commit -m <message>``
 
+#### git remote
+It creates, list and removes connections to repositories, so that, users can link a specified URL to quick access.
+
+``git remote`` lists all connections .
+
+``git remote -v`` lists all connections along with the URL of each one.
+
+``git remote add <name> <url>`` creates a new connection called <name> to a remote repository.
+
+``git remote rm <name>`` removes the connection called <name> to the remote repository.
+
 #### git push
+It transfers commits from Local repository(HEAD) to Remote repository.
+
+``git push <remote> <branch>``
+
+#### git fetch
+It transfers commits from Remote repository to Local repository(HEAD).
+
+``git fetch <remote>`` fetch all branches
+
+``git fetch <remote> <branch>`` fetch only the specified branch
 
 
-* ``git pull``
-* ``git fetch``
 * ``git checkout``
 * ``git diff``
 * ``git branch``
