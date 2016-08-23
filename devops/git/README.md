@@ -199,7 +199,7 @@ It stores the current contents of the Staging area to HEAD in a new commit along
 ``git commit -m <message>``
 
 #### git remote
-It creates, list and removes connections to repositories, so that, users can link a specified URL to quick access.
+It lets users can create, list and delete connections to repositories, so that, users can link a specified URL to quick access.
 
 ``git remote`` lists all connections .
 
@@ -214,6 +214,17 @@ It transfers commits from Local repository(HEAD) to Remote repository.
 
 ``git push <remote> <branch>``
 
+#### git branch
+It lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointers to commits.
+
+``git branch -a`` lists all branches from Git repository
+
+``git branch <branch>`` creates a new branch
+
+``git branch -d <branch>`` deletes a branch called <branch> in a safe way because Git prevents deleting the branch if it has unmerged changes.
+
+``git branch -D <branch>``  forces deleting the specified branch
+
 #### git fetch
 It transfers commits from Remote repository to Local repository(HEAD).
 
@@ -221,15 +232,23 @@ It transfers commits from Remote repository to Local repository(HEAD).
 
 ``git fetch <remote> <branch>`` fetch only the specified branch
 
+#### git merge
 
-* ``git checkout``
-* ``git diff``
-* ``git branch``
-* ``git merge``
-* ``git stash``
-* ``git log``
-* ``git reset``
 
+#### git pull
+It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
+
+``git pull`` is a shorthand for 
+
+``git pull <remote> <branch>`` is a shorthand for 
+
+
+#### git checkout
+#### git diff
+#### git tag
+#### git stash
+#### git log
+#### git reset
 
 ## Git Flow
 
