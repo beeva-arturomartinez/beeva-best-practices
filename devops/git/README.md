@@ -200,8 +200,11 @@ It stores the current contents of the Staging area to HEAD in a new commit along
 
 #### git remote
 It lets users can create, list and delete connections to repositories, so that, users can link a specified URL to quick access.
+``` sh
 
-``git remote`` lists all connections .
+# List all connections.
+$ git remote
+```
 
 ``git remote -v`` lists all connections along with the URL of each one.
 
