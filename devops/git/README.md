@@ -217,6 +217,13 @@ It transfers commits from Local repository(HEAD) to Remote repository.
 
 ``git push <remote> <branch>``
 
+#### git pull
+It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
+
+``git pull`` is a shorthand for 
+
+``git pull <remote> <branch>`` is a shorthand for 
+
 #### git branch
 It lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointers to commits.
 
@@ -228,6 +235,17 @@ It lets users can create, list, rename and delete branches. A branch stands for 
 
 ``git branch -D <branch>``  forces deleting the specified branch
 
+#### git checkout
+
+``` sh
+
+#
+$ git checkout <branch>
+
+#
+$ git checkout -b <branch>
+```
+
 #### git fetch
 It transfers commits from Remote repository to Local repository(HEAD).
 
@@ -236,17 +254,9 @@ It transfers commits from Remote repository to Local repository(HEAD).
 ``git fetch <remote> <branch>`` fetch only the specified branch
 
 #### git merge
+It combines the work user have been working in a branch into the current branch
 
 
-#### git pull
-It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
-
-``git pull`` is a shorthand for 
-
-``git pull <remote> <branch>`` is a shorthand for 
-
-
-#### git checkout
 #### git diff
 #### git tag
 #### git stash
