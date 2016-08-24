@@ -304,8 +304,16 @@ $ git fetch <remote> <branch>
 ```
 
 #### git merge
-It combines the work user have been working in a branch into the current branch
+It combines a work line of a branch into a single branch. Git can execute different merge algorithms 
 
+``` sh
+
+# Combine the specified branch into the current branch and Git will decide the merge algorithm *(by default fast-forward)**
+$ git merge <branch>
+
+# Combine the specified branch into the current branch but always generate a new commit **(no-fast-forward)**
+$ git merge --no-ff <branch>
+```
 
 #### git diff
 #### git tag
