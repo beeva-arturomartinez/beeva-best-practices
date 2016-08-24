@@ -304,13 +304,13 @@ $ git fetch <remote> <branch>
 ```
 
 #### git merge
-It combines a development line of a branch into a single branch. Git can execute several distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
+It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**typical**, **fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
 
-- Typical merge 
-- Fast-forward merge is applied if the branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
-- Non-fast-forward merge forces to create a new commit to represent the merge in the same stage
+- Typical merge creates a new merge commit if the current branch has diverged regarding feature branch.
+- Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
+- Non-fast-forward merge forces to create a new merge commit with the same above stage.
 
-At this [section](#history) can visualize these two algorithms graphically.
+At this [section](#history) can visualize the two last algorithms graphically.
 
 ``` sh
 
