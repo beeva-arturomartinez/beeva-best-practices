@@ -310,6 +310,8 @@ It combines a development line of a branch into a single branch. Git can execute
 - Fast-forward merge is applied if the branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
 - Non-fast-forward merge forces to create a new commit to represent the merge in the same stage
 
+At this [section](#history) can visualize these two algorithms graphically.
+
 ``` sh
 
 # Combine the specified branch into the current branch and Git will decide the merge algorithm (by default fast-forward)
