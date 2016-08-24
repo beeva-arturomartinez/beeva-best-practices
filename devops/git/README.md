@@ -304,14 +304,15 @@ $ git fetch <remote> <branch>
 ```
 
 #### git merge
-It combines a work line of a branch into a single branch. Git can execute different merge algorithms 
+It combines a work line of a branch into a single branch. Git can execute two distinct merge algorithms: **Fast-Forward** merge and **Non-Fast-Forward** merge.
+a
 
 ``` sh
 
-# Combine the specified branch into the current branch and Git will decide the merge algorithm *(by default fast-forward)**
+# Combine the specified branch into the current branch and Git will decide the merge algorithm (by default fast-forward)
 $ git merge <branch>
 
-# Combine the specified branch into the current branch but always generate a new commit **(no-fast-forward)**
+# Combine the specified branch into the current branch but always generate a new commit (non-fast-forward)
 $ git merge --no-ff <branch>
 ```
 
