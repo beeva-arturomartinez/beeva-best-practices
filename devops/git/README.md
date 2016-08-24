@@ -262,7 +262,7 @@ $ git pull <remote> <branch>
 ```
 
 #### git branch
-It lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointers to commits.
+It lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointer to commits.
 
 ``` sh
 
@@ -280,14 +280,15 @@ $ it branch -D <branch>
 ```
 
 #### git checkout
+It lets users can navigate between the different branches so that updates files in the Working directory.
 
 ``` sh
 
-#
+# Switch from current branch to another
 $ git checkout <branch>
 
-#
-$ git checkout -b <branch>
+# Create a new branch and switch to it
+$ git checkout -b <new-branch>
 ```
 
 #### git fetch
