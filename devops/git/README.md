@@ -162,41 +162,67 @@ Following, we will learn each of Git commands separately:
 
 #### git init
 It creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
+``` sh
 
-``git init``
+$ git init
+```
 
 #### git clone
 It clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
 
-``git clone <repository>``
+``` sh
 
-``git clone <repository> <directory>``
+# 
+$ git clone <repository>
+
+#
+$ git clone <repository> <directory>
+```
 
 #### git add
 It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
 
-``git add <file>``
+``` sh
 
-``git add <directory>``
+# 
+$ git add <file>
+
+#
+$ git add <directory>
+```
 
 #### git rm
 It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
 
-``git rm <file>`` deletes a single file from Git repository and also deletes from the working directory.
+``` sh
 
-``git rm --cached <file>`` deletes a single file from Git repository without deleting from working directory.
+# deletes a single file from Git repository and also deletes from the working directory.
+$ git rm <file>
+
+# deletes a single file from Git repository without deleting from working directory.
+$ git rm --cached <file>
+```
 
 #### git status
 It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
 
-``git status``
+``` sh
+
+$ git status
+```
 
 #### git commit 
 It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
 
-``git commit``
+``` sh
 
-``git commit -m <message>``
+# 
+$ git commit
+
+# 
+$ git commit -m <message>
+```
+
 
 #### git remote
 It lets users can create, list and delete connections to repositories, so that, users can link a specified URL to quick access.
@@ -204,36 +230,54 @@ It lets users can create, list and delete connections to repositories, so that, 
 
 # List all connections.
 $ git remote
+
+# lists all connections along with the URL of each one.
+$ git remote -v
+
+# creates a new connection called <name> to a remote repository.
+$ git remote add <name> <url>
+
+# removes the connection called <name> to the remote repository.
+$ git remote rm <name>
 ```
-
-``git remote -v`` lists all connections along with the URL of each one.
-
-``git remote add <name> <url>`` creates a new connection called <name> to a remote repository.
-
-``git remote rm <name>`` removes the connection called <name> to the remote repository.
 
 #### git push
 It transfers commits from Local repository(HEAD) to Remote repository.
 
-``git push <remote> <branch>``
+``` sh
+
+$ git push <remote> <branch>
+```
 
 #### git pull
 It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
 
-``git pull`` is a shorthand for 
+``` sh
 
-``git pull <remote> <branch>`` is a shorthand for 
+# 
+$ git pull
+
+# 
+$ git pull <remote> <branch>
+```
 
 #### git branch
 It lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointers to commits.
 
-``git branch -a`` lists all branches from Git repository
+``` sh
 
-``git branch <branch>`` creates a new branch
+# lists all branches from Git repository
+$ git branch -a
 
-``git branch -d <branch>`` deletes a branch called <branch> in a safe way because Git prevents deleting the branch if it has unmerged changes.
+# creates a new branch
+$ git branch <branch>
 
-``git branch -D <branch>``  forces deleting the specified branch
+# deletes a branch called <branch> in a safe way because Git prevents deleting the branch if it has unmerged changes.
+$ git branch -d <branch>
+
+# forces deleting the specified branch
+$ it branch -D <branch>
+```
 
 #### git checkout
 
@@ -249,9 +293,14 @@ $ git checkout -b <branch>
 #### git fetch
 It transfers commits from Remote repository to Local repository(HEAD).
 
-``git fetch <remote>`` fetch all branches
+``` sh
 
-``git fetch <remote> <branch>`` fetch only the specified branch
+# fetch all branches
+$ git fetch <remote>
+
+# fetch only the specified branch
+$ git fetch <remote> <branch>
+```
 
 #### git merge
 It combines the work user have been working in a branch into the current branch
