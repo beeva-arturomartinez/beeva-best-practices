@@ -322,6 +322,20 @@ $ git merge --no-ff <branch>
 ```
 
 #### git diff
+It shows the difference between the distinct phases of the Local repository or the Remote repository.
+
+``` sh
+
+# Differences between the Working directory and the Staging area(Index)
+$ git diff
+
+# Differences between the Staging area and the most recent commit (HEAD)
+$ git diff --cached
+
+# DIfferences between the Working directory and the most recent commit (HEAD)
+$ git diff HEAD
+```
+
 #### git tag
 #### git stash
 #### git log
