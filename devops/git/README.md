@@ -363,6 +363,19 @@ $ git push origin --tags
 ```
 
 #### git stash
+
+``` sh
+
+# List the available tags in Git.
+$ git stash
+
+# Create a lightweight tag
+$ git stash list
+
+# Create an annotated tag
+$ git stash apply
+```
+
 #### git show
 #### git log
 #### git reset
