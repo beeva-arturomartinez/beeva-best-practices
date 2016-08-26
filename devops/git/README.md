@@ -363,16 +363,16 @@ $ git push origin --tags
 ```
 
 #### git stash
-
+It stores the current state of the Working directory and Staging area to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
 ``` sh
 
-# List the available tags in Git.
+# Store Working directory and Staging area state
 $ git stash
 
-# Create a lightweight tag
+# List the stashes that have been stored
 $ git stash list
 
-# Create an annotated tag
+# Apply the work 
 $ git stash apply
 ```
 
