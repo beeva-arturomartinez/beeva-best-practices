@@ -372,7 +372,7 @@ $ git stash
 # List the stashes that have been stored
 $ git stash list
 
-# Apply the work 
+# Apply the last work that have been stored in the current line of development
 $ git stash apply
 ```
 
