@@ -364,6 +364,7 @@ $ git push origin --tags
 
 #### git stash
 It stores the current state of the Working directory and Staging area to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+
 ``` sh
 
 # Store Working directory and Staging area state
@@ -377,6 +378,19 @@ $ git stash apply
 ```
 
 #### git show
+It displays distinct types of objects:
+
+- Commits
+- Tags
+- Trees
+- Plain blobs
+
+``` sh
+
+# Display any object in Git
+$ git show <object_id>
+```
+
 #### git log
 #### git reset
 
