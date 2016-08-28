@@ -324,6 +324,20 @@ $ git merge --no-ff <branch>
 #### git reset
 It 
 
+#### git log
+It shows commit history
+
+``` sh
+
+# Show commit logs
+$ git log
+
+# Show commit logs with a pretty format
+$ git log --graph --decorate --pretty=oneline
+```
+
+##### git reflog
+
 #### git diff
 It shows the difference of files between the distinct phases of the Local repository.
 
@@ -395,18 +409,6 @@ It displays distinct types of objects:
 
 # Display any object in Git
 $ git show <object_id>
-```
-
-#### git log
-It shows commit history
-
-``` sh
-
-# Show commit logs
-$ git log
-
-# Show commit logs with a pretty format
-$ git log --graph --decorate --pretty=oneline
 ```
 
 ## Git Flow
