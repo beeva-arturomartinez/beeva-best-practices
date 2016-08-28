@@ -321,6 +321,9 @@ $ git merge <branch>
 $ git merge --no-ff <branch>
 ```
 
+#### git reset
+
+
 #### git diff
 It shows the difference of files between the distinct phases of the Local repository.
 
@@ -395,7 +398,16 @@ $ git show <object_id>
 ```
 
 #### git log
-#### git reset
+It shows commit history
+
+``` sh
+
+# Show commit logs
+$ git log
+
+# Show commit logs with a pretty format
+$ git log --graph --decorate --pretty=oneline
+```
 
 ## Git Flow
 
