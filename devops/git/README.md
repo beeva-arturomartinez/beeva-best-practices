@@ -363,7 +363,7 @@ $ git push origin --tags
 ```
 
 #### git stash
-It stores the current state of the Working directory and Staging area to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+It stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
 
 ``` sh
 
@@ -373,8 +373,11 @@ $ git stash
 # List the stashes that have been stored
 $ git stash list
 
-# Apply the last work that have been stored in the current line of development
+# Apply the last recent stash that have been stored in the current line of development
 $ git stash apply
+
+# Apply the second last recent stash that have been stored in the current line of development
+$ git stash apply stash@{1}
 ```
 
 #### git show
