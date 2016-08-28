@@ -172,10 +172,6 @@ It clones an existing Git repository into a new directory with a isolated enviro
 
 ``` sh
 
-# 
-$ git clone <repository>
-
-#
 $ git clone <repository> <directory>
 ```
 
@@ -184,11 +180,7 @@ It adds the new/updated content in the Working directory to the Staging area(Ind
 
 ``` sh
 
-# 
-$ git add <file>
-
-#
-$ git add <directory>
+$ git add <file/directory>
 ```
 
 #### git rm
@@ -216,10 +208,6 @@ It stores the current contents of the Staging area to HEAD in a new commit along
 
 ``` sh
 
-# 
-$ git commit
-
-# 
 $ git commit -m <message>
 ```
 
