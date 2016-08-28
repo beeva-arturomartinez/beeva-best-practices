@@ -322,7 +322,22 @@ $ git merge --no-ff <branch>
 ```
 
 #### git reset
-It 
+Reset the Local Repository to the specified state.
+
+``` sh
+
+# 
+$ git reset
+
+# Reset the specified file from the Staging area and keep the working Directory unchanged
+$ git reset <file>
+
+# Show commit logs with a pretty format
+$ git reset --hard
+```
+
+#### git revert
+
 
 #### git log
 It shows commit history
@@ -336,7 +351,7 @@ $ git log
 $ git log --graph --decorate --pretty=oneline
 ```
 
-##### git reflog
+#### git reflog
 
 #### git diff
 It shows the difference of files between the distinct phases of the Local repository.
