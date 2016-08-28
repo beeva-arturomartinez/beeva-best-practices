@@ -322,7 +322,7 @@ $ git merge --no-ff <branch>
 ```
 
 #### git reset
-
+It 
 
 #### git diff
 It shows the difference of files between the distinct phases of the Local repository.
