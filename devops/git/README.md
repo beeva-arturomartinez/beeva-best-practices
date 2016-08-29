@@ -311,14 +311,17 @@ Reset the Local Repository to the specified state.
 
 ``` sh
 
-# 
+# Reset the Staging area to the most recent commit but keep the Working directory unchanged
 $ git reset
 
-# Reset the specified file from the Staging area and keep the working Directory unchanged
+# Reset the specified file from the Staging area and keep the Working directory unchanged
 $ git reset <file>
 
-# Show commit logs with a pretty format
+# Reset the Staging area and the Working directory to the most recent commit
 $ git reset --hard
+
+# Reset the Staging area to the most recent commit but keep the Working directory unchanged
+$ git reset <commit>
 ```
 
 #### git revert
