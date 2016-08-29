@@ -162,7 +162,7 @@ Once we know the work area of Git project we can start using Git commands, as sh
 
 ![git commands image](static/git-commands.png)
 
-Following, we will learn each of Git commands regarding to the case:
+Therefore, we will check each of main Git commands regarding to different cases:
 
 #### Set up repository
 
@@ -181,46 +181,7 @@ It clones an existing Git repository into a new directory with a isolated enviro
 $ git clone <repository> <directory>
 ```
 
-#### Save changes
-
-##### git add
-It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
-
-``` sh
-
-$ git add <file/directory>
-```
-
-#### git rm
-It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
-
-``` sh
-
-# deletes a single file from Git repository and also deletes from the working directory.
-$ git rm <file>
-
-# deletes a single file from Git repository without deleting from working directory.
-$ git rm --cached <file>
-```
-
-#### git status
-It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
-
-``` sh
-
-$ git status
-```
-
-#### git commit 
-It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
-
-``` sh
-
-$ git commit -m <message>
-```
-
-
-#### git remote
+##### git remote
 It lets users can create, list and delete connections to repositories, so that, users can link a specified URL to quick access.
 ``` sh
 
@@ -237,7 +198,45 @@ $ git remote add <name> <url>
 $ git remote rm <name>
 ```
 
-#### git push
+#### Save changes
+
+##### git add
+It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
+
+``` sh
+
+$ git add <file/directory>
+```
+
+##### git rm
+It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
+
+``` sh
+
+# deletes a single file from Git repository and also deletes from the working directory.
+$ git rm <file>
+
+# deletes a single file from Git repository without deleting from working directory.
+$ git rm --cached <file>
+```
+
+##### git status
+It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
+
+``` sh
+
+$ git status
+```
+
+##### git commit 
+It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
+
+``` sh
+
+$ git commit -m <message>
+```
+
+##### git push
 It transfers commits from Local repository(HEAD) to Remote repository.
 
 ``` sh
@@ -246,7 +245,7 @@ It transfers commits from Local repository(HEAD) to Remote repository.
 $ git push <remote> <branch>
 ```
 
-#### git pull
+##### git pull
 It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
 
 ``` sh
@@ -255,7 +254,7 @@ It updates Working directory to the newest commit from Remote repository executi
 $ git pull <remote> <branch>
 ```
 
-#### git branch
+##### git branch
 It lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointer to commits.
 
 ``` sh
@@ -273,7 +272,7 @@ $ git branch -d <branch>
 $ it branch -D <branch>
 ```
 
-#### git checkout
+##### git checkout
 It lets users can navigate between the different branches so that updates files in the Working directory.
 
 ``` sh
@@ -285,7 +284,7 @@ $ git checkout <branch>
 $ git checkout -b <new-branch>
 ```
 
-#### git fetch
+##### git fetch
 It transfers commits from Remote repository to Local repository(HEAD).
 
 ``` sh
@@ -297,7 +296,7 @@ $ git fetch <remote>
 $ git fetch <remote> <branch>
 ```
 
-#### git merge
+##### git merge
 It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
 
 - Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
@@ -314,7 +313,7 @@ $ git merge <branch>
 $ git merge --no-ff <branch>
 ```
 
-#### git reset
+##### git reset
 Reset the Local Repository to the specified state.
 
 ``` sh
@@ -335,7 +334,7 @@ $ git reset <commit>
 $ git reset --hard <commit>
 ```
 
-#### git log
+##### git log
 It shows commit history
 
 ``` sh
@@ -347,7 +346,7 @@ $ git log
 $ git log --graph --decorate --pretty=oneline
 ```
 
-#### git diff
+##### git diff
 It shows the difference of files between the distinct phases of the Local repository.
 
 ``` sh
@@ -362,7 +361,7 @@ $ git diff --cached
 $ git diff HEAD
 ```
 
-#### git tag
+##### git tag
 It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
 
 The two main types of tags are **lightweight** and **annotated**:
@@ -388,7 +387,7 @@ $ git tag -d <tag_name>
 $ git push origin --tags
 ```
 
-#### git stash
+##### git stash
 It stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
 
 ``` sh
@@ -406,7 +405,7 @@ $ git stash apply
 $ git stash apply stash@{1}
 ```
 
-#### git show
+##### git show
 It displays distinct types of objects:
 
 - Commits
