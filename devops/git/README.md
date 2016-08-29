@@ -147,7 +147,7 @@ As shown in the image above, Git project is made up of:
 * Local repository: local work area is split into:
 	* Working directory: folders/files that you are currently working on.
 	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working directory go into the next level.
-	* Local Repository (HEAD): a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
+	* HEAD: a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
 
 * Remote repository: place where code is stored like GitHub, Bitbucket, etc.
 
@@ -234,6 +234,7 @@ It transfers commits from Local repository(HEAD) to Remote repository.
 
 ``` sh
 
+# Push the work from the specified branch to the detailed remote repository
 $ git push <remote> <branch>
 ```
 
@@ -242,10 +243,7 @@ It updates Working directory to the newest commit from Remote repository executi
 
 ``` sh
 
-# 
-$ git pull
-
-# 
+# Update the specified branch from detailed remote repositoy
 $ git pull <remote> <branch>
 ```
 
