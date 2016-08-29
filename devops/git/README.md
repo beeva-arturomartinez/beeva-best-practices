@@ -420,7 +420,6 @@ $ git checkout <commit>
 $ git checkout <commit> <file>
 ```
 
-
 ##### git reset
 Reset the Local Repository to the specified state.
 
@@ -443,6 +442,13 @@ $ git reset --hard <commit>
 ```
 
 ##### git revert
+Undo a commit which already pushed to the Remote repository, so that, revert the
+
+``` sh
+
+# Undo a specified commit
+$ git revert <commit>
+```
 
 ## Git Flow
 
