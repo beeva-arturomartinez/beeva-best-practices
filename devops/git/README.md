@@ -19,6 +19,10 @@ At this point we're going to talk about best practices to work with git.
 * [Working Git Project](#working-git-project)
 	* [Repositories](#repositories)
 	* [Useful commands](#useful-commands)
+		* [Set up repository](#setting-up)
+		* [Save changes](#saving-changes)
+		* [Check repository](#check-repository)
+		* [Undoing changes](#undoing-changes)
 * [Git Flow](#git-flow)
 	* [Git Flow Rules](#git-flow-rules)
 	* [Branches](#branches)
@@ -158,16 +162,18 @@ Once we know the work area of Git project we can start using Git commands, as sh
 
 ![git commands image](static/git-commands.png)
 
-Following, we will learn each of Git commands separately:
+Following, we will learn each of Git commands regarding to the case:
 
-#### git init
+#### Set up repository
+
+##### git init
 It creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
 ``` sh
 
 $ git init
 ```
 
-#### git clone
+##### git clone
 It clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
 
 ``` sh
@@ -175,7 +181,9 @@ It clones an existing Git repository into a new directory with a isolated enviro
 $ git clone <repository> <directory>
 ```
 
-#### git add
+#### Save changes
+
+##### git add
 It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
 
 ``` sh
@@ -327,9 +335,6 @@ $ git reset <commit>
 $ git reset --hard <commit>
 ```
 
-#### git revert
-
-
 #### git log
 It shows commit history
 
@@ -341,8 +346,6 @@ $ git log
 # Show commit logs with a pretty format
 $ git log --graph --decorate --pretty=oneline
 ```
-
-#### git reflog
 
 #### git diff
 It shows the difference of files between the distinct phases of the Local repository.
