@@ -220,14 +220,6 @@ $ git rm <file>
 $ git rm --cached <file>
 ```
 
-##### git status
-It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
-
-``` sh
-
-$ git status
-```
-
 ##### git commit 
 It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
 
@@ -313,6 +305,24 @@ $ git merge <branch>
 $ git merge --no-ff <branch>
 ```
 
+##### git stash
+It stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+
+``` sh
+
+# Store Working directory and Staging area state
+$ git stash
+
+# List the stashes that have been stored
+$ git stash list
+
+# Apply the last recent stash that have been stored in the current line of development
+$ git stash apply
+
+# Apply the second last recent stash that have been stored in the current line of development
+$ git stash apply stash@{1}
+```
+
 ##### git reset
 Reset the Local Repository to the specified state.
 
@@ -332,6 +342,16 @@ $ git reset <commit>
 
 # Reset the Staging area and the Working directory to the specified commit
 $ git reset --hard <commit>
+```
+
+#### Check repository
+
+##### git status
+It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
+
+``` sh
+
+$ git status
 ```
 
 ##### git log
@@ -361,6 +381,20 @@ $ git diff --cached
 $ git diff HEAD
 ```
 
+##### git show
+It displays distinct types of objects:
+
+- Commits
+- Tags
+- Trees
+- Plain blobs
+
+``` sh
+
+# Display any object in Git
+$ git show <object_id>
+```
+
 ##### git tag
 It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
 
@@ -385,38 +419,6 @@ $ git tag -d <tag_name>
 
 # Push all tags to the Remote repository
 $ git push origin --tags
-```
-
-##### git stash
-It stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
-
-``` sh
-
-# Store Working directory and Staging area state
-$ git stash
-
-# List the stashes that have been stored
-$ git stash list
-
-# Apply the last recent stash that have been stored in the current line of development
-$ git stash apply
-
-# Apply the second last recent stash that have been stored in the current line of development
-$ git stash apply stash@{1}
-```
-
-##### git show
-It displays distinct types of objects:
-
-- Commits
-- Tags
-- Trees
-- Plain blobs
-
-``` sh
-
-# Display any object in Git
-$ git show <object_id>
 ```
 
 ## Git Flow
