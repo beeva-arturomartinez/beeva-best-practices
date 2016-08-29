@@ -22,6 +22,7 @@ At this point we're going to talk about best practices to work with git.
 		* [Set up repository](#set-up-repository)
 		* [Save changes](#save-changes)
 		* [Sync up](#sync-up)
+		* [Use branches](#use-branches)
 		* [Check repository](#check-repository)
 		* [Undo changes](#undo-changes)
 * [Git Flow](#git-flow)
@@ -279,6 +280,34 @@ $ git fetch <remote>
 $ git fetch <remote> <branch>
 ```
 
+##### git tag
+It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
+
+The two main types of tags are **lightweight** and **annotated**:
+
+- Lightweight tag is a reference to a specified commit.
+- Annotated tag is almost like a lightweight tag but contains a message.
+
+``` sh
+
+# List the available tags in Git.
+$ git tag
+
+# Create a lightweight tag
+$ git tag <tag_name>
+
+# Create an annotated tag
+$ git tag -a -m "<tag_message>" <tag_name>
+
+# Delete a tag
+$ git tag -d <tag_name>
+
+# Push all tags to the Remote repository
+$ git push origin --tags
+```
+
+#### Use branches
+
 ##### git merge
 It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
 
@@ -324,32 +353,6 @@ $ git checkout <branch>
 
 # Create a new branch and switch to it
 $ git checkout -b <new-branch>
-```
-
-##### git tag
-It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
-
-The two main types of tags are **lightweight** and **annotated**:
-
-- Lightweight tag is a reference to a specified commit.
-- Annotated tag is almost like a lightweight tag but contains a message.
-
-``` sh
-
-# List the available tags in Git.
-$ git tag
-
-# Create a lightweight tag
-$ git tag <tag_name>
-
-# Create an annotated tag
-$ git tag -a -m "<tag_message>" <tag_name>
-
-# Delete a tag
-$ git tag -d <tag_name>
-
-# Push all tags to the Remote repository
-$ git push origin --tags
 ```
 
 #### Check repository
