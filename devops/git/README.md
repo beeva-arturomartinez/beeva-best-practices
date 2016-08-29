@@ -18,11 +18,11 @@ At this point we're going to talk about best practices to work with git.
 	* [README.md](#readme-md)
 * [Working Git Project](#working-git-project)
 	* [Repositories](#repositories)
-	* [Useful commands](#useful-commands)
-		* [Set up repository](#setting-up)
-		* [Save changes](#saving-changes)
+	* [Commands](#commands)
+		* [Set up repository](#set-up-repository)
+		* [Save changes](#save-changes)
 		* [Check repository](#check-repository)
-		* [Undoing changes](#undoing-changes)
+		* [Undo changes](#undo-changes)
 * [Git Flow](#git-flow)
 	* [Git Flow Rules](#git-flow-rules)
 	* [Branches](#branches)
@@ -156,7 +156,7 @@ As shown in the image above, Git project is made up of:
 * Remote repository: place where code is stored like GitHub, Bitbucket, etc.
 
 
-### Useful commands
+### Commands
 
 Once we know the work area of Git project we can start using Git commands, as shown in the image below:
 
