@@ -21,6 +21,7 @@ At this point we're going to talk about best practices to work with git.
 	* [Commands](#commands)
 		* [Set up repository](#set-up-repository)
 		* [Save changes](#save-changes)
+		* [Sync up](#sync-up)
 		* [Check repository](#check-repository)
 		* [Undo changes](#undo-changes)
 * [Git Flow](#git-flow)
@@ -228,6 +229,8 @@ It stores the current contents of the Staging area to HEAD in a new commit along
 $ git commit -m <message>
 ```
 
+#### Sync up
+
 ##### git push
 It transfers commits from Local repository(HEAD) to Remote repository.
 
@@ -323,27 +326,6 @@ $ git stash apply
 $ git stash apply stash@{1}
 ```
 
-##### git reset
-Reset the Local Repository to the specified state.
-
-``` sh
-
-# Reset the Staging area to the most recent commit but keep the Working directory unchanged
-$ git reset
-
-# Reset the specified file from the Staging area and keep the Working directory unchanged
-$ git reset <file>
-
-# Reset the Staging area and the Working directory to the most recent commit
-$ git reset --hard
-
-# Reset the Staging area to the specified commit but keep the Working directory unchanged
-$ git reset <commit>
-
-# Reset the Staging area and the Working directory to the specified commit
-$ git reset --hard <commit>
-```
-
 #### Check repository
 
 ##### git status
@@ -394,6 +376,30 @@ It displays distinct types of objects:
 # Display any object in Git
 $ git show <object_id>
 ```
+
+#### Undo changes
+
+##### git reset
+Reset the Local Repository to the specified state.
+
+``` sh
+
+# Reset the Staging area to the most recent commit but keep the Working directory unchanged
+$ git reset
+
+# Reset the specified file from the Staging area and keep the Working directory unchanged
+$ git reset <file>
+
+# Reset the Staging area and the Working directory to the most recent commit
+$ git reset --hard
+
+# Reset the Staging area to the specified commit but keep the Working directory unchanged
+$ git reset <commit>
+
+# Reset the Staging area and the Working directory to the specified commit
+$ git reset --hard <commit>
+```
+
 
 ##### git tag
 It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
