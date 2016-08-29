@@ -215,10 +215,10 @@ It deletes files from the Staging area(Index) or from Working directory and Stag
 
 ``` sh
 
-# deletes a single file from Git repository and also deletes from the working directory.
+# deletes a single file from Git repository and also deletes from the Working directory.
 $ git rm <file>
 
-# deletes a single file from Git repository without deleting from working directory.
+# deletes a single file from Git repository without deleting from Working directory.
 $ git rm --cached <file>
 ```
 
