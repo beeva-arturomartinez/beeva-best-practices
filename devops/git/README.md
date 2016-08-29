@@ -229,6 +229,24 @@ It stores the current contents of the Staging area to HEAD in a new commit along
 $ git commit -m <message>
 ```
 
+##### git stash
+It stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+
+``` sh
+
+# Store Working directory and Staging area state
+$ git stash
+
+# List the stashes that have been stored
+$ git stash list
+
+# Apply the last recent stash that have been stored in the current line of development
+$ git stash apply
+
+# Apply the second last recent stash that have been stored in the current line of development
+$ git stash apply stash@{1}
+```
+
 #### Sync up
 
 ##### git push
@@ -247,6 +265,35 @@ It updates Working directory to the newest commit from Remote repository executi
 
 # Update the specified branch from named remote repositoy
 $ git pull <remote> <branch>
+```
+
+##### git fetch
+It transfers commits from Remote repository to Local repository(HEAD).
+
+``` sh
+
+# fetch all branches
+$ git fetch <remote>
+
+# fetch only the specified branch
+$ git fetch <remote> <branch>
+```
+
+##### git merge
+It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
+
+- Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
+- Non-fast-forward merge forces to create a new merge commit if the current branch has diverged regarding feature branch or if there is the same above stage.
+
+At this [section](#history) can visualize the two last algorithms graphically.
+
+``` sh
+
+# Combine the specified branch into the current branch and Git will decide the merge algorithm (by default fast-forward)
+$ git merge <branch>
+
+# Combine the specified branch into the current branch but always generate a new commit (non-fast-forward)
+$ git merge --no-ff <branch>
 ```
 
 ##### git branch
@@ -279,51 +326,30 @@ $ git checkout <branch>
 $ git checkout -b <new-branch>
 ```
 
-##### git fetch
-It transfers commits from Remote repository to Local repository(HEAD).
+##### git tag
+It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
+
+The two main types of tags are **lightweight** and **annotated**:
+
+- Lightweight tag is a reference to a specified commit.
+- Annotated tag is almost like a lightweight tag but contains a message.
 
 ``` sh
 
-# fetch all branches
-$ git fetch <remote>
+# List the available tags in Git.
+$ git tag
 
-# fetch only the specified branch
-$ git fetch <remote> <branch>
-```
+# Create a lightweight tag
+$ git tag <tag_name>
 
-##### git merge
-It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
+# Create an annotated tag
+$ git tag -a -m "<tag_message>" <tag_name>
 
-- Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
-- Non-fast-forward merge forces to create a new merge commit if the current branch has diverged regarding feature branch or if there is the same above stage.
+# Delete a tag
+$ git tag -d <tag_name>
 
-At this [section](#history) can visualize the two last algorithms graphically.
-
-``` sh
-
-# Combine the specified branch into the current branch and Git will decide the merge algorithm (by default fast-forward)
-$ git merge <branch>
-
-# Combine the specified branch into the current branch but always generate a new commit (non-fast-forward)
-$ git merge --no-ff <branch>
-```
-
-##### git stash
-It stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
-
-``` sh
-
-# Store Working directory and Staging area state
-$ git stash
-
-# List the stashes that have been stored
-$ git stash list
-
-# Apply the last recent stash that have been stored in the current line of development
-$ git stash apply
-
-# Apply the second last recent stash that have been stored in the current line of development
-$ git stash apply stash@{1}
+# Push all tags to the Remote repository
+$ git push origin --tags
 ```
 
 #### Check repository
@@ -398,33 +424,6 @@ $ git reset <commit>
 
 # Reset the Staging area and the Working directory to the specified commit
 $ git reset --hard <commit>
-```
-
-
-##### git tag
-It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
-
-The two main types of tags are **lightweight** and **annotated**:
-
-- Lightweight tag is a reference to a specified commit.
-- Annotated tag is almost like a lightweight tag but contains a message.
-
-``` sh
-
-# List the available tags in Git.
-$ git tag
-
-# Create a lightweight tag
-$ git tag <tag_name>
-
-# Create an annotated tag
-$ git tag -a -m "<tag_message>" <tag_name>
-
-# Delete a tag
-$ git tag -d <tag_name>
-
-# Push all tags to the Remote repository
-$ git push origin --tags
 ```
 
 ## Git Flow
