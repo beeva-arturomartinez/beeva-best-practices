@@ -320,8 +320,11 @@ $ git reset <file>
 # Reset the Staging area and the Working directory to the most recent commit
 $ git reset --hard
 
-# Reset the Staging area to the most recent commit but keep the Working directory unchanged
+# Reset the Staging area to the specified commit but keep the Working directory unchanged
 $ git reset <commit>
+
+# Reset the Staging area and the Working directory to the specified commit
+$ git reset --hard <commit>
 ```
 
 #### git revert
