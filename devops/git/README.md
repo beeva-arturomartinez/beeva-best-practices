@@ -164,7 +164,7 @@ Once we know the work area of Git project we can start using Git commands, as sh
 
 ![git commands image](static/git-commands.png)
 
-Therefore, we will check each of main Git commands regarding to different cases:
+Therefore, we will check each of main Git commands regarding to different cases: **set up repository**, **save changes**, **sync up**, **use branches**, **check repository** and **undo changes**.
 
 #### Set up repository
 
