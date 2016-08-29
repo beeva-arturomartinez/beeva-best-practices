@@ -234,7 +234,7 @@ It transfers commits from Local repository(HEAD) to Remote repository.
 
 ``` sh
 
-# Push the work from the specified branch to the detailed remote repository
+# Push the work from the specified branch to the named remote repository
 $ git push <remote> <branch>
 ```
 
@@ -243,7 +243,7 @@ It updates Working directory to the newest commit from Remote repository executi
 
 ``` sh
 
-# Update the specified branch from detailed remote repositoy
+# Update the specified branch from named remote repositoy
 $ git pull <remote> <branch>
 ```
 
