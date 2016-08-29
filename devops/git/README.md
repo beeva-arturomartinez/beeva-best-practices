@@ -241,10 +241,10 @@ $ git stash
 # List the stashes that have been stored
 $ git stash list
 
-# Apply the last recent stash that have been stored in the current line of development
+# Apply the last recent stash in the current line of development
 $ git stash apply
 
-# Apply the second last recent stash that have been stored in the current line of development
+# Apply the second last recent stash in the current line of development
 $ git stash apply stash@{1}
 ```
 
@@ -408,6 +408,19 @@ $ git show <object_id>
 
 #### Undo changes
 
+##### git checkout
+Get back to the specified state to the current the development line.
+
+``` sh
+
+# Update all files in the Working directory according the specified commit
+$ git checkout <commit>
+
+# Update the specified file to a previous version of a determined commit
+$ git checkout <commit> <file>
+```
+
+
 ##### git reset
 Reset the Local Repository to the specified state.
 
@@ -428,6 +441,8 @@ $ git reset <commit>
 # Reset the Staging area and the Working directory to the specified commit
 $ git reset --hard <commit>
 ```
+
+##### git revert
 
 ## Git Flow
 
