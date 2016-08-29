@@ -259,15 +259,6 @@ It transfers commits from Local repository(HEAD) to Remote repository.
 $ git push <remote> <branch>
 ```
 
-##### git pull
-It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
-
-``` sh
-
-# Update the specified branch from named remote repositoy
-$ git pull <remote> <branch>
-```
-
 ##### git fetch
 It transfers commits from Remote repository to Local repository(HEAD).
 
@@ -278,6 +269,15 @@ $ git fetch <remote>
 
 # fetch only the specified branch
 $ git fetch <remote> <branch>
+```
+
+##### git pull
+It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
+
+``` sh
+
+# Update the specified branch from named remote repositoy
+$ git pull <remote> <branch>
 ```
 
 ##### git tag
@@ -308,21 +308,16 @@ $ git push origin --tags
 
 #### Use branches
 
-##### git merge
-It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
-
-- Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
-- Non-fast-forward merge forces to create a new merge commit if the current branch has diverged regarding feature branch or if there is the same above stage.
-
-At this [section](#history) can visualize the two last algorithms graphically.
+##### git checkout
+It lets users can navigate between the different branches so that updates files in the Working directory.
 
 ``` sh
 
-# Combine the specified branch into the current branch and Git will decide the merge algorithm (by default fast-forward)
-$ git merge <branch>
+# Switch from current branch to another
+$ git checkout <branch>
 
-# Combine the specified branch into the current branch but always generate a new commit (non-fast-forward)
-$ git merge --no-ff <branch>
+# Create a new branch and switch to it
+$ git checkout -b <new-branch>
 ```
 
 ##### git branch
@@ -343,16 +338,21 @@ $ git branch -d <branch>
 $ it branch -D <branch>
 ```
 
-##### git checkout
-It lets users can navigate between the different branches so that updates files in the Working directory.
+##### git merge
+It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
+
+- Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
+- Non-fast-forward merge forces to create a new merge commit if the current branch has diverged regarding feature branch or if there is the same above stage.
+
+At this [section](#history) can visualize the two last algorithms graphically.
 
 ``` sh
 
-# Switch from current branch to another
-$ git checkout <branch>
+# Combine the specified branch into the current branch and Git will decide the merge algorithm (by default fast-forward)
+$ git merge <branch>
 
-# Create a new branch and switch to it
-$ git checkout -b <new-branch>
+# Combine the specified branch into the current branch but always generate a new commit (non-fast-forward)
+$ git merge --no-ff <branch>
 ```
 
 #### Check repository
