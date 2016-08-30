@@ -153,7 +153,7 @@ As shown in the image above, Git project is made up of:
 * Local repository: local work area is split into:
 	* Working directory: folders/files that you are currently working on.
 	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working directory go into the next level.
-	* HEAD: a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: it tells Git which commit to take files from when checkout is executed and it tells Git where to put new commits when commit is executed.
+	* HEAD: a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: tells Git which commit to take files when checkout is executed and tells Git where to put new commits when commit is executed.
 
 * Remote repository: place where code is stored like GitHub, Bitbucket, etc.
 
@@ -169,14 +169,14 @@ Therefore, we will check each of main Git commands regarding to different cases:
 #### Set up repository
 
 ##### git init
-It creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
+Creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
 ``` sh
 
 $ git init
 ```
 
 ##### git clone
-It clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
+Clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
 
 ``` sh
 
@@ -184,26 +184,26 @@ $ git clone <repository> <directory>
 ```
 
 ##### git remote
-It lets users can create, list and delete connections to repositories, so that, users can link a specified URL to quick access.
+Lets users can create, list and delete connections to repositories, so that, users can link a specified URL to quick access.
 ``` sh
 
 # List all connections.
 $ git remote
 
-# lists all connections along with the URL of each one.
+# List all connections along with the URL of each one.
 $ git remote -v
 
-# creates a new connection called <name> to a remote repository.
+# Create a new connection called <name> to a remote repository.
 $ git remote add <name> <url>
 
-# removes the connection called <name> to the remote repository.
+# Remove the connection called <name> to the remote repository.
 $ git remote rm <name>
 ```
 
 #### Save changes
 
 ##### git add
-It adds the new/updated content in the Working directory to the Staging area(Index) for the next commit.
+Aggregates the new/updated content in the Working directory to the Staging area(Index) for the next commit.
 
 ``` sh
 
@@ -211,19 +211,19 @@ $ git add <file/directory>
 ```
 
 ##### git rm
-It deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
+Deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
 
 ``` sh
 
-# deletes a single file from Git repository and also deletes from the Working directory.
+# Delete a single file from Git repository and also deletes from the Working directory.
 $ git rm <file>
 
-# deletes a single file from Git repository without deleting from Working directory.
+# Delete a single file from Git repository without deleting from Working directory.
 $ git rm --cached <file>
 ```
 
 ##### git commit 
-It stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
+Stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
 
 ``` sh
 
@@ -231,7 +231,7 @@ $ git commit -m <message>
 ```
 
 ##### git stash
-It stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+Stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
 
 ``` sh
 
@@ -251,7 +251,7 @@ $ git stash apply stash@{1}
 #### Sync up
 
 ##### git push
-It transfers commits from Local repository(HEAD) to Remote repository.
+Transfers commits from Local repository(HEAD) to Remote repository.
 
 ``` sh
 
@@ -260,19 +260,19 @@ $ git push <remote> <branch>
 ```
 
 ##### git fetch
-It transfers commits from Remote repository to Local repository(HEAD).
+Transfers commits from Remote repository to Local repository(HEAD).
 
 ``` sh
 
-# fetch all branches
+# Fetch all branches
 $ git fetch <remote>
 
-# fetch only the specified branch
+# Fetch only the specified branch
 $ git fetch <remote> <branch>
 ```
 
 ##### git pull
-It updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
+Updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
 
 ``` sh
 
@@ -281,7 +281,7 @@ $ git pull <remote> <branch>
 ```
 
 ##### git tag
-It lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
+Lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
 
 The two main types of tags are **lightweight** and **annotated**:
 
@@ -309,7 +309,7 @@ $ git push origin --tags
 #### Use branches
 
 ##### git checkout
-It lets users can navigate between the different branches so that updates files in the Working directory.
+Lets users can navigate between the different branches, so that, can update files in the Working directory.
 
 ``` sh
 
@@ -321,25 +321,25 @@ $ git checkout -b <new-branch>
 ```
 
 ##### git branch
-It lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointer to commits.
+Lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointer to commits.
 
 ``` sh
 
-# lists all branches from Git repository
+# List all branches from Git repository
 $ git branch -a
 
-# creates a new branch
+# Create a new branch
 $ git branch <branch>
 
-# deletes a branch called <branch> in a safe way because Git prevents deleting the branch if it has unmerged changes.
+# Delete a branch called <branch> in a safe way because Git prevents deleting the branch if it has unmerged changes.
 $ git branch -d <branch>
 
-# forces deleting the specified branch
+# Force deleting the specified branch
 $ it branch -D <branch>
 ```
 
 ##### git merge
-It combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
+Combines a development line of a branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
 
 - Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
 - Non-fast-forward merge forces to create a new merge commit if the current branch has diverged regarding feature branch or if there is the same above stage.
@@ -358,7 +358,7 @@ $ git merge --no-ff <branch>
 #### Check repository
 
 ##### git status
-It displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
+Displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
 
 ``` sh
 
@@ -366,7 +366,7 @@ $ git status
 ```
 
 ##### git log
-It shows commit history
+Shows commit history
 
 ``` sh
 
@@ -386,7 +386,7 @@ $ git reflog
 ```
 
 ##### git diff
-It shows the difference of files between the distinct phases of the Local repository.
+Shows the difference of files between the distinct phases of the Local repository.
 
 ``` sh
 
@@ -401,7 +401,7 @@ $ git diff HEAD
 ```
 
 ##### git show
-It displays distinct types of objects:
+Displays distinct types of objects:
 
 - Commits
 - Tags
@@ -429,7 +429,7 @@ $ git checkout <commit> <file>
 ```
 
 ##### git reset
-Reset the Local Repository to the specified state. **Warning** some Git history might be lost.
+Reset the Local Repository to the specified state. **Warning:** some Git history might be lost.
 
 ``` sh
 
@@ -450,7 +450,7 @@ $ git reset --hard <commit>
 ```
 
 ##### git revert
-Rool back a commit which has already been pushed and create a new commit to the history with the undone changes. **Highlight** no Git history will be lost.
+Rool back a commit which has already been pushed and create a new commit to the history with the undone changes. **Highlight:** no Git history will be lost.
 
 ``` sh
 
