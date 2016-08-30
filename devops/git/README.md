@@ -450,7 +450,7 @@ $ git reset --hard <commit>
 ```
 
 ##### git revert
-Undo a commit which already pushed to the Remote repository, so that, revert the
+Rool back a commit which already pushed and add a new commit with the undone changes.
 
 ``` sh
 
