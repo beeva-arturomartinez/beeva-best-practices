@@ -377,6 +377,14 @@ $ git log
 $ git log --graph --decorate --pretty=oneline
 ```
 
+##### git reflog
+Show
+
+``` sh
+
+$ git reflog
+```
+
 ##### git diff
 It shows the difference of files between the distinct phases of the Local repository.
 
