@@ -378,7 +378,7 @@ $ git log --graph --decorate --pretty=oneline
 ```
 
 ##### git reflog
-Show
+Show an overview of the last actions user did in the current branch.
 
 ``` sh
 
