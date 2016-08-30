@@ -429,7 +429,7 @@ $ git checkout <commit> <file>
 ```
 
 ##### git reset
-Reset the Local Repository to the specified state.
+Reset the Local Repository to the specified state. 
 
 ``` sh
 
@@ -450,7 +450,7 @@ $ git reset --hard <commit>
 ```
 
 ##### git revert
-Rool back a commit which already pushed and add a new commit with the undone changes.
+Rool back a commit which has already been pushed and create a new commit with the undone changes.
 
 ``` sh
 
