@@ -378,7 +378,7 @@ $ git log --graph --decorate --pretty=oneline
 ```
 
 ##### git reflog
-Show an overview of the last actions user did in the current branch.
+Show an overview of the last actions (commits, pull, push, checkout, reset, etc) user did inside of Git repository. Highlight actions are only stored in the local machine.
 
 ``` sh
 
