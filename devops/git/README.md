@@ -215,7 +215,7 @@ Deletes files from the Staging area(Index) or from Working directory and Staging
 
 ``` sh
 
-# Delete a single file from Git repository and also deletes from the Working directory.
+# Delete a single file from Git repository and also delete it from the Working directory.
 $ git rm <file>
 
 # Delete a single file from Git repository without deleting from Working directory.
@@ -223,7 +223,7 @@ $ git rm --cached <file>
 ```
 
 ##### git commit 
-Stores the current contents of the Staging area to HEAD in a new commit along with a message describing the changes.
+Stores the current contents from the Staging area(Index) to HEAD in a new commit along with a message describing the changes.
 
 ``` sh
 
@@ -231,7 +231,7 @@ $ git commit -m <message>
 ```
 
 ##### git stash
-Stores the current state of the Working directory and Staging area on a stack to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+Stores the current state from the Working directory and Staging area(Index) on a **stack** to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
 
 ``` sh
 
@@ -241,17 +241,17 @@ $ git stash
 # List the stashes that have been stored
 $ git stash list
 
-# Apply the last recent stash in the current line of development
+# Apply the last recent stash to the current line of development
 $ git stash apply
 
-# Apply the second last recent stash in the current line of development
+# Apply the second last recent stash to the current line of development
 $ git stash apply stash@{1}
 ```
 
 #### Sync up
 
 ##### git push
-Transfers commits from Local repository(HEAD) to Remote repository.
+Transfers commits from HEAD(Local repository) to Remote repository.
 
 ``` sh
 
@@ -260,7 +260,7 @@ $ git push <remote> <branch>
 ```
 
 ##### git fetch
-Transfers commits from Remote repository to Local repository(HEAD).
+Transfers commits from Remote repository to HEAD(Local repository).
 
 ``` sh
 
