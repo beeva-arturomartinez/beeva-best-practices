@@ -347,7 +347,7 @@ Combines a development line of a branch into a single branch. Git can execute di
 - Fast-forward merge is applied if the feature branch has not diverged of current branch and will just point to the latest commit, instead of creating a new commit.
 - Non-fast-forward merge forces to create a new merge commit if the current branch has diverged regarding feature branch or if there is the same above stage.
 
-At this [section](#history) can visualize the two last algorithms graphically.
+In this [section](#history) can visualize the two algorithms graphically.
 
 ``` sh
 
