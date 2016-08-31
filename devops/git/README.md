@@ -432,7 +432,7 @@ $ git checkout <commit> <file>
 ```
 
 ##### git reset
-Reset the Local Repository to the specified state. **Warning:** some Git history might be lost.
+Reset the Working directory and Staging area(Index) according the last commit in the HEAD to the specified state. **Warning:** some Git history might be lost.
 
 ``` sh
 
