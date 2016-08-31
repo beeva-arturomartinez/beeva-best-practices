@@ -144,7 +144,7 @@ In a real Git project in addition to use [Git Flow](#git-flow), users must know 
 
 ### Repositories
 
-The purpose of Git is to manage a project or a set of files as they change over time, therefore, Git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working tree.
+The purpose of Git is to manage a project or a set of files as they change over time, therefore, Git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working repository.
 
 ![stage git project image](static/repositories.png)
 
@@ -160,7 +160,7 @@ As shown in the image above, Git project is made up of:
 
 ### Commands
 
-Once we know the work area of Git project we can start using Git commands, as shown in the image below:
+Once we know the stage of Git project we can start using Git commands, as shown in the image below:
 
 ![git commands image](static/git-commands.png)
 
@@ -184,7 +184,7 @@ $ git clone <repository> <directory>
 ```
 
 ##### git remote
-Lets users can create, list and delete connections to repositories, so that, users can link a specified URL to quick access.
+Lets users can create, list and delete connections to repositories, so that, a specified URL is linked to a quick access.
 ``` sh
 
 # List all connections.
@@ -193,7 +193,7 @@ $ git remote
 # List all connections along with the URL of each one.
 $ git remote -v
 
-# Create a new connection called <name> to a remote repository.
+# Create a new connection called <name> to a remote repository <url>.
 $ git remote add <name> <url>
 
 # Remove the connection called <name> to the remote repository.
