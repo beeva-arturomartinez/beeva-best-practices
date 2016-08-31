@@ -230,24 +230,6 @@ Stores the current contents from the Staging area(Index) to HEAD in a new commit
 $ git commit -m <message>
 ```
 
-##### git stash
-Stores the current state from the Working directory and Staging area(Index) on a **stack** to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
-
-``` sh
-
-# Store Working directory and Staging area state
-$ git stash
-
-# List the stashes that have been stored
-$ git stash list
-
-# Apply the last recent stash to the current line of development
-$ git stash apply
-
-# Apply the second last recent stash to the current line of development
-$ git stash apply stash@{1}
-```
-
 ##### git tag
 Lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
 
@@ -274,10 +256,28 @@ $ git tag -d <tag_name>
 $ git push origin --tags
 ```
 
+##### git stash
+Stores the current state from the Working directory and Staging area(Index) on a **stack** to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+
+``` sh
+
+# Store Working directory and Staging area state
+$ git stash
+
+# List the stashes that have been stored
+$ git stash list
+
+# Apply the last recent stash to the current line of development
+$ git stash apply
+
+# Apply the second last recent stash to the current line of development
+$ git stash apply stash@{1}
+```
+
 #### Sync up
 
 ##### git push
-Transfers commits from HEAD(Local repository) to Remote repository.
+Transfers all commits from HEAD(Local repository) to Remote repository.
 
 ``` sh
 
@@ -286,7 +286,7 @@ $ git push <remote> <branch>
 ```
 
 ##### git fetch
-Transfers commits from Remote repository to HEAD(Local repository).
+Transfers all commits from Remote repository to HEAD(Local repository).
 
 ``` sh
 
