@@ -248,6 +248,32 @@ $ git stash apply
 $ git stash apply stash@{1}
 ```
 
+##### git tag
+Lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
+
+The two main types of tags are **lightweight** and **annotated**:
+
+- Lightweight tag is a reference to a specified commit.
+- Annotated tag is almost like a lightweight tag but contains a message.
+
+``` sh
+
+# List the available tags in Git.
+$ git tag
+
+# Create a lightweight tag
+$ git tag <tag_name>
+
+# Create an annotated tag
+$ git tag -a -m "<tag_message>" <tag_name>
+
+# Delete a tag
+$ git tag -d <tag_name>
+
+# Push all tags to the Remote repository
+$ git push origin --tags
+```
+
 #### Sync up
 
 ##### git push
@@ -278,32 +304,6 @@ Updates Working directory to the newest commit from Remote repository executing 
 
 # Update the specified branch from named remote repositoy
 $ git pull <remote> <branch>
-```
-
-##### git tag
-Lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
-
-The two main types of tags are **lightweight** and **annotated**:
-
-- Lightweight tag is a reference to a specified commit.
-- Annotated tag is almost like a lightweight tag but contains a message.
-
-``` sh
-
-# List the available tags in Git.
-$ git tag
-
-# Create a lightweight tag
-$ git tag <tag_name>
-
-# Create an annotated tag
-$ git tag -a -m "<tag_message>" <tag_name>
-
-# Delete a tag
-$ git tag -d <tag_name>
-
-# Push all tags to the Remote repository
-$ git push origin --tags
 ```
 
 #### Use branches
