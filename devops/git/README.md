@@ -267,10 +267,10 @@ $ git stash
 # List the stashes that have been stored
 $ git stash list
 
-# Apply the last recent stash to the current line of development
+# Apply the most recent stash to the current line of development
 $ git stash apply
 
-# Apply the second last recent stash to the current line of development
+# Apply the second most recent stash to the current line of development
 $ git stash apply stash@{1}
 ```
 
