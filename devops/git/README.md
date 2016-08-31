@@ -235,7 +235,7 @@ Lets users can create, list and delete tags. A tag is just a reference which poi
 
 The two main types of tags are **lightweight** and **annotated**:
 
-- Lightweight tag is a reference to a specified commit.
+- Lightweight tag is just a reference to a specified commit.
 - Annotated tag is almost like a lightweight tag but contains a message.
 
 ``` sh
@@ -298,11 +298,11 @@ $ git fetch <remote> <branch>
 ```
 
 ##### git pull
-Updates Working directory to the newest commit from Remote repository executing a ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
+Updates Working directory to the newest commit from Remote repository executing ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
 
 ``` sh
 
-# Update the specified branch from named remote repositoy
+# Update the specified branch from named remote repository
 $ git pull <remote> <branch>
 ```
 
@@ -331,11 +331,14 @@ $ git branch -a
 # Create a new branch
 $ git branch <branch>
 
+# Rename a branch
+$ git branch -m <old_name> <new_name>
+
 # Delete a branch called <branch> in a safe way because Git prevents deleting the branch if it has unmerged changes.
 $ git branch -d <branch>
 
 # Force deleting the specified branch
-$ it branch -D <branch>
+$ git branch -D <branch>
 ```
 
 ##### git merge
