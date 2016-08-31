@@ -381,7 +381,7 @@ $ git log --graph --decorate --pretty=oneline
 ```
 
 ##### git reflog
-Show an overview of the last actions (commits, pull, push, checkout, reset, etc) user did inside of Git repository. Highlight actions are only stored in the local machine.
+Show an overview of the last actions (commits, pull, push, checkout, reset, etc) user did inside of Git repository. **Highlight** actions are only stored in the local machine.
 
 ``` sh
 
@@ -420,7 +420,7 @@ $ git show <object_id>
 #### Undo changes
 
 ##### git checkout
-Get back to the specified state to the current the development line.
+Gets the specified state back to the current development line.
 
 ``` sh
 
@@ -432,9 +432,7 @@ $ git checkout <commit> <file>
 ```
 
 ##### git reset
-Reset the Local Repository to the specified state.
-
-**Warning:** some Git history might be lost.
+Reset the Local Repository to the specified state. **Warning:** some Git history might be lost.
 
 ``` sh
 
@@ -455,9 +453,7 @@ $ git reset --hard <commit>
 ```
 
 ##### git revert
-Rool back a commit which has already been pushed and create a new commit to the history with the undone changes. 
-
-**Highlight:** no Git history will be lost.
+Rool back a commit which has already been pushed and create a new commit to the history with the undone changes. **Highlight:** no Git history will be lost.
 
 ``` sh
 
