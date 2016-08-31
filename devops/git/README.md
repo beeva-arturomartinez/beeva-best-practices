@@ -344,7 +344,7 @@ $ git branch -D <branch>
 ##### git merge
 Combines the current development line and a feature branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
 
-- Fast-forward merge is applied if the current branch has not diverged of feature branch and will just update the branch pointer without create a new merge commit, achieving the whole commit sequence is linear.
+- Fast-forward merge is applied if the current branch has not diverged of feature branch and will just update the branch pointer without creating a new merge commit, achieving the whole commit sequence is linear.
 - Non-fast-forward merge forces to create a new merge commit whether the current branch has diverged regarding feature branch or the current branch has not diverged regarding feature branch. In this case, the commit history will emphasize the merge.
 
 In this [section](#history) can visualize the two algorithms graphically.
