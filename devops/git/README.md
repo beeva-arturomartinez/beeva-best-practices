@@ -439,16 +439,16 @@ Reset the Working directory and Staging area(Index) according the last commit in
 # Reset the Staging area(Index) to the most recent commit but keep the Working directory unchanged
 $ git reset
 
-# Reset the specified file from the Staging area(Index) and keep the Working directory unchanged
+# Reset the specified file from the Staging area(Index) and keep it in the Working directory unchanged
 $ git reset <file>
 
 # Reset the Staging area(Index) and the Working directory to the most recent commit
 $ git reset --hard
 
-# Reset the Staging area(Index) to the specified commit but keep the Working directory unchanged
+# Reset the Staging area(Index) to a specified commit but keep the Working directory unchanged
 $ git reset <commit>
 
-# Reset the Staging area(Index) and the Working directory to the specified commit
+# Reset the Staging area(Index) and the Working directory to a specified commit
 $ git reset --hard <commit>
 ```
 
