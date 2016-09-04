@@ -169,7 +169,7 @@ Therefore, we will check each of main Git commands regarding to different cases:
 #### Set up repository
 
 ##### git init
-Creates a new Git repository so that can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
+Creates a new Git repository that way can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
 ``` sh
 
 $ git init
@@ -184,7 +184,7 @@ $ git clone <repository> <directory>
 ```
 
 ##### git remote
-Lets users can create, list and delete connections to repositories, so that, a specified URL is linked to a quick access.
+Lets users can create, list and delete connections to repositories so a specified URL is linked to a quick access.
 ``` sh
 
 # List all connections.
@@ -203,7 +203,7 @@ $ git remote rm <name>
 #### Save changes
 
 ##### git add
-Aggregates the new/updated content in the Working directory to the Staging area(Index) for the next commit.
+Aggregates the new/updated content from the Working directory to the Staging area(Index) for the next commit.
 
 ``` sh
 
@@ -218,7 +218,7 @@ Deletes files from the Staging area(Index) or from Working directory and Staging
 # Delete a single file from Git repository and also delete it from the Working directory.
 $ git rm <file>
 
-# Delete a single file from Git repository without deleting from Working directory.
+# Delete a single file from Git repository without deleting from the Working directory.
 $ git rm --cached <file>
 ```
 
