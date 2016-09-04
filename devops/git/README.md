@@ -425,10 +425,10 @@ Gets the specified state back to the current development line.
 
 ``` sh
 
-# Update all files in the Working directory according the specified commit
+# Get all files back to a specific version according a determined commit
 $ git checkout <commit>
 
-# Update the specified file to a previous version of a determined commit
+# Get the file back to a specific version according a determined commit
 $ git checkout <commit> <file>
 ```
 
