@@ -60,8 +60,8 @@ When we choose a name for variables, functions, arguments, classes, etc, it is i
 
 - Avoid encodings, because names encoded are unpronounceable and are usually written incorrectly. In Java there is no need to encode types, as is done in other languages with the Hungarian Notation (HN consists in prefixes in lowercase added to the names of the variables, and that indicate its type; the rest of the name indicates, as clearly as possible, the function that performs the variable), so we have to avoid this encoding as it makes it more difficult the readability of the code, may confuse the reader, and makes it more complicated to change the name or the type of a variable or class.
 
-- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, which must be in uppercase. Each subsequent word inside the name should be capitalzied, according to the CamelCase naming convention. as well as the first letter of any word not initial (naming convention CamelCase).
-- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, which must be in uppercase. Each subsequent word inside the name should be capitalzied, according to the CamelCase naming convention.
+- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, which must be in uppercase. Each subsequent word inside the name should be capitalized, according to the CamelCase naming convention. as well as the first letter of any word not initial (naming convention CamelCase).
+- Use uppercase and lowercase letters to have more legible names. In general, we must use lowercase letters in our names, except on the first letter of the names of the classes and interfaces, which must be in uppercase. Each subsequent word inside the name should be capitalized, according to the CamelCase naming convention.
 
 - Use uppercase in the first letter of standard acronyms. The names will generally have standard abbreviations, such as SQL by Standard Query Language. Names such as *sqlDatabase* for an attribute or *SqlDatabase* for a class are much easier to read than *sQLDatabase* and *SQLDatabase*.
 
@@ -77,7 +77,7 @@ When we choose a name for variables, functions, arguments, classes, etc, it is i
 
 - Use terminology applicable to the domain of solutions and/or of the problem. It is advisable to use computer terms, algorithms, patterns names, and other mathematical terms, i.e. choose technical names to define technical stuff. However when there is not a programming term for what is being done, we should use a domain name of the problem. Many developers make the mistake of creating generic terms for concepts when there are already perfectly useable terms in the domain. For example, if our users relate to their customers as consumers, we have to use the term *Customer* for the corresponding class, not *Client*.
 
-- Some names have a meaning by themselves, but this is a rare case. Generally, they must be included in a context, in classes, functions and namespaces with appropriate names. For example, consider the variables *firstname*, *lastname*, *street*, *number*, *city* and *country*. When combined, it becoumes obvious that they refer to an address, but if the variable *number* is used in isolation on a method, we might not be able to identify that is a part of an address. In this case, the best course of action would be to create the *Address* class, so it would be clear that the variables belong to a broader concept.
+- Some names have a meaning by themselves, but this is a rare case. Generally, they must be included in a context, in classes, functions and namespaces with appropriate names. For example, consider the variables *firstname*, *lastname*, *street*, *number*, *city* and *country*. When combined, it becomes obvious that they refer to an address, but if the variable *number* is used in isolation on a method, we might not be able to identify that is a part of an address. In this case, the best course of action would be to create the *Address* class, so it would be clear that the variables belong to a broader concept.
 
 - Short names are usually more appropriate than the extensive, provided they are clear. For example, the names *AccountAddress* and *ClientAddress* are perfect for instances of the class *Address*, but do not serve as the class name. *Address* serves better as the class name.
 
@@ -98,7 +98,7 @@ A very nice way to choose a function name is to use a verb and a noun.
 
 For example this function name *boolean existFile(nameField)* is better than *boolean exist(nameField)* because the name gives us information about the internal funcionality.
 
-Remember: Don’t be afraid to make of long names, as it is better to have a long and descriptive name that a short and ambiguos one. The most important thing is making the function's intention clear.
+Remember: Don’t be afraid of using long names, as it is better to have a long and descriptive name than a short and ambiguos one. The most important thing is making the function's intention clear.
 
 Functions should **do one thing**. They should do it well. They should do only it. This is an important concept that helps you achieve the other recomendations. In this line a function should not have side effects. We assume that we have followed the rule that a function only do one thing, but it also does other hidden things. Sometimes we have to add functionality in a function and we do not update the name. If it is not reflected in the name of the function, it can cause unexpected behaviors and consequently errors in the program. Furthermore, it also creates a temporal coupling and incomplete test.
 ``` java
@@ -296,7 +296,7 @@ It is not the idea of this guide to show in depth the javadoc tool, all details 
 
 Javadoc comments and self-documenting code (and in-code comments) have two very different target audiences: 
 
-Javadoc comments are typically for users of the API -also developers-, but they don't care about the internal structure of the system, just the classes, methods, inputs, and outputs of the system. The code is contained within a black box. These comments should be used to explain how to do certain tasks, what the expected results of operations are, when exceptions are thrown, and what input values mean. Given a Javadoc-generated set of documentation, I should be able to fully understand how to use your interfaces without ever looking at a line of your code.
+Javadoc comments are typically for users of the API -also developers-, but they don't care about the internal structure of the system, just the classes, methods, inputs, and outputs of the system. The code is contained within a black box. These comments should be used to explain how to do certain tasks, what the expected results of operations are, when exceptions are thrown, and what input values mean. Given a Javadoc-generated set of documentation, anyone should be able to fully understand how to use your interfaces without ever looking at a line of your code.
 
 On the other hand the code and comments that remain in the code file are for developers. You want to address their concerns here, make it easy to understand what the code does and why the code is the way it is. The use of appropriate variable names, methods, classes, and so on (self-documenting code) coupled with comments achieves this.
 
@@ -341,7 +341,7 @@ Again better than before, this code is fine, but it could be rewritten in an equ
 ```java
 float accelerationDueToGravity = 9.81;
 float timeInSeconds = 5; 
-float displacement = NewtonianPhysics.CalculateDisplacement(accelerationDueToGravity);
+float displacement = NewtonianPhysics.CalculateDisplacement(accelerationDueToGravity, timeInSeconds);
 ```
 I think the code is now cleaner and self-explanatory, but this will of course depend on the reader’s point of view if we compare it with the previous excerpt.
 
@@ -711,11 +711,11 @@ Once runtime receives the exception object, it tries to find the handler for the
 
 Java provides specific keywords for exception handling purposes:
 
-* **throw:** We know that if any exception occurs, an exception object is getting created and then Java runtime starts processing to handle them. Sometime we might want to generate exception explicitly in our code, for example in a user authentication program we should throw exception to client if the password is null. **throw** keyword is used to throw exception to the runtime to handle it.
+* **throw:** We know that if any exception occurs, an exception object is getting created and then Java runtime starts processing to handle them. Sometimes we might want to generate exception explicitly in our code, for example in a user authentication program we should throw exception to client if the password is null. **throw** keyword is used to throw exception to the runtime to handle it.
 
 * **throws:** When we are throwing any exception in a method and not handling it, then we need to use **throws** keyword in method signature to let caller program know the exceptions that might be thrown by the method. The caller method might handle these exceptions or propagate it to it’s caller method using throws keyword. We can provide multiple exceptions in the throws clause and it can be used with main() method also.
 
-* **try-catch:** We use try-catch block for exception handling in our code. **try** is the start of the block and **catch** is at the end of try block to handle the exceptions. We can have multiple catch blocks with a try and try-catch block can be nested also. catch block requires a parameter that should be of type Exception.
+* **try-catch:** We use try-catch block for exception handling in our code. **try** is the start of the block and **catch** is at the end of try block to handle the exceptions. We can have multiple catch blocks with a try and try-catch block can be nested too. catch block requires a parameter that should be of type Exception.
 
 * **finally:** finally block is optional and can be used only with try-catch block. Since exception halts the process of execution, we might have some resources open that will not get closed, so we can use finally block. finally block gets executed always, whether exception occurred or not.
 
@@ -778,7 +778,7 @@ Java Exceptions are hierarchical and inheritance is used to categorize different
 
 * **Checked Exceptions:** Checked Exceptions are exceptional scenarios that we can anticipate in a program and try to recover from it, for example FileNotFoundException. We should catch this exception and provide useful message to user and log it properly for debugging purpose. Exception is the parent class of all Checked Exceptions and if we are throwing a checked exception, we must catch it in the same method or we have to propagate it to the caller using throws keyword.
 
-* **Runtime Exception:** Runtime Exceptions are cause by bad programming, for example trying to retrieve an element from the Array. We should check the length of array first before trying to retrieve the element otherwise it might throw ArrayIndexOutOfBoundException at runtime. RuntimeException is the parent class of all runtime exceptions. If we are throwing any runtime exception in a method, it’s not required to specify them in the method signature throws clause. Runtime exceptions can be avoided with better programming.
+* **Runtime Exception:** Runtime Exceptions are caused by bad programming, for example trying to retrieve an element from the Array. We should check the length of array first before trying to retrieve the element otherwise it might throw ArrayIndexOutOfBoundException at runtime. RuntimeException is the parent class of all runtime exceptions. If we are throwing any runtime exception in a method, it’s not required to specify them in the method signature throws clause. Runtime exceptions can be avoided with better programming.
 
 ### Exception methods
 
@@ -826,7 +826,7 @@ In this hierarchy, exceptions a developer needs to rethrow will be under an “A
 
 #### Converting Checked Exception into RuntimeException
 
-This is one of the technique used to limit use of checked Exception in many of frameworks like Spring, where most of checked Exception, which stem from JDBC is wrapped into DataAccessException, an unchecked Exception.
+This is one of the technique used to limit use of checked Exception in many of frameworks like Spring, where most of checked Exceptions which stem from JDBC, are wrapped into DataAccessException, an unchecked Exceptions.
 
 This Java best practice provides benefits, in terms of restricting specific exception into specific modules, like SQLException into DAO layer and throwing meaningful RuntimeException to client layer.
 
@@ -922,7 +922,7 @@ This method is only worth of use it if we are not using SLF4J and we can prove t
 ### Use rotation policies
 Logs can take up a lot of space. Maybe you need to keep years of archival storage, but the space is limited and expensive. So, we have to set up a good rotation strategy and decide whether to destroy or back up your logs but always it has to allow the analysis of recents events.
 
-For example to create daily rolling log files we have to configure log4j, in that case log4j provides the DailyRollingFileAppender class. Here is an example of a log4j’s properties configuration file 
+For example, to create daily rolling log files, we have to configure log4j, in that case log4j provides the DailyRollingFileAppender class. Here is an example of a log4j’s properties configuration file 
 
     log4j.appender.Appender2=org.apache.log4j.DailyRollingFileAppender
     log4j.appender.Appender2.File=app.log
@@ -1572,7 +1572,7 @@ Some objects are not modified once they have been created and, in multithread ap
 
 There are several techniques that provide a single instance of the object, in order to avoid the expensive process of creating object instances:
 
-* **Object catching**: instead of creating a new object, the object is requested to the object cache (if the object doesn't exist, a new one is created and added to the cache for forthcoming requests). The cache is accessed using a key that identifies the object. The proposed example shows how to create a cache with objects especialized on stablishing the format for each type of message rules.
+* **Object caching**: instead of creating a new object, the object is requested to the object cache (if the object doesn't exist, a new one is created and added to the cache for forthcoming requests). The cache is accessed using a key that identifies the object. The proposed example shows how to create a cache with objects especialized on stablishing the format for each type of message rules.
 * **Singleton Design Pattern**: this pattern shows how to avoid the  creation of an object that never varies
 * **Canonical Objects**: another aproach is to create a named copy of each object (a prototype) that can be reused, and then accessed by name, rather than creating new objects identical one to another.
 
@@ -1614,7 +1614,7 @@ Example of Canonical Object:
 
 ##### Using object Pools and Caches
 
-In order to improve the overall performance of applications, usually mechanisms of pooling and catching are implemented.
+In order to improve the overall performance of applications, usually mechanisms of pooling and caching are implemented.
 
 
 ###### Pooling
@@ -1633,9 +1633,9 @@ And the main disadvantages:
 * Synchronizing the access to the pool can be a cause of inefficiency. The greater the concurrency is, the greater the inconvinience.
 * To a lesser extent, the occupation of memory by the constant pool throughout the execution. Possible oversizing of the pool. If the pool is too big, the objects allocated can consume memory and never be used. A previous study of volumetry is advised. It is recommended to define mechanisms to resize the pool dynamically according to the  concurrency volume. The proposed implementation is suitable in most cases.
 
-###### Catching
+###### Caching
 
-On the other hand, in order to avoid costly and repetitive accesses, a catching mechanism can be implemented. It is essential to consider the use of a cache only when the information that will contain will be reused in the application. The benefit of the use of caches is the **reuse of objects**, therefore, if objects are not reused, the cache only occupies memory and does not improve the performance. In particular, the developer has to ensure that the information that is being cached, is not already cached at a higher level.
+On the other hand, in order to avoid costly and repetitive accesses, a caching mechanism can be implemented. It is essential to consider the use of a cache only when the information that will contain will be reused in the application. The benefit of the use of caches is the **reuse of objects**, therefore, if objects are not reused, the cache only occupies memory and does not improve the performance. In particular, the developer has to ensure that the information that is being cached, is not already cached at a higher level.
 
 For example, on some application operations are externalized in XML. Operations are performed in two steps: parsing the XML to a DOM object, and creating the instance of the operation from the DOM object. If there is a cache of operations, implementing a cache of DOM objects is counterproductive, because the information is cached twice.
 
@@ -1866,11 +1866,11 @@ These are slow synchronous operations, and normally are forgotten traces of deve
 
 This API allows to dynamically obtain information from fields and methods of classes and objects, and operate with them. It is powerful but also expensive, so it is not recommended for repetitive actions.
 
-For example, a common use case relays in using this API to load database tables into java objects, on  a generic way, This simplifies development, but in massive processes when working with many rows it is very heavy.
+For example, a common use case relys on using this API to load database tables into java objects, on  a generic way, This simplifies development, but in massive processes when working with many rows it is very heavy.
 
 ###### Take advantage of polymorphism and inheritance
 
-Somo developers often perform linear codebased on type-checking conditions, which decides which code to execute depending on the detected type. This situation is not easy to detect since it is not an explicit type or class check. Usually this situation can be improved with inheritance and polymorphism with a much better, more extensible and reliable code.
+Some developers often perform linear codebased on type-checking conditions, which decides which code to execute depending on the detected type. This situation is not easy to detect since it is not an explicit type or class check. Usually this situation can be improved with inheritance and polymorphism with a much better, more extensible and reliable code.
 
 For example, suppose an implementation of figures like the following:
 
@@ -1981,7 +1981,7 @@ Having methods that do **almost the same** with much of the code in those clases
 
 It reflects a poor design and makes efficient use of these structures in the program problematic. These very complex structures may not be used, since some of their functionality may be reusable but some may not.
 
-###### Avoid the use methods with very long argument lists
+###### Avoid the use of methods with very long argument lists
 
 They make the code less readable and less maintainable.
 
@@ -1993,7 +1993,7 @@ There are certain specific features of the JEE application development that have
 
 #### Execution Scopes on Web containers
 
-A common problem that impacts performance severely on Java applications is the excessive consumption of memory and CPU, result of a massive object creation. In the case of a web application this problem may be even more critical because, because the JVM memory is shared between several users, and each users' requests are handled in different threads. In this special execution environment, performance can be increased by trying to create the minimum number of objects. Depending on each objects execution scope, different measures can be can de adopted.
+A common problem that impacts performance severely on Java applications is the excessive consumption of memory and CPU, result of a massive object creation. In the case of a web application this problem may be even more critical because the JVM memory is shared between several users, and each users' requests are handled in different threads. In this special execution environment, performance can be increased by trying to create the minimum number of objects. Depending on each objects execution scope, different measures can be can de adopted.
 
 * Some objects are needed **through the entire application**, i.e. are needed on different requests and can be reused by all of them. For example, the application's configuration. This application scope objects must be reused, never copied.
 * Other objects must be used **across all the requests** on the same session. This information must be stored in the session (*javax.servlet.http.HttpSession*) and not obtained on each request. For example, the information of the user logon.
