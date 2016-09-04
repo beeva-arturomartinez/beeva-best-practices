@@ -140,11 +140,11 @@ Write a text file called README.md in the main directory of project. This file m
 
 ## Working Git Project
 
-In a real Git project in addition to use [Git Flow](#git-flow), users must know stage where we are working on, that is to say, leads to having to play two different types of repositories.
+In a real Git project in addition to use [Git Flow](#git-flow), users must know stage where they are working on, that is to say, leads to having to play two different types of repositories.
 
 ### Repositories
 
-The purpose of Git is to manage a project or a set of files as they change over time, therefore, Git stores this information in a data structure called a **repository** which often lives in a ``.git`` subdirectory at the root of working repository.
+The purpose of Git is to manage a project or a set of files as they change over time, therefore, Git stores this information in a data structure called a **repository** which often located in a ``.git`` subdirectory at the root of working repository.
 
 ![stage git project image](static/repositories.png)
 
