@@ -278,7 +278,7 @@ $ git stash apply stash@{1}
 #### Sync up
 
 ##### git push
-Transfers all commits from HEAD(Local repository) to Remote repository.
+Transfers all commits from HEAD to Remote repository.
 
 ``` sh
 
@@ -287,7 +287,7 @@ $ git push <remote> <branch>
 ```
 
 ##### git fetch
-Transfers all commits from Remote repository to HEAD(Local repository).
+Transfers all commits from Remote repository to HEAD.
 
 ``` sh
 
@@ -299,7 +299,7 @@ $ git fetch <remote> <branch>
 ```
 
 ##### git pull
-Updates Working directory to the newest commit from Remote repository executing ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
+Updates the Working directory to the newest commit from Remote repository executing ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
 
 ``` sh
 
@@ -310,7 +310,7 @@ $ git pull <remote> <branch>
 #### Use branches
 
 ##### git checkout
-Lets users can navigate between the different branches, so that, can update files in the Working directory.
+Lets users can navigate between the different branches in this way the Working directory will be updated to the specified branch.
 
 ``` sh
 
