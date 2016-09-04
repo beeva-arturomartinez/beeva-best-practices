@@ -157,6 +157,7 @@ As shown in the image above, Git project is made up of:
 
 * Remote repository: place where code is stored like GitHub, Bitbucket, etc.
 
+In summary, each file will go moving through of the distinct phases until to Remote repository.
 
 ### Commands
 
