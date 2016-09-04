@@ -1803,6 +1803,27 @@ The recommended procedure is the following:
 	}
 ```
 
+Starting on Java 7, it is advisable to use the try-with-resource statements as it is a way to ensure that opened resources are automatically closed at the end of the statement without programming it. The try-with-resource statements can include one or more resources. Any object that implements `java.lang.AutoCloseable`, which includes all objects which implement `java.io.Closeable`, can be used as a resource. Using the try-with-resource statement the previous example can be trasnformed into the following one:
+
+```java
+	try (/* obtain or create a resource */) {
+		// use the resource
+	} 
+	catch(...) {
+		// manage exceptions
+	}
+```
+
+For example, to read the first line of a file, we can use the following piece of code:
+
+```java 
+	try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        	return br.readLine();
+	} catch (Exception ex) {
+    		// Manage exception
+	}
+```
+
 When accessing to files, a very inefficient common practice when writing in the file is opening the file, writing and closing the file. It is much more efficient to open the file at the beginning of the execution and to keep it open as long as necessary in order to write and close it only at the end of the execution (including the abnormal exits caused by exceptions). The connections to database behave in a similar way. In a monothread application the same pattern should be followed. In a web application where a pool of connections is available, the pool manages the opening and closing of connections.
 
 In the reading and writing of files or network information, buffered classes should be used such as *BufferedInputStream*, *BufferedOutputStream*, *BufferedReader* and *BufferedWriter*, because the number of readings is reduced and performance is increased.
