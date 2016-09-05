@@ -421,14 +421,17 @@ $ git show <object_id>
 #### Undo changes
 
 ##### git checkout
-Gets the specified state back to the current development line.
+In addition to use checkout command to switch branches also retrieves the specified state to the current development line.
 
 ``` sh
 
-# Get all files back to a specific version according a determined commit
+# Undo the modified file located in the Working Directory to the HEAD version
+$ git checkout -- <file>
+
+# Retrieve all files to a specific version according a determined commit
 $ git checkout <commit>
 
-# Get the file back to a specific version according a determined commit
+# Retrieve the file to a specific version according a determined commit
 $ git checkout <commit> <file>
 ```
 
