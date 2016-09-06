@@ -16,15 +16,6 @@ At this point we're going to talk about best practices to work with git.
 	* [Moving files](#moving-files)
 	* [Large files](#large-files)
 	* [README.md](#readme-md)
-* [Working Git Project](#working-git-project)
-	* [Repositories](#repositories)
-	* [Commands](#commands)
-		* [Set up repository](#set-up-repository)
-		* [Save changes](#save-changes)
-		* [Sync up](#sync-up)
-		* [Use branches](#use-branches)
-		* [Check repository](#check-repository)
-		* [Undo changes](#undo-changes)
 * [Git Flow](#git-flow)
 	* [Git Flow Rules](#git-flow-rules)
 	* [Branches](#branches)
@@ -38,6 +29,15 @@ At this point we're going to talk about best practices to work with git.
 		* [Releases](#releases)
 		* [Hotfixes](#hotfixes)
 	* [Support branches](#support-branches)
+* [Working Git Project](#working-git-project)
+	* [Repositories](#repositories)
+	* [Commands](#commands)
+		* [Set up repository](#set-up-repository)
+		* [Save changes](#save-changes)
+		* [Sync up](#sync-up)
+		* [Use branches](#use-branches)
+		* [Check repository](#check-repository)
+		* [Undo changes](#undo-changes)
 * [Tips](#tips)
 	* [Versioning](#versioning)
 		* [Semantic Versioning](#semantic-versioning)
@@ -137,6 +137,158 @@ Write a text file called README.md in the main directory of project. This file m
 * Information to test the application and test the qa quality.
 * If is a application or library that you can invoke, like an web application or an service web, is important include the information about you can call it.
 * For applications which will run on Docker container, is important include here the information necessary to build the Docker image and how run the container.
+
+## Git Flow
+
+It is highly recommended that **all team members follow the same procedural rules** when using git. The workflow described below is an accepted procedure worldwide for small work teams.
+
+![git flow graph][]
+
+[git flow graph]: static/gitflow.jpg "git flow graph"
+
+### Git Flow Rules
+
+Git Flow establishes the following restrictions:
+
+* There are only one central repository: **origin**. Every developer pull and pushes to origin.
+* There are only two main branches: **develop** and **master**.
+* There are three support branch types: **feature**, **release** and **hotfix**.
+* Always merge with --no-ff option.
+
+### Branches
+
+Git Flow defines two branch types, main branches and support branches.
+
+### Main branches
+
+The Main branches are **develop** and **master**.
+
+#### Master branch
+
+The master branch is the default git branch. This is a special branch.
+Git flow establishes the following restictions on this branch:
+
+* Never delete this branch.
+* Never do commits over this branch directly: only merge commits are allowed.
+* Only do merges from release and hotfix branches.
+
+#### Develop branch
+
+The develop branch is a long running branch and must be created from master.
+
+* Never delete this branch.
+* Never do commits over this branch directly: only merge commits are allowed.
+* All features must be merged in develop
+* When develop reaches a stable point, will be merged back into master, throug a release branch.
+* Once a release process is finished, the release branch must be merged back into develop.
+* Once a hotfix process is finished, the hotfix branch must be merged back into develop.
+
+#### Support branches
+
+The support branches are **short running branches**.
+Those branches are created to follow one of the three processes defined on Git Flow.
+Every support branch has defined from what branch must be created and on what branch/es must be merged.
+
+#### Feature branch
+This is the developer working branch.
+
+* The feature branch always is created from develop branch.
+* We can create several feature branches.
+* It's recommended to create only a feature for each developer and feature to develop, and to create shorter features as posible.
+* The feature branch always must be merged back into develop.
+* Don't merge any other branch into feature branch. (i.e.: develop branch)
+* The feature branch must be deleted once finished: merged back into develop.
+
+### Flow
+
+Git Flow defines three sub work flows:
+
+#### Feature Flow
+
+Each task of development must be created in a feature branch following the Feature flow.
+
+![git flow feature graph][]
+
+[git flow feature graph]: static/feature-gitflow.jpg "git flow feature graph"
+
+Steps in the feature flow:
+``` sh
+
+# gitflow feature Start
+git checkout -b feature/lorem-ipsum develop
+
+# Editing
+edit, git add .., git commit ..
+
+# gitflow feature Finish
+git checkout develop
+git merge --no-ff feature/lorem-ipsum
+git branch -d feature/lorem-ipsum
+
+# Publish code
+git pull origin develop
+git push origin develop
+```
+
+#### Releases
+
+When the source code in the develop branch reaches a stable point and is ready to be released, all of the changes should be merged back into master somehow and then tagged with a release number.
+
+![git flow release graph][]
+
+[git flow release graph]: static/release.jpg "git flow release graph"
+
+Steps in the release flow:
+``` sh
+
+# gitflow release start
+git checkout -b release/0.1.0 develop
+
+# Editing
+edit, git add .., git commit ..
+
+# gitflow release finish
+git checkout master
+git merge --no-ff release/0.1.0
+git tag -a v0.1.0
+git checkout develop
+git merge --no-ff release/0.1.0
+git branch -d release/0.1.0
+
+git push origin 0.1.0
+git push origin develop
+git push origin master
+```
+
+#### Hotfixes
+
+They arise from the necessity to act immediately upon an undesired state of a live production version.
+When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.
+
+![git flow hotfix graph][]
+
+[git flow hotfix graph]: static/hotfix.jpg "git flow hotfix graph"
+
+Steps in the release flow:
+``` sh
+
+# gitflow hotfix start
+git checkout -b hotfix/0.1.1 master
+
+# Editing
+edit, git add .., git commit ..
+
+# gitflow hotfix finish
+git checkout master
+git merge --no-ff hotfix/0.1.1
+git tag -a 0.1.1
+git checkout develop
+git merge --no-ff hotfix/0.1.1
+git branch -d hotfix/0.1.1
+
+git push origin develop
+git push origin master
+```
 
 ## Working Git Project
 
@@ -463,158 +615,6 @@ Rool back a commit which has already been pushed and create a new commit to the 
 
 # Roll back a specified commit
 $ git revert <commit>
-```
-
-## Git Flow
-
-It is highly recommended that **all team members follow the same procedural rules** when using git. The workflow described below is an accepted procedure worldwide for small work teams.
-
-![git flow graph][]
-
-[git flow graph]: static/gitflow.jpg "git flow graph"
-
-### Git Flow Rules
-
-Git Flow establishes the following restrictions:
-
-* There are only one central repository: **origin**. Every developer pull and pushes to origin.
-* There are only two main branches: **develop** and **master**.
-* There are three support branch types: **feature**, **release** and **hotfix**.
-* Always merge with --no-ff option.
-
-### Branches
-
-Git Flow defines two branch types, main branches and support branches.
-
-### Main branches
-
-The Main branches are **develop** and **master**.
-
-#### Master branch
-
-The master branch is the default git branch. This is a special branch.
-Git flow establishes the following restictions on this branch:
-
-* Never delete this branch.
-* Never do commits over this branch directly: only merge commits are allowed.
-* Only do merges from release and hotfix branches.
-
-#### Develop branch
-
-The develop branch is a long running branch and must be created from master.
-
-* Never delete this branch.
-* Never do commits over this branch directly: only merge commits are allowed.
-* All features must be merged in develop
-* When develop reaches a stable point, will be merged back into master, throug a release branch.
-* Once a release process is finished, the release branch must be merged back into develop.
-* Once a hotfix process is finished, the hotfix branch must be merged back into develop.
-
-#### Support branches
-
-The support branches are **short running branches**.
-Those branches are created to follow one of the three processes defined on Git Flow.
-Every support branch has defined from what branch must be created and on what branch/es must be merged.
-
-#### Feature branch
-This is the developer working branch.
-
-* The feature branch always is created from develop branch.
-* We can create several feature branches.
-* It's recommended to create only a feature for each developer and feature to develop, and to create shorter features as posible.
-* The feature branch always must be merged back into develop.
-* Don't merge any other branch into feature branch. (i.e.: develop branch)
-* The feature branch must be deleted once finished: merged back into develop.
-
-### Flow
-
-Git Flow defines three sub work flows:
-
-#### Feature Flow
-
-Each task of development must be created in a feature branch following the Feature flow.
-
-![git flow feature graph][]
-
-[git flow feature graph]: static/feature-gitflow.jpg "git flow feature graph"
-
-Steps in the feature flow:
-``` sh
-
-# gitflow feature Start
-git checkout -b feature/lorem-ipsum develop
-
-# Editing
-edit, git add .., git commit ..
-
-# gitflow feature Finish
-git checkout develop
-git merge --no-ff feature/lorem-ipsum
-git branch -d feature/lorem-ipsum
-
-# Publish code
-git pull origin develop
-git push origin develop
-```
-
-#### Releases
-
-When the source code in the develop branch reaches a stable point and is ready to be released, all of the changes should be merged back into master somehow and then tagged with a release number.
-
-![git flow release graph][]
-
-[git flow release graph]: static/release.jpg "git flow release graph"
-
-Steps in the release flow:
-``` sh
-
-# gitflow release start
-git checkout -b release/0.1.0 develop
-
-# Editing
-edit, git add .., git commit ..
-
-# gitflow release finish
-git checkout master
-git merge --no-ff release/0.1.0
-git tag -a v0.1.0
-git checkout develop
-git merge --no-ff release/0.1.0
-git branch -d release/0.1.0
-
-git push origin 0.1.0
-git push origin develop
-git push origin master
-```
-
-#### Hotfixes
-
-They arise from the necessity to act immediately upon an undesired state of a live production version.
-When a critical bug in a production version must be resolved immediately, a hotfix branch may be branched off from the corresponding tag on the master branch that marks the production version.
-
-![git flow hotfix graph][]
-
-[git flow hotfix graph]: static/hotfix.jpg "git flow hotfix graph"
-
-Steps in the release flow:
-``` sh
-
-# gitflow hotfix start
-git checkout -b hotfix/0.1.1 master
-
-# Editing
-edit, git add .., git commit ..
-
-# gitflow hotfix finish
-git checkout master
-git merge --no-ff hotfix/0.1.1
-git tag -a 0.1.1
-git checkout develop
-git merge --no-ff hotfix/0.1.1
-git branch -d hotfix/0.1.1
-
-git push origin develop
-git push origin master
 ```
 
 ## Tips
