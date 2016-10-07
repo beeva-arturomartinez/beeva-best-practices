@@ -29,6 +29,15 @@ At this point we're going to talk about best practices to work with git.
 		* [Releases](#releases)
 		* [Hotfixes](#hotfixes)
 	* [Support branches](#support-branches)
+* [Working Git Project](#working-git-project)
+	* [Repositories](#repositories)
+	* [Commands](#commands)
+		* [Set up repository](#set-up-repository)
+		* [Save changes](#save-changes)
+		* [Sync up](#sync-up)
+		* [Use branches](#use-branches)
+		* [Check repository](#check-repository)
+		* [Undo changes](#undo-changes)
 * [Tips](#tips)
 	* [Versioning](#versioning)
 		* [Semantic Versioning](#semantic-versioning)
@@ -279,6 +288,333 @@ git branch -d hotfix/0.1.1
 
 git push origin develop
 git push origin master
+```
+
+## Working Git Project
+
+In a real Git project in addition to use [Git Flow](#git-flow), users must know stage where they are working on, that is to say, leads to having to play two different types of repositories.
+
+### Repositories
+
+The purpose of Git is to manage a project or a set of files as they change over time, therefore, Git stores this information in a data structure called a **repository** which often located in a ``.git`` subdirectory at the root of working repository.
+
+![stage git project image](static/repositories.png)
+
+As shown in the image above, Git project is made up of:
+
+* Local repository: local work area is split into:
+	* Working directory: folders/files that you are currently working on.
+	* Staging area (Index): is a holding area for changes that will be committed, so you can control what parts of the working directory go into the next level.
+	* HEAD: a reference to a specific commit (usually points to the most recent commit on the current branch) and it serves two major purposes: tells Git which commit to take files when checkout is executed and tells Git where to put new commits when commit is executed.
+
+* Remote repository: place where code is stored like GitHub, Bitbucket, etc.
+
+In summary, each file will go moving through of the distinct phases until to Remote repository.
+
+### Commands
+
+Once we know the stage of Git project we can start using Git commands, as shown in the image below:
+
+![git commands image](static/git-commands.png)
+
+Therefore, we will check each of main Git commands regarding to different cases: *set up repository*, *save changes*, *sync up*, *use branches*, *check repository* and *undo changes*.
+
+#### Set up repository
+
+##### git init
+Creates a new Git repository that way can transform an existing and unversioned project to a Git repository or initialize a new empty repository.
+``` sh
+
+$ git init
+```
+
+##### git clone
+Clones an existing Git repository into a new directory with a isolated environment that has its own history and manages its own files.
+
+``` sh
+
+$ git clone <repository> <directory>
+```
+
+##### git remote
+Lets users can create, list and delete connections to repositories so a specified URL is linked to a quick access.
+``` sh
+
+# List all connections.
+$ git remote
+
+# List all connections along with the URL of each one.
+$ git remote -v
+
+# Create a new connection called <name> to a remote repository <url>.
+$ git remote add <name> <url>
+
+# Remove the connection called <name> to the remote repository.
+$ git remote rm <name>
+```
+
+#### Save changes
+
+##### git add
+Aggregates the new/updated content from the Working directory to the Staging area(Index) for the next commit.
+
+``` sh
+
+$ git add <file/directory>
+```
+
+##### git rm
+Deletes files from the Staging area(Index) or from Working directory and Staging area(Index).
+
+``` sh
+
+# Delete a single file from Git repository and also delete it from the Working directory.
+$ git rm <file>
+
+# Delete a single file from Git repository without deleting from the Working directory.
+$ git rm --cached <file>
+```
+
+##### git commit 
+Stores the current contents from the Staging area(Index) to HEAD in a new commit along with a message describing the changes.
+
+``` sh
+
+$ git commit -m <message>
+```
+
+##### git tag
+Lets users can create, list and delete tags. A tag is just a reference which points to the current commit.
+
+The two main types of tags are **lightweight** and **annotated**:
+
+- Lightweight tag is just a reference to a specified commit.
+- Annotated tag is almost like a lightweight tag but contains a message.
+
+``` sh
+
+# List the available tags in Git.
+$ git tag
+
+# Create a lightweight tag
+$ git tag <tag_name>
+
+# Create an annotated tag
+$ git tag -a -m "<tag_message>" <tag_name>
+
+# Delete a tag
+$ git tag -d <tag_name>
+
+# Push all tags to the Remote repository
+$ git push origin --tags
+```
+
+##### git stash
+Stores the current state from the Working directory and Staging area(Index) on a **stack** to get it back later, so that, user can switch branches and it is not necessary to commit half-done work.
+
+``` sh
+
+# Store Working directory and Staging area state
+$ git stash
+
+# List the stashes that have been stored
+$ git stash list
+
+# Apply the most recent stash to the current line of development
+$ git stash apply
+
+# Apply the second most recent stash to the current line of development
+$ git stash apply stash@{1}
+```
+
+#### Sync up
+
+##### git push
+Transfers all commits from HEAD to Remote repository.
+
+``` sh
+
+# Push the work from the specified branch to the named remote repository
+$ git push <remote> <branch>
+```
+
+##### git fetch
+Transfers all commits from Remote repository to HEAD.
+
+``` sh
+
+# Fetch all branches
+$ git fetch <remote>
+
+# Fetch only the specified branch
+$ git fetch <remote> <branch>
+```
+
+##### git pull
+Updates the Working directory to the newest commit from Remote repository executing ``git fetch`` and ``git merge`` between the retrieved changes and the current branch.
+
+``` sh
+
+# Update the specified branch from named remote repository
+$ git pull <remote> <branch>
+```
+
+#### Use branches
+
+##### git checkout
+Lets users can navigate between the different branches in this way the Working directory will be updated to the specified branch.
+
+``` sh
+
+# Switch from current branch to another
+$ git checkout <branch>
+
+# Create a new branch and switch to it
+$ git checkout -b <new-branch>
+```
+
+##### git branch
+Lets users can create, list, rename and delete branches. A branch stands for an independent line of development but is just pointer to commits.
+
+``` sh
+
+# List all branches from Git repository
+$ git branch -a
+
+# Create a new branch
+$ git branch <branch>
+
+# Rename a branch
+$ git branch -m <old_name> <new_name>
+
+# Delete a branch called <branch> in a safe way because Git prevents deleting the branch if it has unmerged changes.
+$ git branch -d <branch>
+
+# Force deleting the specified branch
+$ git branch -D <branch>
+```
+
+##### git merge
+Combines the current development line and a feature branch into a single branch. Git can execute distinct merge algorithms (**fast-forward** or **non-fast-forward**) according to the state of the branches, in order to display differently the merges.
+
+- Fast-forward merge is applied if the current branch has not diverged of feature branch and will just update the branch pointer without creating a new merge commit, achieving the whole commit sequence is linear.
+- Non-fast-forward merge forces to create a new merge commit whether the current branch has diverged regarding feature branch or the current branch has not diverged regarding feature branch. In this case, the commit history will emphasize the merge.
+
+In this [section](#history) can visualize the two algorithms graphically.
+
+``` sh
+
+# Combine the specified branch into the current branch and Git will decide the merge algorithm (by default fast-forward)
+$ git merge <branch>
+
+# Combine the specified branch into the current branch but always generate a new commit (non-fast-forward)
+$ git merge --no-ff <branch>
+```
+
+#### Check repository
+
+##### git status
+Displays the state of the Working directory and Staging area, therefore, users can see which changes have been staged, which have not and which files are not being tracked by Git.
+
+``` sh
+
+$ git status
+```
+
+##### git log
+Shows commit history
+
+``` sh
+
+# Show commit logs
+$ git log
+
+# Show commit logs with a pretty format
+$ git log --graph --decorate --pretty=oneline
+```
+
+##### git reflog
+Show an overview of the last actions (commits, pull, push, checkout, reset, etc) user did inside of Git repository. **Highlight** actions are only stored in the local machine.
+
+``` sh
+
+$ git reflog
+```
+
+##### git diff
+Shows the difference of files between the distinct phases of the Local repository.
+
+``` sh
+
+# Differences between the Working directory and the Staging area(Index)
+$ git diff
+
+# Differences between the Staging area and the most recent commit(HEAD)
+$ git diff --cached
+
+# Differences between the Working directory and the most recent commit(HEAD)
+$ git diff HEAD
+```
+
+##### git show
+Displays distinct types of objects:
+
+- Commits
+- Tags
+- Trees
+- Plain blobs
+
+``` sh
+
+# Display any object in Git
+$ git show <object_id>
+```
+
+#### Undo changes
+
+##### git checkout
+In addition to use checkout command to switch branches also retrieves the specified state to the current development line.
+
+``` sh
+
+# Undo the modified file located in the Working Directory to the HEAD version
+$ git checkout -- <file>
+
+# Retrieve all files to a specific version according a determined commit
+$ git checkout <commit>
+
+# Retrieve the file to a specific version according a determined commit
+$ git checkout <commit> <file>
+```
+
+##### git reset
+Reset the Working directory and Staging area(Index) according the last commit in the HEAD to the specified state. **Warning:** some Git history might be lost.
+
+``` sh
+
+# Reset the Staging area(Index) to the most recent commit but keep the Working directory unchanged
+$ git reset
+
+# Reset the specified file from the Staging area(Index) and keep it in the Working directory unchanged
+$ git reset <file>
+
+# Reset the Staging area(Index) and the Working directory to the most recent commit
+$ git reset --hard
+
+# Reset the Staging area(Index) to a specified commit but keep the Working directory unchanged
+$ git reset <commit>
+
+# Reset the Staging area(Index) and the Working directory to a specified commit
+$ git reset --hard <commit>
+```
+
+##### git revert
+Rool back a commit which has already been pushed and create a new commit to the history with the undone changes. **Highlight:** no Git history will be lost.
+
+``` sh
+
+# Roll back a specified commit
+$ git revert <commit>
 ```
 
 ## Tips
