@@ -15,6 +15,7 @@
   * [Encoding](#encoding)
   * [Constraints](#constraints)
 * [Loading Data](#loading-data)
+  * [Copy Command](#copy-command)
 * [User Defined Functions](#user-defined-functions)
 * [Security](#security)
   * [Authentication and Authorization](#authentication-and-authorization)
@@ -152,6 +153,52 @@ You can create **UNIQUE, PRIMARY KEY and FOREIGN KEY** constraints in Redshift b
 You can also create **NOT NULL** constraints. **Redshift does enforce NOT NULL column constraints.**
 
 ### Loading Data
+You can load data in your tables using the three following methods:
+
+1. Using Multi-Row INSERT
+2. Using Bulk INSERT
+3. Using COPY command
+
+It's strongly recommended to use COPY command in the mayority of the cases and avoid the use of Multi-Row inserts. Specially when you need to load large amount of data from outside cluster.
+
+#### Copy Command
+
+You can use COPY command to load data from Amazon DynamoDB , Amazon EMR , Amazon S3 or from many hosts by ssh protocol in parallel. Copy command load data more efficiently than inserts and store the data more efficiently too.
+
+There are some best practices that you can use in order to improve your COPY commands performance
+
+##### Use a Single COPY Command to Load from Multiple Files
+
+If you want to load multiple files into a table you should use a single copy command and Redshift automatically will load those files in parallel. If you specify multiple COPY commands to load one table from multiple files, Amazon Redshift is forced to perform a serialized load, which is much slower.
+
+##### Split Your Load Data into Multiple Files
+
+You can parallelize your loads by split your data into multiple files. Using this method the COPY command divides the workload among the nodes in your cluster. If you try to load all the data form a single large file Redshift is force to perform a serialized load wich is much slower.
+
+It is a good practice to divide your data in multiple files with equal size ( between 1MB and 1GB ) and that the number of files be a multiple of the number of **slices in your cluster**. In this way the workload is distributed uniformly in your cluster.
+
+##### Use a Manifest File
+
+Amazon S3 provides **eventual consistency** for some operations, so it is possible that new data will not be available immediately after the upload, which could result in an incomplete data load or loading stale data. You can manage data consistency by using a manifest file to load data. In addition with the Manifest file you can specify different S3 locations in a more efficient way that with the use of S3 prefixes.
+
+##### Compress Your Data Files
+If you have to load large amount of data ( more that 50MB ) in a Redshift table is a good practice to compress that data. If your priority is to reduce the time spent by COPY commands you should use **LZO compession**. In the other hand if your priority is to reduce the size of the files in S3 and your network bandwitch you should use **BZ2 compression**.
+
+Avoid to use compression if you have small amount of data because the benefit of compression would be outweighed by the processing cost of decompression.
+
+##### Load Data in Sort Key Order
+TBD
+
+##### Load Data in Sequential Blocks
+TBD
+
+##### Use Time-Series Tables
+TBD
+
+##### Use a Staging Table to Perform a Merge (Upsert)
+TBD
+
+##### Schedule Around Maintenance Windows
 TBD
 
 ### User Defined Functions
@@ -178,3 +225,5 @@ It is a best practice to define weekly or daily maintenance task for your cluste
 - [Top 10 Performance Tuning Techniques for Amazon Redshift](https://blogs.aws.amazon.com/bigdata/post/Tx31034QG0G3ED1/Top-10-Performance-Tuning-Techniques-for-Amazon-Redshift "Top 10 Performance Tuning Techniques for Amazon Redshift")
 - [Best Practices for Micro-Batch Loading on Amazon Redshift](http://blogs.aws.amazon.com/bigdata/post/Tx2ANLN1PGELDJU/-Best-Practices-for-Micro-Batch-span-class-matches-Loading-span-on-Amazon-Redshi "Best Practices for Micro-Batch Loading on Amazon Redshift")
 - [Z Order Curve](https://en.wikipedia.org/wiki/Z-order_curve "Z Order Curve")
+- [Amazon Redshift Best Practices for Loading Data](http://docs.aws.amazon.com/redshift/latest/dg/c_loading-data-best-practices.html "Amazon Redshift Best Practices for Loading Data")
+- [Redshift Database Benchmarks: COPY Performance with Compressed Files](https://blog.stitchdata.com/redshift-database-benchmarks-copy-performance-with-compressed-files-2041b8098366#.lkaltc20l "Redshift Database Benchmarks: COPY Performance with Compressed Files")
