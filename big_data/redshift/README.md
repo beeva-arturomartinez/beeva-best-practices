@@ -182,36 +182,36 @@ It is a good practice to divide your data in multiple files with equal size ( be
 Amazon S3 provides **eventual consistency** for some operations, so it is possible that new data will not be available immediately after the upload, which could result in an incomplete data load or loading stale data. You can manage data consistency by using a manifest file to load data. In addition with the Manifest file you can specify different S3 locations in a more efficient way that with the use of S3 prefixes.
 
 ##### Compress Your Data Files
+
 If you have to load large amount of data ( more that 50MB ) in a Redshift table is a good practice to compress that data. If your priority is to reduce the time spent by COPY commands you should use **LZO compession**. In the other hand if your priority is to reduce the size of the files in S3 and your network bandwitch you should use **BZ2 compression**.
 
 Avoid to use compression if you have small amount of data because the benefit of compression would be outweighed by the processing cost of decompression.
 
 ##### Load Data in Sort Key Order
-TBD
 
-##### Load Data in Sequential Blocks
-TBD
+Load your data in sort key order to avoid needing to vacuum.
 
-##### Use Time-Series Tables
-TBD
-
-##### Use a Staging Table to Perform a Merge (Upsert)
-TBD
-
-##### Schedule Around Maintenance Windows
-TBD
+As long as each batch of new data follows the existing rows in your table, your data will be properly stored in sort order, and you will not need to run a vacuum. You don't need to presort the rows in each load because COPY sorts each batch of incoming data as it loads.
 
 ### User Defined Functions
 TBD
 
 ### Security
-TBD
+
+Security is an important point to keep in mind specially if your cluster work with sensitive data. It is important to protect your data and control efficiently how your cluster is accessed.
+
+Like other AWS services network access to your cluster is managed by VPCs and security grops, it is a best practice to open your cluster SG only to some specific AWS Services and IPs and not open your cluster to the Internet.
 
 #### Authentication and Authorization
 TBD
 
 #### Encryption
-TBD
+
+It is a good practice to enable encryption in your cluster specially if you store sensitive data in your cluster. When you enable encryption the data blocks , system metadata and backups are encrypted.
+
+You can choose between AWS Key Management Service (AWS KMS) or a hardware security module (HSM) to manage the top-level encryption key. In the mayority of the cases AWS KMS is the best option becase are automatically integrated with Redshift.
+
+**If you want to go from an encrypted cluster to an unencrypted cluster or the other way around, you must unload your data from the existing cluster and reload it in a new cluster with the chosen encryption setting.**
 
 ### Maintenance
 
@@ -227,3 +227,4 @@ It is a best practice to define weekly or daily maintenance task for your cluste
 - [Z Order Curve](https://en.wikipedia.org/wiki/Z-order_curve "Z Order Curve")
 - [Amazon Redshift Best Practices for Loading Data](http://docs.aws.amazon.com/redshift/latest/dg/c_loading-data-best-practices.html "Amazon Redshift Best Practices for Loading Data")
 - [Redshift Database Benchmarks: COPY Performance with Compressed Files](https://blog.stitchdata.com/redshift-database-benchmarks-copy-performance-with-compressed-files-2041b8098366#.lkaltc20l "Redshift Database Benchmarks: COPY Performance with Compressed Files")
+- [Amazon Redshift Database Encryption](http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html "Amazon Redshift Database Encryption")
